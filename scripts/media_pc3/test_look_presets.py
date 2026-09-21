@@ -166,19 +166,21 @@ class LookPresetTests(unittest.TestCase):
         current = actual_arguments(self.source, self.flags)
         previous = actual_arguments(self.baseline_source, self.flags)
         self.assertEqual(current.look, "baseline")
-        self.assertEqual({key: value for key, value in vars(current).items() if key != "look"}, vars(previous))
+        self.assertEqual(current.environment_detail, "none")
+        self.assertEqual({key: value for key, value in vars(current).items()
+                          if key not in {"look", "environment_detail"}}, vars(previous))
         self.assertEqual((current.mode, current.engine, current.camera, current.samples),
                          ("representatives", "eevee", "cctv", 32))
         self.assertEqual(current.resolution, [1280, 720])
 
-    def test_actual_cli_baseline_modes_and_candidate_representative_limit(self):
+    def test_actual_cli_baseline_modes_and_candidate_short_review_limit(self):
         for mode in ("prepare", "representatives", "short", "animation"):
             with self.subTest(look="baseline", mode=mode):
                 args = actual_arguments(self.source, self.flags + ["--mode", mode, "--look", "baseline"])
                 self.assertEqual((args.mode, args.look), (mode, "baseline"))
             with self.subTest(look="contrast_material_v1", mode=mode):
                 flags = self.flags + ["--mode", mode, "--look", "contrast_material_v1"]
-                if mode in ("prepare", "representatives"):
+                if mode in ("prepare", "representatives", "short"):
                     self.assertEqual(actual_arguments(self.source, flags).look, "contrast_material_v1")
                 else:
                     with self.assertRaises(SystemExit) as failure:

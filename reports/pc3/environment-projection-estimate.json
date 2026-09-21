@@ -1,0 +1,103 @@
+{
+  "method": "Independent pinhole projection of declared environment AABB corners only; no Blender or pixel visibility proof",
+  "camera": [
+    24,
+    1,
+    8
+  ],
+  "lensMm": 32,
+  "sensorWidthMm": 36,
+  "resolution": [
+    1280,
+    720
+  ],
+  "initialFailure": {
+    "rackCenterX": 19.5,
+    "rackBoundsPixels": [
+      972.54,
+      140.59,
+      1351.95,
+      427.38
+    ],
+    "action": "Shift rack and four cartons by -1.2m in x; preserve camera and every other object."
+  },
+  "groups": {
+    "rollcage-1": {
+      "boundsNormalizedTopLeft": [
+        0.49751639415656657,
+        0.08369953869022234,
+        0.5663650328159863,
+        0.2742795915110864
+      ],
+      "boundsPixels": [
+        636.82,
+        60.26,
+        724.95,
+        197.48
+      ],
+      "allBoundsInFrame": true
+    },
+    "rollcage-2": {
+      "boundsNormalizedTopLeft": [
+        0.5654840788509652,
+        0.14251221259226737,
+        0.6440869911727446,
+        0.3466416738148125
+      ],
+      "boundsPixels": [
+        723.82,
+        102.61,
+        824.43,
+        249.58
+      ],
+      "allBoundsInFrame": true
+    },
+    "staging-rack": {
+      "boundsNormalizedTopLeft": [
+        0.7010764293166665,
+        0.14957294191678033,
+        0.967582533825749,
+        0.5196614722753666
+      ],
+      "boundsPixels": [
+        897.38,
+        107.69,
+        1238.51,
+        374.16
+      ],
+      "allBoundsInFrame": true
+    },
+    "staging-cartons": {
+      "boundsNormalizedTopLeft": [
+        0.7414304524651556,
+        0.197336483638213,
+        0.9137706066914622,
+        0.4531259525172539
+      ],
+      "boundsPixels": [
+        949.03,
+        142.08,
+        1169.63,
+        326.25
+      ],
+      "allBoundsInFrame": true
+    },
+    "floor-cue": {
+      "boundsNormalizedTopLeft": [
+        0.46977757580585267,
+        0.19783990226713843,
+        0.6667487294386832,
+        0.38286862163211166
+      ],
+      "boundsPixels": [
+        601.32,
+        142.44,
+        853.44,
+        275.67
+      ],
+      "allBoundsInFrame": true
+    }
+  },
+  "finalRackCenterX": 18.3,
+  "status": "PASS mathematical projection only; actual Blender NOT_RUN"
+}

@@ -25,6 +25,7 @@ from mathutils import Vector
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from scene_contract import SCENE_SEED, FRAME_COUNT, evaluate_motion, load_layout
 from look_presets import settings_for
+from environment_detail import environment_specs
 
 
 def arguments():
@@ -38,14 +39,15 @@ def arguments():
     parser.add_argument('--resolution', nargs=2, type=int, default=[1280, 720])
     parser.add_argument('--samples', type=int, default=32)
     parser.add_argument('--look', choices=['baseline', 'contrast_material_v1'], default='baseline')
+    parser.add_argument('--environment-detail', choices=['none', 'staging_v1'], default='none')
     argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
     args = parser.parse_args(argv)
     if min(args.resolution) < 64 or max(args.resolution) > 3840 or not 1 <= args.samples <= 256:
         parser.error('Resolution must be 64..3840 and samples 1..256.')
     if args.mode == 'animation' and args.camera != 'cctv':
         parser.error('Final event candidate must use the fixed registered CCTV camera.')
-    if args.look != 'baseline' and args.mode not in ['prepare', 'representatives']:
-        parser.error('The unreviewed look candidate is limited to preparation or representative frames.')
+    if args.mode == 'animation' and (args.look != 'baseline' or args.environment_detail != 'none'):
+        parser.error('Look/environment candidates allow prepare, representatives and short only; full animation awaits review.')
     return args
 
 
@@ -309,6 +311,20 @@ def build(layout, args):
     scene.render.stamp_font_size = 18
     scene.render.stamp_foreground = (1, 1, 1, 1)
     scene.render.stamp_background = (0.012, 0.02, 0.03, 0.86)
+    # Appended after all original scene construction. No random draws or edits
+    # to existing objects/materials/camera/lights/animation/tracked are made.
+    for prop in environment_specs(args.environment_detail)['objects']:
+        if prop['primitive'] == 'cube':
+            obj = cube(prop['name'], prop['location'], prop['dimensions'], mats[prop['material']], prop['bevel'])
+        else:
+            obj = cylinder(prop['name'], prop['location'], prop['radius'], prop['depth'], mats[prop['material']], prop['axis'])
+        obj['role'] = prop['role']
+        obj['synthetic'] = True
+        obj['tracked'] = False
+        obj['motion'] = 'static'
+        # Blender custom properties cannot store JSON null; the authoritative
+        # report below preserves businessToteId as null, never a business ID.
+        obj['businessToteId'] = 'null (unassigned environment prop)'
     return scene, root, tracked
 
 
@@ -382,6 +398,7 @@ def main():
                                  'value': scene.cycles.samples if args.engine == 'cycles' else getattr(getattr(scene, 'eevee', None), 'taa_render_samples', None),
                                  'note': 'Runtime property readback; null means unverified, not the requested count.'},
               'look': {'name': args.look, 'settings': settings_for(args.look)},
+              'environmentDetail': environment_specs(args.environment_detail),
               'colorManagement': {'viewTransform': scene.view_settings.view_transform,
                                   'exposure': scene.view_settings.exposure, 'gamma': scene.view_settings.gamma},
               'candidateDurationSeconds': 12, 'candidateFrameCount': FRAME_COUNT,
@@ -393,6 +410,8 @@ def main():
               'blend': digest(blend_path), 'tracks': digest(args.output / 'tracks.json'),
               'clippedFrames': tracking['clippedFrames'], 'occlusionAndVisualContactReviewed': False,
               'videoEncoded': False, 'note': 'Visual review and motion/occlusion inspection remain required. No actual incident reconstruction.'}
+    if args.environment_detail != 'none':
+        report['sourceDependencies'].append(digest(Path(__file__).with_name('environment_detail.py')))
     (args.output / 'render-report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
     print(json.dumps({'output': str(args.output.resolve()), 'rendered': len(rendered), 'clippedFrames': tracking['clippedFrames'], 'seconds': report['wallSeconds']}))
 

@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "pc3-environment-detail-pure-checks-v1",
+  "checkedAt": "2026-09-21T12:14:58.551460+00:00",
+  "samePhysicalPc": "pc3",
+  "baselineCommit": "d67b2c7",
+  "environment": "staging_v1",
+  "blenderExecuted": false,
+  "renderedPixelsVerified": false,
+  "visualAccepted": false,
+  "tests": {
+    "run": 34,
+    "failures": 0,
+    "errors": 0,
+    "passed": true,
+    "suites": {
+      "environment": 11,
+      "sceneContract": 12,
+      "lookPresets": 11
+    }
+  },
+  "checks": {
+    "poses": 288,
+    "parcelParts": 3,
+    "props": 48,
+    "routePairs": 41472,
+    "cameraSegments": 6912,
+    "segmentBoxPairs": 331776,
+    "routeIntersections": 0,
+    "rayIntersections": 0,
+    "maxParcelCornerY": 7.7489416406628715
+  },
+  "propInventory": {
+    "rollcage-1": 17,
+    "rollcage-2": 17,
+    "staging-rack": 6,
+    "staging-cartons": 4,
+    "floor-cue": 4
+  },
+  "pinholeEstimate": {
+    "cornerCount": 384,
+    "xPixels": [
+      601.3152970314914,
+      1238.5056432969586
+    ],
+    "yPixels": [
+      60.263667856960126,
+      374.1562600382639
+    ],
+    "allCornersInFrame": true,
+    "camera": {
+      "id": "SYN-CAM-02",
+      "position": [
+        24,
+        1,
+        8
+      ],
+      "lookAt": [
+        17,
+        7,
+        0.85
+      ],
+      "lensMm": 32,
+      "fixed": true
+    }
+  },
+  "aisle": {
+    "bounds": [
+      [
+        10,
+        8.6,
+        0
+      ],
+      [
+        20.5,
+        10.2,
+        2.2
+      ]
+    ],
+    "solidIntersections": [],
+    "paintExclusionMaxHeightMeters": 0.02
+  },
+  "contact": {
+    "floorPenetrations": 0,
+    "groundConnectedProps": 48,
+    "floorContactWheels": 8,
+    "floorContactRackLegs": 4,
+    "shelfSupportedCartons": 4,
+    "method": "Conservative AABB contacts and carton/shelf top-plane equality, not evaluated meshes."
+  },
+  "astInvariants": [
+    "Original build body equal after removing only appended environment loop",
+    "tracks/camera/cube/cylinder/area/material/aim unchanged",
+    "Main render logic equal after removing only environment report field and conditional dependency",
+    "scene_contract and look_presets AST unchanged",
+    "11 materials and 4 lights unchanged for each existing look"
+  ],
+  "negativeControls": [
+    "Route blocker detected",
+    "Camera-segment blocker detected",
+    "Tall mislabelled floor-cue rejected in aisle",
+    "Original x19.5 rack clipped and rejected",
+    "Unknown environment names/types rejected",
+    "Animation with modified look/environment rejected"
+  ],
+  "limitations": [
+    "Pure Python on pc3; no Blender, rendering, pixel decode, shadow, material quality or runtime sample verification.",
+    "Cylinders and bevels use conservative bounding boxes; contacts are not evaluated Blender mesh contacts.",
+    "New-prop occlusion checked for 288 poses and 24 parcel corners per pose; existing equipment and rendered pixel visibility are not certified.",
+    "Between-frame motion or shadow occlusion not evaluated."
+  ],
+  "sources": [
+    {
+      "path": "scripts/media_pc3/build_scene.py",
+      "sha256": "fe5c874935eded23330ffeeaf3caa6e9b50e081c7e3a118e1279506f4bbcc864"
+    },
+    {
+      "path": "scripts/media_pc3/environment_detail.py",
+      "sha256": "e4a82164a828e165f86b496883d539311fd4f2a98e7581edca4cc197f7a19c36"
+    },
+    {
+      "path": "scripts/media_pc3/scene_contract.py",
+      "sha256": "670638cae0357da1bf934b7c4b9287ea0780180214e53a181166dd53a8a554bf"
+    },
+    {
+      "path": "scripts/media_pc3/look_presets.py",
+      "sha256": "91c3852386c48729d24f69fff1049602451646a41c7d532d4dc4f8f008cd3e33"
+    },
+    {
+      "path": "scripts/media_pc3/test_environment_detail.py",
+      "sha256": "27a00ee803280378218055ba5d0f93ff71eaf14db8b86c34ecd2640f6a2d458e"
+    },
+    {
+      "path": "scripts/media_pc3/test_look_presets.py",
+      "sha256": "0ff502660e2f1036b056401241ec1a3716b75de4bc4c504e0aa2e5091dba426b"
+    },
+    {
+      "path": "tests/remote/pc3/test_scene_contract.py",
+      "sha256": "4a07281ba103be66989791f241766817b6e2984cea55c86da1e02298df5d2263"
+    }
+  ]
+}

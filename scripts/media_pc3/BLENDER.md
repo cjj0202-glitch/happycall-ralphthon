@@ -6,7 +6,7 @@ PC3에는 확인한 범위에서 Blender 실행파일이 없어 **생성기를 �
 
 ## 사전 조건
 
-- 소유 브랜치의 `build_scene.py`, `scene_contract.py`, `look_presets.py`를 함께 사용한다.
+- 소유 브랜치의 `build_scene.py`, `scene_contract.py`, `look_presets.py`를 함께 사용한다. 환경 옵션 통합본에서는 `environment_detail.py`도 같은 커밋에서 사용한다.
 - 공용 기준의 layout JSON과 `data/fixtures/cases.json`을 읽을 수 있어야 한다.
 - 기존 `.blend`나 출력 폴더를 덮지 않는다. 실행마다 새로운 빈 output 디렉터리를 선택한다.
 - 아래 `$blenderExe`는 **실행하는 PC에서 확인한 실제 경로**다. PC3/pc1의 경로를 서로 추측하거나 복사하지 않는다.
@@ -39,27 +39,38 @@ floor/장면은 지지면 상단0.85m, parcel mesh의 실제 바닥0.85m를 사�
 
 ## 기하 수정 뒤 동일 조건의 조명·재질 A/B
 
-pc1이 c208597의 대표3장을 실제 렌더했고 pc3도 다운로드 SHA 검증과 이미지 확인을 마쳤다. 제작 품질은 미통과이며, 부유한 가드의 받침 수정은 별도 `03291cc`로 먼저 전달했다. [기하 보고](../../reports/pc3/blender-guard-fix.md)와 [A/B 실험](../../reports/pc3/blender-look-ab.md)을 따른다.
+pc1이 c208597의 대표3장을 실제 렌더했고 pc3도 다운로드 SHA 검증과 이미지 확인을 마쳤다. 당시 제작 품질은 미통과였고, 부유한 가드의 받침 수정은 별도 `03291cc`로 먼저 전달했다. [기하 보고](../../reports/pc3/blender-guard-fix.md)와 [A/B 실험](../../reports/pc3/blender-look-ab.md)을 따른다.
 
-`--look baseline`이 기본값이다. `--look contrast_material_v1`은 fill/world 조명, 콘크리트/강철 재질만 바꾸는 비교 후보이며 prepare/representatives에서만 허용한다. A/B는 **동일한 기하 수정과 preset 통합 커밋**에서 각각 새 폴더로 생성한다. 이전 geometry의 Release PNG를 A로 재사용하지 않는다. 카메라/경로/seed/샘플/노출/프레임을 고정하며, 원본 크기로 접촉·물성·그림자를 비교한다. B 효과는 아직 미렌더 가설이다.
+`--look baseline`이 기본값이다. `--look contrast_material_v1`은 fill/world 조명, 콘크리트/강철 재질을 바꾸는 B 설정이다. A/B는 **동일한 기하 수정과 preset 통합 커밋**에서 각각 새 폴더로 생성한다. 이전 geometry의 Release PNG를 A로 재사용하지 않는다. 카메라/경로/seed/샘플/노출/프레임을 고정하며, 원본 크기로 접촉·물성·그림자를 비교한다. 21:00 pc1 #9 후속 피드백에서 실제 A/B 6장 렌더와 B 선택이 전달됐다. 이는 아래 새 배경 설비의 시각 수용을 뜻하지 않는다.
 
-## 검수 뒤에만 짧은 동작·최종 후보
+## 선택형 정적 배경 설비: prepare와 대표 3장
 
-대표3장의 물성·접촉·관통/부유·카메라·분기 방향을 pc1이 확인한 다음, 같은 코드/seed에서 확장한다. 아래 명령은 **현재 미실행이며 20:17 피드백은 아직 확장을 허용하지 않았다.** 검수된 B가 선택된다면 preset의 대표 프레임 제한을 후속 배정에서 명시적으로 갱신한 뒤 확장해야 한다.
+`--environment-detail none`은 기본값으로 추가 객체가 없다. `--environment-detail staging_v1`은 컨베이어 뒤쪽에 정적 롤케이지 2대, 낮은 2단 랙과 상자 4개, 바닥 구역선만 추가한다. 사람·작업 움직임은 없다. 기존 geometry/재질/조명/카메라/사건 경로/tracked 목록을 바꾸지 않는다. 정확한 위치·열린 통로·광선 검사는 [환경 설계](../../reports/pc3/environment-detail-design.md)를 따른다.
 
-```powershell
-& $blenderExe --background --factory-startup --python-exit-code 1 --python scripts/media_pc3/build_scene.py -- --layout planning/media/scene-layout-v1.json --output .local/pc3-blender/short-01 --mode short --resolution 1280 720 --samples 32
-& $blenderExe --background --factory-startup --python-exit-code 1 --python scripts/media_pc3/build_scene.py -- --layout planning/media/scene-layout-v1.json --output .local/pc3-blender/final-01 --mode animation --resolution 1920 1080 --samples 64
-```
-
-short는 `[3,6)`초의 frame73..144 72장이다. final은 frame1..288 288장이다. 실제 FFmpeg 경로를 확인한 뒤 각각 다음처럼 인코딩한다. 덮어쓰기 거부 `-n`, H264/yuv420p/faststart를 사용한다.
+아래는 환경 옵션 통합 커밋에서 사용할 명령이다. **문서 작성 시 새 환경 렌더는 미실행**이며, 실행 PC의 검증된 `$blenderExe`와 새 빈 output 폴더를 사용한다. B look, CCTV, EEVEE, 1280×720, 요청 sample32를 고정하고 실효 sample readback도 확인한다.
 
 ```powershell
-& $ffmpegExe -n -framerate 24 -start_number 73 -i .local/pc3-blender/short-01/frame-%04d.png -frames:v 72 -an -c:v libx264 -crf 18 -pix_fmt yuv420p -movflags +faststart .local/pc3-blender/short-01/branch-preview.mp4
-& $ffmpegExe -n -framerate 24 -start_number 1 -i .local/pc3-blender/final-01/frame-%04d.png -frames:v 288 -an -c:v libx264 -crf 18 -pix_fmt yuv420p -movflags +faststart .local/pc3-blender/final-01/case-0002-ww3-blender.mp4
+& $blenderExe --background --factory-startup --python-exit-code 1 --python scripts/media_pc3/build_scene.py -- --layout planning/media/scene-layout-v1.json --fixture data/fixtures/cases.json --output .local/pc3-blender/staging-prepare-01 --mode prepare --engine eevee --camera cctv --resolution 1280 720 --samples 32 --look contrast_material_v1 --environment-detail staging_v1
+& $blenderExe --background --factory-startup --python-exit-code 1 --python scripts/media_pc3/build_scene.py -- --layout planning/media/scene-layout-v1.json --fixture data/fixtures/cases.json --output .local/pc3-blender/staging-representatives-01 --mode representatives --engine eevee --camera cctv --resolution 1280 720 --samples 32 --look contrast_material_v1 --environment-detail staging_v1
 ```
 
-인코딩 성공만으로 재생/탐색/디코딩/전체화면 합성표시/288개 bbox 일치를 통과 처리하지 않는다. 후보는 별도 Release와 해시로 제출하며 기존 v1 Release·정본 fixture/manifest/public을 덮지 않는다. 현재 생성기는 자산 업로드나 등록을 실행하지 않는다.
+prepare의 288행 pose/투영 metadata는 288프레임 렌더가 아니다. 새 환경 대표 1/133/288에서 상자·분기 방향·가드 접촉·가림·물성·그림자 입자를 다시 확인하고 결과·환경 객체 목록·해시를 기록한다. none/staging은 geometry가 다르므로 동일 geometry 조건의 A/B 수신 검사기를 환경 비교에 그대로 적용하지 않는다.
+
+## pc1의 새 대표 검수 뒤에만 short — 288 후보는 금지
+
+pc1이 **staging_v1 대표 3장**을 명시적으로 수용한 뒤에만 같은 코드/seed/B/environment 설정으로 아래 short를 실행할 수 있다. 기존 B 선택만으로 새 환경의 확대를 시작하지 않는다. 아래 명령은 현재 미실행이며 자동 실행 지시가 아니다.
+
+```powershell
+& $blenderExe --background --factory-startup --python-exit-code 1 --python scripts/media_pc3/build_scene.py -- --layout planning/media/scene-layout-v1.json --fixture data/fixtures/cases.json --output .local/pc3-blender/staging-short-01 --mode short --engine eevee --camera cctv --resolution 1280 720 --samples 32 --look contrast_material_v1 --environment-detail staging_v1
+```
+
+short는 `[3,6)`초의 frame73..144 72장이다. 실제 FFmpeg 경로를 확인한 뒤 다음처럼 인코딩한다. 덮어쓰기 거부 `-n`, H264/yuv420p/faststart를 사용한다.
+
+```powershell
+& $ffmpegExe -n -framerate 24 -start_number 73 -i .local/pc3-blender/staging-short-01/frame-%04d.png -frames:v 72 -an -c:v libx264 -crf 18 -pix_fmt yuv420p -movflags +faststart .local/pc3-blender/staging-short-01/branch-preview.mp4
+```
+
+**이번 범위에서는 288프레임 animation 후보 렌더·인코딩을 실행하지 않는다.** short 인코딩 성공만으로 재생/탐색/디코딩/전체화면 합성표시/bbox 일치를 통과 처리하지 않는다. 후보는 별도 Release와 해시로 제출하며 기존 v1 Release·정본 fixture/manifest/public을 덮지 않는다. 현재 생성기는 자산 업로드나 등록을 실행하지 않는다.
 
 ## Blender 없이 실행 가능한 검사
 
@@ -67,6 +78,7 @@ short는 `[3,6)`초의 frame73..144 72장이다. final은 frame1..288 288장이�
 python -m py_compile scripts/media_pc3/build_scene.py scripts/media_pc3/scene_contract.py
 python -m unittest discover -s tests/remote/pc3 -p test_scene_contract.py -v
 python -m unittest discover -s scripts/media_pc3 -p test_look_presets.py -v
+python -m unittest discover -s scripts/media_pc3 -p test_environment_detail.py -v
 python scripts/media_pc3/audit_guard_supports.py --layout planning/media/scene-layout-v1.json
 ```
 
