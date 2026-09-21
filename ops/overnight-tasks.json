@@ -32,7 +32,9 @@
           "browser": "1201x791 existing IAB; voice49.75sec and anchors/drafts/center-readonly; no new saved flow",
           "responsive": "1024/390 overrides not applied; NOT_VERIFIED",
           "unit": "87/87+mutations7/7; save48/48+mutations3/3; tsc exit0",
-          "productionBuild": "NOT_RUN for v2"
+          "productionBuild": "PASS 2026-09-21 23:54; local bundle57/57 independently matched; not deployed",
+          "commit": "9de36c449e6be9bc32a1ad61c3bf45eb5f143601",
+          "buildEvidence": "reports/ux-v2-production-build.md"
         }
       },
       "outcome": "공통 계약·API·통합·인수",
@@ -151,14 +153,19 @@
         "evidence": "reports/save-toast.md"
       },
       "latestBuild": {
-        "completedAtKST": "2026-09-21T21:56:19.194786+09:00",
-        "source": "716e1cdc1a2b738b50f74c5cbcb62f8564e92e4d34e8b49f0b3d38790a7048be",
-        "output": "2b2889efda74036be37a2936763f05a376c4a83fb4e9f65a1134918077b571aa",
+        "completedAtKST": "2026-09-21T23:54:08.604074+09:00",
+        "sourceRevision": "faf52a688d0713143d4677b31503746cbb5987cc",
+        "source": "cdb3de3f4c2549f4bd082f320b933b1ea6b058898289b88048be533e019e2946",
+        "output": "db31d9429fe14169081b33a69619d24287c84cfd7846841131d296ceec01a4f9",
         "outputFiles": 26,
         "build": "PASS",
-        "localBundle": "PASS after fixing stale public fixture",
+        "localBundle": "PASS; independent57/57 sizes/SHA;12,833,576 payload bytes",
+        "bundlePath": "dist/deployment/20260921T145556559445Z-faf52a688d07",
+        "manifestSha256": "8f1e81be6201eabc5c51f11042d75cc856be58150a97cf29d6973dbd801cbbb2",
+        "media": "v3 assets3; tracks not registered",
         "deployed": false,
-        "fullBrowserFlows": "NOT_RUN"
+        "fullBrowserFlows": "NOT_RUN for latest bundle",
+        "evidence": "reports/ux-v2-production-build.md"
       }
     },
     {
@@ -293,10 +300,17 @@
       "pc": "pc3",
       "latestAssignment": {
         "id": "N03-M6",
-        "state": "PREPARED_NOT_SENT",
+        "state": "ACKNOWLEDGED_IN_PROGRESS",
         "card": "reports/channel/N03-M6-full-media-packaging.md",
         "baseCommit": "de2c790a5e739a4aa9cdb2fc481fb10db3e43e29",
-        "accepted": false
+        "accepted": false,
+        "sentAtKST": "2026-09-21T23:56:03+09:00",
+        "sentCommentId": 5762563996,
+        "ackAtKST": "2026-09-21T23:59:10+09:00",
+        "ackCommentId": 5762608955,
+        "ackCommit": "de2c790a5e739a4aa9cdb2fc481fb10db3e43e29",
+        "ackHost": "LAPTOP-U2AL73UH",
+        "ackGithub": "mcjun86-oss"
       },
       "outcome": "WMS 공정·합성 CCTV",
       "state": "FIX_RESULT_RECEIVED_REVIEW",
