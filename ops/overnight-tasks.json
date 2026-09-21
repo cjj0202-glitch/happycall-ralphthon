@@ -7,6 +7,19 @@
     {
       "id": "N01",
       "pc": "pc1",
+      "roleWorkbench": {
+        "commit": "bcbbb35842f8a6e2e1d3fdb2a12267f78bc4a8b3",
+        "state": "IMPLEMENTED_TARGETED_CHECKS_PASSED",
+        "unit": "87/87; mutations7/7",
+        "saveToastRegression": "48/48; mutations3/3",
+        "independentRecheck": "7/7 after two case-selection fixes",
+        "browser": "Existing IAB role/empty/search/WMS return observed; 3-width DOM measured; full flow not rerun",
+        "tmsInternalUI": "N04-U1 ACK; not integrated",
+        "notificationDelivery": "Final scope defined; not connected",
+        "evidence": ["reports/role-workflow-ui.md", "reports/role-workflow-independent.md"],
+        "accepted": true,
+        "acceptanceScope": "Role queues and case-context corrections only"
+      },
       "outcome": "공통 계약·API·통합·인수",
       "state": "IN_PROGRESS",
       "design": "PARTIAL_WITH_EVIDENCE",
