@@ -13,6 +13,7 @@ from openai import OpenAI
 
 from server.analysis_schema import ANALYSIS_SCHEMA, MODEL_ANALYSIS_SCHEMA
 from server.claim_grounding import order_assertion_scope, reconcile_unknown, supported_values
+from server.request_grounding import current_request_quote, receipt_followup
 from server.budget import Budget
 from server.errors import DemoError
 from server.repository import ROOT
@@ -133,7 +134,8 @@ def _review_reply_draft(analysis, received, draft_context):
             parts.append(f"{label}의 {note}‘{cleaned}’라는 말씀을 바탕으로 추가 확인이 필요합니다.")
 
     quote_part("문의 원문", draft_context["subjectQuote"], "문의 대상을 원문과 대조해 먼저 확인할 필요가 있습니다.")
-    quote_part("요청 원문", draft_context["requestQuote"], "어떤 확인이나 안내가 필요한지 원문에서 추가 확인이 필요합니다.")
+    request_label = "요청 원문" if draft_context.get("requestIsCurrent", True) else "참고 발화 원문"
+    quote_part(request_label, draft_context["requestQuote"], "어떤 확인이나 안내가 필요한지 원문에서 추가 확인이 필요합니다.")
     quote_part("수령 관련 원문", received["evidenceQuote"], "현재 도착·수령 상황은 추가 확인이 필요합니다.")
     if analysis["facts"]:
         parts.append("현재 조회한 기록은 다음과 같습니다: " + " / ".join(analysis["facts"][:2]) + ".")
@@ -216,7 +218,10 @@ def normalize_analysis(model_analysis, transcript, case, departments):
                                  "evidence": store_claim["evidenceQuote"] or "점포 발화 미확인"})
     result["fields"] = {"storeId": store_id, "subject": model_analysis["fields"]["subject"],
                          "quantity": received["quantity"], "unit": received["unit"],
-                         "request": model_analysis["fields"]["request"]}
+                         "request": None}
+    followup = receipt_followup(result["fields"], transcript, received["product"])
+    if followup:
+        question(followup)
     if (any(value is not None for value in model_analysis["orderedClaim"].values()) and ordered["product"] is None
             and re.fullmatch(r".+?\s+(?:주문|발주)\s*/\s*.+?\s+수령", result["fields"]["subject"] or "")):
         result["fields"]["subject"] = None
@@ -226,9 +231,6 @@ def normalize_analysis(model_analysis, transcript, case, departments):
     if not (result["fields"]["subject"] or "").strip():
         result["fields"]["subject"] = None
         question("발화에서 문의 대상을 확인하지 못했습니다. 어떤 상품 또는 배송 건에 관한 문의인지 확인해 주세요.")
-    if not (result["fields"]["request"] or "").strip():
-        result["fields"]["request"] = None
-        question("발화에서 요청 내용을 확인하지 못했습니다. 어떤 확인이나 안내가 필요한지 질문해 주세요.")
     # Caller input follows the same receipt contract; unlike order quantities it is comparable.
     intake = case.get("intake", {})
     comparable = bool(_compact(received["product"])) and _compact(received["product"]) in _compact(intake.get("subject"))
@@ -280,6 +282,13 @@ def normalize_analysis(model_analysis, transcript, case, departments):
         else:
             draft_context[key] = None
             question(f"회신 초안에 사용할 {label}의 원문 근거를 확인해 주세요. AI 필드만으로 고객의 말씀을 확정하지 않습니다.")
+    request_quote = current_request_quote(draft_context["requestQuote"], transcript)
+    draft_context["requestIsCurrent"] = request_quote is not None
+    if request_quote:
+        cleaned, softened = _clean_draft_quote(request_quote)
+        result["fields"]["request"] = ("[강한 불만 표현을 순화] " + cleaned) if softened else request_quote
+    else:
+        question("고객의 현재 요청을 뒷받침하는 원문 인용을 확인하지 못했습니다. 요청 원문을 직접 확인해 주세요. AI 추가 질문은 고객 요청에 합치지 않습니다.")
     result["replyDraft"] = _review_reply_draft(result, received, draft_context)
     validate(result, ANALYSIS_SCHEMA)
     return result

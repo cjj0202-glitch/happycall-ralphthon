@@ -376,7 +376,9 @@ def test_injected_offline_run_records_inputs_outputs_failure_costs_and_redacted_
     directory = evaluation.execute_live(dataset, rows, ledger, "a" * 40)
     report, manifest = evaluation.summarize_run(directory)
     assert manifest["measuredHead"] == "a" * 40 and manifest["headVerifiedByRunner"] is False
-    assert len(manifest["codeSha256Before"]) == 5
+    assert len(manifest["codeSha256Before"]) == 7
+    assert "server/claim_grounding.py" in manifest["codeSha256Before"]
+    assert "server/request_grounding.py" in manifest["codeSha256Before"]
     assert manifest["codeChangedDuringRun"] is False
     assert manifest["status"] == "complete-with-errors"
     assert report["reservationCount"] == 2 and report["reservedCents"] == 30

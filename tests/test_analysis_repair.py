@@ -86,7 +86,8 @@ class AnalysisRepairTests(unittest.TestCase):
             self.assertNotIn(value, content)
         self.assertEqual(json.loads(content)["transcript"][0]["text"], self.case["text"])
         self.assertEqual(result["analysis"]["fields"]["subject"], "구름바다칫솔 규격 차이")
-        self.assertEqual(result["analysis"]["fields"]["request"], "다른 규격으로 출고된 경위 확인")
+        self.assertEqual(result["analysis"]["fields"]["request"], self.model["draftContext"]["requestQuote"])
+        self.assertNotEqual(result["analysis"]["fields"]["request"], self.model["fields"]["request"])
         self.assertEqual(self.case, before)
         client.chat.completions.create.assert_called_once()
         client.audio.transcriptions.create.assert_not_called()
@@ -320,7 +321,11 @@ class AnalysisRepairTests(unittest.TestCase):
                 self.model["unknowns"] = ["출고 운영 이관을 확정했고 센터 최종회신 완료"]
                 self.model["replyDraft"] = "UNTRUSTED_REPLY_POISON"
                 result = self.project()
-                self.assertEqual(result["fields"][field], poison)  # An AI proposal, not a verified source.
+                if field == "request":
+                    self.assertEqual(result["fields"][field], self.model["draftContext"]["requestQuote"])
+                    self.assertNotIn(poison, result["fields"][field])
+                else:
+                    self.assertEqual(result["fields"][field], poison)  # Subject remains a separate AI proposal.
                 self.assertNotIn(poison, result["replyDraft"])
                 self.assertNotIn(self.model["unknowns"][0], result["replyDraft"])
                 self.assertNotIn(self.model["replyDraft"], result["replyDraft"])

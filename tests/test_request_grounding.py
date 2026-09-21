@@ -1,0 +1,161 @@
+"""Request provenance counterexamples; no model calls or frozen-input imports."""
+import copy
+import unittest
+from unittest.mock import patch
+
+from server.live import normalize_analysis
+from tests.test_analysis_repair import case_and_model, claim, DEPARTMENTS
+
+
+class RequestGroundingTests(unittest.TestCase):
+    def project(self, text, quote, proposal='상품 단위 확인과 당일 재배송 요청', received=None):
+        case, model = case_and_model()
+        case['text'] = '가상물결점입니다. ' + text
+        model['fields']['request'] = proposal
+        model['draftContext']['requestQuote'] = quote
+        model['receivedClaim'] = received or claim()
+        before = copy.deepcopy((case, model))
+        with patch('server.live.OpenAI', side_effect=AssertionError('NO_API')), patch('server.live.require_demo_api_key', side_effect=AssertionError('NO_KEY')):
+            result = normalize_analysis(model, [{'speaker': '경영주', 'text': case['text']}], case, DEPARTMENTS)
+        self.assertEqual(before, (case, model))
+        return result
+
+    def test_real_customer_request_cannot_borrow_ai_followup_questions(self):
+        quote = '출고 부서에서 주문 내역과 라벨을 확인해 주세요.'
+        result = self.project(quote, quote)
+        self.assertEqual(result['fields']['request'], quote)
+        self.assertNotIn('단위', result['fields']['request'])
+        self.assertNotIn('재배송', result['fields']['request'])
+
+    def test_future_action_and_negative_instruction_are_current_requests(self):
+        for quote in ('내일 오전까지 도착 시각을 알려 주세요.', '아직 재배송 완료로 확정하지 말아 주세요.', '접수 상태와 반송 가능한 절차를 문의합니다.', '라벨이 다르면 먼저 연락해 주시고 확인하고 싶습니다.'):
+            with self.subTest(quote=quote):
+                self.assertEqual(self.project(quote, quote)['fields']['request'], quote)
+
+    def test_statement_denial_future_plan_and_completion_are_not_requests(self):
+        for quote in ('출고 부서가 라벨을 확인했습니다.', '라벨 확인을 요청한 것이 아닙니다.', '내일 라벨 확인을 요청할 예정입니다.', '센터에서 재배송 처리를 완료했습니다.'):
+            with self.subTest(quote=quote):
+                result = self.project(quote, quote)
+                self.assertIsNone(result['fields']['request'])
+                self.assertTrue(any('요청' in q and '원문' in q for q in result['questions']))
+                self.assertIn('참고 발화 원문', result['replyDraft'])
+                self.assertNotIn('요청 원문의', result['replyDraft'])
+
+    def test_valid_looking_fragment_cannot_be_cut_from_negated_or_example_context(self):
+        quote = '라벨을 확인해 주세요'
+        for text in (f'“{quote}”라고 부탁한 적은 없습니다.', f'예문은 “{quote}”입니다.', f'내일 “{quote}”라고 요청할 예정입니다.', f'“{quote}”라고 말한 것은 아닙니다.', f'지난달 “{quote}”라고 요청했습니다.'):
+            with self.subTest(text=text):
+                self.assertIsNone(self.project(text, quote)['fields']['request'])
+
+    def test_missing_or_invented_quote_does_not_fall_back_to_proposal(self):
+        for quote in (None, '', '없는 원문인데 라벨을 확인해 주세요.'):
+            with self.subTest(quote=quote):
+                self.assertIsNone(self.project('라벨이 다릅니다.', quote)['fields']['request'])
+
+    def test_quoted_nominal_denial_past_report_and_hypothesis_are_not_requests(self):
+        quote = '라벨을 확인해 주세요.'
+        for text in (
+            f'“{quote}”라는 문장은 요청이 아닙니다.',
+            f'“{quote}”라는 말은 부탁이 아니에요.',
+            f'“{quote}”라는 요청을 지난주에 전달받았습니다.',
+            f'어제 “{quote}”라는 말을 들었습니다.',
+            f'“{quote}”라고 말했다고 전해 들었습니다.',
+            f'만약 고객이 “{quote}”라고 한다면 기록만 남깁니다.',
+        ):
+            with self.subTest(text=text):
+                result = self.project(text, quote)
+                self.assertIsNone(result['fields']['request'])
+                self.assertIn('참고 발화 원문', result['replyDraft'])
+
+    def test_actual_requests_keep_negative_and_conditional_content(self):
+        for quote in (
+            '박스 말고 개로 확인해 주세요.',
+            '수령 확인이 아니라 라벨 확인을 부탁드립니다.',
+            '어제 연락했지만 오늘 다시 라벨을 확인해 주세요.',
+            '라벨이 다르다면 주문서를 확인해 주세요.',
+        ):
+            with self.subTest(quote=quote):
+                self.assertEqual(self.project(quote, quote)['fields']['request'], quote)
+        quote = '박스 말고 개로 확인해 주세요.'
+        self.assertEqual(self.project(f'제 요청은 “{quote}”입니다.', quote)['fields']['request'], quote)
+
+    def test_profanity_softening_preserves_complaint_and_urgency(self):
+        quote = '씨발, 벌써 세 번째입니다. 오늘 안에 라벨을 확인하고 전화해 주세요.'
+        result = self.project(quote, quote)
+        self.assertNotIn('씨발', result['fields']['request'])
+        for meaning in ('세 번째', '오늘 안에', '라벨을 확인하고 전화해 주세요', '불만'):
+            self.assertIn(meaning, result['fields']['request'])
+
+    def test_independent_future_intention_and_truncated_request(self):
+        text = '다음 주에 라벨을 확인해 주세요라고 부탁하려고 합니다.'
+        with self.subTest(kind='future_intention'):
+            self.assertIsNone(self.project(text, '라벨을 확인해 주세요')['fields']['request'])
+        for quote in ('주세요.', '해 주세요.'):
+            with self.subTest(quote=quote):
+                self.assertIsNone(self.project('라벨을 확인해 주세요.', quote)['fields']['request'])
+
+    def test_nominal_requests_keep_explicit_action_and_target(self):
+        for quote in ('반송 방법 안내 요청입니다.', '차량 도착 시각 확인 부탁입니다.'):
+            with self.subTest(quote=quote):
+                self.assertEqual(self.project(quote, quote)['fields']['request'], quote)
+
+    def test_explicit_following_withdrawal_removes_only_its_request(self):
+        quote = '라벨을 확인해 주세요.'
+        for tail in ('그 요청은 취소합니다.', '라벨 확인 요청은 철회합니다.'):
+            with self.subTest(tail=tail):
+                self.assertIsNone(self.project(quote + ' ' + tail, quote)['fields']['request'])
+        for tail in (
+            '반송 요청은 취소합니다.',
+            '반송 방법을 안내해 주세요. 그 요청은 취소합니다.',
+            '그 요청은 취소하지 말아 주세요.',
+        ):
+            with self.subTest(tail=tail):
+                self.assertEqual(self.project(quote + ' ' + tail, quote)['fields']['request'], quote)
+
+    def test_following_withdrawal_obeys_speaker_boundary(self):
+        from server.request_grounding import current_request_quote
+        quote = '라벨을 확인해 주세요.'
+        for speaker, expected in (('경영주', None), ('상담원', quote)):
+            with self.subTest(speaker=speaker):
+                transcript = [{'speaker': '경영주', 'text': quote},
+                              {'speaker': speaker, 'text': '그 요청은 취소합니다.'}]
+                self.assertEqual(current_request_quote(quote, transcript), expected)
+
+    def test_missing_receipt_unit_stays_question_not_customer_request(self):
+        receipt = '반짝봉투 5개를 받았습니다.'
+        quote = '주문과 라벨을 확인해 주세요.'
+        result = self.project(receipt + ' ' + quote, quote, received=claim('반짝봉투', 5, None, receipt))
+        self.assertIsNone(result['fields']['unit'])
+        self.assertEqual(result['fields']['quantity'], 5)
+        self.assertEqual(result['fields']['request'], quote)
+        self.assertTrue(any('단위' in q for q in result['questions']))
+
+    def test_unknown_target_receipt_amount_gets_unit_followup_without_inference(self):
+        text = '지난달 바람차 2박스를 받았습니다. 오늘 받은 바람차 수량은 아직 모릅니다. 출고 내역을 확인해 주세요.'
+        result = self.project(text, '출고 내역을 확인해 주세요.')
+        self.assertEqual((result['fields']['quantity'], result['fields']['unit']), (None, None))
+        self.assertTrue(any('수량' in q and '단위' in q for q in result['questions']))
+        self.assertEqual(result['fields']['request'], '출고 내역을 확인해 주세요.')
+
+    def test_whole_delivery_inquiry_does_not_require_irrelevant_receipt_amount(self):
+        quote = '차량 도착 시각을 알려 주세요.'
+        for context in ('배송 차량이 오지 않았습니다. ', '배송 차량이 오지 않았고 무엇을 몇 개 받았는지는 아직 모릅니다. ', '받은 물건의 수량 이야기는 하지 않았습니다. '):
+            with self.subTest(context=context):
+                result = self.project(context + quote, quote)
+                self.assertFalse(any('수량' in q or '단위' in q for q in result['questions']))
+
+    def test_mutation_controls_reject_bypass_blanket_null_and_missing_followup(self):
+        checks = [
+            ('server.live.current_request_quote', lambda q, tr: q, 'test_statement_denial_future_plan_and_completion_are_not_requests'),
+            ('server.live.current_request_quote', lambda q, tr: None, 'test_real_customer_request_cannot_borrow_ai_followup_questions'),
+            ('server.live.receipt_followup', lambda *args: None, 'test_unknown_target_receipt_amount_gets_unit_followup_without_inference'),
+        ]
+        for target, mutant, test_name in checks:
+            with self.subTest(target=target):
+                fresh = RequestGroundingTests(test_name)
+                with patch(target, mutant), self.assertRaises(AssertionError):
+                    getattr(fresh, test_name)()
+
+
+if __name__ == '__main__':
+    unittest.main()
