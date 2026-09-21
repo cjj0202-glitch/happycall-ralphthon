@@ -80,6 +80,20 @@ def now() -> str:
     return datetime.now(KST).strftime("%Y-%m-%d %H:%M KST")
 
 
+def kst(iso: str) -> str:
+    """GitHub 은 UTC 로 준다. 그대로 보여 주면 시간 축이 갈린다.
+
+    원본 채널에서 가장 무거운 오판이 이것이었다 — 「2시간 뒤에도 그대로라 동기화 지연으로
+    보기 어렵다」는 회신이 왔는데, 그 2시간은 «자기» 기준이었고 상대 push 로부터는 11분이었다.
+    관측에는 언제·어느 기준으로 잰 것인가가 붙어야 한다.
+    """
+    try:
+        dt = datetime.fromisoformat(iso.replace("Z", "+00:00"))
+        return dt.astimezone(KST).strftime("%m-%d %H:%M KST")
+    except Exception:
+        return iso[:16].replace("T", " ") + " UTC?"
+
+
 def scan_secrets(text: str) -> list[str]:
     hits = []
     for pat, why in SECRET_PATTERNS:
@@ -115,7 +129,7 @@ def cmd_inbox(a) -> int:
         typ = next((x for x in labs if re.match(r"^[A-F]-", x)), "?")
         nrep = len(it.get("comments", []) or [])
         print(f"  #{it['number']:<4} {urgent}[{typ}] {it['title']}")
-        print(f"        from {it['author']['login']} · {it['createdAt'][:16].replace('T',' ')} · 회신 {nrep}건")
+        print(f"        from {it['author']['login']} · {kst(it['createdAt'])} · 회신 {nrep}건")
     print(f"\n  본문: python channel/mail.py read <번호>")
     return 0
 
@@ -129,12 +143,12 @@ def cmd_read(a) -> int:
     labs = ", ".join(x["name"] for x in it["labels"])
     print(f"#{it['number']} [{it['state']}] {it['title']}")
     print(f"라벨: {labs}")
-    print(f"보낸이: {it['author']['login']} · {it['createdAt'][:16].replace('T',' ')}")
+    print(f"보낸이: {it['author']['login']} · {kst(it['createdAt'])}")
     print("─" * 70)
     print(it["body"] or "(본문 없음)")
     for c in it.get("comments", []) or []:
         print("─" * 70)
-        print(f"↩ {c['author']['login']} · {c['createdAt'][:16].replace('T',' ')}")
+        print(f"↩ {c['author']['login']} · {kst(c['createdAt'])}")
         print(c["body"])
     return 0
 
