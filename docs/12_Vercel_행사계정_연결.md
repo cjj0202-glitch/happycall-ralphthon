@@ -1,5 +1,7 @@
 # Vercel 행사 계정 연결 — G-23
 
+**최신 방향: 2026-09-21 사용자 요청으로 개인 AWS 계정으로 전환합니다.** 현재 호스팅 준비는 [개인 AWS 연결 기록](aws-personal-setup.md)을 따릅니다. 아래 Vercel 내용은 이전 안내와 실패 관측 기록이며 추가 로그인·배포를 진행하지 않습니다.
+
 근거: 사용자 제공 [공식 Notion 안내](https://gsholdings.notion.site/vercel-3e2f800bd1c1800cb3d9e5fc29aefeca), 2026-09-21 확인. 내부 스크롤 화면을 나눈 [상단](official/2026-09-21/vercel-guide.png)·[중간](official/2026-09-21/vercel-guide-02.png)·[하단](official/2026-09-21/vercel-guide-03.png)과 [본문](official/2026-09-21/vercel-guide.dom.txt)을 보존했습니다. 세 이미지는 구간 캡처이며 원문 대조는 본문과 함께 합니다.
 
 **2026-09-21 16:24 KST 사용자 요청으로 연결을 재개했으나, 현재 Vercel 인증 제한으로 대기 중입니다.** CLI 로그인에서 이메일 인증까지 진행했고 16:25 KST 재요청은 `Too many attempts`로 차단됐습니다. 반복 요청은 중단했습니다. 상세 관측은 [연결 기록](../reports/vercel-link.md)에 남깁니다.
