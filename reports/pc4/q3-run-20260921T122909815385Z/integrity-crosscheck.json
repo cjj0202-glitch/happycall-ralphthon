@@ -1,0 +1,94 @@
+{
+  "run": "q3-run-20260921T122909815385Z",
+  "status": "FAIL",
+  "axes": {
+    "planned": 8,
+    "passed": 7,
+    "failed": 1,
+    "notRun": 0
+  },
+  "assertions": 263,
+  "guards": {
+    "sameSource": true,
+    "sameBuild": true,
+    "sameTester": true,
+    "originalStatePreserved": true,
+    "apiStopped": true,
+    "paidAnalyzerInvocations": 0,
+    "blockedExternalConnections": []
+  },
+  "archivedSourcesMatchExecuted": true,
+  "archivedSourceHashes": {
+    "flow-ui-run.py": "9a4e1642d6b8322051b4b0ae7a28df90a93bb555744e287be3620f33a5cb2cd3",
+    "q2-build.py": "21eb1d01b774e9347d5bca403ecdd18e9f31798722c4ba615a98c450174f8497",
+    "q2-contract-selftest.py": "ff513087f0b9b7c6c26ae2b96f912a9b1719af565deba6d7fe7362a5cbeb9cd8",
+    "q2-run.py": "0ae96ee9bbd0ce936e69cd5aa5289057f8ffe3943414e5eba99bc871bed0758f",
+    "q2_contract.py": "d4835e4c83f351a10f566abf65a4455d9cc70db79c4c9d42dfc0e147b60e192e",
+    "q3-check.mjs": "50d489f37920271139af382c8de710a20c7a3a045b261bc2524fb69a17d2eba5",
+    "q3-drafts.mjs": "ed3d33ae6b91fbf02c321985cf62539c96351598c0e105ba8b238845f3173e89",
+    "q3-intake.mjs": "37ca8e0a03879f44472da9c34ec083c4d1590a6218173b0e71ea3a786d193f28",
+    "q3-run.py": "c382ab8855c66eef1c9ad69dcfbb1e4a68da5e65cbcf996811c55ba4405a2665",
+    "q3-save.mjs": "e2937ebf54b8ab4dc25c853ec23ee20c4179629312965a5d655e248d3dd13de4",
+    "scenario-check.py": "8d5488503136960b8b3b6ae3962d15d0142c35eee889814e5c0975e6b4891189"
+  },
+  "runContractSha256": "6b5262c9e2b811d40e3cbeb97da3c7c61453556f7c4fb4740293b3769e21f8a8",
+  "contractMetadataNote": "referenceMainSha and unused UI selectors are inherited compatibility metadata, not Q3 product identity. finalSha is the fixed tested product; Q3 does not run Q2 selectors.",
+  "axisStores": [
+    {
+      "id": "Q3-03",
+      "store": {
+        "store": "run-02",
+        "scope": "new isolated test state only"
+      }
+    },
+    {
+      "id": "Q3-04",
+      "store": {
+        "store": "run-03",
+        "scope": "new isolated test state only"
+      }
+    },
+    {
+      "id": "Q3-05",
+      "store": {
+        "store": "run-04",
+        "scope": "new isolated test state only"
+      }
+    },
+    {
+      "id": "Q3-06",
+      "store": {
+        "store": "run-05",
+        "scope": "new isolated test state only"
+      }
+    },
+    {
+      "id": "Q3-07",
+      "store": {
+        "store": "run-06",
+        "scope": "new isolated test state only"
+      }
+    },
+    {
+      "id": "Q3-01",
+      "store": {
+        "store": "run-07",
+        "scope": "new isolated test state only"
+      }
+    },
+    {
+      "id": "Q3-02",
+      "store": {
+        "store": "run-08",
+        "scope": "new isolated test state only"
+      }
+    },
+    {
+      "id": "Q3-08",
+      "store": {
+        "store": "run-09",
+        "scope": "new isolated test state only"
+      }
+    }
+  ]
+}

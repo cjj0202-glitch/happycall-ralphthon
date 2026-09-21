@@ -1,0 +1,17 @@
+{
+  "callReviewIntegrated": true,
+  "newTmsIntegrated": true,
+  "selectors": {
+    "naturalCompletionControl": "button:has-text(\"저장된 분석 결과 재생\")",
+    "segmentControl": "button[aria-label*=\"발화 1 구간 재생\"]",
+    "differentToteNotice": "section[aria-label=\"WMS 공정 확인\"] dt:text-is(\"토트 연속 연결\") + dd",
+    "wmsRegion": "section[aria-label=\"WMS 공정 확인\"]",
+    "wmsRawSourceControl": "section[aria-label=\"WMS 공정 확인\"] summary:text-is(\"선택 이벤트 · 원본 보기\")",
+    "wmsRawSourceText": "section[aria-label=\"WMS 공정 확인\"] details:has(summary:text-is(\"선택 이벤트 · 원본 보기\")) pre",
+    "wmsEvidenceLinkControl": "section[aria-label=\"상담 근거\"] button[data-testid^=\"link-\"]:enabled >> nth=0",
+    "wmsMediaOpenControl": "[data-testid=\"open-video\"]",
+    "tmsRegion": "[data-testid=\"tms-scene\"]",
+    "tmsRawSourceControl": "[aria-label=\"선택 방문 상세\"] summary:text-is(\"선택 방문 · 합성 입력 확인\")",
+    "tmsRawSourceText": "[aria-label=\"선택 방문 상세\"] details[open] pre"
+  }
+}
