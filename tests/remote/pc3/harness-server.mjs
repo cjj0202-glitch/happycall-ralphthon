@@ -12,7 +12,7 @@ export const WEB = path.join(ROOT, 'apps/web');
 export const MEDIA = path.join(WEB, 'public/demo');
 
 export async function sourceHashes() {
-  const files = ['apps/web/components/WmsScene.tsx', 'apps/web/components/WmsScene.module.css', 'apps/web/app/tokens.css', 'data/fixtures/cases.json', 'data/demo-media-manifest.json', 'tests/remote/pc3/harness.tsx', 'tests/remote/pc3/harness.css', 'tests/remote/pc3/harness-server.mjs', 'tests/remote/pc3/clip-mutations.mjs', 'tests/remote/pc3/run.mjs'];
+  const files = ['apps/web/components/WmsScene.tsx', 'apps/web/components/WmsScene.module.css', 'apps/web/app/tokens.css', 'data/fixtures/cases.json', 'data/demo-media-manifest.json', 'server/service.py', 'tests/remote/pc3/harness.tsx', 'tests/remote/pc3/harness.css', 'tests/remote/pc3/harness-server.mjs', 'tests/remote/pc3/clip-mutations.mjs', 'tests/remote/pc3/linked-intake-cases.mjs', 'tests/remote/pc3/run.mjs'];
   return Object.fromEntries(await Promise.all(files.map(async file => [file, await readFile(path.join(ROOT, file)).then(bytes => createHash('sha256').update(bytes).digest('hex')).catch(() => 'missing')])));
 }
 

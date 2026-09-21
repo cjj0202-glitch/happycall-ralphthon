@@ -1,0 +1,154 @@
+{
+  "scope": "Same physical pc3. Source-level actual CaseService outputs, TypeScript contract checks and static SSR. Optional Python dependency imports excluded; memory repository/analyzer. No normal server import/start, HTTP integration, callback execution or media playback.",
+  "source_sha256": "6f7c00558195323f41ba5d6da43fa0b82bad2d73e7a4e59249907b436c5e7222",
+  "service_sha256": "68fc155357bee36e4fa1c894ebeb1f56b0eef763dd5b3b50e4a03b1ffdd0bf60",
+  "passed": 36,
+  "total": 36,
+  "failed": 0,
+  "results": [
+    {
+      "name": "CASE-0001: actual class intake output permits WMS evidence",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: current intake and explicit source displayed separately",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: manually inherited video still blocked for new intake",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: copied object property order does not break source equality",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: missing explicit source blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: unknown explicit source blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: nontext intake blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: foreign display store blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: foreign top-level store blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: foreign reviewed store blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: other type blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: other asOf blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: other order blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: other tote blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: altered scan content blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: altered event content blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: altered evidence content blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: foreign case evidence blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: actual class intake output permits WMS evidence",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: current intake and explicit source displayed separately",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: manually inherited video still blocked for new intake",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: copied object property order does not break source equality",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: missing explicit source blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: unknown explicit source blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: nontext intake blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: foreign display store blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: foreign top-level store blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: foreign reviewed store blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: other type blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: other asOf blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: other order blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: other tote blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: altered scan content blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: altered event content blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: altered evidence content blocked",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: foreign case evidence blocked",
+      "passed": true
+    }
+  ]
+}

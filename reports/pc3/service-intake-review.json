@@ -1,0 +1,472 @@
+{
+  "scope": "Actual CaseService class methods compiled unchanged; two optional dependency imports excluded. Memory repository, no HTTP server, no live analyzer, no operational data writes.",
+  "excluded_imports": [
+    "server.live",
+    "server.repository"
+  ],
+  "service_sha256": "68fc155357bee36e4fa1c894ebeb1f56b0eef763dd5b3b50e4a03b1ffdd0bf60",
+  "created_at": "2026-09-21T10:14:05.404010+00:00",
+  "passed": 10,
+  "results": [
+    {
+      "name": "CASE-0001: actual intake source copies and no media",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: actual patch accepts linked WMS evidence",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: store mutation rejected",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: source rewrite rejected",
+      "passed": true
+    },
+    {
+      "name": "CASE-0001: wrong reference context rejected",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: actual intake source copies and no media",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: actual patch accepts linked WMS evidence",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: store mutation rejected",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: source rewrite rejected",
+      "passed": true
+    },
+    {
+      "name": "CASE-0002: wrong reference context rejected",
+      "passed": true
+    }
+  ],
+  "cases": [
+    {
+      "id": "INT-05D78CD1",
+      "type": "missing",
+      "channel": "text",
+      "synthetic": true,
+      "title": "당일 1회차 배송 전체",
+      "storeId": "SYN-ST01",
+      "subject": "당일 1회차 배송 전체",
+      "store": {
+        "id": "SYN-ST01",
+        "name": "가상 한빛점"
+      },
+      "storeName": "가상 한빛점",
+      "sourceText": "연결된 합성 물류 기록 확인을 요청합니다.",
+      "text": "연결된 합성 물류 기록 확인을 요청합니다.",
+      "status": "draft",
+      "createdAt": "2026-09-21T10:14:05.397421+00:00",
+      "updatedAt": "2026-09-21T10:14:05.397421+00:00",
+      "intake": {
+        "storeId": "SYN-ST01",
+        "subject": "당일 1회차 배송 전체",
+        "quantity": null,
+        "unit": null,
+        "request": "연결된 합성 물류 기록 확인을 요청합니다."
+      },
+      "departmentId": null,
+      "reviewConfirmed": false,
+      "reply": null,
+      "pendingActions": [],
+      "selectedEvidence": [],
+      "evidence": [
+        {
+          "id": "E-M1",
+          "system": "TMS",
+          "label": "규정 도착 시각",
+          "time": "2026-09-18T05:00:00+09:00",
+          "value": "규정 05:00 / 배송완료 기록 없음",
+          "status": "fact",
+          "source": "합성 TMS 방문행 SYN-R01/1"
+        },
+        {
+          "id": "E-M2",
+          "system": "TMS",
+          "label": "배송완료 실적",
+          "time": null,
+          "value": "미등록. 실제 미도착·기사 귀책은 아직 확정할 수 없습니다.",
+          "status": "unknown",
+          "source": "합성 TMS 실적 조회"
+        },
+        {
+          "id": "E-M3",
+          "system": "WMS",
+          "label": "센터 출고 스캔",
+          "time": "2026-09-18T04:20:00+09:00",
+          "value": "SYN-OUT01 출고 스캔 기록 존재. 점포 인도 완료와 다름.",
+          "status": "fact",
+          "source": "합성 WMS 출고행 SYN-OUT01"
+        }
+      ],
+      "linkedFixtureId": "CASE-0001",
+      "history": [
+        {
+          "at": "2026-09-21T10:14:05.397421+00:00",
+          "actor": "owner",
+          "action": "text_intake",
+          "message": "합성 문의 접수"
+        }
+      ],
+      "transcript": [
+        {
+          "speaker": "점주",
+          "text": "연결된 합성 물류 기록 확인을 요청합니다.",
+          "start": 0,
+          "end": 0
+        }
+      ],
+      "analysis": null,
+      "wms": {
+        "picking": {
+          "orderId": "SYN-ORDER01",
+          "product": "당일 1회차 배송",
+          "quantity": null,
+          "unit": null,
+          "zone": "A",
+          "cell": "A-01",
+          "toteId": "SYN-TOTE01",
+          "pickedAt": "2026-09-18T03:30:00+09:00",
+          "workType": "FACILITY",
+          "workUnitType": "BOX"
+        },
+        "shipping": {
+          "id": "SYN-OUT01",
+          "time": "2026-09-18T04:20:00+09:00",
+          "dock": "D-01",
+          "vehicle": "시연 차량 01"
+        },
+        "events": [
+          {
+            "id": "W-M1",
+            "time": "2026-09-18T03:30:00+09:00",
+            "label": "피킹 스캔",
+            "location": "A-01",
+            "status": "fact",
+            "source": "합성 피킹 이벤트"
+          },
+          {
+            "id": "W-M2",
+            "time": "2026-09-18T03:42:00+09:00",
+            "label": "소터 투입",
+            "location": "소터 IN-01",
+            "status": "fact",
+            "source": "합성 공정 시연 이벤트"
+          },
+          {
+            "id": "W-M3",
+            "time": "2026-09-18T03:44:00+09:00",
+            "label": "분기 통과",
+            "location": "분기 01 → D-01",
+            "status": "fact",
+            "source": "합성 공정 시연 이벤트"
+          },
+          {
+            "id": "W-M4",
+            "time": "2026-09-18T04:20:00+09:00",
+            "label": "출고 스캔",
+            "location": "D-01",
+            "status": "fact",
+            "source": "합성 출고 이벤트"
+          }
+        ],
+        "referenceModule": "30_센터작업모니터링",
+        "sorting": {
+          "sortedAt": "2026-09-18T03:44:00+09:00",
+          "schdChuteNo": "CH-01",
+          "rsltChuteNo": "CH-01",
+          "source": "30 필드 정의를 참고한 가상 분류실적"
+        }
+      },
+      "tms": {
+        "centerId": "SYN-CTR01",
+        "bizDate": "2026-09-18",
+        "routeId": "SYN-R01",
+        "vehicle": "시연 차량 01",
+        "mapNote": "가상 좌표·방문순서 연결선. 실제 GPS 궤적 아님.",
+        "stops": [
+          {
+            "id": "SYN-ST01",
+            "name": "가상 한빛점",
+            "sequence": 1,
+            "planned": "2026-09-18T05:00:00+09:00",
+            "actual": null,
+            "mobileEntry": null,
+            "mobileExit": null,
+            "lat": 37.501,
+            "lng": 127.021,
+            "status": "unknown"
+          },
+          {
+            "id": "SYN-ST03",
+            "name": "가상 푸른점",
+            "sequence": 2,
+            "planned": "2026-09-18T05:25:00+09:00",
+            "actual": null,
+            "mobileEntry": null,
+            "mobileExit": null,
+            "lat": 37.509,
+            "lng": 127.043,
+            "status": "unknown"
+          },
+          {
+            "id": "SYN-ST04",
+            "name": "가상 나무점",
+            "sequence": 3,
+            "planned": "2026-09-18T05:50:00+09:00",
+            "actual": null,
+            "mobileEntry": null,
+            "mobileExit": null,
+            "lat": 37.492,
+            "lng": 127.051,
+            "status": "unknown"
+          }
+        ]
+      },
+      "asOf": "2026-09-18T07:00:00+09:00",
+      "expected": {
+        "product": "당일 1회차 배송 전체",
+        "quantity": null,
+        "unit": null
+      },
+      "received": {
+        "product": "경영주 진술: 전체 미수령",
+        "quantity": null,
+        "unit": null
+      },
+      "provenance": "33 모듈 과거 답변의 문의 패턴을 재구성한 독립 합성 시연. 실제 접수·배송 기록 아님.",
+      "revision": 0
+    },
+    {
+      "id": "INT-B879C922",
+      "type": "wrong",
+      "channel": "text",
+      "synthetic": true,
+      "title": "비스킷 주문 대신 휴지 입고",
+      "storeId": "SYN-ST02",
+      "subject": "비스킷 주문 대신 휴지 입고",
+      "store": {
+        "id": "SYN-ST02",
+        "name": "가상 새봄점"
+      },
+      "storeName": "가상 새봄점",
+      "sourceText": "연결된 합성 물류 기록 확인을 요청합니다.",
+      "text": "연결된 합성 물류 기록 확인을 요청합니다.",
+      "status": "draft",
+      "createdAt": "2026-09-21T10:14:05.400946+00:00",
+      "updatedAt": "2026-09-21T10:14:05.400946+00:00",
+      "intake": {
+        "storeId": "SYN-ST02",
+        "subject": "비스킷 주문 대신 휴지 입고",
+        "quantity": null,
+        "unit": null,
+        "request": "연결된 합성 물류 기록 확인을 요청합니다."
+      },
+      "departmentId": null,
+      "reviewConfirmed": false,
+      "reply": null,
+      "pendingActions": [],
+      "selectedEvidence": [],
+      "evidence": [
+        {
+          "id": "E-W1",
+          "system": "WMS",
+          "label": "주문 상품",
+          "time": "2026-09-18T01:00:00+09:00",
+          "value": "비스킷 18 EA",
+          "status": "fact",
+          "source": "합성 주문 SYN-ORDER02/1"
+        },
+        {
+          "id": "E-W2",
+          "system": "WMS",
+          "label": "피킹 스캔",
+          "time": "2026-09-18T02:15:00+09:00",
+          "value": "비스킷 18 EA / SYN-TOTE02-A",
+          "status": "fact",
+          "source": "합성 피킹 SYN-PICK02"
+        },
+        {
+          "id": "E-W3",
+          "system": "WMS",
+          "label": "출고 스캔 불일치",
+          "time": "2026-09-18T03:02:00+09:00",
+          "value": "휴지 1 BOX / SYN-TOTE02-B. 상품·단위 불일치 확인.",
+          "status": "fact",
+          "source": "합성 출고 SYN-OUT02"
+        },
+        {
+          "id": "E-W4",
+          "system": "WMS",
+          "label": "발생 공정",
+          "time": null,
+          "value": "피킹과 출고 기록이 다르나 소터 오류·특정 작업자 귀책은 미확인.",
+          "status": "unknown",
+          "source": "합성 사례의 추가 조사 항목"
+        },
+        {
+          "id": "E-W5",
+          "system": "TMS",
+          "label": "배송완료 기록",
+          "time": "2026-09-18T05:10:00+09:00",
+          "value": "05:10 완료 등록. 정확한 상품 인도 여부는 별도 확인.",
+          "status": "fact",
+          "source": "합성 TMS SYN-R02/2"
+        }
+      ],
+      "linkedFixtureId": "CASE-0002",
+      "history": [
+        {
+          "at": "2026-09-21T10:14:05.400946+00:00",
+          "actor": "owner",
+          "action": "text_intake",
+          "message": "합성 문의 접수"
+        }
+      ],
+      "transcript": [
+        {
+          "speaker": "점주",
+          "text": "연결된 합성 물류 기록 확인을 요청합니다.",
+          "start": 0,
+          "end": 0
+        }
+      ],
+      "analysis": null,
+      "wms": {
+        "picking": {
+          "orderId": "SYN-ORDER02",
+          "product": "비스킷",
+          "quantity": 18,
+          "unit": "EA",
+          "zone": "B",
+          "cell": "B-20-2",
+          "toteId": "SYN-TOTE02-A",
+          "pickedAt": "2026-09-18T02:15:00+09:00",
+          "workType": "FACILITY",
+          "workUnitType": "BOX"
+        },
+        "shipping": {
+          "id": "SYN-OUT02",
+          "product": "휴지",
+          "quantity": 1,
+          "unit": "BOX",
+          "toteId": "SYN-TOTE02-B",
+          "time": "2026-09-18T03:02:00+09:00",
+          "dock": "D-02",
+          "vehicle": "시연 차량 02"
+        },
+        "events": [
+          {
+            "id": "W-W1",
+            "time": "2026-09-18T02:15:00+09:00",
+            "label": "피킹 스캔 · 비스킷 18 EA",
+            "location": "B-20-2 / SYN-TOTE02-A",
+            "status": "fact",
+            "source": "합성 피킹 이벤트"
+          },
+          {
+            "id": "W-W2",
+            "time": "2026-09-18T02:31:00+09:00",
+            "label": "소터 투입",
+            "location": "소터 IN-02 / SYN-TOTE02-A",
+            "status": "fact",
+            "source": "합성 공정 시연 이벤트"
+          },
+          {
+            "id": "W-W3",
+            "time": "2026-09-18T02:33:00+09:00",
+            "label": "분기 이동",
+            "location": "분기 02 → D-02",
+            "status": "fact",
+            "source": "합성 공정 시연 이벤트"
+          },
+          {
+            "id": "W-W4",
+            "time": "2026-09-18T03:02:00+09:00",
+            "label": "출고 스캔 · 휴지 1 BOX",
+            "location": "D-02 / SYN-TOTE02-B",
+            "status": "fact",
+            "source": "합성 출고 이벤트"
+          }
+        ],
+        "referenceModule": "30_센터작업모니터링",
+        "sorting": {
+          "sortedAt": "2026-09-18T02:33:00+09:00",
+          "schdChuteNo": "CH-02",
+          "rsltChuteNo": "CH-02",
+          "source": "30 필드 정의를 참고한 가상 분류실적"
+        }
+      },
+      "tms": {
+        "centerId": "SYN-CTR01",
+        "bizDate": "2026-09-18",
+        "routeId": "SYN-R02",
+        "vehicle": "시연 차량 02",
+        "mapNote": "가상 좌표·방문순서 연결선. 실제 GPS 궤적 아님.",
+        "stops": [
+          {
+            "id": "SYN-ST05",
+            "name": "가상 온유점",
+            "sequence": 1,
+            "planned": "2026-09-18T04:45:00+09:00",
+            "actual": "2026-09-18T04:47:00+09:00",
+            "mobileEntry": "2026-09-18T04:44:00+09:00",
+            "mobileExit": "2026-09-18T04:49:00+09:00",
+            "lat": 37.482,
+            "lng": 127.01,
+            "status": "fact"
+          },
+          {
+            "id": "SYN-ST02",
+            "name": "가상 새봄점",
+            "sequence": 2,
+            "planned": "2026-09-18T05:10:00+09:00",
+            "actual": "2026-09-18T05:10:00+09:00",
+            "mobileEntry": "2026-09-18T05:07:00+09:00",
+            "mobileExit": "2026-09-18T05:14:00+09:00",
+            "lat": 37.495,
+            "lng": 127.033,
+            "status": "fact"
+          },
+          {
+            "id": "SYN-ST06",
+            "name": "가상 해뜰점",
+            "sequence": 3,
+            "planned": "2026-09-18T05:40:00+09:00",
+            "actual": "2026-09-18T05:42:00+09:00",
+            "mobileEntry": "2026-09-18T05:37:00+09:00",
+            "mobileExit": "2026-09-18T05:46:00+09:00",
+            "lat": 37.514,
+            "lng": 127.026,
+            "status": "fact"
+          }
+        ]
+      },
+      "asOf": "2026-09-18T07:00:00+09:00",
+      "expected": {
+        "product": "비스킷",
+        "productId": "SYN-SKU01",
+        "quantity": 18,
+        "unit": "EA"
+      },
+      "received": {
+        "product": "휴지",
+        "productId": "SYN-SKU02",
+        "quantity": 1,
+        "unit": "BOX"
+      },
+      "provenance": "33 모듈 과거 답변의 문의 패턴을 재구성한 독립 합성 시연. 실제 접수·배송 기록 아님.",
+      "revision": 0
+    }
+  ]
+}

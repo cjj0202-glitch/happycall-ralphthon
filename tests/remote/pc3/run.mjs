@@ -5,6 +5,7 @@ import path from 'node:path';
 import { chromium } from 'playwright';
 import { ROOT, MEDIA, sourceHashes, browserExecutable, startHarness } from './harness-server.mjs';
 import { clipMutations } from './clip-mutations.mjs';
+import { makeLinkedIntake, linkedIntakeMutations, reorderObjectKeys } from './linked-intake-cases.mjs';
 
 const output = path.join(ROOT, '.local/pc3-tests', new Date().toISOString().replace(/[:.]/g, '-'));
 const report = {
@@ -305,6 +306,90 @@ try {
       const state = await page.evaluate(() => window.pc3Harness.state());
       assert.equal(state.events.filter(event => event.type === 'link-attempt').length, 0);
       return { foreignId: 'E-M3', activeCase: 'CASE-0002', disabled: true, callbackCount: 0 };
+    });
+    for (const source of fixture.cases) {
+      await check(`linked-intake-positive-${source.id}`, async () => {
+        const data = makeLinkedIntake(source);
+        assert.equal(Object.hasOwn(data, 'media'), false);
+        await render(data);
+        const model = await page.evaluate(() => window.pc3Harness.inspect(window.pc3Harness.state().caseData));
+        assert.equal(model.contextError, '', `Explicit linked intake rejected: ${model.contextError}`);
+        const sourceLabel = await page.getByTestId('source-reference').innerText();
+        assert.ok(sourceLabel.includes(data.id) && sourceLabel.includes(source.id));
+        const selected = source.evidence.find(item => item.system === 'WMS').id;
+        assert.ok(await page.getByTestId(`link-${selected}`).isEnabled());
+        await page.getByTestId(`link-${selected}`).click();
+        await page.waitForFunction(id => window.pc3Harness.state().events.some(event => event.type === 'link-resolved' && event.id === id), selected);
+        const state = await page.evaluate(() => window.pc3Harness.state());
+        assert.equal(state.events.filter(event => event.type === 'link-resolved').length, 1);
+        assert.equal(Object.hasOwn(state.caseData, 'media'), false, 'Component must not synthesize media on a linked intake');
+        assert.equal(await page.getByTestId('open-video').count(), 0);
+        return { intakeId: data.id, sourceId: source.id, sourceLabel, contextError: model.contextError, linkedEvidence: selected, events: state.events, screenshot: await snapshot(`linked-${source.id}`) };
+      });
+    }
+    await check('linked-intake-reviewer-reproduction', async () => {
+      const data = structuredClone(fixture.cases[1]); data.id = 'INT-MAINREVIEW'; data.channel = 'text'; data.linkedFixtureId = 'CASE-0002'; delete data.media;
+      await render(data);
+      const model = await page.evaluate(() => window.pc3Harness.inspect(window.pc3Harness.state().caseData));
+      assert.equal(model.contextError, '');
+      await page.getByTestId('link-E-W2').click();
+      await page.waitForFunction(() => window.pc3Harness.state().events.some(event => event.type === 'link-resolved' && event.id === 'E-W2'));
+      return { intakeId: data.id, sourceId: data.linkedFixtureId, contextError: model.contextError, events: await page.evaluate(() => window.pc3Harness.state().events) };
+    });
+    await check('linked-intake-object-key-order-not-identity', async () => {
+      const data = makeLinkedIntake(fixture.cases[1], 'INT-KEYORDER');
+      data.wms = reorderObjectKeys(data.wms); data.evidence = reorderObjectKeys(data.evidence);
+      data.sourceText = '새 텍스트 본문'; data.intake.subject = '상담원이 수정한 문의 설명';
+      await render(data);
+      const model = await page.evaluate(() => window.pc3Harness.inspect(window.pc3Harness.state().caseData));
+      assert.equal(model.contextError, '');
+      assert.ok(await page.getByTestId('link-E-W2').isEnabled());
+      return { reorderedObjectKeysAccepted: true, originalArrayOrderPreserved: true, editedIntakeTextAccepted: true };
+    });
+    for (const mutation of linkedIntakeMutations) {
+      await check(`linked-intake-reject-${mutation.name}`, async () => {
+        const data = makeLinkedIntake(fixture.cases[1]); mutation.edit(data); await render(data);
+        const model = await page.evaluate(() => window.pc3Harness.inspect(window.pc3Harness.state().caseData));
+        assert.ok(model.contextError.length > 0, `Untrusted linked context accepted: ${mutation.name}`);
+        const links = page.locator('button[data-testid^="link-"]');
+        assert.ok(await links.count() > 0);
+        for (const button of await links.all()) {
+          assert.ok(await button.isDisabled(), `Evidence enabled for ${mutation.name}`);
+          await button.evaluate(element => element.click());
+        }
+        const events = await page.evaluate(() => window.pc3Harness.state().events);
+        assert.equal(events.filter(event => event.type === 'link-attempt').length, 0);
+        return { mutation: mutation.name, contextError: model.contextError, disabledEvidence: await links.count(), callbackCount: 0 };
+      });
+    }
+    await check('linked-intake-manual-media-never-inherited', async () => {
+      const outcomes = [];
+      for (const retargeted of [false, true]) {
+        const data = makeLinkedIntake(fixture.cases[1]); data.media = structuredClone(fixture.cases[1].media);
+        if (retargeted) data.media[0].caseId = data.id;
+        await render(data); await page.getByTestId('event-W-W3').click();
+        const model = await page.evaluate(() => window.pc3Harness.inspect(window.pc3Harness.state().caseData));
+        assert.equal(model.contextError, '', 'Manually attached media must not block otherwise valid evidence');
+        const validation = await page.evaluate(() => { const data = window.pc3Harness.state().caseData; return window.pc3Harness.validate(data, data.wms.events[2], data.media); });
+        assert.ok(!validation.clip && validation.reason);
+        assert.equal(await page.getByTestId('open-video').count(), 0); assert.equal(await page.locator('video').count(), 0);
+        await page.getByTestId('link-E-W2').click();
+        await page.waitForFunction(() => window.pc3Harness.state().events.some(event => event.type === 'link-resolved'));
+        outcomes.push({ retargeted, contextError: model.contextError, videoBlocked: validation.reason, validEvidenceStillLinkable: true });
+      }
+      return outcomes;
+    });
+    await check('linked-intake-source-change-resets-ui', async () => {
+      const data = makeLinkedIntake(fixture.cases[1], 'INT-SAME-IDENTITY'); await render(data);
+      await page.getByTestId('event-W-W3').click(); await page.getByTestId('link-E-W2').click();
+      await page.waitForFunction(() => document.querySelector('[data-testid="link-E-W2"]').textContent === '연결됨');
+      const changed = structuredClone(data); changed.linkedFixtureId = 'CASE-0001';
+      await render(changed);
+      assert.equal((await page.locator('[role="status"]').allTextContents()).join('').trim(), '');
+      assert.ok(!(await page.getByTestId('link-E-W2').innerText()).includes('연결됨'));
+      assert.ok(await page.getByTestId('link-E-W2').isDisabled());
+      assert.equal(await page.getByTestId('event-W-W1').getAttribute('aria-pressed'), 'true');
+      return { intakeId: data.id, oldSource: data.linkedFixtureId, newSource: changed.linkedFixtureId, staleSuccessCleared: true, selectedEventReset: true };
     });
     await check('keyboard-selection-and-back-callback', async () => {
       await render('CASE-0002');

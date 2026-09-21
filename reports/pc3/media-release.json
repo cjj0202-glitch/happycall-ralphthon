@@ -1,0 +1,101 @@
+{
+  "checkedAt": "2026-09-21T10:08:11.850175+00:00",
+  "repository": "cjj0202-glitch/happycall-ralphthon",
+  "tag": "demo-media-20260921-wms-candidates-v1",
+  "releaseId": 392854432,
+  "releaseUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/tag/demo-media-20260921-wms-candidates-v1",
+  "targetCommit": "577a31b8511c9bb73a1f66c5763077cd776ef6a7",
+  "prerelease": true,
+  "draft": false,
+  "publishedAt": "2026-09-21T10:08:07Z",
+  "assetCount": 7,
+  "githubDigestMatches": 7,
+  "downloadMatches": 7,
+  "downloadedOverlayRelationshipsValid": true,
+  "downloadDirectory": "D:\\hwana\\Downloads\\happycall-pc3-wms-candidates-v1",
+  "assets": [
+    {
+      "name": "case-0001-picking.mp4",
+      "bytes": 69153,
+      "sha256": "94b5076150c739dc13fe1d10c370c040dd8a49f4848e581cedaca98536d63cc7",
+      "githubDigest": "sha256:94b5076150c739dc13fe1d10c370c040dd8a49f4848e581cedaca98536d63cc7",
+      "githubDigestMatches": true,
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/download/demo-media-20260921-wms-candidates-v1/case-0001-picking.mp4",
+      "downloadPath": "D:\\hwana\\Downloads\\happycall-pc3-wms-candidates-v1\\case-0001-picking.mp4",
+      "downloadBytesMatches": true,
+      "downloadSha256Matches": true
+    },
+    {
+      "name": "case-0001-sorting.mp4",
+      "bytes": 80031,
+      "sha256": "f2b21ea3fb2ab5427a581c4e66a8625711f43ed9155fbcf36b8aad2b7757812c",
+      "githubDigest": "sha256:f2b21ea3fb2ab5427a581c4e66a8625711f43ed9155fbcf36b8aad2b7757812c",
+      "githubDigestMatches": true,
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/download/demo-media-20260921-wms-candidates-v1/case-0001-sorting.mp4",
+      "downloadPath": "D:\\hwana\\Downloads\\happycall-pc3-wms-candidates-v1\\case-0001-sorting.mp4",
+      "downloadBytesMatches": true,
+      "downloadSha256Matches": true
+    },
+    {
+      "name": "case-0001-shipping.mp4",
+      "bytes": 70888,
+      "sha256": "dffdf1d94c9324aaecf8a04dacf9d4701d4a356d0a8696c3c008cba307717857",
+      "githubDigest": "sha256:dffdf1d94c9324aaecf8a04dacf9d4701d4a356d0a8696c3c008cba307717857",
+      "githubDigestMatches": true,
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/download/demo-media-20260921-wms-candidates-v1/case-0001-shipping.mp4",
+      "downloadPath": "D:\\hwana\\Downloads\\happycall-pc3-wms-candidates-v1\\case-0001-shipping.mp4",
+      "downloadBytesMatches": true,
+      "downloadSha256Matches": true
+    },
+    {
+      "name": "case-0002-picking.mp4",
+      "bytes": 71660,
+      "sha256": "57e8d39e9c4d0c5de2889f6d87dbb5d9cc4c56d843194b39e1e47f2012c3b9f7",
+      "githubDigest": "sha256:57e8d39e9c4d0c5de2889f6d87dbb5d9cc4c56d843194b39e1e47f2012c3b9f7",
+      "githubDigestMatches": true,
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/download/demo-media-20260921-wms-candidates-v1/case-0002-picking.mp4",
+      "downloadPath": "D:\\hwana\\Downloads\\happycall-pc3-wms-candidates-v1\\case-0002-picking.mp4",
+      "downloadBytesMatches": true,
+      "downloadSha256Matches": true
+    },
+    {
+      "name": "case-0002-sorting.mp4",
+      "bytes": 80507,
+      "sha256": "0482a749d028f2f1a9d6b76cda2a7ad252914fcc3051e6b005239ca23eb11414",
+      "githubDigest": "sha256:0482a749d028f2f1a9d6b76cda2a7ad252914fcc3051e6b005239ca23eb11414",
+      "githubDigestMatches": true,
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/download/demo-media-20260921-wms-candidates-v1/case-0002-sorting.mp4",
+      "downloadPath": "D:\\hwana\\Downloads\\happycall-pc3-wms-candidates-v1\\case-0002-sorting.mp4",
+      "downloadBytesMatches": true,
+      "downloadSha256Matches": true
+    },
+    {
+      "name": "case-0002-shipping.mp4",
+      "bytes": 71341,
+      "sha256": "ebbcca8b7eaba36efc89a79c170332c47123a490db8cb616879d97ed627eeb3c",
+      "githubDigest": "sha256:ebbcca8b7eaba36efc89a79c170332c47123a490db8cb616879d97ed627eeb3c",
+      "githubDigestMatches": true,
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/download/demo-media-20260921-wms-candidates-v1/case-0002-shipping.mp4",
+      "downloadPath": "D:\\hwana\\Downloads\\happycall-pc3-wms-candidates-v1\\case-0002-shipping.mp4",
+      "downloadBytesMatches": true,
+      "downloadSha256Matches": true
+    },
+    {
+      "name": "pc3-wms.json",
+      "bytes": 16435,
+      "sha256": "fb4b94e2c70fb33b4e97669cecc8aabb6dbeee5118fc16f55b8e5ba2e69742d0",
+      "githubDigest": "sha256:fb4b94e2c70fb33b4e97669cecc8aabb6dbeee5118fc16f55b8e5ba2e69742d0",
+      "githubDigestMatches": true,
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/download/demo-media-20260921-wms-candidates-v1/pc3-wms.json",
+      "downloadPath": "D:\\hwana\\Downloads\\happycall-pc3-wms-candidates-v1\\pc3-wms.json",
+      "downloadBytesMatches": true,
+      "downloadSha256Matches": true
+    }
+  ],
+  "registrationStatus": "candidate-not-registered",
+  "limitations": [
+    "Not canonical media registration or final acceptance.",
+    "Procedural code animation; not actual CCTV, AI video-model output, or operational evidence.",
+    "No fixture, canonical manifest, public assets, or existing audio v2 release changed."
+  ]
+}

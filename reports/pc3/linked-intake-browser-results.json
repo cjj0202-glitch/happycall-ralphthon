@@ -1,0 +1,1090 @@
+{
+  "suite": "N03 actual WmsScene standalone browser checks",
+  "startedAt": "2026-09-21T10:10:50.921Z",
+  "executor": "AI Playwright; not human observation or full-app integration",
+  "coveragePhase": "responsive, semantic, registration, media-integrity, interaction",
+  "sourceHashesStart": {
+    "apps/web/components/WmsScene.tsx": "6f7c00558195323f41ba5d6da43fa0b82bad2d73e7a4e59249907b436c5e7222",
+    "apps/web/components/WmsScene.module.css": "6c6129347b80868d6aa7d12ac47a0ab938cf67850752e8e6266a64e75665c9bd",
+    "apps/web/app/tokens.css": "31a08dbc4cfd532d4a4d44ca0cf1fa8629ed57e25a9629b5caf748b41d1c01c3",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf",
+    "server/service.py": "68fc155357bee36e4fa1c894ebeb1f56b0eef763dd5b3b50e4a03b1ffdd0bf60",
+    "tests/remote/pc3/harness.tsx": "0a26d3a3336bdb09387eb8715bb1082881cf6130a563dce0abcecb3000b60090",
+    "tests/remote/pc3/harness.css": "586c16e58ff4a1c0603cd8a845f65b249176c1c1accf5d04e40c2d26417c5b8c",
+    "tests/remote/pc3/harness-server.mjs": "482f47fd2cb1497eaf50feb4248f714ae0cb3354ec3801422a7d3614c1c37713",
+    "tests/remote/pc3/clip-mutations.mjs": "a79de0313639664230eb3c525c1cda7df7f04257b60a0cee08bc6cfe2146cdc0",
+    "tests/remote/pc3/linked-intake-cases.mjs": "286183ed61b4bbb7dcbaeb6cdb4f3f5c93fff77ceccc93f088e067f6a6d922ed",
+    "tests/remote/pc3/run.mjs": "4d18b66d00245e5fa3d188ede48e4b9e469841128e274ae02ce28d01858078b2"
+  },
+  "checks": [
+    {
+      "name": "fixture-scope",
+      "status": "PASS",
+      "elapsedMs": 3,
+      "evidence": {
+        "ids": [
+          "CASE-0001",
+          "CASE-0002"
+        ],
+        "synthetic": true
+      }
+    },
+    {
+      "name": "visible-CASE-0001-390",
+      "status": "PASS",
+      "elapsedMs": 466,
+      "evidence": {
+        "width": 390,
+        "docWidth": 390,
+        "bodyWidth": 390,
+        "screenshot": "CASE-0001-390.png"
+      }
+    },
+    {
+      "name": "visible-CASE-0001-921",
+      "status": "PASS",
+      "elapsedMs": 177,
+      "evidence": {
+        "width": 921,
+        "docWidth": 921,
+        "bodyWidth": 921,
+        "screenshot": "CASE-0001-921.png"
+      }
+    },
+    {
+      "name": "visible-CASE-0001-1365",
+      "status": "PASS",
+      "elapsedMs": 209,
+      "evidence": {
+        "width": 1365,
+        "docWidth": 1365,
+        "bodyWidth": 1365,
+        "screenshot": "CASE-0001-1365.png"
+      }
+    },
+    {
+      "name": "visible-CASE-0002-390",
+      "status": "PASS",
+      "elapsedMs": 159,
+      "evidence": {
+        "width": 390,
+        "docWidth": 390,
+        "bodyWidth": 390,
+        "screenshot": "CASE-0002-390.png"
+      }
+    },
+    {
+      "name": "visible-CASE-0002-921",
+      "status": "PASS",
+      "elapsedMs": 193,
+      "evidence": {
+        "width": 921,
+        "docWidth": 921,
+        "bodyWidth": 921,
+        "screenshot": "CASE-0002-921.png"
+      }
+    },
+    {
+      "name": "visible-CASE-0002-1365",
+      "status": "PASS",
+      "elapsedMs": 253,
+      "evidence": {
+        "width": 1365,
+        "docWidth": 1365,
+        "bodyWidth": 1365,
+        "screenshot": "CASE-0002-1365.png"
+      }
+    },
+    {
+      "name": "registered-media-file",
+      "status": "PASS",
+      "elapsedMs": 82,
+      "evidence": {
+        "bytes": 1097133,
+        "sha256": "e6cad3cf9f999b596a0fef3e3d463170e0d279568a31a4be49366e5383908881",
+        "expected": {
+          "name": "sorter-demo.mp4",
+          "bytes": 1097133,
+          "sha256": "e6cad3cf9f999b596a0fef3e3d463170e0d279568a31a4be49366e5383908881",
+          "synthetic": true,
+          "durationSeconds": 12,
+          "durationMethod": "imageio-ffmpeg metadata (ffprobe unavailable)",
+          "width": 960,
+          "height": 540,
+          "fps": 24,
+          "codec": "h264"
+        },
+        "evidence": "Local file bytes independently matched to tracked media manifest"
+      }
+    },
+    {
+      "name": "event-selection-next-action-CASE-0001",
+      "status": "PASS",
+      "elapsedMs": 281,
+      "evidence": [
+        {
+          "event": "W-M1",
+          "action": "다음 확인 행동\n\n상품·수량·단위와 피킹 토트 원본을 확인하세요."
+        },
+        {
+          "event": "W-M2",
+          "action": "다음 확인 행동\n\n투입 시각과 토트 연결 기록을 센터에 확인하세요."
+        },
+        {
+          "event": "W-M3",
+          "action": "다음 확인 행동\n\n계획·실적 슈트와 분기 전후 연결을 확인하세요. 슈트 일치만으로 상품 일치를 확정할 수 없습니다."
+        },
+        {
+          "event": "W-M4",
+          "action": "다음 확인 행동\n\n출고 스캔과 피킹 기록을 대조하고 센터에 토트 연결·상품 처리를 요청하세요."
+        }
+      ]
+    },
+    {
+      "name": "event-selection-next-action-CASE-0002",
+      "status": "PASS",
+      "elapsedMs": 269,
+      "evidence": [
+        {
+          "event": "W-W1",
+          "action": "다음 확인 행동\n\n상품·수량·단위와 피킹 토트 원본을 확인하세요."
+        },
+        {
+          "event": "W-W2",
+          "action": "다음 확인 행동\n\n투입 시각과 토트 연결 기록을 센터에 확인하세요."
+        },
+        {
+          "event": "W-W3",
+          "action": "다음 확인 행동\n\n계획·실적 슈트와 분기 전후 연결을 확인하세요. 슈트 일치만으로 상품 일치를 확정할 수 없습니다."
+        },
+        {
+          "event": "W-W4",
+          "action": "다음 확인 행동\n\n출고 스캔과 피킹 기록을 대조하고 센터에 토트 연결·상품 처리를 요청하세요."
+        }
+      ]
+    },
+    {
+      "name": "unregistered-media-remains-unavailable",
+      "status": "PASS",
+      "elapsedMs": 371,
+      "evidence": {
+        "eventIds": [
+          "W-M1",
+          "W-M2",
+          "W-M3",
+          "W-M4",
+          "W-W1",
+          "W-W2",
+          "W-W4"
+        ],
+        "observed": "No unrelated clip reused"
+      }
+    },
+    {
+      "name": "missing-event-retains-canonical-stage-actions",
+      "status": "PASS",
+      "elapsedMs": 132,
+      "evidence": {
+        "omittedEvent": "W-W2",
+        "sortingAction": "다음 확인 행동\n\n계획·실적 슈트와 분기 전후 연결을 확인하세요. 슈트 일치만으로 상품 일치를 확정할 수 없습니다.",
+        "shippingAction": "다음 확인 행동\n\n출고 스캔과 피킹 기록을 대조하고 센터에 토트 연결·상품 처리를 요청하세요."
+      }
+    },
+    {
+      "name": "registered-clip-positive-control",
+      "status": "PASS",
+      "elapsedMs": 8,
+      "evidence": {
+        "clip": {
+          "id": "SYN-CCTV-CASE2-SORTER",
+          "caseId": "CASE-0002",
+          "system": "WMS",
+          "cameraId": "SYN-CAM-02",
+          "eventIds": [
+            "W-W3"
+          ],
+          "url": "/demo/sorter-demo.mp4",
+          "synthetic": true,
+          "startSeconds": 0,
+          "endSeconds": 12,
+          "occurredAt": "2026-09-18T02:33:00+09:00",
+          "label": "분기02 → D-02 공정 합성 영상",
+          "notice": "AI로 만든 공정 설명 영상. 실제 작업·휴먼에러·귀책 증거가 아님.",
+          "sha256": "e6cad3cf9f999b596a0fef3e3d463170e0d279568a31a4be49366e5383908881",
+          "bytes": 1097133
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "reject-case-mismatch",
+      "status": "PASS",
+      "elapsedMs": 7,
+      "evidence": {
+        "mutation": "case-mismatch",
+        "result": {
+          "reason": "사건·카메라·이벤트·시각·영상 구간의 등록값이 일치하지 않습니다."
+        }
+      }
+    },
+    {
+      "name": "reject-event-mismatch",
+      "status": "PASS",
+      "elapsedMs": 6,
+      "evidence": {
+        "mutation": "event-mismatch",
+        "result": {
+          "reason": "영상 미등록 · 이 공정의 별도 영상이 필요합니다."
+        }
+      }
+    },
+    {
+      "name": "reject-system-mismatch",
+      "status": "PASS",
+      "elapsedMs": 5,
+      "evidence": {
+        "mutation": "system-mismatch",
+        "result": {
+          "reason": "사건·카메라·이벤트·시각·영상 구간의 등록값이 일치하지 않습니다."
+        }
+      }
+    },
+    {
+      "name": "reject-camera-mismatch",
+      "status": "PASS",
+      "elapsedMs": 7,
+      "evidence": {
+        "mutation": "camera-mismatch",
+        "result": {
+          "reason": "사건·카메라·이벤트·시각·영상 구간의 등록값이 일치하지 않습니다."
+        }
+      }
+    },
+    {
+      "name": "reject-occurred-time-mismatch",
+      "status": "PASS",
+      "elapsedMs": 5,
+      "evidence": {
+        "mutation": "occurred-time-mismatch",
+        "result": {
+          "reason": "사건·카메라·이벤트·시각·영상 구간의 등록값이 일치하지 않습니다."
+        }
+      }
+    },
+    {
+      "name": "reject-event-time-missing",
+      "status": "PASS",
+      "elapsedMs": 6,
+      "evidence": {
+        "mutation": "event-time-missing",
+        "result": {
+          "reason": "이벤트의 등록 시각·출처·위치가 일치하지 않습니다."
+        }
+      }
+    },
+    {
+      "name": "reject-future-event",
+      "status": "PASS",
+      "elapsedMs": 5,
+      "evidence": {
+        "mutation": "future-event",
+        "result": {
+          "reason": "원본 사건·문의 유형·기준시각이 일치하지 않습니다."
+        }
+      }
+    },
+    {
+      "name": "reject-tote-mismatch",
+      "status": "PASS",
+      "elapsedMs": 6,
+      "evidence": {
+        "mutation": "tote-mismatch",
+        "result": {
+          "reason": "점포·주문·토트의 영상 관계가 일치하지 않거나 미확인입니다."
+        }
+      }
+    },
+    {
+      "name": "reject-segment-negative",
+      "status": "PASS",
+      "elapsedMs": 5,
+      "evidence": {
+        "mutation": "segment-negative",
+        "result": {
+          "reason": "사건·카메라·이벤트·시각·영상 구간의 등록값이 일치하지 않습니다."
+        }
+      }
+    },
+    {
+      "name": "reject-segment-inverted",
+      "status": "PASS",
+      "elapsedMs": 4,
+      "evidence": {
+        "mutation": "segment-inverted",
+        "result": {
+          "reason": "사건·카메라·이벤트·시각·영상 구간의 등록값이 일치하지 않습니다."
+        }
+      }
+    },
+    {
+      "name": "reject-segment-overrun",
+      "status": "PASS",
+      "elapsedMs": 5,
+      "evidence": {
+        "mutation": "segment-overrun",
+        "result": {
+          "reason": "사건·카메라·이벤트·시각·영상 구간의 등록값이 일치하지 않습니다."
+        }
+      }
+    },
+    {
+      "name": "reject-duplicate-mapping",
+      "status": "PASS",
+      "elapsedMs": 7,
+      "evidence": {
+        "mutation": "duplicate-mapping",
+        "result": {
+          "reason": "중복 영상 등록을 확인하세요. 첫 영상을 임의 선택하지 않습니다."
+        }
+      }
+    },
+    {
+      "name": "reject-external-url",
+      "status": "PASS",
+      "elapsedMs": 6,
+      "evidence": {
+        "mutation": "external-url",
+        "result": {
+          "reason": "사건·카메라·이벤트·시각·영상 구간의 등록값이 일치하지 않습니다."
+        }
+      }
+    },
+    {
+      "name": "reject-synthetic-false",
+      "status": "PASS",
+      "elapsedMs": 5,
+      "evidence": {
+        "mutation": "synthetic-false",
+        "result": {
+          "reason": "사건·카메라·이벤트·시각·영상 구간의 등록값이 일치하지 않습니다."
+        }
+      }
+    },
+    {
+      "name": "reject-store-context-mismatch",
+      "status": "PASS",
+      "elapsedMs": 5,
+      "evidence": {
+        "mutation": "store-context-mismatch",
+        "result": {
+          "reason": "사건과 점포가 일치하지 않습니다."
+        }
+      }
+    },
+    {
+      "name": "reject-order-context-mismatch",
+      "status": "PASS",
+      "elapsedMs": 4,
+      "evidence": {
+        "mutation": "order-context-mismatch",
+        "result": {
+          "reason": "주문·출고·토트·시각의 등록 관계가 일치하지 않습니다."
+        }
+      }
+    },
+    {
+      "name": "reject-picking-tote-context-mismatch",
+      "status": "PASS",
+      "elapsedMs": 6,
+      "evidence": {
+        "mutation": "picking-tote-context-mismatch",
+        "result": {
+          "reason": "주문·출고·토트·시각의 등록 관계가 일치하지 않습니다."
+        }
+      }
+    },
+    {
+      "name": "reject-shipping-tote-context-mismatch",
+      "status": "PASS",
+      "elapsedMs": 5,
+      "evidence": {
+        "mutation": "shipping-tote-context-mismatch",
+        "result": {
+          "reason": "주문·출고·토트·시각의 등록 관계가 일치하지 않습니다."
+        }
+      }
+    },
+    {
+      "name": "reject-segment-timezone-missing",
+      "status": "PASS",
+      "elapsedMs": 5,
+      "evidence": {
+        "mutation": "segment-timezone-missing",
+        "result": {
+          "reason": "이벤트의 등록 시각·출처·위치가 일치하지 않습니다."
+        }
+      }
+    },
+    {
+      "name": "reject-declared-hash-mismatch",
+      "status": "PASS",
+      "elapsedMs": 4,
+      "evidence": {
+        "mutation": "declared-hash-mismatch",
+        "result": {
+          "reason": "영상 해시·크기가 등록 자산과 다릅니다."
+        }
+      }
+    },
+    {
+      "name": "reject-declared-size-mismatch",
+      "status": "PASS",
+      "elapsedMs": 5,
+      "evidence": {
+        "mutation": "declared-size-mismatch",
+        "result": {
+          "reason": "영상 해시·크기가 등록 자산과 다릅니다."
+        }
+      }
+    },
+    {
+      "name": "reject-nested-relation-asof-mismatch",
+      "status": "PASS",
+      "elapsedMs": 5,
+      "evidence": {
+        "mutation": "nested-relation-asof-mismatch",
+        "result": {
+          "reason": "점포·주문·토트의 영상 관계가 일치하지 않거나 미확인입니다."
+        }
+      }
+    },
+    {
+      "name": "reject-event-case-mismatch",
+      "status": "PASS",
+      "elapsedMs": 5,
+      "evidence": {
+        "mutation": "event-case-mismatch",
+        "result": {
+          "reason": "점포·주문·토트의 영상 관계가 일치하지 않거나 미확인입니다."
+        }
+      }
+    },
+    {
+      "name": "time-reversal-preserved",
+      "status": "PASS",
+      "elapsedMs": 92,
+      "evidence": {
+        "originalSortedAt": "2026-09-18T02:00:00+09:00",
+        "preservedSortedAt": "2026-09-18T02:00:00+09:00",
+        "warnings": [
+          "주문·출고·토트·시각의 등록 관계가 일치하지 않습니다. 영상·근거 연결이 차단되었습니다.",
+          "공정 시각 역전이 있습니다. 원본을 보존했으며 발생 순서를 임의로 고치지 않았습니다."
+        ]
+      }
+    },
+    {
+      "name": "quantity-unit-unknown-preservation",
+      "status": "PASS",
+      "elapsedMs": 81,
+      "evidence": {
+        "observed": "피킹 기록\n\n비스킷 · 18 EA\n\n토트 SYN-TOTE02-A · 2026. 09. 18. 02:15 KST\n\n주문 SYN-ORDER02 · 작업방식 FACILITY\n\n출고 기록\n\n휴지 · 1 BOX\n\n토트 SYN-TOTE02-B · 2026. 09. 18. 03:02 KST\n\n출고 SYN-OUT02 · 도크 D-02\n상품·수량·단위 기록 차이\n\nEA와 BOX는 환산하거나 차감하지 않습니다. 피킹·출고 토트의 연결과 차이가 발생한 공정은 추가 확인이 필요합니다.\n\n발생 공정·작업자 귀책 미확인",
+        "variants": [
+          {
+            "quantity": null,
+            "text": "피킹 기록\n\n비스킷 · 수량 미확인 EA\n\n토트 SYN-TOTE02-A · 2026. 09. 18. 02:15 KST\n\n주문 SYN-ORDER02 · 작업방식 FACILITY\n\n출고 기록\n\n휴지 · 1 BOX\n\n토트 SYN-TOTE02-B · 2026. 09. 18. 03:02 KST\n\n출고 SYN-OUT02 · 도크 D-02\n관측값과 미확인을 대조\n\nEA와 BOX는 환산하거나 차감하지 않습니다. 피킹·출고 토트의 연결과 차이가 발생한 공정은 추가 확인이 필요합니다.\n\n발생 공정·작업자 귀책 미확인"
+          },
+          {
+            "quantity": 0,
+            "text": "피킹 기록\n\n비스킷 · 0 EA\n\n토트 SYN-TOTE02-A · 2026. 09. 18. 02:15 KST\n\n주문 SYN-ORDER02 · 작업방식 FACILITY\n\n출고 기록\n\n휴지 · 1 BOX\n\n토트 SYN-TOTE02-B · 2026. 09. 18. 03:02 KST\n\n출고 SYN-OUT02 · 도크 D-02\n상품·수량·단위 기록 차이\n\nEA와 BOX는 환산하거나 차감하지 않습니다. 피킹·출고 토트의 연결과 차이가 발생한 공정은 추가 확인이 필요합니다.\n\n발생 공정·작업자 귀책 미확인"
+          }
+        ]
+      }
+    },
+    {
+      "name": "media-sha-playback-escape-focus",
+      "status": "PASS",
+      "elapsedMs": 1597,
+      "evidence": {
+        "before": {
+          "duration": 12,
+          "currentTime": 0.001006,
+          "src": "blob:http://127.0.0.1:62058/65c0c315-bc80-4db6-8178-879404c64782"
+        },
+        "after": {
+          "currentTime": 0.26789,
+          "paused": false,
+          "error": null
+        },
+        "screenshot": "verified-video-playing.png",
+        "focusReturned": "open-video",
+        "mediaRequests": 1
+      }
+    },
+    {
+      "name": "media-404-retry",
+      "status": "PASS",
+      "elapsedMs": 319,
+      "evidence": {
+        "injectedError": "영상 재생 차단\n\n영상 응답 404. 원본 기록을 확인하거나 다시 불러오세요.\n\n영상 다시 불러오기",
+        "retryLoaded": true
+      }
+    },
+    {
+      "name": "corrupt-media-sha-rejected",
+      "status": "PASS",
+      "elapsedMs": 483,
+      "evidence": {
+        "error": "영상 재생 차단\n\n영상 SHA256 불일치. 원본 기록을 확인하거나 다시 불러오세요.\n\n영상 다시 불러오기",
+        "changedByteCount": 1,
+        "originalByteLengthPreserved": true,
+        "screenshot": "corrupt-video-blocked.png"
+      }
+    },
+    {
+      "name": "case-switch-disposes-open-video",
+      "status": "PASS",
+      "elapsedMs": 273,
+      "evidence": {
+        "currentCase": "CASE-0001",
+        "dialogs": 0,
+        "videos": 0,
+        "selected": "W-M1"
+      }
+    },
+    {
+      "name": "reduced-motion-stops-animation",
+      "status": "PASS",
+      "elapsedMs": 122,
+      "evidence": {
+        "runningAnimationsWithReduce": [],
+        "toggleDisabledDuringReduce": true
+      }
+    },
+    {
+      "name": "rejected-link-never-reports-success",
+      "status": "PASS",
+      "elapsedMs": 295,
+      "evidence": {
+        "events": [
+          {
+            "type": "link-attempt",
+            "id": "E-W2"
+          },
+          {
+            "type": "link-rejected",
+            "id": "E-W2",
+            "message": "PC3_TEST_LINK_REJECTED"
+          }
+        ],
+        "screenshot": "link-failure-no-success.png"
+      }
+    },
+    {
+      "name": "pending-link-deduplicates-and-confirms-after-resolution",
+      "status": "PASS",
+      "elapsedMs": 79,
+      "evidence": [
+        {
+          "type": "link-attempt",
+          "id": "E-W2"
+        },
+        {
+          "type": "link-resolved",
+          "id": "E-W2"
+        }
+      ]
+    },
+    {
+      "name": "handed-off-evidence-readonly",
+      "status": "PASS",
+      "elapsedMs": 40,
+      "evidence": {
+        "state": "handed_off",
+        "disabledLinks": 4
+      }
+    },
+    {
+      "name": "foreign-case-evidence-cannot-link",
+      "status": "PASS",
+      "elapsedMs": 40,
+      "evidence": {
+        "foreignId": "E-M3",
+        "activeCase": "CASE-0002",
+        "disabled": true,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-positive-CASE-0001",
+      "status": "PASS",
+      "elapsedMs": 249,
+      "evidence": {
+        "intakeId": "INT-A1B2C3D4",
+        "sourceId": "CASE-0001",
+        "sourceLabel": "현재 접수 INT-A1B2C3D4 · 원본 사건 CASE-0001",
+        "contextError": "",
+        "linkedEvidence": "E-M3",
+        "events": [
+          {
+            "type": "link-attempt",
+            "id": "E-M3"
+          },
+          {
+            "type": "link-resolved",
+            "id": "E-M3"
+          }
+        ],
+        "screenshot": "linked-CASE-0001.png"
+      }
+    },
+    {
+      "name": "linked-intake-positive-CASE-0002",
+      "status": "PASS",
+      "elapsedMs": 256,
+      "evidence": {
+        "intakeId": "INT-1020ABCD",
+        "sourceId": "CASE-0002",
+        "sourceLabel": "현재 접수 INT-1020ABCD · 원본 사건 CASE-0002",
+        "contextError": "",
+        "linkedEvidence": "E-W1",
+        "events": [
+          {
+            "type": "link-attempt",
+            "id": "E-W1"
+          },
+          {
+            "type": "link-resolved",
+            "id": "E-W1"
+          }
+        ],
+        "screenshot": "linked-CASE-0002.png"
+      }
+    },
+    {
+      "name": "linked-intake-reviewer-reproduction",
+      "status": "PASS",
+      "elapsedMs": 69,
+      "evidence": {
+        "intakeId": "INT-MAINREVIEW",
+        "sourceId": "CASE-0002",
+        "contextError": "",
+        "events": [
+          {
+            "type": "link-attempt",
+            "id": "E-W2"
+          },
+          {
+            "type": "link-resolved",
+            "id": "E-W2"
+          }
+        ]
+      }
+    },
+    {
+      "name": "linked-intake-object-key-order-not-identity",
+      "status": "PASS",
+      "elapsedMs": 23,
+      "evidence": {
+        "reorderedObjectKeysAccepted": true,
+        "originalArrayOrderPreserved": true,
+        "editedIntakeTextAccepted": true
+      }
+    },
+    {
+      "name": "linked-intake-reject-missing-source",
+      "status": "PASS",
+      "elapsedMs": 67,
+      "evidence": {
+        "mutation": "missing-source",
+        "contextError": "등록된 합성 사건이 아닙니다. 사건 연결을 확인하세요.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-unregistered-source",
+      "status": "PASS",
+      "elapsedMs": 69,
+      "evidence": {
+        "mutation": "unregistered-source",
+        "contextError": "등록된 합성 사건이 아닙니다. 사건 연결을 확인하세요.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-foreign-source",
+      "status": "PASS",
+      "elapsedMs": 65,
+      "evidence": {
+        "mutation": "foreign-source",
+        "contextError": "사건과 점포가 일치하지 않습니다.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-voice-channel",
+      "status": "PASS",
+      "elapsedMs": 65,
+      "evidence": {
+        "mutation": "voice-channel",
+        "contextError": "등록된 합성 사건이 아닙니다. 사건 연결을 확인하세요.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-foreign-store",
+      "status": "PASS",
+      "elapsedMs": 68,
+      "evidence": {
+        "mutation": "foreign-store",
+        "contextError": "사건과 점포가 일치하지 않습니다.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-foreign-intake-store",
+      "status": "PASS",
+      "elapsedMs": 62,
+      "evidence": {
+        "mutation": "foreign-intake-store",
+        "contextError": "접수 점포와 원본 사건의 점포가 일치하지 않습니다.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-foreign-type",
+      "status": "PASS",
+      "elapsedMs": 73,
+      "evidence": {
+        "mutation": "foreign-type",
+        "contextError": "원본 사건·문의 유형·기준시각이 일치하지 않습니다.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-foreign-asof",
+      "status": "PASS",
+      "elapsedMs": 78,
+      "evidence": {
+        "mutation": "foreign-asof",
+        "contextError": "원본 사건·문의 유형·기준시각이 일치하지 않습니다.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-foreign-order",
+      "status": "PASS",
+      "elapsedMs": 96,
+      "evidence": {
+        "mutation": "foreign-order",
+        "contextError": "신규 접수의 WMS 원본 행·근거가 연결된 사건과 일치하지 않습니다.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-foreign-picking-tote",
+      "status": "PASS",
+      "elapsedMs": 81,
+      "evidence": {
+        "mutation": "foreign-picking-tote",
+        "contextError": "신규 접수의 WMS 원본 행·근거가 연결된 사건과 일치하지 않습니다.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-foreign-shipping-tote",
+      "status": "PASS",
+      "elapsedMs": 73,
+      "evidence": {
+        "mutation": "foreign-shipping-tote",
+        "contextError": "신규 접수의 WMS 원본 행·근거가 연결된 사건과 일치하지 않습니다.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-raw-event-modified",
+      "status": "PASS",
+      "elapsedMs": 72,
+      "evidence": {
+        "mutation": "raw-event-modified",
+        "contextError": "신규 접수의 WMS 원본 행·근거가 연결된 사건과 일치하지 않습니다.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-raw-event-reordered",
+      "status": "PASS",
+      "elapsedMs": 76,
+      "evidence": {
+        "mutation": "raw-event-reordered",
+        "contextError": "신규 접수의 WMS 원본 행·근거가 연결된 사건과 일치하지 않습니다.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-process-row-modified",
+      "status": "PASS",
+      "elapsedMs": 57,
+      "evidence": {
+        "mutation": "process-row-modified",
+        "contextError": "신규 접수의 WMS 원본 행·근거가 연결된 사건과 일치하지 않습니다.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-process-row-extra-field",
+      "status": "PASS",
+      "elapsedMs": 62,
+      "evidence": {
+        "mutation": "process-row-extra-field",
+        "contextError": "신규 접수의 WMS 원본 행·근거가 연결된 사건과 일치하지 않습니다.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-evidence-modified",
+      "status": "PASS",
+      "elapsedMs": 73,
+      "evidence": {
+        "mutation": "evidence-modified",
+        "contextError": "신규 접수의 WMS 원본 행·근거가 연결된 사건과 일치하지 않습니다.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-evidence-reordered",
+      "status": "PASS",
+      "elapsedMs": 58,
+      "evidence": {
+        "mutation": "evidence-reordered",
+        "contextError": "신규 접수의 WMS 원본 행·근거가 연결된 사건과 일치하지 않습니다.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-malformed-id-null",
+      "status": "PASS",
+      "elapsedMs": 69,
+      "evidence": {
+        "mutation": "malformed-id-null",
+        "contextError": "등록된 합성 사건이 아닙니다. 사건 연결을 확인하세요.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-malformed-id-number",
+      "status": "PASS",
+      "elapsedMs": 70,
+      "evidence": {
+        "mutation": "malformed-id-number",
+        "contextError": "등록된 합성 사건이 아닙니다. 사건 연결을 확인하세요.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-malformed-id-empty",
+      "status": "PASS",
+      "elapsedMs": 60,
+      "evidence": {
+        "mutation": "malformed-id-empty",
+        "contextError": "등록된 합성 사건이 아닙니다. 사건 연결을 확인하세요.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-malformed-id-empty-suffix",
+      "status": "PASS",
+      "elapsedMs": 64,
+      "evidence": {
+        "mutation": "malformed-id-empty-suffix",
+        "contextError": "등록된 합성 사건이 아닙니다. 사건 연결을 확인하세요.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-malformed-id-wrong-prefix",
+      "status": "PASS",
+      "elapsedMs": 63,
+      "evidence": {
+        "mutation": "malformed-id-wrong-prefix",
+        "contextError": "등록된 합성 사건이 아닙니다. 사건 연결을 확인하세요.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-reject-malformed-id-whitespace",
+      "status": "PASS",
+      "elapsedMs": 69,
+      "evidence": {
+        "mutation": "malformed-id-whitespace",
+        "contextError": "등록된 합성 사건이 아닙니다. 사건 연결을 확인하세요.",
+        "disabledEvidence": 4,
+        "callbackCount": 0
+      }
+    },
+    {
+      "name": "linked-intake-manual-media-never-inherited",
+      "status": "PASS",
+      "elapsedMs": 283,
+      "evidence": [
+        {
+          "retargeted": false,
+          "contextError": "",
+          "videoBlocked": "신규 접수 영상 미등록 · 원본 사건의 영상을 자동으로 연결하지 않습니다.",
+          "validEvidenceStillLinkable": true
+        },
+        {
+          "retargeted": true,
+          "contextError": "",
+          "videoBlocked": "신규 접수 영상 미등록 · 원본 사건의 영상을 자동으로 연결하지 않습니다.",
+          "validEvidenceStillLinkable": true
+        }
+      ]
+    },
+    {
+      "name": "linked-intake-source-change-resets-ui",
+      "status": "PASS",
+      "elapsedMs": 158,
+      "evidence": {
+        "intakeId": "INT-SAME-IDENTITY",
+        "oldSource": "CASE-0002",
+        "newSource": "CASE-0001",
+        "staleSuccessCleared": true,
+        "selectedEventReset": true
+      }
+    },
+    {
+      "name": "keyboard-selection-and-back-callback",
+      "status": "PASS",
+      "elapsedMs": 93,
+      "evidence": {
+        "selected": "W-W3",
+        "events": [
+          {
+            "type": "back"
+          }
+        ]
+      }
+    },
+    {
+      "name": "browser-no-runtime-errors-or-external-calls",
+      "status": "PASS",
+      "elapsedMs": 0,
+      "evidence": {
+        "blockedExternal": [],
+        "pageErrors": 0,
+        "expected404ConsoleMessages": 1
+      }
+    }
+  ],
+  "browserErrors": [
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ],
+  "blockedExternal": [],
+  "output": "D:\\hwana\\Work\\happycall-ralphthon\\.local\\pc3-tests\\2026-09-21T10-10-50-917Z",
+  "browser": "153.0.8010.48",
+  "url": "http://127.0.0.1:62058",
+  "sourceHashesEnd": {
+    "apps/web/components/WmsScene.tsx": "6f7c00558195323f41ba5d6da43fa0b82bad2d73e7a4e59249907b436c5e7222",
+    "apps/web/components/WmsScene.module.css": "6c6129347b80868d6aa7d12ac47a0ab938cf67850752e8e6266a64e75665c9bd",
+    "apps/web/app/tokens.css": "31a08dbc4cfd532d4a4d44ca0cf1fa8629ed57e25a9629b5caf748b41d1c01c3",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf",
+    "server/service.py": "68fc155357bee36e4fa1c894ebeb1f56b0eef763dd5b3b50e4a03b1ffdd0bf60",
+    "tests/remote/pc3/harness.tsx": "0a26d3a3336bdb09387eb8715bb1082881cf6130a563dce0abcecb3000b60090",
+    "tests/remote/pc3/harness.css": "586c16e58ff4a1c0603cd8a845f65b249176c1c1accf5d04e40c2d26417c5b8c",
+    "tests/remote/pc3/harness-server.mjs": "482f47fd2cb1497eaf50feb4248f714ae0cb3354ec3801422a7d3614c1c37713",
+    "tests/remote/pc3/clip-mutations.mjs": "a79de0313639664230eb3c525c1cda7df7f04257b60a0cee08bc6cfe2146cdc0",
+    "tests/remote/pc3/linked-intake-cases.mjs": "286183ed61b4bbb7dcbaeb6cdb4f3f5c93fff77ceccc93f088e067f6a6d922ed",
+    "tests/remote/pc3/run.mjs": "4d18b66d00245e5fa3d188ede48e4b9e469841128e274ae02ce28d01858078b2"
+  },
+  "changedSources": [],
+  "finishedAt": "2026-09-21T10:11:02.723Z",
+  "summary": {
+    "pass": 78,
+    "fail": 0
+  },
+  "requests": [
+    {
+      "time": "2026-09-21T10:10:52.845Z",
+      "method": "GET",
+      "path": "/",
+      "range": null,
+      "fault": null
+    },
+    {
+      "time": "2026-09-21T10:10:52.898Z",
+      "method": "GET",
+      "path": "/bundle.css",
+      "range": null,
+      "fault": null
+    },
+    {
+      "time": "2026-09-21T10:10:52.902Z",
+      "method": "GET",
+      "path": "/bundle.js",
+      "range": null,
+      "fault": null
+    },
+    {
+      "time": "2026-09-21T10:10:56.874Z",
+      "method": "GET",
+      "path": "/demo/sorter-demo.mp4",
+      "range": null,
+      "fault": null
+    },
+    {
+      "time": "2026-09-21T10:10:58.372Z",
+      "method": "GET",
+      "path": "/demo/sorter-demo.mp4",
+      "range": null,
+      "fault": "404"
+    },
+    {
+      "time": "2026-09-21T10:10:58.438Z",
+      "method": "GET",
+      "path": "/demo/sorter-demo.mp4",
+      "range": null,
+      "fault": null
+    },
+    {
+      "time": "2026-09-21T10:10:58.703Z",
+      "method": "GET",
+      "path": "/demo/sorter-demo.mp4",
+      "range": null,
+      "fault": "corrupt"
+    },
+    {
+      "time": "2026-09-21T10:10:59.186Z",
+      "method": "GET",
+      "path": "/demo/sorter-demo.mp4",
+      "range": null,
+      "fault": null
+    }
+  ]
+}

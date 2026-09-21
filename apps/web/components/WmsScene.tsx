@@ -17,7 +17,20 @@ const stamp = (value: unknown): number | null => typeof value === 'string' && /T
 const visible = (value: unknown, asOf: unknown): boolean => stamp(value) !== null && stamp(asOf) !== null && stamp(value)! <= stamp(asOf)!;
 const date = (value: unknown): string => stamp(value) === null ? '시각 미확인' : new Intl.DateTimeFormat('ko-KR', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).format(stamp(value)!) + ' KST';
 const scan = (value: Row): string => `${label(value.product)} · ${label(value.quantity, '수량 미확인')} ${label(value.unit, '단위 미확인')}`;
-const canonicalCase = (caseData: CaseData) => fixtures.cases.find(item => item.id === caseData.id);
+const canonicalCase = (caseData: CaseData) => {
+  const direct = fixtures.cases.find(item => item.id === caseData.id);
+  if (direct) return direct;
+  // A new intake must explicitly reference a source; never infer it from copied rows.
+  if (typeof caseData.id !== 'string' || !/^INT-[A-Za-z0-9_-]+$/.test(caseData.id) || caseData.channel !== 'text' || typeof caseData.linkedFixtureId !== 'string') return undefined;
+  return fixtures.cases.find(item => item.id === caseData.linkedFixtureId);
+};
+const sameSource = (left: unknown, right: unknown): boolean => {
+  if (left === right) return true;
+  if (Array.isArray(left) || Array.isArray(right)) return Array.isArray(left) && Array.isArray(right) && left.length === right.length && left.every((value, index) => sameSource(value, right[index]));
+  if (!left || !right || typeof left !== 'object' || typeof right !== 'object') return false;
+  const leftRow = row(left), rightRow = row(right), keys = Object.keys(leftRow);
+  return keys.length === Object.keys(rightRow).length && keys.every(key => Object.hasOwn(rightRow, key) && sameSource(leftRow[key], rightRow[key]));
+};
 const stageFor = (caseData: CaseData, event: Row | undefined): number => event ? rows(canonicalCase(caseData)?.wms.events).findIndex(item => item.id === event.id) : -1;
 
 function contextReason(caseData: CaseData): string {
@@ -25,6 +38,11 @@ function contextReason(caseData: CaseData): string {
   if (!baseline) return '등록된 합성 사건이 아닙니다. 사건 연결을 확인하세요.';
   const wms = row(caseData.wms), expected = row(baseline.wms);
   if (caseData.store?.id !== baseline.store.id) return '사건과 점포가 일치하지 않습니다.';
+  if ((caseData.linkedFixtureId != null && caseData.linkedFixtureId !== baseline.id) || caseData.type !== baseline.type || caseData.asOf !== baseline.asOf) return '원본 사건·문의 유형·기준시각이 일치하지 않습니다.';
+  for (const storeId of [caseData.storeId, row(caseData.intake).storeId]) {
+    if (storeId != null && storeId !== baseline.store.id) return '접수 점포와 원본 사건의 점포가 일치하지 않습니다.';
+  }
+  if (caseData.id !== baseline.id && (!sameSource(caseData.wms, baseline.wms) || !sameSource(caseData.evidence, baseline.evidence))) return '신규 접수의 WMS 원본 행·근거가 연결된 사건과 일치하지 않습니다.';
   for (const [section, fields] of [['picking', ['orderId', 'toteId', 'pickedAt']], ['shipping', ['id', 'toteId', 'time']], ['sorting', ['sortedAt']]] as const) {
     for (const field of fields) if ((row(wms[section])[field] ?? null) !== (row(expected[section])[field] ?? null)) return '주문·출고·토트·시각의 등록 관계가 일치하지 않습니다.';
   }
@@ -46,6 +64,7 @@ export function validateWmsClip(caseData: CaseData, event: Row, media: unknown =
   const contextError = contextReason(caseData);
   if (contextError) return { reason: contextError };
   const baseline = canonicalCase(caseData)!;
+  if (caseData.id !== baseline.id) return { reason: '신규 접수 영상 미등록 · 원본 사건의 영상을 자동으로 연결하지 않습니다.' };
   const registeredEvent = rows(baseline.wms.events).find(item => item.id === event.id);
   if (!registeredEvent || !['time', 'location', 'source', 'status'].every(key => event[key] === registeredEvent[key])) return { reason: '이벤트의 등록 시각·출처·위치가 일치하지 않습니다.' };
   if (!visible(event.time, caseData.asOf)) return { reason: '이벤트 시각이 미확인이거나 기준시각 이후입니다.' };
@@ -133,7 +152,7 @@ function VideoDialog({ clip, event, picking, shipping, opener, onClose }: { clip
 
 export default function WmsScene(props: Props) {
   // Replacing upstream case contents also invalidates an open clip and pending UI feedback.
-  return <Scene key={JSON.stringify([props.caseData.id, props.caseData.store, props.caseData.asOf, props.caseData.revision, props.caseData.status, props.caseData.wms, props.caseData.media])} {...props}/>;
+  return <Scene key={JSON.stringify([props.caseData.id, props.caseData.linkedFixtureId, props.caseData.type, props.caseData.storeId, row(props.caseData.intake).storeId, props.caseData.store, props.caseData.asOf, props.caseData.revision, props.caseData.status, props.caseData.wms, props.caseData.evidence, props.caseData.media])} {...props}/>;
 }
 
 function Scene({ caseData, onBack, onLinkEvidence }: Props) {
@@ -163,6 +182,7 @@ function Scene({ caseData, onBack, onLinkEvidence }: Props) {
   }
   return <section className={styles.scene} aria-label="WMS 공정 확인">
     <header className={styles.header}><div><p className={styles.eyebrow}>WMS · 물류 기록 확인</p><h1>{caseData.store?.name || '점포 미확인'} <span>{caseData.type === 'wrong' ? '오출고 문의' : '미도착 문의'}</span></h1><p>{caseData.id} · 기준 {date(caseData.asOf)}</p></div><button className={styles.button} type="button" onClick={onBack}>상담으로 돌아가기</button></header>
+    <p className={styles.caption} data-testid="source-reference">현재 접수 {label(caseData.id)} · 원본 사건 {label(canonicalCase(caseData)?.id, '미연결')}{model.contextError ? ' · 연결 검증 필요' : ''}</p>
     <p className={styles.notice}>독립 합성 시연 · 실제 WMS/CCTV 아님. 기록과 경영주 진술, 원인 미확인을 구분합니다.</p>
     {model.contextError && <p className={styles.warning} role="alert">{model.contextError} 영상·근거 연결이 차단되었습니다.</p>}
     <section className={styles.comparison} aria-label="피킹과 출고 기록 비교"><div><p className={styles.eyebrow}>피킹 기록</p><h2>{scan(safePicking)}</h2><p>토트 {label(safePicking.toteId)} · {model.pickingVisible ? date(picking.pickedAt) : '기준시각 내 피킹 시각 미확인'}</p><small>주문 {label(picking.orderId)} · 작업방식 {label(picking.workType)}</small></div><div><p className={styles.eyebrow}>출고 기록</p><h2>{scan(safeShipping)}</h2><p>토트 {label(safeShipping.toteId)} · {model.shippingVisible ? date(shipping.time) : '기준시각 내 출고 시각 미확인'}</p><small>출고 {label(shipping.id)} · 도크 {label(shipping.dock)}</small></div><div className={styles.finding}><strong>{model.difference ? '상품·수량·단위 기록 차이' : caseData.type === 'missing' ? '미수령 진술과 출고 기록을 구분' : '관측값과 미확인을 대조'}</strong><p>{caseData.type === 'missing' ? '경영주는 미수령을 진술했습니다. 센터 출고 기록만으로 점포 도착·인도를 확정할 수 없습니다.' : 'EA와 BOX는 환산하거나 차감하지 않습니다. 피킹·출고 토트의 연결과 차이가 발생한 공정은 추가 확인이 필요합니다.'}</p><b>발생 공정·작업자 귀책 미확인</b></div></section>

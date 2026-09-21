@@ -1,5 +1,7 @@
 # N03 구현·검증 인계
 
+후속 변경: pc1의 신규 접수 원본 연결 검토를 반영한 [회귀 수정·78개 재검](linked-intake-fix.md) 및 [후보 prerelease 전달](media-release.md)을 확인한다. 아래는 첫 인계 당시의 검증 이력이다.
+
 2026-09-21 18:48 KST / pc3 `LAPTOP-U2AL73UH` / GitHub `mcjun86-oss`.
 실제 checkout `D:\hwana\Work\happycall-ralphthon`, branch `work/pc3-n03-wms-scenes`, 기준 `d4b4a8137fbc608911e9f6f71bd4b5e289e0a958`. 배정은 [#9](https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9). 결과 SHA는 이 보고서를 포함한 커밋과 같은 이슈의 결과 회신을 대조한다.
 

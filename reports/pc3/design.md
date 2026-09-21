@@ -13,6 +13,7 @@
 
 - 현 fixture에는 event-level 점포/주문/토트/카메라 키가 없다. 원천 실물 연결을 검증했다고 주장하지 않는다. 확인 범위는 합성 fixture에 등록된 사건/이벤트/카메라 관계다.
 - caseData.id/store.id, picking.orderId/toteId, shipping.id/toteId를 읽기 전용 기준 fixture와 대조한다. event id/time/source/location 및 optional relation fields 불일치는 영상 연결을 차단한다. 다른 날짜/점포/토트의 자료를 유사 영상으로 대체하지 않는다.
+- pc1 후속 검토에 따라 신규 `INT-*` 텍스트 접수는 명시 `linkedFixtureId`로 원본 CASE를 찾는다. 현재 접수와 원본 ID를 화면에 분리하고 점포/type/asOf 및 복사 WMS·evidence 전체를 대조한다. 객체 키 순서는 허용하지만 배열 순서·원본 행 변형은 차단한다. 원본 근거 연결과 영상 등록은 별개이며 신규 INT에 원본 media를 자동 상속하지 않는다. 상세 계약·반례는 linked-intake-fix.md에 있다.
 - 기존 sorter-demo는 CASE-0002 / W-W3 / SYN-CAM-02만 허용. media id/case/system/camera/eventIds/occurredAt/url/구간을 등록 행과 정확히 대조하고 중복 후보는 거부한다. 등록되지 않은 후보는 영상 미등록이다.
 - SHA256/bytes/duration은 공용 manifest를 읽고, fetch한 실제 영상 바이트를 Web Crypto로 검증한 뒤 Blob URL로 재생한다. URL은 등록된 같은 origin /demo 경로만 사용. 해시/구간/404 실패는 인라인 복구와 원본 열람을 제공한다.
 - occurredAt=event.time, 명시된 timezone, event.time<=case.asOf가 필요하다. 과거 사례를 현재시간과 비교해 임의 stale 처리하지 않으며 사건의 asOf를 표시한다. 시각 역전은 정렬로 감추지 않는다.
@@ -28,7 +29,7 @@ WmsScene 기본 export props: caseData: CaseData, onLinkEvidence(id): Promise<vo
 - UX: 선택한 공정의 사실/미확인/다음 행동과 연결 영상을 함께 보여준다.
 - 구조: 공용 계약은 읽기 전용, 소유 컴포넌트/overlay/미디어 생성기/테스트/보고만 작성한다.
 - 검증: 실제 렌더·재생·음성 없는 반례와 해시 변조를 검사한다. 기술 검증이며 실제 사람 Silent Test가 아니다.
-- 기존 결정 재질문 없음. 메인 결정 필요: 신규 후보 Release 태그와 정본 등록/셸 통합. 기존 영상은 등록된 설명 범위만 허용한다.
+- 기존 결정 재질문 없음. pc1이 지정한 후보 Release 태그로 6개 MP4와 메타데이터 공유·재수신 검증을 마쳤다(media-release.md). 정본 등록/셸 통합·최종 인수는 pc1이 진행하며 기존 영상은 등록된 설명 범위만 허용한다.
 - 작은 Bolt: 선택 이벤트가 맞는 영상만 열리는 병목 하나. 기존 느슨한 event→clip 조건의 반례를 고정하고 엄격한 등록 대조/해시 검사 후 같은 반례와 정상 재생을 다시 검사한다.
 
 ## 인수

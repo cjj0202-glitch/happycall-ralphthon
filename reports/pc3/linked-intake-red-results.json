@@ -1,0 +1,76 @@
+{
+  "suite": "N03 actual WmsScene standalone browser checks",
+  "startedAt": "2026-09-21T10:08:20.921Z",
+  "executor": "AI Playwright; not human observation or full-app integration",
+  "coveragePhase": "responsive, semantic, registration, media-integrity, interaction",
+  "sourceHashesStart": {
+    "apps/web/components/WmsScene.tsx": "d9f1dbe73480cc0081e927bef8bd790b5163c0980790e3595b00ea181aed67e1",
+    "apps/web/components/WmsScene.module.css": "6c6129347b80868d6aa7d12ac47a0ab938cf67850752e8e6266a64e75665c9bd",
+    "apps/web/app/tokens.css": "31a08dbc4cfd532d4a4d44ca0cf1fa8629ed57e25a9629b5caf748b41d1c01c3",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf",
+    "server/service.py": "68fc155357bee36e4fa1c894ebeb1f56b0eef763dd5b3b50e4a03b1ffdd0bf60",
+    "tests/remote/pc3/harness.tsx": "0a26d3a3336bdb09387eb8715bb1082881cf6130a563dce0abcecb3000b60090",
+    "tests/remote/pc3/harness.css": "586c16e58ff4a1c0603cd8a845f65b249176c1c1accf5d04e40c2d26417c5b8c",
+    "tests/remote/pc3/harness-server.mjs": "482f47fd2cb1497eaf50feb4248f714ae0cb3354ec3801422a7d3614c1c37713",
+    "tests/remote/pc3/clip-mutations.mjs": "a79de0313639664230eb3c525c1cda7df7f04257b60a0cee08bc6cfe2146cdc0",
+    "tests/remote/pc3/linked-intake-cases.mjs": "286183ed61b4bbb7dcbaeb6cdb4f3f5c93fff77ceccc93f088e067f6a6d922ed",
+    "tests/remote/pc3/run.mjs": "3542e34634a1fa0f71ab914399053e7214fa24bc45038ee57c9e1b2ad48f20e2"
+  },
+  "checks": [
+    {
+      "name": "linked-intake-positive-CASE-0002",
+      "status": "FAIL",
+      "elapsedMs": 66,
+      "error": "AssertionError [ERR_ASSERTION]: Explicit linked intake rejected: 등록된 합성 사건이 아닙니다. 사건 연결을 확인하세요.\n+ actual - expected\n\n+ '등록된 합성 사건이 아닙니다. 사건 연결을 확인하세요.'\n- ''\n\n    at file:///D:/hwana/Work/happycall-ralphthon/tests/remote/pc3/run.mjs:316:16\n    at async check (file:///D:/hwana/Work/happycall-ralphthon/tests/remote/pc3/run.mjs:39:26)\n    at async file:///D:/hwana/Work/happycall-ralphthon/tests/remote/pc3/run.mjs:311:7"
+    }
+  ],
+  "browserErrors": [],
+  "blockedExternal": [],
+  "output": "D:\\hwana\\Work\\happycall-ralphthon\\.local\\pc3-tests\\2026-09-21T10-08-20-905Z",
+  "browser": "153.0.8010.48",
+  "url": "http://127.0.0.1:55001",
+  "sourceHashesEnd": {
+    "apps/web/components/WmsScene.tsx": "d9f1dbe73480cc0081e927bef8bd790b5163c0980790e3595b00ea181aed67e1",
+    "apps/web/components/WmsScene.module.css": "6c6129347b80868d6aa7d12ac47a0ab938cf67850752e8e6266a64e75665c9bd",
+    "apps/web/app/tokens.css": "31a08dbc4cfd532d4a4d44ca0cf1fa8629ed57e25a9629b5caf748b41d1c01c3",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf",
+    "server/service.py": "68fc155357bee36e4fa1c894ebeb1f56b0eef763dd5b3b50e4a03b1ffdd0bf60",
+    "tests/remote/pc3/harness.tsx": "0a26d3a3336bdb09387eb8715bb1082881cf6130a563dce0abcecb3000b60090",
+    "tests/remote/pc3/harness.css": "586c16e58ff4a1c0603cd8a845f65b249176c1c1accf5d04e40c2d26417c5b8c",
+    "tests/remote/pc3/harness-server.mjs": "482f47fd2cb1497eaf50feb4248f714ae0cb3354ec3801422a7d3614c1c37713",
+    "tests/remote/pc3/clip-mutations.mjs": "a79de0313639664230eb3c525c1cda7df7f04257b60a0cee08bc6cfe2146cdc0",
+    "tests/remote/pc3/linked-intake-cases.mjs": "286183ed61b4bbb7dcbaeb6cdb4f3f5c93fff77ceccc93f088e067f6a6d922ed",
+    "tests/remote/pc3/run.mjs": "3542e34634a1fa0f71ab914399053e7214fa24bc45038ee57c9e1b2ad48f20e2"
+  },
+  "changedSources": [],
+  "finishedAt": "2026-09-21T10:08:26.973Z",
+  "summary": {
+    "pass": 0,
+    "fail": 1
+  },
+  "requests": [
+    {
+      "time": "2026-09-21T10:08:25.612Z",
+      "method": "GET",
+      "path": "/",
+      "range": null,
+      "fault": null
+    },
+    {
+      "time": "2026-09-21T10:08:25.722Z",
+      "method": "GET",
+      "path": "/bundle.css",
+      "range": null,
+      "fault": null
+    },
+    {
+      "time": "2026-09-21T10:08:25.725Z",
+      "method": "GET",
+      "path": "/bundle.js",
+      "range": null,
+      "fault": null
+    }
+  ]
+}
