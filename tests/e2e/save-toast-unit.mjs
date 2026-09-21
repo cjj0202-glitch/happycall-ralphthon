@@ -56,7 +56,7 @@ function setup(overrides = {}) {
   let resolve, reject;
   const deferred = new Promise((yes, no) => { resolve = yes; reject = no; });
   const env = {
-    fallback: false, view: 'desk', role: 'counselor', isEvidenceEditable: workflowModule.exports.isEvidenceEditable, payload: {}, reloadInFlight: { current: false },
+    fallback: false, view: 'desk', role: 'counselor', isEvidenceEditable: workflowModule.exports.isEvidenceEditable, acceptOwnEvidenceSave: () => false, payload: {}, reloadInFlight: { current: false },
     setToast: value => { state.toast = value; state.toastLog.push(value); }, onToast: value => { state.toast = value; state.toastLog.push(value); },
     request: (...args) => { state.requests.push(args); return deferred; }, fetch: (...args) => { state.requests.push(args); return deferred; },
     update: value => state.updates.push(value), onUpdate: value => state.updates.push(value),

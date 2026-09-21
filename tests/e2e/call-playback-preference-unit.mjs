@@ -226,7 +226,7 @@ for (const rate of [1.25, 1.5]) {
   for (const kind of ['seek', 'gap', 'empty', 'untrusted', 'clip', 'no-start', 'not-ended']) await test(`blocked ${rate} ${kind}`, blocked(rate, kind));
 }
 // Every mutant is run through a behavioral acceptance scenario, never a string-only check.
-function replaceOnce(text, before, after) { assert.equal(text.split(before).length, 2, `Unique mutation anchor: ${before}`); return text.replace(before, after); }
+function replaceOnce(text, before, after) { const normalized = text.replace(/\r\n/g, '\n'); assert.equal(normalized.split(before).length, 2, `Unique mutation anchor: ${before}`); return normalized.replace(before, after); }
 const mutantCases = [
   ['Home resets preference on case change', 'page', 'setSelected(id); setView(roleView[role]);', 'setPlaybackRate(1.25); setSelected(id); setView(roleView[role]);', preference],
   ['Home omits parent preference callback', 'page', 'onPlaybackRateChange={setPlaybackRate}', 'onPlaybackRateChange={() => {}}', preference],
