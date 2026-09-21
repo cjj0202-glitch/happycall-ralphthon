@@ -71,10 +71,10 @@ for (const fps of [24, 25, 30]) {
     }
   }
 }
-const fixedExpression = 'Math.min(validatedTracks.frameCount - 1, Math.floor(player.currentTime * fps + 1e-6))';
+const fixedExpression = 'Math.min(validatedTracks.frameCount - 1, Math.floor((player.currentTime + 1.001e-6) * fps))';
 let mutation = { status: 'FIX_NOT_PRESENT', detected: false };
 if (functions.step.includes(fixedExpression)) {
-  const oldStep = functions.step.replace(fixedExpression, 'Math.floor(player.currentTime * fps + 1e-6)');
+  const oldStep = functions.step.replace(fixedExpression, 'Math.floor((player.currentTime + 1.001e-6) * fps)');
   const oldCode = ts.transpileModule(functions.seek + '\n' + oldStep, { compilerOptions: { target: ts.ScriptTarget.ES2020, module: ts.ModuleKind.CommonJS } }).outputText;
   const actual = execute(samples[0], oldCode);
   mutation = { status: 'REMOVED_CURRENT_INDEX_CLAMP', actual, detected: actual.frame !== samples[0].expectedFrame, expectedFrame: samples[0].expectedFrame };

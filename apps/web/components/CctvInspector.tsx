@@ -104,7 +104,8 @@ function Inspector({ clip, event, picking, shipping, opener, onClose, tracks: de
     const player = video.current; if (!player || !validatedTracks) return;
     player.pause();
     const fps = validatedTracks.fps;
-    const index = Math.min(validatedTracks.frameCount - 1, Math.floor(player.currentTime * fps + 1e-6));
+    // Match frameAt: one microsecond of seek quantization plus a 1 ns numeric margin.
+    const index = Math.min(validatedTracks.frameCount - 1, Math.floor((player.currentTime + 1.001e-6) * fps));
     const lastIndex = Math.min(validatedTracks.frameCount - 1, Math.floor(clip.endSeconds * fps + 1e-6));
     const target = Math.min(lastIndex, Math.max(Math.floor(clip.startSeconds * fps), index + direction)) / fps;
     // A saturated next step must not rewind a time within the last available frame.

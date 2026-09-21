@@ -40,10 +40,13 @@ function withDescriptor(change = () => {}) {
   video.tracks = { schemaVersion: 'oneflow-cctv-tracks-v1', url: '/demo/sorter-demo.tracks.json', bytes: 100, sha256: '1'.repeat(64), videoSha256: video.sha256 };
   change(video.tracks, video, value); return value;
 }
-const noRegistration = wmsModule().validateWmsClip(clone(originalCase), event);
-check('current video with no registered coordinates remains available', !!noRegistration.clip && noRegistration.reason === '' && !noRegistration.tracks && !noRegistration.tracksError);
+// The no-sidecar control must remain explicit after the product registers tracks.
+const unregisteredManifest = clone(manifest);
+delete unregisteredManifest.assets.find(a => a.name === 'sorter-demo.mp4').tracks;
+const noRegistration = wmsModule(unregisteredManifest).validateWmsClip(clone(originalCase), event);
+check('video with explicitly unregistered coordinates remains available', !!noRegistration.clip && noRegistration.reason === '' && !noRegistration.tracks && !noRegistration.tracksError);
 const injected = clone(originalCase); injected.media[0].tracks = { url: 'https://untrusted.invalid/coords.json' };
-const ignored = wmsModule().validateWmsClip(injected, event);
+const ignored = wmsModule(unregisteredManifest).validateWmsClip(injected, event);
 check('case media cannot register coordinates or leak them into trusted clip', !!ignored.clip && !ignored.tracks && !Object.hasOwn(ignored.clip, 'tracks'));
 const accepted = wmsModule(withDescriptor()).validateWmsClip(injected, event);
 check('manifest coordinates override untrusted case metadata', accepted.tracks?.url === '/demo/sorter-demo.tracks.json' && accepted.tracks.sha256 === '1'.repeat(64));
@@ -68,7 +71,7 @@ for (const [name, change] of [ ['wrong chute', t => { t.eventAnchor.chuteId = 'C
 api.validateTrackVideo(syntheticTracks, 1920, 1080, 12); check('full 1080p twelve-second synthetic fixture metadata matches', true);
 rejects('three-second short cannot use 288-frame coordinates', () => api.validateTrackVideo(syntheticTracks, 1920, 1080, 3));
 rejects('different resolution cannot share coordinates', () => api.validateTrackVideo(syntheticTracks, 1280, 720, 12));
-for (const [name, registeredManifest, expected] of [['registered', withDescriptor(), 'valid'], ['unregistered', manifest, 'none'], ['malformed', withDescriptor(d => { d.videoSha256 = '0'.repeat(64); }), 'invalid']]) {
+for (const [name, registeredManifest, expected] of [['registered', withDescriptor(), 'valid'], ['unregistered', unregisteredManifest, 'none'], ['malformed', withDescriptor(d => { d.videoSha256 = '0'.repeat(64); }), 'invalid']]) {
   const component = wmsModule(registeredManifest); component.states[0] = 2;
   const first = component.render(clone(originalCase)), button = find(first, el => el.props?.['data-testid'] === 'open-video');
   check(name + ' JSX exposes video opener', typeof button?.props.onClick === 'function');
@@ -95,6 +98,18 @@ if (!wmsSource.includes(wiringNeedle)) throw new Error('Wiring mutation anchor a
 const unwired = wmsModule(withDescriptor(), wmsSource.replace(wiringNeedle, ''));
 unwired.states[0] = 2; find(unwired.render(clone(originalCase)), el => el.props?.['data-testid'] === 'open-video').props.onClick({ currentTarget: {} });
 check('props wiring removal mutation detected', !find(unwired.render(clone(originalCase)), el => el.type === unwired.inspector).props.tracks);
+const actualAsset = manifest.assets.find(a => a.name === 'sorter-demo.mp4');
+if (Object.hasOwn(actualAsset, 'tracks')) {
+  const actual = wmsModule().validateWmsClip(clone(originalCase), event);
+  check('product manifest registers coordinates for the actual case and event', !!actual.clip && !!actual.tracks && !actual.tracksError && actual.tracks.sha256 === actualAsset.tracks.sha256);
+  const videoBytes = fs.readFileSync(path.join(root, 'apps/web/public/demo/sorter-demo.mp4'));
+  const trackBytes = fs.readFileSync(path.join(root, 'apps/web/public/demo/sorter-demo.tracks.json'));
+  check('registered product video bytes and SHA match actual local media', videoBytes.length === actualAsset.bytes && sha(videoBytes) === actualAsset.sha256);
+  check('registered product track bytes and SHA match actual local sidecar', trackBytes.length === actual.tracks.bytes && sha(trackBytes) === actual.tracks.sha256);
+  const actualTracks = api.validateTracks(JSON.parse(trackBytes), actual.tracks, actual.clip, event, actual.processAnchor);
+  api.validateTrackVideo(actualTracks, actualAsset.width, actualAsset.height, actualAsset.durationSeconds);
+  check('actual product tracks match registered case anchors and media dimensions', actualTracks.frames.length === 288);
+}
 const out = path.join(root, '.local', 'cctv-trusted-tracks-' + Date.now()); fs.mkdirSync(out, { recursive: true });
 const report = { measuredAt: new Date().toISOString(), host: process.env.COMPUTERNAME, method: 'Actual TypeScript modules transpiled and executed; JSX handler/props with minimal state adapter; no DOM or media playback', serverStarts: 0, browserStarts: 0, networkCalls: 0, actualSceneAlignment: 'NOT_TESTED', browserRecheck: 'NOT_RUN', sourceHashes: Object.fromEntries(sourcePaths.map(p => [p, sha(sources[p])])), harnessSha256: sha(fs.readFileSync(import.meta.filename)), checks: checkResults, passed: checkResults.filter(c => c.pass).length, total: checkResults.length };
 fs.writeFileSync(path.join(out, 'results.json'), JSON.stringify(report, null, 2));

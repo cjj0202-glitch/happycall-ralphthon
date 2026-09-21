@@ -70,7 +70,8 @@ export function validateTrackVideo(tracks: CctvTracks, width: number, height: nu
 
 export function frameAt(tracks: CctvTracks, mediaTime: number): TrackFrame | null {
   if (!finite(mediaTime) || mediaTime < 0 || mediaTime >= tracks.frameCount / tracks.fps) return null;
-  return tracks.frames[Math.min(tracks.frameCount - 1, Math.floor(mediaTime * tracks.fps + 1e-6))] ?? null;
+  // A microsecond-truncated player timestamp needs 1 us plus a 1 ns numeric margin.
+  return tracks.frames[Math.min(tracks.frameCount - 1, Math.floor((mediaTime + 1.001e-6) * tracks.fps))] ?? null;
 }
 
 export async function verifiedBytes(url: string, bytes: number, expectedSha: string, signal: AbortSignal): Promise<ArrayBuffer> {

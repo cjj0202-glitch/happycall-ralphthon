@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "repository": "cjj0202-glitch/happycall-ralphthon",
-  "releaseTag": "demo-media-20260921-audio-v3",
+  "releaseTag": "demo-media-20260922-v4",
   "releaseStateAtPreparation": "published-prerelease-verified",
-  "measuredAt": "2026-09-21T21:31:46.357623+09:00",
+  "measuredAt": "2026-09-21T17:10:53.449830+00:00",
   "measuredHost": "CJJ",
   "notice": "Synthetic demo media; not actual calls, CCTV, or logistics evidence. Publication and downloads must be verified separately.",
   "assets": [
@@ -53,25 +53,34 @@
     },
     {
       "name": "sorter-demo.mp4",
-      "bytes": 1097133,
-      "sha256": "e6cad3cf9f999b596a0fef3e3d463170e0d279568a31a4be49366e5383908881",
+      "bytes": 991249,
+      "sha256": "4a640c20e209bf5a43e26c3f1c5afeb41f4157af9017f04b4c3812b1990dca51",
       "synthetic": true,
       "durationSeconds": 12.0,
-      "durationMethod": "imageio-ffmpeg metadata (ffprobe unavailable)",
-      "width": 960,
-      "height": 540,
+      "durationMethod": "MP4 exact clocks and complete FFmpeg decoded frame timestamps",
+      "width": 1920,
+      "height": 1080,
       "fps": 24.0,
-      "codec": "h264"
+      "codec": "h264",
+      "sourceBytes": 1097133,
+      "sourceSha256": "e6cad3cf9f999b596a0fef3e3d463170e0d279568a31a4be49366e5383908881",
+      "tracks": {
+        "schemaVersion": "oneflow-cctv-tracks-v1",
+        "url": "/demo/sorter-demo.tracks.json",
+        "bytes": 158546,
+        "sha256": "b9b9f50295af799cfdf718b840b0cef703f57ad3e3b778557fcd9fdeb9ac681c",
+        "videoSha256": "4a640c20e209bf5a43e26c3f1c5afeb41f4157af9017f04b4c3812b1990dca51"
+      }
     }
   ],
+  "previousRelease": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/tag/demo-media-20260921-audio-v3",
+  "analysisNote": "v4 upgrades only the synthetic sorter video and registers matching 3D-projected coordinates. WAV files remain byte-identical to audio-v3; new CLOVA voice delivery and listening acceptance are pending. Earlier AI reports retain their measured input hashes.",
   "releaseVerification": {
-    "publishedAt": "2026-09-21T12:32:30Z",
-    "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/tag/demo-media-20260921-audio-v3",
-    "githubDigestMatches": 3,
-    "independentDownloadMatches": 3,
+    "publishedAt": "2026-09-21T17:11:05Z",
+    "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/tag/demo-media-20260922-v4",
+    "githubDigestMatches": 4,
+    "independentDownloadMatches": 4,
     "verifiedOn": "pc1",
     "otherPcReceipts": "PENDING"
-  },
-  "previousRelease": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/tag/demo-media-20260921-audio-v2",
-  "analysisNote": "v3 changes only CASE-0002 pause and transcript timing. Earlier live reports retain their original audio hashes. Main A/B segment ASR is one pair, not a general accuracy or human listening result."
+  }
 }
