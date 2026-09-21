@@ -4,6 +4,8 @@
 
 원격 결과를 읽기 전용으로 검토하는 예외 사본은 `.local/review-pc3-577a31b`입니다. pc3 결과 `577a31b`의 detached Git worktree로, 메인 작업 폴더나 운영 런타임을 바꾸지 않습니다. 제품 편집은 여전히 위 메인 경로의 소유권을 따르며 검토 사본을 최신 배포로 혼동하지 않습니다. 원본 보고·실패 이력과 함께 보존합니다.
 
+후속 관측: 이 pc3 검토 사본은 수정 결과 `d6aa6b3`로 갱신했습니다(폴더 이름은 처음 검토한 SHA). pc2 결과 `7ae648e`는 `.local/review-pc2-7ae648e`의 별도 detached worktree에서 읽습니다. 두 사본은 제품 런타임이 아닙니다. `.local/tools/blender`는 공식 portable 도구, `.local/media-benchmark`는 렌더 실측용이며 Git에 넣지 않습니다.
+
 | 위치 | 보관하는 내용 | 공유 기준 |
 |---|---|---|
 | `apps/web/` | Next 화면·스타일·클라이언트 코드 | 검증한 소스·lock 파일 |
