@@ -33,39 +33,48 @@
       "id": "N02",
       "pc": "pc2",
       "outcome": "음성 명료도·통화 검토 UX",
-      "state": "ASSIGNED_AWAITING_ACK",
+      "state": "DISPATCHED_AWAITING_ACK",
       "design": "PENDING",
       "implementation": "PENDING",
       "unit": "PENDING",
       "functional": "PENDING",
       "adversarial": "PENDING",
-      "accepted": false
+      "accepted": false,
+      "issueUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8",
+      "sentAtKST": "2026-09-21T18:28:01+09:00",
+      "acknowledged": false
     },
     {
       "id": "N03",
       "pc": "pc3",
       "outcome": "WMS 공정·합성 CCTV",
-      "state": "ASSIGNED_AWAITING_ACK",
+      "state": "DISPATCHED_AWAITING_ACK",
       "design": "PENDING",
       "implementation": "PENDING",
       "unit": "PENDING",
       "functional": "PENDING",
       "adversarial": "PENDING",
-      "accepted": false
+      "accepted": false,
+      "issueUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9",
+      "sentAtKST": "2026-09-21T18:28:13+09:00",
+      "acknowledged": false
     },
     {
       "id": "N04",
       "pc": "pc4",
       "outcome": "TMS·타모듈 시나리오 검증",
-      "state": "ASSIGNED_AWAITING_ACK",
+      "state": "DISPATCHED_AWAITING_ACK",
       "design": "PENDING",
       "implementation": "PENDING",
       "unit": "PENDING",
       "functional": "PENDING",
       "adversarial": "PENDING",
-      "accepted": false
+      "accepted": false,
+      "issueUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10",
+      "sentAtKST": "2026-09-21T18:28:16+09:00",
+      "acknowledged": false
     }
   ],
-  "updatedAtKST": "2026-09-21T17:34:00+09:00",
-  "sharedBaseCommit": "297b138"
+  "updatedAtKST": "2026-09-21T18:29:59.989251+09:00",
+  "sharedBaseCommit": "d4b4a8137fbc608911e9f6f71bd4b5e289e0a958"
 }
