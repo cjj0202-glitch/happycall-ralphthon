@@ -1,0 +1,581 @@
+{
+  "schemaVersion": "pc3-independent-ffmpeg-video-audit-v1",
+  "notice": "Independent full software decode of received MP4; not visual acceptance, fixture acceptance, or a change to package PENDING fields.",
+  "tool": {
+    "path": "D:\\hwana\\Work\\happycall-ralphthon\\.local\\media-pc3-deps\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+    "versionLine": "ffmpeg version 7.1-essentials_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers",
+    "sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3"
+  },
+  "input": {
+    "path": "D:\\hwana\\Work\\happycall-ralphthon\\.local\\pc3-real-short-intake\\download\\case-0002-ww3-short-review.mp4",
+    "bytes": 544733,
+    "sha256": "21ac21351803125334deba303fd249909774aba98058bc787e38121058f70ccf"
+  },
+  "startedAtUtc": "2026-09-21T13:24:02.717329+00:00",
+  "finishedAtUtc": "2026-09-21T13:24:03.958577+00:00",
+  "wallSeconds": 1.2413496000008308,
+  "exitCode": 0,
+  "inputStreams": [
+    "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1280x720 [SAR 1:1 DAR 16:9], 1447 kb/s, 24 fps, 24 tbr, 12288 tbn (default)"
+  ],
+  "containerDurationSeconds": 3.0,
+  "decodedFrameCount": 72,
+  "decodedFirstPtsSeconds": 0.0,
+  "decodedLastPtsSeconds": 2.958333,
+  "decodedEndSeconds": 2.9999997,
+  "checks": {
+    "inputExpectedBytesAndSha256": true,
+    "decoderExitZero": true,
+    "inputHasOneH264VideoStream": true,
+    "inputPixelFormatYuv420p": true,
+    "decodedAllFramesYuv420p": true,
+    "resolution1280x720": true,
+    "inputFps24": true,
+    "exact72DecodedFrames": true,
+    "progressFinalFrame72": true,
+    "containerDuration3Seconds": true,
+    "decodedPtsFollow24fps": true,
+    "decodedEnd3Seconds": true,
+    "noInputAudioStream": true,
+    "inputUnchangedAfterDecode": true
+  },
+  "checkCount": 14,
+  "passed": 14,
+  "technicalDecodePassed": true,
+  "visualAccepted": false,
+  "packagePendingChanged": false,
+  "command": [
+    "D:\\hwana\\Work\\happycall-ralphthon\\.local\\media-pc3-deps\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+    "-nostdin",
+    "-loglevel",
+    "info",
+    "-progress",
+    "pipe:1",
+    "-nostats",
+    "-xerror",
+    "-protocol_whitelist",
+    "file,pipe",
+    "-threads",
+    "2",
+    "-err_detect",
+    "explode",
+    "-i",
+    "D:\\hwana\\Work\\happycall-ralphthon\\.local\\pc3-real-short-intake\\download\\case-0002-ww3-short-review.mp4",
+    "-map",
+    "0:v:0",
+    "-an",
+    "-vf",
+    "showinfo",
+    "-fps_mode",
+    "passthrough",
+    "-f",
+    "null",
+    "-"
+  ],
+  "frames": [
+    {
+      "index": 0,
+      "pts": 0,
+      "ptsSeconds": 0.0,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 1,
+      "pts": 512,
+      "ptsSeconds": 0.0416667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 2,
+      "pts": 1024,
+      "ptsSeconds": 0.0833333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 3,
+      "pts": 1536,
+      "ptsSeconds": 0.125,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 4,
+      "pts": 2048,
+      "ptsSeconds": 0.166667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 5,
+      "pts": 2560,
+      "ptsSeconds": 0.208333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 6,
+      "pts": 3072,
+      "ptsSeconds": 0.25,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 7,
+      "pts": 3584,
+      "ptsSeconds": 0.291667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 8,
+      "pts": 4096,
+      "ptsSeconds": 0.333333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 9,
+      "pts": 4608,
+      "ptsSeconds": 0.375,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 10,
+      "pts": 5120,
+      "ptsSeconds": 0.416667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 11,
+      "pts": 5632,
+      "ptsSeconds": 0.458333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 12,
+      "pts": 6144,
+      "ptsSeconds": 0.5,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 13,
+      "pts": 6656,
+      "ptsSeconds": 0.541667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 14,
+      "pts": 7168,
+      "ptsSeconds": 0.583333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 15,
+      "pts": 7680,
+      "ptsSeconds": 0.625,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 16,
+      "pts": 8192,
+      "ptsSeconds": 0.666667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 17,
+      "pts": 8704,
+      "ptsSeconds": 0.708333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 18,
+      "pts": 9216,
+      "ptsSeconds": 0.75,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 19,
+      "pts": 9728,
+      "ptsSeconds": 0.791667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 20,
+      "pts": 10240,
+      "ptsSeconds": 0.833333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 21,
+      "pts": 10752,
+      "ptsSeconds": 0.875,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 22,
+      "pts": 11264,
+      "ptsSeconds": 0.916667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 23,
+      "pts": 11776,
+      "ptsSeconds": 0.958333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 24,
+      "pts": 12288,
+      "ptsSeconds": 1.0,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 25,
+      "pts": 12800,
+      "ptsSeconds": 1.041667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 26,
+      "pts": 13312,
+      "ptsSeconds": 1.083333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 27,
+      "pts": 13824,
+      "ptsSeconds": 1.125,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 28,
+      "pts": 14336,
+      "ptsSeconds": 1.166667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 29,
+      "pts": 14848,
+      "ptsSeconds": 1.208333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 30,
+      "pts": 15360,
+      "ptsSeconds": 1.25,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 31,
+      "pts": 15872,
+      "ptsSeconds": 1.291667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 32,
+      "pts": 16384,
+      "ptsSeconds": 1.333333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 33,
+      "pts": 16896,
+      "ptsSeconds": 1.375,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 34,
+      "pts": 17408,
+      "ptsSeconds": 1.416667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 35,
+      "pts": 17920,
+      "ptsSeconds": 1.458333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 36,
+      "pts": 18432,
+      "ptsSeconds": 1.5,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 37,
+      "pts": 18944,
+      "ptsSeconds": 1.541667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 38,
+      "pts": 19456,
+      "ptsSeconds": 1.583333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 39,
+      "pts": 19968,
+      "ptsSeconds": 1.625,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 40,
+      "pts": 20480,
+      "ptsSeconds": 1.666667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 41,
+      "pts": 20992,
+      "ptsSeconds": 1.708333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 42,
+      "pts": 21504,
+      "ptsSeconds": 1.75,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 43,
+      "pts": 22016,
+      "ptsSeconds": 1.791667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 44,
+      "pts": 22528,
+      "ptsSeconds": 1.833333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 45,
+      "pts": 23040,
+      "ptsSeconds": 1.875,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 46,
+      "pts": 23552,
+      "ptsSeconds": 1.916667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 47,
+      "pts": 24064,
+      "ptsSeconds": 1.958333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 48,
+      "pts": 24576,
+      "ptsSeconds": 2.0,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 49,
+      "pts": 25088,
+      "ptsSeconds": 2.041667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 50,
+      "pts": 25600,
+      "ptsSeconds": 2.083333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 51,
+      "pts": 26112,
+      "ptsSeconds": 2.125,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 52,
+      "pts": 26624,
+      "ptsSeconds": 2.166667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 53,
+      "pts": 27136,
+      "ptsSeconds": 2.208333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 54,
+      "pts": 27648,
+      "ptsSeconds": 2.25,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 55,
+      "pts": 28160,
+      "ptsSeconds": 2.291667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 56,
+      "pts": 28672,
+      "ptsSeconds": 2.333333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 57,
+      "pts": 29184,
+      "ptsSeconds": 2.375,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 58,
+      "pts": 29696,
+      "ptsSeconds": 2.416667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 59,
+      "pts": 30208,
+      "ptsSeconds": 2.458333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 60,
+      "pts": 30720,
+      "ptsSeconds": 2.5,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 61,
+      "pts": 31232,
+      "ptsSeconds": 2.541667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 62,
+      "pts": 31744,
+      "ptsSeconds": 2.583333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 63,
+      "pts": 32256,
+      "ptsSeconds": 2.625,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 64,
+      "pts": 32768,
+      "ptsSeconds": 2.666667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 65,
+      "pts": 33280,
+      "ptsSeconds": 2.708333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 66,
+      "pts": 33792,
+      "ptsSeconds": 2.75,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 67,
+      "pts": 34304,
+      "ptsSeconds": 2.791667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 68,
+      "pts": 34816,
+      "ptsSeconds": 2.833333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 69,
+      "pts": 35328,
+      "ptsSeconds": 2.875,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 70,
+      "pts": 35840,
+      "ptsSeconds": 2.916667,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    },
+    {
+      "index": 71,
+      "pts": 36352,
+      "ptsSeconds": 2.958333,
+      "pixelFormat": "yuv420p",
+      "durationSeconds": 0.0416667
+    }
+  ]
+}

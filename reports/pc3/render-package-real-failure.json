@@ -1,0 +1,9 @@
+{
+  "stage": "external source digest check after safe extraction; before checker execution",
+  "exception": "KeyError: 'dependencies'",
+  "cause": "Root intake wrapper used dependencies instead of sourceDependencies",
+  "originalPreserved": "intake-first.py",
+  "resolution": "Use actual expectation schema key, revalidate all original archive/extracted bytes without rewriting raw, then continue",
+  "checkerChanged": false,
+  "receivedInputChanged": false
+}

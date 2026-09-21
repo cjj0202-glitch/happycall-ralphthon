@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "pc3-short-runtime-evidence-audit-v1",
+  "recordedAtUtc": "2026-09-21T13:30:32.469571+00:00",
+  "sourceCommit": "33fa0e4edeb88c0d4ad5e9cc0194ffc7e96cebcd",
+  "scope": "PC3 local consistency audit of received PC1 runtime evidence, plus reference to a separate PC3 full FFmpeg decode. No PC3 Blender execution.",
+  "checks": {
+    "sourceCommitAcrossRecords": true,
+    "actualFixtureBytesShaMatchSourceIntake": true,
+    "actualLayoutBytesShaMatchSourceIntakeAndReport": true,
+    "fiveSourceDescriptorsAgree": true,
+    "shortAndPrepareExitZero": true,
+    "shortProcessCopiedExactly": true,
+    "requestedModeShortAndPrepare": true,
+    "requestedThreadsSamplesRaysAcrossCommands": true,
+    "runtimeVersionEngineThreads": true,
+    "runtimeSamples96AndShadowRays4": true,
+    "seventyTwo96SampleLogFrames": true,
+    "seventyTwoFrameDescriptorsAgree": true,
+    "sourceFrameWindow73To144": true,
+    "generatorWallSecondsAgree": true,
+    "runtimeMeshCountsAgree": true,
+    "environment48NamesStaticAndUntracked": true,
+    "equivalenceGeometryDigestsAgreeWithShortReadback": true,
+    "actualTracksDigestAgrees": true,
+    "videoIdentityAgreesWithIndependentDecode": true,
+    "videoTechnicalClaimsAgreeWithIndependentDecode": true,
+    "videoClockOffsetAndNoTrackBinding": true,
+    "pc1SixRecordedSeekChecksConsistent": true,
+    "visualAndRegistrationRemainFalse": true,
+    "inspectedEvidenceFilesUnchanged": true
+  },
+  "checkCount": 24,
+  "passed": 24,
+  "failures": [],
+  "pc1ExternalExecution": {
+    "blenderVersion": "4.5.14 LTS",
+    "engine": "BLENDER_EEVEE_NEXT",
+    "threadsMode": "FIXED",
+    "threads": 2,
+    "runtimeSamples": 96,
+    "runtimeShadowRays": 4,
+    "shortExitCode": 0,
+    "shortWallSeconds": 896.578,
+    "prepareExitCode": 0,
+    "prepareWallSeconds": 5.187,
+    "completed96SampleFrames": 72,
+    "coreMeshes": 268,
+    "environmentMeshes": 48,
+    "receivedFixture": {
+      "bytes": 23430,
+      "sha256": "79c3b01aed139352b5cc0a695f2829e76f78eabb61d7cfd6b8055db32f61a73b"
+    },
+    "recordedSeekChecks": 6,
+    "recordedLossySourceFrameComparisons": 6
+  },
+  "pc3IndependentDecode": {
+    "evidence": "video-audit.json",
+    "checksPassed": 14,
+    "checksTotal": 14,
+    "frames": 72,
+    "durationSeconds": 3.0,
+    "input": {
+      "path": "D:\\hwana\\Work\\happycall-ralphthon\\.local\\pc3-real-short-intake\\download\\case-0002-ww3-short-review.mp4",
+      "bytes": 544733,
+      "sha256": "21ac21351803125334deba303fd249909774aba98058bc787e38121058f70ccf"
+    }
+  },
+  "inputDigests": {
+    "source-intake.json": {
+      "bytes": 4340,
+      "sha256": "7dea30a4816ca865ce80f3d9d2305dfd27e8386ac0a30d09de726a214d56bd9e"
+    },
+    "short-cli-process.json": {
+      "bytes": 1497,
+      "sha256": "333b29329467e7ca7315905649b44887bfbabc51860bef507abffe1115d04359"
+    },
+    "prepare-cli-process.json": {
+      "bytes": 1499,
+      "sha256": "8ef699c4f048eb4101f8adeb2444a8de6189887c70f2509c934506a8be9d5fe5"
+    },
+    "short-verification.json": {
+      "bytes": 12455,
+      "sha256": "a4f3398f462a8066665db0d190c54a4bd354b4291ca9b7461f70c4a5289bb5a3"
+    },
+    "equivalence.json": {
+      "bytes": 512,
+      "sha256": "93ad3aad4f77c3dae25284a2be58fa1eddb66e34315ebf566a422742e27eee2c"
+    },
+    "short/render-report.json": {
+      "bytes": 47567,
+      "sha256": "5679d20271eadab4addb4ce7043077b8fb68d5c701d50845196cd7100daf6c91"
+    },
+    "short/independent-scene-readback.json": {
+      "bytes": 32478,
+      "sha256": "a6a7eb2eb3c7555f18db906a9b844cd450fa513aab57d9ab862d1cd92fd15b2d"
+    },
+    "review-video/candidate.json": {
+      "bytes": 2675,
+      "sha256": "13be662f6abdca1a1969e9fb778c75c0d43c9b95e2d78fa32f944d65521085fd"
+    },
+    "review-video/seek-validation.json": {
+      "bytes": 1741,
+      "sha256": "a4518d048301c8ad760959f1f104ed9906844e9fa7658a05eaefd2e1fdc294f8"
+    },
+    "review-video/source-frame-comparison.json": {
+      "bytes": 3453,
+      "sha256": "e31f765725e676626ae320b7fa0529493448ce23932ae696143feb0c9b87f262"
+    },
+    "final-summary.json": {
+      "bytes": 3545,
+      "sha256": "6a272d079430a1b517ceaa3ddeb6b759a296a595ec484dd9903d882f149c5132"
+    },
+    "short-cli.log": {
+      "bytes": 38499,
+      "sha256": "bc7440ec45c2c9559927656969d5282db4efe61bc8e03a5bf4aaf550cf832f74"
+    },
+    "input/cases.json": {
+      "bytes": 23430,
+      "sha256": "79c3b01aed139352b5cc0a695f2829e76f78eabb61d7cfd6b8055db32f61a73b"
+    },
+    "input/scene-layout-v1.json": {
+      "bytes": 1772,
+      "sha256": "c6aece6692c6b78beb85d4f1167868f2bd095b3ab8366e837466715b82bd6cb6"
+    },
+    "short/tracks.json": {
+      "bytes": 158545,
+      "sha256": "9fb424be0fd212bbf3faa057097bec56c63a89e4b8ae08c524e5fd76b80fd44b"
+    }
+  },
+  "visualAccepted": false,
+  "packagePendingChanged": false,
+  "blenderRerunOnPc3": false,
+  "limitations": [
+    "Source files are not present in this raw package: five generator/dependency descriptors were cross-checked between records, not locally reexecuted or independently authenticated.",
+    "Prepared scene artifacts are absent: prepare/short equivalence remains a PC1 supplied assertion; short readback/tracks match its stated hashes.",
+    "PC1 external records corroborate threads/fixture/runtime observations separately; the generic package verifier PENDING fields remain unchanged.",
+    "PC1 six-frame image comparison and six file-seek results were read as external evidence, not reexecuted here; browser/network seek and visual acceptance are outside this audit.",
+    "The earlier short-verification and render-report videoEncoded=false describe the PNG stage; later review-video/candidate.json and PC3 independent decode cover the encoded MP4.",
+    "Synthetic elapsed source window [3,6) maps to MP4 [0,3); fixed business event time and full288 tracks are not rebound to the short clip.",
+    "Runtime Blender custom businessToteId string denotes unassigned environment props; authoritative report JSON keeps businessToteId=null."
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "schemaVersion": "pc3-real-short-intake-evidence-v1",
+  "assignment": "N03-M3 real short intake",
+  "instructionUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5761144166",
+  "executor": "LAPTOP-U2AL73UH / mcjun86-oss / pc3",
+  "sourceCommit": "33fa0e4edeb88c0d4ad5e9cc0194ffc7e96cebcd",
+  "checkerCommit": "9be72090021c550c6e27746469f926baf57fea2e",
+  "releaseTag": "wms-short-review-20260921-33fa0e4",
+  "releaseTargetCommitish": "181aa4070109b7024cd4aa3756502a55615c3844",
+  "releaseTargetIsNotGeneratorCommit": true,
+  "assets": [
+    {
+      "name": "wms-short-33fa0e4-review.zip",
+      "bytes": 82333801,
+      "sha256": "10fa9981105eaecfe07a5c715d19c3e7bd932f8aa4b8bb375f93447f73f80891",
+      "mtimeNs": 1789996905687327800
+    },
+    {
+      "name": "intake-expected.json",
+      "bytes": 2067,
+      "sha256": "c7066902302d770290bdb28a79cb4ebac2428c3963428ecb66c2236ddbd8e81f",
+      "mtimeNs": 1789996889481411000
+    },
+    {
+      "name": "case-0002-ww3-short-review.mp4",
+      "bytes": 544733,
+      "sha256": "21ac21351803125334deba303fd249909774aba98058bc787e38121058f70ccf",
+      "mtimeNs": 1789996890056323700
+    }
+  ],
+  "archiveSummary": {
+    "zipEntries": 121,
+    "zipFileEntries": 121,
+    "zipDirectoryEntries": 0,
+    "uncompressedBytes": 85483552,
+    "extractedFiles": 121,
+    "extractedDirectories": 3,
+    "manifestDescriptors": 120,
+    "manifestMatches": 120,
+    "zipExtractedMatches": 121,
+    "allZipCrcChecksCompleted": true,
+    "manifestExcludesOnlyItself": true,
+    "rawIdentityUnchanged": true,
+    "zipOriginalUnchanged": true
+  },
+  "topLevelFileGroups": {
+    "(root)": 13,
+    "input": 2,
+    "review-video": 30,
+    "short": 76
+  },
+  "fixture": {
+    "bytes": 23430,
+    "sha256": "79c3b01aed139352b5cc0a695f2829e76f78eabb61d7cfd6b8055db32f61a73b"
+  },
+  "layout": {
+    "bytes": 1772,
+    "sha256": "c6aece6692c6b78beb85d4f1167868f2bd095b3ab8366e837466715b82bd6cb6"
+  },
+  "sourceChecks": [
+    {
+      "path": "scripts/media_pc3/build_scene.py",
+      "bytes": 24994,
+      "sha256": "ff03e34ae903272af3a99659ed36964a6e52c20518b2489939a22b067d3ea854"
+    },
+    {
+      "path": "scripts/media_pc3/scene_contract.py",
+      "bytes": 14278,
+      "sha256": "670638cae0357da1bf934b7c4b9287ea0780180214e53a181166dd53a8a554bf"
+    },
+    {
+      "path": "scripts/media_pc3/look_presets.py",
+      "bytes": 1762,
+      "sha256": "91c3852386c48729d24f69fff1049602451646a41c7d532d4dc4f8f008cd3e33"
+    },
+    {
+      "path": "scripts/media_pc3/shadow_settings.py",
+      "bytes": 2643,
+      "sha256": "4d1357cde51530be813e3a1505972b253b9b23ae8c35a99cbb1b304fe5c374fe"
+    },
+    {
+      "path": "scripts/media_pc3/environment_detail.py",
+      "bytes": 3714,
+      "sha256": "e4a82164a828e165f86b496883d539311fd4f2a98e7581edca4cc197f7a19c36"
+    }
+  ],
+  "tracksSha256": "9fb424be0fd212bbf3faa057097bec56c63a89e4b8ae08c524e5fd76b80fd44b",
+  "expectedChangedKeys": [
+    "mode",
+    "fixture"
+  ],
+  "expectationsDerivedFromReceivedReport": false,
+  "strictCopyFiles": 75,
+  "strictCopyPngs": 72,
+  "rawShortFiles": 76,
+  "separatelyPreservedShortFile": "short/independent-scene-readback.json",
+  "additionalRawFilesOutsideStrict": 46,
+  "allAdditionalFilesByteVerified": true,
+  "checker": {
+    "status": "PASS_WITH_PENDING",
+    "exitCode": 0,
+    "failures": [],
+    "images": 72,
+    "inputs": 75,
+    "pending": [
+      {
+        "code": "FIXTURE_RUNTIME_UNVERIFIED",
+        "detail": "33fa has no fixture digest readback; separate execution evidence is required."
+      },
+      {
+        "code": "THREADS_RUNTIME_UNVERIFIED",
+        "detail": "33fa has no actual thread readback; requested two threads remain unverified."
+      },
+      {
+        "code": "PIXEL_DECODE_NOT_RUN",
+        "detail": "PNG chunks and CRC only; compressed pixels are not decoded."
+      },
+      {
+        "code": "VIDEO_DECODE_NOT_RUN",
+        "detail": "Video hashes only; codec, frame count, FPS and duration are not decoded."
+      },
+      {
+        "code": "VISUAL_REVIEW_PENDING",
+        "detail": "Meshes, physical contact, occlusion, motion and visual quality need separate review."
+      },
+      {
+        "code": "AUTHENTICITY_UNVERIFIED",
+        "detail": "Source commit and source hashes are external expectations/declarations, not sender authentication."
+      }
+    ],
+    "sourceHash": {
+      "bytes": 29547,
+      "sha256": "36b4e2f3de8f0517da6cb26719e346e0fbfec221f5d1b673e494a73c31af30cc"
+    },
+    "sourceUnchanged": true
+  },
+  "frameRange": [
+    73,
+    144
+  ],
+  "fullCoordinateCount": 288,
+  "sourceElapsedRangeHalfOpen": [
+    3,
+    6
+  ],
+  "mp4TimeRangeHalfOpen": [
+    0,
+    3
+  ],
+  "sourceOffsetSeconds": 3,
+  "videoDecode": {
+    "exitCode": 0,
+    "wallSeconds": 1.2413496000008308,
+    "containerDurationSeconds": 3.0,
+    "decodedFrameCount": 72,
+    "decodedFirstPtsSeconds": 0.0,
+    "decodedLastPtsSeconds": 2.958333,
+    "decodedEndSeconds": 2.9999997,
+    "checkCount": 14,
+    "passed": 14,
+    "technicalDecodePassed": true,
+    "visualAccepted": false
+  },
+  "preservation": {
+    "at": "2026-09-21T13:27:28.061809+00:00",
+    "downloadFiles": 3,
+    "rawFiles": 121,
+    "strictFiles": 75,
+    "totalByteComparisons": 199,
+    "allInputBytesUnchanged": true,
+    "noMissingOrExtraRawOrStrictFiles": true,
+    "downloadMtimesUnchanged": true,
+    "checkerSource": {
+      "bytes": 29547,
+      "sha256": "36b4e2f3de8f0517da6cb26719e346e0fbfec221f5d1b673e494a73c31af30cc"
+    },
+    "checkerUnmodifiedFromCommit": "9be72090021c550c6e27746469f926baf57fea2e"
+  },
+  "rootWrapperFailure": {
+    "stage": "external source digest check after safe extraction; before checker execution",
+    "exception": "KeyError: 'dependencies'",
+    "cause": "Root intake wrapper used dependencies instead of sourceDependencies",
+    "originalPreserved": "intake-first.py",
+    "resolution": "Use actual expectation schema key, revalidate all original archive/extracted bytes without rewriting raw, then continue",
+    "checkerChanged": false,
+    "receivedInputChanged": false
+  },
+  "rootWrapperFirstSha256": "abcb19f6f1ce75b3f0d12fccc3e2ca204f07413951e9785511d8b2bbf558cfa0",
+  "rootWrapperSuccessfulSha256": "b3d59c3026b6bf8ce4abbd010659b3d04d95f2adb700211ff01156ff8e0d9830",
+  "pc3BlenderExecuted": false,
+  "browserExecuted": false,
+  "newToolsInstalled": false,
+  "paidApiUsed": false,
+  "testRoundtrip": "PENDING",
+  "pixelQualityAccepted": false,
+  "finalMediaAccepted": false,
+  "productAssetRegisteredByPc3": false,
+  "rawEvidenceRoot": ".local/pc3-real-short-intake",
+  "externalRuntimeEvidence": {
+    "checks": 24,
+    "matched": 24,
+    "failures": [],
+    "blenderRerunOnPc3": false,
+    "evidence": "render-package-real-runtime.json"
+  },
+  "publication": {
+    "textLineEndings": "LF",
+    "localOriginalsPreserved": true,
+    "onlyReportCopyLineEndingsNormalized": true,
+    "copiesBeforeNormalization": {
+      "render-package-real-archive.json": {
+        "bytes": 29846,
+        "sha256": "6b7b1534e00dd90562ed6d3d2ba7966b421f199b218446aa6e0492f0915b38b3"
+      },
+      "render-package-real-checker.json": {
+        "bytes": 29105,
+        "sha256": "891c9d5922c7fd3502ccfc5cd15fa1499da0a843d6e2f80b23e45bb06010b494"
+      },
+      "render-package-real-expectations.json": {
+        "bytes": 25827,
+        "sha256": "08d396072ea42b5cdbf390acf02f184ebd0de6746e6835824d3d48cbe0ab9fdb"
+      },
+      "render-package-real-failure.json": {
+        "bytes": 469,
+        "sha256": "57087d121e2dfcff90ee5df86d357d510c9d85858675b4640da62005ae7c530d"
+      },
+      "render-package-real-intake.py": {
+        "bytes": 7822,
+        "sha256": "b3d59c3026b6bf8ce4abbd010659b3d04d95f2adb700211ff01156ff8e0d9830"
+      },
+      "render-package-real-runtime.json": {
+        "bytes": 6136,
+        "sha256": "5345a734201f384e1c67dc376375e67eee3d46aeacc898946424811170e6a7fe"
+      },
+      "render-package-real-video.json": {
+        "bytes": 13765,
+        "sha256": "476e963b59edeb2ef5c0be0f22f5d845362e5b9658da62abd9a73dc3063a8b9f"
+      }
+    },
+    "publishedIntakeScript": {
+      "bytes": 7821,
+      "sha256": "4ecaed0052018b4c787b5453572cd79b3b80f34f55c2e14fc4528b29e33d7faf"
+    },
+    "note": "Original local evidence bytes and executed wrapper SHA are preserved; published textual copies use Git-required LF without changing JSON values or Python logic."
+  }
+}

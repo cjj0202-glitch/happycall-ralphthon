@@ -1,0 +1,1121 @@
+{
+  "schemaVersion": "pc3-render-expectations-v1",
+  "sourceCommit": "33fa0e4edeb88c0d4ad5e9cc0194ffc7e96cebcd",
+  "mode": "short",
+  "generator": {
+    "name": "build_scene.py",
+    "bytes": 24994,
+    "sha256": "ff03e34ae903272af3a99659ed36964a6e52c20518b2489939a22b067d3ea854"
+  },
+  "layout": {
+    "name": "scene-layout-v1.json",
+    "bytes": 1772,
+    "sha256": "c6aece6692c6b78beb85d4f1167868f2bd095b3ab8366e837466715b82bd6cb6"
+  },
+  "sourceDependencies": [
+    {
+      "name": "scene_contract.py",
+      "bytes": 14278,
+      "sha256": "670638cae0357da1bf934b7c4b9287ea0780180214e53a181166dd53a8a554bf"
+    },
+    {
+      "name": "look_presets.py",
+      "bytes": 1762,
+      "sha256": "91c3852386c48729d24f69fff1049602451646a41c7d532d4dc4f8f008cd3e33"
+    },
+    {
+      "name": "shadow_settings.py",
+      "bytes": 2643,
+      "sha256": "4d1357cde51530be813e3a1505972b253b9b23ae8c35a99cbb1b304fe5c374fe"
+    },
+    {
+      "name": "environment_detail.py",
+      "bytes": 3714,
+      "sha256": "e4a82164a828e165f86b496883d539311fd4f2a98e7581edca4cc197f7a19c36"
+    }
+  ],
+  "fixture": {
+    "name": "cases.json",
+    "bytes": 23430,
+    "sha256": "79c3b01aed139352b5cc0a695f2829e76f78eabb61d7cfd6b8055db32f61a73b"
+  },
+  "samples": 96,
+  "shadowRays": 4,
+  "threads": 2,
+  "look": {
+    "name": "contrast_material_v1",
+    "settings": {
+      "worldStrength": 0.12,
+      "lightEnergies": {
+        "Large soft loading-side light": 1800,
+        "Ceiling key": 3300,
+        "Warehouse fill": 650,
+        "Chute rim": 900
+      },
+      "concrete": {
+        "color": [
+          0.2,
+          0.215,
+          0.225
+        ],
+        "roughness": 0.43,
+        "bumpStrength": 0.06,
+        "bumpDistance": 0.002
+      },
+      "steel": {
+        "color": [
+          0.32,
+          0.35,
+          0.38
+        ],
+        "metallic": 0.88,
+        "roughness": 0.24
+      }
+    }
+  },
+  "environmentDetail": {
+    "name": "staging_v1",
+    "synthetic": true,
+    "role": "synthetic-environment",
+    "businessToteId": null,
+    "tracked": false,
+    "motion": "static",
+    "geometrySource": "independent-demo-design",
+    "notice": "Optional static demonstration context; no actual facility, shipment or tote identity; not tracked.",
+    "objects": [
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE1-BASE",
+        "group": "rollcage-1",
+        "primitive": "cube",
+        "location": [
+          13.3,
+          10.9,
+          0.16
+        ],
+        "dimensions": [
+          0.9,
+          0.8,
+          0.04
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE1-WHEEL--1--1",
+        "group": "rollcage-1",
+        "primitive": "cylinder",
+        "location": [
+          12.96,
+          10.6,
+          0.07
+        ],
+        "radius": 0.07,
+        "depth": 0.06,
+        "axis": "X",
+        "material": "frame"
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE1-POST--1--1",
+        "group": "rollcage-1",
+        "primitive": "cube",
+        "location": [
+          12.865,
+          10.515,
+          0.85
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          1.4
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE1-WHEEL--1-+1",
+        "group": "rollcage-1",
+        "primitive": "cylinder",
+        "location": [
+          12.96,
+          11.200000000000001,
+          0.07
+        ],
+        "radius": 0.07,
+        "depth": 0.06,
+        "axis": "X",
+        "material": "frame"
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE1-POST--1-+1",
+        "group": "rollcage-1",
+        "primitive": "cube",
+        "location": [
+          12.865,
+          11.285,
+          0.85
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          1.4
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE1-WHEEL-+1--1",
+        "group": "rollcage-1",
+        "primitive": "cylinder",
+        "location": [
+          13.64,
+          10.6,
+          0.07
+        ],
+        "radius": 0.07,
+        "depth": 0.06,
+        "axis": "X",
+        "material": "frame"
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE1-POST-+1--1",
+        "group": "rollcage-1",
+        "primitive": "cube",
+        "location": [
+          13.735000000000001,
+          10.515,
+          0.85
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          1.4
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE1-WHEEL-+1-+1",
+        "group": "rollcage-1",
+        "primitive": "cylinder",
+        "location": [
+          13.64,
+          11.200000000000001,
+          0.07
+        ],
+        "radius": 0.07,
+        "depth": 0.06,
+        "axis": "X",
+        "material": "frame"
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE1-POST-+1-+1",
+        "group": "rollcage-1",
+        "primitive": "cube",
+        "location": [
+          13.735000000000001,
+          11.285,
+          0.85
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          1.4
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE1-LONG-RAIL-1--1",
+        "group": "rollcage-1",
+        "primitive": "cube",
+        "location": [
+          13.3,
+          10.513,
+          0.75
+        ],
+        "dimensions": [
+          0.9,
+          0.026,
+          0.03
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE1-END-RAIL-1--1",
+        "group": "rollcage-1",
+        "primitive": "cube",
+        "location": [
+          12.863000000000001,
+          10.9,
+          0.75
+        ],
+        "dimensions": [
+          0.026,
+          0.8,
+          0.03
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE1-LONG-RAIL-1-+1",
+        "group": "rollcage-1",
+        "primitive": "cube",
+        "location": [
+          13.3,
+          11.287,
+          0.75
+        ],
+        "dimensions": [
+          0.9,
+          0.026,
+          0.03
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE1-END-RAIL-1-+1",
+        "group": "rollcage-1",
+        "primitive": "cube",
+        "location": [
+          13.737,
+          10.9,
+          0.75
+        ],
+        "dimensions": [
+          0.026,
+          0.8,
+          0.03
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE1-LONG-RAIL-2--1",
+        "group": "rollcage-1",
+        "primitive": "cube",
+        "location": [
+          13.3,
+          10.513,
+          1.535
+        ],
+        "dimensions": [
+          0.9,
+          0.026,
+          0.03
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE1-END-RAIL-2--1",
+        "group": "rollcage-1",
+        "primitive": "cube",
+        "location": [
+          12.863000000000001,
+          10.9,
+          1.535
+        ],
+        "dimensions": [
+          0.026,
+          0.8,
+          0.03
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE1-LONG-RAIL-2-+1",
+        "group": "rollcage-1",
+        "primitive": "cube",
+        "location": [
+          13.3,
+          11.287,
+          1.535
+        ],
+        "dimensions": [
+          0.9,
+          0.026,
+          0.03
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE1-END-RAIL-2-+1",
+        "group": "rollcage-1",
+        "primitive": "cube",
+        "location": [
+          13.737,
+          10.9,
+          1.535
+        ],
+        "dimensions": [
+          0.026,
+          0.8,
+          0.03
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE2-BASE",
+        "group": "rollcage-2",
+        "primitive": "cube",
+        "location": [
+          15.1,
+          10.9,
+          0.16
+        ],
+        "dimensions": [
+          0.9,
+          0.8,
+          0.04
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE2-WHEEL--1--1",
+        "group": "rollcage-2",
+        "primitive": "cylinder",
+        "location": [
+          14.76,
+          10.6,
+          0.07
+        ],
+        "radius": 0.07,
+        "depth": 0.06,
+        "axis": "X",
+        "material": "frame"
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE2-POST--1--1",
+        "group": "rollcage-2",
+        "primitive": "cube",
+        "location": [
+          14.665,
+          10.515,
+          0.85
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          1.4
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE2-WHEEL--1-+1",
+        "group": "rollcage-2",
+        "primitive": "cylinder",
+        "location": [
+          14.76,
+          11.200000000000001,
+          0.07
+        ],
+        "radius": 0.07,
+        "depth": 0.06,
+        "axis": "X",
+        "material": "frame"
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE2-POST--1-+1",
+        "group": "rollcage-2",
+        "primitive": "cube",
+        "location": [
+          14.665,
+          11.285,
+          0.85
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          1.4
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE2-WHEEL-+1--1",
+        "group": "rollcage-2",
+        "primitive": "cylinder",
+        "location": [
+          15.44,
+          10.6,
+          0.07
+        ],
+        "radius": 0.07,
+        "depth": 0.06,
+        "axis": "X",
+        "material": "frame"
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE2-POST-+1--1",
+        "group": "rollcage-2",
+        "primitive": "cube",
+        "location": [
+          15.535,
+          10.515,
+          0.85
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          1.4
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE2-WHEEL-+1-+1",
+        "group": "rollcage-2",
+        "primitive": "cylinder",
+        "location": [
+          15.44,
+          11.200000000000001,
+          0.07
+        ],
+        "radius": 0.07,
+        "depth": 0.06,
+        "axis": "X",
+        "material": "frame"
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE2-POST-+1-+1",
+        "group": "rollcage-2",
+        "primitive": "cube",
+        "location": [
+          15.535,
+          11.285,
+          0.85
+        ],
+        "dimensions": [
+          0.03,
+          0.03,
+          1.4
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE2-LONG-RAIL-1--1",
+        "group": "rollcage-2",
+        "primitive": "cube",
+        "location": [
+          15.1,
+          10.513,
+          0.75
+        ],
+        "dimensions": [
+          0.9,
+          0.026,
+          0.03
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE2-END-RAIL-1--1",
+        "group": "rollcage-2",
+        "primitive": "cube",
+        "location": [
+          14.663,
+          10.9,
+          0.75
+        ],
+        "dimensions": [
+          0.026,
+          0.8,
+          0.03
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE2-LONG-RAIL-1-+1",
+        "group": "rollcage-2",
+        "primitive": "cube",
+        "location": [
+          15.1,
+          11.287,
+          0.75
+        ],
+        "dimensions": [
+          0.9,
+          0.026,
+          0.03
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE2-END-RAIL-1-+1",
+        "group": "rollcage-2",
+        "primitive": "cube",
+        "location": [
+          15.536999999999999,
+          10.9,
+          0.75
+        ],
+        "dimensions": [
+          0.026,
+          0.8,
+          0.03
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE2-LONG-RAIL-2--1",
+        "group": "rollcage-2",
+        "primitive": "cube",
+        "location": [
+          15.1,
+          10.513,
+          1.535
+        ],
+        "dimensions": [
+          0.9,
+          0.026,
+          0.03
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE2-END-RAIL-2--1",
+        "group": "rollcage-2",
+        "primitive": "cube",
+        "location": [
+          14.663,
+          10.9,
+          1.535
+        ],
+        "dimensions": [
+          0.026,
+          0.8,
+          0.03
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE2-LONG-RAIL-2-+1",
+        "group": "rollcage-2",
+        "primitive": "cube",
+        "location": [
+          15.1,
+          11.287,
+          1.535
+        ],
+        "dimensions": [
+          0.9,
+          0.026,
+          0.03
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-CAGE2-END-RAIL-2-+1",
+        "group": "rollcage-2",
+        "primitive": "cube",
+        "location": [
+          15.536999999999999,
+          10.9,
+          1.535
+        ],
+        "dimensions": [
+          0.026,
+          0.8,
+          0.03
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-RACK-POST--1--1",
+        "group": "staging-rack",
+        "primitive": "cube",
+        "location": [
+          16.53,
+          11.93,
+          0.825
+        ],
+        "dimensions": [
+          0.06,
+          0.06,
+          1.65
+        ],
+        "material": "frame",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-RACK-POST--1-+1",
+        "group": "staging-rack",
+        "primitive": "cube",
+        "location": [
+          16.53,
+          12.870000000000001,
+          0.825
+        ],
+        "dimensions": [
+          0.06,
+          0.06,
+          1.65
+        ],
+        "material": "frame",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-RACK-POST-+1--1",
+        "group": "staging-rack",
+        "primitive": "cube",
+        "location": [
+          20.07,
+          11.93,
+          0.825
+        ],
+        "dimensions": [
+          0.06,
+          0.06,
+          1.65
+        ],
+        "material": "frame",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-RACK-POST-+1-+1",
+        "group": "staging-rack",
+        "primitive": "cube",
+        "location": [
+          20.07,
+          12.870000000000001,
+          0.825
+        ],
+        "dimensions": [
+          0.06,
+          0.06,
+          1.65
+        ],
+        "material": "frame",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-RACK-SHELF-1",
+        "group": "staging-rack",
+        "primitive": "cube",
+        "location": [
+          18.3,
+          12.4,
+          0.19
+        ],
+        "dimensions": [
+          3.6,
+          1.0,
+          0.06
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-STATIC-CARTON-1-1",
+        "group": "staging-cartons",
+        "primitive": "cube",
+        "location": [
+          17.45,
+          12.4,
+          0.45999999999999996
+        ],
+        "dimensions": [
+          0.62,
+          0.6,
+          0.48
+        ],
+        "material": "card",
+        "bevel": 0.012
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-STATIC-CARTON-1-2",
+        "group": "staging-cartons",
+        "primitive": "cube",
+        "location": [
+          19.15,
+          12.4,
+          0.45999999999999996
+        ],
+        "dimensions": [
+          0.62,
+          0.6,
+          0.48
+        ],
+        "material": "card",
+        "bevel": 0.012
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-RACK-SHELF-2",
+        "group": "staging-rack",
+        "primitive": "cube",
+        "location": [
+          18.3,
+          12.4,
+          0.97
+        ],
+        "dimensions": [
+          3.6,
+          1.0,
+          0.06
+        ],
+        "material": "steel",
+        "bevel": 0.005
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-STATIC-CARTON-2-1",
+        "group": "staging-cartons",
+        "primitive": "cube",
+        "location": [
+          17.45,
+          12.4,
+          1.24
+        ],
+        "dimensions": [
+          0.62,
+          0.6,
+          0.48
+        ],
+        "material": "card",
+        "bevel": 0.012
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-STATIC-CARTON-2-2",
+        "group": "staging-cartons",
+        "primitive": "cube",
+        "location": [
+          19.15,
+          12.4,
+          1.24
+        ],
+        "dimensions": [
+          0.62,
+          0.6,
+          0.48
+        ],
+        "material": "card",
+        "bevel": 0.012
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-FLOOR-CUE-LONG-1",
+        "group": "floor-cue",
+        "primitive": "cube",
+        "location": [
+          14.2,
+          10.22,
+          0.004
+        ],
+        "dimensions": [
+          3.6,
+          0.04,
+          0.008
+        ],
+        "material": "yellow",
+        "bevel": 0
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-FLOOR-CUE-LONG-2",
+        "group": "floor-cue",
+        "primitive": "cube",
+        "location": [
+          14.2,
+          11.58,
+          0.004
+        ],
+        "dimensions": [
+          3.6,
+          0.04,
+          0.008
+        ],
+        "material": "yellow",
+        "bevel": 0
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-FLOOR-CUE-END-1",
+        "group": "floor-cue",
+        "primitive": "cube",
+        "location": [
+          12.42,
+          10.9,
+          0.004
+        ],
+        "dimensions": [
+          0.04,
+          1.4,
+          0.008
+        ],
+        "material": "yellow",
+        "bevel": 0
+      },
+      {
+        "synthetic": true,
+        "role": "synthetic-environment",
+        "businessToteId": null,
+        "tracked": false,
+        "motion": "static",
+        "name": "SYN-ENV-FLOOR-CUE-END-2",
+        "group": "floor-cue",
+        "primitive": "cube",
+        "location": [
+          15.98,
+          10.9,
+          0.004
+        ],
+        "dimensions": [
+          0.04,
+          1.4,
+          0.008
+        ],
+        "material": "yellow",
+        "bevel": 0
+      }
+    ]
+  },
+  "additionalAssets": []
+}
