@@ -23,15 +23,29 @@
         "reports/live-analysis-independent.md"
       ],
       "remaining": [
-        "음성 명료도",
-        "PC 모듈 인수·통합",
-        "20입력·12경계·6회 리허설",
-        "최종 UI 검수·인계"
+        "AI 사실관계 오류4건 수정·재검증",
+        "음성/Blender 제작 품질",
+        "원격 독립 QA",
+        "영속 저장·원격 전체 흐름",
+        "최종 인계·발표·로그"
       ],
       "mainIntegration": {
-        "state": "FUNCTIONAL_6_OF_6_UI_REFINEMENT_PENDING",
-        "evidence": "reports/integrated-modules.md",
-        "buildSource": "7e76d4b0d5c84e80d5c6c6ab24c638d37b82ea4073b39d3032d0b3684f3894cc",
+        "state": "FUNCTIONAL_6_OF_6_UI_AND_CLIPS_VERIFIED_REMOTE_QA_PENDING",
+        "candidateCommit": "bfc8543aa65316682948f2e3d5b77a3ee56b21ff",
+        "evidence": [
+          "reports/call-review-workflow.md",
+          "reports/media/transcript-timing.md",
+          "reports/e2e/rehearsal-2026-09-21T11-18-13-436Z/results.json"
+        ],
+        "buildSource": "15d2659176cae5f9351ff1b4483f0ff11db2341117669280f025c9332a4b2d11",
+        "accepted": false
+      },
+      "evaluation": {
+        "runId": "20260921T112012Z-62da8e1711",
+        "fixed": "116/120",
+        "boundary": "64/72",
+        "safetyFailures": 4,
+        "evidence": "reports/evaluation/recheck-20260921-2020-review.md",
         "accepted": false
       }
     },
@@ -55,7 +69,7 @@
       "reportedRepo": "C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon",
       "resultCommit": "ef8f33e23f003c95a51e6a44a8c77cac19f46b71",
       "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5758898272",
-      "mainFinding": "Current intake + confirmation wired; actual shell 6/6 functional; action distance UX fix pending.",
+      "mainFinding": "통합 상담 동선·16발화 구간·6회 흐름 검증. N02-M2 음질 A/B 결과는 별도 대기.",
       "followupCard": {
         "id": "N02-M2",
         "baseCommit": "e5469aa99bb266c5a977b80c097223275ac6fc9b",
@@ -67,9 +81,14 @@
         "sourceDelivery": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5759439879"
       },
       "mainIntegration": {
-        "state": "FUNCTIONAL_6_OF_6_UI_REFINEMENT_PENDING",
-        "evidence": "reports/integrated-modules.md",
-        "buildSource": "7e76d4b0d5c84e80d5c6c6ab24c638d37b82ea4073b39d3032d0b3684f3894cc",
+        "state": "FUNCTIONAL_6_OF_6_UI_AND_CLIPS_VERIFIED_REMOTE_QA_PENDING",
+        "candidateCommit": "bfc8543aa65316682948f2e3d5b77a3ee56b21ff",
+        "evidence": [
+          "reports/call-review-workflow.md",
+          "reports/media/transcript-timing.md",
+          "reports/e2e/rehearsal-2026-09-21T11-18-13-436Z/results.json"
+        ],
+        "buildSource": "15d2659176cae5f9351ff1b4483f0ff11db2341117669280f025c9332a4b2d11",
         "accepted": false
       }
     },
@@ -93,23 +112,29 @@
       "reportedRepo": "D:/hwana/Work/happycall-ralphthon",
       "resultCommit": "d6aa6b38ab18836789eb77e9034560a5e7890eef",
       "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5758883538",
-      "mainFinding": "d6aa6b3 independent helper/SSR 58/58, 42 tampered contexts blocked and canonical media positive control passed; final browser integration and candidate registration pending.",
+      "mainFinding": "통합 WMS 근거/영상 흐름 검증. Blender 대표3프레임 품질 미달 후 기하 수정03291cca 수신, 동일조건 렌더 재검 중.",
       "followupCard": {
         "id": "N03-M2",
         "baseCommit": "e5469aa99bb266c5a977b80c097223275ac6fc9b",
         "sentAtUTC": "2026-09-21T10:48:49Z",
         "replyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5759286998",
         "bodyFile": "reports/channel/N03-M2-pc3-blender-scene.md",
-        "state": "FIRST_CODE_RESULT_RECEIVED_RENDER_PENDING",
+        "state": "GEOMETRY_FIX_RECEIVED_REPRESENTATIVE_RECHECK",
         "acknowledged": true,
         "ackUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5759324663",
-        "resultCommit": "c208597a318a1934b7ee873299b326619ec23f33",
-        "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5759468507"
+        "resultCommit": "03291cca16310926a28a5b7d01ff02b9c0d2ec2e",
+        "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5759713202",
+        "mainReview": "reports/media/pc3-representative-review.md"
       },
       "mainIntegration": {
-        "state": "FUNCTIONAL_6_OF_6_UI_REFINEMENT_PENDING",
-        "evidence": "reports/integrated-modules.md",
-        "buildSource": "7e76d4b0d5c84e80d5c6c6ab24c638d37b82ea4073b39d3032d0b3684f3894cc",
+        "state": "FUNCTIONAL_6_OF_6_UI_AND_CLIPS_VERIFIED_REMOTE_QA_PENDING",
+        "candidateCommit": "bfc8543aa65316682948f2e3d5b77a3ee56b21ff",
+        "evidence": [
+          "reports/call-review-workflow.md",
+          "reports/media/transcript-timing.md",
+          "reports/e2e/rehearsal-2026-09-21T11-18-13-436Z/results.json"
+        ],
+        "buildSource": "15d2659176cae5f9351ff1b4483f0ff11db2341117669280f025c9332a4b2d11",
         "accepted": false
       }
     },
@@ -139,24 +164,35 @@
       "resumeBasis": "pc4 reports direct instruction by its local user; previous local hold no longer active.",
       "resultCommit": "1b82f1d7fad1b31545d512b28896bfcba40189ec",
       "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5759119569",
-      "mainFinding": "TMS 39 contract and25 browser checks reported. Existing-shell6 flows include seek-ended repeats; not6 full-length playbacks or new integratedTMS verification. Main independent acceptance pending.",
+      "mainFinding": "통합 TMS 로컬6회 완료, PC4 Q2 준비 d7ff5ee 수신. bfc8543 독립 제품 검증 실행 계약을 실제 발송했으며 결과 대기.",
       "followupCard": {
         "id": "N04-Q2",
         "baseCommit": "e5469aa99bb266c5a977b80c097223275ac6fc9b",
         "sentAtUTC": "2026-09-21T10:48:52Z",
         "replyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5759287396",
         "bodyFile": "reports/channel/N04-Q2-pc4-integrated-qa.md",
-        "state": "SENT_BODY_VERIFIED",
-        "acknowledged": false
+        "state": "CANDIDATE_DISPATCHED_RESULTS_PENDING",
+        "acknowledged": true,
+        "readyCommit": "d7ff5eebd180a3805c8aff59fc503d27aa044be2",
+        "readyReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5759574296",
+        "candidateCommit": "bfc8543aa65316682948f2e3d5b77a3ee56b21ff",
+        "candidateDispatchUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5759811184",
+        "candidateDispatchedAtUTC": "2026-09-21T11:34:45Z",
+        "candidateContract": "reports/channel/N04-Q2-bfc8543-release-inputs.json"
       },
       "mainIntegration": {
-        "state": "FUNCTIONAL_6_OF_6_UI_REFINEMENT_PENDING",
-        "evidence": "reports/integrated-modules.md",
-        "buildSource": "7e76d4b0d5c84e80d5c6c6ab24c638d37b82ea4073b39d3032d0b3684f3894cc",
+        "state": "FUNCTIONAL_6_OF_6_UI_AND_CLIPS_VERIFIED_REMOTE_QA_PENDING",
+        "candidateCommit": "bfc8543aa65316682948f2e3d5b77a3ee56b21ff",
+        "evidence": [
+          "reports/call-review-workflow.md",
+          "reports/media/transcript-timing.md",
+          "reports/e2e/rehearsal-2026-09-21T11-18-13-436Z/results.json"
+        ],
+        "buildSource": "15d2659176cae5f9351ff1b4483f0ff11db2341117669280f025c9332a4b2d11",
         "accepted": false
       }
     }
   ],
-  "updatedAtKST": "2026-09-21T19:50:42.325121+09:00",
+  "updatedAtKST": "2026-09-21T20:35:52+09:00",
   "sharedBaseCommit": "d4b4a8137fbc608911e9f6f71bd4b5e289e0a958"
 }
