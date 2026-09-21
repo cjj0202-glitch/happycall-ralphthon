@@ -203,13 +203,40 @@
       "parentVerificationCard": {
         "id": "N02-M3",
         "productCommit": "92d2ecbad981f366a9e5ffc850d9c2bb7fd5d3a2",
-        "state": "ACK_RECEIVED_EXECUTING",
+        "state": "SCOPED_TECHNICAL_ACCEPTANCE",
         "card": "reports/channel/N02-M3-v3-parent-verification.md",
         "comment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5760570765",
-        "accepted": false,
+        "accepted": true,
         "ackComment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5760679104",
         "acknowledgedAtKST": "2026-09-21T21:44:09+09:00",
-        "reportedFirstResultWindowKST": "21:57–22:07"
+        "reportedFirstResultWindowKST": "21:57–22:07",
+        "resultCommit": "d65a798b62395a1ec1ad6c02e118f2dc9a2f9409",
+        "resultComment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5760927124",
+        "evidence": "reports/pc2-m3-main-intake.md",
+        "scope": "Fixed92d API replay parent workflow only; remote14/14; evidence34/34; product51/51; main browser NOT_RUN; not voice naturalness, public fixture, latest7ca, final deployment or wholeN02."
+      },
+      "voiceQualityV4": {
+        "state": "CLOVA_PREVIEW_CREATED_LOCAL_EXPORT_UNVERIFIED",
+        "previousV3Naturalness": "FAIL_USER_FEEDBACK",
+        "userNegativeListeningFeedbackCount": 1,
+        "script": "planning/media/korean-call-v4-script.json",
+        "criteria": "planning/media/korean-voice-quality.md",
+        "evidence": "reports/media/clova-dubbing-preview-20260921.md",
+        "uiPreviewSeconds": 32.17,
+        "turns": [
+          "W02",
+          "W03",
+          "W04",
+          "W05"
+        ],
+        "voices": [
+          "승표",
+          "아라 상담원"
+        ],
+        "localFileReceived": false,
+        "humanPreviewFeedback": "PENDING",
+        "productApplied": false,
+        "accepted": false
       }
     },
     {

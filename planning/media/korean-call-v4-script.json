@@ -1,0 +1,694 @@
+{
+  "schemaVersion": "oneflow-korean-call-script-v4-candidate-1",
+  "status": "SCRIPT_CANDIDATE_NOT_SYNTHESIZED",
+  "createdAt": "2026-09-21T22:08:15+09:00",
+  "synthetic": true,
+  "notice": "독립 합성 시연용 새 대본 후보입니다. 실제 고객 통화가 아니며 기존 정본·음원·고정 32개 평가 원본을 교체하지 않았습니다.",
+  "source": {
+    "commit": "181aa4070109b7024cd4aa3756502a55615c3844",
+    "fixturePath": "data/fixtures/cases.json",
+    "fixtureSha256": "5edf80669f7def9d3e10ceea910086c41026ff1252fbc638b97641562f3d84f4",
+    "originalTurnCountPerCase": 8
+  },
+  "synthesis": {
+    "provider": null,
+    "model": null,
+    "voiceIdBySpeaker": {
+      "상담원": null,
+      "경영주": null
+    },
+    "status": "NOT_RUN",
+    "onlySpokenTextIsSynthesizable": true,
+    "directionsAreNotSpoken": true,
+    "pauseValuesAreStartingSuggestions": true,
+    "cloningRealPersonVoice": false,
+    "automaticPaidRetry": false
+  },
+  "timing": {
+    "policy": "모든 start/end/duration은 실제 합성·PCM 조립 후 실측하여 기록합니다. 문장 길이만으로 60~90초 달성을 선언하지 않습니다.",
+    "globalTargetSeconds": [
+      60,
+      90
+    ]
+  },
+  "rewriteRules": [
+    "경영주와 상담원 두 화자만 말하며 AI는 통화 종료 후 지원합니다.",
+    "기존 상품·주문량·수령 진술·화자·문의 시점·합성 점포 이름을 유지합니다.",
+    "듣기 좋은 표현으로 바꾸되 원문의 불만과 처리 요청을 없애지 않습니다.",
+    "새 업무 피해·공정 사실·개인정보·ETA·보상 약속을 만들지 않습니다.",
+    "숫자 표기→한글 발음 변환 외 text/spokenText의 의미는 같아야 합니다.",
+    "연기 지시·역할 이름·시간 코드·단위 코드 EA/BOX를 음성으로 읽지 않습니다."
+  ],
+  "cases": [
+    {
+      "caseId": "CASE-0001",
+      "title": "미도착 — 기다리는 경영주와 배송 확인 접수",
+      "store": {
+        "id": "SYN-ST01",
+        "name": "가상 한빛점"
+      },
+      "occurredAsOf": "2026-09-18T07:00:00+09:00",
+      "targetDurationSeconds": {
+        "min": 60,
+        "max": 90
+      },
+      "actualDurationSeconds": null,
+      "characterIntent": {
+        "owner": "오늘 아침 배송을 아직 받지 못해 답답합니다. 원인을 단정하기보다 현재 위치와 도착 가능 시간을 알고 싶습니다.",
+        "counselor": "통째로 미수령했다는 진술과 공사 때문이라는 추측을 구분하고, 센터가 확인할 두 가지 요청을 짧게 재확인합니다."
+      },
+      "turns": [
+        {
+          "id": "M01",
+          "speaker": "상담원",
+          "text": "안녕하세요, 해피콜입니다.",
+          "spokenText": "안녕하세요, 해피콜입니다.",
+          "direction": "일상적인 응대. 광고처럼 밝게 올리지 않습니다.",
+          "pauseAfterMs": 220,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "M02",
+          "speaker": "경영주",
+          "text": "가상 한빛점인데요. 오늘 아침 물건이 아직 안 와서요. 5시 배송인데, 지금 7시가 다 됐거든요.",
+          "spokenText": "가상 한빛점인데요. 오늘 아침 물건이 아직 안 와서요. 다섯 시 배송인데, 지금 일곱 시가 다 됐거든요.",
+          "direction": "기다리다 전화한 답답함. 시각만 분명히 읽고 큰 소리로 연기하지 않습니다.",
+          "pauseAfterMs": 280,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "M03",
+          "speaker": "상담원",
+          "text": "네, 오늘 아침 배송 말씀하시는 거죠. 물건을 아예 못 받으신 건가요?",
+          "spokenText": "네, 오늘 아침 배송 말씀하시는 거죠. 물건을 아예 못 받으신 건가요?",
+          "direction": "질문은 미수령 범위 하나. 중간은 확인하고 끝에서만 가볍게 올립니다.",
+          "pauseAfterMs": 180,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "M04",
+          "speaker": "경영주",
+          "text": "네, 하나도 안 왔어요. 어제도 바빴는데 오늘까지 이러니까… 아, 정말 답답하네요.",
+          "spokenText": "네, 하나도 안 왔어요. 어제도 바빴는데 오늘까지 이러니까… 아, 정말 답답하네요.",
+          "direction": "끝의 답답함을 낮게 내립니다. 말줄임은 생각을 잇는 짧은 쉼이며 흐느낌·한숨 효과를 덧붙이지 않습니다.",
+          "pauseAfterMs": 380,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "M05",
+          "speaker": "상담원",
+          "text": "오늘 배송을 통째로 못 받으신 거군요. 기다리시느라 불편하셨겠습니다.",
+          "spokenText": "오늘 배송을 통째로 못 받으신 거군요. 기다리시느라 불편하셨겠습니다.",
+          "direction": "들은 내용을 한 번 확인한 뒤 짧게 공감합니다. 사과 문구를 길게 늘이지 않습니다.",
+          "pauseAfterMs": 250,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "M06",
+          "speaker": "경영주",
+          "text": "가게 앞 공사 때문에 길이 막힌 건가 싶기도 하고요.",
+          "spokenText": "가게 앞 공사 때문에 길이 막힌 건가 싶기도 하고요.",
+          "direction": "가능성을 떠올리는 말. 원인을 아는 사람처럼 확신해서 읽지 않습니다.",
+          "pauseAfterMs": 200,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "M07",
+          "speaker": "상담원",
+          "text": "공사 때문에 늦어진 것 같다는 말씀이시죠?",
+          "spokenText": "공사 때문에 늦어진 것 같다는 말씀이시죠?",
+          "direction": "책망하지 않고 추측인지 확인하는 질문입니다.",
+          "pauseAfterMs": 180,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "M08",
+          "speaker": "경영주",
+          "text": "네, 제 생각이에요. 어디 있는지만 알아도 좀 낫겠는데요.",
+          "spokenText": "네, 제 생각이에요. 어디 있는지만 알아도 좀 낫겠는데요.",
+          "direction": "앞에서는 짧게 인정하고 뒤에서는 실제 원하는 정보를 말합니다.",
+          "pauseAfterMs": 250,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "M09",
+          "speaker": "상담원",
+          "text": "네. 공사 때문인지는 확인이 필요하다고 남기겠습니다. 지금 배송이 어디쯤 왔는지 센터에 확인 요청하겠습니다.",
+          "spokenText": "네. 공사 때문인지는 확인이 필요하다고 남기겠습니다. 지금 배송이 어디쯤 왔는지 센터에 확인 요청하겠습니다.",
+          "direction": "추측과 확인 요청을 구분합니다. 보고서처럼 한 호흡으로 읽지 않습니다.",
+          "pauseAfterMs": 280,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "M10",
+          "speaker": "경영주",
+          "text": "그럼 언제 오는지도 같이 좀 알려 주세요. 마냥 기다리고 있을 수만은 없잖아요.",
+          "spokenText": "그럼 언제 오는지도 같이 좀 알려 주세요. 마냥 기다리고 있을 수만은 없잖아요.",
+          "direction": "현재 위치만 듣고 끝내지 않도록 도착 시간 확인을 요청합니다. 고함은 없습니다.",
+          "pauseAfterMs": 250,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "M11",
+          "speaker": "상담원",
+          "text": "네, 지금 위치하고 도착할 수 있는 시간을 함께 확인해 달라고 하겠습니다.",
+          "spokenText": "네, 지금 위치하고 도착할 수 있는 시간을 함께 확인해 달라고 하겠습니다.",
+          "direction": "센터가 확인할 요청 두 가지를 요약합니다. 도착 시각을 약속하는 어조는 피합니다.",
+          "pauseAfterMs": 180,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "M12",
+          "speaker": "경영주",
+          "text": "지금은 몇 시쯤 오는지 모르는 거죠?",
+          "spokenText": "지금은 몇 시쯤 오는지 모르는 거죠?",
+          "direction": "현재 바로 답을 받을 수 있는지 확인합니다.",
+          "pauseAfterMs": 220,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "M13",
+          "speaker": "상담원",
+          "text": "네, 지금은 확인된 시간이 없어서 말씀드리기 어렵습니다. 센터에서 확인한 뒤에 안내드리도록 전달하겠습니다.",
+          "spokenText": "네, 지금은 확인된 시간이 없어서 말씀드리기 어렵습니다. 센터에서 확인한 뒤에 안내드리도록 전달하겠습니다.",
+          "direction": "알 수 없는 내용을 분명히 말하고 다음 담당자를 안내합니다. 냉담한 종결 어조는 피합니다.",
+          "pauseAfterMs": 300,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "M14",
+          "speaker": "경영주",
+          "text": "네. 확인되면 연락 좀 부탁드려요.",
+          "spokenText": "네. 확인되면 연락 좀 부탁드려요.",
+          "direction": "요청을 남기고 마칩니다. 문제가 해결된 듯 밝게 웃지 않습니다.",
+          "pauseAfterMs": 450,
+          "startSeconds": null,
+          "endSeconds": null
+        }
+      ],
+      "criticalFacts": [
+        {
+          "id": "M-F01",
+          "meaning": "점포는 기존 독립 합성 점포 가상 한빛점 / SYN-ST01입니다.",
+          "turnIds": [
+            "M02"
+          ],
+          "sourcePointers": [
+            "/cases/0/store"
+          ]
+        },
+        {
+          "id": "M-F02",
+          "meaning": "경영주는 당일 아침 5시 배송을 7시가 다 되도록 받지 못했다고 진술합니다. 실제 미도착이 확정된 것은 아닙니다.",
+          "turnIds": [
+            "M02",
+            "M04"
+          ],
+          "sourcePointers": [
+            "/cases/0/transcript/1/text",
+            "/cases/0/asOf"
+          ]
+        },
+        {
+          "id": "M-F03",
+          "meaning": "문의 대상은 당일 배송 전체이며, 상품별 수량·단위는 null을 유지합니다. '하나도 안 왔다'를 수량 0개로 추출하지 않습니다.",
+          "turnIds": [
+            "M03",
+            "M04",
+            "M05"
+          ],
+          "sourcePointers": [
+            "/cases/0/expected",
+            "/cases/0/received",
+            "/cases/0/intake"
+          ]
+        },
+        {
+          "id": "M-F04",
+          "meaning": "어제도 바빴고 오늘까지 이어지는 불편에 답답함을 느낍니다. 새 고객 항의·매출 손해 수치는 만들지 않습니다.",
+          "turnIds": [
+            "M04"
+          ],
+          "sourcePointers": [
+            "/cases/0/transcript/3/text"
+          ]
+        },
+        {
+          "id": "M-F05",
+          "meaning": "공사로 길이 막혔을 수 있다는 말은 경영주의 추측입니다.",
+          "turnIds": [
+            "M06",
+            "M07",
+            "M08",
+            "M09"
+          ],
+          "sourcePointers": [
+            "/cases/0/transcript/3/text",
+            "/cases/0/replayAnalysis/unknowns"
+          ]
+        },
+        {
+          "id": "M-F06",
+          "meaning": "경영주는 현재 운행 위치와 도착 가능 시간을 센터에서 확인해 안내해 달라고 요청합니다.",
+          "turnIds": [
+            "M08",
+            "M10",
+            "M11",
+            "M14"
+          ],
+          "sourcePointers": [
+            "/cases/0/transcript/5/text",
+            "/cases/0/transcript/7/text",
+            "/cases/0/intake/request"
+          ]
+        },
+        {
+          "id": "M-F07",
+          "meaning": "상담원은 확인되지 않은 도착 시각을 확답하지 않고 센터 확인·후속 안내를 전달합니다.",
+          "turnIds": [
+            "M09",
+            "M11",
+            "M13"
+          ],
+          "sourcePointers": [
+            "/cases/0/transcript/6/text"
+          ]
+        }
+      ],
+      "prohibitedInferences": [
+        "미수령 진술을 실제 미도착·기사 귀책 확정으로 바꾸지 않습니다.",
+        "'하나도'를 숫자 0이나 개/BOX 단위로 채우지 않습니다.",
+        "공사→길 막힘→배송 지연의 인과관계를 확정하지 않습니다.",
+        "통화자가 알지 못하는 04:20 출고 스캔, 차량·토트·노선 코드를 발화에 넣지 않습니다.",
+        "센터가 이미 확인했거나 연락을 마쳤다고 말하지 않습니다."
+      ],
+      "shortComparison": {
+        "turnIds": [
+          "M06",
+          "M07",
+          "M08",
+          "M09"
+        ],
+        "purpose": "경영주의 추측과 상담원의 확인 질문, 담담한 업무 말투를 같은 네 턴으로 국내 음성 후보 간 비교합니다.",
+        "actualDurationSeconds": null
+      }
+    },
+    {
+      "caseId": "CASE-0002",
+      "title": "오출고 — 단위 오청을 바로잡고 회송과 주문 상품 처리를 요청",
+      "store": {
+        "id": "SYN-ST02",
+        "name": "가상 새봄점"
+      },
+      "occurredAsOf": "2026-09-18T07:00:00+09:00",
+      "targetDurationSeconds": {
+        "min": 60,
+        "max": 90
+      },
+      "actualDurationSeconds": null,
+      "characterIntent": {
+        "owner": "주문한 비스킷 대신 휴지를 받아 주말 장사에 곤란함을 느낍니다. 잘못 온 물건뿐 아니라 주문한 상품의 처리를 알고 싶습니다.",
+        "counselor": "단위 오청을 인정하고 주문 18개와 수령 진술 1박스를 분리합니다. 회송과 주문 상품 처리를 센터 상품 담당자에게 함께 전달합니다."
+      },
+      "turns": [
+        {
+          "id": "W01",
+          "speaker": "상담원",
+          "text": "안녕하세요, 해피콜입니다.",
+          "spokenText": "안녕하세요, 해피콜입니다.",
+          "direction": "일상적인 응대. 경영주와 확실히 구분되는 안정적인 음색입니다.",
+          "pauseAfterMs": 200,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "W02",
+          "speaker": "경영주",
+          "text": "가상 새봄점인데요. 물건이 잘못 왔어요. 비스킷 18개 시켰는데 휴지 1박스가 왔거든요. 이게 대체 뭡니까.",
+          "spokenText": "가상 새봄점인데요. 물건이 잘못 왔어요. 비스킷 열여덟 개 시켰는데 휴지 한 박스가 왔거든요. 이게 대체 뭡니까.",
+          "direction": "불편을 먼저 말한 뒤 상품과 수량을 설명합니다. 끝의 불만은 유지하되 소리를 지르지 않습니다.",
+          "pauseAfterMs": 280,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "W03",
+          "speaker": "상담원",
+          "text": "아, 주문하신 것하고 다른 상품을 받으셨군요. 비스킷 18개 대신 휴지 1개가 왔다는 말씀이시죠?",
+          "spokenText": "아, 주문하신 것하고 다른 상품을 받으셨군요. 비스킷 열여덟 개 대신 휴지 한 개가 왔다는 말씀이시죠?",
+          "direction": "상담원이 실제로 단위를 잘못 재진술하는 오류 발화입니다. 모델이 박스로 자동 수정하면 안 됩니다.",
+          "pauseAfterMs": 120,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "W04",
+          "speaker": "경영주",
+          "text": "아니요, 1개가 아니라 1박스요. 단위 좀 제대로 적어 주세요.",
+          "spokenText": "아니요, 한 개가 아니라 한 박스요. 단위 좀 제대로 적어 주세요.",
+          "direction": "짧게 끊고 정정합니다. '한 개가 아니라'보다 '한 박스'가 또렷해야 합니다. 잘못 들은 답답함을 과장하지 않습니다.",
+          "pauseAfterMs": 220,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "W05",
+          "speaker": "상담원",
+          "text": "죄송합니다. 제가 잘못 들었습니다. 휴지 1박스로 고치겠습니다.",
+          "spokenText": "죄송합니다. 제가 잘못 들었습니다. 휴지 한 박스로 고치겠습니다.",
+          "direction": "변명하지 않고 오류를 인정합니다. '정정하겠습니다' 낭독체 대신 짧게 바로잡습니다.",
+          "pauseAfterMs": 220,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "W06",
+          "speaker": "경영주",
+          "text": "네. 주말 장사도 해야 되는데, 정말 곤란하잖아요.",
+          "spokenText": "네. 주말 장사도 해야 되는데, 정말 곤란하잖아요.",
+          "direction": "불편의 맥락을 이어 갑니다. 새로운 고객 민원·재고량·금전 손해는 덧붙이지 않습니다.",
+          "pauseAfterMs": 280,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "W07",
+          "speaker": "상담원",
+          "text": "네. 비스킷은 18개 주문하셨고, 실제로 받으신 건 휴지 1박스, 맞으시죠?",
+          "spokenText": "네. 비스킷은 열여덟 개 주문하셨고, 실제로 받으신 건 휴지 한 박스, 맞으시죠?",
+          "direction": "주문과 실제 수령 진술을 나눠 읽고 한 번만 재확인합니다.",
+          "pauseAfterMs": 150,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "W08",
+          "speaker": "경영주",
+          "text": "네, 맞아요. 그럼 이 잘못 온 물건은 어떻게 해야 해요?",
+          "spokenText": "네, 맞아요. 그럼 이 잘못 온 물건은 어떻게 해야 해요?",
+          "direction": "확인 뒤 바로 실무 조치를 묻습니다.",
+          "pauseAfterMs": 220,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "W09",
+          "speaker": "상담원",
+          "text": "센터 상품 담당자에게 주문 내용과 받은 상품을 확인해 달라고 하겠습니다. 휴지를 돌려보내는 방법도 같이요.",
+          "spokenText": "센터 상품 담당자에게 주문 내용과 받은 상품을 확인해 달라고 하겠습니다. 휴지를 돌려보내는 방법도 같이요.",
+          "direction": "확인과 회송 안내를 맡을 담당자를 말합니다. 회송이 결정·완료된 것처럼 읽지 않습니다.",
+          "pauseAfterMs": 230,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "W10",
+          "speaker": "경영주",
+          "text": "휴지만 가져가면 되는 게 아니고, 주문한 비스킷은 어떻게 되는지도 알아야죠.",
+          "spokenText": "휴지만 가져가면 되는 게 아니고, 주문한 비스킷은 어떻게 되는지도 알아야죠.",
+          "direction": "누락되기 쉬운 주문 상품 처리 요청을 분명하게 덧붙입니다. 상담원을 조롱하지 않습니다.",
+          "pauseAfterMs": 200,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "W11",
+          "speaker": "상담원",
+          "text": "네, 비스킷 처리 방법도 함께 확인해 달라고 하겠습니다.",
+          "spokenText": "네, 비스킷 처리 방법도 함께 확인해 달라고 하겠습니다.",
+          "direction": "요청을 받은 짧은 응답. 앞 문장을 또 길게 반복하지 않습니다.",
+          "pauseAfterMs": 200,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "W12",
+          "speaker": "경영주",
+          "text": "그럼 지금 여기서 정해 주실 수 있는 건 없는 거예요?",
+          "spokenText": "그럼 지금 여기서 정해 주실 수 있는 건 없는 거예요?",
+          "direction": "즉시 조치 여부가 궁금한 현실적인 반문입니다. 위협·욕설을 새로 넣지 않습니다.",
+          "pauseAfterMs": 280,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "W13",
+          "speaker": "상담원",
+          "text": "지금 바로 정해 드리기는 어렵습니다. 휴지는 어떻게 돌려보내실지, 비스킷은 어떻게 처리할지 센터에서 확인한 뒤 안내드리도록 전달하겠습니다.",
+          "spokenText": "지금 바로 정해 드리기는 어렵습니다. 휴지는 어떻게 돌려보내실지, 비스킷은 어떻게 처리할지 센터에서 확인한 뒤 안내드리도록 전달하겠습니다.",
+          "direction": "권한 밖의 약속을 하지 않으면서 다음 조치를 설명합니다. 상담이 완료됐다는 의미로 읽지 않습니다.",
+          "pauseAfterMs": 300,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "W14",
+          "speaker": "경영주",
+          "text": "네, 알겠어요. 확인되면 어떻게 하면 되는지 알려 주세요.",
+          "spokenText": "네, 알겠어요. 확인되면 어떻게 하면 되는지 알려 주세요.",
+          "direction": "확인 요청을 유지한 채 통화를 마칩니다. 해결·보상에 동의한 말이 아닙니다.",
+          "pauseAfterMs": 450,
+          "startSeconds": null,
+          "endSeconds": null
+        }
+      ],
+      "criticalFacts": [
+        {
+          "id": "W-F01",
+          "meaning": "점포는 기존 독립 합성 점포 가상 새봄점 / SYN-ST02입니다.",
+          "turnIds": [
+            "W02"
+          ],
+          "sourcePointers": [
+            "/cases/1/store"
+          ]
+        },
+        {
+          "id": "W-F02",
+          "meaning": "경영주 주문은 비스킷 18 EA(18개)입니다.",
+          "turnIds": [
+            "W02",
+            "W03",
+            "W07"
+          ],
+          "sourcePointers": [
+            "/cases/1/expected",
+            "/cases/1/transcript/1/text"
+          ]
+        },
+        {
+          "id": "W-F03",
+          "meaning": "경영주가 실제 받았다고 말하는 상품은 휴지 1 BOX(1박스)입니다.",
+          "turnIds": [
+            "W02",
+            "W04",
+            "W05",
+            "W07",
+            "W08"
+          ],
+          "sourcePointers": [
+            "/cases/1/received",
+            "/cases/1/transcript/1/text",
+            "/cases/1/transcript/3/text"
+          ]
+        },
+        {
+          "id": "W-F04",
+          "meaning": "상담원이 1개로 잘못 재진술하고 경영주가 1박스로 정정합니다. 오류 발화자는 상담원이며 경영주 자기정정으로 바꾸지 않습니다.",
+          "turnIds": [
+            "W03",
+            "W04",
+            "W05"
+          ],
+          "sourcePointers": [
+            "/cases/1/transcript/2/text",
+            "/cases/1/transcript/3/text",
+            "/cases/1/transcript/4/text"
+          ]
+        },
+        {
+          "id": "W-F05",
+          "meaning": "기존 intake.unit=EA는 발견해야 할 잘못된 상담 입력입니다. 정정된 접수 의미는 quantity=1, unit=BOX입니다.",
+          "turnIds": [
+            "W03",
+            "W04",
+            "W05",
+            "W07"
+          ],
+          "sourcePointers": [
+            "/cases/1/intake",
+            "/cases/1/replayAnalysis/fields",
+            "/cases/1/replayAnalysis/issues/0"
+          ]
+        },
+        {
+          "id": "W-F06",
+          "meaning": "주문 18개와 수령 진술 1박스는 다른 상품·단위입니다. 차감·환산하지 않습니다.",
+          "turnIds": [
+            "W02",
+            "W07"
+          ],
+          "sourcePointers": [
+            "/cases/1/replayAnalysis/issues/1"
+          ]
+        },
+        {
+          "id": "W-F07",
+          "meaning": "주말 장사를 해야 해 곤란하다는 불만과 '이게 대체 뭡니까'의 화난 의미를 보존합니다.",
+          "turnIds": [
+            "W02",
+            "W04",
+            "W06"
+          ],
+          "sourcePointers": [
+            "/cases/1/transcript/1/text",
+            "/cases/1/transcript/3/text",
+            "/cases/1/transcript/5/text"
+          ]
+        },
+        {
+          "id": "W-F08",
+          "meaning": "경영주는 잘못 온 상품의 회송 방법과 주문한 비스킷의 처리 모두를 요청합니다.",
+          "turnIds": [
+            "W08",
+            "W10",
+            "W14"
+          ],
+          "sourcePointers": [
+            "/cases/1/transcript/5/text",
+            "/cases/1/transcript/7/text",
+            "/cases/1/intake/request"
+          ]
+        },
+        {
+          "id": "W-F09",
+          "meaning": "상담원은 오출고 확인과 회송·주문 상품 처리 요청을 센터 상품 담당자에게 전달합니다. 최종 회신은 센터 담당자입니다.",
+          "turnIds": [
+            "W09",
+            "W11",
+            "W13"
+          ],
+          "sourcePointers": [
+            "/cases/1/transcript/6/text",
+            "/cases/1/replayAnalysis/department"
+          ]
+        }
+      ],
+      "prohibitedInferences": [
+        "상담원의 '1개' 오류를 TTS가 1박스로 자동 수정하지 않습니다.",
+        "경영주가 처음에 1개라고 말한 것처럼 발화자를 바꾸지 않습니다.",
+        "주문 18 EA에서 수령 1 BOX를 빼거나 BOX당 수량을 추정하지 않습니다.",
+        "경영주 발화에 02:33 소터·03:02 출고·05:10 배송 실적·토트 A/B 기록을 넣지 않습니다.",
+        "수령 진술을 영상으로 확정하거나 작업자·기사 실수로 단정하지 않습니다.",
+        "회송·재배송 시각·무료 보상·환불·기사 재방문을 약속하지 않습니다."
+      ],
+      "shortComparison": {
+        "turnIds": [
+          "W02",
+          "W03",
+          "W04",
+          "W05",
+          "W06",
+          "W07"
+        ],
+        "purpose": "동일한 여섯 턴으로 두 화자 구분, 열여덟 개/한 개/한 박스, 오청→경영주 정정→재확인의 자연스러움을 비교합니다.",
+        "actualDurationSeconds": null
+      }
+    }
+  ],
+  "qualityRubric": {
+    "scope": "대본 자체의 사전 검토이며 음성 품질 판정이 아닙니다.",
+    "hardGates": [
+      "원본에 없는 사실·시각·수량·단위·점포·개인정보·보상 약속 추가 0건",
+      "16개 criticalFacts 모두 대본 근거 턴을 가져야 함",
+      "CASE2 오류 발화자는 상담원, 정정 발화자는 경영주",
+      "공사 추측·센터 확인 필요·후속 안내가 확정 사실로 바뀌지 않음",
+      "상품별 미수령 수량 null 및 주문/수령 단위 분리 보존",
+      "14턴 × 2통, 두 화자만 사용, 발음 표기 의미 동등",
+      "인공 음성 청취·실제 STT·전체 흐름 시험 미실행을 통과로 쓰지 않음"
+    ],
+    "editorialAxes": [
+      {
+        "name": "업무 대화의 자연스러움",
+        "question": "질문과 반응이 앞말에 이어지고 정보 입력용 낭독처럼 들리지 않는가?"
+      },
+      {
+        "name": "불만과 응대의 현실성",
+        "question": "불만은 남고 과한 연기·새로운 욕설·장황한 사과는 없는가?"
+      },
+      {
+        "name": "정정의 이해 가능성",
+        "question": "틀린 말, 바로잡는 말, 재확인이 누구의 것인지 한 번에 이해되는가?"
+      },
+      {
+        "name": "필요한 정보의 밀도",
+        "question": "시간을 채우는 문장 없이 위치·도착/회송·주문 상품 처리 요청이 남는가?"
+      },
+      {
+        "name": "발음용 원고의 충실성",
+        "question": "숫자·단위·점포명·부정과 추측이 원문과 같은 의미인가?"
+      }
+    ],
+    "ratingScale": {
+      "min": 0,
+      "max": 4,
+      "zero": "목적 훼손 또는 사실 오류",
+      "one": "여러 곳에서 다시 써야 함",
+      "two": "반복·낭독체 등 명확한 개선 필요",
+      "three": "대본으로 사용 가능하나 음성 확인 필요",
+      "four": "별도 검토자가 구체적 문장 근거로 강점과 잔여 한계를 확인"
+    },
+    "proposedGate": {
+      "allHardGatesRequired": true,
+      "everyAxisAtLeast": 3,
+      "totalAtLeast": 17,
+      "totalPossible": 20
+    },
+    "scores": null,
+    "independentReview": "NOT_RUN",
+    "humanListening": "NOT_RUN",
+    "actualStt": "NOT_RUN",
+    "productIntegration": "NOT_RUN"
+  },
+  "knownRisks": [
+    "가상 점포명은 독립 합성 사례 계약 때문에 보존했습니다. 실제 점포명으로 바꿔 자연스러움을 얻지 않습니다.",
+    "14턴씩 총28턴으로 기존 생성기의 총16턴 보호 한도를 넘습니다. 기존 스크립트를 그대로 실행하면 안 되며 메인이 새 공급자 어댑터·총 호출 수·기존 예산을 설계해야 합니다.",
+    "기존 발화번호 기반 발화4/발화3~5 근거와 자막 타이밍은 새 대본에 그대로 사용할 수 없습니다.",
+    "같은 60~90초를 맞추려고 느리게 늘리거나 빈 문장을 추가하지 않습니다. 실제 길이가 짧으면 정보 밀도와 자연스러움을 보고 메인이 판정합니다.",
+    "대본을 실제 STT 결과로 표시하지 않습니다. 기존 STT·정제 성공 수치를 새 음원에 소급하지 않습니다.",
+    "목소리·모델·스타일·쉼 지원은 공급자 확인 전 미정이며 현재 파일만으로 음성 자연스러움은 입증되지 않습니다."
+  ],
+  "reviewHistory": [
+    {
+      "id": "R01",
+      "status": "REVISION_APPLIED",
+      "finding": "'한 개… 아니, 한 박스'를 경영주의 자기정정으로 바꾸면 정본의 상담원 휴먼에러 시나리오가 바뀝니다.",
+      "resolution": "상담원 오류 W03→경영주 정정 W04→상담원 인정 W05로 보존했습니다."
+    },
+    {
+      "id": "R02",
+      "status": "REVISION_APPLIED",
+      "finding": "'단위 정정·회송 안내가 필요한 것으로 접수' 문구는 상담 대화보다 업무 보고서에 가깝습니다.",
+      "resolution": "'한 박스로 고치겠습니다'와 '휴지를 돌려보내는 방법도 같이요'로 바꾸고 사후 정제 필드와 원문을 구분했습니다."
+    },
+    {
+      "id": "R03",
+      "status": "OPEN_NOT_TESTED",
+      "finding": "사용자가 기존 한국어 음성을 매우 어색하다고 직접 지적했습니다.",
+      "resolution": "새 대본과 국내 TTS 후보 비교가 필요합니다. 이 대본 작성만으로 피드백이 해결됐다고 보지 않습니다."
+    }
+  ]
+}
