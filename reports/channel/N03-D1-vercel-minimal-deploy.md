@@ -1,5 +1,7 @@
 # N03-D1 — 기존 Vercel 세션으로 최소 배포 연결
 
+**현행 상태: 중단.** 사용자 최신 지시로 개인 AWS에 배포했다. 아래는07:51의 과거 배정이며 다시 실행하지 않는다. PC3는08:00 회신에서 외부 Vercel 변경·유료 호출0과 준비본 보존을 보고했다. 보고 커밋 `004f15a9b79149a9b6cef0b861e34d97e4ef7907`, 지정 원본 `reports/pc3/minimal-vercel-deployment.md`만 인수한다. 실제 AWS 결과는 [메인 실측](../deployment/aws-minimal-deployment-20260922.md)을 따른다.
+
 2026-09-22 07:51 KST, pc1 최제준/cjj0202-glitch → pc3 LAPTOP-U2AL73UH/mcjun86-oss.
 
 07:50의 기존 hackathon02-1948 /52g Studio/g-28 브라우저 접근 보고를 확인했습니다. 사용자 최신 목표는09:00까지 최소 기능 서버 배포·API 연결·빠른 저가형 AI 응답입니다. 기존 승인된 프로젝트 접근으로 아래 작업을 진행합니다. 비밀을 pc1이나 GitHub로 전달할 필요가 없습니다.
