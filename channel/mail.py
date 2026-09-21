@@ -16,6 +16,7 @@
     python channel/mail.py done 12 --evidence "PID 5092 · 기동 10:25:53 · 27건"
     python channel/mail.py status --set "지금 무엇을 하는 중"
     python channel/mail.py board                     # 4대 상태 한눈에
+    python channel/mail.py watch --once --consumer main-loop  # 소비자별 변화 탐지
 """
 from __future__ import annotations
 
@@ -303,8 +304,18 @@ def cmd_status(a) -> int:
     return 0
 
 
-def _state_path(slot: str) -> Path:
-    return ROOT / f".mailbox_state.{slot}.json"
+def _consumer_name(value: str) -> str:
+    """A filename component, never a slot or a path. Lowercase avoids Windows aliases."""
+    if not isinstance(value, str) or re.fullmatch(r"[a-z][a-z0-9_-]{0,31}", value, flags=re.ASCII) is None:
+        raise argparse.ArgumentTypeError(
+            "--consumer는 소문자로 시작하는 1~32자 ASCII 소문자·숫자·_·- 이름이어야 합니다."
+        )
+    return value
+
+
+def _state_path(slot: str, consumer: str | None = None) -> Path:
+    suffix = "" if consumer is None else f".{_consumer_name(consumer)}"
+    return ROOT / f".mailbox_state.{slot}{suffix}.json"
 
 
 def _snapshot(label: str) -> dict:
@@ -359,9 +370,15 @@ def cmd_watch(a) -> int:
 
     if a.interval <= 0 or a.max_loops < 0:
         raise SystemExit("--interval은 양수, --max-loops는 0 이상이어야 합니다.")
+    consumer = getattr(a, "consumer", None)
+    if consumer is not None:
+        try:
+            consumer = _consumer_name(consumer)
+        except argparse.ArgumentTypeError as exc:
+            raise SystemExit(str(exc)) from exc
     slot, meta = me()
     label = meta["inbox"]
-    sp = _state_path(slot)
+    sp = _state_path(slot) if consumer is None else _state_path(slot, consumer)
 
     try:
         old = json.loads(sp.read_text(encoding="utf-8")) if sp.exists() else {}
@@ -372,7 +389,9 @@ def cmd_watch(a) -> int:
     #    성립하지 않는다 — 변화가 없는데도 3줄이 나와 루프가 매번 뭔가 있다고 읽는다.
     if not a.once:
         print(f"감시 시작 · {slot}/{meta.get('role','미정')} · {a.interval}초 간격 · {now()}")
-        print("새 편지·회신·종결이 있을 때만 출력합니다. 조용하면 변화가 없는 것입니다.")
+        print("새 편지·회신·종결이 있을 때만 출력합니다. 무출력은 미처리 편지 부재나 ACK를 뜻하지 않습니다.")
+        if consumer is not None:
+            print(f"소비자 {consumer} · 별도 탐지 상태 {sp.name}")
         print("─" * 70, flush=True)
 
     n_loop = 0
@@ -487,11 +506,19 @@ def main() -> int:
     p.add_argument("--set", help="지금 하는 일 한 줄")
     p.set_defaults(fn=cmd_status)
 
-    p = sub.add_parser("watch", help="편지함 감시 — 새것이 있을 때만 출력")
+    p = sub.add_parser(
+        "watch", help="편지함 감시 — 새것이 있을 때만 출력",
+        description="새 편지·회신·종결의 변화 탐지이며 처리 완료나 ACK가 아닙니다.",
+        epilog="미지정은 기존 슬롯 상태를 공유합니다. 서로 다른 소비자는 다른 이름을 사용하세요. "
+               "새 이름은 빈 상태에서 시작해 기존 열린 편지도 처음에 탐지합니다. "
+               "같은 이름의 동시 실행은 상태를 공유하며, 무출력은 미처리 결과 없음의 증거가 아닙니다.",
+    )
     p.add_argument("--interval", type=int, default=30, help="초 (기본 30)")
     p.add_argument("--once", action="store_true", help="1회만 — 루프에 끼워 넣을 때")
     p.add_argument("--bell", action="store_true", help="새것이 오면 터미널 벨")
     p.add_argument("--max-loops", type=int, default=0, help="N회 돌고 종료 (0=무한)")
+    p.add_argument("--consumer", type=_consumer_name, metavar="NAME",
+                   help="별도 탐지 상태 이름: 소문자 시작, ASCII 소문자·숫자·_·-, 1~32자. 슬롯/수신처는 바꾸지 않음")
     p.set_defaults(fn=cmd_watch)
 
     p = sub.add_parser("board", help="4대 상태 한눈에")
