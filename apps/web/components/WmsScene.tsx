@@ -7,9 +7,11 @@ import fixtures from '../../../data/fixtures/cases.json';
 import manifest from '../../../data/demo-media-manifest.json';
 import styles from './WmsScene.module.css';
 import CctvInspector from './CctvInspector';
+import { registeredTracks } from '../lib/cctv-tracks';
+import type { RegisteredTracks } from '../lib/cctv-tracks';
 
 type Row = Record<string, unknown>;
-type Props = { caseData: CaseData; onLinkEvidence(id: string): Promise<void> | void; onBack(): void };
+type Props = { caseData: CaseData; onLinkEvidence(id: string): Promise<void> | void; onBack(): void; backLabel?: string; readOnly?: boolean };
 type Clip = { id: string; caseId: string; system: string; cameraId: string; eventIds: string[]; occurredAt: string; url: string; startSeconds: number; endSeconds: number; synthetic: true; sha256: string; bytes: number };
 const row = (value: unknown): Row => value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Row : {};
 const rows = (value: unknown): Row[] => Array.isArray(value) ? value.map(row) : [];
@@ -45,7 +47,7 @@ function contextReason(caseData: CaseData): string {
     if (storeId != null && storeId !== baseline.store.id) return '접수 점포와 원본 사건의 점포가 일치하지 않습니다.';
   }
   if (caseData.id !== baseline.id && (!sameSource(caseData.wms, baseline.wms) || !sameSource(caseData.evidence, baseline.evidence))) return '신규 접수의 WMS 원본 행·근거가 연결된 사건과 일치하지 않습니다.';
-  for (const [section, fields] of [['picking', ['orderId', 'toteId', 'pickedAt']], ['shipping', ['id', 'toteId', 'time']], ['sorting', ['sortedAt']]] as const) {
+  for (const [section, fields] of [['picking', ['orderId', 'toteId', 'pickedAt']], ['shipping', ['id', 'toteId', 'time', 'dock']], ['sorting', ['sortedAt', 'rsltChuteNo']]] as const) {
     for (const field of fields) if ((row(wms[section])[field] ?? null) !== (row(expected[section])[field] ?? null)) return '주문·출고·토트·시각의 등록 관계가 일치하지 않습니다.';
   }
   return '';
@@ -61,8 +63,8 @@ export function inspectWms(caseData: CaseData) {
   return { wms, picking, shipping, sorting, events, timeReversal, pickingVisible, shippingVisible, comparisonKnown, difference: comparisonKnown && ['product', 'quantity', 'unit'].some(key => picking[key] !== shipping[key]), contextError: contextReason(caseData) };
 }
 
-/** Only registrations in the shared fixture are playable. Candidate overlays need pc1 integration. */
-export function validateWmsClip(caseData: CaseData, event: Row, media: unknown = caseData.media): { clip?: Clip; reason: string } {
+/** Fixture identity gates the video; only the build-time manifest can register its coordinates. */
+export function validateWmsClip(caseData: CaseData, event: Row, media: unknown = caseData.media): { clip?: Clip; reason: string } & RegisteredTracks {
   const contextError = contextReason(caseData);
   if (contextError) return { reason: contextError };
   const baseline = canonicalCase(caseData)!;
@@ -96,7 +98,8 @@ export function validateWmsClip(caseData: CaseData, event: Row, media: unknown =
   const asset = manifest.assets.find(item => `/demo/${item.name}` === url);
   if (!asset || !('durationSeconds' in asset) || typeof candidate.startSeconds !== 'number' || typeof candidate.endSeconds !== 'number' || !Number.isFinite(candidate.startSeconds) || !Number.isFinite(candidate.endSeconds) || candidate.startSeconds < 0 || candidate.endSeconds <= candidate.startSeconds || candidate.endSeconds > asset.durationSeconds) return { reason: '영상 구간 또는 자산 정보가 유효하지 않습니다.' };
   if (('sha256' in candidate && candidate.sha256 !== asset.sha256) || ('hash' in candidate && candidate.hash !== asset.sha256) || ('bytes' in candidate && candidate.bytes !== asset.bytes)) return { reason: '영상 해시·크기가 등록 자산과 다릅니다.' };
-  return { clip: { ...candidate, sha256: asset.sha256, bytes: asset.bytes } as Clip, reason: '' };
+  const clip = { ...Object.fromEntries(keys.map(key => [key, candidate[key]])), eventIds: candidate.eventIds, sha256: asset.sha256, bytes: asset.bytes } as Clip;
+  return { clip, reason: '', ...registeredTracks(asset, clip, event, baseline.wms) };
 }
 
 function Source({ name, data }: { name: string; data: unknown }) {
@@ -113,10 +116,10 @@ export default function WmsScene(props: Props) {
   return <Scene key={JSON.stringify([props.caseData.id, props.caseData.linkedFixtureId, props.caseData.type, props.caseData.storeId, row(props.caseData.intake).storeId, props.caseData.store, props.caseData.asOf, props.caseData.revision, props.caseData.status, props.caseData.wms, props.caseData.evidence, props.caseData.media])} {...props}/>;
 }
 
-function Scene({ caseData, onBack, onLinkEvidence }: Props) {
+function Scene({ caseData, onBack, onLinkEvidence, backLabel = '상담으로 돌아가기', readOnly: roleReadOnly = false }: Props) {
   const model = inspectWms(caseData), { picking, shipping, sorting, events } = model;
   const [selected, setSelected] = useState(0), [playing, setPlaying] = useState(false), [reduced, setReduced] = useState(false);
-  const [active, setActive] = useState<{ clip: Clip; event: Row; opener: HTMLElement } | null>(null);
+  const [active, setActive] = useState<({ clip: Clip; event: Row; opener: HTMLElement } & RegisteredTracks) | null>(null);
   const [pending, setPending] = useState(''), [error, setError] = useState(''), [message, setMessage] = useState(''), [linked, setLinked] = useState<string[]>([]);
   const requestPending = useRef(false), mounted = useRef(true);
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
@@ -126,7 +129,7 @@ function Scene({ caseData, onBack, onLinkEvidence }: Props) {
     update(); query.addEventListener('change', update); return () => query.removeEventListener('change', update);
   }, []);
   const current = events[selected], currentStage = stageFor(caseData, current), clipResult = current ? validateWmsClip(caseData, current) : { reason: '공정 기록 미등록' };
-  const readOnly = !!caseData.status && !['draft', 'review'].includes(caseData.status);
+  const readOnly = roleReadOnly || (!!caseData.status && !['draft', 'review'].includes(caseData.status));
   const safePicking = model.pickingVisible ? picking : {}, safeShipping = model.shippingVisible ? shipping : {};
   const steps = ['피킹', '소터 투입', '분기 / 슈트', '출고'];
   const nextActions = ['상품·수량·단위와 피킹 토트 원본을 확인하세요.', '투입 시각과 토트 연결 기록을 센터에 확인하세요.', '계획·실적 슈트와 분기 전후 연결을 확인하세요. 슈트 일치만으로 상품 일치를 확정할 수 없습니다.', '출고 스캔과 피킹 기록을 대조하고 센터에 토트 연결·상품 처리를 요청하세요.'];
@@ -139,7 +142,7 @@ function Scene({ caseData, onBack, onLinkEvidence }: Props) {
     finally { requestPending.current = false; if (mounted.current) setPending(''); }
   }
   return <section className={styles.scene} aria-label="WMS 공정 확인">
-    <header className={styles.header}><div><p className={styles.eyebrow}>WMS · 물류 기록 확인</p><h1>{caseData.store?.name || '점포 미확인'} <span>{caseData.type === 'wrong' ? '오출고 문의' : '미도착 문의'}</span></h1><p>{caseData.id} · 기준 {date(caseData.asOf)}</p></div><button className={styles.button} type="button" onClick={onBack}>상담으로 돌아가기</button></header>
+    <header className={styles.header}><div><p className={styles.eyebrow}>WMS · 물류 기록 확인</p><h1>{caseData.store?.name || '점포 미확인'} <span>{caseData.type === 'wrong' ? '오출고 문의' : '미도착 문의'}</span></h1><p>{caseData.id} · 기준 {date(caseData.asOf)}</p></div><button className={styles.button} type="button" onClick={onBack}>{backLabel}</button></header>
     <p className={styles.caption} data-testid="source-reference">현재 접수 {label(caseData.id)} · 원본 사건 {label(canonicalCase(caseData)?.id, '미연결')}{model.contextError ? ' · 연결 검증 필요' : ''}</p>
     <p className={styles.notice}>독립 합성 시연 · 실제 WMS/CCTV 아님. 기록과 경영주 진술, 원인 미확인을 구분합니다.</p>
     {model.contextError && <p className={styles.warning} role="alert">{model.contextError} 영상·근거 연결이 차단되었습니다.</p>}
@@ -152,9 +155,9 @@ function Scene({ caseData, onBack, onLinkEvidence }: Props) {
       {events.some(event => !visible(event.time, caseData.asOf)) && <p className={styles.warning}>미등록·불명확·기준시각 이후 이벤트는 확정 근거로 사용할 수 없습니다.</p>}
     </section>
     {current && <section className={styles.detailGrid}><div className={styles.panel}><p className={styles.eyebrow}>선택 공정 · {label(current.id)}</p><h2>{label(current.label)}</h2><p>{date(current.time)} · {label(current.location)}</p><div className={styles.action}><h3>다음 확인 행동</h3><p>{nextActions[currentStage] || '사건 관계와 원본을 센터에 확인하세요.'}</p></div><dl className={styles.facts}><div><dt>피킹 토트</dt><dd>{label(safePicking.toteId)}</dd></div><div><dt>출고 토트</dt><dd>{label(safeShipping.toteId)}</dd></div><div><dt>계획 / 실적 슈트</dt><dd>{visible(sorting.sortedAt, caseData.asOf) ? `${label(sorting.schdChuteNo)} / ${label(sorting.rsltChuteNo)}` : '기준시각 내 분류 실적 미확인'}</dd></div><div><dt>토트 연속 연결</dt><dd>미확인 · 동일 이동으로 가정하지 않음</dd></div></dl><Source name="선택 이벤트" data={current}/><Source name="피킹 스캔" data={picking}/><Source name="분류 기록" data={sorting}/><Source name="출고 스캔" data={shipping}/></div>
-      <div className={styles.panel}><p className={styles.eyebrow}>선택 공정의 합성 영상</p><h2>기록과 함께 확인</h2><p className={styles.caption}>영상은 설명용이며 원인·귀책 판정에 사용할 수 없습니다.</p>{clipResult.clip ? <><div className={styles.videoCard}><span className={styles.synthetic}>합성 · 실제 CCTV 아님</span><strong>{clipResult.clip.cameraId}</strong><p>{date(clipResult.clip.occurredAt)} · {clipResult.clip.startSeconds}–{clipResult.clip.endSeconds}초</p><button className={styles.primary} type="button" data-testid="open-video" onClick={event => setActive({ clip: clipResult.clip!, event: current, opener: event.currentTarget })}>등록된 합성 영상 열기</button></div><p className={styles.caption}>재생 전 등록 파일의 크기·SHA256을 확인합니다. 카메라 관계는 합성 시나리오에 한정됩니다.</p></> : <div className={styles.empty} data-testid="media-unavailable"><strong>연결 영상 없음</strong><p>{clipResult.reason}</p><p>원본 기록을 먼저 확인하세요. 다른 공정의 영상으로 대체하지 않습니다.</p></div>}<p className={styles.caption}>선택한 사건과 공정에 등록된 영상만 제공합니다. 영상이 없으면 원본 기록을 확인하고 센터에 추가 자료를 요청하세요.</p></div>
+      <div className={styles.panel}><p className={styles.eyebrow}>선택 공정의 합성 영상</p><h2>기록과 함께 확인</h2><p className={styles.caption}>영상은 설명용이며 원인·귀책 판정에 사용할 수 없습니다.</p>{clipResult.clip ? <><div className={styles.videoCard}><span className={styles.synthetic}>합성 · 실제 CCTV 아님</span><strong>{clipResult.clip.cameraId}</strong><p>{date(clipResult.clip.occurredAt)} · {clipResult.clip.startSeconds}–{clipResult.clip.endSeconds}초</p><button className={styles.primary} type="button" data-testid="open-video" onClick={event => setActive({ clip: clipResult.clip!, event: current, opener: event.currentTarget, tracks: clipResult.tracks, processAnchor: clipResult.processAnchor, tracksError: clipResult.tracksError })}>등록된 합성 영상 열기</button></div><p className={styles.caption}>재생 전 등록 파일의 크기·SHA256을 확인합니다. 카메라 관계는 합성 시나리오에 한정됩니다.</p>{clipResult.tracksError && <p className={styles.warning} role="alert">객체 좌표 등록 확인 필요 · {clipResult.tracksError}</p>}</> : <div className={styles.empty} data-testid="media-unavailable"><strong>연결 영상 없음</strong><p>{clipResult.reason}</p><p>원본 기록을 먼저 확인하세요. 다른 공정의 영상으로 대체하지 않습니다.</p></div>}<p className={styles.caption}>선택한 사건과 공정에 등록된 영상만 제공합니다. 영상이 없으면 원본 기록을 확인하고 센터에 추가 자료를 요청하세요.</p></div>
     </section>}
-    <section className={styles.panel} aria-label="상담 근거"><h2>상담에 연결할 근거</h2><p>합성 기록·미확인 항목의 출처를 유지합니다. 연결 완료는 저장 응답 후 표시합니다.</p>{readOnly && <p className={styles.warning}>이관 이후 읽기 전용 · 상담 근거를 변경할 수 없습니다.</p>}<div className={styles.evidence}>{(caseData.evidence ?? []).filter(item => item.system === 'WMS').map(item => { const registered = registeredEvidence(caseData, item); const temporal = item.status === 'unknown' && !item.time || visible(item.time, caseData.asOf); const done = linked.includes(item.id) || caseData.selectedEvidence?.includes(item.id); return <article key={item.id}><span className={styles.eyebrow}>{item.status === 'unknown' ? '미확인 항목' : '합성 기록'} · {item.id}</span><h3>{item.label}</h3><p>{String(item.value ?? '값 미확인')}</p><small>{item.source} · {item.time ? date(item.time) : '시각 미등록'}</small><button className={styles.button} type="button" data-testid={`link-${item.id}`} disabled={readOnly || !!model.contextError || !registered || !temporal || !!pending || !!done} onClick={() => void link(item.id)}>{!registered ? '사건 근거 불일치' : done ? '연결됨' : pending === item.id ? '연결 중…' : !temporal ? '시각 확인 필요' : '상담 근거에 연결'}</button></article>; })}</div><p role="status" className={styles.verified}>{message}</p>{error && <p role="alert" className={styles.warning}>근거 연결 확인: {error}</p>}</section>
+    <section className={styles.panel} aria-label="상담 근거"><h2>상담에 연결할 근거</h2><p>합성 기록·미확인 항목의 출처를 유지합니다. 연결 완료는 저장 응답 후 표시합니다.</p>{readOnly && <p className={styles.warning}>조회 전용 · 근거 기록을 확인할 수 있으며 현재 화면에서는 변경할 수 없습니다.</p>}<div className={styles.evidence}>{(caseData.evidence ?? []).filter(item => item.system === 'WMS').map(item => { const registered = registeredEvidence(caseData, item); const temporal = item.status === 'unknown' && !item.time || visible(item.time, caseData.asOf); const done = linked.includes(item.id) || caseData.selectedEvidence?.includes(item.id); return <article key={item.id}><span className={styles.eyebrow}>{item.status === 'unknown' ? '미확인 항목' : '합성 기록'} · {item.id}</span><h3>{item.label}</h3><p>{String(item.value ?? '값 미확인')}</p><small>{item.source} · {item.time ? date(item.time) : '시각 미등록'}</small><button className={styles.button} type="button" data-testid={`link-${item.id}`} disabled={readOnly || !!model.contextError || !registered || !temporal || !!pending || !!done} onClick={() => void link(item.id)}>{!registered ? '사건 근거 불일치' : done ? '연결됨' : pending === item.id ? '연결 중…' : !temporal ? '시각 확인 필요' : '상담 근거에 연결'}</button></article>; })}</div><p role="status" className={styles.verified}>{message}</p>{error && <p role="alert" className={styles.warning}>근거 연결 확인: {error}</p>}</section>
     {active && <CctvInspector {...active} picking={safePicking} shipping={safeShipping} onClose={() => setActive(null)}/>}
   </section>;
 }
