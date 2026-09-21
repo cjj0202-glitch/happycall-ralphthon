@@ -1,5 +1,6 @@
 """Request provenance counterexamples; no model calls or frozen-input imports."""
 import copy
+import inspect
 import unittest
 from unittest.mock import patch
 
@@ -156,6 +157,91 @@ class RequestGroundingTests(unittest.TestCase):
         for quote, tail in pairs:
             with self.subTest(quote=quote, tail=tail):
                 self.assertIsNone(self.project(quote + ' ' + tail, quote)['fields']['request'])
+
+    def test_nominal_information_request_survives_separate_operation_withdrawal(self):
+        pairs = (
+            ('배송 시각 안내 요청입니다.', '배송 상품 반송 요청은 취소합니다.'),
+            ('출고 시간 확인 요청입니다.', '출고 상품 교환 요청은 취소합니다.'),
+            ('배송 일정 확인 요청입니다.', '배송 상품 반품 요청은 취소합니다.'),
+            ('상품 라벨 확인 요청입니다.', '상품 회송 요청은 취소합니다.'),
+            ('주문 내역 확인 요청입니다.', '주문 상품 재배송 요청은 취소합니다.'),
+        )
+        for quote, tail in pairs:
+            with self.subTest(quote=quote):
+                self.assertEqual(self.project(quote + ' ' + tail, quote)['fields']['request'], quote)
+
+    def test_two_nominal_requests_preserve_only_request_before_withdrawn_latest(self):
+        first = '배송 시각 안내 요청입니다.'
+        second = '배송 상품 반송 방법 안내 요청입니다.'
+        for earlier, latest in ((first, second), (second, first)):
+            text = earlier + ' ' + latest + ' 그 요청은 취소합니다.'
+            with self.subTest(earlier=earlier, latest=latest):
+                self.assertEqual(self.project(text, earlier)['fields']['request'], earlier)
+                self.assertIsNone(self.project(text, latest)['fields']['request'])
+
+    def test_information_with_particle_in_compound_cancellation_is_not_separate(self):
+        # Same information target cannot disappear behind a Korean particle.
+        for quote, information, operation in (
+            ('배송 시각을 알려 주세요.', '배송 시각', '반송'),
+            ('배송 시각 안내 요청입니다.', '배송 시각', '반송'),
+            ('상품 라벨 확인 요청입니다.', '상품 라벨', '교환'),
+            ('주문 내역 확인 요청입니다.', '주문 내역', '재배송'),
+        ):
+            for particle in ('과', '도', '을 포함한'):
+                tail = f'{information}{particle} {operation} 요청은 취소합니다.'
+                with self.subTest(quote=quote, tail=tail):
+                    self.assertIsNone(self.project(quote + ' ' + tail, quote)['fields']['request'])
+            latest = f'{information}과 {operation} 방법 안내 요청입니다.'
+            with self.subTest(quote=quote, latest=latest):
+                self.assertIsNone(self.project(quote + ' ' + latest + ' 그 요청은 취소합니다.', quote)['fields']['request'])
+
+    def test_nominal_inquiry_keeps_related_and_noncurrent_guards(self):
+        pairs = (
+            ('배송 시각 안내 요청입니다.', '배송 시각 안내 요청은 취소합니다.'),
+            ('배송 시각 안내 요청입니다.', '배송 요청은 취소합니다.'),
+            ('배송 상품 반송 시간 안내 요청입니다.', '배송 상품 반송 요청은 취소합니다.'),
+            ('배송 상품을 돌려보낼 시간 안내 요청입니다.', '배송 상품 반송 요청은 취소합니다.'),
+            ('배송 시각 안내 요청입니다. 배송 상품 반송 요청입니다.', '배송 상품 반송 요청은 취소합니다.'),
+        )
+        for quote, tail in pairs:
+            with self.subTest(quote=quote, tail=tail):
+                self.assertIsNone(self.project(quote + ' ' + tail, quote)['fields']['request'])
+        quote = '배송 시각 안내 요청입니다.'
+        for text in (f'예문은 "{quote}"입니다.', f'"{quote}"라고 요청한 적은 없습니다.',
+                     f'"{quote}"라고 내일 요청할 예정입니다.'):
+            with self.subTest(text=text):
+                self.assertIsNone(self.project(text, quote)['fields']['request'])
+
+    def test_reported_nominal_operation_does_not_replace_nearest_current_request(self):
+        quote = '배송 시각 안내 요청입니다.'
+        past = '배송 상품 반송 방법 안내 요청입니다.'
+        for context in (f'"{past}"라고 지난주에 요청했습니다.',
+                        f'"{past}"라고 내일 요청할 예정입니다.',
+                        f'"{past}"라고 요청한 적은 없습니다.',
+                        f'예문은 "{past}"입니다.'):
+            with self.subTest(context=context):
+                text = quote + ' ' + context + ' 그 요청은 취소합니다.'
+                self.assertIsNone(self.project(text, quote)['fields']['request'])
+
+    def test_nominal_cancellation_boundary_mutations_are_detected(self):
+        from server import request_grounding
+        source = inspect.getsource(request_grounding._separate_inquiry)
+        mutations = (
+            ('not any(term in other for term in information)',
+             'not information.intersection(_target_terms(other))',
+             'test_information_with_particle_in_compound_cancellation_is_not_separate'),
+            ('re.fullmatch(nominal_operation, other.strip())',
+             're.search(nominal_operation, other.strip())',
+             'test_reported_nominal_operation_does_not_replace_nearest_current_request'),
+        )
+        for before, after, test_name in mutations:
+            with self.subTest(mutation=before):
+                self.assertEqual(source.count(before), 1)
+                namespace = dict(request_grounding.__dict__)
+                exec(compile(source.replace(before, after), '<nominal-boundary-mutant>', 'exec'), namespace)
+                fresh = RequestGroundingTests(test_name)
+                with patch('server.request_grounding._separate_inquiry', namespace['_separate_inquiry']), self.assertRaises(AssertionError):
+                    getattr(fresh, test_name)()
 
     def test_shared_business_word_does_not_move_pronoun_to_earlier_request(self):
         first = '배송 시각을 알려 주세요.'

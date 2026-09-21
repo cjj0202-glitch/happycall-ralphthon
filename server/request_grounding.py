@@ -61,14 +61,22 @@ def _separate_inquiry(inquiry, other):
         r'(?:(?:요청|부탁|문의)(?:[은는을를])?|(?:안내해|확인해|해)?\s*'
         r'(?:주세요|주십시오))[.!?]?\s*$'
     )
+    nominal_operation = (
+        r'(?:(?:배송|출고|주문)\s+)?(?:상품\s+)?' + operation
+        + r'(?:\s+(?:방법|절차))?\s+(?:안내|확인)\s+요청입니다[.!?]?'
+    )
     simple_inquiry = (
         r'(?:(?:배송|출고)\s+(?:시각|시간|일정)|상품\s+라벨|주문\s+내역)'
-        r'(?:을|를)?\s*(?:알려|안내해|확인해)\s*(?:주세요|주십시오)[.!?]?'
+        r'(?:(?:을|를)?\s*(?:알려|안내해|확인해)\s*(?:주세요|주십시오)'
+        r'|\s+(?:안내|확인)\s+요청입니다)[.!?]?'
     )
     return (
         bool(re.fullmatch(simple_inquiry, inquiry.strip()))
-        and bool(re.search(named_operation, other))
-        and not information.intersection(_target_terms(other))
+        and bool(re.search(named_operation, other)
+                 or re.fullmatch(nominal_operation, other.strip()))
+        # Particles such as 시각과/라벨도 must not hide a shared target.
+        # Ambiguous compounds keep the conservative cancellation rule.
+        and not any(term in other for term in information)
         and not re.search(r'아니|말고|제외|빼고|않|못|대신', other)
     )
 
