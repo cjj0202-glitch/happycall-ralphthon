@@ -70,6 +70,7 @@ python channel/mail.py inbox        # ③ 내 앞 편지
 | 파일 | 무엇 |
 |---|---|
 | [docs/01_ChatGPT_전달_프롬프트.md](docs/01_ChatGPT_전달_프롬프트.md) | **복붙용.** 워커 루프 · 메인 루프 프롬프트 |
+| [docs/03_팀원_공유용.md](docs/03_팀원_공유용.md) | **팀원에게 그대로 보내는 글** — 카톡·슬랙에 붙여넣는다 |
 | [AGENTS.md](AGENTS.md) | 에이전트 상시 지침 — Codex CLI 가 자동으로 읽는다 |
 | `.claude/skills/mailbox/` | **스킬** — 「편지함」·「inbox」·「회신해」 등에 자동 발동 |
 | `.claude/skills/ralph-loop/` | **스킬** — 「랄프」·「루프 돌려」·「다음 덩어리」에 자동 발동 |
