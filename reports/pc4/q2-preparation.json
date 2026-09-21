@@ -1,0 +1,29 @@
+{
+  "preparedAt": "2026-09-21T11:09:40.323020+00:00",
+  "task": "N04-Q2",
+  "status": "PREPARED_NOT_RUN",
+  "finalInputBlockers": [
+    "FINAL_INTEGRATION_SHA_REQUIRED",
+    "fixtureSha256_REQUIRED",
+    "manifestSha256_REQUIRED",
+    "frontendSourceFingerprint_REQUIRED",
+    "frontendOutputFingerprint_REQUIRED",
+    "FINAL_MODULE_INTEGRATION_REQUIRED",
+    "REAL_UI_SELECTOR_REQUIRED:naturalCompletionControl",
+    "REAL_UI_SELECTOR_REQUIRED:segmentControl",
+    "REAL_UI_SELECTOR_REQUIRED:differentToteNotice",
+    "REAL_UI_SELECTOR_REQUIRED:tmsRegion",
+    "REAL_UI_SELECTOR_REQUIRED:tmsRawSourceControl",
+    "FINAL_ASSET_INVENTORY_REQUIRED"
+  ],
+  "productExecutions": 0,
+  "finalFlows": {
+    "planned": 6,
+    "executed": 0,
+    "passed": 0,
+    "notRun": 6
+  },
+  "boundaryExecutions": 0,
+  "paidCalls": 0,
+  "note": "Schema readiness is not module integration, browser execution or acceptance."
+}

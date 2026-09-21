@@ -1,0 +1,21 @@
+{
+  "schema": "pc4-final-release-v1",
+  "status": "NOT_RUN_FINAL_INPUTS_PENDING",
+  "referenceMainSha": "e5469aa99bb266c5a977b80c097223275ac6fc9b",
+  "finalSha": null,
+  "fixtureSha256": null,
+  "manifestSha256": null,
+  "frontendSourceFingerprint": null,
+  "frontendOutputFingerprint": null,
+  "targetUrl": "http://127.0.0.1:18105",
+  "apiBase": "same-origin",
+  "integratedComponents": {"CallReview": false, "WmsScene": false, "TmsScene": false},
+  "capabilities": {"callReviewIntegrated": false, "newTmsIntegrated": false, "selectors": {
+    "naturalCompletionControl": null,
+    "segmentControl": null,
+    "differentToteNotice": null,
+    "tmsRegion": null,
+    "tmsRawSourceControl": null
+  }},
+  "assets": []
+}

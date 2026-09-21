@@ -1,0 +1,256 @@
+{
+  "executedAt": "2026-09-21T20:09:38.811254+09:00",
+  "scope": "checker-only; product/browser/server/build/API/media executions 0",
+  "productExecutions": 0,
+  "commands": [
+    {
+      "name": "release-contract-controls",
+      "command": [
+        "C:\\Users\\j324r\\OneDrive\\문서\\ChatGPT\\해커톤_D-Day\\.happycall-tools\\python\\Scripts\\python.exe",
+        "tests/remote/pc4/q2-contract-selftest.py"
+      ],
+      "expectedExitCode": 0,
+      "actualExitCode": 0,
+      "passed": true,
+      "result": {
+        "kind": "checker-only-mutation-controls",
+        "executed": 37,
+        "passed": 37,
+        "failed": 0,
+        "productExecutions": 0
+      }
+    },
+    {
+      "name": "ui-observation-controls",
+      "command": [
+        "node",
+        "tests/remote/pc4/flow-ui-check.mjs",
+        "--self-test"
+      ],
+      "expectedExitCode": 0,
+      "actualExitCode": 0,
+      "passed": true,
+      "result": {
+        "kind": "checker-only synthetic observation tests; no browser, app, API or media execution",
+        "status": "PASS",
+        "checks": 16,
+        "plannedBoundaryIds": [
+          "audio-end-seek-must-not-complete",
+          "audio-segment-must-not-complete",
+          "previous-case-native-ended-must-not-complete-current",
+          "new-text-different-day-no-implicit-evidence",
+          "explicit-reference-text-media-missing",
+          "media-404-and-retry",
+          "api-error-and-recovery-no-false-save",
+          "api-offline-example-and-reconnect",
+          "browser-offline-save-and-recovery",
+          "two-ui-editors-real-409-no-overwrite",
+          "future-evidence-hidden-in-investigation-ui",
+          "different-business-totes-not-continuous-tracking",
+          "responsive-keyboard-reduced-motion-1365",
+          "responsive-keyboard-reduced-motion-921",
+          "responsive-keyboard-reduced-motion-390"
+        ],
+        "results": [
+          {
+            "id": "natural-full-rate-one",
+            "status": "PASS",
+            "expectedAccepted": true,
+            "accepted": true,
+            "reasons": [],
+            "coverage": 1
+          },
+          {
+            "id": "end-seek",
+            "status": "PASS",
+            "expectedAccepted": false,
+            "accepted": false,
+            "reasons": [
+              "seek-observed",
+              "insufficient-wall-time",
+              "incomplete-native-played-coverage"
+            ],
+            "coverage": 0
+          },
+          {
+            "id": "segment-only",
+            "status": "PASS",
+            "expectedAccepted": false,
+            "accepted": false,
+            "reasons": [
+              "not-started-at-zero",
+              "not-natural-end",
+              "insufficient-wall-time",
+              "incomplete-native-played-coverage"
+            ],
+            "coverage": 0
+          },
+          {
+            "id": "previous-case-callback",
+            "status": "PASS",
+            "expectedAccepted": false,
+            "accepted": false,
+            "reasons": [
+              "stale-case-source-or-session"
+            ],
+            "coverage": 1
+          },
+          {
+            "id": "previous-session-callback",
+            "status": "PASS",
+            "expectedAccepted": false,
+            "accepted": false,
+            "reasons": [
+              "stale-case-source-or-session"
+            ],
+            "coverage": 1
+          },
+          {
+            "id": "detached-old-player",
+            "status": "PASS",
+            "expectedAccepted": false,
+            "accepted": false,
+            "reasons": [
+              "stale-case-source-or-session"
+            ],
+            "coverage": 1
+          },
+          {
+            "id": "synthetic-ended",
+            "status": "PASS",
+            "expectedAccepted": false,
+            "accepted": false,
+            "reasons": [
+              "missing-trusted-ended"
+            ],
+            "coverage": 1
+          },
+          {
+            "id": "fast-rate",
+            "status": "PASS",
+            "expectedAccepted": false,
+            "accepted": false,
+            "reasons": [
+              "not-continuous-rate-one"
+            ],
+            "coverage": 1
+          },
+          {
+            "id": "missing-middle-coverage",
+            "status": "PASS",
+            "expectedAccepted": false,
+            "accepted": false,
+            "reasons": [
+              "incomplete-native-played-coverage"
+            ],
+            "coverage": 0.2
+          },
+          {
+            "id": "wrong-source",
+            "status": "PASS",
+            "expectedAccepted": false,
+            "accepted": false,
+            "reasons": [
+              "stale-case-source-or-session"
+            ],
+            "coverage": 1
+          },
+          {
+            "id": "exact-origin",
+            "status": "PASS",
+            "actual": true,
+            "expected": true
+          },
+          {
+            "id": "other-loopback-port",
+            "status": "PASS",
+            "actual": false,
+            "expected": false
+          },
+          {
+            "id": "credential-bearing-url",
+            "status": "PASS",
+            "actual": false,
+            "expected": false
+          },
+          {
+            "id": "matching-run-identity",
+            "status": "PASS",
+            "actual": true,
+            "expected": true
+          },
+          {
+            "id": "wrong-run-nonce",
+            "status": "PASS",
+            "actual": false,
+            "expected": false
+          },
+          {
+            "id": "wrong-build-fingerprint",
+            "status": "PASS",
+            "actual": false,
+            "expected": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "checker-missing-final-inputs",
+      "command": [
+        "node",
+        "tests/remote/pc4/flow-ui-check.mjs"
+      ],
+      "expectedExitCode": 2,
+      "actualExitCode": 2,
+      "passed": true,
+      "result": {
+        "status": "NOT_RUN",
+        "classification": "SETUP_CAPABILITY",
+        "error": "Invalid URL",
+        "ui": {
+          "planned": 6,
+          "executed": 0,
+          "passed": 0,
+          "failed": 0,
+          "notRun": 6
+        },
+        "browserStarted": false
+      }
+    },
+    {
+      "name": "ui-syntax",
+      "command": [
+        "node",
+        "--check",
+        "tests/remote/pc4/flow-ui-check.mjs"
+      ],
+      "expectedExitCode": 0,
+      "actualExitCode": 0,
+      "passed": true
+    },
+    {
+      "name": "python-syntax",
+      "command": [
+        "C:\\Users\\j324r\\OneDrive\\문서\\ChatGPT\\해커톤_D-Day\\.happycall-tools\\python\\Scripts\\python.exe",
+        "-m",
+        "py_compile",
+        "tests/remote/pc4/q2_contract.py",
+        "tests/remote/pc4/q2-run.py",
+        "tests/remote/pc4/q2-build.py",
+        "tests/remote/pc4/q2-contract-selftest.py"
+      ],
+      "expectedExitCode": 0,
+      "actualExitCode": 0,
+      "passed": true
+    }
+  ],
+  "sourceHashes": {
+    "tests/remote/pc4/q2-build.py": "21eb1d01b774e9347d5bca403ecdd18e9f31798722c4ba615a98c450174f8497",
+    "tests/remote/pc4/q2-contract-selftest.py": "ff513087f0b9b7c6c26ae2b96f912a9b1719af565deba6d7fe7362a5cbeb9cd8",
+    "tests/remote/pc4/q2-release.template.json": "59ed0a1d1c9af00c649bb1d2ec65bf798b7f256e387aed21759a8c490213031e",
+    "tests/remote/pc4/q2-run.py": "0ae96ee9bbd0ce936e69cd5aa5289057f8ffe3943414e5eba99bc871bed0758f",
+    "tests/remote/pc4/q2_contract.py": "d4835e4c83f351a10f566abf65a4455d9cc70db79c4c9d42dfc0e147b60e192e",
+    "tests/remote/pc4/flow-ui-check.mjs": "cb533e59e2db918e6385f9ccecb250e88c7eba127dddd7b41002af642a6bfa97"
+  },
+  "allPassed": true
+}
