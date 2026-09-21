@@ -19,10 +19,14 @@ def error(exc):
 
 
 async def health():
-    from scripts.demo_openai_env import read_env, REQUIRED_POLICY
-    values = read_env()
-    ready = bool(values.get("OPENAI_API_KEY")) and all(values.get(k) == v for k, v in REQUIRED_POLICY.items())
-    return {"status": "ok", "synthetic": True, "runtime": "local-demo", "liveReady": ready, "budget": Budget().status()}
+    from server.runtime_config import require_demo_api_key
+    try:
+        require_demo_api_key()
+        ready = True
+    except DemoError:
+        ready = False
+    # Readiness covers configuration only, not provider auth, storage or deployment.
+    return {"status": "ok", "synthetic": True, "runtime": "synthetic-demo", "liveReady": ready, "budget": Budget().status()}
 
 
 async def list_cases():

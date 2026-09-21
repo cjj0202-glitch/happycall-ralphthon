@@ -10,22 +10,17 @@ from pathlib import Path
 from jsonschema import validate
 from openai import OpenAI
 
-from scripts.demo_openai_env import read_env, REQUIRED_POLICY, assert_key
 from server.analysis_schema import ANALYSIS_SCHEMA, MODEL_ANALYSIS_SCHEMA
 from server.budget import Budget
 from server.errors import DemoError
 from server.repository import ROOT
+from server.runtime_config import require_demo_api_key
 
 
 def demo_client() -> OpenAI:
-    values = read_env()  # Do not print values or inherit uncontrolled runtime policy.
-    if any(values.get(k) != v for k, v in REQUIRED_POLICY.items()):
-        raise DemoError("DEMO_POLICY_REQUIRED", "데모 전용 키·예산 정책을 확인해 주세요.", 503)
-    try:
-        assert_key(values.get("OPENAI_API_KEY", ""))
-    except ValueError:
-        raise DemoError("API_KEY_MISSING", "로컬 데모 API 키가 준비되지 않았습니다.", 503) from None
-    return OpenAI(api_key=values["OPENAI_API_KEY"], timeout=90, max_retries=0)
+    # Pin the endpoint so unrelated OPENAI_BASE_URL cannot redirect the demo key.
+    return OpenAI(api_key=require_demo_api_key(), base_url="https://api.openai.com/v1",
+                  timeout=90, max_retries=0)
 
 
 def wav_duration(path: Path) -> float:
