@@ -107,7 +107,7 @@ def healthy():
     try:
         with urllib.request.urlopen("http://127.0.0.1:8100/api/health", timeout=1) as response:
             body = json.load(response)
-        return isinstance(body, dict) and body.get("status") == "ok" and body.get("synthetic") is True and body.get("runtime") == "local-demo"
+        return isinstance(body, dict) and body.get("status") == "ok" and body.get("synthetic") is True and body.get("runtime") == "synthetic-demo"
     except (OSError, ValueError):
         return False
 
@@ -211,7 +211,7 @@ def start():
                     refresh(state, processes())
                     save_state(state)
                     print("Demo ready: http://127.0.0.1:3100")
-                    print("Health JSON verified: status=ok, synthetic=true, runtime=local-demo")
+                    print("Health JSON verified: status=ok, synthetic=true, runtime=synthetic-demo")
                     print("Stop: python scripts/stop_demo.py")
                     return
                 time.sleep(0.5)
