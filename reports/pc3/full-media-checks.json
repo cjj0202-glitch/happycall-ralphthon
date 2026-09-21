@@ -1,0 +1,926 @@
+{
+  "schemaVersion": "pc3-full-media-checks-v1",
+  "recordedAtUtc": "2026-09-21T15:25:40.517229+00:00",
+  "identity": {
+    "slot": "pc3",
+    "hostname": "LAPTOP-U2AL73UH",
+    "github": "mcjun86-oss"
+  },
+  "baseline": "de2c790a5e739a4aa9cdb2fc481fb10db3e43e29",
+  "contractRef": "faf52a688d0713143d4677b31503746cbb5987cc",
+  "assignment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5762563996",
+  "status": "scoped_code_and_artificial_media_verified; actual_pc1_media_and_acceptance_pending",
+  "sourceHashMeaning": "SHA-256 of the working file bytes actually tested; Git checkout newline conversion can change byte hashes without changing Python semantics.",
+  "sources": {
+    "scripts/media_pc3/test_full_animation_media.py": {
+      "bytes": 27521,
+      "sha256": "0a1ae96bc03fb997b5696286a351b2e849b49d890281967de4af4b67b2d79e39"
+    },
+    "scripts/media_pc3/package_full_animation_media.py": {
+      "bytes": 26089,
+      "sha256": "b4185ee1438ad4f98570750f35f8927aa67cf0eb1993846dd0ca3cc2f5eead45"
+    },
+    "scripts/media_pc3/verify_full_animation.py": {
+      "bytes": 21052,
+      "sha256": "a711fed3ce821bb1e24caafadcf2c6161f266e9b031cfea29b73d46e0d716075"
+    },
+    "scripts/media_pc3/verify_render_package.py": {
+      "bytes": 29547,
+      "sha256": "36b4e2f3de8f0517da6cb26719e346e0fbfec221f5d1b673e494a73c31af30cc"
+    },
+    "scripts/media_pc3/full_render_gate.py": {
+      "bytes": 23306,
+      "sha256": "382d764b06da18abd710a50edecdf874883038fffea1a5e55bbd747e61fa12c5"
+    },
+    "scripts/media_pc3/build_scene.py": {
+      "bytes": 28295,
+      "sha256": "c255e94d9f93a08734bf49cc0a7da1edc5304f4b0a9955e6508864dc72998320"
+    },
+    "scripts/media_pc3/scene_contract.py": {
+      "bytes": 14278,
+      "sha256": "670638cae0357da1bf934b7c4b9287ea0780180214e53a181166dd53a8a554bf"
+    },
+    "scripts/media_pc3/look_presets.py": {
+      "bytes": 1762,
+      "sha256": "91c3852386c48729d24f69fff1049602451646a41c7d532d4dc4f8f008cd3e33"
+    },
+    "scripts/media_pc3/environment_detail.py": {
+      "bytes": 3714,
+      "sha256": "e4a82164a828e165f86b496883d539311fd4f2a98e7581edca4cc197f7a19c36"
+    },
+    "scripts/media_pc3/shadow_settings.py": {
+      "bytes": 2643,
+      "sha256": "4d1357cde51530be813e3a1505972b253b9b23ae8c35a99cbb1b304fe5c374fe"
+    }
+  },
+  "unitTests": {
+    "testCommand": "python -B -m unittest discover -s scripts/media_pc3 -p test_full_animation_media.py -v",
+    "testsRun": 19,
+    "passed": 19,
+    "failureRecords": 0,
+    "errorRecords": 0,
+    "skipped": 0,
+    "elapsedSeconds": 215.797,
+    "successfulTests": [
+      "test_full_animation_media.FullAnimationMediaTests.test_decode_all_frames_clock_dimensions_hashes_and_errors",
+      "test_full_animation_media.FullAnimationMediaTests.test_disabled_full_decode_guard_is_killed_by_independent_negative",
+      "test_full_animation_media.FullAnimationMediaTests.test_failure_does_not_write_into_replacement_foreign_directory",
+      "test_full_animation_media.FullAnimationMediaTests.test_final_video_tamper_after_tracks_copy_is_rejected_before_publication",
+      "test_full_animation_media.FullAnimationMediaTests.test_late_write_failure_removes_owned_success_markers",
+      "test_full_animation_media.FullAnimationMediaTests.test_m5_failure_stops_before_any_encoder_and_has_no_success_outputs",
+      "test_full_animation_media.FullAnimationMediaTests.test_mp4_requires_faststart_and_complete_boxes",
+      "test_full_animation_media.FullAnimationMediaTests.test_nonzero_exit_and_timeouts_never_publish_success",
+      "test_full_animation_media.FullAnimationMediaTests.test_normal_preflight_encode_decode_raw_copy_and_exact_five_field_descriptor",
+      "test_full_animation_media.FullAnimationMediaTests.test_optional_ffprobe_success_and_ffmpeg_only_input_metadata_rejections",
+      "test_full_animation_media.FullAnimationMediaTests.test_original_sources_are_byte_preserved",
+      "test_full_animation_media.FullAnimationMediaTests.test_output_existing_overlap_traversal_and_binary_missing_do_not_encode",
+      "test_full_animation_media.FullAnimationMediaTests.test_output_inode_replacement_before_publication_is_rejected",
+      "test_full_animation_media.FullAnimationMediaTests.test_output_under_junction_parent_is_rejected",
+      "test_full_animation_media.FullAnimationMediaTests.test_probe_framecount_duration_resolution_codec_pixfmt_and_stream_identity",
+      "test_full_animation_media.FullAnimationMediaTests.test_rejects_wrong_decoded_frame_count",
+      "test_full_animation_media.FullAnimationMediaTests.test_source_or_external_expected_change_after_preflight_is_rejected",
+      "test_full_animation_media.FullAnimationMediaTests.test_subprocess_uses_explicit_argv_timeout_utf8_capture_hidden_windows_and_full_decode",
+      "test_full_animation_media.FullAnimationMediaTests.test_video_change_during_validation_is_rejected"
+    ],
+    "negativeCaseCount": 67,
+    "negativeCases": [
+      "decode-287-frames",
+      "decode-bad-size",
+      "decode-bad-timebase",
+      "decode-duplicate-pts",
+      "decode-empty",
+      "decode-exit",
+      "decode-extra-frame",
+      "decode-late-offset",
+      "decode-malformed",
+      "decode-timeout",
+      "decode-wrong-duration",
+      "decode-wrong-hash",
+      "encode-exit",
+      "encode-timeout",
+      "expected-changed-after-preflight",
+      "failed-output-cannot-be-reused",
+      "failure-after-output-inode-replacement",
+      "ffmpeg-metadata-missing",
+      "ffmpeg-metadata-output-cannot-substitute-input",
+      "ffmpeg-metadata-success-text-only",
+      "ffmpeg-metadata-wrong-input-codec",
+      "ffmpeg-metadata-wrong-input-duration",
+      "ffmpeg-metadata-wrong-input-fps",
+      "ffmpeg-metadata-wrong-input-pixfmt",
+      "ffmpeg-metadata-wrong-input-start",
+      "ffmpeg-metadata-wrong-input-tbr",
+      "ffmpeg-metadata-wrong-input-width",
+      "final-output-tamper-sorter-demo.mp4",
+      "final-output-tamper-sorter-demo.tracks.json",
+      "late-report-write-failure",
+      "m5-missing-frame",
+      "missing-explicit-ffmpeg",
+      "mp4-empty",
+      "mp4-media-duration",
+      "mp4-moov-after-mdat",
+      "mp4-movie-duration",
+      "mp4-not-mp4",
+      "mp4-sample-count",
+      "mp4-truncated",
+      "mp4-width",
+      "output-empty-existing",
+      "output-existing",
+      "output-inode-replacement-before-publication",
+      "output-junction",
+      "output-source-child",
+      "output-source-overlap",
+      "output-source-parent",
+      "output-traversal",
+      "partial-encode",
+      "probe-codec-hevc",
+      "probe-declared-frames72",
+      "probe-duration3",
+      "probe-exit",
+      "probe-extra-audio",
+      "probe-format-duration",
+      "probe-fps30",
+      "probe-frames287",
+      "probe-height720",
+      "probe-missing-streams",
+      "probe-offset",
+      "probe-pixel-yuv444p",
+      "probe-rate30",
+      "probe-timeout",
+      "probe-width-bool",
+      "probe-width1280",
+      "source-changed-after-preflight",
+      "video-changed-during-validation"
+    ],
+    "mockProcessCallCount": 128,
+    "mockProcessStageCounts": {
+      "encode": 61,
+      "decode": 50,
+      "probe": 17
+    },
+    "realM5VerifierUsed": true,
+    "actualVideoEncodes": 0,
+    "actualVideoDecodes": 0,
+    "limits": [
+      "Artificial flat-color PNGs, fake MP4 boxes and mocked subprocess protocol only.",
+      "Successful mocked videoDecoded is a code-path observation, not an actual video-decoding result.",
+      "No visual-quality acceptance, product registration, real scene rendering or issuer authentication."
+    ]
+  },
+  "unitEvidence": [
+    {
+      "path": ".local/pc3-m6-intake/actualtest-20260921T151518480036Z.json",
+      "bytes": 93717,
+      "sha256": "02b041692a2b52a91cb59537caa6e2af85478c9f057b87b68433452d604a46c2"
+    },
+    {
+      "path": ".local/pc3-m6-intake/actualtest-20260921T151518480036Z.log",
+      "bytes": 3582,
+      "sha256": "618fee1acef0159e2aff20f2ebbe69d81d8aa89e10141dbaf693649238fa9088"
+    }
+  ],
+  "fullSuiteSource": {
+    "bytes": 26070,
+    "sha256": "86726979fb2b711a1abae4c097135ac466f66cf432d810c986f74b0033727c85"
+  },
+  "finalSarChangeTargetedTests": {
+    "command": "python -B .local/pc3-m6-intake/actualtest-run.py test_normal_preflight_encode_decode_raw_copy_and_exact_five_field_descriptor test_subprocess_uses_explicit_argv_timeout_utf8_capture_hidden_windows_and_full_decode test_missing_input_and_decoded_sample_aspect_are_rejected",
+    "selectedTests": [
+      "test_normal_preflight_encode_decode_raw_copy_and_exact_five_field_descriptor",
+      "test_subprocess_uses_explicit_argv_timeout_utf8_capture_hidden_windows_and_full_decode",
+      "test_missing_input_and_decoded_sample_aspect_are_rejected"
+    ],
+    "testsRun": 3,
+    "passed": 3,
+    "failureRecords": 0,
+    "errorRecords": 0,
+    "skipped": 0,
+    "elapsedSeconds": 24.203,
+    "successfulTests": [
+      "test_full_animation_media.FullAnimationMediaTests.test_normal_preflight_encode_decode_raw_copy_and_exact_five_field_descriptor",
+      "test_full_animation_media.FullAnimationMediaTests.test_subprocess_uses_explicit_argv_timeout_utf8_capture_hidden_windows_and_full_decode",
+      "test_full_animation_media.FullAnimationMediaTests.test_missing_input_and_decoded_sample_aspect_are_rejected"
+    ],
+    "negativeCaseCount": 2,
+    "negativeCases": [
+      "decoded-sar-zero",
+      "input-sar-absent"
+    ]
+  },
+  "targetedEvidence": [
+    {
+      "path": ".local/pc3-m6-intake/actualtest-20260921T151953814882Z.json",
+      "bytes": 5675,
+      "sha256": "f88ab2b880d1d78ecaf8281f95d695f068dc26e5f54a0a3d258b0c47524716c8"
+    },
+    {
+      "path": ".local/pc3-m6-intake/actualtest-20260921T151953814882Z.log",
+      "bytes": 728,
+      "sha256": "8f405ce46cf226459e0f413ef46fbd04a85c4e92283ddc6736c2ffd87a3fa820"
+    }
+  ],
+  "distinctNegativeCasesAcrossFullAndTargeted": 69,
+  "verificationSequence": "Full 19-method suite checked the publication-boundary fixes. Actual FFmpeg then exposed missing square-pixel metadata. The final encoder-only aspect option was checked with affected normal/argv/SAR tests and a new real full-size tool run; the unchanged guards were not all rerun.",
+  "mutations": [
+    {
+      "name": "disable-exact288-full-decode-guard-in-memory",
+      "killed": true,
+      "negativeTest": "test_rejects_wrong_decoded_frame_count",
+      "testsRun": 1,
+      "failures": 1,
+      "errors": 0,
+      "sourceFilesChanged": false
+    }
+  ],
+  "failureAndCorrection": {
+    "before": {
+      "testsRun": 3,
+      "assertionFailures": 3,
+      "errors": 0,
+      "seconds": 17.938,
+      "packager": {
+        "bytes": 24455,
+        "sha256": "7c6e72b4894e9248e34dc2dc065752b8b58d178755670dc15e4f6a0cde490671"
+      },
+      "testNames": [
+        "test_final_video_tamper_after_tracks_copy_is_rejected_before_publication (test_full_animation_media.FullAnimationMediaTests.test_final_video_tamper_after_tracks_copy_is_rejected_before_publication)",
+        "test_output_inode_replacement_before_publication_is_rejected (test_full_animation_media.FullAnimationMediaTests.test_output_inode_replacement_before_publication_is_rejected)",
+        "test_failure_does_not_write_into_replacement_foreign_directory (test_full_animation_media.FullAnimationMediaTests.test_failure_does_not_write_into_replacement_foreign_directory)"
+      ],
+      "evidence": [
+        {
+          "path": ".local/pc3-m6-intake/actualtest-20260921T151236338964Z.json",
+          "bytes": 126746,
+          "sha256": "0f91bdddcc57b0e646077676bcaec9cee9a5201ee26b411a4dbe28446a6a3e53"
+        },
+        {
+          "path": ".local/pc3-m6-intake/actualtest-20260921T151236338964Z.log",
+          "bytes": 122638,
+          "sha256": "61f1a953f5a22d961593fefe18f6473921585221dd0f13a95d46b9f91bc861bc"
+        }
+      ]
+    },
+    "observedDefects": [
+      "Final video modification or output-directory identity replacement could still produce a success report.",
+      "Failure handling could write failure.json into a replacement foreign directory."
+    ],
+    "fix": [
+      "Recheck output directory identity, exact inventory and final video/tracks hashes before publishing descriptor, then recheck descriptor binding before publishing report.",
+      "Write failure diagnostics only when the output directory still belongs to this invocation."
+    ],
+    "after": "The final complete suite includes the same three regression methods and an additional final-tracks-tamper subcase; all passed."
+  },
+  "realSyntheticIntegration": {
+    "schemaVersion": "pc3-m6-real-artificial-tool-check-v1",
+    "createdAtUtc": "2026-09-21T15:20:00.330932+00:00",
+    "synthetic": true,
+    "actualPc1Render": false,
+    "fixture": "Independent artificial flat PNGs 288 at 1920x1080, fake Blend and declared readback",
+    "ffmpeg": {
+      "path": "D:\\hwana\\Work\\happycall-ralphthon\\.local\\media-pc3-deps\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+      "bytes": 87638016,
+      "sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3"
+    },
+    "ffprobe": null,
+    "runDirectory": ".local\\pc3-m6-intake\\real-artificial-20260921T151940688936Z",
+    "wallSeconds": 16.4059999999954,
+    "checks": {
+      "package291Preserved": true,
+      "expectedPreserved": true,
+      "packagerAccepted": true,
+      "exactOutputFiles": true,
+      "twoRealProcessesExitedZero": true,
+      "boundedHiddenExplicitProcesses": true,
+      "independent288FrameTimeline": true,
+      "decodeRunsToEofWithoutFrameLimit": true,
+      "rawTracksByteIdentical": true,
+      "fiveFieldDescriptorBoundToActualOutputs": true
+    },
+    "processes": [
+      {
+        "argv": [
+          "D:\\hwana\\Work\\happycall-ralphthon\\.local\\media-pc3-deps\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+          "-hide_banner",
+          "-loglevel",
+          "error",
+          "-nostdin",
+          "-n",
+          "-framerate",
+          "24",
+          "-start_number",
+          "1",
+          "-i",
+          "D:\\hwana\\Work\\happycall-ralphthon\\.local\\pc3-m6-intake\\real-artificial-20260921T151940688936Z\\inputs\\package\\frame-%04d.png",
+          "-map",
+          "0:v:0",
+          "-an",
+          "-frames:v",
+          "288",
+          "-c:v",
+          "libx264",
+          "-pix_fmt",
+          "yuv420p",
+          "-aspect",
+          "16:9",
+          "-crf",
+          "18",
+          "-preset",
+          "medium",
+          "-threads",
+          "2",
+          "-fps_mode",
+          "passthrough",
+          "-movflags",
+          "+faststart",
+          "D:\\hwana\\Work\\happycall-ralphthon\\.local\\pc3-m6-intake\\real-artificial-20260921T151940688936Z\\new-candidate\\sorter-demo.partial.mp4"
+        ],
+        "exitCode": 0,
+        "wallSeconds": 3.688000000001921,
+        "shell": false,
+        "timeout": 120,
+        "creationflags": 134217728,
+        "stdout": {
+          "path": ".local\\pc3-m6-intake\\real-artificial-20260921T151940688936Z\\process-1-stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": ".local\\pc3-m6-intake\\real-artificial-20260921T151940688936Z\\process-1-stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "argv": [
+          "D:\\hwana\\Work\\happycall-ralphthon\\.local\\media-pc3-deps\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+          "-hide_banner",
+          "-loglevel",
+          "info",
+          "-nostdin",
+          "-xerror",
+          "-err_detect",
+          "explode",
+          "-threads",
+          "2",
+          "-i",
+          "D:\\hwana\\Work\\happycall-ralphthon\\.local\\pc3-m6-intake\\real-artificial-20260921T151940688936Z\\new-candidate\\sorter-demo.partial.mp4",
+          "-map",
+          "0:v:0",
+          "-an",
+          "-sn",
+          "-dn",
+          "-c:v",
+          "rawvideo",
+          "-threads",
+          "2",
+          "-fps_mode",
+          "passthrough",
+          "-f",
+          "framehash",
+          "-hash",
+          "sha256",
+          "pipe:1"
+        ],
+        "exitCode": 0,
+        "wallSeconds": 5.110000000000582,
+        "shell": false,
+        "timeout": 120,
+        "creationflags": 134217728,
+        "stdout": {
+          "path": ".local\\pc3-m6-intake\\real-artificial-20260921T151940688936Z\\process-2-stdout.log",
+          "bytes": 32475,
+          "sha256": "eaddfccb30df79d2d9edce800740b5c35da1ac6bed6b0d7d824d179108e21277"
+        },
+        "stderr": {
+          "path": ".local\\pc3-m6-intake\\real-artificial-20260921T151940688936Z\\process-2-stderr.log",
+          "bytes": 2359,
+          "sha256": "54dc7b51939284ada8843562303abbf9162d206404c565147a76fb0b58420e06"
+        }
+      }
+    ],
+    "sources": {
+      "package_full_animation_media.py": {
+        "bytes": 26089,
+        "sha256": "b4185ee1438ad4f98570750f35f8927aa67cf0eb1993846dd0ca3cc2f5eead45"
+      },
+      "test_full_animation_media.py": {
+        "bytes": 27521,
+        "sha256": "0a1ae96bc03fb997b5696286a351b2e849b49d890281967de4af4b67b2d79e39"
+      },
+      "verify_full_animation.py": {
+        "bytes": 21052,
+        "sha256": "a711fed3ce821bb1e24caafadcf2c6161f266e9b031cfea29b73d46e0d716075"
+      }
+    },
+    "resultStatus": "PASS_WITH_PENDING",
+    "failures": [],
+    "observedMedia": {
+      "videoProbe": {
+        "method": "ffmpeg-input-block",
+        "codec": "h264",
+        "pixelFormat": "yuv420p",
+        "width": 1920,
+        "height": 1080,
+        "fps": 24,
+        "startSeconds": 0,
+        "displayedDurationSeconds": 12,
+        "durationDisplayRounded": true,
+        "notice": "Rounded Input duration is corroborated by exact MP4 clocks and all decoded frame timestamps."
+      },
+      "mp4": {
+        "faststart": true,
+        "videoTracks": 1,
+        "sampleEntry": "avc1",
+        "width": 1920,
+        "height": 1080,
+        "sampleCount": 288,
+        "fps": 24,
+        "movieTimeScale": 1000,
+        "mediaTimeScale": 12288,
+        "durationSeconds": 12
+      },
+      "decodedRows": 288,
+      "videoDecoded": true,
+      "visualAccepted": false
+    },
+    "outputs": {
+      "candidate-report.json": {
+        "bytes": 70829,
+        "sha256": "9b60aaa1f929bb99bf65eb19383c49fcc7657f0abe66678cd3201162c9232a6e"
+      },
+      "sorter-demo.mp4": {
+        "bytes": 26181,
+        "sha256": "6e9f3614dece4885498d6de1d1d06525f62a1794d6b3a0a41b2ff78efda24c47"
+      },
+      "sorter-demo.tracks.descriptor.json": {
+        "bytes": 274,
+        "sha256": "62c747737088c471bbdede9c09992cd5c201ae692b4edc3757a5a6a77b1b6674"
+      },
+      "sorter-demo.tracks.json": {
+        "bytes": 152081,
+        "sha256": "97a51146a5e53ba749859f1b2df2bc5227c4158a9eb165d943c62b05757ba697"
+      }
+    },
+    "limits": [
+      "No actual pc1 full package received.",
+      "Full synthetic video decode is a capability/integration check, not visual quality or actual case evidence.",
+      "No Blender, installation, network, Release, frontend or product changes."
+    ]
+  },
+  "firstRealSyntheticFailure": {
+    "schemaVersion": "pc3-m6-real-artificial-tool-check-v1",
+    "createdAtUtc": "2026-09-21T15:15:37.985373+00:00",
+    "synthetic": true,
+    "actualPc1Render": false,
+    "fixture": "Independent artificial flat PNGs 288 at 1920x1080, fake Blend and declared readback",
+    "ffmpeg": {
+      "path": "D:\\hwana\\Work\\happycall-ralphthon\\.local\\media-pc3-deps\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+      "bytes": 87638016,
+      "sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3"
+    },
+    "ffprobe": null,
+    "runDirectory": ".local\\pc3-m6-intake\\real-artificial-20260921T151514588998Z",
+    "wallSeconds": 19.35899999999674,
+    "checks": {
+      "package291Preserved": true,
+      "expectedPreserved": true,
+      "packagerAccepted": false,
+      "exactOutputFiles": false,
+      "twoRealProcessesExitedZero": true,
+      "boundedHiddenExplicitProcesses": true,
+      "independent288FrameTimeline": true,
+      "decodeRunsToEofWithoutFrameLimit": true
+    },
+    "processes": [
+      {
+        "argv": [
+          "D:\\hwana\\Work\\happycall-ralphthon\\.local\\media-pc3-deps\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+          "-hide_banner",
+          "-loglevel",
+          "error",
+          "-nostdin",
+          "-n",
+          "-framerate",
+          "24",
+          "-start_number",
+          "1",
+          "-i",
+          "D:\\hwana\\Work\\happycall-ralphthon\\.local\\pc3-m6-intake\\real-artificial-20260921T151514588998Z\\inputs\\package\\frame-%04d.png",
+          "-map",
+          "0:v:0",
+          "-an",
+          "-frames:v",
+          "288",
+          "-c:v",
+          "libx264",
+          "-pix_fmt",
+          "yuv420p",
+          "-crf",
+          "18",
+          "-preset",
+          "medium",
+          "-threads",
+          "2",
+          "-fps_mode",
+          "passthrough",
+          "-movflags",
+          "+faststart",
+          "D:\\hwana\\Work\\happycall-ralphthon\\.local\\pc3-m6-intake\\real-artificial-20260921T151514588998Z\\new-candidate\\sorter-demo.partial.mp4"
+        ],
+        "exitCode": 0,
+        "wallSeconds": 7.73399999999674,
+        "shell": false,
+        "timeout": 120,
+        "creationflags": 134217728,
+        "stdout": {
+          "path": ".local\\pc3-m6-intake\\real-artificial-20260921T151514588998Z\\process-1-stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": ".local\\pc3-m6-intake\\real-artificial-20260921T151514588998Z\\process-1-stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "argv": [
+          "D:\\hwana\\Work\\happycall-ralphthon\\.local\\media-pc3-deps\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+          "-hide_banner",
+          "-loglevel",
+          "info",
+          "-nostdin",
+          "-xerror",
+          "-err_detect",
+          "explode",
+          "-threads",
+          "2",
+          "-i",
+          "D:\\hwana\\Work\\happycall-ralphthon\\.local\\pc3-m6-intake\\real-artificial-20260921T151514588998Z\\new-candidate\\sorter-demo.partial.mp4",
+          "-map",
+          "0:v:0",
+          "-an",
+          "-sn",
+          "-dn",
+          "-c:v",
+          "rawvideo",
+          "-threads",
+          "2",
+          "-fps_mode",
+          "passthrough",
+          "-f",
+          "framehash",
+          "-hash",
+          "sha256",
+          "pipe:1"
+        ],
+        "exitCode": 0,
+        "wallSeconds": 6.639999999999418,
+        "shell": false,
+        "timeout": 120,
+        "creationflags": 134217728,
+        "stdout": {
+          "path": ".local\\pc3-m6-intake\\real-artificial-20260921T151514588998Z\\process-2-stdout.log",
+          "bytes": 32475,
+          "sha256": "49603bff68537506ad97053dc2f3806c62df6ea5f73d8b7644ef55b879d2dd03"
+        },
+        "stderr": {
+          "path": ".local\\pc3-m6-intake\\real-artificial-20260921T151514588998Z\\process-2-stderr.log",
+          "bytes": 2499,
+          "sha256": "894573ddbce1efc94b8a60fcff7ffa1986cf55afb4da8d99bbbf0d3436dfdf1b"
+        }
+      }
+    ],
+    "sources": {
+      "package_full_animation_media.py": {
+        "bytes": 26070,
+        "sha256": "86726979fb2b711a1abae4c097135ac466f66cf432d810c986f74b0033727c85"
+      },
+      "test_full_animation_media.py": {
+        "bytes": 26978,
+        "sha256": "971dd3ad979fe257292c22f25b9dd63f7fe8b9a3e69a4f6e8a3f8b9c4e3adb02"
+      },
+      "verify_full_animation.py": {
+        "bytes": 21052,
+        "sha256": "a711fed3ce821bb1e24caafadcf2c6161f266e9b031cfea29b73d46e0d716075"
+      }
+    },
+    "resultStatus": "FAIL",
+    "failures": [
+      {
+        "code": "METADATA",
+        "detail": "Input pixel format, dimensions, aspect or frame rate differs."
+      }
+    ],
+    "observedMedia": {
+      "videoProbe": null,
+      "mp4": {
+        "faststart": true,
+        "videoTracks": 1,
+        "sampleEntry": "avc1",
+        "width": 1920,
+        "height": 1080,
+        "sampleCount": 288,
+        "fps": 24,
+        "movieTimeScale": 1000,
+        "mediaTimeScale": 12288,
+        "durationSeconds": 12
+      },
+      "decodedRows": 288,
+      "videoDecoded": false,
+      "visualAccepted": false
+    },
+    "outputs": {
+      "failure.json": {
+        "bytes": 48108,
+        "sha256": "0325befe17ec4c42cee7f194ff61a6c315bac3a85fb242eb710d498be972d8f3"
+      },
+      "sorter-demo.partial.mp4": {
+        "bytes": 26164,
+        "sha256": "a5f9baad901dc3644bd757e3fc9aacaa5579d99c23f70891ff9a886c118d004b"
+      }
+    },
+    "limits": [
+      "No actual pc1 full package received.",
+      "Full synthetic video decode is a capability/integration check, not visual quality or actual case evidence.",
+      "No Blender, installation, network, Release, frontend or product changes."
+    ]
+  },
+  "realEvidence": {
+    "path": ".local/pc3-m6-intake/real-artificial-20260921T151940688936Z/actual-checks.json",
+    "bytes": 6451,
+    "sha256": "3ccbef1a3915b8111619544fe8525b22c54cedd119df0f1e0e21059cb6a121b4"
+  },
+  "toolAudit": {
+    "evidence": {
+      "path": ".local/pc3-m6-intake/runtime-audit.json",
+      "bytes": 19448,
+      "sha256": "746c8461cdb8f962d3d3b76956a303a5bce7ad4b841632e487b58f1252b20d26"
+    },
+    "inventory": {
+      "pathLookup": {
+        "ffmpeg": null,
+        "ffprobe": null
+      },
+      "scannedDirectories": [
+        "D:\\hwana\\Work\\happycall-ralphthon\\.local",
+        "D:\\hwana\\Apps"
+      ],
+      "ffprobeFoundInTheseScopes": false,
+      "scopeLimit": "This scoped inventory is not proof that no ffprobe exists elsewhere on the computer.",
+      "ffmpeg": {
+        "path": "D:\\hwana\\Work\\happycall-ralphthon\\.local\\media-pc3-deps\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+        "bytes": 87638016,
+        "sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
+        "versionCommand": [
+          "D:\\hwana\\Work\\happycall-ralphthon\\.local\\media-pc3-deps\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+          "-version"
+        ],
+        "versionExitCode": 0,
+        "versionLine": "ffmpeg version 7.1-essentials_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers",
+        "versionRawLogSaved": false,
+        "versionEvidence": "Already returned exec_command output chunk c789fa",
+        "distribution": "Existing imageio-ffmpeg 0.6.0 wheel-bundled Gyan FFmpeg executable",
+        "packageMetadata": "D:\\hwana\\Work\\happycall-ralphthon\\.local\\media-pc3-deps\\imageio_ffmpeg-0.6.0.dist-info\\METADATA",
+        "authenticityVerified": false,
+        "provenanceLimit": "Local distribution metadata and executable self-reported version/hash were read. No signature or remote official-source authentication was performed.",
+        "localWheelRecord": {
+          "path": "D:\\hwana\\Work\\happycall-ralphthon\\.local\\media-pc3-deps\\imageio_ffmpeg-0.6.0.dist-info\\RECORD",
+          "entry": "imageio_ffmpeg/binaries/ffmpeg-win-x86_64-v7.1.exe",
+          "recordedBytes": 87638016,
+          "recordedSha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
+          "matchesObservedBytesAndSha256": true,
+          "installer": "pip",
+          "limit": "Agreement with the local installed wheel RECORD, not an authenticated upstream signature."
+        }
+      }
+    },
+    "implementationAudit": {
+      "status": "complete",
+      "file": "scripts/media_pc3/package_full_animation_media.py",
+      "bytes": 26089,
+      "sha256": "b4185ee1438ad4f98570750f35f8927aa67cf0eb1993846dd0ca3cc2f5eead45",
+      "initialReviewedSource": {
+        "bytes": 24455,
+        "sha256": "7c6e72b4894e9248e34dc2dc065752b8b58d178755670dc15e4f6a0cde490671"
+      },
+      "findings": [
+        {
+          "id": "FAILURE_OUTPUT_IDENTITY",
+          "before": "failure.json could be written to a replacement regular directory even when cleanup identity did not match.",
+          "fixed": "failure.json write is gated by safe_cleanup and _write_new receives the originally created directory identity.",
+          "resolutionInspected": true,
+          "lines": [
+            419,
+            426
+          ]
+        },
+        {
+          "id": "FINAL_OUTPUT_HASH_AND_IDENTITY",
+          "before": "The partial MP4 was validated, but final MP4/tracks and directory inventory were not checked again immediately around success publication.",
+          "fixed": "_assert_outputs checks identity, exact inventory, all final bytes/SHA before descriptor/report publication and after report creation; _write_new checks directory identity before/after exclusive writes.",
+          "resolutionInspected": true,
+          "lines": [
+            282,
+            288,
+            298
+          ]
+        }
+      ],
+      "additionalBlockingFindings": [],
+      "reviewedBoundaries": [
+        {
+          "area": "process execution",
+          "line": 50,
+          "observed": "Explicit argv, shell=False, DEVNULL stdin, UTF8 replace text capture, caller timeout1..3600, Windows CREATE_NO_WINDOW; nonzero exits/timeouts cannot pass."
+        },
+        {
+          "area": "Input metadata",
+          "line": 81,
+          "observed": "Exactly one Input#0 block before Stream mapping, one H264 video and no other streams; yuv420p/1920x1080/SAR1:1/DAR16:9/24fps/start0/displayed12s. Output rawvideo/progress cannot substitute."
+        },
+        {
+          "area": "complete decoded frame protocol",
+          "line": 106,
+          "observed": "Unbounded-to-EOF decoder command has no frame limit, crop/scale/format/FPS conversion. Framehash requires one stream, tb1/24,288ordered pts=dts0..287,duration1,3110400rawbytes per frame and SHA256 records."
+        },
+        {
+          "area": "MP4 independent structure/clocks",
+          "line": 205,
+          "observed": "Exactly one moov/mdat with moov first, one vide trak and avc1sample entry1920x1080, mvhd/mdhd duration exactly12s, stts288samples with constant24fps. Box bounds/count/payload sizes checked without loading mdat."
+        },
+        {
+          "area": "independent expectations and original inputs",
+          "line": 268,
+          "observed": "M5 PASS_WITH_PENDING precedes output directory and subprocess execution. Rehash all291input files, manifest and supplied tool binaries across encoding/publication; unsafe links/reparse/hardlinks rejected by existing safe I/O."
+        },
+        {
+          "area": "new output and preserved tracks",
+          "line": 320,
+          "observed": "Reject existing output/traversal/overlap, reserve new directory, -n plus exclusive writes, copy tracks rawbytes without JSON reserialization; descriptor is exactly schemaVersion/url/bytes/sha256/videoSha256."
+        },
+        {
+          "area": "partial failure",
+          "line": 419,
+          "observed": "Remove only recorded success-marker identities in the owned directory; retain partial media with valid=false, never reuse an existing partial output directory."
+        }
+      ],
+      "descriptorContract": {
+        "keys": [
+          "schemaVersion",
+          "url",
+          "bytes",
+          "sha256",
+          "videoSha256"
+        ],
+        "schemaVersion": "oneflow-cctv-tracks-v1",
+        "url": "/demo/sorter-demo.tracks.json",
+        "provenanceOutsideDescriptor": true,
+        "rawTracksPreserved": true
+      },
+      "actualExecutionSeparation": {
+        "tiny64x64ThreeFrameEncodeAndFullDecode": "Actually executed once each by this auditor; original logs/commands retained.",
+        "production1080x288InputMetadataParser": "Root actually encoded and decoded artificial288 input. Auditor independently read retained logs showing H264/yuv420p/1920x1080/SAR1:1/DAR16:9/24fps; no auditor rerun.",
+        "productionEOFFramehash288": "Root full EOF decode retained288rows, pts=dts0..287 at1/24, duration1,3110400bytes/frame,SAR1/1. Auditor read original framehash; no rerun.",
+        "productionMp4Clocks12Seconds": "Root retained integration evidence reports faststart/one vide trak/avc1/288samples/exact12second clocks; auditor read evidence, no parser/media reexecution.",
+        "ffprobe": "No executable found in scoped inventory; optional branch was reviewed statically, never actually executed by this auditor.",
+        "pc1FullRenderedMedia": "Not inspected or packaged by this auditor."
+      },
+      "limits": [
+        "The local wheel RECORD and self-reported version match the executable; no upstream signature authentication was performed.",
+        "The4MiB stdout/stderr limit is checked after subprocess capture; it is not a streaming memory cap. Only explicitly supplied existing tools are invoked.",
+        "Identity/hash checks provide observed filesystem consistency; they do not lock out a privileged concurrent filesystem writer.",
+        "Codec/metadata/framehash/MP4 structure checks do not prove visual quality, physical contact, occlusion, flicker or reconstruction of an actual incident.",
+        "No M6 unit suite or root288integration was rerun by this auditor; test/integration evidence belongs to their separate owners."
+      ],
+      "securityFixRevision": {
+        "bytes": 26070,
+        "sha256": "86726979fb2b711a1abae4c097135ac466f66cf432d810c986f74b0033727c85"
+      }
+    }
+  },
+  "protectedFiles": {
+    "count": 25,
+    "unchanged": 25,
+    "files": {
+      "scripts/media_pc3/BLENDER.md": {
+        "bytes": 11388,
+        "sha256": "b4d19cd501422c90e0b566ddeebe6726195e01b373b894cf4b9ec1b8b1167c0a"
+      },
+      "scripts/media_pc3/README.md": {
+        "bytes": 3035,
+        "sha256": "8b62ff48278cd2ca4ecbe2e338bdd0fbc2e43cb63882c6b89d9129ace12d39b2"
+      },
+      "scripts/media_pc3/audit_guard_supports.py": {
+        "bytes": 14677,
+        "sha256": "c86199ac17d658ce6b21518340784de65d3e6ebb49dfa07592af0367f7c325a5"
+      },
+      "scripts/media_pc3/build_review_page.py": {
+        "bytes": 19121,
+        "sha256": "e917bf1e33b30cbba40c63c9cb6f77b7b270a6b09c36a8884a84ca398ad25951"
+      },
+      "scripts/media_pc3/build_scene.py": {
+        "bytes": 28295,
+        "sha256": "c255e94d9f93a08734bf49cc0a7da1edc5304f4b0a9955e6508864dc72998320"
+      },
+      "scripts/media_pc3/compare_representatives.py": {
+        "bytes": 11551,
+        "sha256": "fd6b3ee4b451f4f9dc39f3ef638e7b407668d40d4864efc9de947028604e5412"
+      },
+      "scripts/media_pc3/environment_detail.py": {
+        "bytes": 3714,
+        "sha256": "e4a82164a828e165f86b496883d539311fd4f2a98e7581edca4cc197f7a19c36"
+      },
+      "scripts/media_pc3/full_render_gate.py": {
+        "bytes": 23306,
+        "sha256": "382d764b06da18abd710a50edecdf874883038fffea1a5e55bbd747e61fa12c5"
+      },
+      "scripts/media_pc3/generate_candidates.py": {
+        "bytes": 9690,
+        "sha256": "5bfd67a9bf81a4b10604fc26b0d0384255bad2b707e284d14b4090ae4ce7302f"
+      },
+      "scripts/media_pc3/look_presets.py": {
+        "bytes": 1762,
+        "sha256": "91c3852386c48729d24f69fff1049602451646a41c7d532d4dc4f8f008cd3e33"
+      },
+      "scripts/media_pc3/media_contract.py": {
+        "bytes": 7778,
+        "sha256": "1d7e6f094d9838c839c7e2cc242ea86f29c7aae81f3926c301b1169599e7fad2"
+      },
+      "scripts/media_pc3/requirements.txt": {
+        "bytes": 37,
+        "sha256": "632ed6a2203d994ab4340c918c2618d0d9b1a278884e8e6c281698acc2680982"
+      },
+      "scripts/media_pc3/scene_contract.py": {
+        "bytes": 14278,
+        "sha256": "670638cae0357da1bf934b7c4b9287ea0780180214e53a181166dd53a8a554bf"
+      },
+      "scripts/media_pc3/shadow_settings.py": {
+        "bytes": 2643,
+        "sha256": "4d1357cde51530be813e3a1505972b253b9b23ae8c35a99cbb1b304fe5c374fe"
+      },
+      "scripts/media_pc3/test_compare_representatives.py": {
+        "bytes": 13193,
+        "sha256": "f0c65f9ee14e610381a53c522704132a0d1e588791e67df7d4e8d238ccb8dab7"
+      },
+      "scripts/media_pc3/test_environment_detail.py": {
+        "bytes": 23414,
+        "sha256": "768483c7e1627ca35929191d60a923c1b2f75fe36c92a4ddf50079e7f5921f23"
+      },
+      "scripts/media_pc3/test_full_animation_package.py": {
+        "bytes": 25007,
+        "sha256": "bc6dd3735da0b435fa38fca982a2677b344371076beb9db62babcc92fadcb5b9"
+      },
+      "scripts/media_pc3/test_full_render_gate.py": {
+        "bytes": 28727,
+        "sha256": "85e2f89abf1fc0fe326400d88d094be8a558f0bcd9f877ac4bada36a71e47955"
+      },
+      "scripts/media_pc3/test_look_presets.py": {
+        "bytes": 18867,
+        "sha256": "5befb2602001f8c40a52d0670717729c8bc46b4bb83e73955523ccd1288a8446"
+      },
+      "scripts/media_pc3/test_media_contract.py": {
+        "bytes": 4431,
+        "sha256": "84a5d8801480125cb09a4e427ee23553101089b6eadd3f75ffab34d2fe097995"
+      },
+      "scripts/media_pc3/test_render_package.py": {
+        "bytes": 28542,
+        "sha256": "a5a1b448763955ba1542be73abfb67c7a4445c7faccf3b504f5dbb9cefec51ad"
+      },
+      "scripts/media_pc3/test_review_package.py": {
+        "bytes": 13933,
+        "sha256": "aec79018a4c8f117d1216d52cbb178a377ba6e0f894eb3be2e79304d1506fd2e"
+      },
+      "scripts/media_pc3/test_shadow_settings.py": {
+        "bytes": 13816,
+        "sha256": "fcc9a2f9cbb2a20f5821fa978f4f46c13225508b4b0f29180bbf7961d5560293"
+      },
+      "scripts/media_pc3/verify_full_animation.py": {
+        "bytes": 21052,
+        "sha256": "a711fed3ce821bb1e24caafadcf2c6161f266e9b031cfea29b73d46e0d716075"
+      },
+      "scripts/media_pc3/verify_render_package.py": {
+        "bytes": 29547,
+        "sha256": "36b4e2f3de8f0517da6cb26719e346e0fbfec221f5d1b673e494a73c31af30cc"
+      }
+    }
+  },
+  "denominatorNotes": [
+    "Unit test methods, distinct negative subcases and mutant execution are separate counts and must not be added as independent test totals.",
+    "The real full-size functional run consists of one encoding and one EOF decoding of artificial flat PNGs, not the pc1 Blender scene.",
+    "A separate prior 64x64 three-frame tool capability sample is documented by runtime-audit; it is not included in the full-size run denominator."
+  ],
+  "remaining": {
+    "actualPc1Completed291FilePackageReceived": false,
+    "actualPc1FullVideoPackaged": false,
+    "actualFfprobeExecuted": false,
+    "blenderExecuted": false,
+    "visualQualityAccepted": false,
+    "contactOcclusionFlickerAccepted": false,
+    "releaseUploaded": false,
+    "frontendOrManifestChanged": false,
+    "TEST": "awaiting_pc1_test",
+    "wholeN03Accepted": false
+  },
+  "scoreEvidence": "Actual delegation, observed failing regressions, correction, independent tests, tool commands and source hashes are evidence for the agreed workflow. No score, human usability result or official submission completion is claimed."
+}
