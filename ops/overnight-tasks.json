@@ -23,7 +23,7 @@
         "reports/live-analysis-independent.md"
       ],
       "remaining": [
-        "고객 요청에 AI 추가질문을 섞은 P1 수정·독립 검증",
+        "고객 요청 공통어 과잉 철회 P2와 최종 고정평가 한계 보존; 최신 UI/미디어 통합",
         "음성/Blender 제작 품질",
         "최신 후보 원격 독립 QA",
         "영속 저장·원격 전체 흐름",
@@ -79,6 +79,18 @@
         "budgetReservedUsd": 28.3,
         "evidence": "reports/evaluation/targeted-grounding-live-20260921-2106-review.md",
         "accepted": false
+      },
+      "requestGrounding": {
+        "commit": "ea647594ea8d84cd270c62ae15356d3f08fdb58a",
+        "sameIndependentCases": "9/9",
+        "additionalCases": "5/6",
+        "remainingP2": "Common cancellation term may null a different current request; human source review retained",
+        "mainImpactTests": "204 passed;178 subtests",
+        "storedResponsesUnchanged": 36,
+        "newLiveCalls": 0,
+        "evidence": "reports/request-grounding-final-independent.md",
+        "accepted": true,
+        "acceptanceScope": "Original four defects and quoted-request projection only"
       }
     },
     {
@@ -101,7 +113,7 @@
       "reportedRepo": "C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon",
       "resultCommit": "ef8f33e23f003c95a51e6a44a8c77cac19f46b71",
       "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5758898272",
-      "mainFinding": "통합 상담 동선·16발화 구간·6회 흐름 검증. N02-M2 음질 A/B 결과는 별도 대기.",
+      "mainFinding": "M2 pause candidate and timeline adopted in v3 after main source/PCM review27/27; M3 actual-parent verification sent",
       "followupCard": {
         "id": "N02-M2",
         "baseCommit": "e5469aa99bb266c5a977b80c097223275ac6fc9b",
@@ -137,6 +149,31 @@
         "followupComment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5760122054",
         "ackComment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5760187325",
         "accepted": false
+      },
+      "pauseAdoption": {
+        "atKST": "2026-09-21T21:36:25.620067+09:00",
+        "pc2ResultCommit": "6a13abec2a7d2f0c52e609aeb7e07f560512950f",
+        "mainCommit": "92d2ecbad981f366a9e5ffc850d9c2bb7fd5d3a2",
+        "release": "demo-media-20260921-audio-v3",
+        "remoteBrowserChecks": "18/18",
+        "mainArtifactChecks": "27/27",
+        "releaseDigestMatches": 3,
+        "downloadMatches": 3,
+        "upgradeTests": "49 passed;2 skipped;16 subtests",
+        "installedASGIChecks": "4/4",
+        "humanListening": 0,
+        "finalParentFlow": "PENDING",
+        "evidence": "reports/media/pc2-pause-adoption.md",
+        "accepted": true,
+        "acceptanceScope": "PCM-preserving audio and transcript timing adoption; not N02 overall"
+      },
+      "parentVerificationCard": {
+        "id": "N02-M3",
+        "productCommit": "92d2ecbad981f366a9e5ffc850d9c2bb7fd5d3a2",
+        "state": "SENT_ACK_PENDING",
+        "card": "reports/channel/N02-M3-v3-parent-verification.md",
+        "comment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5760570765",
+        "accepted": false
       }
     },
     {
@@ -159,7 +196,7 @@
       "reportedRepo": "D:/hwana/Work/happycall-ralphthon",
       "resultCommit": "d6aa6b38ab18836789eb77e9034560a5e7890eef",
       "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5758883538",
-      "mainFinding": "통합 WMS 근거/영상 흐름 검증. Blender 대표3프레임 품질 미달 후 기하 수정03291cca 수신, 동일조건 렌더 재검 중.",
+      "mainFinding": "Environment staging_v1 and shadow CLI received; main actual3 frames complete; independent pixel/geometry review and72frame check in progress",
       "followupCard": {
         "id": "N03-M2",
         "baseCommit": "e5469aa99bb266c5a977b80c097223275ac6fc9b",
@@ -209,6 +246,18 @@
           "evidence": "reports/media/pc3-engine-shadow-review.md",
           "accepted": false
         }
+      },
+      "environmentCandidate": {
+        "resultCommit": "8823de240e769dd7c5ed668a11ea4800a155b404",
+        "shadowCliCommit": "33fa0e4edeb88c0d4ad5e9cc0194ffc7e96cebcd",
+        "mainRepresentativeFrames": 3,
+        "mainRepresentativeWallSeconds": 47.016,
+        "settings": "EEVEE96/shadow4/threads2, root explicit override before formal CLI intake",
+        "checks": "34/34 pre-render source tests",
+        "evidenceLocal": ".local/pc3-render-intake/staging-01/",
+        "motion72": "PENDING",
+        "finalMediaRegistered": false,
+        "accepted": false
       }
     },
     {
@@ -237,7 +286,7 @@
       "resumeBasis": "pc4 reports direct instruction by its local user; previous local hold no longer active.",
       "resultCommit": "1b82f1d7fad1b31545d512b28896bfcba40189ec",
       "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5759119569",
-      "mainFinding": "통합 TMS 로컬6회 완료, PC4 Q2 준비 d7ff5ee 수신. bfc8543 독립 제품 검증 실행 계약을 실제 발송했으며 결과 대기.",
+      "mainFinding": "Q2 fixedbfc accepted scoped. Q3 fixedc6 ACK received, independent8axes executing on separate clean checkout",
       "followupCard": {
         "id": "N04-Q2",
         "baseCommit": "e5469aa99bb266c5a977b80c097223275ac6fc9b",
@@ -281,12 +330,14 @@
         "productCommit": "c6f734f60d0dbe0151a69e35b8dfd8a41f3c5bd5",
         "card": "reports/channel/N04-Q3-prototype-recovery.md",
         "comment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5760348790",
-        "state": "SENT_ACK_PENDING",
-        "accepted": false
+        "state": "ACK_RECEIVED_EXECUTING",
+        "accepted": false,
+        "ackComment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5760453319",
+        "acknowledgedAtKST": "2026-09-21T21:25:57+09:00"
       }
     }
   ],
-  "updatedAtKST": "2026-09-21T20:35:52+09:00",
-  "sharedBaseCommit": "d4b4a8137fbc608911e9f6f71bd4b5e289e0a958",
-  "lastMainReviewKST": "2026-09-21T21:18:24.863147+09:00"
+  "updatedAtKST": "2026-09-21T21:36:25.620067+09:00",
+  "sharedBaseCommit": "92d2ecbad981f366a9e5ffc850d9c2bb7fd5d3a2",
+  "lastMainReviewKST": "2026-09-21T21:36:25.620067+09:00"
 }
