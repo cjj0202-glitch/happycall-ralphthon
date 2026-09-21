@@ -2,6 +2,8 @@
 
 **지금 사용할 것:** [눈으로 보는 TODO](TODO.md) · [다른 PC에 보낼 프롬프트](docs/14_팀원_PC_채팅용_프롬프트.md) · [새 메인 세션 상세 인수인계](docs/15_새_메인세션_상세_인수인계.md) · [4인 설계회의/BMAD](docs/13_4인_설계회의와_BMAD.md) · [First Bolt 실험 방법](docs/16_FDE_First_Bolt_적용.md) · [전체 솔루션 지도](planning/solution-map.md)
 
+데모용 OpenAI API 키는 [데모 API 연결 규칙](docs/18_OpenAI_데모_API_연결.md)에 따라 각 PC 로컬에만 보관합니다. 개발 기본은 replay이며 Vercel 설정은 사용자 재개 요청까지 보류합니다.
+
 **먼저 읽기:** [작업표](TODO.md) · [공식 일정·채점·제출 대조](docs/09_공식규정_전수대조.md) · [목표](docs/03_목표와_범위.md) · [상세 설계](docs/04_제품_상세설계.md) · [4PC 운영](docs/05_랄프톤_실행계획.md) · [노트북 사전 준비](docs/08_다른_노트북_사전준비.md) · [Goal 초안](GOAL.md) · [점수 전략](docs/11_점수전략과_증거설계.md) · [행사 Vercel 연결](docs/12_Vercel_행사계정_연결.md)
 
 **최종 제출은 9/22 12:00 KST.** 실제 `/goal` 원문과 Codex JSONL도 제출 대상입니다. 로그 원본은 GitHub에 올리지 않습니다. 제품 작업 완료 체크는 `ops/tasks.py`의 증거 검증을 거칩니다. 노트북 등록 뒤 [편지함 왕복 테스트](docs/17_편지함_왕복테스트.md)로 실제 수신·회신을 확인합니다.

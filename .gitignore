@@ -1,6 +1,7 @@
 # 시크릿 — 레포에도 이슈에도 올리지 않는다
 .env
 .env.*
+!.env.demo.example
 *.key
 *.pem
 secrets/
