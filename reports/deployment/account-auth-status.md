@@ -1,6 +1,8 @@
 # Vercel 계정 인증 완료와 메인 배포 인수인계
 
-관측: 2026-09-21 17:57~18:03 KST, pc1/CJJ. 계정 연결 담당 작업 작성. 비밀번호·OTP·기기 인증 코드·토큰 값은 포함하지 않습니다.
+관측: 2026-09-21 17:57~18:09 KST, pc1/CJJ. 계정 연결 담당 작업 작성. 비밀번호·OTP·기기 인증 코드·토큰 값은 포함하지 않습니다.
+
+**현재 결론:** Vercel 로그인과 Enterprise `g-28` 로컬 연결은 완료됐습니다. 메인이 18:07경 시도한 private Blob 생성은 **권한 오류 403**으로 거절됐습니다. 계정 연결 담당의 후속 읽기 조회에서도 현재 계정이 볼 수 있는 연결 저장소/Blob은 각각 0건입니다. 영속 저장소 준비와 실제 배포는 아직 완료되지 않았습니다.
 
 ## 최신 사용자 지시와 역할
 
@@ -17,7 +19,8 @@
 - [x] 두 후보 프로젝트의 존재와 설정을 읽기 전용으로 대조
 - [x] 사용자 전달 실제 팀 보고를 메인이 대조해 G-28로 확정
 - [x] 저장소 루트를 기존 Enterprise `g-28`에 연결하고 CLI 재조회로 검증
-- [ ] Blob 생성 권한·프로젝트 연결·서버 환경변수 실측
+- [x] Blob 생성 시도 결과 및 연결 저장소 읽기 조회 결과 확인 — 생성 403, 조회 가능한 저장소 0건
+- [ ] 권한 있는 팀 관리자의 private Blob 생성/연결 조치 및 서버 환경변수 실측
 - [ ] Preview/Production 배포 및 제품 흐름 검증
 
 브라우저 로그인·CLI 인증·로컬 프로젝트 링크가 완료됐습니다. 실제 서버 배포와 GitHub 자동 배포 연결은 아직 완료하지 않았습니다.
@@ -74,15 +77,39 @@ vercel project inspect --scope 52g-studio --json
 
 CLI 출력에서 `Linked 52g-studio/g-28`을 확인했고 로컬 파일의 projectId/orgId를 위 확정값과 대조했습니다. 이어 `vercel project inspect --scope 52g-studio --json`이 g-28과 52g Studio를 반환했습니다. 루트 `.vercel/project.json`과 자동 생성된 `.env.local`이 Git에서 제외되고 추적되지 않는 것을 확인했습니다. CLI가 덧붙인 중복 `.vercel`/`.env*` 규칙은 기존 `.env.demo.example` 예외를 덮을 수 있어 해당 자동 추가분만 제거하고 원래 ignore 규칙을 유지했습니다.
 
-프로젝트의 원격 rootDirectory/framework는 여전히 null이고 기존 배포 보호도 유지됩니다. 메인이 배포 패키지에 맞춰 후속 설정합니다. Blob·OpenAI 키·Basic 비밀번호를 주입하거나 Git 저장소 자동 배포를 연결하지 않았습니다.
+계정 연결 담당이 18:03까지 확인한 프로젝트의 원격 rootDirectory/framework는 null이고 기존 배포 보호도 유지됐습니다. 이후 원격 배포 설정은 메인 담당이므로 실행 직전 다시 조회합니다. 이 작업에서는 Blob·OpenAI 키·Basic 비밀번호를 주입하거나 Git 저장소 자동 배포를 연결하지 않았습니다.
 
-## Blob 준비 — 도구 조사 완료, 생성은 메인 소유
+## Blob 생성 403과 읽기 전용 후속 확인
 
-설치된 CLI의 `storage create/connect/status --help`에서 아래 기능을 확인했습니다. 아직 store를 생성하거나 앱 비밀값을 주입하지 않았으며 실제 생성 권한은 미검증입니다. CLI link가 자체 생성한 OIDC 환경 파일은 위 경로에 있습니다.
+메인 작업이 2026-09-21 18:07경 다음 생성 명령을 실행했고 결과를 전달했습니다. 종료 코드 1, `status:error`, `reason:api_error`, 메시지는 `Failed to create the store: You don’t have permission to create the blob. (403)`입니다. 생성된 store ID는 없습니다. 로그인 성공과 팀 리소스 생성 권한은 별개입니다.
 
 ```powershell
-# 아래 명령은 메인이 store 이름과 리전을 선택한 뒤 실행합니다.
-vercel storage create <팀전용-store-name> --type blob --access private --region <선택한-region> --scope 52g-studio
+# 메인이 실행했고 403으로 실패한 명령. 권한 변경 없이 재시도하지 않습니다.
+vercel storage create happycall-g28-state --type blob --access private --region icn1 --scope 52g-studio --json
+```
+
+계정 연결 담당은 같은 PC/계정에서 아래 두 조회만 수행했습니다. 두 명령 모두 종료 코드 0과 구조화된 응답 `{"stores":[]}`를 반환했습니다. CLI 로그인·팀·프로젝트 조회가 성공한 동일 환경이며, 오류를 빈 목록으로 변환한 결과가 아닙니다.
+
+| 읽기 명령 | 결과 | 로컬 원문 위치(Git 제외) |
+|---|---|---|
+| `vercel storage status --project prj_VUk0C5e3thVOU9GgT8pc9tAoCczs --scope 52g-studio --json` | 조회 가능한 프로젝트 연결 저장소 0건 | `.local/vercel-storage-status.json` |
+| `vercel storage list --type blob --scope 52g-studio --json` | 조회 가능한 팀 Blob 0건 | `.local/vercel-blob-list.json` |
+
+**판정 범위:** 현재 Contributor 계정의 조회 결과입니다. 팀 전체에 Blob이 전혀 없다는 증거로 확대하지 않습니다. 현재 계정이 바로 사용할 수 있는 기존 연결 저장소는 이 조회로 발견하지 못했습니다. 공식 [접근 역할 문서](https://vercel.com/docs/rbac/access-roles)도 Contributor의 지정 프로젝트 권한과 팀 수준 권한을 구분합니다. 정확한 권한 정책과 부여 방식은 팀 관리자가 확인해야 합니다.
+
+생성 요청을 다른 도구·개인 Hobby·다른 계정으로 우회하지 않습니다. 계정 연결 담당은 재생성 시도, 권한 변경, 관리자에게 외부 메시지 발송을 하지 않았습니다. 저장소 준비 전에는 영속 저장·전역 예산 검증 완료나 live 배포 완료로 기록하지 않습니다.
+
+### 메인이 관리자에게 전달할 요청 초안
+
+> 52g Studio의 G-28 해커톤 프로젝트에서 private Blob 저장소 연결이 필요합니다. 현재 `hackathon02-1948` 계정은 Contributor이며 CLI 생성 요청이 403으로 거절됐습니다. 권한 있는 관리자가 `happycall-g28-state`(private, `icn1`)를 생성하고 `g-28` 프로젝트의 Preview/Production에 연결해 주세요. 프로젝트 ID는 `prj_VUk0C5e3thVOU9GgT8pc9tAoCczs`, 팀 ID는 `team_VXOpli8PNx0SDCGSdsjjDoJw`입니다. 이미 사용 가능한 G-28 전용 private 저장소가 있다면 해당 연결로 대체할 수 있습니다. 연결 결과와 store ID만 전달하고, 인증 토큰은 채팅에 보내지 말고 Vercel 서버 환경변수로 설정해 주세요. 인증 방식은 메인 배포 담당과 OIDC/토큰 호환성을 확인한 뒤 선택합니다.
+
+이 문구는 인수인계용 초안이며 실제 관리자에게 발송한 기록이 아닙니다. 관리자 생성/연결 또는 적법한 권한 부여가 확인된 뒤 메인이 이어서 실행합니다.
+
+## Blob 연결 도구와 후속 검증 — 메인 소유
+
+설치된 CLI의 `storage create/connect/status --help`에서 아래 기능을 확인했습니다. CLI link가 자체 생성한 OIDC 환경 파일은 위 경로에 있습니다. 다음 연결 명령은 store와 권한을 확보한 뒤 사용합니다.
+
+```powershell
 vercel storage connect <store-id> --project prj_VUk0C5e3thVOU9GgT8pc9tAoCczs --environment preview --environment production --auth oidc --dry-run --scope 52g-studio
 vercel storage connect <store-id> --project prj_VUk0C5e3thVOU9GgT8pc9tAoCczs --environment preview --environment production --auth oidc --yes --scope 52g-studio
 ```
@@ -94,7 +121,7 @@ Blob 실제 인수는 최초 생성 경합·ETag 갱신 충돌·최신 읽기·�
 ## 메인에서 남은 순서
 
 1. 확정된 g-28의 루트 링크 결과를 확인하고, 검증된 ASGI 배포 설정을 적용합니다.
-2. 팀 전용 private Blob 연결과 서버 비밀값을 설정하고 저장/예산 실환경 검증을 실행합니다.
+2. 팀 관리자 조치로 private Blob을 확보하고 연결을 재조회합니다. 서버 비밀값 설정 후 저장/예산 실환경 검증을 실행합니다. 403이 해소되기 전에도 UI·패키지·로컬 테스트는 계속할 수 있습니다.
 3. Preview URL에서 API·정적 JS·미디어·두 업무 흐름을 검증한 후 Production으로 진행합니다.
 4. 배포 보호 설정과 시연 접근제어를 실제 비로그인 브라우저에서 검증합니다. 기존 보호를 임의 해제하지 않습니다.
 
