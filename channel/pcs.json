@@ -18,10 +18,10 @@
       "inbox": "to:pc2"
     },
     "pc3": {
-      "role": "미정",
-      "설명": "역할 미배정 — 설계 확정 후 채운다",
-      "hostname": [],
-      "github": "",
+      "role": "worker",
+      "설명": "G-28 팀 PC. 제품 작업은 메인의 작업 ID 배정 후 수행한다.",
+      "hostname": ["LAPTOP-U2AL73UH"],
+      "github": "mcjun86-oss",
       "inbox": "to:pc3"
     },
     "pc4": {
