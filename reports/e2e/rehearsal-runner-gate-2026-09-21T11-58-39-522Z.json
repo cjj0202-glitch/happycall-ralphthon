@@ -1,0 +1,224 @@
+{
+  "at": "2026-09-21T11:58:39.519Z",
+  "mode": "aggregation-only; no browser, server, API, or cleanup",
+  "historicalSource": {
+    "path": "C:\\00.프로젝트\\happycall-ralphthon\\reports\\e2e\\rehearsal-2026-09-21T11-18-13-436Z\\results.json",
+    "sha256": "cbcc837db5ae408a28a1e8ab43246504a6af6159bc801825eea7d453b3485b91",
+    "modified": false
+  },
+  "runner": {
+    "version": "six-flow-rehearsal-v5-explicit-revision-recovery",
+    "observedAt": "2026-09-21T11:58:39.521Z",
+    "nodeVersion": "v24.19.0",
+    "files": {
+      "tests/e2e/six-flow-rehearsal.mjs": {
+        "sha256": "2bda1205d2b61c9144d63d9c493d274e39bc3e352d1bb9745a584a91b563b55f",
+        "bytes": 34627
+      },
+      "tests/helpers/rehearsal_server.py": {
+        "sha256": "7521fdf31d6b0d0295e29b31c66302e21f0cb7f9f5d388552fe0a2ad73747968",
+        "bytes": 6279
+      }
+    }
+  },
+  "checks": [
+    {
+      "name": "historical-pass-offline-completion-blocked",
+      "expectedExit": 0,
+      "actualProcessExit": 0,
+      "observed": {
+        "exitCode": 0,
+        "failures": [],
+        "summary": {
+          "corePassed": 6,
+          "coreExecuted": 6,
+          "coreTarget": 6,
+          "manualPassed": 2,
+          "manualExecuted": 2,
+          "offlineSafetyPassed": 1,
+          "offlineExecuted": 1,
+          "offlineCompletePassed": 0,
+          "externalRequests": 0,
+          "liveRequests": 0
+        },
+        "scope": "core 6/6, manual 2/2, offline safety 1/1, zero external/live requests; offline full completion reported separately"
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "offline-safety-fail",
+      "expectedExit": 1,
+      "actualProcessExit": 1,
+      "observed": {
+        "exitCode": 1,
+        "failures": [
+          "offline-safety"
+        ],
+        "summary": {
+          "corePassed": 6,
+          "coreExecuted": 6,
+          "coreTarget": 6,
+          "manualPassed": 2,
+          "manualExecuted": 2,
+          "offlineSafetyPassed": 0,
+          "offlineExecuted": 1,
+          "offlineCompletePassed": 0,
+          "externalRequests": 0,
+          "liveRequests": 0
+        },
+        "scope": "core 6/6, manual 2/2, offline safety 1/1, zero external/live requests; offline full completion reported separately"
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "offline-not-run",
+      "expectedExit": 1,
+      "actualProcessExit": 1,
+      "observed": {
+        "exitCode": 1,
+        "failures": [
+          "offline-safety"
+        ],
+        "summary": {
+          "corePassed": 6,
+          "coreExecuted": 6,
+          "coreTarget": 6,
+          "manualPassed": 2,
+          "manualExecuted": 2,
+          "offlineSafetyPassed": 0,
+          "offlineExecuted": 0,
+          "offlineCompletePassed": 0,
+          "externalRequests": 0,
+          "liveRequests": 0
+        },
+        "scope": "core 6/6, manual 2/2, offline safety 1/1, zero external/live requests; offline full completion reported separately"
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "core-fail",
+      "expectedExit": 1,
+      "actualProcessExit": 1,
+      "observed": {
+        "exitCode": 1,
+        "failures": [
+          "core"
+        ],
+        "summary": {
+          "corePassed": 5,
+          "coreExecuted": 6,
+          "coreTarget": 6,
+          "manualPassed": 2,
+          "manualExecuted": 2,
+          "offlineSafetyPassed": 1,
+          "offlineExecuted": 1,
+          "offlineCompletePassed": 0,
+          "externalRequests": 0,
+          "liveRequests": 0
+        },
+        "scope": "core 6/6, manual 2/2, offline safety 1/1, zero external/live requests; offline full completion reported separately"
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "manual-fail",
+      "expectedExit": 1,
+      "actualProcessExit": 1,
+      "observed": {
+        "exitCode": 1,
+        "failures": [
+          "manual"
+        ],
+        "summary": {
+          "corePassed": 6,
+          "coreExecuted": 6,
+          "coreTarget": 6,
+          "manualPassed": 1,
+          "manualExecuted": 2,
+          "offlineSafetyPassed": 1,
+          "offlineExecuted": 1,
+          "offlineCompletePassed": 0,
+          "externalRequests": 0,
+          "liveRequests": 0
+        },
+        "scope": "core 6/6, manual 2/2, offline safety 1/1, zero external/live requests; offline full completion reported separately"
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "external-request",
+      "expectedExit": 1,
+      "actualProcessExit": 1,
+      "observed": {
+        "exitCode": 1,
+        "failures": [
+          "external-request"
+        ],
+        "summary": {
+          "corePassed": 6,
+          "coreExecuted": 6,
+          "coreTarget": 6,
+          "manualPassed": 2,
+          "manualExecuted": 2,
+          "offlineSafetyPassed": 1,
+          "offlineExecuted": 1,
+          "offlineCompletePassed": 0,
+          "externalRequests": 1,
+          "liveRequests": 0
+        },
+        "scope": "core 6/6, manual 2/2, offline safety 1/1, zero external/live requests; offline full completion reported separately"
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "live-request",
+      "expectedExit": 1,
+      "actualProcessExit": 1,
+      "observed": {
+        "exitCode": 1,
+        "failures": [
+          "live-request"
+        ],
+        "summary": {
+          "corePassed": 6,
+          "coreExecuted": 6,
+          "coreTarget": 6,
+          "manualPassed": 2,
+          "manualExecuted": 2,
+          "offlineSafetyPassed": 1,
+          "offlineExecuted": 1,
+          "offlineCompletePassed": 0,
+          "externalRequests": 0,
+          "liveRequests": 1
+        },
+        "scope": "core 6/6, manual 2/2, offline safety 1/1, zero external/live requests; offline full completion reported separately"
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "fatal",
+      "expectedExit": 1,
+      "actualProcessExit": 1,
+      "observed": {
+        "exitCode": 1,
+        "failures": [
+          "fatal"
+        ],
+        "summary": {
+          "corePassed": 6,
+          "coreExecuted": 6,
+          "coreTarget": 6,
+          "manualPassed": 2,
+          "manualExecuted": 2,
+          "offlineSafetyPassed": 1,
+          "offlineExecuted": 1,
+          "offlineCompletePassed": 0,
+          "externalRequests": 0,
+          "liveRequests": 0
+        },
+        "scope": "core 6/6, manual 2/2, offline safety 1/1, zero external/live requests; offline full completion reported separately"
+      },
+      "status": "PASS"
+    }
+  ]
+}

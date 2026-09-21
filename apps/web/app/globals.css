@@ -63,6 +63,19 @@ a { color: var(--action-text); }
 .notice.warning { background: var(--status-warning-tint); color: var(--status-warning-text); }
 .notice.compact { font-size: var(--font-size-12); padding: var(--space-12); }
 .button-row { display: flex; gap: var(--space-8); align-items: center; flex-wrap: wrap; }
+.workspace-sync { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-12); margin-bottom: var(--space-16); padding: var(--space-16); border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--surface-raised); }
+.workspace-sync > div { flex: 1; min-width: 0; }
+.workspace-sync p { margin-block: var(--space-4); }
+.recovery-panel { margin-bottom: var(--space-20); }
+.recovery-panel > p, .recovery-panel > .badge { margin-block: var(--space-8); }
+.recovery-comparison { display: grid; gap: var(--space-12); margin-block: var(--space-16); }
+.recovery-comparison > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-12); }
+.recovery-comparison h4 { grid-column: 1 / -1; }
+.recovery-comparison > div > div { padding: var(--space-12); background: var(--surface-sunken); border: 1px solid var(--border-default); border-radius: var(--radius-md); min-width: 0; }
+.recovery-comparison p { white-space: pre-wrap; overflow-wrap: anywhere; margin-top: var(--space-6); }
+.owner-entry { display: flex; flex-direction: column; gap: var(--space-16); min-width: 0; }
+.recovery-attempt { flex-direction: column; align-items: flex-start; }
+@media (max-width: 600px) { .recovery-comparison > div { grid-template-columns: minmax(0, 1fr); } .workspace-sync > button { width: 100%; } }
 .case-selector { padding: var(--space-16); background: var(--surface-raised); border: 1px solid var(--border-default); border-radius: var(--radius-lg); margin-bottom: var(--space-24); display: flex; gap: var(--space-24); align-items: center; }
 .section-label { display: flex; flex-direction: column; gap: var(--space-6); min-width: 120px; }
 .section-label strong { font-weight: var(--font-weight-semibold); display: flex; align-items: center; gap: var(--space-8); }

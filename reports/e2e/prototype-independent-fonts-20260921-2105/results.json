@@ -1,0 +1,225 @@
+{
+  "startedAt": "2026-09-21T12:04:26.239Z",
+  "status": "PASS",
+  "fonts": [
+    {
+      "selector": "body",
+      "computed": {
+        "text": "본문으로 이동HappyCall OneFlow합성 데이터 시연김김하나 상담원상담 작업대경영주 접수센터 회신WMS 작업 확인TMS 배송 확인접수부터",
+        "fontFamily": "\"Pretendard Variable\", Pretendard, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Apple SD Gothic Neo\", \"Malgun Gothic\", sans-serif",
+        "fontSize": "13px",
+        "fontWeight": "400",
+        "lineHeight": "19.5px"
+      },
+      "platformFonts": []
+    },
+    {
+      "selector": "h1",
+      "computed": {
+        "text": "상담 작업대",
+        "fontFamily": "\"Pretendard Variable\", Pretendard, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Apple SD Gothic Neo\", \"Malgun Gothic\", sans-serif",
+        "fontSize": "26px",
+        "fontWeight": "600",
+        "lineHeight": "33.8px"
+      },
+      "platformFonts": [
+        {
+          "familyName": "Segoe UI Semibold",
+          "postScriptName": "SegoeUI-Semibold",
+          "isCustomFont": false,
+          "glyphCount": 1
+        },
+        {
+          "familyName": "Malgun Gothic",
+          "postScriptName": "MalgunGothicBold",
+          "isCustomFont": false,
+          "glyphCount": 5
+        }
+      ]
+    },
+    {
+      "selector": ".workspace-sync strong",
+      "computed": {
+        "text": "접수 현황",
+        "fontFamily": "\"Pretendard Variable\", Pretendard, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Apple SD Gothic Neo\", \"Malgun Gothic\", sans-serif",
+        "fontSize": "13px",
+        "fontWeight": "700",
+        "lineHeight": "19.5px"
+      },
+      "platformFonts": [
+        {
+          "familyName": "Malgun Gothic",
+          "postScriptName": "MalgunGothicBold",
+          "isCustomFont": false,
+          "glyphCount": 4
+        },
+        {
+          "familyName": "Segoe UI",
+          "postScriptName": "SegoeUI-Bold",
+          "isCustomFont": false,
+          "glyphCount": 1
+        }
+      ]
+    },
+    {
+      "selector": ".workspace-sync button",
+      "computed": {
+        "text": "목록 새로고침",
+        "fontFamily": "\"Pretendard Variable\", Pretendard, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Apple SD Gothic Neo\", \"Malgun Gothic\", sans-serif",
+        "fontSize": "13px",
+        "fontWeight": "500",
+        "lineHeight": "19.5px"
+      },
+      "platformFonts": [
+        {
+          "familyName": "Segoe UI Semibold",
+          "postScriptName": "SegoeUI-Semibold",
+          "isCustomFont": false,
+          "glyphCount": 1
+        },
+        {
+          "familyName": "Malgun Gothic",
+          "postScriptName": "MalgunGothic",
+          "isCustomFont": false,
+          "glyphCount": 6
+        }
+      ]
+    },
+    {
+      "selector": "textarea",
+      "computed": {
+        "text": "운행 위치와 도착 예정 확인",
+        "fontFamily": "\"Pretendard Variable\", Pretendard, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Apple SD Gothic Neo\", \"Malgun Gothic\", sans-serif",
+        "fontSize": "12px",
+        "fontWeight": "500",
+        "lineHeight": "18.6px"
+      },
+      "platformFonts": []
+    },
+    {
+      "selector": ".department-card select",
+      "computed": {
+        "text": "부서 선택출고 운영배송 운영고객 지원",
+        "fontFamily": "\"Pretendard Variable\", Pretendard, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Apple SD Gothic Neo\", \"Malgun Gothic\", sans-serif",
+        "fontSize": "13px",
+        "fontWeight": "500",
+        "lineHeight": "normal"
+      },
+      "platformFonts": [
+        {
+          "familyName": "Segoe UI Semibold",
+          "postScriptName": "SegoeUI-Semibold",
+          "isCustomFont": false,
+          "glyphCount": 1
+        },
+        {
+          "familyName": "Malgun Gothic",
+          "postScriptName": "MalgunGothic",
+          "isCustomFont": false,
+          "glyphCount": 4
+        }
+      ]
+    },
+    {
+      "selector": ".review-check span",
+      "computed": {
+        "text": "점포·상품·전달 부서를 원문과 대조하고, 접수 정보를 편집·확인했습니다.",
+        "fontFamily": "\"Pretendard Variable\", Pretendard, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Apple SD Gothic Neo\", \"Malgun Gothic\", sans-serif",
+        "fontSize": "12px",
+        "fontWeight": "500",
+        "lineHeight": "18.6px"
+      },
+      "platformFonts": [
+        {
+          "familyName": "Segoe UI Semibold",
+          "postScriptName": "SegoeUI-Semibold",
+          "isCustomFont": false,
+          "glyphCount": 11
+        },
+        {
+          "familyName": "Malgun Gothic",
+          "postScriptName": "MalgunGothic",
+          "isCustomFont": false,
+          "glyphCount": 29
+        }
+      ]
+    }
+  ],
+  "server": {
+    "startedAt": "2026-09-21T12:04:28.280194+00:00",
+    "pid": 3048,
+    "ports": [
+      8921,
+      8922,
+      8923,
+      8924
+    ],
+    "buildStamp": {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "completedAt": "2026-09-21T11:51:42.931661+00:00",
+      "nextPublicApiBase": "",
+      "outputFileCount": 26,
+      "outputFingerprint": "65c40b09aa68ef178eca9d73847c68a92cf237910b65c9040b79c3ba1d2fe40a",
+      "recordDigest": "19110e15a537fa4c7bbbec5726c208f2264c4aa2756e2850c68acb313748b854",
+      "schemaVersion": "oneflow-next-build-v1",
+      "sourceAfter": "a519e346e7a097f00961441373e858a088d86bce119640531fecd10762441292",
+      "sourceBefore": "a519e346e7a097f00961441373e858a088d86bce119640531fecd10762441292",
+      "status": "complete"
+    },
+    "backendHashes": {
+      "server/analysis_schema.py": "ed155f5d3b89f537844db5d882501a0901b428c1c6c0bbd896be7a9b267c7167",
+      "server/app.py": "7eef1605a0a1e0e9c027dc70d27874991034a635009def5af8c7b1be5028beae",
+      "server/budget.py": "961409c916801d2d133785119ce58232170686caa3eeb3b75ec4488031dfdaf0",
+      "server/cas_budget.py": "4191432f59b0157867d39303cfd6e9720a43656459785992f9d7e5d944f05036",
+      "server/cas_repository.py": "e1b06fa0c558424c354abccfbe675b9cb9ceb0c4f4d84b8a3fae7860f3079d66",
+      "server/cas_store.py": "939c7210ec1d2c1f406f69754b832268d1fb0cb8e3d925b6cf235fbe85a38ee7",
+      "server/claim_grounding.py": "c98947e06f567560c2d89eb3f75561a9d6bf78e98e42bf774784f60e42b3243e",
+      "server/deployment_access.py": "299c1432484598c86b9ec19541f8a187404eb6907f2fe140775901910fee1935",
+      "server/deployment_app.py": "0e576b81725f83434d459f201075de4ff03f635f800d59d49ef0c11b08db0382",
+      "server/errors.py": "dae0dac1eeba6c6f3687c8cebcd32db8de17e3bde330c44e9bf170e215cdf01d",
+      "server/handlers.py": "eda5dd598fb892945b959b14624d2981d33dc7bc99cea2a99f0278b25e078e63",
+      "server/intake_idempotency.py": "1a7519ed664bc0f35c482cbb25ec8c23544856f08ba0797d67b8cda1d1635a57",
+      "server/live.py": "51cbce2c274436803d9ecca5ea6adaa6684073605d64cac06ff04b53b0dd6e51",
+      "server/repository.py": "a9eae0440d133db9fa2dac7ea99d224e62dde2aa40327efa869e1218000eb232",
+      "server/runtime_config.py": "82a24e6ec92c00c945d84fed7cb494e9baf8866dfd3b2d66ef5ef2eed5425f3f",
+      "server/runtime_storage.py": "2ee19f31430891a0560f3c226b20c9c1b5f92769201454f5e2274309dde9e45b",
+      "server/service.py": "e9eb913baeca788095a0dc39b9565df1a01458dd570aa973e5cfdc2967a39a5a",
+      "server/vercel_blob_store.py": "e425701497876ec5b9dc5988cae34b38b7b0bac233e75d804efe5e8c019ee93d",
+      "server/__init__.py": "b4c4a62ab2ea460cda3dddadcda2d33254eab2c0c91541ae38b4134014f9bdac",
+      "server/openapi.yaml": "df5d5258c3dff290fd4d4e2720c3a824c41bf479f5cf63a24c3880126c5c8b70"
+    },
+    "fixtureSha256": "79c3b01aed139352b5cc0a695f2829e76f78eabb61d7cfd6b8055db32f61a73b",
+    "mediaHashes": {
+      "demo/CASE-0001.wav": "d4eeb6448ff8969f27034ecade9a050ee212468585c6300b19c9a0ebdc372931",
+      "demo/CASE-0002.wav": "333897f4f10426674ec97b9e3a44c2f8da21f1f7931b4f911c82a29abcf6b914",
+      "demo/sorter-demo.mp4": "e6cad3cf9f999b596a0fef3e3d463170e0d279568a31a4be49366e5383908881"
+    },
+    "staticSnapshot": "C:\\Users\\choi8\\AppData\\Local\\Temp\\oneflow-rehearsal-9m8yhqyz\\static",
+    "temporaryStateRoot": "C:\\Users\\choi8\\AppData\\Local\\Temp\\oneflow-rehearsal-9m8yhqyz",
+    "statePreserved": true,
+    "cleanupPolicy": "preserve-new-run-no-delete",
+    "mode": "isolated-replay-only",
+    "existingProcessesTouched": false,
+    "keyReads": 0,
+    "paidCalls": 0,
+    "budgetLedgerCreated": false
+  },
+  "serverProcess": {
+    "ProcessId": 3048,
+    "ParentProcessId": 24592,
+    "CommandLine": "\"C:\\Users\\choi8\\AppData\\Roaming\\uv\\python\\cpython-3.12.14-windows-x86_64-none\\python.exe\" tests/helpers/rehearsal_server.py --port 8921 --metadata C:\\00.프로젝트\\happycall-ralphthon\\reports\\e2e\\prototype-independent-fonts-20260921-2105\\server.json --preserve-state"
+  },
+  "fontAvailability": {
+    "Pretendard Variable": true,
+    "Pretendard": true,
+    "Segoe UI": true,
+    "Malgun Gothic": true,
+    "Batang": true,
+    "Gulim": true
+  },
+  "finishedAt": "2026-09-21T12:04:30.596Z"
+}

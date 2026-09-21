@@ -8,3 +8,4 @@
 
 # Hash-bearing rehearsal evidence preserves its observed bytes across PCs.
 reports/e2e/rehearsal-*/** -text
+reports/e2e/prototype-*/** -text

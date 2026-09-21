@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from 'react';
 import type { CaseData, Evidence } from '@/lib/types';
+import { ApiError } from '@/lib/api';
 import overlay from '../../../data/overlays/pc4-tms.json';
 import fixtureData from '../../../data/fixtures/cases.json';
 import styles from './TmsScene.module.css';
@@ -185,7 +186,7 @@ function TmsContent({ caseData, onLinkEvidence, onBack }: Props) {
       await onLinkEvidence(item.id);
       if (mounted.current) { setLinked(current => [...current, item.id]); setMessage(`${item.label} 근거를 ${caseData.id} 상담에 연결했습니다.`); }
     } catch (cause) {
-      if (mounted.current) setError(`근거 연결 실패: ${cause instanceof Error ? cause.message : '저장 응답을 받지 못했습니다.'} 연결되지 않았습니다. 같은 버튼으로 재시도할 수 있습니다.`);
+      if (mounted.current) setError(`${cause instanceof Error ? cause.message : '저장 응답을 확인하지 못했습니다.'} ${cause instanceof ApiError && !cause.uncertain ? '안내 내용을 확인한 뒤 다시 시도해 주세요.' : '상단의 목록 새로고침으로 최신 접수를 조회해 연결 여부를 먼저 확인해 주세요.'}`);
     } finally { busy.current = false; if (mounted.current) setPending(null); }
   }
 

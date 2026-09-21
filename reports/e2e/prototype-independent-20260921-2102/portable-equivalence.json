@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "method": "Exact line comparison after excluding listed path/environment-only declarations",
+  "excludedPrefixes": [
+    "import { chromium }",
+    "import { fileURLToPath }",
+    "const root =",
+    "const port =",
+    "assert.ok(Number.isInteger(port)",
+    "const out =",
+    "const base =",
+    "const server = spawn(",
+    "browser=await chromium.launch(",
+    "await context.route('**/*',"
+  ],
+  "businessLinesCompared": 69,
+  "checkCallLines": 23,
+  "originalSha256": "b05eb039172f118099cf32a4b60444f48ea43d96d17eed83de59f45ccb6ac331",
+  "portableSha256": "9f96a95a01c484b80fbd191d8de5033c0a7472039eb71db25acbe239a60fa9eb",
+  "runtimeRerun": false,
+  "limitation": "Portability syntax and unchanged business assertions verified; another PC execution remains separate."
+}
