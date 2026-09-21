@@ -94,8 +94,31 @@ def environment(export_dir):
 
 
 @pytest.fixture
-def app(environment):
-    return deployment.create_deployment_app(environ=environment, api_app=EchoAPI())
+def legacy_media_manifest(export_dir):
+    """The three-file test export owns its descriptors; no repository media is read."""
+    from server.media_contract import MEDIA_NAMES
+    assets = []
+    for name in MEDIA_NAMES:
+        content = (export_dir / "demo" / name).read_bytes()
+        assets.append({"name": name, "bytes": len(content),
+                       "sha256": hashlib.sha256(content).hexdigest(), "synthetic": True})
+    return {"schemaVersion": 1, "repository": "cjj0202-glitch/happycall-ralphthon",
+            "releaseTag": "demo-media-20260921-audio-v3", "assets": assets}
+
+
+@pytest.fixture
+def app(environment, legacy_media_manifest):
+    return deployment.create_deployment_app(environ=environment, api_app=EchoAPI(),
+                                            media_manifest=legacy_media_manifest)
+
+
+def test_explicit_legacy_export_does_not_load_packaged_registration(request, monkeypatch):
+    forbidden = Mock(side_effect=AssertionError("Explicit test export must not load packaged media"))
+    monkeypatch.setattr(deployment, "_packaged_manifest", forbidden)
+    application = request.getfixturevalue("app")
+    assert authenticated(application, path="/demo/sorter-demo.mp4").content == MEDIA
+    assert authenticated(application, path="/demo/sorter-demo.tracks.json").status_code == 404
+    forbidden.assert_not_called()
 
 
 @pytest.mark.parametrize("method,path", [("GET", "/"), ("HEAD", "/"), ("GET", "/cases.json"),
@@ -268,44 +291,50 @@ def test_replaced_required_file_symlink_is_blocked_after_start(app, export_dir, 
     ("ONEFLOW_ACCESS_PASSWORD", "replace-with-a-secure-password-123456789!"),
     ("ONEFLOW_ACCESS_PASSWORD", "ChangeMe-1234567890-Secret!"),
     ("ONEFLOW_ACCESS_PASSWORD", PASSWORD + "\n")])
-def test_invalid_access_configuration_fails_without_echo(environment, key, value):
+def test_invalid_access_configuration_fails_without_echo(environment, legacy_media_manifest, key, value):
     with pytest.raises(ValueError) as caught:
-        deployment.create_deployment_app(environ={**environment, key: value}, api_app=EchoAPI())
+        deployment.create_deployment_app(environ={**environment, key: value}, api_app=EchoAPI(),
+                                         media_manifest=legacy_media_manifest)
     assert str(caught.value) == access.ACCESS_ERROR
     assert PASSWORD not in str(caught.value)
 
 
 @pytest.mark.parametrize("key", ["ONEFLOW_STATIC_DIR", "ONEFLOW_ACCESS_USER", "ONEFLOW_ACCESS_PASSWORD"])
-def test_missing_environment_is_not_recovered_from_local_file(environment, key):
+def test_missing_environment_is_not_recovered_from_local_file(environment, legacy_media_manifest, key):
     environment.pop(key)
     with pytest.raises(ValueError):
-        deployment.create_deployment_app(environ=environment, api_app=EchoAPI())
+        deployment.create_deployment_app(environ=environment, api_app=EchoAPI(),
+                                         media_manifest=legacy_media_manifest)
 
 
 @pytest.mark.parametrize("value", ["", "apps/web/out", "../out", "missing-synthetic-export", "\x00"])
-def test_invalid_static_configuration_fails_without_echo(environment, value):
+def test_invalid_static_configuration_fails_without_echo(environment, legacy_media_manifest, value):
     with pytest.raises(ValueError) as caught:
-        deployment.create_deployment_app(environ={**environment, "ONEFLOW_STATIC_DIR": value}, api_app=EchoAPI())
+        deployment.create_deployment_app(environ={**environment, "ONEFLOW_STATIC_DIR": value}, api_app=EchoAPI(),
+                                         media_manifest=legacy_media_manifest)
     assert str(caught.value) == deployment.STATIC_ERROR
 
 
 @pytest.mark.parametrize("relative", [*deployment.REQUIRED_FILES, "_next/static/chunks/app.js",
                                     "_next/static/css/app.css"])
-def test_missing_export_component_prevents_startup(environment, export_dir, relative):
+def test_missing_export_component_prevents_startup(environment, export_dir, legacy_media_manifest, relative):
     (export_dir / relative).unlink()
     with pytest.raises(ValueError, match="ONEFLOW_STATIC_DIR"):
-        deployment.create_deployment_app(environ=environment, api_app=EchoAPI())
+        deployment.create_deployment_app(environ=environment, api_app=EchoAPI(),
+                                         media_manifest=legacy_media_manifest)
 
 
-def test_empty_export_component_and_symlink_root_prevent_startup(environment, export_dir, tmp_path):
+def test_empty_export_component_and_symlink_root_prevent_startup(environment, export_dir, legacy_media_manifest, tmp_path):
     (export_dir / "index.html").write_bytes(b"")
     with pytest.raises(ValueError, match="ONEFLOW_STATIC_DIR"):
-        deployment.create_deployment_app(environ=environment, api_app=EchoAPI())
+        deployment.create_deployment_app(environ=environment, api_app=EchoAPI(),
+                                         media_manifest=legacy_media_manifest)
     (export_dir / "index.html").write_bytes(b"<html/>")
     root_link = tmp_path / "linked-export"
     physical_symlink(root_link, export_dir, directory=True)
     with pytest.raises(ValueError, match="ONEFLOW_STATIC_DIR"):
-        deployment.create_deployment_app(environ={**environment, "ONEFLOW_STATIC_DIR": str(root_link)}, api_app=EchoAPI())
+        deployment.create_deployment_app(environ={**environment, "ONEFLOW_STATIC_DIR": str(root_link)}, api_app=EchoAPI(),
+                                         media_manifest=legacy_media_manifest)
 
 
 def test_static_mutation_methods_are_not_allowed(app):
@@ -327,11 +356,12 @@ def test_synthetic_link_detection_denies_file_directory_and_root(app, export_dir
 
 
 @pytest.mark.parametrize("kind", ["is_symlink", "is_junction"])
-def test_synthetic_link_export_fails_startup(environment, export_dir, monkeypatch, kind):
+def test_synthetic_link_export_fails_startup(environment, export_dir, legacy_media_manifest, monkeypatch, kind):
     original = getattr(Path, kind)
     monkeypatch.setattr(Path, kind, lambda path: path == export_dir or original(path))
     with pytest.raises(ValueError, match="ONEFLOW_STATIC_DIR"):
-        deployment.create_deployment_app(environ=environment, api_app=EchoAPI())
+        deployment.create_deployment_app(environ=environment, api_app=EchoAPI(),
+                                         media_manifest=legacy_media_manifest)
 
 
 def test_websockets_are_always_closed(app):
@@ -344,7 +374,7 @@ def test_websockets_are_always_closed(app):
 
 
 @pytest.fixture
-def real_api_app(environment, tmp_path, monkeypatch):
+def real_api_app(environment, legacy_media_manifest, tmp_path, monkeypatch):
     from server import handlers
     from server.repository import JsonCaseRepository
     from server.service import CaseService
@@ -358,7 +388,7 @@ def real_api_app(environment, tmp_path, monkeypatch):
     async def health():
         return {"status": "synthetic", "budget": {"marker": "private-synthetic-budget"}}
     monkeypatch.setattr(handlers, "health", health)
-    yield deployment.create_deployment_app(environ=environment), service
+    yield deployment.create_deployment_app(environ=environment, media_manifest=legacy_media_manifest), service
     analyzer.analyze.assert_not_called()
 
 
@@ -403,7 +433,7 @@ def test_real_api_role_and_revision_denials_survive_outer_basic_auth(real_api_ap
     assert close.status_code == 403 and close.json()["error"]["code"] == "CENTER_ROLE_REQUIRED"
 
 
-def test_guard_mutations_are_killed_with_unchanged_control(environment, export_dir):
+def test_guard_mutations_are_killed_with_unchanged_control(environment, export_dir, legacy_media_manifest):
     """Execute memory-only mutants; never rewrite repository source during verification."""
     access_source = Path(access.__file__).read_text(encoding="utf-8")
     app_source = Path(deployment.__file__).read_text(encoding="utf-8")
@@ -424,12 +454,14 @@ def test_guard_mutations_are_killed_with_unchanged_control(environment, export_d
         assert authenticated(app, path="/api/cases").status_code == 200
 
     def original_path(module):
-        app = module.create_deployment_app(environ=environment, api_app=EchoAPI())
+        app = module.create_deployment_app(environ=environment, api_app=EchoAPI(),
+                                           media_manifest=legacy_media_manifest)
         assert authenticated(app, path="/api/cases").json()["path"] == "/api/cases"
 
     def secret_denied(module):
         (export_dir / "private.json").write_text('{"syntheticSecret":"never-serve"}', encoding="utf-8")
-        app = module.create_deployment_app(environ=environment, api_app=EchoAPI())
+        app = module.create_deployment_app(environ=environment, api_app=EchoAPI(),
+                                           media_manifest=legacy_media_manifest)
         assert authenticated(app, path="/private.json").status_code == 404
 
     mutations = [
@@ -450,17 +482,16 @@ def test_guard_mutations_are_killed_with_unchanged_control(environment, export_d
 
 
 @pytest.fixture
-def tracks_registration(export_dir):
-    from server.media_contract import MEDIA_NAMES, TRACKS_NAME, TRACKS_URL
+def tracks_registration(export_dir, legacy_media_manifest):
+    """Registered sidecar coverage stays separate from the legacy three-file fixture."""
+    from server.media_contract import TRACKS_NAME, TRACKS_URL
     tracks = b'{"syntheticM4Fixture":"opaque-sidecar"}'
     (export_dir / "demo" / TRACKS_NAME).write_bytes(tracks)
     digest = hashlib.sha256(MEDIA).hexdigest()
-    assets = [{"name": name, "bytes": len(MEDIA), "sha256": digest, "synthetic": True}
-              for name in MEDIA_NAMES]
-    assets[-1]["tracks"] = {"schemaVersion": "oneflow-cctv-tracks-v1", "url": TRACKS_URL,
+    manifest = copy.deepcopy(legacy_media_manifest)
+    manifest["assets"][-1]["tracks"] = {"schemaVersion": "oneflow-cctv-tracks-v1", "url": TRACKS_URL,
         "bytes": len(tracks), "sha256": hashlib.sha256(tracks).hexdigest(), "videoSha256": digest}
-    return {"schemaVersion": 1, "repository": "cjj0202-glitch/happycall-ralphthon",
-            "releaseTag": "demo-media-20260921-audio-v3", "assets": assets}, tracks
+    return manifest, tracks
 
 
 def test_tracks_absent_registration_denies_even_if_cases_advertise_it(export_dir):
@@ -513,8 +544,10 @@ def test_injected_tracks_descriptor_is_never_exempt(export_dir, tracks_registrat
         deployment.DeploymentRouter(EchoAPI(), export_dir, media_manifest=invalid)
 
 
-def test_packaged_manifest_is_known_path_and_uses_same_validator(environment, tmp_path, monkeypatch, tracks_registration):
+@pytest.mark.parametrize("tag", ["demo-media-20260921-audio-v3", "demo-media-20260922-v4"])
+def test_packaged_manifest_is_known_path_and_uses_same_validator(environment, export_dir, tmp_path, monkeypatch, tracks_registration, tag):
     manifest, tracks = tracks_registration
+    manifest["releaseTag"] = tag
     package = tmp_path / "synthetic-package"
     (package / "data").mkdir(parents=True)
     monkeypatch.setattr(deployment, "PACKAGE_ROOT", package)
@@ -524,6 +557,11 @@ def test_packaged_manifest_is_known_path_and_uses_same_validator(environment, tm
     path.write_text(json.dumps(manifest), encoding="utf-8")
     registered = deployment.create_deployment_app(environ=environment, api_app=EchoAPI())
     assert authenticated(registered, path="/demo/sorter-demo.tracks.json").content == tracks
+    video = export_dir / "demo/sorter-demo.mp4"
+    video.write_bytes(b"!" * len(MEDIA))
+    with pytest.raises(ValueError, match="integrity"):
+        deployment.create_deployment_app(environ=environment, api_app=EchoAPI())
+    video.write_bytes(MEDIA)
     manifest["assets"][-1]["tracks"]["bytes"] = True
     path.write_text(json.dumps(manifest), encoding="utf-8")
     for args in ({}, {"media_manifest": manifest}):
