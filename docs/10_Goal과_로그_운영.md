@@ -1,5 +1,7 @@
 # Goal 원문·실행 근거·로그 제출 운영
 
+**현재 실행 상태:** 2026-09-21 17:22:02 KST 실제 Goal이 시작됐고, 18:48 `get_goal`에서 active와 원문을 재확인했습니다. [실제 시작 기록](../reports/goal-start-20260921.md), 로컬 `.local/submission/goal-used.md`와 `goal-changes.md`를 구분해 보존했습니다. 18:49 주로그의 로컬 중간 사본·해시·JSONL 형식을 검사했으며 [로그 준비 보고](../reports/log-readiness.md)에 기록합니다. 비밀정보 검토·HowLong 실팀 분석·공식 제출은 별도 미완료입니다. 아래 실행 전 절차는 과거/새 Goal용이며 현재 Goal을 미실행으로 표현하는 근거가 아닙니다.
+
 ## 1. 실행 전
 
 `GOAL.md`는 최신 요구·방법론·배점·완료선을 담은 전체 **미실행 초안**입니다. 실제 Goal 시작 요청으로 실행한 뒤, 입력 원문 전체를 `.local/submission/goal-used.md`에 보존합니다. DEC-013의 일반 대화 기반 구현 착수는 Goal 실행이 아니며, 과거 작업에 Goal을 소급하지 않습니다. 이후 지시를 수정하면 원문을 덮어써서 과거 입력처럼 만들지 말고 시각·변경 내용·이유를 `.local/submission/goal-changes.md`에 추가합니다. 제출란에는 실제 사용 원문을 넣습니다.
