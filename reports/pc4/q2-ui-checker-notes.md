@@ -17,7 +17,7 @@ node tests/remote/pc4/flow-ui-check.mjs --self-test
 
 브라우저, 서버, 빌드, 제품 API, 음성/영상 재생은 이번 준비에서 **0회 실행**했다. 제품 전체 흐름은 계획 6회 / 실행 0회 / 통과 0회 / 실패 0회 / NOT_RUN 6회다. 경계 검사는 계획 15개 / 실행 0개다. 유료 호출도 0회다.
 
-검사기 SHA-256: `cb533e59e2db918e6385f9ccecb250e88c7eba127dddd7b41002af642a6bfa97`.
+검사기 SHA-256: `b64bf8e028f187829acdca3f243e37e382996b4f6e99e45cd4ca4c14d19a845e`.
 
 ## 실행 입력과 격리
 
