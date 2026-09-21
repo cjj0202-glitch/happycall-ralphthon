@@ -4,6 +4,8 @@
 
 **현재 우선순위:** 공식 CLOVA 음원 수신·최종 두 흐름 시연·영속 저장과 배포. 알림 의도 저장·역할별 표시가 포함된 새 생산 묶음과 PC3 v4 수신 보고는 아래 한정 범위로 인수했습니다.
 
+**현행 통화 실제 STT·정제 검증 (2026-09-22 04:13):** 현재 WAV2개를 각각1회 실제 전사→정제했습니다(API4호출 성공). 사전 oracle의12필드 중8통과/4실패이며 CASE2 요청은 비연속 인용 거부로null, 제목은 서버 덮어쓰기로 확인 목적이 누락됐습니다.1BOX 값은 맞지만 화자 귀속은 미달입니다. 코드/모델 정확도 통과로 처리하지 않고 [실제 결과](reports/evaluation/voice-canary-20260922-review.md)와 [후속 상세설계](planning/multi-request-provenance.md)에 기록했습니다. 기존 원장29.20/30달러,80센트를 남깁니다. PC2 독립 경계셋 계약은 [N02-R1](reports/channel/N02-R1-multiple-request-contract.md)이며 실제 발송/ACK/인수는 [기존 #8](https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8)의 증거로 구분합니다.
+
 **최신 보호 Preview 배포 (2026-09-22 04:01):** 고정3cf7b0a·v4/알림/배속/요청 수정 묶음을 [새 Preview](https://g-28-lg9o6yhjv-52g-studio.vercel.app)에 실제 배포했습니다. API에서 READY·Preview·project 일치, 원격 정적27/27파일·영상 Range2/2·인증 보호를 확인했습니다. 연결 저장소0, 접수API503 STORAGE_CONFIG_INVALID로 전체 저장 흐름·클라우드 실모델·최종 Production은 미완료입니다. [배포·HTTP 범위와 증거](reports/deployment/protected-preview-refresh-20260922.md).
 
 **명사형 요청·취소 보완 (2026-09-22 03:54):** 명사형 정보문의가 별도 반송 취소 때문에 지워지는 P2와, 기존 명령형에서 `시각과` 등 복합 취소를 놓치는 P1을 수정했습니다. 수정 전9실패를 고정하고 요청28PASS/116하위사례·영향111PASS/250하위사례, 별도50+16입력/통합12건과 변이를 확인했습니다. 제한된 코드 계약 인수이며 기존 실행API·새 실모델 효과는 별도입니다. 위 새 Preview 묶음에는 포함됐지만 저장소503으로 원격 업무 흐름 검증은 미완료입니다. [상세 설계](planning/nominal-request-cancellation.md) · [실패·독립 인수](reports/nominal-request-cancellation.md).

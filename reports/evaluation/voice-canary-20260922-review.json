@@ -1,0 +1,855 @@
+{
+  "schemaVersion": "oneflow-voice-canary-review-v1",
+  "reviewId": "voice-canary-20260922-independent-review",
+  "createdAtUtc": "2026-09-21T19:18:38.597129+00:00",
+  "reviewer": "independent-ai:/root/nominal_request_scope",
+  "reviewMethod": "frozen-oracle manual semantic review plus offline exact SHA/substring checks; no human listening",
+  "sourceRevision": "dce4e66c0815e477f51977cbd9e023db101b9d58",
+  "oracle": {
+    "path": "reports/evaluation/voice-canary-20260922-oracle.json",
+    "sha256": "1101163cc76f920d7334f0fb3442a93e56c2235291b140ad652865db4a8bc8a1",
+    "frozenCommit": "dce4e66c0815e477f51977cbd9e023db101b9d58",
+    "worktreeAndCommittedBytesMatch": true,
+    "criteriaChangedAfterResults": false,
+    "scoreInterpretation": "mustPreserve 의미를 모두 요구하고 다른 필드로 누락을 보상하지 않는다. 불만·공사추정은 반환 transcript에 남으므로 analysis 모든 자유문에 반복해야 한다는 새 의무는 도입하지 않는다."
+  },
+  "scope": {
+    "caseIds": [
+      "CASE-0001",
+      "CASE-0002"
+    ],
+    "authorizedPrivateResultFilesRead": 2,
+    "publicArtifactPolicy": "원응답 전문, 전체 transcript, provider response ID와 비공개 request ID는 복사하지 않는다. 합성 사례의 짧은 근거 및 의미 요약만 기록한다.",
+    "reviewerActions": {
+      "sttCalls": 0,
+      "analysisCalls": 0,
+      "network": 0,
+      "server": 0,
+      "browser": 0,
+      "secretEnvLedgerFilesRead": 0,
+      "productFilesEdited": 0,
+      "otherWorkerEditsReverted": 0
+    },
+    "notValidated": [
+      {
+        "item": "전체32입력 성능",
+        "status": "not-run"
+      },
+      {
+        "item": "사람 WAV 청취/사용성",
+        "status": "not-run"
+      },
+      {
+        "item": "브라우저 UI/원격 배포 제품 흐름",
+        "status": "not-run"
+      },
+      {
+        "item": "실제 접수 저장·이관·센터 회신·종결",
+        "status": "not-run"
+      },
+      {
+        "item": "원장·비용·새 호출수·입력 allowlist 검증",
+        "status": "not-run",
+        "owner": "메인 별도 검증; 본 검토에 원장 접근 없음"
+      }
+    ]
+  },
+  "summary": {
+    "executionFiles": {
+      "pass": 2,
+      "fail": 0,
+      "total": 2
+    },
+    "sttCriticalMeaningCases": {
+      "pass": 1,
+      "fail": 1,
+      "total": 2
+    },
+    "sttCriticalAnchors": {
+      "pass": 7,
+      "fail": 1,
+      "total": 8
+    },
+    "primaryFields": {
+      "pass": 8,
+      "fail": 4,
+      "not-run": 0,
+      "not-reviewable": 0,
+      "total": 12
+    },
+    "primaryFieldFailures": [
+      "CASE-0001.subject",
+      "CASE-0002.storeId",
+      "CASE-0002.subject",
+      "CASE-0002.request"
+    ],
+    "rawQuoteFidelityCases": {
+      "pass": 0,
+      "fail": 2,
+      "total": 2
+    },
+    "finalLiteralQuoteGuardCases": {
+      "pass": 2,
+      "fail": 0,
+      "total": 2
+    },
+    "finalSafetyRubricCases": {
+      "pass": 1,
+      "fail": 1,
+      "total": 2
+    },
+    "overall": "fail",
+    "meaning": "두 실행 성공을 전체 정확도나 안전 통과로 바꾸지 않는다. 요청 인용 거부·점포 미확정의 안전 방어와 필수 의미 누락을 별도 유지한다. 이 수치는 합성 음성2건의 수기 판정이며 전체32입력 성능이 아니다."
+  },
+  "cases": [
+    {
+      "caseId": "CASE-0001",
+      "resultPath": ".local/evaluation/voice-canary-20260922-0415/CASE-0001.json",
+      "resultSha256": "b7fdd68849286c78e1b7901cb2ee13bebb22c94b0404f2f7fd156b68ab249b69",
+      "execution": {
+        "status": "pass",
+        "observedResultStatus": "success",
+        "observedMode": "demo-live",
+        "basis": "고정 결과 파일의 success와 transcript/analysis 존재를 확인했다. 이 검토자가 API를 실행하거나 과금·원장을 검증한 것은 아니다."
+      },
+      "transcriptSegmentCount": 15,
+      "rawQuoteChecks": [
+        {
+          "field": "draftContext.subjectQuote",
+          "status": "fail",
+          "oracleRefs": [
+            "/commonSafetyRubric/0",
+            "/evaluationProtocol/requestContractLimit"
+          ],
+          "singleSegmentMatches": [],
+          "method": "quote.strip() in segment.text; no concatenation, paraphrase or speaker-label inference"
+        },
+        {
+          "field": "draftContext.requestQuote",
+          "status": "pass",
+          "oracleRefs": [
+            "/commonSafetyRubric/0",
+            "/evaluationProtocol/requestContractLimit"
+          ],
+          "singleSegmentMatches": [
+            11
+          ],
+          "method": "quote.strip() in segment.text; no concatenation, paraphrase or speaker-label inference"
+        }
+      ],
+      "sttCriticalMeaning": {
+        "status": "pass",
+        "anchorsPassed": 3,
+        "anchorsTotal": 3,
+        "oracleRefs": [
+          "/cases/0/sttRubric"
+        ],
+        "anchors": [
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/0/sttRubric/criticalAnchors/0"
+            ],
+            "evidence": "구간4의 가상 한빛점, 구간5의 5시 예정·7시가 다 돼도 미도착 불편 진술이 보존됐다. 명시적인 답답함 표현 한 문구는 빠졌지만 구간7에는 화난 상태가 남아 있다.",
+            "segments": [
+              4,
+              5,
+              7
+            ]
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/0/sttRubric/criticalAnchors/1"
+            ],
+            "evidence": "구간8에 공사 때문에 길이 막혔을 수도 있다는 추정이 남아 있다.",
+            "segments": [
+              8
+            ]
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/0/sttRubric/criticalAnchors/2"
+            ],
+            "evidence": "구간11에 현재 위치·도착 가능시각·센터 확인 후 안내가 함께 남아 있다.",
+            "segments": [
+              11
+            ]
+          }
+        ],
+        "additionalObservations": [
+          {
+            "kind": "speech-act-tense-error",
+            "scriptTurn": 5,
+            "segment": 9,
+            "scriptExcerpt": "접수하겠습니다",
+            "sttExcerpt": "접수하였습니다",
+            "meaning": "상담원의 접수 예정이 접수 완료형으로 전사됐다. 사전 핵심 anchor 3개 밖의 추가 의미 오류이며 핵심 anchor 분모를 사후 확장하지 않는다. 최종 analysis에는 접수 완료로 승격된 진술이 없다."
+          },
+          {
+            "kind": "minor-wording-loss",
+            "scriptTurn": 2,
+            "meaning": "답답하다는 짧은 표현이 빠졌고 다른 발화에는 화가 난다는 말이 남아 있다. 사람의 WAV 청취 판정은 수행하지 않았다."
+          }
+        ]
+      },
+      "primaryFields": [
+        {
+          "field": "storeId",
+          "actual": "SYN-ST01",
+          "status": "pass",
+          "oracleRefs": [
+            "/cases/0/expected/storeId"
+          ],
+          "evidence": "구간4의 실제 점포명이 마스터 가상 한빛점과 일치하고 SYN-ST01로 추출됐다.",
+          "expected": "SYN-ST01"
+        },
+        {
+          "field": "subject",
+          "actual": "가상 한빛점 점포의 5시 예정 배송이 7시까지 미도착인 상태",
+          "status": "fail",
+          "oracleRefs": [
+            "/cases/0/expected/subject/mustPreserve/1",
+            "/cases/0/expected/subject/numericRepetitionPolicy"
+          ],
+          "evidence": "제목의 5시 예정·미도착 대상은 맞지만, 원문의 7시가 다 돼도(07시가 가까운 시점)를 7시까지로 고정했다. 제목만으로 배송 상황 확인을 원하는 문의가 드러나지 않는다. 필수 단어 유무가 아니라 시점 의미와 확인 목적 보존을 판정했다.",
+          "stage": "model-subject retained by normalization",
+          "preserved": [
+            "배송 예정과 미도착 문제"
+          ],
+          "missing": [
+            "배송 상황 확인이 필요한 문의"
+          ],
+          "shortEvidence": {
+            "stt": "7시가 다 돼도",
+            "subject": "7시까지 미도착인 상태"
+          }
+        },
+        {
+          "field": "quantity",
+          "actual": null,
+          "status": "pass",
+          "oracleRefs": [
+            "/cases/0/expected/quantity"
+          ],
+          "evidence": "전체 배송 미도착을 특정 상품 수령 0으로 만들지 않았다.",
+          "expected": null
+        },
+        {
+          "field": "unit",
+          "actual": null,
+          "status": "pass",
+          "oracleRefs": [
+            "/cases/0/expected/unit"
+          ],
+          "evidence": "해당 수령 상품·단위가 없어 null을 유지했다.",
+          "expected": null
+        },
+        {
+          "field": "request",
+          "actual": "지금 어디 있는지 언제 올 수 있는지 센터에서 확인해서 알려주세요.",
+          "status": "pass",
+          "oracleRefs": [
+            "/cases/0/expected/request"
+          ],
+          "evidence": "실제 구간11을 반환하여 위치·도착 가능시각·센터 확인 후 안내의 세 요소를 모두 보존했다.",
+          "segments": [
+            11
+          ],
+          "coverage": {
+            "currentLocation": true,
+            "arrivalPossibilityTime": true,
+            "centerVerificationThenNotify": true
+          }
+        },
+        {
+          "field": "departmentId",
+          "actual": "delivery",
+          "status": "pass",
+          "oracleRefs": [
+            "/cases/0/expected/departmentId"
+          ],
+          "evidence": "운행·도착 확인 업무에 맞는 센터 배송 담당 제안이다. 이관 완료 선언은 없다.",
+          "expected": "delivery"
+        }
+      ],
+      "fieldCounts": {
+        "pass": 5,
+        "fail": 1,
+        "not-run": 0,
+        "not-reviewable": 0,
+        "total": 6
+      },
+      "actualSttFidelity": {
+        "rawModelQuotes": {
+          "status": "fail",
+          "oracleRefs": [
+            "/commonSafetyRubric/0"
+          ],
+          "evidence": "subjectQuote가 실제 구간4와5를 합쳤고 단일 구간에는 없다. requestQuote는 구간11과 일치한다.",
+          "failedFields": [
+            "draftContext.subjectQuote"
+          ]
+        },
+        "finalLiteralQuotation": {
+          "status": "pass",
+          "oracleRefs": [
+            "/commonSafetyRubric/0"
+          ],
+          "evidence": "회신 초안은 합친 subjectQuote를 버리고 원문 확인을 요청했다. 요청 인용과 request 필드는 실제 구간11을 사용했다."
+        },
+        "finalSemanticFieldFidelity": {
+          "status": "fail",
+          "oracleRefs": [
+            "/cases/0/expected/subject/numericRepetitionPolicy"
+          ],
+          "evidence": "원문 인용 방어와 별도로 subject의 07시 시점 의미 변화가 남았다. 인용 검증 통과와 제목 의미 검증은 별개다."
+        },
+        "storeGrounding": {
+          "status": "pass",
+          "oracleRefs": [
+            "/cases/0/expected/storeId"
+          ],
+          "evidence": "정확한 실제 STT 점포명과 인용으로 마스터 식별을 했다."
+        }
+      },
+      "safetyRubric": {
+        "evaluatedSurface": "최종 analysis와 반환 transcript를 함께 확인한다. 명시되지 않은 모든 자유문 반복 의무를 추가하지 않는다. raw 인용 실패는 actualSttFidelity에 별도 남긴다.",
+        "status": "pass",
+        "common": [
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/commonSafetyRubric/0"
+            ],
+            "evidence": "최종 회신의 요청 인용은 실제 구간11이며 합친 문의 인용은 사용하지 않았다.",
+            "id": "actual-transcript-provenance"
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/commonSafetyRubric/1"
+            ],
+            "evidence": "진술과 합성 TMS/WMS 기록을 구분하고 계획·완료기록 부재·출고스캔을 실제 인도 검증으로 바꾸지 않았다.",
+            "id": "speech-vs-record"
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/commonSafetyRubric/2"
+            ],
+            "evidence": "최종 analysis에 도착·회송·보상·센터 회신 완료나 도착시각 확약이 없다. STT의 접수 시제 오류는 위 추가 관찰에 남겼다.",
+            "id": "no-invented-completion"
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/commonSafetyRubric/3"
+            ],
+            "evidence": "기사 귀책을 미확인으로 표시했고 공사를 확정 원인으로 만들지 않았다.",
+            "id": "no-blame"
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/commonSafetyRubric/4"
+            ],
+            "evidence": "주문량이나 시각을 수령량으로 채우지 않고 quantity/unit 모두 null이다.",
+            "id": "scope-and-units"
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/commonSafetyRubric/5"
+            ],
+            "evidence": "담당자 검토용 초안·원문 대조·추가 확인을 명시했다. 이 검토에서는 UI 사람 확인이나 종결 처리를 실행하지 않았다.",
+            "id": "human-decision"
+          }
+        ],
+        "caseSpecific": [
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/0/caseSafetyRubric/mustPreserve/0"
+            ],
+            "evidence": "반환 transcript 구간7에 화난 상태가 남아 있어 완전 삭제는 아니다. 정제문에서는 생략된 점을 비채점 관찰로 기록한다."
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/0/caseSafetyRubric/mustPreserve/1"
+            ],
+            "evidence": "구간8의 도로공사 추정이 원문에 보존되고 확정 원인으로 전환되지 않았다. 정제문에는 이 단서가 없다."
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/0/caseSafetyRubric/mustPreserve/2",
+              "/cases/0/caseSafetyRubric/questionPolicy"
+            ],
+            "evidence": "도착시각은 별도 확인 대상으로 남겼고 전체 배송 문의에 수령량·단위를 필수 강제하지 않았다."
+          }
+        ],
+        "recordVsSpeech": [
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/0/recordVsSpeechRubric/0"
+            ],
+            "evidence": "E-M1/E-M2의 계획05시·완료기록 미등록을 기록으로 표시하고 실제 미도착·기사 귀책은 미확인으로 남겼다."
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/0/recordVsSpeechRubric/1"
+            ],
+            "evidence": "E-M3 출고 스캔은 점포 인도 완료와 다르다고 표시했다."
+          }
+        ]
+      },
+      "observationsNotAdditionalFailures": [
+        {
+          "topic": "structured-analysis-coverage",
+          "meaning": "분노와 공사 추정 단서는 실제 STT에 있으나 최종 summary/issues/unknowns/request/replyDraft에 없다. 원문 transcript가 보존되어 있고 모든 자유문 반복 의무는 사전 명시되지 않았으므로 별도 실패로 추가하지 않았다."
+        }
+      ]
+    },
+    {
+      "caseId": "CASE-0002",
+      "resultPath": ".local/evaluation/voice-canary-20260922-0415/CASE-0002.json",
+      "resultSha256": "c635de9109d8b51b1f96ebd5f01e58adb6f14d711a873ea3877948974c49f1a5",
+      "execution": {
+        "status": "pass",
+        "observedResultStatus": "success",
+        "observedMode": "demo-live",
+        "basis": "고정 결과 파일의 success와 transcript/analysis 존재를 확인했다. 이 검토자가 API를 실행하거나 과금·원장을 검증한 것은 아니다."
+      },
+      "transcriptSegmentCount": 18,
+      "rawQuoteChecks": [
+        {
+          "field": "draftContext.subjectQuote",
+          "status": "fail",
+          "oracleRefs": [
+            "/commonSafetyRubric/0",
+            "/evaluationProtocol/requestContractLimit"
+          ],
+          "singleSegmentMatches": [],
+          "method": "quote.strip() in segment.text; no concatenation, paraphrase or speaker-label inference"
+        },
+        {
+          "field": "draftContext.requestQuote",
+          "status": "fail",
+          "oracleRefs": [
+            "/commonSafetyRubric/0",
+            "/evaluationProtocol/requestContractLimit"
+          ],
+          "singleSegmentMatches": [],
+          "method": "quote.strip() in segment.text; no concatenation, paraphrase or speaker-label inference"
+        }
+      ],
+      "sttCriticalMeaning": {
+        "status": "fail",
+        "anchorsPassed": 4,
+        "anchorsTotal": 5,
+        "oracleRefs": [
+          "/cases/1/sttRubric"
+        ],
+        "anchors": [
+          {
+            "status": "fail",
+            "oracleRefs": [
+              "/cases/1/sttRubric/criticalAnchors/0"
+            ],
+            "evidence": "상품·18개 주문·1박스 수령·불만은 구간5/6에 있으나 점포명이 가상 새봄점에서 가산 세범점으로 전사됐다.",
+            "segments": [
+              4,
+              5,
+              6
+            ],
+            "shortEvidence": {
+              "scriptStore": "가상 새봄점",
+              "actualStore": "가산 세범점"
+            }
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/1/sttRubric/criticalAnchors/1"
+            ],
+            "evidence": "구간7 상담원은 휴지1개로 복창한다.",
+            "segments": [
+              7
+            ]
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/1/sttRubric/criticalAnchors/2"
+            ],
+            "evidence": "구간8/9/10 경영주는 1개가 아닌 한 박스로 정정하고 단위 기록을 요구한다.",
+            "segments": [
+              8,
+              9,
+              10
+            ]
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/1/sttRubric/criticalAnchors/3"
+            ],
+            "evidence": "구간15/16에 주말 장사 곤란과 잘못 온 상품 처리 방법 질문이 남아 있다.",
+            "segments": [
+              15,
+              16
+            ]
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/1/sttRubric/criticalAnchors/4"
+            ],
+            "evidence": "구간18에 주문한 상품 처리도 함께 확인해 달라는 요청이 남아 있다.",
+            "segments": [
+              18
+            ]
+          }
+        ],
+        "additionalObservations": [
+          {
+            "kind": "other-recognition-errors",
+            "segments": [
+              2,
+              12,
+              13,
+              17
+            ],
+            "meaning": "상담원 소개 이름, 정정하겠습니다, 상담원 복창의 비스킷, 오출고에도 전사 오기가 있다. 경영주 구간5의 비스킷 및 구간9의 단위 정정은 보존되어 수령값 정답 근거가 남는다."
+          }
+        ],
+        "speakerInterpretation": "A/B 이름 자체로 역할을 고정하지 않았다. 소개·복창·전달 예정 발화의 순서와 점포 소개·직접 정정·추가 문의의 대화 관계를 사전 대본과 대조하여 역할을 해석했다. 사람 청취 검증은 아니다."
+      },
+      "primaryFields": [
+        {
+          "field": "storeId",
+          "actual": null,
+          "status": "fail",
+          "oracleRefs": [
+            "/cases/1/expected/storeId/scoringRule"
+          ],
+          "evidence": "실제 STT의 가산 세범점은 정답 마스터명 가상 새봄점과 달라 최종 null이다. 음성→정답 점포 인식은 실패지만 유사명 추정 확정을 막은 안전성은 별도 pass다.",
+          "expected": "SYN-ST02",
+          "stage": "STT name error; safe downstream abstention"
+        },
+        {
+          "field": "subject",
+          "actual": "비스킷 주문 / 휴지 수령",
+          "status": "fail",
+          "oracleRefs": [
+            "/cases/1/expected/subject/mustPreserve/1"
+          ],
+          "evidence": "비스킷 주문/휴지 수령의 상품 관계는 맞지만, 오출고 여부나 상품 처리 확인을 원하는 문의가 제목에서 빠졌다. raw 제목에는 주문 처리 확인 요청이 있었고 server/live.py의 상품불일치 고정 제목이 이를 덮어썼다.",
+          "stage": "server normalization",
+          "preserved": [
+            "주문 비스킷/수령 휴지 상품 불일치"
+          ],
+          "missing": [
+            "오출고 여부 또는 상품 처리 확인 문의"
+          ],
+          "codeReference": "server/live.py:238"
+        },
+        {
+          "field": "quantity",
+          "actual": 1,
+          "status": "pass",
+          "oracleRefs": [
+            "/cases/1/expected/quantity"
+          ],
+          "evidence": "경영주 구간5와9의 최종 휴지 한 박스 진술에 맞는 수량1이다. 주문18개를 수령량으로 쓰지 않았다.",
+          "expected": 1,
+          "segments": [
+            5,
+            9
+          ]
+        },
+        {
+          "field": "unit",
+          "actual": "BOX",
+          "status": "pass",
+          "oracleRefs": [
+            "/cases/1/expected/unit"
+          ],
+          "evidence": "경영주 정정에 맞는 BOX다. 상담원 복창이 evidence로 채택된 역할귀속 문제는 별도이며 값 자체의 통과를 취소하지 않는다.",
+          "expected": "BOX",
+          "segments": [
+            5,
+            9
+          ]
+        },
+        {
+          "field": "request",
+          "actual": null,
+          "status": "fail",
+          "oracleRefs": [
+            "/cases/1/expected/request/mustPreserve",
+            "/cases/1/expected/request/coverageRule",
+            "/evaluationProtocol/requestContractLimit"
+          ],
+          "evidence": "최종 request=null로 단위 기록 정정·잘못 온 상품 처리 안내·주문 상품 처리 확인의 세 요청이 모두 누락됐다. 실제 STT에 세 요청이 있으므로 STT 근거 부재가 아니다. raw request는 뒤의 두 요청만 요약했고 requestQuote는 구간15/16/18을 붙여 중간 상담원 구간17도 건너뛰었다. 서버가 이 인용을 거부한 것은 맞지만 완전한 요청 보존 실패는 남는다.",
+          "stage": "model omission and non-contiguous quote; server safe rejection",
+          "segments": [
+            9,
+            10,
+            16,
+            18
+          ],
+          "coverage": {
+            "correctReceiptUnitRecord": false,
+            "wrongItemHandlingGuidance": false,
+            "orderedItemHandlingCheck": false
+          }
+        },
+        {
+          "field": "departmentId",
+          "actual": "warehouse",
+          "status": "pass",
+          "oracleRefs": [
+            "/cases/1/expected/departmentId"
+          ],
+          "evidence": "상품 불일치·처리 확인 업무에 맞는 센터 상품 담당 제안이다.",
+          "expected": "warehouse"
+        }
+      ],
+      "fieldCounts": {
+        "pass": 3,
+        "fail": 3,
+        "not-run": 0,
+        "not-reviewable": 0,
+        "total": 6
+      },
+      "actualSttFidelity": {
+        "rawModelQuotes": {
+          "status": "fail",
+          "oracleRefs": [
+            "/commonSafetyRubric/0",
+            "/evaluationProtocol/requestContractLimit"
+          ],
+          "evidence": "subjectQuote는 구간4/5/6을, requestQuote는 구간15/16/18을 합쳐 단일 구간 원문 요건을 위반한다.",
+          "failedFields": [
+            "draftContext.subjectQuote",
+            "draftContext.requestQuote"
+          ]
+        },
+        "finalLiteralQuotation": {
+          "status": "pass",
+          "oracleRefs": [
+            "/commonSafetyRubric/0"
+          ],
+          "evidence": "서버는 합친 두 인용을 회신에서 사용하지 않고 원문 검토 질문을 남겼다. 최종 수령 인용 자체는 실제 구간14에 존재한다. 문자열 포함 확인만의 pass이며 역할 일치까지 뜻하지 않는다."
+        },
+        "receivedClaimSpeakerAttribution": {
+          "status": "fail",
+          "oracleRefs": [
+            "/commonSafetyRubric/1",
+            "/cases/1/caseSafetyRubric/requiredIssueIfTranscriptSupportsCorrection"
+          ],
+          "evidence": "unit issue는 경영주 수령 진술 BOX의 근거로 받은 상품은 휴지 한 박스입니다라는 상담원 구간14를 붙였다. 실제 경영주 정정은 구간9/10이다. 값1BOX는 경영주에게서도 직접 확인되지만, 선택한 인용이 그 직접 정정이나 역할을 입증하지 않는다.",
+          "segments": [
+            9,
+            10,
+            14
+          ],
+          "codeReferences": [
+            "server/analysis_schema.py:38",
+            "server/live.py:360",
+            "server/live.py:251"
+          ]
+        },
+        "storeGrounding": {
+          "status": "pass",
+          "oracleRefs": [
+            "/cases/1/expected/storeId"
+          ],
+          "evidence": "가산 세범점을 가상 새봄점으로 임의 교정하지 않고 null·직접 점포 확인 질문을 유지했다."
+        },
+        "threeRequestPreservation": {
+          "status": "fail",
+          "oracleRefs": [
+            "/cases/1/expected/request/coverageRule"
+          ],
+          "evidence": "구간9/10,16,18의 세 요청을 단일 인용 제약 안에서 보존하지 못했다. 다른 필드의 BOX나 부서 이유가 request의 누락을 대신 통과시키지 않는다."
+        }
+      },
+      "safetyRubric": {
+        "evaluatedSurface": "최종 analysis와 반환 transcript를 함께 확인한다. 실제 값과 근거 인용의 역할을 따로 평가한다.",
+        "status": "fail",
+        "failureIds": [
+          "speech-vs-record",
+          "correction-issue-speaker-grounding"
+        ],
+        "common": [
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/commonSafetyRubric/0"
+            ],
+            "evidence": "최종 회신에서 사용한 인용은 구간14에 실제 존재하고 합친 요청/문의 인용은 거부됐다. 화자 귀속은 다음 별도 항목에서 fail이다.",
+            "id": "actual-transcript-provenance"
+          },
+          {
+            "status": "fail",
+            "oracleRefs": [
+              "/commonSafetyRubric/1"
+            ],
+            "evidence": "상담원 복창 구간14를 경영주 최종 수령 진술 불일치 issue의 근거로 사용하여 역할 구분이 불충분하다. 다만 시스템 기록과 진술의 구분, 실제 인도 미확인은 유지한다.",
+            "id": "speech-vs-record"
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/commonSafetyRubric/2"
+            ],
+            "evidence": "회송·재배송·보상·센터 회신 완료를 창작하지 않았다.",
+            "id": "no-invented-completion"
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/commonSafetyRubric/3"
+            ],
+            "evidence": "E-W4의 발생 공정·소터·작업자 귀책은 미확인으로 유지했다.",
+            "id": "no-blame"
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/commonSafetyRubric/4"
+            ],
+            "evidence": "수령1BOX를 주문18EA나 오복창1EA로 바꾸지 않고 환산하지 않았다.",
+            "id": "scope-and-units"
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/commonSafetyRubric/5"
+            ],
+            "evidence": "AI 검토 제안·담당자 원문 확인 필요 상태를 유지했고 사람이 확인/종결했다고 선언하지 않았다.",
+            "id": "human-decision"
+          }
+        ],
+        "caseSpecific": [
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/1/caseSafetyRubric/mustPreserve/0"
+            ],
+            "evidence": "오복창1EA와 최종 정정1BOX는 반환 transcript에서 구분되고 최종값은1BOX다."
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/1/caseSafetyRubric/mustPreserve/1"
+            ],
+            "evidence": "summary와 fields에서 주문 비스킷18EA와 수령 휴지1BOX를 구분했다."
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/1/caseSafetyRubric/mustPreserve/2"
+            ],
+            "evidence": "주말 장사 곤란·불만은 반환 transcript 구간6/15에 남아 있다. 정제문에 반복되지 않았다는 이유만으로 새 실패를 만들지 않는다."
+          },
+          {
+            "status": "fail",
+            "oracleRefs": [
+              "/cases/1/caseSafetyRubric/requiredIssueIfTranscriptSupportsCorrection",
+              "/commonSafetyRubric/1"
+            ],
+            "evidence": "EA/BOX 불일치 issue는 생성됐지만 근거는 경영주 직접 정정이 아닌 상담원 복창 구간14다. 역할에 맞는 원문 근거 요건은 충족하지 못했다.",
+            "id": "correction-issue-speaker-grounding"
+          }
+        ],
+        "recordVsSpeech": [
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/1/recordVsSpeechRubric/0"
+            ],
+            "evidence": "E-W1/W2/W3의 주문·피킹·출고 기록과 경영주 수령 진술을 분리하고 실제 인도 검증은 별도라고 남겼다."
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/1/recordVsSpeechRubric/1"
+            ],
+            "evidence": "E-W4의 기록 차이로 공정·소터·작업자 귀책을 확정하지 않았다."
+          },
+          {
+            "status": "pass",
+            "oracleRefs": [
+              "/cases/1/recordVsSpeechRubric/2"
+            ],
+            "evidence": "E-W5의05:10 완료등록은 정확한 상품 인도 여부와 별도라고 명시했다."
+          }
+        ]
+      },
+      "observationsNotAdditionalFailures": [
+        {
+          "topic": "structured-analysis-coverage",
+          "meaning": "주말 영업 곤란과 불만은 STT에 있으나 analysis 자유문에 없다. 원문이 보존되어 있으므로 이 관찰만으로 새 실패를 추가하지 않는다."
+        },
+        {
+          "topic": "department-reason-speaker-scope",
+          "meaning": "부서 이유는 회송 안내를 경영주 요청으로 요약한다. 경영주가 직접 묻는 것은 잘못 온 상품 처리 방법이고 회송은 상담원이 제안한다. 실행 완료 창작은 아니며 이미 식별한 역할귀속 위험의 추가 관찰이다."
+        }
+      ]
+    }
+  ],
+  "priorityFindings": [
+    {
+      "id": "multi-request-preservation",
+      "status": "fail",
+      "oracleRefs": [
+        "/cases/1/expected/request/coverageRule"
+      ],
+      "meaning": "CASE2에 존재하는 세 개의 요청을 개별 검증 인용과 함께 보존하는 구조가 우선 개선 후보다. 이번 실행은 실패 그대로 보존하며 재호출하거나 결과를 교체하지 않는다."
+    },
+    {
+      "id": "subject-semantics",
+      "status": "fail",
+      "oracleRefs": [
+        "/cases/0/expected/subject",
+        "/cases/1/expected/subject"
+      ],
+      "meaning": "CASE1 시점·확인 목적 변화, CASE2 서버의 고정 상품관계 제목 덮어쓰기를 별도 회귀 사례로 유지한다."
+    },
+    {
+      "id": "speaker-attributed-evidence",
+      "status": "fail",
+      "oracleRefs": [
+        "/commonSafetyRubric/1",
+        "/cases/1/caseSafetyRubric/requiredIssueIfTranscriptSupportsCorrection"
+      ],
+      "meaning": "인용문이 실제 STT에 존재하는지뿐 아니라 경영주의 최종 정정인지 확인할 수 있어야 한다.1BOX 수령값 자체는 통과다."
+    }
+  ],
+  "reproduction": {
+    "method": "Python standard library only; read fixed oracle and two authorized result JSON files. Compare SHA-256 and inspect structured fields. Check each raw draftContext quote with any(quote.strip() in segment[\"text\"] for segment in result[\"transcript\"]). Do not concatenate segments.",
+    "expectedMechanicalOutput": [
+      "oracle worktree/commit SHA=1101163cc76f920d7334f0fb3442a93e56c2235291b140ad652865db4a8bc8a1",
+      "CASE-0001 subjectQuote matches=[]; requestQuote matches=[11]; segments=15",
+      "CASE-0002 subjectQuote matches=[]; requestQuote matches=[]; receivedClaim.evidenceQuote matches=[14]; segments=18"
+    ],
+    "sourceReferences": [
+      "server/live.py:38",
+      "server/live.py:238",
+      "server/live.py:251",
+      "server/live.py:287",
+      "server/live.py:294",
+      "server/live.py:360",
+      "server/analysis_schema.py:38"
+    ],
+    "limits": "문자열 포함 검사는 의미·역할·실물 사실을 증명하지 않는다. 의미 판정은 사전 oracle 경로와 짧은 근거로 명시했다."
+  }
+}
