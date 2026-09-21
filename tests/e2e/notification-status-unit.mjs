@@ -122,6 +122,15 @@ for (const [name, expectedAudience] of [['Desk', 'workforce'], ['Center', 'workf
   check(name + ' notification follows existing action or reply', html.indexOf('aria-label="외부 알림"') > html.indexOf(name === 'Desk' ? '접수 내용 저장' : name === 'Center' ? '최종 회신·처리 완료' : '센터에서 보낸 회신'));
 }
 const escaping = renderToStaticMarkup(React.createElement(page.Center, { ...sharedProps, caseData: { ...savedCase, title: htmlAttack } }));
+for (const [id, analysis, expected] of [
+  ['warehouse', undefined, '출고 운영'], ['delivery', undefined, '배송 운영'], ['cs', undefined, '고객 지원'],
+  ['', undefined, '미선택'], ['warehouse', { department: { id: 'warehouse', name: '잘못된 AI 이름' } }, '출고 운영'],
+  ['custom', { department: { id: 'custom', name: '별도 담당' } }, '별도 담당'],
+  ['custom', { department: { id: 'warehouse', name: '출고 운영' } }, 'custom'],
+]) {
+  const html = renderToStaticMarkup(React.createElement(page.Center, { ...sharedProps, caseData: { ...savedCase, departmentId: id, analysis } }));
+  check('actual center department label ' + id + '/' + expected, html.includes('<dt>전달 부서</dt><dd>' + expected + '</dd>'));
+}
 check('actual React page SSR escapes untrusted text instead of injecting HTML', escaping.includes('&lt;script&gt;alert(&quot;PRIVATE-HTML-SENTINEL&quot;)&lt;/script&gt;') && !escaping.includes('<script'));
 check('actual three draft roles were reached without writes', ['desk:CASE-UI-1', 'center:CASE-UI-1', 'owner:new'].every(key => draftReads.includes(key)));
 

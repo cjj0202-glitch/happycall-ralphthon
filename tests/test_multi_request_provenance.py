@@ -163,7 +163,9 @@ def test_normal_valid_requests_do_not_add_review_warnings():
     ('반송 방법을 알려 주세요.', '교환 방법을 알려 주세요.', '교환 방법 요청은 취소합니다.'),
     ('치약 반송 방법을 알려 주세요.', '컵 반송 방법을 알려 주세요.', '컵 반송 방법 요청은 취소합니다.'),
 ])
-def test_independent_review_named_withdrawal_keeps_distinct_operation_or_product(first, second, cancellation):
+@pytest.mark.parametrize('particle', ['은', '만', '만을', '만은', '을만'])
+def test_independent_review_named_withdrawal_keeps_distinct_operation_or_product(first, second, cancellation, particle):
+    cancellation = cancellation.replace('요청은', '요청' + particle)
     transcript = [{'speaker': 'customer', 'text': first},
                   {'speaker': 'customer', 'text': second},
                   {'speaker': 'agent', 'text': '확인하겠습니다.'},
@@ -179,7 +181,7 @@ def test_independent_review_named_withdrawal_keeps_distinct_operation_or_product
 
 @pytest.mark.parametrize('interruption', [True, False])
 @pytest.mark.parametrize('contract', ['requestQuote', 'requestQuotes'])
-@pytest.mark.parametrize('punctuation', ['', '.', '!', '?'])
+@pytest.mark.parametrize('punctuation', ['', '.', '!', '?', '?!', '!?', '...', '!!'])
 def test_independent_review_denied_quoted_cancellation_keeps_original_request(interruption, contract, punctuation):
     quote = '반송 방법을 알려 주세요.'
     transcript = [{'speaker': 'customer', 'text': quote}]
@@ -209,10 +211,112 @@ def test_independent_review_unit_correction_cannot_drop_context_without_adverb(m
 
 
 @pytest.mark.parametrize('speaker', ['화자', 'unknown', 'speaker', 'none'])
-def test_independent_review_fallback_label_cannot_confirm_same_person_withdrawal(speaker):
+@pytest.mark.parametrize('contract', ['requestQuote', 'requestQuotes'])
+def test_independent_review_fallback_label_cannot_confirm_same_person_withdrawal(speaker, contract):
     quote = '반송 방법을 알려 주세요.'
     transcript = [{'speaker': speaker, 'text': quote},
                   {'speaker': speaker, 'text': '반송 방법 요청은 취소합니다.'}]
-    result = resolve_requests({'requestQuotes': [quote]}, transcript)
+    context = {contract: quote if contract == 'requestQuote' else [quote]}
+    result = resolve_requests(context, transcript)
     assert [item['quote'] for item in result['active']] == [quote]
     assert result['reviewReasons'] == ['SPEAKER_ROLE_UNVERIFIED', 'OTHER_SPEAKER_CANCELLATION']
+
+
+def pc2_r2_cases():
+    """Fixed D01-D20 expectations from PC2 commit 4c200dec, not code output."""
+    q, paste, cup = '반송 방법을 알려 주세요.', '치약 반송 방법을 알려 주세요.', '컵 반송 방법을 알려 주세요.'
+    exchange, unit = '교환 방법을 알려 주세요.', '단위를 기록해 주세요.'
+
+    def rows(parts):
+        return [{'id': f't{i+1}', 'speaker': speaker, 'text': text,
+                 'startSeconds': i * 4.0, 'endSeconds': i * 4.0 + 3.5}
+                for i, (speaker, text) in enumerate(parts)]
+
+    def one(quote, tail, speaker='customer', legacy=False, interruption=False):
+        parts = [(speaker, quote)] + ([('agent', '확인하겠습니다.')] if interruption else []) + [(speaker, tail)]
+        return ({'requestQuote': quote} if legacy else {'requestQuotes': [quote]}, rows(parts))
+
+    def two(first, second, tail):
+        return ({'requestQuotes': [first, second]}, rows([
+            ('customer', first), ('customer', second), ('agent', '확인하겠습니다.'), ('customer', tail)]))
+
+    result = []
+
+    def add(id, inputs, active, rejected=(), review=()):
+        context, transcript = inputs
+        result.append({'id': id, 'draftContext': context, 'transcript': transcript,
+                       'active': active, 'rejected': list(rejected), 'review': list(review)})
+
+    add('D01', one('치약을 반송해 주세요.', '치약 반송 요청은 취소합니다.'), [],
+        [(0, '치약을 반송해 주세요.', 'WITHDRAWN')], ['WITHDRAWN'])
+    add('D02', one(paste, '치약 반송 요청은 취소합니다.'), [], [(0, paste, 'WITHDRAWN')], ['WITHDRAWN'])
+    add('D03', one('치약을 반송해 주세요.', '컵 반송 요청은 취소합니다.'), ['치약을 반송해 주세요.'])
+    add('D04', two(paste, cup, '컵 반송 방법 요청만 취소합니다.'), [paste], [(1, cup, 'WITHDRAWN')], ['WITHDRAWN'])
+    add('D05', two(paste, cup, '컵 반송 방법 요청은 취소합니다.'), [paste], [(1, cup, 'WITHDRAWN')], ['WITHDRAWN'])
+    add('D06', two(q, exchange, '교환 방법 요청만 취소합니다.'), [q], [(1, exchange, 'WITHDRAWN')], ['WITHDRAWN'])
+    add('D07', two(q, exchange, '교환 방법 요청은 취소합니다.'), [q], [(1, exchange, 'WITHDRAWN')], ['WITHDRAWN'])
+    denial = '저는 "반송 방법 요청은 취소합니다?!"라고 말한 적이 없습니다.'
+    add('D08', one(q, denial, interruption=True), [q])
+    add('D09', one(q, denial, legacy=True, interruption=True), [q])
+    add('D10', one(q, '저는 "반송 방법 요청은 취소합니다."라고 말한 적이 없습니다.', interruption=True), [q])
+    add('D11', one(q, '반송 방법 요청은 취소합니다?!'), [], [(0, q, 'WITHDRAWN')], ['WITHDRAWN'])
+    for id, speaker, legacy in [('D12', 'unknown', True), ('D13', 'unknown', False),
+                                ('D14', None, True), ('D15', '화자', True)]:
+        add(id, one(q, '반송 방법 요청은 취소합니다.', speaker=speaker, legacy=legacy), [q],
+            review=['SPEAKER_ROLE_UNVERIFIED', 'OTHER_SPEAKER_CANCELLATION'])
+    add('D16', one(q, '반송 방법 요청은 취소합니다.', legacy=True), [], [(0, q, 'WITHDRAWN')], ['WITHDRAWN'])
+    correction = '한 개가 아닌 한 박스예요. '
+    add('D17', ({'requestQuotes': [unit]}, rows([('customer', correction + unit)])), [],
+        [(0, unit, 'MISSING_CORRECTION_CONTEXT')], ['MISSING_CORRECTION_CONTEXT'])
+    add('D18', ({'requestQuotes': [correction + unit]}, rows([('customer', correction + unit)])), [correction + unit])
+    add('D19', ({'requestQuotes': [unit]}, rows([('customer', '한 개가 아니라 한 박스예요. ' + unit)])), [],
+        [(0, unit, 'MISSING_CORRECTION_CONTEXT')], ['MISSING_CORRECTION_CONTEXT'])
+    add('D20', ({'requestQuotes': [q]}, rows([('customer', q), ('agent', '확인하겠습니다.'), ('customer', q)])), [],
+        [(0, q, 'AMBIGUOUS_OCCURRENCE')], ['AMBIGUOUS_OCCURRENCE'])
+    return result
+
+
+@pytest.mark.parametrize('case', pc2_r2_cases(), ids=lambda case: 'PC2-R2-' + case['id'])
+def test_pc2_r2_fixed_resolver_and_public_projection(case):
+    before = copy.deepcopy(case)
+    result = resolve_requests(case['draftContext'], case['transcript'])
+    assert [item['quote'] for item in result['active']] == case['active']
+    assert [(item['proposalIndex'], item['quote'], item['reason']) for item in result['rejected']] == case['rejected']
+    assert result['reviewReasons'] == case['review']
+    active = case['active']
+    expected = None if not active else active[0] if len(active) == 1 else '\n'.join(
+        f'{index + 1}. {quote}' for index, quote in enumerate(active))
+    projection = normalize_case(case)
+    assert projection['fields']['request'] == expected
+    assert projection['fields']['quantity'] is None and projection['fields']['unit'] is None
+    for item in result['active']:
+        for occurrence in item['occurrences']:
+            slices = []
+            for span in occurrence['spans']:
+                row = case['transcript'][span['segmentIndex']]
+                slices.append(row['text'][span['startChar']:span['endChar']])
+                assert (span['startSeconds'], span['endSeconds']) == (row['startSeconds'], row['endSeconds'])
+                assert occurrence['speaker'] == row['speaker']
+            assert ' '.join(slices) == item['quote']
+    assert case == before
+
+
+@pytest.mark.parametrize('product,particle', [('치약', '을'), ('컵', '을'), ('오이', '를'), ('파이', '를')])
+def test_particle_comparison_keeps_surface_nouns_and_one_character_products(product, particle):
+    quote = f'{product}{particle} 반송해 주세요.'
+    transcript = [{'speaker': 'customer', 'text': quote},
+                  {'speaker': 'customer', 'text': f'{product} 반송 요청만은 취소합니다.'}]
+    result = resolve_requests({'requestQuotes': [quote]}, transcript)
+    assert not result['active']
+    assert result['reviewReasons'] == ['WITHDRAWN']
+
+
+def test_independent_review_subject_particle_syllable_does_not_merge_distinct_product_names():
+    quote = '파이 반송 방법을 알려 주세요.'
+    transcript = [{'speaker': 'customer', 'text': quote},
+                  {'speaker': 'customer', 'text': '파 반송 요청만 취소합니다.'}]
+    context = {'requestQuotes': [quote]}
+    result = resolve_requests(context, transcript)
+    assert [item['quote'] for item in result['active']] == [quote]
+    assert result['reviewReasons'] == []
+    assert normalize_case({'draftContext': context, 'transcript': transcript})['fields']['request'] == quote

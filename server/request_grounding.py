@@ -18,6 +18,26 @@ NON_CURRENT = re.compile(
     r'|(?:라고|라는)[^.!?\n]*(?:(?:전달|전해)\s*(?:받았|들었)|들었|보냈|남겼|한다면|할\s*경우|가정)'
     r'|(?:예시|예문|연습용)')
 CANCELLATION = re.compile(r'(?:취소|철회)(?:합니다|해요|하겠습니다|할게요|했습니다)')
+CASE_PARTICLE = r'(?:에게|에서|으로|까지|부터|[을를은는이가로만도]){1,2}'
+
+
+def _explicit_speaker(speaker):
+    # Shared by source joins and legacy follow-up checks. A fallback label is
+    # not evidence that separate segments were spoken by the same person.
+    return (isinstance(speaker, str) and bool(speaker.strip())
+            and speaker.strip().casefold() not in {'화자', 'unknown', 'speaker', 'none'})
+
+
+def _noun_forms(token):
+    """Comparison-only surface/stem forms; never rewrite a source quote.
+
+    Do not strip an ambiguous subject-particle 이/가: 파이 and 파 must stay
+    distinct. Object/focus endings can still compare 파이를 with 파이. A
+    one-character product such as 컵 is also meaningful.
+    """
+    return {token} | {token[:index] for index in range(1, len(token))
+                      if not token[index:].startswith(('이', '가'))
+                      and re.fullmatch(CASE_PARTICLE, token[index:])}
 
 
 def _meaningful_request(text):
@@ -40,9 +60,9 @@ def _target_terms(text):
     generic = {'요청', '부탁', '문의', '확인', '확인해', '안내', '안내해', '대조', '대조해',
                '알려', '연락', '전화', '해', '그', '이', '해당', '방금', '오늘', '내일'}
     for token in re.findall(r'[가-힣A-Za-z0-9]+', REQUEST.sub(' ', text)):
-        token = re.sub(r'(?:에게|에서|으로|까지|부터|[을를은는이가로])$', '', token)
-        if len(token) >= 2 and token not in generic:
-            terms.add(token)
+        forms = _noun_forms(token)
+        if not forms.intersection(generic):
+            terms.update(form for form in forms if len(form) >= 2)
     return terms
 
 
@@ -58,7 +78,7 @@ def _separate_inquiry(inquiry, other):
     operation = r'(?:반송|반품|회송|교환|재배송)'
     named_operation = (
         operation + r'(?:\s*(?:방법|절차)(?:을|를)?)?\s*'
-        r'(?:(?:요청|부탁|문의)(?:[은는을를])?|(?:안내해|확인해|해)?\s*'
+        r'(?:(?:요청|부탁|문의)(?:' + CASE_PARTICLE + r')?|(?:안내해|확인해|해)?\s*'
         r'(?:주세요|주십시오))[.!?]?\s*$'
     )
     nominal_operation = (
@@ -82,18 +102,21 @@ def _separate_inquiry(inquiry, other):
 
 
 def _same_target(reference, other):
-    if _separate_named_operations(reference, other):
-        return False
+    named_match = _named_operation_match(reference, other)
+    if named_match is not None:
+        return named_match
     if not _target_terms(reference).intersection(_target_terms(other)):
         return False
     return not (_separate_inquiry(reference, other) or _separate_inquiry(other, reference))
 
 
-def _separate_named_operations(reference, other):
-    """Distinguish explicit simple operation/product names, not shared '방법'.
+def _named_operation_match(reference, other):
+    """Compare explicit simple operation/product names, not shared '방법'.
 
     Short or synonymous cancellation names still use the overlap policy. Only
-    two fully named simple operations establish this narrower separation.
+    two fully named simple operations establish this narrower comparison. A
+    matched one-character product must not fall back to the length-two overlap
+    heuristic, which would discard the very target just established here.
     """
     pattern = (
         r'(?P<target>(?:[가-힣A-Za-z0-9]+\s+){0,4})'
@@ -101,29 +124,43 @@ def _separate_named_operations(reference, other):
         r'(?:\s*(?:방법|절차)(?:을|를)?)?\s*'
         r'(?:(?:안내해|알려|확인해|해)?\s*(?:주세요|주십시오)'
         r'|(?:안내|확인)\s*(?:요청|부탁|문의)입니다'
-        r'|(?:요청|부탁|문의)[은는을를]?)?[.!?]?\s*'
+        r'|(?:요청|부탁|문의)(?:' + CASE_PARTICLE + r')?)?[.!?]?\s*'
     )
     left, right = (re.fullmatch(pattern, value.strip()) for value in (reference, other))
     if not left or not right:
-        return False
+        return None
     operation = lambda match: ('반송' if match['operation'] in {'반송', '반품', '회송'}
                                else match['operation'])
     if operation(left) != operation(right):
-        return True
+        return False
     generic = {'배송', '출고', '주문', '상품'}
-    products = [set(match['target'].split()) - generic for match in (left, right)]
-    return bool(products[0] and products[1] and products[0].isdisjoint(products[1]))
+    products = [set().union(*(_noun_forms(token) for token in match['target'].split()
+                             if not _noun_forms(token).intersection(generic)))
+                for match in (left, right)]
+    return not (products[0] and products[1] and products[0].isdisjoint(products[1]))
+
+
+def _sentence_end(text, start):
+    boundary = re.search(r'[.!?]+|\n', text[start:])
+    return start + boundary.end() if boundary else len(text)
+
+
+def _speech_context_end(text, end, terminated=False):
+    """Consume the whole punctuation run before checking a quoted-report tail."""
+    right = end if terminated else _sentence_end(text, end)
+    punctuation = re.match(r'[.!?]+', text[right:])
+    if punctuation:
+        right += punctuation.end()
+    tail = text[right:].lstrip()
+    if tail.startswith(('"', "'", '”', '’', '」', '』', '라고', '라는')):
+        right = _sentence_end(text, right)
+    return right
 
 
 def _current_cancellation_context(text, start, end):
-    """Include a quoted sentence's reporting/denial tail after . ! or ?."""
+    """Include a quoted sentence's reporting/denial tail after punctuation."""
     left = max(text.rfind(mark, 0, start) for mark in ('.', '!', '?', '\n')) + 1
-    boundaries = [text.find(mark, end) for mark in ('.', '!', '?', '\n')]
-    right = min((position + 1 for position in boundaries if position >= 0), default=len(text))
-    tail = text[right:].lstrip()
-    if tail.startswith(('"', "'", '”', '’', '」', '』', '라고', '라는')):
-        boundaries = [text.find(mark, right) for mark in ('.', '!', '?', '\n')]
-        right = min((position + 1 for position in boundaries if position >= 0), default=len(text))
+    right = _speech_context_end(text, end)
     return not NON_CURRENT.search(text[left:right])
 
 
@@ -164,15 +201,11 @@ def current_request_quote(quote, transcript):
         while start >= 0:
             end = start + len(quote)
             left = max(text.rfind(mark, 0, start) for mark in ('.', '!', '?', '\n')) + 1
-            right = end
-            tail = text[end:].lstrip()
-            if not quote.endswith(('.', '!', '?')) or tail.startswith(('"', "'", '”', '’', '」', '』', '라고', '라는')):
-                boundaries = [text.find(mark, end) for mark in ('.', '!', '?', '\n')]
-                right = min((position + 1 for position in boundaries if position >= 0), default=len(text))
+            right = _speech_context_end(text, end, terminated=quote.endswith(('.', '!', '?')))
             contexts.append(text[left:right])
             following = text[start + request.end():]
             for later in transcript[index + 1:]:
-                if not segment.get('speaker') or later.get('speaker') != segment['speaker']:
+                if not _explicit_speaker(segment.get('speaker')) or later.get('speaker') != segment['speaker']:
                     break
                 following += '\n' + later.get('text', '')
             if _withdrawn(quote, following):

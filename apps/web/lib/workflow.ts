@@ -4,6 +4,11 @@ export type WorkRole = 'counselor' | 'center' | 'owner';
 export type QueueId = 'attention' | 'handed_off' | 'in_progress' | 'closed' | 'all';
 export const roleView: Record<WorkRole, View> = { counselor: 'desk', center: 'center', owner: 'owner' };
 export const roleNames: Record<WorkRole, string> = { counselor: '상담원', center: '센터 담당자', owner: '경영주' };
+const departmentNames: Record<string, string> = { delivery: '배송 운영', warehouse: '출고 운영', cs: '고객 지원' };
+export function departmentName(id?: string | null, recommendation?: { id: string; name: string } | null): string {
+  if (!id) return '미선택';
+  return Object.hasOwn(departmentNames, id) ? departmentNames[id] : recommendation?.id === id && recommendation.name ? recommendation.name : id;
+}
 export const queues = (role: WorkRole): { id: QueueId; label: string }[] => role === 'center'
   ? [{ id: 'handed_off', label: '새 이관' }, { id: 'in_progress', label: '처리 중' }, { id: 'closed', label: '완료' }, { id: 'all', label: '전체' }]
   : [{ id: 'attention', label: '접수·확인 대기' }, { id: 'handed_off', label: '센터 전달' }, { id: 'closed', label: '완료' }, { id: 'all', label: '전체' }];

@@ -6,19 +6,13 @@ are retained verbatim; character times and speaker identities are never inferred
 import re
 
 from server.request_grounding import (
-    CANCELLATION, NON_CURRENT, REQUEST, _current_cancellation_context, _meaningful_request, _same_target,
+    CANCELLATION, NON_CURRENT, REQUEST, _current_cancellation_context, _explicit_speaker,
+    _meaningful_request, _same_target,
     current_request_quote,
 )
 
 
 MAX_REQUEST_QUOTES = 8
-
-
-def _explicit_speaker(speaker):
-    # A diarization label such as A is explicit even when its business role is
-    # unknown. The STT fallback label '화자' does not identify the same speaker.
-    return (isinstance(speaker, str) and bool(speaker.strip())
-            and speaker.strip().casefold() not in {'화자', 'unknown', 'speaker', 'none'})
 
 
 def source_occurrences(quote, transcript):
@@ -87,9 +81,9 @@ def _missing_correction_context(quote, occurrence, transcript):
     first = occurrence['spans'][0]
     index = first['segmentIndex']
     prefix = transcript[index].get('text', '')[:first['startChar']]
-    if index and occurrence['speaker'] and transcript[index - 1].get('speaker') == occurrence['speaker']:
+    if index and _explicit_speaker(occurrence['speaker']) and transcript[index - 1].get('speaker') == occurrence['speaker']:
         prefix = transcript[index - 1].get('text', '') + ' ' + prefix
-    return bool(re.search(r'아니라[^.!?\n]*(?:박스|상자|개|EA|BOX)', prefix))
+    return bool(re.search(r'(?:아니라|아닌)[^.!?\n]*(?:박스|상자|개|EA|BOX)', prefix))
 
 
 def _cancellation(quote, occurrence, transcript, legacy=False):
