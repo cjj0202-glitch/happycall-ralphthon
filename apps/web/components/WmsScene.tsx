@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { CaseData } from '@/lib/types';
 import { ApiError } from '@/lib/api';
 import fixtures from '../../../data/fixtures/cases.json';
 import manifest from '../../../data/demo-media-manifest.json';
 import styles from './WmsScene.module.css';
+import CctvInspector from './CctvInspector';
 
 type Row = Record<string, unknown>;
 type Props = { caseData: CaseData; onLinkEvidence(id: string): Promise<void> | void; onBack(): void };
@@ -107,50 +108,6 @@ function registeredEvidence(caseData: CaseData, evidence: Row): boolean {
   return !!registered && ['system', 'label', 'time', 'value', 'status', 'source'].every(key => evidence[key] === registered[key]);
 }
 
-function VideoDialog({ clip, event, picking, shipping, opener, onClose }: { clip: Clip; event: Row; picking: Row; shipping: Row; opener: HTMLElement; onClose(): void }) {
-  const dialog = useRef<HTMLDialogElement>(null), video = useRef<HTMLVideoElement>(null);
-  const title = useId();
-  const [url, setUrl] = useState(''), [error, setError] = useState(''), [attempt, setAttempt] = useState(0);
-  useEffect(() => { const player = video.current; return () => player?.pause(); }, [url, error]);
-  useEffect(() => {
-    const element = dialog.current;
-    element?.showModal();
-    return () => { video.current?.pause(); element?.close(); if (opener.isConnected) opener.focus(); };
-  }, [opener]);
-  useEffect(() => {
-    const controller = new AbortController();
-    let disposed = false, blobUrl = '';
-    const timeout = window.setTimeout(() => controller.abort(), 15000);
-    setUrl(''); setError('');
-    (async () => {
-      try {
-        const response = await fetch(clip.url, { signal: controller.signal, credentials: 'same-origin', cache: 'no-store', redirect: 'error' });
-        if (!response.ok) throw new Error(`영상 응답 ${response.status}`);
-        const data = await response.arrayBuffer();
-        if (data.byteLength !== clip.bytes) throw new Error('영상 바이트 수 불일치');
-        const digest = await crypto.subtle.digest('SHA-256', data);
-        const hash = Array.from(new Uint8Array(digest)).map(value => value.toString(16).padStart(2, '0')).join('');
-        if (hash !== clip.sha256) throw new Error('영상 SHA256 불일치');
-        if (disposed) return;
-        blobUrl = URL.createObjectURL(new Blob([data], { type: 'video/mp4' }));
-        setUrl(blobUrl);
-      } catch (failure) { if (!disposed) setError(failure instanceof Error ? failure.message : '영상 검증 실패'); }
-      finally { window.clearTimeout(timeout); }
-    })();
-    return () => { disposed = true; controller.abort(); window.clearTimeout(timeout); video.current?.pause(); if (blobUrl) URL.revokeObjectURL(blobUrl); };
-  }, [clip, attempt]);
-  const close = () => { video.current?.pause(); onClose(); };
-  return <dialog ref={dialog} className={styles.dialog} aria-labelledby={title} onCancel={event => { event.preventDefault(); close(); }}>
-    <header className={styles.dialogHead}><div><span className={styles.eyebrow}>합성 공정 영상 · 실제 CCTV 아님</span><h2 id={title}>{label(event.label)} 영상</h2></div><button type="button" className={styles.button} onClick={close} autoFocus aria-label="연결 영상 닫기">닫기 ×</button></header>
-    <p className={styles.notice}>코드로 만든 공정 설명입니다. 실제 이동 경로·발생 공정·작업자 귀책의 증거가 아닙니다.</p>
-    <div className={styles.meta}><span>{clip.caseId}</span><span>{clip.cameraId}</span><span>{label(event.id)}</span><span>{date(clip.occurredAt)}</span><span>{clip.startSeconds}–{clip.endSeconds}초</span></div>
-    <div className={styles.videoGrid}><div>
-      {error ? <div role="alert" className={styles.empty}><strong>영상 재생 차단</strong><p>{error}. 원본 기록을 확인하거나 다시 불러오세요.</p><button className={styles.button} type="button" onClick={() => setAttempt(value => value + 1)}>영상 다시 불러오기</button></div> : !url ? <div className={styles.empty} role="status">영상 바이트·SHA256 확인 중…</div> : <><video ref={video} src={url} className={styles.video} controls playsInline preload="metadata" aria-label="합성 공정 영상" onError={() => { video.current?.pause(); setError('영상 디코딩 실패'); }} onLoadedMetadata={event => { const player = event.currentTarget; if (!Number.isFinite(player.duration) || clip.endSeconds > player.duration + 0.05 || clip.startSeconds >= player.duration) { player.pause(); setError('등록 구간이 실제 영상 길이를 초과합니다'); return; } player.currentTime = clip.startSeconds; }} onTimeUpdate={event => { const player = event.currentTarget; if (player.currentTime >= clip.endSeconds) { player.pause(); if (player.currentTime > clip.endSeconds) player.currentTime = clip.endSeconds; } }} onSeeking={event => { const player = event.currentTarget; if (player.currentTime < clip.startSeconds) player.currentTime = clip.startSeconds; if (player.currentTime > clip.endSeconds) { player.pause(); player.currentTime = clip.endSeconds; } }} onPlay={event => { if (event.currentTarget.currentTime >= clip.endSeconds) event.currentTarget.currentTime = clip.startSeconds; }}>영상 재생을 지원하는 브라우저가 필요합니다.</video><p className={styles.verified}>등록 자산 SHA256·크기 확인 · 사용자가 재생할 때 시작합니다.</p></>}
-      <p className={styles.caption}>카메라·이벤트 연결은 합성 시나리오의 등록 관계입니다. 실물 토트의 연속 이동은 미확인입니다.</p>
-    </div><aside><h3>원본 스캔과 비교</h3><p>피킹: {scan(picking)}</p><p>출고: {scan(shipping)}</p><p className={styles.warning}>상품·단위를 대조하세요. 원인과 귀책은 미확인입니다.</p><Source name="선택 이벤트" data={event}/><Source name="피킹 기록" data={picking}/><Source name="출고 기록" data={shipping}/><Source name="영상 등록·해시" data={clip}/></aside></div>
-  </dialog>;
-}
-
 export default function WmsScene(props: Props) {
   // Replacing upstream case contents also invalidates an open clip and pending UI feedback.
   return <Scene key={JSON.stringify([props.caseData.id, props.caseData.linkedFixtureId, props.caseData.type, props.caseData.storeId, row(props.caseData.intake).storeId, props.caseData.store, props.caseData.asOf, props.caseData.revision, props.caseData.status, props.caseData.wms, props.caseData.evidence, props.caseData.media])} {...props}/>;
@@ -198,6 +155,6 @@ function Scene({ caseData, onBack, onLinkEvidence }: Props) {
       <div className={styles.panel}><p className={styles.eyebrow}>선택 공정의 합성 영상</p><h2>기록과 함께 확인</h2><p className={styles.caption}>영상은 설명용이며 원인·귀책 판정에 사용할 수 없습니다.</p>{clipResult.clip ? <><div className={styles.videoCard}><span className={styles.synthetic}>합성 · 실제 CCTV 아님</span><strong>{clipResult.clip.cameraId}</strong><p>{date(clipResult.clip.occurredAt)} · {clipResult.clip.startSeconds}–{clipResult.clip.endSeconds}초</p><button className={styles.primary} type="button" data-testid="open-video" onClick={event => setActive({ clip: clipResult.clip!, event: current, opener: event.currentTarget })}>등록된 합성 영상 열기</button></div><p className={styles.caption}>재생 전 등록 파일의 크기·SHA256을 확인합니다. 카메라 관계는 합성 시나리오에 한정됩니다.</p></> : <div className={styles.empty} data-testid="media-unavailable"><strong>연결 영상 없음</strong><p>{clipResult.reason}</p><p>원본 기록을 먼저 확인하세요. 다른 공정의 영상으로 대체하지 않습니다.</p></div>}<p className={styles.caption}>선택한 사건과 공정에 등록된 영상만 제공합니다. 영상이 없으면 원본 기록을 확인하고 센터에 추가 자료를 요청하세요.</p></div>
     </section>}
     <section className={styles.panel} aria-label="상담 근거"><h2>상담에 연결할 근거</h2><p>합성 기록·미확인 항목의 출처를 유지합니다. 연결 완료는 저장 응답 후 표시합니다.</p>{readOnly && <p className={styles.warning}>이관 이후 읽기 전용 · 상담 근거를 변경할 수 없습니다.</p>}<div className={styles.evidence}>{(caseData.evidence ?? []).filter(item => item.system === 'WMS').map(item => { const registered = registeredEvidence(caseData, item); const temporal = item.status === 'unknown' && !item.time || visible(item.time, caseData.asOf); const done = linked.includes(item.id) || caseData.selectedEvidence?.includes(item.id); return <article key={item.id}><span className={styles.eyebrow}>{item.status === 'unknown' ? '미확인 항목' : '합성 기록'} · {item.id}</span><h3>{item.label}</h3><p>{String(item.value ?? '값 미확인')}</p><small>{item.source} · {item.time ? date(item.time) : '시각 미등록'}</small><button className={styles.button} type="button" data-testid={`link-${item.id}`} disabled={readOnly || !!model.contextError || !registered || !temporal || !!pending || !!done} onClick={() => void link(item.id)}>{!registered ? '사건 근거 불일치' : done ? '연결됨' : pending === item.id ? '연결 중…' : !temporal ? '시각 확인 필요' : '상담 근거에 연결'}</button></article>; })}</div><p role="status" className={styles.verified}>{message}</p>{error && <p role="alert" className={styles.warning}>근거 연결 확인: {error}</p>}</section>
-    {active && <VideoDialog {...active} picking={safePicking} shipping={safeShipping} onClose={() => setActive(null)}/>}
+    {active && <CctvInspector {...active} picking={safePicking} shipping={safeShipping} onClose={() => setActive(null)}/>}
   </section>;
 }
