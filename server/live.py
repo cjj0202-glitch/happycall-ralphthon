@@ -14,6 +14,7 @@ from openai import OpenAI
 from server.analysis_schema import ANALYSIS_SCHEMA, MODEL_ANALYSIS_SCHEMA
 from server.claim_grounding import order_assertion_scope, reconcile_unknown, supported_values
 from server.request_grounding import current_request_quote, receipt_followup
+from server.request_provenance import resolve_requests
 from server.budget import Budget
 from server.errors import DemoError
 from server.repository import ROOT
@@ -134,8 +135,15 @@ def _review_reply_draft(analysis, received, draft_context):
             parts.append(f"{label}의 {note}‘{cleaned}’라는 말씀을 바탕으로 추가 확인이 필요합니다.")
 
     quote_part("문의 원문", draft_context["subjectQuote"], "문의 대상을 원문과 대조해 먼저 확인할 필요가 있습니다.")
-    request_label = "요청 원문" if draft_context.get("requestIsCurrent", True) else "참고 발화 원문"
-    quote_part(request_label, draft_context["requestQuote"], "어떤 확인이나 안내가 필요한지 원문에서 추가 확인이 필요합니다.")
+    requests = draft_context.get("requestQuotes", [])
+    if requests:
+        for index, quote in enumerate(requests):
+            label = "요청 원문" if len(requests) == 1 else f"요청 {index + 1} 원문"
+            quote_part(label, quote, "요청의 원문 대조가 필요합니다.")
+    else:
+        for quote in draft_context.get("referenceQuotes", []):
+            quote_part("참고 발화 원문", quote, "해당 발화의 문맥 확인이 필요합니다.")
+        parts.append("어떤 확인이나 안내가 필요한지 원문에서 추가 확인이 필요합니다.")
     quote_part("수령 관련 원문", received["evidenceQuote"], "현재 도착·수령 상황은 추가 확인이 필요합니다.")
     if analysis["facts"]:
         parts.append("현재 조회한 기록은 다음과 같습니다: " + " / ".join(analysis["facts"][:2]) + ".")
@@ -165,6 +173,16 @@ def normalize_analysis(model_analysis, transcript, case, departments):
     # Missing provenance stays missing; never manufacture it from free-form fields.
     if isinstance(model_analysis, dict) and "draftContext" not in model_analysis:
         model_analysis = {**model_analysis, "draftContext": {"subjectQuote": None, "requestQuote": None}}
+    raw_context = model_analysis.get("draftContext", {})
+    request_selection = resolve_requests(raw_context, transcript, current_check=current_request_quote)
+    # A malformed request collection goes to review, without discarding unrelated
+    # facts/fields or mutating the saved raw model response. Other schema failures
+    # remain schema failures. Legacy single quotes have one explicit conversion.
+    if isinstance(raw_context, dict):
+        context = {key: value for key, value in raw_context.items()
+                   if key not in {"requestQuote", "requestQuotes"}}
+        context["requestQuotes"] = [item["quote"] for item in request_selection["active"]]
+        model_analysis = {**model_analysis, "draftContext": context}
     validate(model_analysis, MODEL_ANALYSIS_SCHEMA)
     result = {key: copy.deepcopy(model_analysis[key]) for key in ANALYSIS_SCHEMA["properties"]
               if key not in {"fields", "facts"}}
@@ -283,19 +301,38 @@ def normalize_analysis(model_analysis, transcript, case, departments):
         question("문의 대상과 필요한 확인 업무를 원문에서 확인한 뒤 담당 부서를 선택해 주세요.")
     result["department"]["reason"] = "AI 검토 제안: " + result["department"]["reason"]
     # A generated draft is not a center reply or evidence that an action occurred.
-    draft_context = {}
-    for key, label in (("subjectQuote", "문의"), ("requestQuote", "요청")):
-        quote = model_analysis["draftContext"][key]
-        if _quoted({"evidenceQuote": quote}, transcript):
-            draft_context[key] = quote.strip()
-        else:
-            draft_context[key] = None
-            question(f"회신 초안에 사용할 {label}의 원문 근거를 확인해 주세요. AI 필드만으로 고객의 말씀을 확정하지 않습니다.")
-    request_quote = current_request_quote(draft_context["requestQuote"], transcript)
-    draft_context["requestIsCurrent"] = request_quote is not None
-    if request_quote:
-        cleaned, softened = _clean_draft_quote(request_quote)
-        result["fields"]["request"] = ("[강한 불만 표현을 순화] " + cleaned) if softened else request_quote
+    subject_quote = model_analysis["draftContext"]["subjectQuote"]
+    draft_context = {"subjectQuote": subject_quote.strip() if _quoted({"evidenceQuote": subject_quote}, transcript) else None,
+                     "requestQuotes": [item["quote"] for item in request_selection["active"]],
+                     "referenceQuotes": [item["quote"] for item in request_selection["rejected"]
+                                         if item["reason"] == "NON_CURRENT_CONTEXT" and item.get("occurrences")]}
+    if not draft_context["subjectQuote"]:
+        question("회신 초안에 사용할 문의의 원문 근거를 확인해 주세요. AI 필드만으로 고객의 말씀을 확정하지 않습니다.")
+    review_messages = {
+        "NONCONTIGUOUS_QUOTE": "떨어진 발화나 다른 화자를 합친 요청 인용은 채택하지 않았습니다.",
+        "QUOTE_NOT_IN_SOURCE": "요청 인용이 원문과 일치하지 않습니다.",
+        "NON_CURRENT_CONTEXT": "과거·예시·계획·부정 또는 현재 요청이 아닌 발화를 제외했습니다.",
+        "EMPTY_SPEAKER_JOIN": "화자가 확인되지 않은 구간을 연결한 요청 인용은 채택하지 않았습니다.",
+        "SPEAKER_ROLE_UNVERIFIED": "요청 인용의 화자 라벨만으로 경영주 역할을 확인할 수 없습니다.",
+        "WITHDRAWN": "같은 화자의 후속 철회가 있는 요청을 제외했습니다.",
+        "OTHER_SPEAKER_CANCELLATION": "다른 화자의 취소를 원 요청자의 철회로 확정하지 않았습니다.",
+        "AMBIGUOUS_CANCELLATION": "취소 대상이 모호하여 영향을 받는 요청의 자동 채택을 유보했습니다.",
+        "AMBIGUOUS_OCCURRENCE": "같은 요청 문구가 여러 위치에 있어 출처를 자동 선택하지 않았습니다.",
+        "MIXED_CONTRACT_KEYS": "신형·구형 요청 인용이 함께 반환되어 요청을 자동 채우지 않았습니다.",
+        "TOO_MANY_QUOTES": "요청 인용이 원시 기준8개를 초과하여 자르거나 합치지 않고 검토로 남겼습니다.",
+        "MISSING_CORRECTION_CONTEXT": "요청 인용에서 단위 정정의 대상·값 문맥이 잘려 자동 채택하지 않았습니다.",
+        "INVALID_QUOTES_TYPE": "요청 인용의 배열 또는 항목 형식이 올바르지 않아 자동 채택하지 않았습니다.",
+        "PARTIAL_WITHDRAWAL": "일부 과업이 철회된 복합 인용을 제외하고 별도 유효 부분 인용만 보존했습니다.",
+    }
+    for reason in request_selection["reviewReasons"]:
+        question(review_messages[reason] + " 해당 요청 원문을 직접 대조해 주세요.")
+    displayed = []
+    for quote in draft_context["requestQuotes"]:
+        cleaned, softened = _clean_draft_quote(quote)
+        displayed.append(("[강한 불만 표현을 순화] " + cleaned) if softened else quote)
+    if displayed:
+        result["fields"]["request"] = displayed[0] if len(displayed) == 1 else "\n".join(
+            f"{index + 1}. {quote}" for index, quote in enumerate(displayed))
     else:
         question("고객의 현재 요청을 뒷받침하는 원문 인용을 확인하지 못했습니다. 요청 원문을 직접 확인해 주세요. AI 추가 질문은 고객 요청에 합치지 않습니다.")
     result["replyDraft"] = _review_reply_draft(result, received, draft_context)
@@ -351,8 +388,10 @@ class LiveAnalyzer:
                     "다른 필드에 적었다는 이유로 해당 제목이나 요청의 의미에 필요한 조건을 생략하지 마라. 원문에 없는 조건은 만들지 않는다. "
                     "원문의 다른 상품·추가 상품·대체 상품처럼 관계를 나타내는 표현을 서로 바꿔 쓰지 않는다. "
                     "상담 입력·임시 문구·시스템 기록을 fields의 정답으로 복사하지 마라. 발화에 없는 대상·요청은 null과 확인 질문으로 남긴다. "
-                    "draftContext.subjectQuote는 점포 소개만 고르지 말고 문의 대상·문제·필수 조건을 뒷받침하는 실제 transcript 원문을, requestQuote는 고객 요청·불만·긴급성을 담은 원문을 그대로 인용한다. "
-                    "인용은 연속된 한 구간만 사용하며 떨어진 문장을 줄임표로 연결하거나 글자를 생략하지 않는다. 짧게 만들기 위해 부정·정정·시점·귀속 불확실성을 자르지 않는다. "
+                    "draftContext.subjectQuote는 점포 소개만 고르지 말고 문의 대상·문제·필수 조건을 뒷받침하는 실제 transcript 한 구간 원문을 인용한다. "
+                    "requestQuotes에는 서로 다른 현재 요청·불만·긴급성의 자족적인 원문을 각각 최대8개, 전사 순서대로 넣는다. 요청이 없으면 빈 배열이다. "
+                    "요청 인용은 인접한 같은 명시 화자의 구간만 ASCII 공백 하나로 연결할 수 있다. 다른 화자나 중간 문장을 건너뛰거나 글자를 생략하지 않는다. "
+                    "단위 정정 요청은 정정 대상과 최종 값 문맥도 포함한다. 짧게 만들기 위해 부정·정정·시점·귀속 불확실성을 자르지 않는다. "
                     "fields의 요약문을 인용으로 복사하지 마라. 완료·귀책·회신에 대한 고객 주장도 사실로 바꾸지 말고 원문 근거가 없으면 null이다. "
                     "orderedClaim에는 경영주가 실제로 주문했다고 긍정 진술한 상품·수량·단위만 추출한다. "
                     "주문하지 않았음, 주문했는지 모름, 주문 규격을 확인해 달라는 요청은 긍정 주문 진술이 아니다. "

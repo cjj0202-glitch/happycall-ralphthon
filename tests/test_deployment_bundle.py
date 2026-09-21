@@ -510,9 +510,9 @@ from pathlib import Path
 root = Path.cwd()
 sys.path.insert(0, str(root))
 from api.index import app
-from server import deployment_app, handlers, live, runtime_config, runtime_storage
+from server import deployment_app, handlers, live, request_provenance, runtime_config, runtime_storage
 import scripts.demo_openai_env
-for module in (deployment_app, handlers, live, runtime_config, runtime_storage, scripts.demo_openai_env):
+for module in (deployment_app, handlers, live, request_provenance, runtime_config, runtime_storage, scripts.demo_openai_env):
     assert Path(module.__file__).resolve().is_relative_to(root)
 assert app.app.root == root / "apps/web/out"
 def forbidden(*args, **kwargs):

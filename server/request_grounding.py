@@ -14,7 +14,7 @@ REQUEST = re.compile(
 NON_CURRENT = re.compile(
     r'(?:요청|부탁|문의)(?:을|를)?\s*(?:할\s*(?:예정|계획)|하(?:려고|려는|고자)|(?:한|했던)\s*(?:것|건|적|사실)(?:이|은|는|가)?\s*(?:아니|아닙|없)|하지\s*않|안\s*했)'
     r'|(?:요청|부탁|문의)(?:이|가|은|는)\s*(?:아닙|아니에요|아니었|아니라고)'
-    r'|(?:라고|라는)[^.!?\n]*(?:예정|계획|예시|예문|(?:부탁|요청|말)?한\s*(?:것|건|적|사실)(?:이|은|는|가)?\s*(?:아니|아닙|없)|(?:요청|부탁|문의|말|전달|입력)(?:했|하였|드렸))'
+    r'|(?:라고|라는)[^.!?\n]*(?:예정|계획|요청할\s*생각|예시|예문|(?:부탁|요청|말)?한\s*(?:것|건|적|사실)(?:이|은|는|가)?\s*(?:아니|아닙|없)|(?:요청|부탁|문의|말|전달|입력)(?:했|하였|드렸))'
     r'|(?:라고|라는)[^.!?\n]*(?:(?:전달|전해)\s*(?:받았|들었)|들었|보냈|남겼|한다면|할\s*경우|가정)'
     r'|(?:예시|예문|연습용)')
 CANCELLATION = re.compile(r'(?:취소|철회)(?:합니다|해요|하겠습니다|할게요|했습니다)')
@@ -82,16 +82,58 @@ def _separate_inquiry(inquiry, other):
 
 
 def _same_target(reference, other):
+    if _separate_named_operations(reference, other):
+        return False
     if not _target_terms(reference).intersection(_target_terms(other)):
         return False
     return not (_separate_inquiry(reference, other) or _separate_inquiry(other, reference))
 
 
+def _separate_named_operations(reference, other):
+    """Distinguish explicit simple operation/product names, not shared '방법'.
+
+    Short or synonymous cancellation names still use the overlap policy. Only
+    two fully named simple operations establish this narrower separation.
+    """
+    pattern = (
+        r'(?P<target>(?:[가-힣A-Za-z0-9]+\s+){0,4})'
+        r'(?P<operation>반송|반품|회송|교환|재배송)(?:해)?'
+        r'(?:\s*(?:방법|절차)(?:을|를)?)?\s*'
+        r'(?:(?:안내해|알려|확인해|해)?\s*(?:주세요|주십시오)'
+        r'|(?:안내|확인)\s*(?:요청|부탁|문의)입니다'
+        r'|(?:요청|부탁|문의)[은는을를]?)?[.!?]?\s*'
+    )
+    left, right = (re.fullmatch(pattern, value.strip()) for value in (reference, other))
+    if not left or not right:
+        return False
+    operation = lambda match: ('반송' if match['operation'] in {'반송', '반품', '회송'}
+                               else match['operation'])
+    if operation(left) != operation(right):
+        return True
+    generic = {'배송', '출고', '주문', '상품'}
+    products = [set(match['target'].split()) - generic for match in (left, right)]
+    return bool(products[0] and products[1] and products[0].isdisjoint(products[1]))
+
+
+def _current_cancellation_context(text, start, end):
+    """Include a quoted sentence's reporting/denial tail after . ! or ?."""
+    left = max(text.rfind(mark, 0, start) for mark in ('.', '!', '?', '\n')) + 1
+    boundaries = [text.find(mark, end) for mark in ('.', '!', '?', '\n')]
+    right = min((position + 1 for position in boundaries if position >= 0), default=len(text))
+    tail = text[right:].lstrip()
+    if tail.startswith(('"', "'", '”', '’', '」', '』', '라고', '라는')):
+        boundaries = [text.find(mark, right) for mark in ('.', '!', '?', '\n')]
+        right = min((position + 1 for position in boundaries if position >= 0), default=len(text))
+    return not NON_CURRENT.search(text[left:right])
+
+
 def _withdrawn(reference, following):
     nearest = True
-    for sentence in re.split(r'[.!?\n]+', following):
+    for source in re.finditer(r'[^.!?\n]+(?:[.!?]+|$)', following):
+        sentence = source.group()
         cancellation = CANCELLATION.search(sentence)
-        if cancellation:
+        if cancellation and _current_cancellation_context(
+                following, source.start() + cancellation.start(), source.start() + cancellation.end()):
             named = sentence[:cancellation.start()]
             pronoun = re.match(r'\s*(?:그|이|해당|방금)\s*요청', named)
             if (pronoun and nearest) or _same_target(reference, named):

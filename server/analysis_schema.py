@@ -51,7 +51,8 @@ MODEL_ANALYSIS_SCHEMA = obj({
     }),
     "draftContext": obj({
         "subjectQuote": {**NULLABLE, "description": "문의 대상·문제·필수 조건을 뒷받침하는 transcript의 연속된 한 구간을 그대로 인용한다. 점포 소개만 선택하거나 fields.subject를 복사하거나 새로운 문장을 만들지 않는다. 짧게 만들기 위해 부정·정정·시점·귀속 불확실성을 자르지 않는다. 관련 원문이 없으면 null."},
-        "requestQuote": {**NULLABLE, "description": "회신 초안에서 다룰 고객 요청·불만·긴급성을 담은 transcript 한 구간의 짧은 원문 그대로. 욕설은 서버가 초안에서만 순화하므로 여기서는 원문을 변형하지 않는다. 관련 원문이 없으면 null."},
+        "requestQuotes": {"type": "array", "maxItems": 8, "items": {"type": "string", "minLength": 1},
+                          "description": "현재 요청별 자족적인 원문 인용을 최대8개, 전사 순서대로 각각 반환한다. 요청이 없으면 빈 배열. 인접한 같은 명시 화자의 구간만 ASCII 공백 하나로 이어 인용할 수 있다. 다른 화자나 중간 문장을 건너뛰어 합치지 않는다. 단위 정정·조건·철회 문맥을 생략하거나 원문을 교정하지 않는다."},
     }),
     "orderedClaim": claim_schema("주문"),
     "receivedClaim": claim_schema("실제 수령"),
