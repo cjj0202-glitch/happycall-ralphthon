@@ -85,6 +85,48 @@ function Desk({ caseData: c, mode, fallback, onUpdate, onSave, onView, onToast }
   const audioRef = useRef<HTMLAudioElement>(null);
   const intakeLocked = ['handed_off', 'in_progress', 'closed'].includes(c.status || '');
   const canTransfer = !intakeLocked && edited && confirmed && !!(form.storeId || '').trim() && !!(form.subject || '').trim() && !!department && !busy && !fallback;
+  // Cards only read the saved selection. Opening a record must not refresh formRevision.
+  const evidenceText = (value: unknown, empty = '미등록') => typeof value === 'string' && value.trim() ? value : typeof value === 'number' && Number.isFinite(value) ? String(value) : empty;
+  const evidenceStamp = (value: unknown) => {
+    if (typeof value !== 'string') return null;
+    const parts = value.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2})(?:\.\d+)?)?(?:Z|[+-]\d{2}:\d{2})$/i);
+    if (!parts) return null;
+    const [year, month, day, hour, minute, second] = parts.slice(1, 7).map(part => part === undefined ? 0 : Number(part));
+    const calendar = new Date(0);
+    calendar.setUTCFullYear(year, month - 1, day); calendar.setUTCHours(hour, minute, second, 0);
+    if (calendar.getUTCFullYear() !== year || calendar.getUTCMonth() !== month - 1 || calendar.getUTCDate() !== day || calendar.getUTCHours() !== hour || calendar.getUTCMinutes() !== minute || calendar.getUTCSeconds() !== second) return null;
+    const stamp = Date.parse(value);
+    return Number.isFinite(stamp) ? stamp : null;
+  };
+  const evidenceDate = (value: unknown) => {
+    const stamp = evidenceStamp(value);
+    return stamp === null ? (value == null || value === '' ? '미등록' : '시각·시간대 확인 필요') : new Intl.DateTimeFormat('ko-KR', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(new Date(stamp)) + ' KST';
+  };
+  const selectedEvidence = Array.from(new Set(c.selectedEvidence || [])).map(id => {
+    const matches = (c.evidence || []).filter(record => record.id === id);
+    const record = matches.length === 1 ? matches[0] : undefined;
+    const metadata = (record || {}) as Record<string, unknown>;
+    const observedAt = 'observedAt' in metadata ? metadata.observedAt : record?.time;
+    const sourceAsOf = 'sourceAsOf' in metadata ? metadata.sourceAsOf : c.asOf;
+    const observedStamp = evidenceStamp(observedAt);
+    const asOfStamp = evidenceStamp(c.asOf);
+    const sourceStamp = evidenceStamp(sourceAsOf);
+    const suppliedTimes = [record?.time, observedAt].filter(value => value != null && value !== '');
+    const suppliedStamps = suppliedTimes.map(evidenceStamp);
+    let withheld = !record ? (matches.length ? '같은 ID의 원본이 여러 개입니다. 연결 대상을 확인해 주세요.' : '현재 접수 건에서 원본을 찾을 수 없습니다.') : '';
+    if (!withheld && metadata.caseId != null && ![c.id, c.linkedFixtureId].includes(metadata.caseId)) withheld = '원본 사건과 현재 접수의 연결 관계를 확인해 주세요.';
+    if (!withheld && metadata.storeId != null && metadata.storeId !== c.store?.id) withheld = '원본 점포와 현재 접수 점포가 다릅니다.';
+    if (!withheld && metadata.relationStatus != null && metadata.relationStatus !== 'exact') withheld = '원본과 접수의 연결 관계가 확인되지 않았습니다.';
+    if (!withheld && ['unknown', 'unverified'].includes(String(metadata.timezoneStatus))) withheld = '원본 기록의 시간대를 확인해 주세요.';
+    if (!withheld && suppliedStamps.some(stamp => stamp === null)) withheld = '원본 기록의 시각·시간대를 확인해 주세요.';
+    if (!withheld && suppliedStamps.length > 0 && asOfStamp === null) withheld = '접수 기준시각이 없어 기록 시점을 대조할 수 없습니다.';
+    if (!withheld && asOfStamp !== null && suppliedStamps.some(stamp => stamp !== null && stamp > asOfStamp)) withheld = '접수 기준시각 이후의 기록입니다.';
+    if (!withheld && 'observedAt' in metadata && record?.time != null && record.time !== '' && observedStamp !== evidenceStamp(record.time)) withheld = '원본의 두 기록 시각이 서로 다릅니다. 시각 정보를 확인해 주세요.';
+    if (!withheld && 'sourceAsOf' in metadata && (sourceStamp === null || asOfStamp === null || sourceStamp > asOfStamp)) withheld = '원본 조회 기준시각과 접수 기준시각을 대조해 주세요.';
+    const synthetic = metadata.synthetic === true || (metadata.synthetic !== false && (c.synthetic === true || /합성/.test(evidenceText(record?.source, '')) || /합성/.test(evidenceText(c.provenance, ''))));
+    return { id, record, metadata, observedAt, sourceAsOf, withheld, synthetic };
+  });
+  const visibleEvidenceCount = selectedEvidence.filter(item => !item.withheld).length;
   const field = (key: keyof Intake, value: string) => { setForm(old => ({ ...old, [key]: value })); setEdited(true); setConfirmed(false); };
   const analyze = async () => {
     if (fallback) { setError('실제 분석은 서버에 연결한 후 사용할 수 있습니다.'); return; }
@@ -135,7 +177,26 @@ function Desk({ caseData: c, mode, fallback, onUpdate, onSave, onView, onToast }
         <div className="panel-actions"><button disabled={intakeLocked || !!busy || fallback} onClick={() => void persist()}>접수 내용 저장</button><button className="primary" disabled={!canTransfer} onClick={() => void persist(true)}>{busy === 'transfer' ? '전달 중…' : '확인 후 센터 전달'} <span aria-hidden="true">→</span></button></div>
       </section>
     </div>
-    <section className="panel evidence-panel"><div className="panel-heading"><div><span className="small-kicker">03 / CONNECTED EVIDENCE</span><h3>확인한 사실과 남은 질문</h3></div><div className="button-row"><button onClick={() => onView('wms')}>WMS 작업 확인 <Arrow/></button><button onClick={() => onView('tms')}>TMS 배송 확인 <Arrow/></button></div></div><div className="facts-grid"><div><h4><span className="status-dot positive"/>확인된 사실</h4>{analysis?.facts?.length ? <ul className="clean-list">{analysis.facts.map((x, i) => <li key={i}>{x}</li>)}</ul> : <p className="muted">분석 결과와 물류 기록을 확인한 후 사실을 구분합니다.</p>}</div><div><h4><span className="status-dot warning"/>아직 확인할 사항</h4>{analysis?.unknowns?.length ? <ul className="clean-list">{analysis.unknowns.map((x, i) => <li key={i}>{x}</li>)}</ul> : <p className="muted">확인되지 않은 내용은 단정하지 않습니다.</p>}</div></div>{!!c.selectedEvidence?.length && <p className="linked-note">연결된 근거 {c.selectedEvidence.length}건 · {c.selectedEvidence.join(', ')}</p>}</section>
+    <section className="panel evidence-panel">
+      <div className="panel-heading"><div><span className="small-kicker">03 / CONNECTED EVIDENCE</span><h3>물류 근거와 남은 질문</h3></div><div className="button-row"><button onClick={() => onView('wms')}>WMS 작업 확인 <Arrow/></button><button onClick={() => onView('tms')}>TMS 배송 확인 <Arrow/></button></div></div>
+      <div className="facts-grid"><div><h4>AI가 정리한 사실 · 확인 전 초안</h4>{analysis?.facts?.length ? <ul className="clean-list">{analysis.facts.map((x, i) => <li key={i}>{x}</li>)}</ul> : <p className="muted">분석 결과를 불러오면 원문과 대조할 초안을 표시합니다.</p>}</div><div><h4><span className="status-dot warning"/>AI가 정리한 추가 확인 사항</h4>{analysis?.unknowns?.length ? <ul className="clean-list">{analysis.unknowns.map((x, i) => <li key={i}>{x}</li>)}</ul> : <p className="muted">확인되지 않은 내용은 단정하지 않습니다.</p>}</div></div>
+      <section className="desk-evidence-section" aria-label="연결한 물류 근거" data-case-id={c.id}>
+        <div className="desk-evidence-heading"><h4>연결한 물류 근거</h4><span className="small muted">선택 {selectedEvidence.length}건 · 표시 {visibleEvidenceCount}건{selectedEvidence.length > visibleEvidenceCount ? ` · 보류 ${selectedEvidence.length - visibleEvidenceCount}건` : ''}</span></div>
+        <div className="desk-evidence-context"><span>접수 {c.id}</span>{typeof c.linkedFixtureId === 'string' && <span>연결 원본 {c.linkedFixtureId}</span>}<span>접수 기준 {evidenceDate(c.asOf)}</span></div>
+        {selectedEvidence.length ? <ul className="desk-evidence-grid">{selectedEvidence.map(({ id, record, metadata, observedAt, sourceAsOf, withheld, synthetic }) => <li key={id}>
+          <article className={`desk-evidence-card${withheld ? ' desk-evidence-blocked' : ''}`} data-evidence-id={id} data-evidence-state={withheld ? 'withheld' : 'ready'}>
+            {withheld || !record ? <><div className="desk-evidence-card-header"><h4>{id}</h4><span className="badge warning">내용 표시 보류</span></div><p className="desk-evidence-note">{withheld}</p><p className="desk-evidence-summary">연결된 ID는 유지됩니다. 원본을 확인한 뒤 접수에 사용할 수 있습니다.</p></> : <>
+              <div className="desk-evidence-card-header"><h4>{evidenceText(record.label, id)}</h4><div className="desk-evidence-badges"><span className="badge neutral">{evidenceText(metadata.sourceSystem ?? record.system, '출처 시스템 미등록')}</span><span className={`badge ${(metadata.recordStatus ?? record.status) === 'fact' ? 'info' : 'warning'}`}>{(metadata.recordStatus ?? record.status) === 'fact' ? '기록 확인' : (metadata.recordStatus ?? record.status) === 'unknown' ? '미확인' : '기록 상태 미등록'}</span><span className="badge neutral">{synthetic ? '합성 자료' : '합성 여부 확인 필요'}</span></div></div>
+              <p className="desk-evidence-value">{evidenceText(record.value, '관측 내용 미등록')}</p>
+              <dl className="desk-evidence-meta"><div><dt>원본 출처</dt><dd>{evidenceText(record.source, '출처 미등록')}</dd></div><div><dt>기록 시각</dt><dd>{evidenceDate(observedAt)}</dd></div><div><dt>조회 기준시각</dt><dd>{evidenceDate(sourceAsOf)}</dd></div><div><dt>근거 ID</dt><dd>{id}</dd></div></dl>
+              {(observedAt == null || observedAt === '') && <p className="desk-evidence-note">기록 시각 미등록 · 접수 기준시각과 대조할 수 없습니다.</p>}
+              <details className="desk-evidence-detail"><summary>원본 기록과 연결 정보</summary><dl className="desk-evidence-meta"><div><dt>원본 레코드 키</dt><dd>{evidenceText(metadata.sourceRecordKey)}</dd></div><div><dt>시각 정밀도 / 시간대 상태</dt><dd>{evidenceText(metadata.observedAtPrecision)} / {evidenceText(metadata.timezoneStatus)}</dd></div><div><dt>원본 연결 상태</dt><dd>{evidenceText(metadata.relationStatus)}</dd></div></dl><pre>{JSON.stringify(record, null, 2)}</pre></details>
+            </>}
+          </article>
+        </li>)}</ul> : <p className="desk-evidence-empty">연결한 근거가 없습니다. WMS 작업 확인 또는 TMS 배송 확인에서 현재 접수에 필요한 근거를 연결해 주세요.</p>}
+        <p className="desk-evidence-summary">기록 상태와 합성 여부를 구분합니다. 기록 확인만으로 실제 도착·발생 원인·작업자 귀책을 확정할 수 없습니다.</p>
+      </section>
+    </section>
   </div>;
 }
 
