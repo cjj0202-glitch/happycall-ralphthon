@@ -1,0 +1,200 @@
+{
+  "reviewedAt": "2026-09-21T22:12:54.584598+09:00",
+  "method": "Git blob/static comparison and existing raw browser request log only; no new browser/server/build/tests",
+  "mainNotice": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5760919013",
+  "comparison": {
+    "92d2ecbad981f366a9e5ffc850d9c2bb7fd5d3a2": {
+      "canonicalGitBlob": {
+        "bytes": 23090,
+        "sha256": "c7449e66a89c6c2b43b9b09868d651379a376e25a27f3f227b99375c7fa51449"
+      },
+      "publicGitBlob": {
+        "bytes": 22830,
+        "sha256": "071b4599c4a8a733accb201aaa4dd1535b216d8a2dbb6a0004b67043ffda8916"
+      },
+      "semanticDifferences": [
+        {
+          "path": "/cases/1/audioUrl",
+          "canonical": "/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "public": "/demo/CASE-0002.wav"
+        },
+        {
+          "path": "/cases/1/transcript/3/end",
+          "canonical": 23.3,
+          "public": 23.1
+        },
+        {
+          "path": "/cases/1/transcript/3/start",
+          "canonical": 17.75,
+          "public": 17.55
+        },
+        {
+          "path": "/cases/1/transcript/4/end",
+          "canonical": 29.8,
+          "public": 29.6
+        },
+        {
+          "path": "/cases/1/transcript/4/start",
+          "canonical": 23.65,
+          "public": 23.45
+        },
+        {
+          "path": "/cases/1/transcript/5/end",
+          "canonical": 36.55,
+          "public": 36.35
+        },
+        {
+          "path": "/cases/1/transcript/5/start",
+          "canonical": 30.15,
+          "public": 29.95
+        },
+        {
+          "path": "/cases/1/transcript/6/end",
+          "canonical": 44.25,
+          "public": 44.05
+        },
+        {
+          "path": "/cases/1/transcript/6/start",
+          "canonical": 36.9,
+          "public": 36.7
+        },
+        {
+          "path": "/cases/1/transcript/7/end",
+          "canonical": 49.4,
+          "public": 49.2
+        },
+        {
+          "path": "/cases/1/transcript/7/start",
+          "canonical": 44.6,
+          "public": 44.4
+        },
+        {
+          "path": "/cases/1/transcriptTiming/addedFrames",
+          "canonical": 4800,
+          "public": null
+        },
+        {
+          "path": "/cases/1/transcriptTiming/audioSha256",
+          "canonical": "6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "public": "333897f4f10426674ec97b9e3a44c2f8da21f1f7931b4f911c82a29abcf6b914"
+        },
+        {
+          "path": "/cases/1/transcriptTiming/insertionFrame",
+          "canonical": 417000,
+          "public": null
+        },
+        {
+          "path": "/cases/1/transcriptTiming/notice",
+          "canonical": "합성 발화 경계에 후보 쉼0.20초를 반영했습니다. STT·단어 정렬 결과가 아닙니다.",
+          "public": "합성 발화 파일의 시간 범위입니다. STT·단어 정렬 결과가 아닙니다."
+        },
+        {
+          "path": "/cases/1/transcriptTiming/originalAudioSha256",
+          "canonical": "333897f4f10426674ec97b9e3a44c2f8da21f1f7931b4f911c82a29abcf6b914",
+          "public": null
+        },
+        {
+          "path": "/cases/1/transcriptTiming/source",
+          "canonical": "synthetic-tts-segment-boundaries-with-pause020",
+          "public": "synthetic-tts-segment-boundaries"
+        }
+      ]
+    },
+    "7ca0e8ba85dbfa7bff85577d4b0d019756e53e35": {
+      "canonicalGitBlob": {
+        "bytes": 23090,
+        "sha256": "c7449e66a89c6c2b43b9b09868d651379a376e25a27f3f227b99375c7fa51449"
+      },
+      "publicGitBlob": {
+        "bytes": 23090,
+        "sha256": "c7449e66a89c6c2b43b9b09868d651379a376e25a27f3f227b99375c7fa51449"
+      },
+      "semanticDifferences": []
+    }
+  },
+  "mainReportedWindowsBytesExplained": {
+    "conversion": "Git LF to CRLF only",
+    "bytes": 23693,
+    "sha256": "5edf80669f7def9d3e10ceea910086c41026ff1252fbc638b97641562f3d84f4",
+    "actualExportNotRebuiltOrDownloaded": true
+  },
+  "existingBrowserEvidence": {
+    "path": "reports/pc2/audio-m3/parent-2026-09-21T12-51-25-545Z/results.json",
+    "sha256": "daaf0993bb1a80aeee2789ff402dab75ec2b8b4735c16dd188ab8537190afd84",
+    "normalApiListRequests": 9,
+    "offlineCasesJsonRequests": 0,
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/",
+        "count": 8
+      },
+      {
+        "method": "GET",
+        "path": "/_next/static/css/c51028af84ba3eb0.css",
+        "count": 8
+      },
+      {
+        "method": "GET",
+        "path": "/_next/static/css/8539327adedac84e.css",
+        "count": 8
+      },
+      {
+        "method": "GET",
+        "path": "/_next/static/chunks/webpack-f777753e94ab0e86.js",
+        "count": 8
+      },
+      {
+        "method": "GET",
+        "path": "/_next/static/chunks/49ea6767-0552f1e6d98592e5.js",
+        "count": 8
+      },
+      {
+        "method": "GET",
+        "path": "/_next/static/chunks/802-aa61581df1c5cf6c.js",
+        "count": 8
+      },
+      {
+        "method": "GET",
+        "path": "/_next/static/chunks/main-app-297ff8eb55f160d4.js",
+        "count": 8
+      },
+      {
+        "method": "GET",
+        "path": "/_next/static/chunks/app/page-cd945035eca7ec5b.js",
+        "count": 8
+      },
+      {
+        "method": "GET",
+        "path": "/icon.svg",
+        "count": 16
+      },
+      {
+        "method": "GET",
+        "path": "/api/cases",
+        "count": 9
+      },
+      {
+        "method": "GET",
+        "path": "/demo/CASE-0001.wav",
+        "count": 10
+      },
+      {
+        "method": "POST",
+        "path": "/api/cases/CASE-0001/analyze",
+        "count": 1
+      },
+      {
+        "method": "GET",
+        "path": "/demo/CASE-0002.wav",
+        "count": 15
+      },
+      {
+        "method": "POST",
+        "path": "/api/cases/CASE-0002/analyze",
+        "count": 2
+      }
+    ]
+  },
+  "conclusion": "14/14 applies to fixed92d2 normal API flow only; known offline fixture defect excluded, fixed7ca browser/export execution unverified by pc2"
+}
