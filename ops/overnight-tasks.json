@@ -23,9 +23,9 @@
         "reports/live-analysis-independent.md"
       ],
       "remaining": [
-        "AI 사실관계 오류4건 수정·재검증",
+        "고객 요청에 AI 추가질문을 섞은 P1 수정·독립 검증",
         "음성/Blender 제작 품질",
-        "원격 독립 QA",
+        "최신 후보 원격 독립 QA",
         "영속 저장·원격 전체 흐름",
         "최종 인계·발표·로그"
       ],
@@ -46,6 +46,38 @@
         "boundary": "64/72",
         "safetyFailures": 4,
         "evidence": "reports/evaluation/recheck-20260921-2020-review.md",
+        "accepted": false
+      },
+      "prototypeResilience": {
+        "atKST": "2026-09-21T21:18:24.863147+09:00",
+        "candidateCommit": "c6f734f60d0dbe0151a69e35b8dfd8a41f3c5bd5",
+        "buildSource": "a519e346e7a097f00961441373e858a088d86bce119640531fecd10762441292",
+        "buildOutput": "65c40b09aa68ef178eca9d73847c68a92cf237910b65c9040b79c3ba1d2fe40a",
+        "browserChecks": "54/54",
+        "independentChecks": "41/41",
+        "fullFlows": "6/6",
+        "textFlows": "2/2",
+        "offlineSafety": "1/1",
+        "offlineComplete": "0/1 BLOCKED",
+        "backend": "752 passed; 5 skipped; 207 subtests",
+        "evidence": [
+          "reports/prototype-independent-acceptance.md",
+          "reports/prototype-resilience.md",
+          "reports/prototype-backend-regression.md"
+        ],
+        "accepted": false
+      },
+      "targetedLiveRecheck": {
+        "runId": "20260921T120622Z-657e60bdb7",
+        "actualCases": 4,
+        "notRunCases": 28,
+        "autoFields": "15/16",
+        "semanticFields": "7/8",
+        "safetyRubric": "2/4",
+        "remainingP1": "FIX-W05 invents unit-confirmation customer request",
+        "remainingP2": "EDGE-12 missing unit follow-up question",
+        "budgetReservedUsd": 28.3,
+        "evidence": "reports/evaluation/targeted-grounding-live-20260921-2106-review.md",
         "accepted": false
       }
     },
@@ -89,6 +121,21 @@
           "reports/e2e/rehearsal-2026-09-21T11-18-13-436Z/results.json"
         ],
         "buildSource": "15d2659176cae5f9351ff1b4483f0ff11db2341117669280f025c9332a4b2d11",
+        "accepted": false
+      },
+      "pauseCandidate": {
+        "atKST": "2026-09-21T21:18:24.863147+09:00",
+        "resultCommit": "309867bf0930d9c20deee12023125c91cf6e8f6a",
+        "shaChecks": "3/3",
+        "pcmChecks": "6/6",
+        "asrCalls": 2,
+        "asrObservation": "both preserve unit correction; one pair only",
+        "humanListening": 0,
+        "approvedAssetChanged": false,
+        "evidence": "reports/media/pc2-pause-independent-review.md",
+        "followupCard": "reports/channel/N02-M2-pause-browser-followup.md",
+        "followupComment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5760122054",
+        "ackComment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5760187325",
         "accepted": false
       }
     },
@@ -136,6 +183,32 @@
         ],
         "buildSource": "15d2659176cae5f9351ff1b4483f0ff11db2341117669280f025c9332a4b2d11",
         "accepted": false
+      },
+      "lookReview": {
+        "atKST": "2026-09-21T21:18:24.863147+09:00",
+        "resultCommit": "d67b2c7c60c9bf08ec7d29555366e0e33a9790f6",
+        "actualABFrames": 6,
+        "contractChecks": "42/42",
+        "selectedCandidate": "contrast_material_v1 for further review",
+        "sampling96Frames": 3,
+        "sampling96Contract": "8/8",
+        "finalQuality": "NOT_ACCEPTED",
+        "evidence": [
+          "reports/media/pc3-look-ab-review.md",
+          "reports/media/pc3-sampling-review.md"
+        ],
+        "followupCard": "reports/channel/N03-M2-environment-detail-followup.md",
+        "followupComment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5760136604",
+        "accepted": false,
+        "engineCandidate": {
+          "engine": "EEVEE",
+          "samples": 96,
+          "shadowRays": 4,
+          "actualFrames": 1,
+          "checks": "15/15",
+          "evidence": "reports/media/pc3-engine-shadow-review.md",
+          "accepted": false
+        }
       }
     },
     {
@@ -190,9 +263,30 @@
         ],
         "buildSource": "15d2659176cae5f9351ff1b4483f0ff11db2341117669280f025c9332a4b2d11",
         "accepted": false
+      },
+      "candidateQ2Result": {
+        "atKST": "2026-09-21T21:18:24.863147+09:00",
+        "productCommit": "bfc8543aa65316682948f2e3d5b77a3ee56b21ff",
+        "resultCommit": "ca00b2fb23b5f2e252dba5c0930f6aea3a8416c5",
+        "reply": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5760172352",
+        "reportedFlows": "6/6",
+        "reportedBoundaries": "15/15",
+        "mainEvidenceReview": "220/220 source and observation comparisons; remote files not directly inspected",
+        "appliesToNewPrototype": false,
+        "accepted": true,
+        "evidence": "reports/pc4-main-q2-review.md",
+        "remainingP2": "First failed checker source not found in received Git commits"
+      },
+      "prototypeQ3": {
+        "productCommit": "c6f734f60d0dbe0151a69e35b8dfd8a41f3c5bd5",
+        "card": "reports/channel/N04-Q3-prototype-recovery.md",
+        "comment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5760348790",
+        "state": "SENT_ACK_PENDING",
+        "accepted": false
       }
     }
   ],
   "updatedAtKST": "2026-09-21T20:35:52+09:00",
-  "sharedBaseCommit": "d4b4a8137fbc608911e9f6f71bd4b5e289e0a958"
+  "sharedBaseCommit": "d4b4a8137fbc608911e9f6f71bd4b5e289e0a958",
+  "lastMainReviewKST": "2026-09-21T21:18:24.863147+09:00"
 }

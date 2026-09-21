@@ -49,3 +49,5 @@ TODO.md.tmp
 # Raw session logs are only for local review and the official submission portal.
 *.jsonl
 submission-private/
+# Browser-server raw diagnostics stay local; publish selected structured evidence.
+reports/e2e/**/server.log
