@@ -41,6 +41,21 @@
 .quantity { font-size: var(--font-size-26); font-weight: var(--font-weight-semibold); font-variant-numeric: var(--font-numeric); letter-spacing: var(--font-tracking-title); overflow-wrap: anywhere; }
 .unit { margin-left: var(--space-6); color: var(--text-muted); font-size: var(--font-size-12); font-weight: var(--font-weight-regular); }
 .processSvg { display: block; width: 100%; height: auto; max-width: 100%; overflow: hidden; border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--surface-zebra); margin-block: var(--space-16); }
+.routeHelp { color: var(--text-muted); font-size: var(--font-size-12); line-height: var(--font-leading-relaxed); }
+.routeViewport { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; margin-block: var(--space-16); border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--surface-zebra); }
+/* Preserve one SVG unit per CSS pixel at minimum; labels never shrink with the viewport. */
+.routeSvg { min-width: calc(var(--space-20) * 38); max-width: none; margin: 0; border: 0; }
+.routeHitTarget { fill: transparent; }
+.routeSvg .truck { pointer-events: none; }
+.routeViewport:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring); outline-offset: var(--focus-ring-offset); }
+.selectedVisit { padding: var(--space-16); margin-bottom: var(--space-16); border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--action-tint); }
+.selectedVisitHeading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-12); }
+.selectedVisitHeading > div { min-width: 0; }
+.selectedVisitHeading strong { font-size: var(--font-size-14); overflow-wrap: anywhere; }
+.selectedVisitHeading .badge { margin-left: var(--space-8); }
+.selectedVisitTimes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-12); margin-top: var(--space-16); }
+.selectedVisitTimes dt { color: var(--text-secondary); font-size: var(--font-size-12); }
+.selectedVisitTimes dd { margin: var(--space-4) 0 0; font-size: var(--font-size-16); font-weight: var(--font-weight-semibold); font-variant-numeric: var(--font-numeric); overflow-wrap: anywhere; }
 .conveyor { fill: none; stroke: var(--border-strong); stroke-width: 42; }
 .conveyorMark { fill: none; stroke: var(--border-strong); stroke-width: 14; stroke-dasharray: 2 22; animation: beltMove 6s linear infinite; animation-play-state: paused; }
 .root[data-playing='true'] .conveyorMark, .root [data-playing='true'] .conveyorMark, .processSvg[data-playing='true'] .conveyorMark { animation-play-state: running; }

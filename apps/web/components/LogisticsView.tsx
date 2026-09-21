@@ -89,6 +89,10 @@ export default function LogisticsView(props: Props) {
 function LogisticsContent({ kind, caseData, onBack, onLinkEvidence }: Props) {
   const isWms = kind === 'wms';
   const svgTitle = useId();
+  const routeHelp = useId();
+  const visitTableId = useId();
+  const routeViewport = useRef<HTMLDivElement>(null);
+  const selectedRowButton = useRef<HTMLButtonElement>(null);
   const [playing, setPlaying] = useState(false);
   const [reduced, setReduced] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -99,6 +103,22 @@ function LogisticsContent({ kind, caseData, onBack, onLinkEvidence }: Props) {
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const [activeMedia, setActiveMedia] = useState<{ event: Row; clip: MediaClip; opener: HTMLElement | null } | null>(null);
+
+  useEffect(() => {
+    const viewport = routeViewport.current;
+    if (!viewport) return;
+    const revealSelected = () => {
+      const node = viewport.querySelector<SVGGElement>('[role="button"][aria-pressed="true"]');
+      if (!node) return;
+      const visible = viewport.getBoundingClientRect();
+      const selected = node.getBoundingClientRect();
+      viewport.scrollLeft += selected.left + selected.width / 2 - visible.left - viewport.clientWidth / 2;
+    };
+    revealSelected();
+    const observer = new ResizeObserver(revealSelected);
+    observer.observe(viewport);
+    return () => observer.disconnect();
+  }, [selectedStop, isWms]);
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -197,19 +217,23 @@ function LogisticsContent({ kind, caseData, onBack, onLinkEvidence }: Props) {
     </> : <>
       <div className={styles.facts}><div className={styles.fact}><span className={styles.factLabel}>센터 / 노선</span><strong className={styles.factValue}>{text(tms.centerId)} / {text(tms.routeId)}</strong></div><div className={styles.fact}><span className={styles.factLabel}>차량</span><strong className={styles.factValue}>{text(tms.vehicle)}</strong></div><div className={styles.fact}><span className={styles.factLabel}>방문 예정 점포</span><strong className={styles.factValue}>{stops.length}개</strong></div><div className={styles.fact}><span className={styles.factLabel}>완료 시각 등록</span><strong className={styles.factValue}>{stops.filter(stop => stamp(stop.actual) !== null).length} / {stops.length}개</strong></div></div>
       <section className={styles.panel}><div className={styles.panelHeader}><div><p className={styles.eyebrow}>ROUTE OVERVIEW</p><h2 className={styles.panelTitle}>가상 지역 · 방문순서 개념도</h2></div><span className={styles.badge}>GPS 아님</span></div>
-        <svg className={styles.processSvg} viewBox="0 0 760 310" role="group" aria-labelledby={svgTitle}>
+        <p id={routeHelp} className={styles.routeHelp}>좁은 화면에서는 지도를 좌우로 이동해 점포를 선택하세요. 선택한 방문 기록은 지도 아래에서 바로 비교할 수 있습니다.</p>
+        <div ref={routeViewport} className={styles.routeViewport} role="region" aria-label="방문순서 지도 가로 이동" aria-describedby={routeHelp} tabIndex={0}>
+        <svg className={`${styles.processSvg} ${styles.routeSvg}`} viewBox="0 0 760 310" role="group" aria-labelledby={svgTitle}>
           <title id={svgTitle}>가상 좌표에 방문순서를 연결한 개념도. 트럭은 설명용이며 현재 위치를 나타내지 않습니다.</title>
           <rect className={styles.svgLand} width="760" height="310" rx="8"/><path className={styles.svgWater} d="M0 215 C160 265 230 175 400 215 S610 285 760 240 V275 C580 320 530 280 390 250 S160 310 0 250Z"/>
           <g className={styles.svgRoad} fill="none" strokeWidth="13"><path d="M0 90 L210 90 L295 165 L760 165"/><path d="M100 0 L100 310 M340 0L420 310 M655 0 L600 310"/><path d="M0 280L760 45"/></g>
           <text className={styles.svgMuted} x="24" y="30">가상 물류 권역</text><text className={styles.svgMuted} x="24" y="294">좌표·도로·트럭 이동은 합성 설명</text>
           {mapPoints.length > 1 && <polyline className={styles.svgRoute} points={mapPoints.map(point => `${point.x},${point.y}`).join(' ')} fill="none" strokeWidth="4" strokeDasharray="9 7"/>}
-          {mapPoints.map(point => <g key={point.id} role="button" tabIndex={0} aria-label={`${point.sequence}번째 ${point.name} 방문 기록 선택`} aria-pressed={point.id === selectedStop} onClick={() => setSelectedStop(point.id)} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setSelectedStop(point.id); } }}><circle className={point.id === selectedStop ? styles.svgSelected : styles.svgNode} cx={point.x} cy={point.y} r="19"/><text className={styles.svgLabel} x={point.x} y={point.y + 5} textAnchor="middle">{point.sequence}</text><text className={styles.svgLabel} x={point.x} y={point.y - 31} textAnchor="middle">{point.name}</text><text className={styles.svgMuted} x={point.x} y={point.y + 42} textAnchor="middle">규정 {timeLabel(point.planned, caseData.asOf)}</text></g>)}
           {mapPoints.length > 0 && <g className={styles.truck} transform={`translate(${truck.x}, ${truck.y - 5})`} aria-hidden="true"><rect x="-16" y="-12" width="23" height="17" rx="2"/><path d="M7 -7H15L20 0V5H7Z"/><circle cx="-9" cy="7" r="4"/><circle cx="13" cy="7" r="4"/></g>}
+          {mapPoints.map(point => <g key={point.id} role="button" tabIndex={0} aria-label={`${point.sequence}번째 ${point.name} 방문 기록 선택`} aria-pressed={point.id === selectedStop} onClick={() => setSelectedStop(point.id)} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setSelectedStop(point.id); } }}><circle className={styles.routeHitTarget} cx={point.x} cy={point.y} r="24"/><circle className={point.id === selectedStop ? styles.svgSelected : styles.svgNode} cx={point.x} cy={point.y} r="19"/><text className={styles.svgLabel} x={point.x} y={point.y + 5} textAnchor="middle">{point.sequence}</text><text className={styles.svgLabel} x={point.x} y={point.y - 31} textAnchor="middle">{point.name}</text><text className={styles.svgMuted} x={point.x} y={point.y + 42} textAnchor="middle">규정 {timeLabel(point.planned)}</text></g>)}
         </svg>
+        </div>
+        {selected && <div className={styles.selectedVisit} aria-label="선택한 방문 요약" aria-live="polite"><div className={styles.selectedVisitHeading}><div><span className={styles.factLabel}>선택한 방문 · {selected.sequence}번째</span><strong>{selected.name}</strong>{selected.id === caseData.store.id && <span className={styles.badge}>문의 점포</span>}</div><button type="button" className={styles.button} aria-controls={visitTableId} onClick={() => { selectedRowButton.current?.focus({ preventScroll: true }); selectedRowButton.current?.scrollIntoView({ block: 'center', inline: 'center' }); }}>이 점포의 표 행 보기 ↓</button></div><dl className={styles.selectedVisitTimes}><div><dt>계획 · 규정 도착</dt><dd>{timeLabel(selected.planned)}</dd></div><div><dt>기록 · 배송완료</dt><dd>{timeLabel(selected.actual, caseData.asOf)}</dd></div></dl></div>}
         {playback}<p className={styles.legend}>번호는 방문순서입니다. 점포를 선택하면 아래 원본 방문행을 확인할 수 있습니다. {stops.length - mappedStops.length > 0 && `좌표 미등록 ${stops.length - mappedStops.length}개 점포는 표에서 확인하세요.`}</p>
         {!stops.length && <p className={styles.empty}>등록된 방문순서가 없습니다.</p>}
-        {selected && <Source label={`${selected.name} 방문 기록`} value={{ ...selected, planned: atOrBefore(selected.planned, caseData.asOf) ? selected.planned : null, status: stamp(selected.actual) === null ? '배송완료 시각 미등록 · 원인 미확인' : '배송완료 시각 등록', source: `합성 TMS 방문행 ${text(tms.routeId)}/${selected.sequence}`, mapNote: '가상 좌표·방문순서 연결선. 실제 GPS 궤적 아님.' }}/>}</section>
-      <section className={styles.panel}><div className={styles.panelHeader}><h2 className={styles.panelTitle}>방문별 시각 대조</h2><span className={styles.muted}>KST · 빈 기록은 미등록</span></div><div className={styles.tableWrap}><table className={styles.table}><caption className={styles.srOnly}>배송 방문 기록: 규정, 배송완료, 모바일 진입과 이탈 시각 비교</caption><thead><tr>{([{ key: 'sequence', label: '방문순번' }, { key: 'name', label: '점포' }, { key: 'planned', label: '규정 도착' }, { key: 'actual', label: '배송완료' }, { key: 'mobileEntry', label: '모바일 진입' }, { key: 'mobileExit', label: '모바일 이탈' }] as { key: SortKey; label: string }[]).map(column => <th scope="col" key={column.key} aria-sort={sort.key === column.key ? sort.direction === 1 ? 'ascending' : 'descending' : 'none'}><button type="button" className={styles.sortButton} onClick={() => sortBy(column.key)}>{column.label} {sort.key === column.key ? sort.direction === 1 ? '▲' : '▼' : '↕'}</button></th>)}</tr></thead><tbody>{sortedStops.map(stop => <tr key={stop.id} className={stop.id === selectedStop ? styles.selectedRow : undefined}><td className={styles.numeric}>{stop.sequence}</td><td><button type="button" className={styles.button} onClick={() => setSelectedStop(stop.id)} aria-pressed={stop.id === selectedStop}>{stop.name}{stop.id === caseData.store.id ? ' · 문의 점포' : ''}</button></td><td className={styles.numeric}>{timeLabel(stop.planned, caseData.asOf)}</td><td className={styles.numeric}>{timeLabel(stop.actual, caseData.asOf)}</td><td className={styles.numeric}>{timeLabel(stop.mobileEntry, caseData.asOf)}</td><td className={styles.numeric}>{timeLabel(stop.mobileExit, caseData.asOf)}</td></tr>)}</tbody></table></div><p className={styles.muted}>모바일 진입·이탈은 배송완료와 별개의 기록입니다. 미등록 원인과 실제 인도 여부는 센터 확인이 필요합니다.</p></section>
+        {selected && <Source label={`${selected.name} 방문 기록`} value={{ ...selected, status: stamp(selected.actual) === null ? '배송완료 시각 미등록 · 원인 미확인' : '배송완료 시각 등록', source: `합성 TMS 방문행 ${text(tms.routeId)}/${selected.sequence}`, mapNote: '가상 좌표·방문순서 연결선. 실제 GPS 궤적 아님.' }}/>}</section>
+      <section className={styles.panel}><div className={styles.panelHeader}><h2 className={styles.panelTitle}>방문별 시각 대조</h2><span className={styles.muted}>KST · 빈 기록은 미등록</span></div><div className={styles.tableWrap}><table id={visitTableId} className={styles.table}><caption className={styles.srOnly}>배송 방문 기록: 규정, 배송완료, 모바일 진입과 이탈 시각 비교</caption><thead><tr>{([{ key: 'sequence', label: '방문순번' }, { key: 'name', label: '점포' }, { key: 'planned', label: '규정 도착' }, { key: 'actual', label: '배송완료' }, { key: 'mobileEntry', label: '모바일 진입' }, { key: 'mobileExit', label: '모바일 이탈' }] as { key: SortKey; label: string }[]).map(column => <th scope="col" key={column.key} aria-sort={sort.key === column.key ? sort.direction === 1 ? 'ascending' : 'descending' : 'none'}><button type="button" className={styles.sortButton} onClick={() => sortBy(column.key)}>{column.label} {sort.key === column.key ? sort.direction === 1 ? '▲' : '▼' : '↕'}</button></th>)}</tr></thead><tbody>{sortedStops.map(stop => <tr key={stop.id} className={stop.id === selectedStop ? styles.selectedRow : undefined}><td className={styles.numeric}>{stop.sequence}</td><td><button ref={stop.id === selectedStop ? selectedRowButton : undefined} type="button" className={styles.button} onClick={() => setSelectedStop(stop.id)} aria-pressed={stop.id === selectedStop}>{stop.name}{stop.id === caseData.store.id ? ' · 문의 점포' : ''}</button></td><td className={styles.numeric}>{timeLabel(stop.planned)}</td><td className={styles.numeric}>{timeLabel(stop.actual, caseData.asOf)}</td><td className={styles.numeric}>{timeLabel(stop.mobileEntry, caseData.asOf)}</td><td className={styles.numeric}>{timeLabel(stop.mobileExit, caseData.asOf)}</td></tr>)}</tbody></table></div><p className={styles.muted}>모바일 진입·이탈은 배송완료와 별개의 기록입니다. 미등록 원인과 실제 인도 여부는 센터 확인이 필요합니다.</p></section>
     </>}
 
     {!isWms && <p className={styles.empty}>이 사례의 TMS 이벤트에 연결된 영상이 미등록입니다.</p>}
