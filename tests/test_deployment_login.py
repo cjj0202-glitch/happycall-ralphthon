@@ -15,6 +15,49 @@ ORIGIN = "https://demo.invalid"
 AUTH = "Basic " + base64.b64encode(f"{USER}:{PASSWORD}".encode()).decode()
 
 
+def _demo_pin_environment():
+    return {"ONEFLOW_ACCESS_USER": "happycall", "ONEFLOW_ACCESS_PASSWORD": "0000",
+            "ONEFLOW_DEMO_PIN_LOGIN": "1", "ONEFLOW_SESSION_SECRET": "0123456789abcdef" * 4}
+
+
+def test_demo_pin_requires_explicit_opt_in_and_valid_separate_secret():
+    for changes in ({"ONEFLOW_DEMO_PIN_LOGIN": ""}, {"ONEFLOW_DEMO_PIN_LOGIN": "true"},
+                    {"ONEFLOW_SESSION_SECRET": ""}, {"ONEFLOW_SESSION_SECRET": "a" * 63},
+                    {"ONEFLOW_SESSION_SECRET": "z" * 64}):
+        with pytest.raises(ValueError, match="valid non-placeholder"):
+            access.AccessCredentials.from_environment({**_demo_pin_environment(), **changes})
+
+
+def test_demo_pin_exception_rejects_other_weak_credentials():
+    for changes in ({"ONEFLOW_ACCESS_USER": "someone"}, {"ONEFLOW_ACCESS_PASSWORD": "1234"},
+                    {"ONEFLOW_ACCESS_USER": "Happycall"}, {"ONEFLOW_ACCESS_PASSWORD": "00000"}):
+        with pytest.raises(ValueError, match="valid non-placeholder"):
+            access.AccessCredentials.from_environment({**_demo_pin_environment(), **changes})
+
+
+def test_demo_pin_login_works_without_exposing_secret():
+    credentials = access.AccessCredentials.from_environment(_demo_pin_environment())
+    application = access.DeploymentAccess(Echo(), credentials)
+    response = login(application, username="happycall", password="0000")
+    assert response.status_code == 303
+    session = response.headers["set-cookie"].split(";", 1)[0]
+    assert request(application, path="/api/cases", headers={"Cookie": session}).status_code == 200
+    assert _demo_pin_environment()["ONEFLOW_SESSION_SECRET"] not in repr(credentials) + response.text + session
+    assert login(application, username="happycall", password="0001").status_code == 401
+
+
+def test_demo_pin_session_requires_separate_secret_and_rotation_invalidates():
+    credentials = access.AccessCredentials.from_environment(_demo_pin_environment())
+    application = access.DeploymentAccess(Echo(), credentials)
+    session = login(application, username="happycall", password="0000").headers["set-cookie"].split(";", 1)[0]
+    guessed = access.DeploymentAccess(Echo(), access.AccessCredentials(
+        credentials.username_digest, credentials.password_digest))
+    rotated = access.DeploymentAccess(Echo(), access.AccessCredentials.from_environment(
+        {**_demo_pin_environment(), "ONEFLOW_SESSION_SECRET": "fedcba9876543210" * 4}))
+    for other in (guessed, rotated):
+        assert request(other, path="/api/cases", headers={"Cookie": session}).status_code == 401
+
+
 class Echo:
     def __init__(self):
         self.calls = []
