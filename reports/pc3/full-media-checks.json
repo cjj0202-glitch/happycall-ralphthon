@@ -922,5 +922,879 @@
     "TEST": "awaiting_pc1_test",
     "wholeN03Accepted": false
   },
-  "scoreEvidence": "Actual delegation, observed failing regressions, correction, independent tests, tool commands and source hashes are evidence for the agreed workflow. No score, human usability result or official submission completion is claimed."
+  "scoreEvidence": "Actual delegation, observed failing regressions, correction, independent tests, tool commands and source hashes are evidence for the agreed workflow. No score, human usability result or official submission completion is claimed.",
+  "reviewCorrection": {
+    "schemaVersion": "pc3-m6-review-correction-v1",
+    "recordedAtUtc": "2026-09-21T16:38:46.678501+00:00",
+    "baseline": "3a223f160941212d4d8608a53806563ec2ef9318",
+    "mainReference": "4b18b27e00ffab3106d1d88920e4f18b3de64356",
+    "assignment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5763744576",
+    "status": "scoped_review_corrections_verified; pc1_acceptance_pending",
+    "sources": {
+      "packager": {
+        "path": "scripts\\media_pc3\\package_full_animation_media.py",
+        "bytes": 40523,
+        "sha256": "cad81122ffb8225c35e58d7ca8b6327701e504e8ddbd8c6dd7d5b667d12b9396"
+      },
+      "tests": {
+        "path": "scripts\\media_pc3\\test_full_animation_media.py",
+        "bytes": 41324,
+        "sha256": "672ad99b52c06df95a53ee1b051a9d3e0c9c0e2c2c6b620fa031fcdb94b8f398"
+      }
+    },
+    "pc1ReportedPriorSuite": {
+      "testsRun": 20,
+      "passed": 20,
+      "seconds": 267.557,
+      "measuredBy": "pc1 isolated copy; reported in assignment, not pc3 measurement"
+    },
+    "originalReproduction": {
+      "command": "python -B .local/pc3-m6-review/original-repro.py",
+      "snapshotSources": {
+        "package_original.py": {
+          "bytes": 26089,
+          "sha256": "b4185ee1438ad4f98570750f35f8927aa67cf0eb1993846dd0ca3cc2f5eead45"
+        },
+        "test_original.py": {
+          "bytes": 27521,
+          "sha256": "0a1ae96bc03fb997b5696286a351b2e849b49d890281967de4af4b67b2d79e39"
+        }
+      },
+      "observations": 9,
+      "matched": 9,
+      "wallSeconds": 14.51123109999753,
+      "records": [
+        {
+          "name": "input-normal-control",
+          "expectedOriginalAcceptance": true,
+          "accepted": true,
+          "matchesReproductionExpectation": true
+        },
+        {
+          "name": "input-displaymatrix-negative180-incorrectly-accepted",
+          "expectedOriginalAcceptance": true,
+          "accepted": true,
+          "matchesReproductionExpectation": true
+        },
+        {
+          "name": "probe-normal-control",
+          "expectedOriginalAcceptance": true,
+          "accepted": true,
+          "matchesReproductionExpectation": true
+        },
+        {
+          "name": "probe-rotation-negative180-incorrectly-accepted",
+          "expectedOriginalAcceptance": true,
+          "accepted": true,
+          "matchesReproductionExpectation": true
+        },
+        {
+          "name": "mp4-tkhd-identity-control",
+          "expectedOriginalAcceptance": true,
+          "accepted": true,
+          "matchesReproductionExpectation": true
+        },
+        {
+          "name": "mp4-tkhd-rotated180-incorrectly-accepted",
+          "expectedOriginalAcceptance": true,
+          "accepted": true,
+          "matchesReproductionExpectation": true
+        },
+        {
+          "name": "normal-control",
+          "returnedStatus": "PASS_WITH_PENDING",
+          "returnedValid": true,
+          "diskReportStatus": "PASS_WITH_PENDING",
+          "diskReportValid": true,
+          "diskFailureStatus": null,
+          "descriptorExists": true,
+          "injected": {
+            "lastValidationFailures": 0,
+            "deniedDeletes": []
+          },
+          "wallSeconds": 3.87776440000016,
+          "matchesReproductionExpectation": true
+        },
+        {
+          "name": "late-failure-delete-allowed-control",
+          "returnedStatus": "FAIL",
+          "returnedValid": false,
+          "diskReportStatus": null,
+          "diskReportValid": null,
+          "diskFailureStatus": "FAIL",
+          "descriptorExists": false,
+          "injected": {
+            "lastValidationFailures": 1,
+            "deniedDeletes": []
+          },
+          "wallSeconds": 3.297933699999703,
+          "matchesReproductionExpectation": true
+        },
+        {
+          "name": "late-failure-delete-denied-counterexample",
+          "returnedStatus": "FAIL",
+          "returnedValid": false,
+          "diskReportStatus": "PASS_WITH_PENDING",
+          "diskReportValid": true,
+          "diskFailureStatus": "FAIL",
+          "descriptorExists": true,
+          "injected": {
+            "lastValidationFailures": 1,
+            "deniedDeletes": [
+              "candidate-report.json",
+              "sorter-demo.tracks.descriptor.json"
+            ]
+          },
+          "wallSeconds": 3.2569099000029382,
+          "matchesReproductionExpectation": true
+        }
+      ],
+      "actualMediaProcesses": 0,
+      "rawEvidence": {
+        "path": ".local\\pc3-m6-review\\original-repro-20260921T162118065043Z\\original-repro.json",
+        "bytes": 8513,
+        "sha256": "ba407f641a1e53e61917cf0cd9192a82f69fa6e6ee86e8a09b00a9ac301bf1af"
+      },
+      "rawLog": {
+        "path": ".local\\pc3-m6-review\\original-repro-20260921T162118065043Z\\original-repro.log",
+        "bytes": 5412,
+        "sha256": "365f55b053c75d1781b5a3cc0ed968ed52d1cf88e55ba0486897e6792440b87b"
+      },
+      "input291Preserved": true,
+      "expectationsPreserved": true,
+      "limits": [
+        "Artificial box/protocol data and fake subprocesses, no actual encode/decode/render.",
+        "PermissionError injection is not an actual Windows file-lock reproduction.",
+        "Matching expected acceptance of negative cases reproduces a defect; it is not product acceptance."
+      ]
+    },
+    "finalFullSuite": {
+      "schemaVersion": "pc3-full-animation-media-review-independent-tests-v1",
+      "createdAtUtc": "2026-09-21T16:37:02.906996+00:00",
+      "command": "python -B .local/pc3-m6-review/actualtest-run.py",
+      "selectedTests": "all",
+      "testCommand": "python -B -m unittest discover -s scripts/media_pc3 -p test_full_animation_media.py -v",
+      "testsRun": 30,
+      "passed": 30,
+      "failureRecords": 0,
+      "errorRecords": 0,
+      "skipped": 0,
+      "elapsedSeconds": 272.266,
+      "successfulTests": [
+        "test_full_animation_media.FullAnimationMediaTests.test_consumer_rejects_success_report_with_failure_marker",
+        "test_full_animation_media.FullAnimationMediaTests.test_consumer_requires_complete_current_four_file_bundle",
+        "test_full_animation_media.FullAnimationMediaTests.test_decode_all_frames_clock_dimensions_hashes_and_errors",
+        "test_full_animation_media.FullAnimationMediaTests.test_disabled_full_decode_guard_is_killed_by_independent_negative",
+        "test_full_animation_media.FullAnimationMediaTests.test_disabled_transform_and_consumer_guards_are_killed",
+        "test_full_animation_media.FullAnimationMediaTests.test_failure_does_not_write_into_replacement_foreign_directory",
+        "test_full_animation_media.FullAnimationMediaTests.test_final_video_tamper_after_tracks_copy_is_rejected_before_publication",
+        "test_full_animation_media.FullAnimationMediaTests.test_finalcheck_failure_with_cleanup_permission_fault_cannot_publish_success",
+        "test_full_animation_media.FullAnimationMediaTests.test_identity_transform_metadata_and_v0_v1_boxes_are_valid",
+        "test_full_animation_media.FullAnimationMediaTests.test_late_staged_report_write_failure_is_not_published_or_accepted",
+        "test_full_animation_media.FullAnimationMediaTests.test_m5_failure_stops_before_any_encoder_and_has_no_success_outputs",
+        "test_full_animation_media.FullAnimationMediaTests.test_missing_input_and_decoded_sample_aspect_are_rejected",
+        "test_full_animation_media.FullAnimationMediaTests.test_movie_and_track_matrix_unknown_malformed_and_nonidentity_rejected",
+        "test_full_animation_media.FullAnimationMediaTests.test_mp4_requires_faststart_and_complete_boxes",
+        "test_full_animation_media.FullAnimationMediaTests.test_nonzero_exit_and_timeouts_never_publish_success",
+        "test_full_animation_media.FullAnimationMediaTests.test_normal_preflight_encode_decode_raw_copy_and_exact_five_field_descriptor",
+        "test_full_animation_media.FullAnimationMediaTests.test_optional_ffprobe_success_and_ffmpeg_only_input_metadata_rejections",
+        "test_full_animation_media.FullAnimationMediaTests.test_original_sources_are_byte_preserved",
+        "test_full_animation_media.FullAnimationMediaTests.test_output_existing_overlap_traversal_and_binary_missing_do_not_encode",
+        "test_full_animation_media.FullAnimationMediaTests.test_output_inode_replacement_before_publication_is_rejected",
+        "test_full_animation_media.FullAnimationMediaTests.test_output_under_junction_parent_is_rejected",
+        "test_full_animation_media.FullAnimationMediaTests.test_probe_framecount_duration_resolution_codec_pixfmt_and_stream_identity",
+        "test_full_animation_media.FullAnimationMediaTests.test_rejects_nonidentity_track_matrix",
+        "test_full_animation_media.FullAnimationMediaTests.test_rejects_wrong_decoded_frame_count",
+        "test_full_animation_media.FullAnimationMediaTests.test_report_publish_failure_cannot_be_accepted",
+        "test_full_animation_media.FullAnimationMediaTests.test_sample_description_rejects_crop_unknown_and_nonsquare_pixels",
+        "test_full_animation_media.FullAnimationMediaTests.test_source_or_external_expected_change_after_preflight_is_rejected",
+        "test_full_animation_media.FullAnimationMediaTests.test_subprocess_uses_explicit_argv_timeout_utf8_capture_hidden_windows_and_full_decode",
+        "test_full_animation_media.FullAnimationMediaTests.test_text_and_probe_rotation_or_unknown_transform_is_rejected",
+        "test_full_animation_media.FullAnimationMediaTests.test_video_change_during_validation_is_rejected"
+      ],
+      "failures": [],
+      "errors": [],
+      "skipDetails": [],
+      "negativeCaseCount": 118,
+      "negativeCases": [
+        "atomic-report-publish-denied",
+        "consumer-extra-candidate-report.staged.json",
+        "consumer-extra-sorter-demo.partial.mp4",
+        "consumer-extra-unknown.txt",
+        "consumer-report-only",
+        "consumer-success-report-plus-failure",
+        "consumer-tampered-candidate-report.json",
+        "consumer-tampered-sorter-demo.mp4",
+        "consumer-tampered-sorter-demo.tracks.descriptor.json",
+        "consumer-tampered-sorter-demo.tracks.json",
+        "consumer-tracks-video-binding",
+        "decode-287-frames",
+        "decode-bad-size",
+        "decode-bad-timebase",
+        "decode-duplicate-pts",
+        "decode-empty",
+        "decode-exit",
+        "decode-extra-frame",
+        "decode-late-offset",
+        "decode-malformed",
+        "decode-timeout",
+        "decode-wrong-duration",
+        "decode-wrong-hash",
+        "decoded-sar-zero",
+        "encode-exit",
+        "encode-timeout",
+        "expected-changed-after-preflight",
+        "failed-output-cannot-be-reused",
+        "failure-after-output-inode-replacement",
+        "ffmpeg-metadata-missing",
+        "ffmpeg-metadata-output-cannot-substitute-input",
+        "ffmpeg-metadata-success-text-only",
+        "ffmpeg-metadata-wrong-input-codec",
+        "ffmpeg-metadata-wrong-input-duration",
+        "ffmpeg-metadata-wrong-input-fps",
+        "ffmpeg-metadata-wrong-input-pixfmt",
+        "ffmpeg-metadata-wrong-input-start",
+        "ffmpeg-metadata-wrong-input-tbr",
+        "ffmpeg-metadata-wrong-input-width",
+        "final-output-tamper-sorter-demo.mp4",
+        "final-output-tamper-sorter-demo.tracks.json",
+        "finalcheck-plus-cleanup-permission-fault",
+        "input-display-rotation--180.00",
+        "input-display-rotation-90",
+        "input-display-rotation-Infinity",
+        "input-display-rotation-NaN",
+        "input-display-rotation-unknown",
+        "input-sar-absent",
+        "late-report-write-failure",
+        "m5-missing-frame",
+        "missing-explicit-ffmpeg",
+        "mp4-empty",
+        "mp4-media-duration",
+        "mp4-moov-after-mdat",
+        "mp4-movie-duration",
+        "mp4-not-mp4",
+        "mp4-sample-count",
+        "mp4-sample-transform-crop",
+        "mp4-sample-transform-duplicate-pasp",
+        "mp4-sample-transform-nonsquare",
+        "mp4-sample-transform-short",
+        "mp4-sample-transform-unknown",
+        "mp4-sample-transform-zero",
+        "mp4-transform-missing-tkhd",
+        "mp4-transform-movie-perspective",
+        "mp4-transform-movie-reflect",
+        "mp4-transform-movie-rotate180",
+        "mp4-transform-movie-rotate90",
+        "mp4-transform-movie-scale",
+        "mp4-transform-movie-translate",
+        "mp4-transform-movie-zero",
+        "mp4-transform-short-mvhd",
+        "mp4-transform-short-tkhd",
+        "mp4-transform-track-perspective",
+        "mp4-transform-track-reflect",
+        "mp4-transform-track-rotate180",
+        "mp4-transform-track-rotate90",
+        "mp4-transform-track-scale",
+        "mp4-transform-track-translate",
+        "mp4-transform-track-zero",
+        "mp4-transform-unknown-mvhd-version",
+        "mp4-transform-unknown-tkhd-version",
+        "mp4-truncated",
+        "mp4-width",
+        "output-empty-existing",
+        "output-existing",
+        "output-inode-replacement-before-publication",
+        "output-junction",
+        "output-source-child",
+        "output-source-overlap",
+        "output-source-parent",
+        "output-traversal",
+        "package-rotated-track-matrix",
+        "partial-encode",
+        "probe-codec-hevc",
+        "probe-declared-frames72",
+        "probe-duration3",
+        "probe-exit",
+        "probe-extra-audio",
+        "probe-format-duration",
+        "probe-fps30",
+        "probe-frames287",
+        "probe-height720",
+        "probe-missing-streams",
+        "probe-offset",
+        "probe-pixel-yuv444p",
+        "probe-rate30",
+        "probe-timeout",
+        "probe-transform-side-180",
+        "probe-transform-side-hidden-translation",
+        "probe-transform-side-malformed",
+        "probe-transform-side-missing-matrix",
+        "probe-transform-tag-180",
+        "probe-transform-tag-malformed",
+        "probe-width-bool",
+        "probe-width1280",
+        "source-changed-after-preflight",
+        "video-changed-during-validation"
+      ],
+      "mutations": [
+        {
+          "name": "disable-exact288-full-decode-guard-in-memory",
+          "killed": true,
+          "negativeTest": "test_rejects_wrong_decoded_frame_count",
+          "testsRun": 1,
+          "failures": 1,
+          "errors": 0,
+          "sourceFilesChanged": false,
+          "assertionEvidence": {
+            "chars": 60357,
+            "sha256": "9ccfed2a103c20d40a18489a3cf8b73db076b4fc84586809b1bfb85dbf746e91",
+            "prefix": "Traceback (most recent call last):\n  File \"D:\\hwana\\Work\\happycall-ralphthon\\scripts\\media_pc3\\test_full_animation_media.py\", line 322, in test_rejects_wrong_decoded_frame_count\n    self.rejected(\"decode-287-frames\")\n  File \"D:\\hwana\\Work\\happycall-ralphthon\\scripts\\media_pc3\\test_full_animation_media.py\", line 206, in rejected\n    self.assertIs(result[\"valid\"],False,(name,result))\nAssertionError: True is not False : ('decode-287-frames', {'schemaVersion': 'pc3-full-animation-media-candidate-v1', 'valid': True, 'status': 'PASS_WITH_PENDING', 'failures': [], 'pending': [{'code': 'VISUAL_REVIEW_PENDING', 'detail': 'Successful encoding/decoding does not approve visual quality, contact, occlusio",
+            "fullRecord": ".local\\pc3-m6-review\\actualtest-20260921T163230638669Z.json"
+          }
+        },
+        {
+          "name": "disable-matrix-guard-in-memory",
+          "killed": true,
+          "negativeTest": "test_rejects_nonidentity_track_matrix",
+          "guardsChanged": 1,
+          "testsRun": 1,
+          "failures": 1,
+          "errors": 0,
+          "sourceFilesChanged": false,
+          "assertionEvidence": {
+            "chars": 60446,
+            "sha256": "6c57853cbf5dbd953e5550efec634afd407da3fedd4d3afa0e77630546f00d71",
+            "prefix": "Traceback (most recent call last):\n  File \"D:\\hwana\\Work\\happycall-ralphthon\\scripts\\media_pc3\\test_full_animation_media.py\", line 567, in test_rejects_nonidentity_track_matrix\n    self.rejected(\"package-rotated-track-matrix\")\n  File \"D:\\hwana\\Work\\happycall-ralphthon\\scripts\\media_pc3\\test_full_animation_media.py\", line 206, in rejected\n    self.assertIs(result[\"valid\"],False,(name,result))\nAssertionError: True is not False : ('package-rotated-track-matrix', {'schemaVersion': 'pc3-full-animation-media-candidate-v1', 'valid': True, 'status': 'PASS_WITH_PENDING', 'failures': [], 'pending': [{'code': 'VISUAL_REVIEW_PENDING', 'detail': 'Successful encoding/decoding does not approve visual quali",
+            "fullRecord": ".local\\pc3-m6-review\\actualtest-20260921T163230638669Z.json"
+          }
+        },
+        {
+          "name": "disable-consumer-inventory-guard-in-memory",
+          "killed": true,
+          "negativeTest": "test_consumer_rejects_success_report_with_failure_marker",
+          "guardsChanged": 2,
+          "testsRun": 1,
+          "failures": 1,
+          "errors": 0,
+          "sourceFilesChanged": false,
+          "assertionEvidence": {
+            "chars": 2317,
+            "sha256": "e7151755b2b6ec1900e5300bf47b83aed2aff94b3e04ba4c28f9ac5f85a37527",
+            "prefix": "Traceback (most recent call last):\n  File \"D:\\hwana\\Work\\happycall-ralphthon\\scripts\\media_pc3\\test_full_animation_media.py\", line 654, in test_consumer_rejects_success_report_with_failure_marker\n    self.assertIs(consumed[\"valid\"],False,consumed)\nAssertionError: True is not False : {'schemaVersion': 'pc3-full-animation-media-consumption-v1', 'valid': True, 'status': 'PASS_WITH_PENDING', 'failures': [], 'visualAccepted': False, 'mainRegistration': False, 'authenticityVerified': False, 'videoDecoded': False, 'pixelDecoded': False, 'inputDigests': [{'name': 'candidate-report.json', 'bytes': 70955, 'sha256': 'db2653674cc8fc1883de9b9e9a1f2cb75eb5d62e444a962d01f797c7b3f11f8b'}, {'name': 'sorter-d",
+            "fullRecord": ".local\\pc3-m6-review\\actualtest-20260921T163230638669Z.json"
+          }
+        }
+      ],
+      "compoundObservations": [
+        {
+          "finalCheckFaultReached": true,
+          "cleanupPermissionFaultConfigured": true,
+          "actualUnlinkAttempts": [],
+          "publishedSuccessReportExists": false,
+          "consumerValid": false,
+          "notice": "No actual OS file lock; zero unlink attempts means failure rejection does not depend on deletion."
+        }
+      ],
+      "originalSourceBytesPreserved": true,
+      "mockProcessCallCount": 145,
+      "mockProcessStageCounts": {
+        "encode": 70,
+        "decode": 58,
+        "probe": 17
+      },
+      "realM5VerifierUsed": true,
+      "inputFixtureCounts": {
+        "pngFiles": 288,
+        "trackRows": 288,
+        "packageFiles": 291
+      },
+      "actualVideoEncodes": 0,
+      "actualVideoDecodes": 0,
+      "actualBlenderRenders": 0,
+      "approvedReceiptIssued": false,
+      "networkUsed": false,
+      "limits": [
+        "Artificial flat-color PNGs, fake MP4 boxes and mocked subprocess protocol only.",
+        "Successful mocked videoDecoded is a code-path observation, not an actual video-decoding result.",
+        "No visual-quality acceptance, product registration, real scene rendering or issuer authentication."
+      ],
+      "rawLog": ".local\\pc3-m6-review\\actualtest-20260921T163230638669Z.log",
+      "processExitCode": null,
+      "processExitCodeLimit": "Original command session handle was not retained by the independent tester; raw unittest OK, result JSON and stable source hashes were observed. No exit code is inferred or test rerun performed for that metadata.",
+      "rawEvidence": {
+        "path": ".local\\pc3-m6-review\\actualtest-20260921T163230638669Z.json",
+        "bytes": 164596,
+        "sha256": "62608b9995bc879edde3f5c1914592d2a8f52d6039a2d9763b20ebb608d2a999"
+      },
+      "rawLogDigest": {
+        "path": ".local\\pc3-m6-review\\actualtest-20260921T163230638669Z.log",
+        "bytes": 5562,
+        "sha256": "da90a4b49b5bb1ce2edbbe369b1e598123df5789aaa3ade50f5a80bf7e1fc7ec"
+      }
+    },
+    "realExistingOutputComparison": {
+      "schemaVersion": "pc3-m6-review-real-output-comparison-v1",
+      "createdAtUtc": "2026-09-21T16:32:28.990466+00:00",
+      "command": "python -B .local/pc3-m6-review/compare-existing-real.py",
+      "source": {
+        "path": "scripts\\media_pc3\\package_full_animation_media.py",
+        "bytes": 40523,
+        "sha256": "cad81122ffb8225c35e58d7ca8b6327701e504e8ddbd8c6dd7d5b667d12b9396"
+      },
+      "historicalInputs": [
+        {
+          "path": ".local\\pc3-m6-intake\\real-artificial-20260921T151940688936Z\\new-candidate\\sorter-demo.mp4",
+          "bytes": 26181,
+          "sha256": "6e9f3614dece4885498d6de1d1d06525f62a1794d6b3a0a41b2ff78efda24c47"
+        },
+        {
+          "path": ".local\\pc3-m6-intake\\real-artificial-20260921T151940688936Z\\process-2-stderr.log",
+          "bytes": 2359,
+          "sha256": "54dc7b51939284ada8843562303abbf9162d206404c565147a76fb0b58420e06"
+        },
+        {
+          "path": ".local\\pc3-m6-intake\\real-artificial-20260921T151940688936Z\\process-2-stdout.log",
+          "bytes": 32475,
+          "sha256": "eaddfccb30df79d2d9edce800740b5c35da1ac6bed6b0d7d824d179108e21277"
+        },
+        {
+          "path": ".local\\pc3-m6-review\\tiny-20260921T162205975805Z\\sample.mp4",
+          "bytes": 1928,
+          "sha256": "caf830f7fca6cc0e7e1bdf5fd329e0a04b8395f882c64632da0f2c8fdac8e526"
+        }
+      ],
+      "observations": {
+        "historical1080Metadata": {
+          "method": "ffmpeg-input-block",
+          "codec": "h264",
+          "pixelFormat": "yuv420p",
+          "width": 1920,
+          "height": 1080,
+          "fps": 24,
+          "startSeconds": 0,
+          "displayedDurationSeconds": 12,
+          "durationDisplayRounded": true,
+          "notice": "Rounded Input duration is corroborated by exact MP4 clocks and all decoded frame timestamps."
+        },
+        "historical288Framehash": {
+          "frameCount": 288,
+          "timeBase": "1/24",
+          "firstPts": 0,
+          "lastPts": 287,
+          "frameDuration": 1,
+          "durationSeconds": 12,
+          "width": 1920,
+          "height": 1080,
+          "decodedFrameBytes": 3110400,
+          "method": "ffmpeg-full-eof-framehash",
+          "pixelFormat": "yuv420p"
+        },
+        "historical1080Container": {
+          "faststart": true,
+          "videoTracks": 1,
+          "sampleEntry": "avc1",
+          "width": 1920,
+          "height": 1080,
+          "sampleCount": 288,
+          "fps": 24,
+          "movieTimeScale": 1000,
+          "mediaTimeScale": 12288,
+          "durationSeconds": 12,
+          "displayTransform": "identity",
+          "displayWidth": 1920,
+          "displayHeight": 1080
+        },
+        "historicalRealCandidateConsumer": {
+          "valid": true,
+          "status": "PASS_WITH_PENDING",
+          "videoDecoded": false,
+          "visualAccepted": false,
+          "authenticityVerified": false
+        },
+        "freshTinyMovieIdentity": [
+          65536,
+          0,
+          0,
+          0,
+          65536,
+          0,
+          0,
+          0,
+          1073741824
+        ],
+        "freshTinyTrackIdentity": [
+          65536,
+          0,
+          0,
+          0,
+          65536,
+          0,
+          0,
+          0,
+          1073741824
+        ]
+      },
+      "actualNewEncodes": 0,
+      "actualNewDecodes": 0,
+      "actualPc1Render": false,
+      "status": "PASS",
+      "observationCount": 6,
+      "inputBytesPreserved": true,
+      "limits": [
+        "1080p/288 evidence is a read-only comparison of preserved previous actual FFmpeg outputs, not a new final-source full-package run.",
+        "Fresh 64x64 three-PNG actual tool executions are separately measured in tiny evidence.",
+        "All images are artificial fixtures, not pc1 actual rendered scene; no visual/product acceptance."
+      ],
+      "rawEvidence": {
+        "path": ".local\\pc3-m6-review\\real-comparison-20260921T163229108716Z.json",
+        "bytes": 3524,
+        "sha256": "0a1f14837a3967bc88948255b7dbc73c4a98739a6e2f16e534ce83a71457161a"
+      }
+    },
+    "consumerCli": {
+      "createdAtUtc": "2026-09-21T16:34:55.482987+00:00",
+      "sourceSha256": "cad81122ffb8225c35e58d7ca8b6327701e504e8ddbd8c6dd7d5b667d12b9396",
+      "observations": [
+        {
+          "name": "real-preserved-valid",
+          "argv": [
+            "C:\\Users\\hwana\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+            "-B",
+            "D:\\hwana\\Work\\happycall-ralphthon\\scripts\\media_pc3\\package_full_animation_media.py",
+            "--check-candidate",
+            "D:\\hwana\\Work\\happycall-ralphthon\\.local\\pc3-m6-intake\\real-artificial-20260921T151940688936Z\\new-candidate"
+          ],
+          "exit": 0,
+          "expectedExit": 0,
+          "status": "PASS_WITH_PENDING",
+          "valid": true,
+          "freshDecoded": false,
+          "output": ".local\\pc3-m6-review\\consumer-cli-real-preserved-valid.json",
+          "outputSha256": "a9b68f44323ebeb5dca4f8dcf97c5b1648d990ae11cc7b9f5fd8d0e2866e9137",
+          "stderr": "",
+          "mediaProcesses": 0
+        },
+        {
+          "name": "original-contradictory-markers",
+          "argv": [
+            "C:\\Users\\hwana\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+            "-B",
+            "D:\\hwana\\Work\\happycall-ralphthon\\scripts\\media_pc3\\package_full_animation_media.py",
+            "--check-candidate",
+            "D:\\hwana\\Work\\happycall-ralphthon\\.local\\pc3-m6-review\\original-repro-20260921T162118065043Z\\late-failure-delete-denied-counterexample"
+          ],
+          "exit": 1,
+          "expectedExit": 1,
+          "status": "FAIL",
+          "valid": false,
+          "freshDecoded": false,
+          "output": ".local\\pc3-m6-review\\consumer-cli-original-contradictory-markers.json",
+          "outputSha256": "c968881e10e3d164254fd9791054635d805c2f89d4c7435e628a2299ea5bec54",
+          "stderr": "",
+          "mediaProcesses": 0
+        }
+      ],
+      "checks": 2,
+      "passed": 2,
+      "actualMediaProcesses": 0,
+      "limits": [
+        "Consumer CLI read-only integrity check; no new encoder/decoder run or visual acceptance."
+      ],
+      "rawEvidence": {
+        "path": ".local\\pc3-m6-review\\consumer-cli-evidence.json",
+        "bytes": 1977,
+        "sha256": "38a2f3115383370e9ecf7d8d494ad7136d7e25dcac1738fd421988e61d24d35b"
+      }
+    },
+    "newTinyToolSample": {
+      "kind": "approved-tiny-PNG-tool-sample",
+      "createdAtUtc": "2026-09-21T16:22:07.121984+00:00",
+      "synthetic": true,
+      "actualPc1Render": false,
+      "fullPackagerInvoked": false,
+      "tool": {
+        "path": ".local\\media-pc3-deps\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+        "bytes": 87638016,
+        "sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3"
+      },
+      "inputs": [
+        {
+          "path": ".local\\pc3-m6-review\\tiny-20260921T162205975805Z\\frame-0001.png",
+          "bytes": 8822,
+          "sha256": "a0a216405c49d70b977084937338f485ff259d09e9f04b5cc2ed8fb4923a4042"
+        },
+        {
+          "path": ".local\\pc3-m6-review\\tiny-20260921T162205975805Z\\frame-0002.png",
+          "bytes": 8822,
+          "sha256": "92370a9cfd6da3fddef7fba6f66b5c1ff381ecdc364ca7a4e9a7a413d6adfaff"
+        },
+        {
+          "path": ".local\\pc3-m6-review\\tiny-20260921T162205975805Z\\frame-0003.png",
+          "bytes": 8822,
+          "sha256": "08846de48592f2191cf76f0618df594745d87c93c701e8cae7f042662698e8af"
+        }
+      ],
+      "processes": [
+        {
+          "argv": [
+            "D:\\hwana\\Work\\happycall-ralphthon\\.local\\media-pc3-deps\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+            "-hide_banner",
+            "-loglevel",
+            "info",
+            "-nostdin",
+            "-n",
+            "-framerate",
+            "24",
+            "-start_number",
+            "1",
+            "-i",
+            "D:\\hwana\\Work\\happycall-ralphthon\\.local\\pc3-m6-review\\tiny-20260921T162205975805Z\\frame-%04d.png",
+            "-map",
+            "0:v:0",
+            "-an",
+            "-frames:v",
+            "3",
+            "-c:v",
+            "libx264",
+            "-pix_fmt",
+            "yuv420p",
+            "-aspect",
+            "1:1",
+            "-threads",
+            "2",
+            "-fps_mode",
+            "passthrough",
+            "-movflags",
+            "+faststart",
+            "D:\\hwana\\Work\\happycall-ralphthon\\.local\\pc3-m6-review\\tiny-20260921T162205975805Z\\sample.mp4"
+          ],
+          "returncode": 0,
+          "seconds": 0.61,
+          "shell": false,
+          "timeout": 60,
+          "hiddenWindows": true,
+          "stdout": {
+            "path": ".local\\pc3-m6-review\\tiny-20260921T162205975805Z\\process-1-stdout.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": ".local\\pc3-m6-review\\tiny-20260921T162205975805Z\\process-1-stderr.log",
+            "bytes": 3127,
+            "sha256": "34cf9f4458751c402cbf5ffbcb71dfca3adf544ca17456345d7c5a7bb8894b6b"
+          }
+        },
+        {
+          "argv": [
+            "D:\\hwana\\Work\\happycall-ralphthon\\.local\\media-pc3-deps\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+            "-hide_banner",
+            "-loglevel",
+            "info",
+            "-nostdin",
+            "-xerror",
+            "-err_detect",
+            "explode",
+            "-threads",
+            "2",
+            "-i",
+            "D:\\hwana\\Work\\happycall-ralphthon\\.local\\pc3-m6-review\\tiny-20260921T162205975805Z\\sample.mp4",
+            "-map",
+            "0:v:0",
+            "-an",
+            "-sn",
+            "-dn",
+            "-c:v",
+            "rawvideo",
+            "-threads",
+            "2",
+            "-fps_mode",
+            "passthrough",
+            "-f",
+            "framehash",
+            "-hash",
+            "sha256",
+            "pipe:1"
+          ],
+          "returncode": 0,
+          "seconds": 0.11,
+          "shell": false,
+          "timeout": 60,
+          "hiddenWindows": true,
+          "stdout": {
+            "path": ".local\\pc3-m6-review\\tiny-20260921T162205975805Z\\process-2-stdout.log",
+            "bytes": 551,
+            "sha256": "5f1e3eeab77952c1e3155fb7b3952b5abda97f8d662d1ef7ef9af8179d1fd3cf"
+          },
+          "stderr": {
+            "path": ".local\\pc3-m6-review\\tiny-20260921T162205975805Z\\process-2-stderr.log",
+            "bytes": 1442,
+            "sha256": "8ba8e632d7484be71c74672ec7167f23ccb4330c4b74ac9fb8b8a403b57a1028"
+          }
+        }
+      ],
+      "status": "PASS",
+      "frames": 3,
+      "width": 64,
+      "height": 64,
+      "fps": 24,
+      "exactDurationSeconds": 0.125,
+      "video": {
+        "path": ".local\\pc3-m6-review\\tiny-20260921T162205975805Z\\sample.mp4",
+        "bytes": 1928,
+        "sha256": "caf830f7fca6cc0e7e1bdf5fd329e0a04b8395f882c64632da0f2c8fdac8e526"
+      },
+      "actualEncodes": 1,
+      "actualEofDecodes": 1,
+      "originalPngsPreserved": true,
+      "limits": [
+        "A tiny synthetic capability sample, not a 291-file full packager run or actual pc1 visual inspection.",
+        "No new render, browser, server, installation or ffprobe."
+      ],
+      "rawEvidence": {
+        "path": ".local\\pc3-m6-review\\tiny-20260921T162205975805Z\\evidence.json",
+        "bytes": 4525,
+        "sha256": "9698fe38e9c04f8c34f6462ea576225fec546cd33894c0e20d5e0432f7a3e402"
+      },
+      "collector": {
+        "path": ".local\\pc3-m6-review\\tiny-real-check.py",
+        "bytes": 3666,
+        "sha256": "be2159b9390f215ed816264d9e83c3ef0cab82082b79d832ee4dba67309d6d69"
+      }
+    },
+    "protectedPreexistingMedia": {
+      "count": 25,
+      "bytesUnchanged": true,
+      "sourceInventory": {
+        "path": ".local\\pc3-m6-review\\protected-before.json",
+        "bytes": 3908,
+        "sha256": "def1d18cfe5d43b195ea4c8f12b75b72168f25143513365c61588b5737357ff8"
+      }
+    },
+    "consumerContract": {
+      "api": "validate_candidate(directory)",
+      "requiredResult": {
+        "valid": true,
+        "status": "PASS_WITH_PENDING"
+      },
+      "inventory": [
+        "sorter-demo.mp4",
+        "sorter-demo.tracks.json",
+        "sorter-demo.tracks.descriptor.json",
+        "candidate-report.json"
+      ],
+      "reportAloneAcceptable": false,
+      "failureStagedPartialUnknownFilesReject": true,
+      "permanentConcurrentModificationProtection": false
+    },
+    "limits": [
+      "Artificial 291-file fixtures/mock subprocesses for final full suite; no real pc1 full package.",
+      "PermissionError is injected, not a real Windows file-lock reproduction.",
+      "New actual tool execution is only 64x64 three-PNG encode plus EOF decode; no new 1080p encode.",
+      "Existing genuine 1080p/288 outputs/logs compared read-only; not a fresh final-source end-to-end real encode.",
+      "Consumer rechecks current files, does not authenticate producer or run a fresh decoder; later or concurrent changes remain possible.",
+      "Actual scene/render, visual acceptance, Release/product/deployment, TEST roundtrip and whole N03 acceptance remain with pc1 and pending."
+    ],
+    "independentFinalAudit": {
+      "schemaVersion": "pc3-m6-review-readonly-final-audit-v1",
+      "recordedAtUtc": "2026-09-21T16:33:52.224535+00:00",
+      "source": {
+        "path": "D:\\hwana\\Work\\happycall-ralphthon\\scripts\\media_pc3\\package_full_animation_media.py",
+        "bytes": 40523,
+        "sha256": "cad81122ffb8225c35e58d7ca8b6327701e504e8ddbd8c6dd7d5b667d12b9396"
+      },
+      "verdict": "No additional blocking issue identified within the assigned display-coordinate and publication/consumer audit.",
+      "originalReproduction": {
+        "record": ".local/pc3-m6-review/original-repro-20260921T162118065043Z/original-repro.json",
+        "observations": 9,
+        "matched": 9,
+        "meaning": "Original three rotation acceptance defects and final-validation-plus-cleanup failure were reproduced, with normal/deletion-permitted controls. Negative acceptance is a reproduced defect, not a PASS."
+      },
+      "focusedFinalGuardExecution": {
+        "command": "python -B .local/pc3-m6-review/final-audit.py",
+        "record": ".local/pc3-m6-review/final-audit-guards.json",
+        "log": ".local/pc3-m6-review/final-audit-guards.log",
+        "checks": 35,
+        "matched": 35,
+        "exitCode": 0,
+        "sourceUnchangedDuringExecution": true,
+        "actualToolProcesses": 0
+      },
+      "displayCoordinateReview": [
+        {
+          "function": "_text_transform",
+          "line": 94,
+          "observed": "Only supported zero rotation forms accepted; known coordinate-bearing keys and malformed rotation rejected. Input is bounded before Stream mapping."
+        },
+        {
+          "function": "_probe_transform",
+          "line": 119,
+          "observed": "Stream/format tags and side data inspected; complete identity Display Matrix plus zero rotation required; unknown/malformed/duplicate side data closed."
+        },
+        {
+          "function": "_mp4",
+          "line": 300,
+          "observed": "Movie/track v0/v1 matrix offsets checked as identity; track display size fixed1920x1080; square positive pasp and whitelisted unique sample-entry extensions. Crop/unknown extensions reject. Source and file stamps preserved."
+        }
+      ],
+      "publicationReview": {
+        "functions": {
+          "_publish_report": 430,
+          "package_full_animation": 541,
+          "validate_candidate": 444
+        },
+        "stagedReportName": "candidate-report.staged.json",
+        "sequence": [
+          "Encode/decode and input verification",
+          "Create byte-identical tracks and exact five-field descriptor",
+          "Write complete candidate JSON only under staged filename",
+          "Recheck original inputs and exact four staged output hashes/inventory",
+          "Check owned directory and safe staged file/final destination",
+          "Final os.rename exposes candidate-report.json",
+          "Return result; no subsequent fallible filesystem validation or cleanup in success path"
+        ],
+        "failureSemantics": "No unlink or cleanup is required for failure correctness. Staged/partial/unknown files or failure.json disqualify consumer inventory, even if writing failure.json is denied. A retained descriptor alone is not success.",
+        "dynamicFaultSuiteOwner": "handoff_audit; not rerun by this auditor",
+        "finiteBoundary": "Rename atomic visibility on the current Windows runtime is not a permanent cross-process lock. No guarantee is made against concurrent replacement in the final check-to-rename interval or later writes."
+      },
+      "consumerReview": {
+        "exactFiles": [
+          "sorter-demo.mp4",
+          "sorter-demo.tracks.json",
+          "sorter-demo.tracks.descriptor.json",
+          "candidate-report.json"
+        ],
+        "checks": [
+          "safe paths and stamps",
+          "pending contract and success report flags",
+          "actual bytes/SHA vs three asset descriptors",
+          "exact five-field tracks descriptor bound to actual media/tracks",
+          "canonical tracks schema and original tracks digest declaration",
+          "complete291source names/declarations",
+          "stored288frame decode fields/checksum list",
+          "fresh MP4 structure/timing/display matrix check",
+          "final stamps, hashes, owned directory and inventory"
+        ],
+        "freshDecodePerformed": false,
+        "producerAuthenticated": false,
+        "visualAccepted": false
+      },
+      "limits": [
+        "35 pure helper observations are separate from the independent full unittest suite and root actual-media evidence; counts are not combined.",
+        "FFmpeg text rotation0 alone does not prove the full display matrix; binary MP4 identity checks are also required.",
+        "Stored frame hashes and decode claims are checked for shape/binding, not regenerated by validate_candidate.",
+        "Coherently forged reports/files are not cryptographically authenticated; producer trust remains external.",
+        "PermissionError counterexample used injection, not an actual Windows lock.",
+        "No production edits, new media process, render, install, network, Git mutation or external reply by this auditor."
+      ],
+      "productionFilesEdited": false,
+      "actualMediaProcesses": 0,
+      "additionalBlockingFindings": [],
+      "rawEvidence": {
+        "path": ".local\\pc3-m6-review\\final-audit.json",
+        "bytes": 4999,
+        "sha256": "6d6600932529747c61d39729f7ca05dd78c2218db1e48b49d4f53834497b5f59"
+      }
+    }
+  },
+  "currentEvidenceSection": "reviewCorrection"
 }
