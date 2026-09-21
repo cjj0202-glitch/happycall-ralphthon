@@ -1,0 +1,675 @@
+{
+  "datasetSha256": "71c852da9497be8dacb744c49e62299f5ebc5d45ba1df4ea086683a2bd467884",
+  "scope": "synthetic-text-six-field-evaluation; not audio/STT quality",
+  "cohorts": {
+    "fixed": {
+      "plannedCases": 20,
+      "plannedCells": 120,
+      "automatableCells": 80,
+      "manualSemanticCells": 40,
+      "counts": {
+        "correct": 80,
+        "incorrect": 0,
+        "manual-review-required": 40,
+        "not-run": 0,
+        "error": 0,
+        "invalid-output": 0
+      },
+      "perField": {
+        "storeId": {
+          "correct": 20,
+          "incorrect": 0,
+          "manual-review-required": 0,
+          "not-run": 0,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "subject": {
+          "correct": 0,
+          "incorrect": 0,
+          "manual-review-required": 20,
+          "not-run": 0,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "quantity": {
+          "correct": 20,
+          "incorrect": 0,
+          "manual-review-required": 0,
+          "not-run": 0,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "unit": {
+          "correct": 20,
+          "incorrect": 0,
+          "manual-review-required": 0,
+          "not-run": 0,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "request": {
+          "correct": 0,
+          "incorrect": 0,
+          "manual-review-required": 20,
+          "not-run": 0,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "departmentId": {
+          "correct": 20,
+          "incorrect": 0,
+          "manual-review-required": 0,
+          "not-run": 0,
+          "error": 0,
+          "invalid-output": 0
+        }
+      },
+      "safetyCounts": {
+        "pass": 0,
+        "fail": 0,
+        "manual-review-required": 20,
+        "not-run": 0,
+        "error": 0,
+        "invalid-output": 0
+      },
+      "accuracy": null,
+      "target": 0.9,
+      "targetStatus": "not-determined"
+    },
+    "boundary": {
+      "plannedCases": 12,
+      "plannedCells": 72,
+      "automatableCells": 48,
+      "manualSemanticCells": 24,
+      "counts": {
+        "correct": 47,
+        "incorrect": 1,
+        "manual-review-required": 24,
+        "not-run": 0,
+        "error": 0,
+        "invalid-output": 0
+      },
+      "perField": {
+        "storeId": {
+          "correct": 12,
+          "incorrect": 0,
+          "manual-review-required": 0,
+          "not-run": 0,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "subject": {
+          "correct": 0,
+          "incorrect": 0,
+          "manual-review-required": 12,
+          "not-run": 0,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "quantity": {
+          "correct": 12,
+          "incorrect": 0,
+          "manual-review-required": 0,
+          "not-run": 0,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "unit": {
+          "correct": 11,
+          "incorrect": 1,
+          "manual-review-required": 0,
+          "not-run": 0,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "request": {
+          "correct": 0,
+          "incorrect": 0,
+          "manual-review-required": 12,
+          "not-run": 0,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "departmentId": {
+          "correct": 12,
+          "incorrect": 0,
+          "manual-review-required": 0,
+          "not-run": 0,
+          "error": 0,
+          "invalid-output": 0
+        }
+      },
+      "safetyCounts": {
+        "pass": 0,
+        "fail": 0,
+        "manual-review-required": 12,
+        "not-run": 0,
+        "error": 0,
+        "invalid-output": 0
+      },
+      "accuracy": null,
+      "target": null,
+      "targetStatus": "not-determined"
+    }
+  },
+  "cases": [
+    {
+      "caseId": "FIX-M01",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M02",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M03",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M04",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M05",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M06",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M07",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M08",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M09",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M10",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W01",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W02",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W03",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W04",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W05",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W06",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W07",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W08",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W09",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W10",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-01",
+      "cohort": "boundary",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-02",
+      "cohort": "boundary",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-03",
+      "cohort": "boundary",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-04",
+      "cohort": "boundary",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-05",
+      "cohort": "boundary",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-06",
+      "cohort": "boundary",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-07",
+      "cohort": "boundary",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-08",
+      "cohort": "boundary",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-09",
+      "cohort": "boundary",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-10",
+      "cohort": "boundary",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-11",
+      "cohort": "boundary",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-12",
+      "cohort": "boundary",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "incorrect",
+        "departmentId": "correct",
+        "subject": "manual-review-required",
+        "request": "manual-review-required"
+      },
+      "safety": "manual-review-required",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    }
+  ],
+  "apiDispatchAttempts": 32,
+  "apiSuccesses": 32,
+  "reservationCount": 32,
+  "reservedCents": 480,
+  "reviewerKinds": []
+}
