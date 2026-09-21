@@ -21,6 +21,17 @@ data/seed/*.sqlite
 __pycache__/
 *.pyc
 node_modules/
+.venv/
+.next/
+.next-dev/
+.checks/
+.playwright-mcp/
+tests/e2e/test-results/
+out/
+*.tsbuildinfo
+.pytest_cache/
+apps/web/public/demo/*.json
+reports/e2e/screenshots/
 dist/
 
 # OS·편집기

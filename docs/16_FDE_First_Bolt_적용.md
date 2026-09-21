@@ -1,5 +1,7 @@
 # FDE 5주차 개념과 해커톤 적용
 
+**현재 적용:** DEC-013에 따라 로컬 구현·AI Playwright 기술 검증을 먼저 진행합니다. 실제 사람 관찰과 실제 Goal 실행은 별도 미완료이며 아래 교육 원칙을 완료한 것으로 소급하지 않습니다. 실행 지침은 [통합 프롬프트](../PROMPT_team.md)를 따릅니다.
+
 ## 1. 출처와 확인 범위
 
 2026-09-21 사용자 제공 위치는 Administrator PC의 `81_FDE교육/5주차/강의페이지_스크린샷`이다. 최초 조회에서는 전달 브리핑 1개만 보였으나, OneDrive 재확인 후 이 PC의 `C:/Users/choi8/OneDrive - GS Retail Co., Ltd/00.프로젝트/81_FDE교육/5주차/강의페이지_스크린샷`에서 **week05_full.png와 p01~p10 총 11개를 확보했다.** 분할 p01~p05는 방법론 검토 에이전트, p06~p10은 메인 에이전트가 직접 열어 내용과 페이지 끝을 확인했다. 이 문서는 그 이미지 대조와 `코덱스_전달_5주차브리핑.md`를 반영한다. 파일 검증·출처 메타데이터는 [source-review.json](../planning/source-review.json), 공유 사본은 [교육 캡처](education/week05/README.md)에 보존한다.

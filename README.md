@@ -1,5 +1,11 @@
 # happycall-ralphthon
 
+**전체 /goal:** [GOAL.md](GOAL.md) · **42개 요구 대조:** [누락 점검](docs/22_요구사항_누락점검.md). 실제 실행 여부는 별도 기록합니다.
+
+**모든 PC의 통합 시작 지시:** [PROMPT_team.md](PROMPT_team.md) — 제품·BMAD·Grill-me·First Bolt·Ralph·공식 배점·증거·편지함 규약을 함께 적용합니다.
+
+**다른 PC는 여기부터:** [현재 상태·작업 계약·인수 절차](docs/21_공유_작업컨텍스트.md) → [편지함 설정/복붙 프롬프트](docs/19_4PC_편지함_감시_빠른시작.md) → [로컬 시연 실행](docs/20_로컬_시연_실행.md). 대화 기억 대신 이 문서와 작업 이슈의 기준 커밋·소유 파일·검증 증거를 함께 읽습니다.
+
 **지금 사용할 것:** [눈으로 보는 TODO](TODO.md) · [다른 PC에 보낼 프롬프트](docs/14_팀원_PC_채팅용_프롬프트.md) · [새 메인 세션 상세 인수인계](docs/15_새_메인세션_상세_인수인계.md) · [4인 설계회의/BMAD](docs/13_4인_설계회의와_BMAD.md) · [First Bolt 실험 방법](docs/16_FDE_First_Bolt_적용.md) · [전체 솔루션 지도](planning/solution-map.md)
 
 데모용 OpenAI API 키는 [데모 API 연결 규칙](docs/18_OpenAI_데모_API_연결.md)에 따라 각 PC 로컬에만 보관합니다. 개발 기본은 replay이며 Vercel 설정은 사용자 재개 요청까지 보류합니다.

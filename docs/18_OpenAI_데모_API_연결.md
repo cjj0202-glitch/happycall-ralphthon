@@ -6,7 +6,7 @@
 
 - 실제 키는 각 허가된 PC의 저장소 루트 `.env.demo.local`에만 둔다. `.gitignore`의 `.env.*` 규칙으로 Git에서 제외된다.
 - 브라우저 번들, `NEXT_PUBLIC_*`, 화면 HTML, 이슈, 회신, 보고서, 로그에는 키를 넣지 않는다.
-- 일반 개발은 `replay` 또는 `manual` 모드다. 실제 API를 쓰는 경우에만 `ONEFLOW_RUNTIME_MODE=demo-live`를 명시적으로 선택한다.
+- 일반 개발 자동검사는 `replay` 또는 수동 접수 흐름이다. `manual`은 API mode enum이 아니며 HTTP 분석 모드는 `replay`/`demo-live` 두 가지다. 실제 API를 쓰는 경우에만 `ONEFLOW_RUNTIME_MODE=demo-live`를 명시적으로 선택한다.
 - `scripts/demo_openai_env.py`는 키 값을 출력하지 않는다. `verify`는 모델 생성 요청을 하지 않고 인증 가능한 모델 목록만 조회한다.
 - 앱이 생기면 서버 측 live adapter만 이 파일을 읽는다. 프론트엔드가 OpenAI에 직접 요청하지 않는다.
 
