@@ -1,0 +1,86 @@
+{
+  "at": "2026-09-21T21:58:01.826244+09:00",
+  "assignment": "N03-M3",
+  "sourceCommit": "33fa0e4edeb88c0d4ad5e9cc0194ffc7e96cebcd",
+  "executor": "LAPTOP-U2AL73UH / mcjun86-oss / pc3",
+  "python": "3.12.10",
+  "renderPackage": {
+    "methods": 19,
+    "passed": 18,
+    "skipped": 1,
+    "negativeCases": 104,
+    "mutationCases": 4,
+    "mutantsKilled": 4,
+    "disabledGates": 5
+  },
+  "reviewPackage": {
+    "passed": 19,
+    "seconds": 13.628
+  },
+  "legacyAB": {
+    "passed": 12,
+    "seconds": 4.197
+  },
+  "browser": {
+    "checks": 14,
+    "passed": 14,
+    "widths": [
+      390,
+      768,
+      1365
+    ],
+    "browserVersion": "153.0.8010.48",
+    "pageErrors": 0,
+    "externalRequests": 0,
+    "screenshotsInspected": 2,
+    "syntheticFixtureOnly": true
+  },
+  "cleanCopy": {
+    "positiveModes": 4,
+    "priorLocalInputs": false,
+    "gitDirectory": false,
+    "exitCode": 0
+  },
+  "actualRenderPackageReceived": false,
+  "pc3BlenderExecuted": false,
+  "visualAccepted": false,
+  "testRoundtrip": "PENDING",
+  "sources": [
+    {
+      "path": "scripts/media_pc3/verify_render_package.py",
+      "bytes": 29547,
+      "sha256": "36b4e2f3de8f0517da6cb26719e346e0fbfec221f5d1b673e494a73c31af30cc"
+    },
+    {
+      "path": "scripts/media_pc3/test_render_package.py",
+      "bytes": 28542,
+      "sha256": "a5a1b448763955ba1542be73abfb67c7a4445c7faccf3b504f5dbb9cefec51ad"
+    },
+    {
+      "path": "scripts/media_pc3/build_review_page.py",
+      "bytes": 19121,
+      "sha256": "e917bf1e33b30cbba40c63c9cb6f77b7b270a6b09c36a8884a84ca398ad25951"
+    },
+    {
+      "path": "scripts/media_pc3/test_review_package.py",
+      "bytes": 13933,
+      "sha256": "aec79018a4c8f117d1216d52cbb178a377ba6e0f894eb3be2e79304d1506fd2e"
+    },
+    {
+      "path": "reports/pc3/render-package-expectations.json",
+      "bytes": 25709,
+      "sha256": "0cf8ba1d87759fcf6e0cbca0a6c6fbfd0a7be828233ed93ca386e407662683bb"
+    },
+    {
+      "path": "reports/pc3/render-package-test-layout.json",
+      "bytes": 1772,
+      "sha256": "c6aece6692c6b78beb85d4f1167868f2bd095b3ab8366e837466715b82bd6cb6"
+    },
+    {
+      "path": "reports/pc3/render-package-browser-check.mjs",
+      "bytes": 3461,
+      "sha256": "47c6e5050f09972eee48cbd27f9d95dd4898e9f2c2c58921088c6cc162bf69bd"
+    }
+  ],
+  "textNormalization": "New report text normalized to LF before commit; checker/viewer/test code hashes unchanged. JSON formatting only."
+}

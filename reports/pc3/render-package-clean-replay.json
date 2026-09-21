@@ -1,0 +1,7 @@
+{
+  "purpose": "Reproduce all four positive modes in isolated copy with no prior .local inputs, no planning input, and no .git",
+  "syntheticOnly": true,
+  "exitCode": 0,
+  "stdout": "",
+  "stderr": "test_valid_modes_keep_pending_and_inputs_unchanged (test_render_package.RenderPackageTests.test_valid_modes_keep_pending_and_inputs_unchanged) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 3.452s\n\nOK\n"
+}

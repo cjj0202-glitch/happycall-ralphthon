@@ -1,0 +1,22 @@
+{
+  "purpose": "Same positive artificial fixture against preserved original checker and corrected checker",
+  "syntheticFixtureOnly": true,
+  "beforeCheckerSha256": "1de04a759e375adb97ea5624696671716ed88428b5b20fead885b6725e1cd883",
+  "afterCheckerSha256": "36b4e2f3de8f0517da6cb26719e346e0fbfec221f5d1b673e494a73c31af30cc",
+  "before": {
+    "valid": false,
+    "failures": [
+      {
+        "code": "PATH",
+        "detail": "Unsafe file descriptor name."
+      }
+    ]
+  },
+  "after": {
+    "valid": true,
+    "status": "PASS_WITH_PENDING",
+    "failures": []
+  },
+  "inputReportSha256": "33be43ecb30f166aa94660bcfa6543b53d7b3b6e93e79c47a92bcf6a9396c343",
+  "actualRenderReceived": false
+}

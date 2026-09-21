@@ -1,0 +1,67 @@
+{
+  "kind": "N03-M3 local review page on artificial checker fixture",
+  "actualBlenderAssets": false,
+  "humanReview": false,
+  "sourceHtmlSha256": "65ec6aab1a608e71fc84667ae90b09eb3c265024e2ac2d589395b74a2bb7d221",
+  "checks": [
+    {
+      "name": "layout-390",
+      "result": "PASS"
+    },
+    {
+      "name": "pending-synthetic-390",
+      "result": "PASS"
+    },
+    {
+      "name": "three-artificial-png-decodes-390",
+      "result": "PASS"
+    },
+    {
+      "name": "keyboard-native-expansion-390",
+      "result": "PASS"
+    },
+    {
+      "name": "layout-768",
+      "result": "PASS"
+    },
+    {
+      "name": "pending-synthetic-768",
+      "result": "PASS"
+    },
+    {
+      "name": "three-artificial-png-decodes-768",
+      "result": "PASS"
+    },
+    {
+      "name": "keyboard-native-expansion-768",
+      "result": "PASS"
+    },
+    {
+      "name": "layout-1365",
+      "result": "PASS"
+    },
+    {
+      "name": "pending-synthetic-1365",
+      "result": "PASS"
+    },
+    {
+      "name": "three-artificial-png-decodes-1365",
+      "result": "PASS"
+    },
+    {
+      "name": "keyboard-native-expansion-1365",
+      "result": "PASS"
+    },
+    {
+      "name": "no-page-errors-or-external-requests",
+      "result": "PASS"
+    },
+    {
+      "name": "no-input-html-mutation",
+      "result": "PASS"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "browser": "153.0.8010.48"
+}
