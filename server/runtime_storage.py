@@ -17,6 +17,7 @@ from server.live import LiveAnalyzer
 from server.repository import CaseRepository, JsonCaseRepository, ROOT
 from server.service import CaseService
 from server.vercel_blob_store import VercelBlobCasStore
+from server.dynamodb_store import DynamoDbCasStore, TABLE_NAME
 
 
 def storage_unavailable() -> DemoError:
@@ -33,6 +34,7 @@ class StorageConfig:
     state_dir: Path | None = None
     token: str | None = field(default=None, repr=False)
     store_id: str | None = field(default=None, repr=False)
+    dynamodb_table: str | None = None
     initial_reserved_cents: int | None = None
 
 
@@ -40,7 +42,10 @@ def storage_config(environ: Mapping[str, str] | None = None) -> StorageConfig:
     environment = os.environ if environ is None else environ
     backend = environment.get("ONEFLOW_STORAGE_BACKEND", "local-json")
     is_vercel = environment.get("VERCEL") == "1" or bool(environment.get("VERCEL_ENV"))
-    if backend not in ("local-json", "vercel-blob") or (is_vercel and backend != "vercel-blob"):
+    is_lambda = bool(environment.get("AWS_LAMBDA_FUNCTION_NAME") or environment.get("AWS_LAMBDA_RUNTIME_API"))
+    if (backend not in ("local-json", "vercel-blob", "dynamodb")
+            or (is_vercel and backend != "vercel-blob")
+            or (is_lambda and backend == "local-json")):
         raise _invalid_config()
     if backend == "local-json":
         raw_path = environment.get("ONEFLOW_STATE_DIR")
@@ -53,18 +58,24 @@ def storage_config(environ: Mapping[str, str] | None = None) -> StorageConfig:
             if not path.is_absolute():
                 raise _invalid_config()
         return StorageConfig(backend=backend, state_dir=path)
-    token = environment.get("BLOB_READ_WRITE_TOKEN")
-    store_id = environment.get("ONEFLOW_BLOB_STORE_ID")
     initial = environment.get("ONEFLOW_BUDGET_INITIAL_RESERVED_CENTS")
-    if (not isinstance(token, str) or not 0 < len(token) <= 8192
-            or any(not 33 <= ord(char) <= 126 for char in token)
-            or not isinstance(store_id, str) or not re.fullmatch(r"(?:store_)?[A-Za-z0-9]{1,63}", store_id)
-            or not isinstance(initial, str) or not re.fullmatch(r"[0-9]+", initial)):
+    if not isinstance(initial, str) or not re.fullmatch(r"[0-9]+", initial):
         raise _invalid_config()
     try:
         initial_cents = int(initial)
     except ValueError:
         raise _invalid_config() from None
+    if backend == "dynamodb":
+        table = environment.get("ONEFLOW_DYNAMODB_TABLE")
+        if not isinstance(table, str) or not TABLE_NAME.fullmatch(table):
+            raise _invalid_config()
+        return StorageConfig(backend=backend, dynamodb_table=table, initial_reserved_cents=initial_cents)
+    token = environment.get("BLOB_READ_WRITE_TOKEN")
+    store_id = environment.get("ONEFLOW_BLOB_STORE_ID")
+    if (not isinstance(token, str) or not 0 < len(token) <= 8192
+            or any(not 33 <= ord(char) <= 126 for char in token)
+            or not isinstance(store_id, str) or not re.fullmatch(r"(?:store_)?[A-Za-z0-9]{1,63}", store_id)):
+        raise _invalid_config()
     return StorageConfig(backend=backend, token=token, store_id=store_id, initial_reserved_cents=initial_cents)
 
 
@@ -104,7 +115,7 @@ class RuntimeStorage:
     def check_ready(self) -> dict:
         """Read current state; never cache readiness or initialize cloud state."""
         try:
-            if self.backend == "vercel-blob":
+            if self.backend != "local-json":
                 self.repository.list()
             return self.budget.status()
         except Exception:
@@ -117,7 +128,8 @@ def _build_runtime(config: StorageConfig) -> RuntimeStorage:
             repository = JsonCaseRepository(path=config.state_dir / "cases-store.json")
             budget = Budget(path=config.state_dir / "demo-usage.json")
         else:
-            transport = VercelBlobCasStore(token=config.token, store_id=config.store_id)
+            transport = (DynamoDbCasStore(table_name=config.dynamodb_table) if config.backend == "dynamodb"
+                         else VercelBlobCasStore(token=config.token, store_id=config.store_id))
             store = ExistingDocumentsStore(transport)
             repository = CasCaseRepository(store)
             budget = CasBudget(store, initial_reserved_cents=config.initial_reserved_cents)

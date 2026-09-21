@@ -8,7 +8,7 @@ from server.runtime_storage import get_runtime_storage, storage_unavailable
 
 def service():
     runtime = get_runtime_storage()
-    if runtime.backend == "vercel-blob":
+    if runtime.backend in ("vercel-blob", "dynamodb"):
         runtime.check_ready()
     return runtime.service
 

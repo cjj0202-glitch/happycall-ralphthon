@@ -22,7 +22,8 @@ from server.vercel_blob_store import VercelBlobCasStore
 
 BLOB_ENV = {"ONEFLOW_STORAGE_BACKEND": "vercel-blob", "BLOB_READ_WRITE_TOKEN": "offline-only-token",
             "ONEFLOW_BLOB_STORE_ID": "store_offline123", "ONEFLOW_BUDGET_INITIAL_RESERVED_CENTS": "75"}
-ENV_KEYS = {*BLOB_ENV, "ONEFLOW_STATE_DIR", "VERCEL", "VERCEL_ENV"}
+ENV_KEYS = {*BLOB_ENV, "ONEFLOW_STATE_DIR", "VERCEL", "VERCEL_ENV", "ONEFLOW_DYNAMODB_TABLE",
+            "AWS_LAMBDA_FUNCTION_NAME", "AWS_LAMBDA_RUNTIME_API"}
 CASES_KEY = "oneflow/cases.json"
 BUDGET_KEY = "oneflow/budget.json"
 
@@ -137,6 +138,75 @@ def test_explicit_zero_migration_is_allowed_and_secrets_are_not_in_config_repr()
     assert config.initial_reserved_cents == 0
     assert BLOB_ENV["BLOB_READ_WRITE_TOKEN"] not in repr(config)
     assert BLOB_ENV["ONEFLOW_BLOB_STORE_ID"] not in repr(config)
+
+
+@pytest.mark.parametrize("marker", ["AWS_LAMBDA_FUNCTION_NAME", "AWS_LAMBDA_RUNTIME_API"])
+def test_lambda_local_json_is_rejected_before_any_constructor(marker, monkeypatch):
+    local = Mock(side_effect=AssertionError("no local fallback"))
+    monkeypatch.setattr(storage, "JsonCaseRepository", local)
+    assert_503(lambda: storage.get_runtime_storage({marker: "synthetic-lambda"}), "STORAGE_CONFIG_INVALID")
+    assert_503(lambda: storage.get_runtime_storage({marker: "synthetic-lambda", "ONEFLOW_STORAGE_BACKEND": "local-json"}),
+               "STORAGE_CONFIG_INVALID")
+    local.assert_not_called()
+
+
+@pytest.mark.parametrize("table,baseline", [(None, "2920"), ("", "2920"), ("x", "2920"),
+                                           ("invalid/table", "2920"), ("valid-table", None)])
+def test_dynamodb_requires_explicit_table_and_baseline(table, baseline):
+    assert_503(lambda: storage.storage_config({"ONEFLOW_STORAGE_BACKEND": "dynamodb",
+                                              "ONEFLOW_DYNAMODB_TABLE": table,
+                                              "ONEFLOW_BUDGET_INITIAL_RESERVED_CENTS": baseline}),
+               "STORAGE_CONFIG_INVALID")
+
+
+def test_dynamodb_runtime_uses_existing_documents_shared_budget_and_table_cache(monkeypatch):
+    backing = seeded_store(initial=2920)
+    observed = Mock(wraps=backing)
+    constructor = Mock(return_value=observed)
+    monkeypatch.setattr(storage, "DynamoDbCasStore", constructor)
+    env = {"ONEFLOW_STORAGE_BACKEND": "dynamodb", "ONEFLOW_DYNAMODB_TABLE": "synthetic-table",
+           "ONEFLOW_BUDGET_INITIAL_RESERVED_CENTS": "2920", "AWS_LAMBDA_FUNCTION_NAME": "synthetic"}
+    runtime = storage.get_runtime_storage(env)
+    constructor.assert_called_once_with(table_name="synthetic-table")
+    observed.read.assert_not_called()
+    observed.compare_and_swap.assert_not_called()
+    assert runtime.repository.store is runtime.budget.store
+    assert runtime.service.analyzer.budget is runtime.budget
+    assert runtime.check_ready()["reservedUsd"] == 29.2
+    assert storage.get_runtime_storage(env) is runtime
+    assert storage.get_runtime_storage({**env, "ONEFLOW_DYNAMODB_TABLE": "other-table"}) is not runtime
+    observed.compare_and_swap.assert_not_called()
+
+
+@pytest.mark.parametrize("missing", [CASES_KEY, BUDGET_KEY])
+def test_dynamodb_missing_documents_block_readiness_without_bootstrap(missing, monkeypatch):
+    backing = seeded_store(initial=2920)
+    observed = Mock(wraps=backing)
+    observed.read.side_effect = lambda key: None if key == missing else backing.read(key)
+    monkeypatch.setattr(storage, "DynamoDbCasStore", Mock(return_value=observed))
+    runtime = storage.get_runtime_storage({"ONEFLOW_STORAGE_BACKEND": "dynamodb",
+                                          "ONEFLOW_DYNAMODB_TABLE": "synthetic-table",
+                                          "ONEFLOW_BUDGET_INITIAL_RESERVED_CENTS": "2920"})
+    assert_503(runtime.check_ready, "STORAGE_UNAVAILABLE")
+    observed.compare_and_swap.assert_not_called()
+
+
+@pytest.mark.parametrize("missing", [CASES_KEY, BUDGET_KEY])
+def test_dynamodb_missing_documents_stop_handlers_before_analyzer(missing, monkeypatch):
+    backing = seeded_store(initial=2920)
+    observed = Mock(wraps=backing)
+    observed.read.side_effect = lambda key: None if key == missing else backing.read(key)
+    monkeypatch.setattr(storage, "DynamoDbCasStore", Mock(return_value=observed))
+    use_env(monkeypatch, {"ONEFLOW_STORAGE_BACKEND": "dynamodb",
+                         "ONEFLOW_DYNAMODB_TABLE": "synthetic-table",
+                         "ONEFLOW_BUDGET_INITIAL_RESERVED_CENTS": "2920"})
+    runtime = storage.get_runtime_storage()
+    analyzer = Mock(side_effect=AssertionError("must not analyze without both documents"))
+    runtime.service.analyzer.analyze = analyzer
+    result = asyncio.run(handlers.analyze_case("CASE-0001", {"mode": "demo-live"}))
+    assert result[1] == 503 and result[0]["error"]["code"] == "STORAGE_UNAVAILABLE"
+    analyzer.assert_not_called()
+    observed.compare_and_swap.assert_not_called()
 
 
 def test_cloud_factory_does_not_touch_network_or_seed_and_wires_exact_budget(monkeypatch):
