@@ -1,0 +1,51 @@
+{
+  "started": "2026-09-21T09:21:27.177Z",
+  "mode": "read-only playback, no analysis API",
+  "releaseTag": "demo-media-20260921-audio-v2",
+  "checks": [
+    {
+      "id": "CASE-0001",
+      "sha256": "d4eeb6448ff8969f27034ecade9a050ee212468585c6300b19c9a0ebdc372931",
+      "bytes": 2263278,
+      "audio": {
+        "duration": 47.15,
+        "currentTime": 47.15,
+        "ended": true,
+        "volume": 1,
+        "muted": false,
+        "playbackRate": 1,
+        "error": null
+      },
+      "errors": []
+    },
+    {
+      "id": "CASE-0002",
+      "sha256": "333897f4f10426674ec97b9e3a44c2f8da21f1f7931b4f911c82a29abcf6b914",
+      "bytes": 2378478,
+      "audio": {
+        "duration": 49.55,
+        "currentTime": 49.55,
+        "ended": true,
+        "volume": 1,
+        "muted": false,
+        "playbackRate": 1,
+        "error": null
+      },
+      "errors": [],
+      "video": {
+        "duration": 12,
+        "currentTime": 12,
+        "ended": true,
+        "width": 960,
+        "height": 540,
+        "error": null
+      }
+    }
+  ],
+  "mutationRequests": 0,
+  "limits": [
+    "Playback progression and decoded media only; human listening and OS output are not verified."
+  ],
+  "status": "PASS_SCOPED",
+  "finished": "2026-09-21T09:22:32.335Z"
+}

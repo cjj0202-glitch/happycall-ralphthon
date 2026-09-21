@@ -117,3 +117,14 @@ CASE-0002 비교 URL 경로는 `/CASE-0002/original.wav`, `/CASE-0002/candidate.
 **캐시 형식 변경 때문에 다음 실제 `--generate`는 기존 캐시를 재사용하지 않고 새 유료 생성으로 이어질 수 있습니다.** 이 작업에서 실제 TTS 생성 스크립트는 실행하지 않았습니다. 테스트의 `main()` 호출은 임시 ROOT·가짜 client/Budget로 격리했으며 외부 호출은 없습니다. 기존 캐시·기존 WAV는 삭제하지 않았습니다.
 
 이 환경에서 수행한 것은 PCM/FFmpeg 측정과 자동 검증입니다. 실제 소리를 직접 듣지 않았고, OS/브라우저 출력장치·사람의 핵심어 인지·발음 개선·기존 STT 오류 개선은 미검증입니다. 유료 TTS/STT, 제품 UI 수정, Git 커밋/푸시, Release는 메인 담당으로 남겼습니다.
+
+## 메인 적용·브라우저 검증 · 18:14–18:23 KST 후속 기록
+
+위 절은 작업자가 후보를 인계한 시점의 관측입니다. 메인은 수치 기준과 원본 보존을 대조한 뒤 두 후보를 public에 적용했습니다. 이는 사용자 청취 합격 판정이 아니며, 음량 개선과 실제 의미 인식 결과를 별도로 관리합니다. 기존 v1 Release와 `.local/audio-normalized/` 원본 사본은 보존했습니다.
+
+- [v2 Release](https://github.com/cjj0202-glitch/happycall-ralphthon/releases/tag/demo-media-20260921-audio-v2): 두 보정 WAV와 기존 MP4. GitHub 자산 digest 3/3 및 별도 폴더 재다운로드 크기·SHA256 3/3 일치. 다른 PC 수신 ACK는 아직 없습니다.
+- 정본 `data/demo-media-manifest.json`에 보정 hash·원본 hash/bytes·측정값·출처를 기록했습니다. sourceBytes는 보존 원본을 다시 해시 검증해 CASE1 2,263,244 B, CASE2 2,378,444 B로 확인했습니다. 새 파일은 추가 WAV 헤더로 각각 34 B 증가했지만 PCM frame 수·길이·포맷은 같습니다.
+- 18:14:16 실제 보정 CASE-0002 WAV의 STT→GPT 1회, 28.7초. 수령 1 BOX와 단위 정정 인용은 통과했습니다. 점포/일부 용어는 오인식했고 점포 ID는 null을 유지했습니다. 원장 예약액은 $16.60→$16.75이며 실제 청구액이 아닙니다. 상담 상태를 수정하지 않았습니다. [해당 실행 증거](e2e/normalized-voice-live.json).
+- Playwright는 실제 제공 WAV 응답의 크기·해시를 정본과 대조하고 volume=1, muted=false, playbackRate=1로 두 파일을 끝까지 재생했습니다. CASE1 47.15초, CASE2 49.55초, 오류 0. CASE2 WMS 이벤트 버튼으로 연 CCTV도 12초 끝까지 재생, 960×540, 오류 0입니다. 쓰기/분석 API 요청 0회, pageerror 0건. [재생 증거](e2e/media-playback-2026-09-21T09-21-27.177Z.json).
+
+이 결과는 브라우저 디코딩·재생 진행을 검증합니다. 출력 장치에서 실제 소리가 들렸는지, 사람이 업무 용어를 정확히 이해했는지, 일반적인 STT 정확도가 개선됐는지는 미검증입니다. 새 합성 TTS 생성은 수행하지 않았습니다.

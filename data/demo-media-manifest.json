@@ -1,31 +1,51 @@
 {
   "schemaVersion": 1,
   "repository": "cjj0202-glitch/happycall-ralphthon",
-  "releaseTag": "demo-media-20260921",
-  "releaseStateAtPreparation": "not-published",
-  "measuredAt": "2026-09-21T17:03:34+09:00",
+  "releaseTag": "demo-media-20260921-audio-v2",
+  "releaseStateAtPreparation": "pending-publication",
+  "measuredAt": "2026-09-21T18:13:43.960611+09:00",
   "measuredHost": "CJJ",
   "notice": "Synthetic demo media; not actual calls, CCTV, or logistics evidence. Publication and downloads must be verified separately.",
   "assets": [
     {
       "name": "CASE-0001.wav",
-      "bytes": 2263244,
-      "sha256": "1432d1b44b66d7edd53408811ab73ede98303555235b14b4587671a390a51b92",
+      "bytes": 2263278,
+      "sha256": "d4eeb6448ff8969f27034ecade9a050ee212468585c6300b19c9a0ebdc372931",
       "synthetic": true,
       "durationSeconds": 47.15,
       "durationMethod": "Python wave decoded PCM byte count",
       "sampleRate": 24000,
-      "channels": 1
+      "channels": 1,
+      "sourceSha256": "1432d1b44b66d7edd53408811ab73ede98303555235b14b4587671a390a51b92",
+      "processing": {
+        "method": "FFmpeg loudnorm two-pass dynamic",
+        "integratedLufs": -18.0,
+        "truePeakDbtp": -1.2,
+        "clippedSamples": 0,
+        "framesAndFormatPreserved": true,
+        "humanListeningVerified": false
+      },
+      "sourceBytes": 2263244
     },
     {
       "name": "CASE-0002.wav",
-      "bytes": 2378444,
-      "sha256": "f9fa70afaeb575876ab2dd18f1f395fbd38d6fec99b7cc0f70cb723650fb2e0c",
+      "bytes": 2378478,
+      "sha256": "333897f4f10426674ec97b9e3a44c2f8da21f1f7931b4f911c82a29abcf6b914",
       "synthetic": true,
       "durationSeconds": 49.55,
       "durationMethod": "Python wave decoded PCM byte count",
       "sampleRate": 24000,
-      "channels": 1
+      "channels": 1,
+      "sourceSha256": "f9fa70afaeb575876ab2dd18f1f395fbd38d6fec99b7cc0f70cb723650fb2e0c",
+      "processing": {
+        "method": "FFmpeg loudnorm two-pass dynamic",
+        "integratedLufs": -17.9,
+        "truePeakDbtp": -1.2,
+        "clippedSamples": 0,
+        "framesAndFormatPreserved": true,
+        "humanListeningVerified": false
+      },
+      "sourceBytes": 2378444
     },
     {
       "name": "sorter-demo.mp4",
@@ -41,11 +61,13 @@
     }
   ],
   "releaseVerification": {
-    "publishedAt": "2026-09-21T17:25:46+09:00",
-    "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/tag/demo-media-20260921",
+    "publishedAt": "2026-09-21T09:14:48Z",
+    "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/tag/demo-media-20260921-audio-v2",
     "githubDigestMatches": 3,
     "independentDownloadMatches": 3,
     "verifiedOn": "pc1",
     "otherPcReceipts": "PENDING"
-  }
+  },
+  "previousRelease": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/tag/demo-media-20260921",
+  "analysisNote": "Earlier STT reports used sourceSha256 audio. reports/e2e/normalized-voice-live.json records one normalized CASE-0002 check; it is not a general accuracy or human listening result."
 }
