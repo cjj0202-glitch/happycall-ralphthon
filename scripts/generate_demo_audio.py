@@ -14,8 +14,24 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from server.live import demo_client
-from server.budget import Budget
+
+SPEECH_INSTRUCTIONS = '한국어로 자연스럽게 말하세요. 실제 전화 상담처럼 차분하고 또렷하게, 숫자와 단위를 정확히 읽으세요. 제공된 문장만 말하세요.'
+
+
+def build_speech_parameters(text: str, voice: str, *, model: str = 'gpt-4o-mini-tts',
+                            speed: float = 1.0, instructions: str = SPEECH_INSTRUCTIONS,
+                            response_format: str = 'wav') -> dict[str, str | float]:
+    """Return the single source of truth for the request and its cache identity."""
+    return {'model': model, 'voice': voice, 'input': text,
+            'response_format': response_format, 'speed': speed,
+            'instructions': instructions}
+
+
+def speech_cache_fingerprint(parameters: dict[str, str | float]) -> str:
+    """Include every request parameter, independently of dictionary key order."""
+    canonical = json.dumps(parameters, sort_keys=True, ensure_ascii=False,
+                           separators=(',', ':'), allow_nan=False)
+    return hashlib.sha256(canonical.encode('utf-8')).hexdigest()[:16]
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -33,20 +49,23 @@ def main():
                       'accounting':'reservation only, not provider billing','generate':args.generate}))
     if not args.generate:
         return
+    # Importing cache helpers must not read local credentials or initialize clients.
+    from server.live import demo_client
+    from server.budget import Budget
+
     client = demo_client()
     budget = Budget()
     for case in cases:
         chunks, metadata, cursor, params = [], [], 0.0, None
         for index, turn in enumerate(case['transcript']):
             voice = 'marin' if turn['speaker'] == '상담원' else 'cedar'
-            fingerprint = hashlib.sha256((voice+turn['text']).encode()).hexdigest()[:16]
+            request_parameters = build_speech_parameters(turn['text'], voice)
+            fingerprint = speech_cache_fingerprint(request_parameters)
             seg = cache/f'{case["id"]}-{index}-{fingerprint}.wav'
             if not seg.exists():
                 rid = budget.reserve(100, 'synthetic-demo-tts')
                 try:
-                    response = client.audio.speech.create(model='gpt-4o-mini-tts',voice=voice,
-                        input=turn['text'], response_format='wav',
-                        instructions='한국어로 자연스럽게 말하세요. 실제 전화 상담처럼 차분하고 또렷하게, 숫자와 단위를 정확히 읽으세요. 제공된 문장만 말하세요.')
+                    response = client.audio.speech.create(**request_parameters)
                     content = response.read()
                     with wave.open(io.BytesIO(content),'rb') as check:
                         if check.getnframes() == 0:
