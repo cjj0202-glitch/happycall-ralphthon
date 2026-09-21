@@ -9,12 +9,25 @@
       "pc": "pc1",
       "outcome": "공통 계약·API·통합·인수",
       "state": "IN_PROGRESS",
-      "design": "PENDING",
-      "implementation": "PENDING",
-      "unit": "PENDING",
-      "functional": "PENDING",
-      "adversarial": "PENDING",
-      "accepted": false
+      "design": "PARTIAL_WITH_EVIDENCE",
+      "implementation": "PARTIAL_WITH_EVIDENCE",
+      "unit": "PARTIAL_WITH_EVIDENCE",
+      "functional": "PARTIAL_WITH_EVIDENCE",
+      "adversarial": "PARTIAL_WITH_EVIDENCE",
+      "accepted": false,
+      "evidence": [
+        "docs/25_단계별_상세설계와_전체테스트.md",
+        "docs/26_원천구조와_솔루션_연결계약.md",
+        "reports/adversarial-system-recheck.md",
+        "reports/e2e/revision-reference-recheck.md",
+        "reports/live-analysis-independent.md"
+      ],
+      "remaining": [
+        "음성 명료도",
+        "PC 모듈 인수·통합",
+        "20입력·12경계·6회 리허설",
+        "최종 UI 검수·인계"
+      ]
     },
     {
       "id": "N02",
@@ -52,5 +65,7 @@
       "adversarial": "PENDING",
       "accepted": false
     }
-  ]
+  ],
+  "updatedAtKST": "2026-09-21T17:34:00+09:00",
+  "sharedBaseCommit": "297b138"
 }

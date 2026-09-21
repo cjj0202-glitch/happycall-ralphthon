@@ -39,5 +39,13 @@
       "fps": 24.0,
       "codec": "h264"
     }
-  ]
+  ],
+  "releaseVerification": {
+    "publishedAt": "2026-09-21T17:25:46+09:00",
+    "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/tag/demo-media-20260921",
+    "githubDigestMatches": 3,
+    "independentDownloadMatches": 3,
+    "verifiedOn": "pc1",
+    "otherPcReceipts": "PENDING"
+  }
 }
