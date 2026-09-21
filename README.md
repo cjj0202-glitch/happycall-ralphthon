@@ -70,7 +70,9 @@ python channel/mail.py inbox        # ③ 내 앞 편지
 | 파일 | 무엇 |
 |---|---|
 | [docs/01_ChatGPT_전달_프롬프트.md](docs/01_ChatGPT_전달_프롬프트.md) | **복붙용.** 워커 루프 · 메인 루프 프롬프트 |
-| [docs/08_팀원_공유용.md](docs/08_팀원_공유용.md) | **팀원에게 그대로 보내는 글** — 카톡·슬랙에 붙여넣는다 |
+| [docs/공유문_팀원_카톡.md](docs/공유문_팀원_카톡.md) | **팀원에게 그대로 보내는 글** — 카톡·슬랙에 붙여넣는다 |
+| [docs/08_다른_노트북_사전준비.md](docs/08_다른_노트북_사전준비.md) | 사전준비 상세 (정본) |
+| [PROMPT_build.md](PROMPT_build.md) · [PROMPT_main.md](PROMPT_main.md) | 워커·메인 시작 프롬프트 (정본) |
 | [AGENTS.md](AGENTS.md) | 에이전트 상시 지침 — Codex CLI 가 자동으로 읽는다 |
 | `.claude/skills/mailbox/` | **스킬** — 「편지함」·「inbox」·「회신해」 등에 자동 발동 |
 | `.claude/skills/ralph-loop/` | **스킬** — 「랄프」·「루프 돌려」·「다음 덩어리」에 자동 발동 |
