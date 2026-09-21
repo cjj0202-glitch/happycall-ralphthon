@@ -1,0 +1,88 @@
+{
+  "at": "2026-09-21T10:59:07.174Z",
+  "head": "ef8f33e23f003c95a51e6a44a8c77cac19f46b71",
+  "node": "v24.21.0",
+  "react": "19.1.4",
+  "typescript": "5.9.3",
+  "method": "Actual TSX in-memory transpile and React renderToStaticMarkup; actual parent field callback invoked with state collectors; actual old/new documentation object expressions evaluated.",
+  "limits": "No browser, clicks, hydration, CSS layout, full parent page, save/API or media playback executed.",
+  "original": {
+    "savedQuantity": 6,
+    "editedQuantity": "999",
+    "parentConfirmed": false,
+    "reviewCaseConfirmed": true,
+    "confirmationLabels": 1
+  },
+  "beforeHashes": {
+    "apps/web/components/CallReview.tsx": "e861bc8ff7775e51be35c67f72364fdda261bd43407f4962be06367831fd6161",
+    "apps/web/app/page.tsx": "48aaca8bae6fae2114f0d65bbff263ee4318f16d7f3de9408da90fb393fcf420",
+    "reports/pc2/integration.md": "5ea0a2ba3069c3c4bd2a70d13ec4fe84773c5c8bda93f54b4805c59a6a290d5d",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648"
+  },
+  "afterHashes": {
+    "apps/web/components/CallReview.tsx": "e861bc8ff7775e51be35c67f72364fdda261bd43407f4962be06367831fd6161",
+    "apps/web/app/page.tsx": "48aaca8bae6fae2114f0d65bbff263ee4318f16d7f3de9408da90fb393fcf420",
+    "reports/pc2/integration.md": "5ea0a2ba3069c3c4bd2a70d13ec4fe84773c5c8bda93f54b4805c59a6a290d5d",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648"
+  },
+  "checks": [
+    {
+      "name": "original-failure-reproduced",
+      "status": "PASS",
+      "expectedBug": true,
+      "confirmationLabels": 1,
+      "edited999Visible": true
+    },
+    {
+      "name": "saved-true-current-false",
+      "status": "PASS",
+      "expectedLabels": 0,
+      "actualLabels": 0,
+      "currentQuantity": "999",
+      "unit": "EA",
+      "sourceAndTranscriptUnchanged": true,
+      "markupSha256": "a6473f221937f0113c56d30e8b13a8fc173f7578933c0f6ce45facd3097ca3e4"
+    },
+    {
+      "name": "saved-false-current-true",
+      "status": "PASS",
+      "expectedLabels": 1,
+      "actualLabels": 1,
+      "currentQuantity": "999",
+      "unit": "EA",
+      "sourceAndTranscriptUnchanged": true,
+      "markupSha256": "8344f2583e432b2ff6b246c68cbe8630211eb1243a4cd4d25520ea63994b50f3"
+    },
+    {
+      "name": "saved-false-current-false",
+      "status": "PASS",
+      "expectedLabels": 0,
+      "actualLabels": 0,
+      "currentQuantity": "999",
+      "unit": "EA",
+      "sourceAndTranscriptUnchanged": true,
+      "markupSha256": "a6473f221937f0113c56d30e8b13a8fc173f7578933c0f6ce45facd3097ca3e4"
+    },
+    {
+      "name": "saved-true-current-true",
+      "status": "PASS",
+      "expectedLabels": 1,
+      "actualLabels": 1,
+      "currentQuantity": "999",
+      "unit": "EA",
+      "sourceAndTranscriptUnchanged": true,
+      "markupSha256": "8344f2583e432b2ff6b246c68cbe8630211eb1243a4cd4d25520ea63994b50f3"
+    },
+    {
+      "name": "missing-prop-mutation-caught",
+      "status": "PASS",
+      "staleLabels": 1
+    },
+    {
+      "name": "inputs-unchanged",
+      "status": "PASS"
+    }
+  ],
+  "passed": 7,
+  "failed": 0
+}

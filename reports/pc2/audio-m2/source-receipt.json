@@ -1,0 +1,162 @@
+{
+  "at": "2026-09-21T11:24:33.479873+00:00",
+  "source_comment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5759439879",
+  "release": "demo-voice-sources-20260921",
+  "outer_files_verified": 2,
+  "outer_files": {
+    "demo-voice-sources-20260921.zip": {
+      "sha256": "4cce238f49c513b9ef068a8a1e5a34c4938d968b16de2a39ac245a3eaac3ac12",
+      "bytes": 3474435
+    },
+    "demo-voice-sources-20260921.manifest.json": {
+      "sha256": "6a734e6437c1e21a9a2d82c62842d58b83856798e01bb1023f914a00406fe75e",
+      "bytes": 17735
+    }
+  },
+  "segments_verified": 16,
+  "segments": [
+    {
+      "path": "segments/CASE-0001-0-be762ca2c7db02b6.wav",
+      "sha256": "044176fd0accb3ada653baaad9c9cc1a9c71ec778e04972a8744358ad58f524e",
+      "bytes": 244844,
+      "actual_frames": 122400,
+      "actual_seconds": 5.1,
+      "matches_manifest": true
+    },
+    {
+      "path": "segments/CASE-0001-1-2bc78c14573d17a1.wav",
+      "sha256": "795ae7bf037fa07add93bae385b7016ff865acbc653d2250292b0820b5596817",
+      "bytes": 309644,
+      "actual_frames": 154800,
+      "actual_seconds": 6.45,
+      "matches_manifest": true
+    },
+    {
+      "path": "segments/CASE-0001-2-10d266a78c9abf88.wav",
+      "sha256": "ed0131ef17d3d769526d47345204afe291e053e3d5df30634f8eae6254eb2872",
+      "bytes": 196844,
+      "actual_frames": 98400,
+      "actual_seconds": 4.1,
+      "matches_manifest": true
+    },
+    {
+      "path": "segments/CASE-0001-3-06e100ef86ad96ab.wav",
+      "sha256": "a9ee2c70c3922d01684abfd018b10598acbc264ba2b8da23968694a78fc8a0cc",
+      "bytes": 302444,
+      "actual_frames": 151200,
+      "actual_seconds": 6.3,
+      "matches_manifest": true
+    },
+    {
+      "path": "segments/CASE-0001-4-816a13bda445821c.wav",
+      "sha256": "aa82be21a5aaf1c43d6151d784f4f5ec621cc14e3bebd6ed7e6f6dfa78e46e70",
+      "bytes": 328844,
+      "actual_frames": 164400,
+      "actual_seconds": 6.85,
+      "matches_manifest": true
+    },
+    {
+      "path": "segments/CASE-0001-5-a991e258cd734e42.wav",
+      "sha256": "08aeb1c3719de4b241715ea7f9e384daec57f94b0664ebecc84852d19c1f0b46",
+      "bytes": 252044,
+      "actual_frames": 126000,
+      "actual_seconds": 5.25,
+      "matches_manifest": true
+    },
+    {
+      "path": "segments/CASE-0001-6-4306f823511ed6a1.wav",
+      "sha256": "a13977cf69a1be0f64ec86618d40bca170844916b4e805afc5400b17ed08c893",
+      "bytes": 376844,
+      "actual_frames": 188400,
+      "actual_seconds": 7.85,
+      "matches_manifest": true
+    },
+    {
+      "path": "segments/CASE-0001-7-c9903d7bf4ed50ac.wav",
+      "sha256": "307e9af13711aee952b5492930ef8ee262c2c53c70f01a7be2086c808db84c76",
+      "bytes": 117644,
+      "actual_frames": 58800,
+      "actual_seconds": 2.45,
+      "matches_manifest": true
+    },
+    {
+      "path": "segments/CASE-0002-0-2267111806264ca6.wav",
+      "sha256": "6af85718cb5b5a4b0c49e5943cea6b1f9a1c26e935a42c1742bfc2900caaa3e5",
+      "bytes": 206444,
+      "actual_frames": 103200,
+      "actual_seconds": 4.3,
+      "matches_manifest": true
+    },
+    {
+      "path": "segments/CASE-0002-1-68d5c9957ad86cbe.wav",
+      "sha256": "8f30bd2f774d0758258fd5b5d4b40f177684724b0da200954cea00ba5788fa78",
+      "bytes": 362444,
+      "actual_frames": 181200,
+      "actual_seconds": 7.55,
+      "matches_manifest": true
+    },
+    {
+      "path": "segments/CASE-0002-2-1b8b780818065541.wav",
+      "sha256": "eb99c00f772038922f1203f5283ef95a186bdf7c22e798b727f3fe5e16caf4eb",
+      "bytes": 223244,
+      "actual_frames": 111600,
+      "actual_seconds": 4.65,
+      "matches_manifest": true
+    },
+    {
+      "path": "segments/CASE-0002-3-44e99d7bc42ffff8.wav",
+      "sha256": "39648fccb52bceb50d3e22d40b9693523f481872bf3a6c3b6c5e6b45d65c562b",
+      "bytes": 266444,
+      "actual_frames": 133200,
+      "actual_seconds": 5.55,
+      "matches_manifest": true
+    },
+    {
+      "path": "segments/CASE-0002-4-aa7e9bb12c5300c9.wav",
+      "sha256": "55b59044bb4020fd9eb468ce63649b771d068b49a371bc3fd93902e4611d9a37",
+      "bytes": 295244,
+      "actual_frames": 147600,
+      "actual_seconds": 6.15,
+      "matches_manifest": true
+    },
+    {
+      "path": "segments/CASE-0002-5-1d1f2fe666959faa.wav",
+      "sha256": "c9e1cb8f50a89d0663e0fcc73c91947cdd3ec1042d5b5a3287a9835ab0118ebe",
+      "bytes": 307244,
+      "actual_frames": 153600,
+      "actual_seconds": 6.4,
+      "matches_manifest": true
+    },
+    {
+      "path": "segments/CASE-0002-6-98f36a6ca69d193b.wav",
+      "sha256": "1f56d393dcb0ccfde2d0634e83f8020b56475af6de37d92b442d9741b33c486f",
+      "bytes": 352844,
+      "actual_frames": 176400,
+      "actual_seconds": 7.35,
+      "matches_manifest": true
+    },
+    {
+      "path": "segments/CASE-0002-7-ddf46971e0b7c295.wav",
+      "sha256": "7e97017f04f096f9e3b0bc4bf275d7ea3e4912c54305f9ec1f986ccf59ef235d",
+      "bytes": 230444,
+      "actual_frames": 115200,
+      "actual_seconds": 4.8,
+      "matches_manifest": true
+    }
+  ],
+  "v1_reconstruction": [
+    {
+      "case": "CASE-0001",
+      "sha256": "1432d1b44b66d7edd53408811ab73ede98303555235b14b4587671a390a51b92",
+      "v1_byte_identical": true
+    },
+    {
+      "case": "CASE-0002",
+      "sha256": "f9fa70afaeb575876ab2dd18f1f395fbd38d6fec99b7cc0f70cb723650fb2e0c",
+      "v1_byte_identical": true
+    }
+  ],
+  "extracted": false,
+  "generated_api_calls": 0,
+  "limits": "Original synthesis cache/v1 source, not v2-normalized utterance audio, STT, listening or quality acceptance."
+}

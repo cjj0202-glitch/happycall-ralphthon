@@ -1,0 +1,2 @@
+# Preserve FFmpeg output bytes, including its padded progress lines.
+*-ebur128.txt -text whitespace=-blank-at-eol

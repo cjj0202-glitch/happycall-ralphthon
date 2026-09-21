@@ -1,0 +1,366 @@
+{
+  "created_at": "2026-09-21T11:04:37.492320+00:00",
+  "candidate": "N02-M2-pause020-v1",
+  "python": "3.12.14",
+  "imageio_ffmpeg": "0.6.0",
+  "ffmpeg_version": "ffmpeg version 7.1-essentials_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers",
+  "ffmpeg_binary_sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
+  "edit": {
+    "source_case": "CASE-0002",
+    "insertion_source_time": 17.375,
+    "insertion_frame": 417000,
+    "added_seconds": 0.2,
+    "added_frames": 4800,
+    "silence_guard_frames_each_side": 600,
+    "speed": 1,
+    "gain_db": 0,
+    "intent": "Test whether a 0.35-to-0.55 second pause before the EA-to-BOX correction helps listeners separate the two speakers. Improvement is unproven.",
+    "clip_source_range": [
+      12.25,
+      29.95
+    ]
+  },
+  "candidate_time_map": [
+    {
+      "source_frames": [
+        0,
+        417000
+      ],
+      "candidate_frames": [
+        0,
+        417000
+      ]
+    },
+    {
+      "source_frames": null,
+      "candidate_frames": [
+        417000,
+        421800
+      ],
+      "kind": "inserted digital silence"
+    },
+    {
+      "source_frames": [
+        417000,
+        1189200
+      ],
+      "candidate_frames": [
+        421800,
+        1194000
+      ]
+    }
+  ],
+  "generation_turns": [
+    {
+      "turn": 1,
+      "source_start": 0,
+      "source_end": 4.3,
+      "candidate_start": 0,
+      "candidate_end": 4.3,
+      "basis": "pc1 generation timing table citation; not new STT or human-aligned boundaries"
+    },
+    {
+      "turn": 2,
+      "source_start": 4.65,
+      "source_end": 12.2,
+      "candidate_start": 4.65,
+      "candidate_end": 12.2,
+      "basis": "pc1 generation timing table citation; not new STT or human-aligned boundaries"
+    },
+    {
+      "turn": 3,
+      "source_start": 12.55,
+      "source_end": 17.2,
+      "candidate_start": 12.55,
+      "candidate_end": 17.2,
+      "basis": "pc1 generation timing table citation; not new STT or human-aligned boundaries"
+    },
+    {
+      "turn": 4,
+      "source_start": 17.55,
+      "source_end": 23.1,
+      "candidate_start": 17.75,
+      "candidate_end": 23.3,
+      "basis": "pc1 generation timing table citation; not new STT or human-aligned boundaries"
+    },
+    {
+      "turn": 5,
+      "source_start": 23.45,
+      "source_end": 29.6,
+      "candidate_start": 23.65,
+      "candidate_end": 29.8,
+      "basis": "pc1 generation timing table citation; not new STT or human-aligned boundaries"
+    },
+    {
+      "turn": 6,
+      "source_start": 29.95,
+      "source_end": 36.35,
+      "candidate_start": 30.15,
+      "candidate_end": 36.550000000000004,
+      "basis": "pc1 generation timing table citation; not new STT or human-aligned boundaries"
+    },
+    {
+      "turn": 7,
+      "source_start": 36.7,
+      "source_end": 44.05,
+      "candidate_start": 36.900000000000006,
+      "candidate_end": 44.25,
+      "basis": "pc1 generation timing table citation; not new STT or human-aligned boundaries"
+    },
+    {
+      "turn": 8,
+      "source_start": 44.4,
+      "source_end": 49.2,
+      "candidate_start": 44.6,
+      "candidate_end": 49.400000000000006,
+      "basis": "pc1 generation timing table citation; not new STT or human-aligned boundaries"
+    }
+  ],
+  "measurements": {
+    "full_A": {
+      "file": "CASE-0002.wav",
+      "path": "apps/web/public/demo/CASE-0002.wav",
+      "bytes": 2378478,
+      "sha256": "333897f4f10426674ec97b9e3a44c2f8da21f1f7931b4f911c82a29abcf6b914",
+      "codec": "pcm_s16le",
+      "shape": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 1189200,
+        "duration_seconds": 49.55
+      },
+      "pcm": {
+        "start_seconds": 0.0,
+        "end_seconds": 49.55,
+        "frames": 1189200,
+        "sample_count": 1189200,
+        "duration_seconds": 49.55,
+        "sample_peak_dbfs": -1.2084450520587433,
+        "rms_dbfs": -18.134992659219694,
+        "digital_rail_samples": 0,
+        "digital_rail_percent": 0.0,
+        "above_minus_1_dbfs_samples": 0,
+        "exact_zero_samples": 99586,
+        "exact_zero_percent": 8.374201143625967,
+        "quiet_20ms_windows": 683,
+        "complete_20ms_windows": 2477,
+        "quiet_20ms_percent": 27.573677836092045,
+        "excluded_tail_frames": 240
+      },
+      "ebur128": {
+        "integrated_lufs": -17.9,
+        "true_peak_dbtp": -1.2,
+        "loudness_range_lu": 3.2,
+        "exit_code": 0,
+        "command": [
+          "<ffmpeg>",
+          "-hide_banner",
+          "-nostdin",
+          "-i",
+          "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\apps\\web\\public\\demo\\CASE-0002.wav",
+          "-af",
+          "ebur128=peak=true",
+          "-f",
+          "null",
+          "-"
+        ],
+        "raw_log": "reports/pc2/audio-m2/full_A-ebur128.txt"
+      }
+    },
+    "full_B": {
+      "file": "CASE-0002-pause020-v1.wav",
+      "path": ".local/pc2-n02-m2-pause-v1-recheck/CASE-0002-pause020-v1.wav",
+      "bytes": 2388044,
+      "sha256": "6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "codec": "pcm_s16le",
+      "shape": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 1194000,
+        "duration_seconds": 49.75
+      },
+      "pcm": {
+        "start_seconds": 0.0,
+        "end_seconds": 49.75,
+        "frames": 1194000,
+        "sample_count": 1194000,
+        "duration_seconds": 49.75,
+        "sample_peak_dbfs": -1.2084450520587433,
+        "rms_dbfs": -18.152486921824195,
+        "digital_rail_samples": 0,
+        "digital_rail_percent": 0.0,
+        "above_minus_1_dbfs_samples": 0,
+        "exact_zero_samples": 104386,
+        "exact_zero_percent": 8.742546063651591,
+        "quiet_20ms_windows": 693,
+        "complete_20ms_windows": 2487,
+        "quiet_20ms_percent": 27.864897466827504,
+        "excluded_tail_frames": 240
+      },
+      "ebur128": {
+        "integrated_lufs": -17.9,
+        "true_peak_dbtp": -1.2,
+        "loudness_range_lu": 3.2,
+        "exit_code": 0,
+        "command": [
+          "<ffmpeg>",
+          "-hide_banner",
+          "-nostdin",
+          "-i",
+          "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\.local\\pc2-n02-m2-pause-v1-recheck\\CASE-0002-pause020-v1.wav",
+          "-af",
+          "ebur128=peak=true",
+          "-f",
+          "null",
+          "-"
+        ],
+        "raw_log": "reports/pc2/audio-m2/full_B-ebur128.txt"
+      }
+    },
+    "clip_A": {
+      "file": "CASE-0002-units-A-v2.wav",
+      "path": ".local/pc2-n02-m2-pause-v1-recheck/CASE-0002-units-A-v2.wav",
+      "bytes": 849644,
+      "sha256": "7ce4984751d6b0a84ffdc6df3c899bcd1d40d3bcf9589c7495fe7e34940f3cc3",
+      "codec": "pcm_s16le",
+      "shape": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 424800,
+        "duration_seconds": 17.7
+      },
+      "pcm": {
+        "start_seconds": 0.0,
+        "end_seconds": 17.7,
+        "frames": 424800,
+        "sample_count": 424800,
+        "duration_seconds": 17.7,
+        "sample_peak_dbfs": -2.4881783057717914,
+        "rms_dbfs": -18.521768196900755,
+        "digital_rail_samples": 0,
+        "digital_rail_percent": 0.0,
+        "above_minus_1_dbfs_samples": 0,
+        "exact_zero_samples": 43814,
+        "exact_zero_percent": 10.314030131826742,
+        "quiet_20ms_windows": 264,
+        "complete_20ms_windows": 885,
+        "quiet_20ms_percent": 29.83050847457627,
+        "excluded_tail_frames": 0
+      },
+      "ebur128": {
+        "integrated_lufs": -18.2,
+        "true_peak_dbtp": -2.4,
+        "loudness_range_lu": 3.6,
+        "exit_code": 0,
+        "command": [
+          "<ffmpeg>",
+          "-hide_banner",
+          "-nostdin",
+          "-i",
+          "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\.local\\pc2-n02-m2-pause-v1-recheck\\CASE-0002-units-A-v2.wav",
+          "-af",
+          "ebur128=peak=true",
+          "-f",
+          "null",
+          "-"
+        ],
+        "raw_log": "reports/pc2/audio-m2/clip_A-ebur128.txt"
+      }
+    },
+    "clip_B": {
+      "file": "CASE-0002-units-B-pause020.wav",
+      "path": ".local/pc2-n02-m2-pause-v1-recheck/CASE-0002-units-B-pause020.wav",
+      "bytes": 859244,
+      "sha256": "538dd32890d4b3c57930192860441d4003390c9f6334c9b5845b73346d3a6ce4",
+      "codec": "pcm_s16le",
+      "shape": {
+        "sample_rate_hz": 24000,
+        "channels": 1,
+        "bits_per_sample": 16,
+        "frames": 429600,
+        "duration_seconds": 17.9
+      },
+      "pcm": {
+        "start_seconds": 0.0,
+        "end_seconds": 17.9,
+        "frames": 429600,
+        "sample_count": 429600,
+        "duration_seconds": 17.9,
+        "sample_peak_dbfs": -2.4881783057717914,
+        "rms_dbfs": -18.57056584308162,
+        "digital_rail_samples": 0,
+        "digital_rail_percent": 0.0,
+        "above_minus_1_dbfs_samples": 0,
+        "exact_zero_samples": 48614,
+        "exact_zero_percent": 11.31610800744879,
+        "quiet_20ms_windows": 274,
+        "complete_20ms_windows": 895,
+        "quiet_20ms_percent": 30.614525139664803,
+        "excluded_tail_frames": 0
+      },
+      "ebur128": {
+        "integrated_lufs": -18.2,
+        "true_peak_dbtp": -2.4,
+        "loudness_range_lu": 3.9,
+        "exit_code": 0,
+        "command": [
+          "<ffmpeg>",
+          "-hide_banner",
+          "-nostdin",
+          "-i",
+          "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\.local\\pc2-n02-m2-pause-v1-recheck\\CASE-0002-units-B-pause020.wav",
+          "-af",
+          "ebur128=peak=true",
+          "-f",
+          "null",
+          "-"
+        ],
+        "raw_log": "reports/pc2/audio-m2/clip_B-ebur128.txt"
+      }
+    }
+  },
+  "checks": {
+    "approved_source_sha": true,
+    "all_original_frames_recoverable_in_order": true,
+    "written_wav_round_trip_pcm_exact": true,
+    "written_comparison_clips_exact": true,
+    "inserted_frames_exactly_zero": true,
+    "no_original_samples_changed_or_removed": true,
+    "full_tail_one_second_byte_identical": true,
+    "expected_full_duration_49_75": true,
+    "digital_rail_zero_all_outputs": true,
+    "full_loudness_delta_at_most_point2_lu": true,
+    "clip_loudness_delta_at_most_point2_lu": true,
+    "candidate_full_lufs_near_minus18": true,
+    "candidate_true_peak_no_more_minus1": true,
+    "protected_inputs_unchanged": true
+  },
+  "passed": 14,
+  "total": 14,
+  "protected_before": {
+    "apps/web/public/demo/CASE-0002.wav": "333897f4f10426674ec97b9e3a44c2f8da21f1f7931b4f911c82a29abcf6b914",
+    "apps/web/public/demo/CASE-0001.wav": "d4eeb6448ff8969f27034ecade9a050ee212468585c6300b19c9a0ebdc372931",
+    "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "reports/e2e/normalized-voice-live.json": "17e8f171c6cf61c9d8d7a11a8420f5b41374c82c70cd4ec889bb0ad45b491d5c"
+  },
+  "protected_after": {
+    "apps/web/public/demo/CASE-0002.wav": "333897f4f10426674ec97b9e3a44c2f8da21f1f7931b4f911c82a29abcf6b914",
+    "apps/web/public/demo/CASE-0001.wav": "d4eeb6448ff8969f27034ecade9a050ee212468585c6300b19c9a0ebdc372931",
+    "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "reports/e2e/normalized-voice-live.json": "17e8f171c6cf61c9d8d7a11a8420f5b41374c82c70cd4ec889bb0ad45b491d5c"
+  },
+  "limits": {
+    "human_listening_trials": 0,
+    "intelligibility_improvement": "UNVERIFIED",
+    "stt_calls": 0,
+    "tts_calls": 0,
+    "browser_playback_runs": 0,
+    "production_assets_changed": false,
+    "no_cut_claim": "No additional full-file cut: every original sample is recoverable. Original speech quality and old truncation, if any, are not evaluated."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "first_run_preserved": true,
+  "second_run_reason": "Validate written WAV payload and A/B extraction, plus reproducibility of all three files",
+  "checks": [
+    {
+      "file": "CASE-0002-pause020-v1.wav",
+      "sha256": "6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "identical": true
+    },
+    {
+      "file": "CASE-0002-units-A-v2.wav",
+      "sha256": "7ce4984751d6b0a84ffdc6df3c899bcd1d40d3bcf9589c7495fe7e34940f3cc3",
+      "identical": true
+    },
+    {
+      "file": "CASE-0002-units-B-pause020.wav",
+      "sha256": "538dd32890d4b3c57930192860441d4003390c9f6334c9b5845b73346d3a6ce4",
+      "identical": true
+    }
+  ]
+}
