@@ -1,0 +1,33 @@
+{
+  "observedAtKST": "2026-09-21T19:50:28.550692+09:00",
+  "scope": "Sent comments and exact body verification, not recipient acknowledgement",
+  "items": [
+    {
+      "issue": 8,
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5759286540",
+      "createdAt": "2026-09-21T10:48:47Z",
+      "login": "cjj0202-glitch",
+      "bodyFile": "reports/channel/N02-M2-pc2-voice-quality.md",
+      "bodyMatched": true,
+      "acknowledged": false
+    },
+    {
+      "issue": 9,
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5759286998",
+      "createdAt": "2026-09-21T10:48:49Z",
+      "login": "cjj0202-glitch",
+      "bodyFile": "reports/channel/N03-M2-pc3-blender-scene.md",
+      "bodyMatched": true,
+      "acknowledged": false
+    },
+    {
+      "issue": 10,
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5759287396",
+      "createdAt": "2026-09-21T10:48:52Z",
+      "login": "cjj0202-glitch",
+      "bodyFile": "reports/channel/N04-Q2-pc4-integrated-qa.md",
+      "bodyMatched": true,
+      "acknowledged": false
+    }
+  ]
+}

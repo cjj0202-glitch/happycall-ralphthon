@@ -6,6 +6,8 @@
 
 후속 관측: 이 pc3 검토 사본은 수정 결과 `d6aa6b3`로 갱신했습니다(폴더 이름은 처음 검토한 SHA). pc2 결과 `7ae648e`는 `.local/review-pc2-7ae648e`의 별도 detached worktree에서 읽습니다. 두 사본은 제품 런타임이 아닙니다. `.local/tools/blender`는 공식 portable 도구, `.local/media-benchmark`는 렌더 실측용이며 Git에 넣지 않습니다.
 
+pc4 결과 `1b82f1d`의 읽기 전용 검토 사본은 `.local/review-pc4-1b82f1d`입니다. `.local/layout-study`는 원천 도면 렌더·추출·해시·내부 대조 기록으로 Git 제외이며, 외부 공유는 독립 합성 설계만 사용합니다.
+
 | 위치 | 보관하는 내용 | 공유 기준 |
 |---|---|---|
 | `apps/web/` | Next 화면·스타일·클라이언트 코드 | 검증한 소스·lock 파일 |

@@ -49,7 +49,16 @@
       "reportedRepo": "C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon",
       "resultCommit": "7ae648eb4bfb8f7e00ab842b39ad86e0df0ac134",
       "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5758898272",
-      "mainFinding": "Parent integration must pass current reviewConfirmed along with edited intake; independent component checks passed within scope."
+      "mainFinding": "Parent integration must pass current reviewConfirmed along with edited intake; independent component checks passed within scope.",
+      "followupCard": {
+        "id": "N02-M2",
+        "baseCommit": "e5469aa99bb266c5a977b80c097223275ac6fc9b",
+        "sentAtUTC": "2026-09-21T10:48:47Z",
+        "replyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5759286540",
+        "bodyFile": "reports/channel/N02-M2-pc2-voice-quality.md",
+        "state": "SENT_BODY_VERIFIED",
+        "acknowledged": false
+      }
     },
     {
       "id": "N03",
@@ -71,7 +80,16 @@
       "reportedRepo": "D:/hwana/Work/happycall-ralphthon",
       "resultCommit": "d6aa6b38ab18836789eb77e9034560a5e7890eef",
       "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5758883538",
-      "mainFinding": "d6aa6b3 independent helper/SSR 58/58, 42 tampered contexts blocked and canonical media positive control passed; final browser integration and candidate registration pending."
+      "mainFinding": "d6aa6b3 independent helper/SSR 58/58, 42 tampered contexts blocked and canonical media positive control passed; final browser integration and candidate registration pending.",
+      "followupCard": {
+        "id": "N03-M2",
+        "baseCommit": "e5469aa99bb266c5a977b80c097223275ac6fc9b",
+        "sentAtUTC": "2026-09-21T10:48:49Z",
+        "replyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5759286998",
+        "bodyFile": "reports/channel/N03-M2-pc3-blender-scene.md",
+        "state": "SENT_BODY_VERIFIED",
+        "acknowledged": false
+      }
     },
     {
       "id": "N04",
@@ -99,9 +117,18 @@
       "resumeBasis": "pc4 reports direct instruction by its local user; previous local hold no longer active.",
       "resultCommit": "1b82f1d7fad1b31545d512b28896bfcba40189ec",
       "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5759119569",
-      "mainFinding": "TMS 39 contract and25 browser checks reported. Existing-shell6 flows include seek-ended repeats; not6 full-length playbacks or new integratedTMS verification. Main independent acceptance pending."
+      "mainFinding": "TMS 39 contract and25 browser checks reported. Existing-shell6 flows include seek-ended repeats; not6 full-length playbacks or new integratedTMS verification. Main independent acceptance pending.",
+      "followupCard": {
+        "id": "N04-Q2",
+        "baseCommit": "e5469aa99bb266c5a977b80c097223275ac6fc9b",
+        "sentAtUTC": "2026-09-21T10:48:52Z",
+        "replyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5759287396",
+        "bodyFile": "reports/channel/N04-Q2-pc4-integrated-qa.md",
+        "state": "SENT_BODY_VERIFIED",
+        "acknowledged": false
+      }
     }
   ],
-  "updatedAtKST": "2026-09-21T19:45:41.679408+09:00",
+  "updatedAtKST": "2026-09-21T19:50:42.325121+09:00",
   "sharedBaseCommit": "d4b4a8137fbc608911e9f6f71bd4b5e289e0a958"
 }
