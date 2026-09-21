@@ -1,0 +1,1854 @@
+{
+  "suite": "N02 isolated actual CallReview browser acceptance",
+  "startedAt": "2026-09-21T10:10:27.882Z",
+  "base": "http://127.0.0.1:3122",
+  "harness": "tests/remote/pc2/harness.tsx imports the actual component, CSS module, app tokens/globals and read-only synthetic fixture",
+  "executor": "AI Playwright technical observation, not human listening or Silent Test",
+  "checkFilter": null,
+  "checks": [
+    {
+      "id": "C01-1-real-v2-complete",
+      "status": "PASS",
+      "expected": "Real v2 WAV matches manifest, decodes and naturally ends at 1x; exactly one completion callback, error=0",
+      "actual": {
+        "name": "CASE-0001.wav",
+        "hash": "d4eeb6448ff8969f27034ecade9a050ee212468585c6300b19c9a0ebdc372931",
+        "expectedSeconds": 47.15,
+        "wallElapsedMs": 49514,
+        "callbacks": 1,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 47.15,
+          "duration": 47.15,
+          "ended": true,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": true,
+          "error": null,
+          "src": "http://127.0.0.1:3122/demo/CASE-0001.wav",
+          "played": [
+            [
+              0,
+              47.15
+            ]
+          ]
+        }
+      },
+      "durationMs": 53708
+    },
+    {
+      "id": "C01-2-real-v2-complete",
+      "status": "PASS",
+      "expected": "Real v2 WAV matches manifest, decodes and naturally ends at 1x; exactly one completion callback, error=0",
+      "actual": {
+        "name": "CASE-0002.wav",
+        "hash": "333897f4f10426674ec97b9e3a44c2f8da21f1f7931b4f911c82a29abcf6b914",
+        "expectedSeconds": 49.55,
+        "wallElapsedMs": 51438,
+        "callbacks": 1,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 49.55,
+          "duration": 49.55,
+          "ended": true,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": true,
+          "error": null,
+          "src": "http://127.0.0.1:3122/demo/CASE-0002.wav",
+          "played": [
+            [
+              0,
+              49.55
+            ]
+          ]
+        }
+      },
+      "durationMs": 53880
+    },
+    {
+      "id": "C02-segment-clock",
+      "status": "PASS",
+      "expected": "Selected timed utterance plays the same source, pauses around its end, completion callback remains 0",
+      "actual": {
+        "label": "경영주 발화 1 구간 재생 0:00.150~0:00.800",
+        "callbacks": 0,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 0.8,
+          "duration": 3,
+          "ended": false,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": true,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/short.wav",
+          "played": [
+            [
+              0.15,
+              0.816393
+            ]
+          ]
+        }
+      },
+      "durationMs": 1005
+    },
+    {
+      "id": "C03-quantity-context",
+      "status": "PASS",
+      "expected": "Current intake 1 EA, AI suggestion 1 BOX and order18EA remain distinct; quote visible; no input mutation",
+      "actual": {
+        "current": "1 EA",
+        "proposal": "1 BOX",
+        "order": "18 EA",
+        "unchanged": true
+      },
+      "durationMs": 175
+    },
+    {
+      "id": "C04-null-zero",
+      "status": "PASS",
+      "expected": "Unknown AI store/quantity remain unknown; explicit operator quantity0 stays0; no store fallback",
+      "actual": {
+        "immutableInput": {
+          "aiStore": null,
+          "aiQuantity": null,
+          "intakeQuantity": 0
+        },
+        "visibleText": "N02 통화 검토 독립 렌더\n\n합성 입력 · 실제 CallReview 컴포넌트 · 외부 API 없음\n\nCALL REVIEW · SYN-N02-PLAYER\n\n통화와 접수 내용 대조\n\nN02 독립 합성 통화 검토\n\n합성 시연 사례\n1. 통화 다시 듣기\n사전 생성한 합성 음성\n재생 준비\n0:00 / 길이 확인 중\n재생 속도\n0.75배\n1배\n1.25배\n1.5배\n2배\n볼륨 100%\n음소거\n\n음성을 처음부터 끝까지 재생하면 분석 준비가 됩니다. 구간 재생이나 끝으로 이동은 전체 재생 완료로 처리하지 않습니다.\n\n구간 재생 중 다른 탭으로 이동하면 선택 구간을 멈춥니다. 전체 통화 재생은 계속될 수 있습니다.\n\n처음부터 전체 통화 재생\n2. 합성 통화 원대본\n원문 보존\n\n음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.\n\n경영주: 주문은 18 EA였지만 받은 것은 1 BOX입니다. 상담원: 1 EA가 아니라 1 BOX로 확인하겠습니다.\n화자별 대화록\n\n합성 대화록 · 저장 결과 재생\n\n자막 표시\n경영주\n발화 1\n\n주문은 18 EA였지만 받은 것은 1 BOX입니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n상담원\n발화 2\n\n1 EA가 아니라 1 BOX로 확인하겠습니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n3. AI 제안과 상담 입력 대조\n사람 확인 필요\n저장된 AI 제안 · 재생 자료\n\n경영주 진술은 수령 1 BOX이며 상담원 입력 1 EA와 단위가 다릅니다.\n\n수령 값은 경영주 진술입니다. 주문·출고 수량으로 채우거나 BOX를 EA로 환산하지 않습니다.\n\n점포 ID\n미확인 포함\nAI 제안 · 확인 전\n미확인\n현재 상담 입력\n미확인\n상품·문의 대상\n동일\nAI 제안 · 확인 전\n합성 테스트 상품\n현재 상담 입력\n합성 테스트 상품\n수령 수량(경영주 진술)\n미확인 포함\nAI 제안 · 확인 전\n미확인\n현재 상담 입력\n0\n수령 단위(경영주 진술)\n미확인 포함\nAI 제안 · 확인 전\n미확인\n현재 상담 입력\n미확인\n요청사항\n동일\nAI 제안 · 확인 전\n단위 정정과 출고 확인\n현재 상담 입력\n단위 정정과 출고 확인\n\n현재 상담 입력은 사람의 최종 확인 완료를 뜻하지 않습니다. 이 화면은 값을 변경하거나 저장하지 않습니다.\n\n주문 정보와 수령 진술은 다릅니다\n주문 정보 · 합성 사례\n합성 테스트 상품 · 18 EA\n수령 진술 · 합성 사례 참고값\n합성 테스트 상품 · 1 BOX\n\n대조용 사례 정보입니다. AI가 식별하지 못한 점포·수량의 자동 보정값이나 실제 물류 확인 결과로 사용하지 않습니다.\n\n4. 인용 근거와 추가 확인\n확인 필요 · 수령 단위(경영주 진술)\n\n수령 단위 1 BOX / 상담 입력 1 EA 불일치\n\nAI가 연결한 인용 · 원문 대조 필요\n1 EA가 아니라 1 BOX\n아직 확인되지 않은 내용\n점포와 실제 물류 수량 미확인\n통화 후 추가로 물어볼 질문\n점포를 다시 확인해 주세요.\n수령 단위가 BOX인지 확인해 주세요.\nAI 추천 부서 · 센터 확인 담당\n\n합성 출고 문의\n\n상담원 확인 전 제안 · 자동 이관하지 않습니다.\n0 / 0"
+      },
+      "durationMs": 49
+    },
+    {
+      "id": "C05-analysis-states-retry",
+      "status": "PASS",
+      "expected": "Loading/error visible; retry disabled before full playback, calls only supplied callback after full playback, disabled prop blocks",
+      "actual": {
+        "callbacks": 1,
+        "retries": 1,
+        "audio": {
+          "paused": true,
+          "currentTime": 3,
+          "duration": 3,
+          "ended": true,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": false,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/short.wav",
+          "played": [
+            [
+              0,
+              3
+            ]
+          ]
+        }
+      },
+      "durationMs": 3343
+    },
+    {
+      "id": "C06-source-provenance",
+      "status": "PASS",
+      "expected": "Explicit replay/demo-live labels and unknown default; original text remains distinct, no source inference from fixture presence",
+      "actual": {
+        "scope": "region: 화자별 대화록, exact text only",
+        "replayLabel": "합성 대화록 · 저장 결과 재생",
+        "liveLabel": "실제 STT 결과 · 인식 오류 확인 필요",
+        "unknownLabel": "전사 출처 미확인",
+        "analysisModeFallback": "demo-live",
+        "explicitPropOverridesFallback": true,
+        "storedResponse": "reports/e2e/normalized-voice-live.json",
+        "storedSegments": 14,
+        "storedSpeakerColors": {
+          "A": "rgb(0, 91, 168)",
+          "B": "rgb(109, 40, 217)"
+        },
+        "storeId": null,
+        "newApiCalls": 0
+      },
+      "durationMs": 371
+    },
+    {
+      "id": "C07-missing",
+      "status": "PASS",
+      "expected": "Missing/unusable media visibly distinguished; completion0 and no other case substituted",
+      "actual": {
+        "callbacks": 0,
+        "retries": 0,
+        "audio": null,
+        "visibleText": "N02 통화 검토 독립 렌더\n\n합성 입력 · 실제 CallReview 컴포넌트 · 외부 API 없음\n\nCALL REVIEW · SYN-N02-PLAYER\n\n통화와 접수 내용 대조\n\nN02 독립 합성 통화 검토\n\n합성 시연 사례\n1. 통화 다시 듣기\n사전 생성한 합성 음성\n\n음원 없음 · 이 사건에 연결된 음성 파일이 없습니다. 다른 사건 음원으로 대체하지 않습니다.\n\n2. 합성 통화 원대본\n원문 보존\n\n음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.\n\n경영주: 주문은 18 EA였지만 받은 것은 1 BOX입니다. 상담원: 1 EA가 아니라 1 BOX로 확인하겠습니다.\n화자별 대화록\n\n합성 대화록 · 저장 결과 재생\n\n자막 표시\n경영주\n발화 1\n\n주문은 18 EA였지만 받은 것은 1 BOX입니다.\n\n구간 재생 불가\n\n음원 없음 · 구간 재생 불가\n\n상담원\n발화 2\n\n1 EA가 아니라 1 BOX로 확인하겠습니다.\n\n구간 재생 불가\n\n음원 없음 · 구간 재생 불가\n\n3. AI 제안과 상담 입력 대조\n사람 확인 필요\n저장된 AI 제안 · 재생 자료\n\n경영주 진술은 수령 1 BOX이며 상담원 입력 1 EA와 단위가 다릅니다.\n\n수령 값은 경영주 진술입니다. 주문·출고 수량으로 채우거나 BOX를 EA로 환산하지 않습니다.\n\n점포 ID\n미확인 포함\nAI 제안 · 확인 전\n미확인\n현재 상담 입력\nSYN-OPERATOR\n상품·문의 대상\n동일\nAI 제안 · 확인 전\n합성 테스트 상품\n현재 상담 입력\n합성 테스트 상품\n수령 수량(경영주 진술)\n동일\nAI 제안 · 확인 전\n1\n현재 상담 입력\n1\n수령 단위(경영주 진술)\n차이 확인 필요\nAI 제안 · 확인 전\nBOX\n현재 상담 입력\nEA\n요청사항\n동일\nAI 제안 · 확인 전\n단위 정정과 출고 확인\n현재 상담 입력\n단위 정정과 출고 확인\n\n현재 상담 입력은 사람의 최종 확인 완료를 뜻하지 않습니다. 이 화면은 값을 변경하거나 저장하지 않습니다.\n\n주문 정보와 수령 진술은 다릅니다\n주문 정보 · 합성 사례\n합성 테스트 상품 · 18 EA\n수령 진술 · 합성 사례 참고값\n합성 테스트 상품 · 1 BOX\n\n대조용 사례 정보입니다. AI가 식별하지 못한 점포·수량의 자동 보정값이나 실제 물류 확인 결과로 사용하지 않습니다.\n\n4. 인용 근거와 추가 확인\n확인 필요 · 수령 단위(경영주 진술)\n\n수령 단위 1 BOX / 상담 입력 1 EA 불일치\n\nAI가 연결한 인용 · 원문 대조 필요\n1 EA가 아니라 1 BOX\n아직 확인되지 않은 내용\n점포와 실제 물류 수량 미확인\n통화 후 추가로 물어볼 질문\n점포를 다시 확인해 주세요.\n수령 단위가 BOX인지 확인해 주세요.\nAI 추천 부서 · 센터 확인 담당\n\n합성 출고 문의\n\n상담원 확인 전 제안 · 자동 이관하지 않습니다.\n0 / 0"
+      },
+      "durationMs": 20
+    },
+    {
+      "id": "C07-404",
+      "status": "PASS",
+      "expected": "Missing/unusable media visibly distinguished; completion0 and no other case substituted",
+      "actual": {
+        "callbacks": 0,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 0,
+          "duration": null,
+          "ended": false,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": true,
+          "error": 4,
+          "src": "http://127.0.0.1:3122/test-audio/not-found.wav",
+          "played": []
+        },
+        "visibleText": "N02 통화 검토 독립 렌더\n\n합성 입력 · 실제 CallReview 컴포넌트 · 외부 API 없음\n\nCALL REVIEW · SYN-N02-PLAYER\n\n통화와 접수 내용 대조\n\nN02 독립 합성 통화 검토\n\n합성 시연 사례\n1. 통화 다시 듣기\n사전 생성한 합성 음성\n음원 오류\n0:00 / 길이 확인 중\n재생 속도\n0.75배\n1배\n1.25배\n1.5배\n2배\n볼륨 100%\n음소거\n\n음성을 처음부터 끝까지 재생하면 분석 준비가 됩니다. 구간 재생이나 끝으로 이동은 전체 재생 완료로 처리하지 않습니다.\n\n구간 재생 중 다른 탭으로 이동하면 선택 구간을 멈춥니다. 전체 통화 재생은 계속될 수 있습니다.\n\n음성 파일을 불러오지 못했습니다. 파일 없음·네트워크·음원 형식을 확인해 주세요.\n\n처음부터 전체 통화 재생\n음원 다시 불러오기\n2. 합성 통화 원대본\n원문 보존\n\n음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.\n\n경영주: 주문은 18 EA였지만 받은 것은 1 BOX입니다. 상담원: 1 EA가 아니라 1 BOX로 확인하겠습니다.\n화자별 대화록\n\n합성 대화록 · 저장 결과 재생\n\n자막 표시\n경영주\n발화 1\n\n주문은 18 EA였지만 받은 것은 1 BOX입니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n상담원\n발화 2\n\n1 EA가 아니라 1 BOX로 확인하겠습니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n3. AI 제안과 상담 입력 대조\n사람 확인 필요\n저장된 AI 제안 · 재생 자료\n\n경영주 진술은 수령 1 BOX이며 상담원 입력 1 EA와 단위가 다릅니다.\n\n수령 값은 경영주 진술입니다. 주문·출고 수량으로 채우거나 BOX를 EA로 환산하지 않습니다.\n\n점포 ID\n미확인 포함\nAI 제안 · 확인 전\n미확인\n현재 상담 입력\nSYN-OPERATOR\n상품·문의 대상\n동일\nAI 제안 · 확인 전\n합성 테스트 상품\n현재 상담 입력\n합성 테스트 상품\n수령 수량(경영주 진술)\n동일\nAI 제안 · 확인 전\n1\n현재 상담 입력\n1\n수령 단위(경영주 진술)\n차이 확인 필요\nAI 제안 · 확인 전\nBOX\n현재 상담 입력\nEA\n요청사항\n동일\nAI 제안 · 확인 전\n단위 정정과 출고 확인\n현재 상담 입력\n단위 정정과 출고 확인\n\n현재 상담 입력은 사람의 최종 확인 완료를 뜻하지 않습니다. 이 화면은 값을 변경하거나 저장하지 않습니다.\n\n주문 정보와 수령 진술은 다릅니다\n주문 정보 · 합성 사례\n합성 테스트 상품 · 18 EA\n수령 진술 · 합성 사례 참고값\n합성 테스트 상품 · 1 BOX\n\n대조용 사례 정보입니다. AI가 식별하지 못한 점포·수량의 자동 보정값이나 실제 물류 확인 결과로 사용하지 않습니다.\n\n4. 인용 근거와 추가 확인\n확인 필요 · 수령 단위(경영주 진술)\n\n수령 단위 1 BOX / 상담 입력 1 EA 불일치\n\nAI가 연결한 인용 · 원문 대조 필요\n1 EA가 아니라 1 BOX\n아직 확인되지 않은 내용\n점포와 실제 물류 수량 미확인\n통화 후 추가로 물어볼 질문\n점포를 다시 확인해 주세요.\n수령 단위가 BOX인지 확인해 주세요.\nAI 추천 부서 · 센터 확인 담당\n\n합성 출고 문의\n\n상담원 확인 전 제안 · 자동 이관하지 않습니다.\n0 / 0"
+      },
+      "durationMs": 37
+    },
+    {
+      "id": "C07-damaged",
+      "status": "PASS",
+      "expected": "Missing/unusable media visibly distinguished; completion0 and no other case substituted",
+      "actual": {
+        "callbacks": 0,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 0,
+          "duration": null,
+          "ended": false,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": true,
+          "error": 4,
+          "src": "http://127.0.0.1:3122/test-audio/damaged.wav",
+          "played": []
+        },
+        "visibleText": "N02 통화 검토 독립 렌더\n\n합성 입력 · 실제 CallReview 컴포넌트 · 외부 API 없음\n\nCALL REVIEW · SYN-N02-PLAYER\n\n통화와 접수 내용 대조\n\nN02 독립 합성 통화 검토\n\n합성 시연 사례\n1. 통화 다시 듣기\n사전 생성한 합성 음성\n음원 오류\n0:00 / 길이 확인 중\n재생 속도\n0.75배\n1배\n1.25배\n1.5배\n2배\n볼륨 100%\n음소거\n\n음성을 처음부터 끝까지 재생하면 분석 준비가 됩니다. 구간 재생이나 끝으로 이동은 전체 재생 완료로 처리하지 않습니다.\n\n구간 재생 중 다른 탭으로 이동하면 선택 구간을 멈춥니다. 전체 통화 재생은 계속될 수 있습니다.\n\n음성 파일을 불러오지 못했습니다. 파일 없음·네트워크·음원 형식을 확인해 주세요.\n\n처음부터 전체 통화 재생\n음원 다시 불러오기\n2. 합성 통화 원대본\n원문 보존\n\n음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.\n\n경영주: 주문은 18 EA였지만 받은 것은 1 BOX입니다. 상담원: 1 EA가 아니라 1 BOX로 확인하겠습니다.\n화자별 대화록\n\n합성 대화록 · 저장 결과 재생\n\n자막 표시\n경영주\n발화 1\n\n주문은 18 EA였지만 받은 것은 1 BOX입니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n상담원\n발화 2\n\n1 EA가 아니라 1 BOX로 확인하겠습니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n3. AI 제안과 상담 입력 대조\n사람 확인 필요\n저장된 AI 제안 · 재생 자료\n\n경영주 진술은 수령 1 BOX이며 상담원 입력 1 EA와 단위가 다릅니다.\n\n수령 값은 경영주 진술입니다. 주문·출고 수량으로 채우거나 BOX를 EA로 환산하지 않습니다.\n\n점포 ID\n미확인 포함\nAI 제안 · 확인 전\n미확인\n현재 상담 입력\nSYN-OPERATOR\n상품·문의 대상\n동일\nAI 제안 · 확인 전\n합성 테스트 상품\n현재 상담 입력\n합성 테스트 상품\n수령 수량(경영주 진술)\n동일\nAI 제안 · 확인 전\n1\n현재 상담 입력\n1\n수령 단위(경영주 진술)\n차이 확인 필요\nAI 제안 · 확인 전\nBOX\n현재 상담 입력\nEA\n요청사항\n동일\nAI 제안 · 확인 전\n단위 정정과 출고 확인\n현재 상담 입력\n단위 정정과 출고 확인\n\n현재 상담 입력은 사람의 최종 확인 완료를 뜻하지 않습니다. 이 화면은 값을 변경하거나 저장하지 않습니다.\n\n주문 정보와 수령 진술은 다릅니다\n주문 정보 · 합성 사례\n합성 테스트 상품 · 18 EA\n수령 진술 · 합성 사례 참고값\n합성 테스트 상품 · 1 BOX\n\n대조용 사례 정보입니다. AI가 식별하지 못한 점포·수량의 자동 보정값이나 실제 물류 확인 결과로 사용하지 않습니다.\n\n4. 인용 근거와 추가 확인\n확인 필요 · 수령 단위(경영주 진술)\n\n수령 단위 1 BOX / 상담 입력 1 EA 불일치\n\nAI가 연결한 인용 · 원문 대조 필요\n1 EA가 아니라 1 BOX\n아직 확인되지 않은 내용\n점포와 실제 물류 수량 미확인\n통화 후 추가로 물어볼 질문\n점포를 다시 확인해 주세요.\n수령 단위가 BOX인지 확인해 주세요.\nAI 추천 부서 · 센터 확인 담당\n\n합성 출고 문의\n\n상담원 확인 전 제안 · 자동 이관하지 않습니다.\n0 / 0"
+      },
+      "durationMs": 33
+    },
+    {
+      "id": "C07-zero",
+      "status": "PASS",
+      "expected": "Missing/unusable media visibly distinguished; completion0 and no other case substituted",
+      "actual": {
+        "callbacks": 0,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 0,
+          "duration": null,
+          "ended": false,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": true,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/zero.wav",
+          "played": []
+        },
+        "visibleText": "N02 통화 검토 독립 렌더\n\n합성 입력 · 실제 CallReview 컴포넌트 · 외부 API 없음\n\nCALL REVIEW · SYN-N02-PLAYER\n\n통화와 접수 내용 대조\n\nN02 독립 합성 통화 검토\n\n합성 시연 사례\n1. 통화 다시 듣기\n사전 생성한 합성 음성\n음원 오류\n0:00 / 길이 확인 중\n재생 속도\n0.75배\n1배\n1.25배\n1.5배\n2배\n볼륨 100%\n음소거\n\n음성을 처음부터 끝까지 재생하면 분석 준비가 됩니다. 구간 재생이나 끝으로 이동은 전체 재생 완료로 처리하지 않습니다.\n\n구간 재생 중 다른 탭으로 이동하면 선택 구간을 멈춥니다. 전체 통화 재생은 계속될 수 있습니다.\n\n음원 길이를 확인할 수 없습니다. 유효한 음원인지 확인해 주세요.\n\n처음부터 전체 통화 재생\n음원 다시 불러오기\n2. 합성 통화 원대본\n원문 보존\n\n음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.\n\n경영주: 주문은 18 EA였지만 받은 것은 1 BOX입니다. 상담원: 1 EA가 아니라 1 BOX로 확인하겠습니다.\n화자별 대화록\n\n합성 대화록 · 저장 결과 재생\n\n자막 표시\n경영주\n발화 1\n\n주문은 18 EA였지만 받은 것은 1 BOX입니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n상담원\n발화 2\n\n1 EA가 아니라 1 BOX로 확인하겠습니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n3. AI 제안과 상담 입력 대조\n사람 확인 필요\n저장된 AI 제안 · 재생 자료\n\n경영주 진술은 수령 1 BOX이며 상담원 입력 1 EA와 단위가 다릅니다.\n\n수령 값은 경영주 진술입니다. 주문·출고 수량으로 채우거나 BOX를 EA로 환산하지 않습니다.\n\n점포 ID\n미확인 포함\nAI 제안 · 확인 전\n미확인\n현재 상담 입력\nSYN-OPERATOR\n상품·문의 대상\n동일\nAI 제안 · 확인 전\n합성 테스트 상품\n현재 상담 입력\n합성 테스트 상품\n수령 수량(경영주 진술)\n동일\nAI 제안 · 확인 전\n1\n현재 상담 입력\n1\n수령 단위(경영주 진술)\n차이 확인 필요\nAI 제안 · 확인 전\nBOX\n현재 상담 입력\nEA\n요청사항\n동일\nAI 제안 · 확인 전\n단위 정정과 출고 확인\n현재 상담 입력\n단위 정정과 출고 확인\n\n현재 상담 입력은 사람의 최종 확인 완료를 뜻하지 않습니다. 이 화면은 값을 변경하거나 저장하지 않습니다.\n\n주문 정보와 수령 진술은 다릅니다\n주문 정보 · 합성 사례\n합성 테스트 상품 · 18 EA\n수령 진술 · 합성 사례 참고값\n합성 테스트 상품 · 1 BOX\n\n대조용 사례 정보입니다. AI가 식별하지 못한 점포·수량의 자동 보정값이나 실제 물류 확인 결과로 사용하지 않습니다.\n\n4. 인용 근거와 추가 확인\n확인 필요 · 수령 단위(경영주 진술)\n\n수령 단위 1 BOX / 상담 입력 1 EA 불일치\n\nAI가 연결한 인용 · 원문 대조 필요\n1 EA가 아니라 1 BOX\n아직 확인되지 않은 내용\n점포와 실제 물류 수량 미확인\n통화 후 추가로 물어볼 질문\n점포를 다시 확인해 주세요.\n수령 단위가 BOX인지 확인해 주세요.\nAI 추천 부서 · 센터 확인 담당\n\n합성 출고 문의\n\n상담원 확인 전 제안 · 자동 이관하지 않습니다.\n0 / 0"
+      },
+      "durationMs": 44
+    },
+    {
+      "id": "C08-invalid-timestamps",
+      "status": "PASS",
+      "expected": "Missing/negative/reversed/equal/NaN/infinite/out-of-range timestamps cannot initiate segment playback; text preserved",
+      "actual": {
+        "invalidInputs": 8,
+        "segmentButtons": 8,
+        "callbacks": 0,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 0,
+          "duration": 3,
+          "ended": false,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": true,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/short.wav",
+          "played": []
+        }
+      },
+      "durationMs": 80
+    },
+    {
+      "id": "C09-seek-cannot-unlock",
+      "status": "PASS",
+      "expected": "Seeking to end and synthetic ended without continuous playback must not emit callback",
+      "actual": {
+        "callbacks": 0,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 3,
+          "duration": 3,
+          "ended": true,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": true,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/short.wav",
+          "played": [
+            [
+              2.85,
+              3
+            ]
+          ]
+        }
+      },
+      "durationMs": 401
+    },
+    {
+      "id": "C10-controls-keyboard",
+      "status": "PASS",
+      "expected": "Native controls retained; speed/mute/volume UI matches actual audio; keyboard can start full playback with visible focus",
+      "actual": {
+        "tabTarget": {
+          "tag": "INPUT",
+          "name": "통화 볼륨"
+        },
+        "focusOutline": "solid",
+        "callbacks": 0,
+        "retries": 0,
+        "audio": {
+          "paused": false,
+          "currentTime": 0,
+          "duration": 3,
+          "ended": false,
+          "rate": 1.5,
+          "muted": true,
+          "volume": 0,
+          "controls": true,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/short.wav",
+          "played": []
+        }
+      },
+      "durationMs": 204
+    },
+    {
+      "id": "C11-case-url-stale-event",
+      "status": "PASS",
+      "expected": "Case and same-ID URL switches stop old audio, clear completion and ignore detached ended/error events",
+      "actual": {
+        "oldPaused": true,
+        "callbacks": 0,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 0,
+          "duration": 3,
+          "ended": false,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": false,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/short.wav",
+          "played": []
+        }
+      },
+      "durationMs": 329
+    },
+    {
+      "id": "C12-layout-1440",
+      "status": "PASS",
+      "expected": "Long unbroken transcript/fields/question/error preserve zero document horizontal overflow and visible focus",
+      "actual": {
+        "scroll": 1440,
+        "client": 1440,
+        "inner": 1440,
+        "fullButton": {
+          "x": 37,
+          "y": 509.765625,
+          "width": 166.6875,
+          "height": 40
+        }
+      },
+      "durationMs": 337
+    },
+    {
+      "id": "C12-layout-1024",
+      "status": "PASS",
+      "expected": "Long unbroken transcript/fields/question/error preserve zero document horizontal overflow and visible focus",
+      "actual": {
+        "scroll": 1024,
+        "client": 1024,
+        "inner": 1024,
+        "fullButton": {
+          "x": 37,
+          "y": 567.09375,
+          "width": 166.6875,
+          "height": 40
+        }
+      },
+      "durationMs": 625
+    },
+    {
+      "id": "C12-layout-390",
+      "status": "PASS",
+      "expected": "Long unbroken transcript/fields/question/error preserve zero document horizontal overflow and visible focus",
+      "actual": {
+        "scroll": 390,
+        "client": 390,
+        "inner": 390,
+        "fullButton": {
+          "x": 33,
+          "y": 722.890625,
+          "width": 324,
+          "height": 40
+        }
+      },
+      "durationMs": 236
+    },
+    {
+      "id": "C13-silent-technical-only",
+      "status": "PASS",
+      "expected": "Silent WAV may decode/end, but UI/test makes no human intelligibility or speaker-output success claim",
+      "actual": {
+        "callbacks": 1,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 0.4,
+          "duration": 0.4,
+          "ended": true,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": true,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/silent.wav",
+          "played": [
+            [
+              0,
+              0.4
+            ]
+          ]
+        },
+        "humanListeningVerified": false,
+        "actualSampleContent": "all PCM samples0"
+      },
+      "durationMs": 715
+    },
+    {
+      "id": "C14-frozen-props",
+      "status": "PASS",
+      "expected": "Playback, transcript interaction and repeated prop updates do not mutate frozen source/analysis/intake",
+      "actual": {
+        "unchanged": true,
+        "frozenNestedFields": true
+      },
+      "durationMs": 181
+    },
+    {
+      "id": "C16-disabled-midplay-and-resume",
+      "status": "PASS",
+      "expected": "Disabled mid-play pauses audio and blocks controls; reenable + jump to end cannot unlock, fresh full replay can",
+      "actual": {
+        "callbacks": 1,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 3,
+          "duration": 3,
+          "ended": true,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": true,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/short.wav",
+          "played": [
+            [
+              0,
+              3
+            ]
+          ]
+        }
+      },
+      "durationMs": 4018
+    },
+    {
+      "id": "C17-seek-outside-segment",
+      "status": "PASS",
+      "expected": "Seeking outside a selected interval pauses it and cannot emit whole-call completion",
+      "actual": {
+        "callbacks": 0,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 2.5,
+          "duration": 3,
+          "ended": false,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": true,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/short.wav",
+          "played": []
+        }
+      },
+      "durationMs": 108
+    },
+    {
+      "id": "C18-background-segment",
+      "status": "PASS",
+      "expected": "A real short-WAV segment stops at its boundary when requestAnimationFrame callbacks are suspended; this injected condition is not proof of real hidden-tab behavior",
+      "actual": {
+        "rafSuspension": {
+          "injected": "requestAnimationFrame and cancelAnimationFrame suspended",
+          "actualVisibility": "visible",
+          "expectedEnd": 0.8,
+          "callbacks": 0,
+          "retries": 0,
+          "audio": {
+            "paused": true,
+            "currentTime": 0.8,
+            "duration": 3,
+            "ended": false,
+            "rate": 1,
+            "muted": false,
+            "volume": 1,
+            "controls": true,
+            "error": null,
+            "src": "http://127.0.0.1:3122/test-audio/short.wav",
+            "played": [
+              [
+                0.15,
+                0.90143
+              ]
+            ]
+          },
+          "timeUpdates": [
+            {
+              "time": 0.15,
+              "paused": false,
+              "trusted": true
+            },
+            {
+              "time": 0.37045,
+              "paused": false,
+              "trusted": true
+            },
+            {
+              "time": 0.628312,
+              "paused": false,
+              "trusted": true
+            },
+            {
+              "time": 0.8,
+              "paused": true,
+              "trusted": true
+            },
+            {
+              "time": 0.8,
+              "paused": true,
+              "trusted": true
+            },
+            {
+              "time": 0.8,
+              "paused": true,
+              "trusted": true
+            }
+          ]
+        },
+        "realTabSwitchObservation": {
+          "hidden": false,
+          "visibilityState": "visible"
+        },
+        "realHiddenTabVerified": false,
+        "injectedVisibilitySegment": {
+          "callbacks": 0,
+          "retries": 0,
+          "audio": {
+            "paused": true,
+            "currentTime": 0.31083,
+            "duration": 3,
+            "ended": false,
+            "rate": 1,
+            "muted": false,
+            "volume": 1,
+            "controls": true,
+            "error": null,
+            "src": "http://127.0.0.1:3122/test-audio/short.wav",
+            "played": [
+              [
+                0.15,
+                0.31083
+              ]
+            ]
+          }
+        },
+        "injectedVisibilityFullPlayback": {
+          "callbacks": 1,
+          "retries": 0,
+          "audio": {
+            "paused": true,
+            "currentTime": 3,
+            "duration": 3,
+            "ended": true,
+            "rate": 1,
+            "muted": false,
+            "volume": 1,
+            "controls": true,
+            "error": null,
+            "src": "http://127.0.0.1:3122/test-audio/short.wav",
+            "played": [
+              [
+                0,
+                3
+              ]
+            ]
+          }
+        }
+      },
+      "durationMs": 6116
+    },
+    {
+      "id": "C19-completed-source-reset",
+      "status": "PASS",
+      "expected": "After a completed call enables retry, case-ID and then same-ID audio-URL changes each reset the retry gate and ignore old events",
+      "actual": {
+        "idChangeLockedRetry": true,
+        "sameIdUrlChangeLockedRetry": true,
+        "completedCallbacks": 2,
+        "callbacks": 2,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 0,
+          "duration": 0.4,
+          "ended": false,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": true,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/silent.wav",
+          "played": []
+        }
+      },
+      "durationMs": 6657
+    },
+    {
+      "id": "C20-text-intake",
+      "status": "PASS",
+      "expected": "Text intake has no audio gate, keeps its input visible, allows error retry immediately and still honors disabled",
+      "actual": {
+        "voiceGateNotRequired": true,
+        "callbacks": 0,
+        "retries": 1,
+        "audio": null
+      },
+      "durationMs": 264
+    },
+    {
+      "id": "C15-no-external-no-render-error",
+      "status": "PASS",
+      "expected": "No product API/external network attempt or React page exception",
+      "actual": {
+        "externalRequests": 0,
+        "paidCalls": 0,
+        "pageErrors": 0,
+        "intentional404OrDecodeConsoleMessages": [
+          "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        ]
+      },
+      "durationMs": 1
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "unexpectedRequests": [],
+  "media": [
+    {
+      "name": "CASE-0001.wav",
+      "hash": "d4eeb6448ff8969f27034ecade9a050ee212468585c6300b19c9a0ebdc372931",
+      "expectedSeconds": 47.15,
+      "wallElapsedMs": 49514,
+      "callbacks": 1,
+      "retries": 0,
+      "audio": {
+        "paused": true,
+        "currentTime": 47.15,
+        "duration": 47.15,
+        "ended": true,
+        "rate": 1,
+        "muted": false,
+        "volume": 1,
+        "controls": true,
+        "error": null,
+        "src": "http://127.0.0.1:3122/demo/CASE-0001.wav",
+        "played": [
+          [
+            0,
+            47.15
+          ]
+        ]
+      }
+    },
+    {
+      "name": "CASE-0002.wav",
+      "hash": "333897f4f10426674ec97b9e3a44c2f8da21f1f7931b4f911c82a29abcf6b914",
+      "expectedSeconds": 49.55,
+      "wallElapsedMs": 51438,
+      "callbacks": 1,
+      "retries": 0,
+      "audio": {
+        "paused": true,
+        "currentTime": 49.55,
+        "duration": 49.55,
+        "ended": true,
+        "rate": 1,
+        "muted": false,
+        "volume": 1,
+        "controls": true,
+        "error": null,
+        "src": "http://127.0.0.1:3122/demo/CASE-0002.wav",
+        "played": [
+          [
+            0,
+            49.55
+          ]
+        ]
+      }
+    }
+  ],
+  "limitations": [
+    "No paid AI/API calls; no real customer, operational data, server mutation or shared product-file edits.",
+    "Headless browser media completion proves decoding and event/clock behavior, not OS speaker output or human intelligibility.",
+    "Artificial short/silent/invalid WAV and timestamps are explicit test fixtures; timestamp tests do not prove linguistic alignment of v2 STT.",
+    "The harness tests component props and local callbacks. Parent analysis gating, API persistence and whole-service integration remain pc1 acceptance work.",
+    "Comparison is AI suggestion versus current caseData.intake. This component cannot restore operator input already overwritten upstream."
+  ],
+  "previousRuns": [
+    {
+      "startedAt": "2026-09-21T09:47:32.785Z",
+      "finishedAt": null,
+      "passed": 9,
+      "failed": 3,
+      "total": 12,
+      "failures": [
+        {
+          "id": "C01-1-real-v2-complete",
+          "status": "FAIL",
+          "expected": "Real v2 WAV matches manifest, decodes and naturally ends at 1x; exactly one completion callback, error=0",
+          "error": "Error: EPERM: operation not permitted, open 'C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\apps\\web\\public\\demo\\CASE-0001.wav'\n    at async open (node:internal/fs/promises:697:25)\n    at async readFile (node:internal/fs/promises:1348:14)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:98:21\n    at async check (file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:39:20)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:96:5\n    at async Promise.all (index 0)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:95:3",
+          "durationMs": 1
+        },
+        {
+          "id": "C01-2-real-v2-complete",
+          "status": "FAIL",
+          "expected": "Real v2 WAV matches manifest, decodes and naturally ends at 1x; exactly one completion callback, error=0",
+          "error": "Error: EPERM: operation not permitted, open 'C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\apps\\web\\public\\demo\\CASE-0002.wav'\n    at async open (node:internal/fs/promises:697:25)\n    at async readFile (node:internal/fs/promises:1348:14)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:98:21\n    at async check (file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:39:20)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:96:5\n    at async Promise.all (index 1)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:95:3",
+          "durationMs": 3
+        },
+        {
+          "id": "C07-zero",
+          "status": "FAIL",
+          "expected": "Missing/unusable media visibly distinguished; completion0 and no other case substituted",
+          "error": "page.waitForFunction: Timeout 10000ms exceeded.\n    at C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\tests\\remote\\pc2\\run.mjs:180:39\n    at async check (C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\tests\\remote\\pc2\\run.mjs:39:20)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:178:5",
+          "durationMs": 10024
+        }
+      ],
+      "sourceHashes": {
+        "apps/web/components/CallReview.tsx": "e1409e94f34e446aecce07b9e332c7318fe2572a0e91f6598597a1bea4b79630",
+        "apps/web/components/CallReview.module.css": "decc14c878b152c1ceab08070f21abb29a7acf1b56edc19440e97a2cc01f4d13",
+        "apps/web/app/tokens.css": "31a08dbc4cfd532d4a4d44ca0cf1fa8629ed57e25a9629b5caf748b41d1c01c3",
+        "apps/web/app/globals.css": "9d303f73ec32aa9832461932a065d84a7204968e8001edb8c2e6f0e9de15bce4",
+        "apps/web/lib/types.ts": "3871af57d8633ae73b27c160de4bbe84fb9018263c43b56fc011efd7919a1461",
+        "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+        "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf"
+      },
+      "note": "Original failed assertions/environment errors retained; current results below are separate re-execution."
+    },
+    {
+      "startedAt": "2026-09-21T09:54:42.391Z",
+      "finishedAt": "2026-09-21T09:54:56.924Z",
+      "passed": 18,
+      "failed": 3,
+      "total": 21,
+      "failures": [
+        {
+          "id": "C01-1-real-v2-complete",
+          "status": "FAIL",
+          "expected": "Real v2 WAV matches manifest, decodes and naturally ends at 1x; exactly one completion callback, error=0",
+          "error": "Error: EPERM: operation not permitted, open 'C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\apps\\web\\public\\demo\\CASE-0001.wav'\n    at async open (node:internal/fs/promises:697:25)\n    at async readFile (node:internal/fs/promises:1348:14)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:108:21\n    at async check (file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:49:20)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:106:5\n    at async Promise.all (index 0)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:105:3",
+          "durationMs": 1
+        },
+        {
+          "id": "C01-2-real-v2-complete",
+          "status": "FAIL",
+          "expected": "Real v2 WAV matches manifest, decodes and naturally ends at 1x; exactly one completion callback, error=0",
+          "error": "Error: EPERM: operation not permitted, open 'C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\apps\\web\\public\\demo\\CASE-0002.wav'\n    at async open (node:internal/fs/promises:697:25)\n    at async readFile (node:internal/fs/promises:1348:14)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:108:21\n    at async check (file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:49:20)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:106:5\n    at async Promise.all (index 1)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:105:3",
+          "durationMs": 2
+        },
+        {
+          "id": "C05-analysis-states-retry",
+          "status": "FAIL",
+          "expected": "Loading/error visible; retry disabled before full playback, calls only supplied callback after full playback, disabled prop blocks",
+          "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(await retry.isDisabled())\n\n    at file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:179:12\n    at async check (file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:49:20)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:168:3",
+          "durationMs": 3304
+        }
+      ],
+      "sourceHashes": {
+        "apps/web/components/CallReview.tsx": "e1409e94f34e446aecce07b9e332c7318fe2572a0e91f6598597a1bea4b79630",
+        "apps/web/components/CallReview.module.css": "decc14c878b152c1ceab08070f21abb29a7acf1b56edc19440e97a2cc01f4d13",
+        "apps/web/app/tokens.css": "31a08dbc4cfd532d4a4d44ca0cf1fa8629ed57e25a9629b5caf748b41d1c01c3",
+        "apps/web/app/globals.css": "9d303f73ec32aa9832461932a065d84a7204968e8001edb8c2e6f0e9de15bce4",
+        "apps/web/lib/types.ts": "3871af57d8633ae73b27c160de4bbe84fb9018263c43b56fc011efd7919a1461",
+        "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+        "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf"
+      },
+      "note": "Original failed assertions/environment errors retained; current results below are separate re-execution."
+    },
+    {
+      "startedAt": "2026-09-21T09:57:49.234Z",
+      "finishedAt": "2026-09-21T09:58:10.443Z",
+      "passed": 21,
+      "failed": 0,
+      "total": 21,
+      "failures": [],
+      "sourceHashes": {
+        "apps/web/components/CallReview.tsx": "d414fc25dfc0ed7d98a95afaccc9f6a89c914b7230c15b73211a02e141ec1232",
+        "apps/web/components/CallReview.module.css": "decc14c878b152c1ceab08070f21abb29a7acf1b56edc19440e97a2cc01f4d13",
+        "apps/web/app/tokens.css": "31a08dbc4cfd532d4a4d44ca0cf1fa8629ed57e25a9629b5caf748b41d1c01c3",
+        "apps/web/app/globals.css": "9d303f73ec32aa9832461932a065d84a7204968e8001edb8c2e6f0e9de15bce4",
+        "apps/web/lib/types.ts": "3871af57d8633ae73b27c160de4bbe84fb9018263c43b56fc011efd7919a1461",
+        "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+        "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf"
+      },
+      "note": "Original failed assertions/environment errors retained; current results below are separate re-execution."
+    },
+    {
+      "startedAt": "2026-09-21T09:59:18.559Z",
+      "finishedAt": "2026-09-21T10:01:25.779Z",
+      "checkFilter": null,
+      "passed": 23,
+      "failed": 0,
+      "total": 23,
+      "failures": [],
+      "checks": [
+        {
+          "id": "C01-1-real-v2-complete",
+          "status": "PASS",
+          "expected": "Real v2 WAV matches manifest, decodes and naturally ends at 1x; exactly one completion callback, error=0",
+          "actual": {
+            "name": "CASE-0001.wav",
+            "hash": "d4eeb6448ff8969f27034ecade9a050ee212468585c6300b19c9a0ebdc372931",
+            "expectedSeconds": 47.15,
+            "wallElapsedMs": 49825,
+            "callbacks": 1,
+            "retries": 0,
+            "audio": {
+              "paused": true,
+              "currentTime": 47.15,
+              "duration": 47.15,
+              "ended": true,
+              "rate": 1,
+              "muted": false,
+              "volume": 1,
+              "controls": true,
+              "error": null,
+              "src": "http://127.0.0.1:3122/demo/CASE-0001.wav",
+              "played": [
+                [
+                  0,
+                  47.15
+                ]
+              ]
+            }
+          },
+          "durationMs": 55720
+        },
+        {
+          "id": "C01-2-real-v2-complete",
+          "status": "PASS",
+          "expected": "Real v2 WAV matches manifest, decodes and naturally ends at 1x; exactly one completion callback, error=0",
+          "actual": {
+            "name": "CASE-0002.wav",
+            "hash": "333897f4f10426674ec97b9e3a44c2f8da21f1f7931b4f911c82a29abcf6b914",
+            "expectedSeconds": 49.55,
+            "wallElapsedMs": 52910,
+            "callbacks": 1,
+            "retries": 0,
+            "audio": {
+              "paused": true,
+              "currentTime": 49.55,
+              "duration": 49.55,
+              "ended": true,
+              "rate": 1,
+              "muted": false,
+              "volume": 1,
+              "controls": true,
+              "error": null,
+              "src": "http://127.0.0.1:3122/demo/CASE-0002.wav",
+              "played": [
+                [
+                  0,
+                  49.55
+                ]
+              ]
+            }
+          },
+          "durationMs": 59964
+        },
+        {
+          "id": "C02-segment-clock",
+          "status": "PASS",
+          "expected": "Selected timed utterance plays the same source, pauses around its end, completion callback remains 0",
+          "actual": {
+            "label": "경영주 발화 1 구간 재생 0:00.150~0:00.800",
+            "callbacks": 0,
+            "retries": 0,
+            "audio": {
+              "paused": true,
+              "currentTime": 0.8,
+              "duration": 3,
+              "ended": false,
+              "rate": 1,
+              "muted": false,
+              "volume": 1,
+              "controls": true,
+              "error": null,
+              "src": "http://127.0.0.1:3122/test-audio/short.wav",
+              "played": [
+                [
+                  0.15,
+                  0.813513
+                ]
+              ]
+            }
+          },
+          "durationMs": 1756
+        },
+        {
+          "id": "C03-quantity-context",
+          "status": "PASS",
+          "expected": "Current intake 1 EA, AI suggestion 1 BOX and order18EA remain distinct; quote visible; no input mutation",
+          "actual": {
+            "current": "1 EA",
+            "proposal": "1 BOX",
+            "order": "18 EA",
+            "unchanged": true
+          },
+          "durationMs": 266
+        },
+        {
+          "id": "C04-null-zero",
+          "status": "PASS",
+          "expected": "Unknown AI store/quantity remain unknown; explicit operator quantity0 stays0; no store fallback",
+          "actual": {
+            "immutableInput": {
+              "aiStore": null,
+              "aiQuantity": null,
+              "intakeQuantity": 0
+            },
+            "visibleText": "N02 통화 검토 독립 렌더\n\n합성 입력 · 실제 CallReview 컴포넌트 · 외부 API 없음\n\nCALL REVIEW · SYN-N02-PLAYER\n\n통화와 접수 내용 대조\n\nN02 독립 합성 통화 검토\n\n합성 시연 사례\n1. 통화 다시 듣기\n사전 생성한 합성 음성\n재생 준비\n0:00 / 길이 확인 중\n재생 속도\n0.75배\n1배\n1.25배\n1.5배\n2배\n볼륨 100%\n음소거\n\n음성을 처음부터 끝까지 재생하면 분석 준비가 됩니다. 구간 재생이나 끝으로 이동은 전체 재생 완료로 처리하지 않습니다.\n\n처음부터 전체 통화 재생\n2. 합성 통화 원대본\n원문 보존\n\n음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.\n\n경영주: 주문은 18 EA였지만 받은 것은 1 BOX입니다. 상담원: 1 EA가 아니라 1 BOX로 확인하겠습니다.\n화자별 대화록\n\n합성 대화록 · 저장 결과 재생\n\n자막 표시\n경영주\n발화 1\n\n주문은 18 EA였지만 받은 것은 1 BOX입니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n상담원\n발화 2\n\n1 EA가 아니라 1 BOX로 확인하겠습니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n3. AI 제안과 상담 입력 대조\n사람 확인 필요\n저장된 AI 제안 · 재생 자료\n\n경영주 진술은 수령 1 BOX이며 상담원 입력 1 EA와 단위가 다릅니다.\n\n수령 값은 경영주 진술입니다. 주문·출고 수량으로 채우거나 BOX를 EA로 환산하지 않습니다.\n\n점포 ID\n미확인 포함\nAI 제안 · 확인 전\n미확인\n현재 상담 입력\n미확인\n상품·문의 대상\n동일\nAI 제안 · 확인 전\n합성 테스트 상품\n현재 상담 입력\n합성 테스트 상품\n수령 수량(경영주 진술)\n미확인 포함\nAI 제안 · 확인 전\n미확인\n현재 상담 입력\n0\n수령 단위(경영주 진술)\n미확인 포함\nAI 제안 · 확인 전\n미확인\n현재 상담 입력\n미확인\n요청사항\n동일\nAI 제안 · 확인 전\n단위 정정과 출고 확인\n현재 상담 입력\n단위 정정과 출고 확인\n\n현재 상담 입력은 사람의 최종 확인 완료를 뜻하지 않습니다. 이 화면은 값을 변경하거나 저장하지 않습니다.\n\n주문 정보와 수령 진술은 다릅니다\n주문 정보 · 합성 사례\n합성 테스트 상품 · 18 EA\n수령 진술 · 합성 사례 참고값\n합성 테스트 상품 · 1 BOX\n\n대조용 사례 정보입니다. AI가 식별하지 못한 점포·수량의 자동 보정값이나 실제 물류 확인 결과로 사용하지 않습니다.\n\n4. 인용 근거와 추가 확인\n확인 필요 · 수령 단위(경영주 진술)\n\n수령 단위 1 BOX / 상담 입력 1 EA 불일치\n\nAI가 연결한 인용 · 원문 대조 필요\n1 EA가 아니라 1 BOX\n아직 확인되지 않은 내용\n점포와 실제 물류 수량 미확인\n통화 후 추가로 물어볼 질문\n점포를 다시 확인해 주세요.\n수령 단위가 BOX인지 확인해 주세요.\nAI 추천 부서 · 센터 확인 담당\n\n합성 출고 문의\n\n상담원 확인 전 제안 · 자동 이관하지 않습니다.\n0 / 0"
+          },
+          "durationMs": 65
+        },
+        {
+          "id": "C05-analysis-states-retry",
+          "status": "PASS",
+          "expected": "Loading/error visible; retry disabled before full playback, calls only supplied callback after full playback, disabled prop blocks",
+          "actual": {
+            "callbacks": 1,
+            "retries": 1,
+            "audio": {
+              "paused": true,
+              "currentTime": 3,
+              "duration": 3,
+              "ended": true,
+              "rate": 1,
+              "muted": false,
+              "volume": 1,
+              "controls": false,
+              "error": null,
+              "src": "http://127.0.0.1:3122/test-audio/short.wav",
+              "played": [
+                [
+                  0,
+                  3
+                ]
+              ]
+            }
+          },
+          "durationMs": 3874
+        },
+        {
+          "id": "C06-source-provenance",
+          "status": "PASS",
+          "expected": "Explicit replay/demo-live labels and unknown default; original text remains distinct, no source inference from fixture presence",
+          "actual": {
+            "replay": "N02 통화 검토 독립 렌더\n\n합성 입력 · 실제 CallReview 컴포넌트 · 외부 API 없음\n\nCALL REVIEW · SYN-N02-PLAYER\n\n통화와 접수 내용 대조\n\nN02 독립 합성 통화 검토\n\n합성 시연 사례\n1. 통화 다시 듣기\n사전 생성한 합성 음성\n재생 준비\n0:00 / 길이 확인 중\n재생 속도\n0.75배\n1배\n1.25배\n1.5배\n2배\n볼륨 100%\n음소거\n\n음성을 처음부터 끝까지 재생하면 분석 준비가 됩니다. 구간 재생이나 끝으로 이동은 전체 재생 완료로 처리하지 않습니다.\n\n처음부터 전체 통화 재생\n2. 합성 통화 원대본\n원문 보존\n\n음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.\n\n경영주: 주문은 18 EA였지만 받은 것은 1 BOX입니다. 상담원: 1 EA가 아니라 1 BOX로 확인하겠습니다.\n화자별 대화록\n\n합성 대화록 · 저장 결과 재생\n\n자막 표시\n경영주\n발화 1\n\n주문은 18 EA였지만 받은 것은 1 BOX입니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n상담원\n발화 2\n\n1 EA가 아니라 1 BOX로 확인하겠습니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n3. AI 제안과 상담 입력 대조\n사람 확인 필요\n저장된 AI 제안 · 재생 자료\n\n경영주 진술은 수령 1 BOX이며 상담원 입력 1 EA와 단위가 다릅니다.\n\n수령 값은 경영주 진술입니다. 주문·출고 수량으로 채우거나 BOX를 EA로 환산하지 않습니다.\n\n점포 ID\n미확인 포함\nAI 제안 · 확인 전\n미확인\n현재 상담 입력\nSYN-OPERATOR\n상품·문의 대상\n동일\nAI 제안 · 확인 전\n합성 테스트 상품\n현재 상담 입력\n합성 테스트 상품\n수령 수량(경영주 진술)\n동일\nAI 제안 · 확인 전\n1\n현재 상담 입력\n1\n수령 단위(경영주 진술)\n차이 확인 필요\nAI 제안 · 확인 전\nBOX\n현재 상담 입력\nEA\n요청사항\n동일\nAI 제안 · 확인 전\n단위 정정과 출고 확인\n현재 상담 입력\n단위 정정과 출고 확인\n\n현재 상담 입력은 사람의 최종 확인 완료를 뜻하지 않습니다. 이 화면은 값을 변경하거나 저장하지 않습니다.\n\n주문 정보와 수령 진술은 다릅니다\n주문 정보 · 합성 사례\n합성 테스트 상품 · 18 EA\n수령 진술 · 합성 사례 참고값\n합성 테스트 상품 · 1 BOX\n\n대조용 사례 정보입니다. AI가 식별하지 못한 점포·수량의 자동 보정값이나 실제 물류 확인 결과로 사용하지 않습니다.\n\n4. 인용 근거와 추가 확인\n확인 필요 · 수령 단위(경영주 진술)\n\n수령 단위 1 BOX / 상담 입력 1 EA 불일치\n\nAI가 연결한 인용 · 원문 대조 필요\n1 EA가 아니라 1 BOX\n아직 확인되지 않은 내용\n점포와 실제 물류 수량 미확인\n통화 후 추가로 물어볼 질문\n점포를 다시 확인해 주세요.\n수령 단위가 BOX인지 확인해 주세요.\nAI 추천 부서 · 센터 확인 담당\n\n합성 출고 문의\n\n상담원 확인 전 제안 · 자동 이관하지 않습니다.\n0 / 0",
+            "live": "N02 통화 검토 독립 렌더\n\n합성 입력 · 실제 CallReview 컴포넌트 · 외부 API 없음\n\nCALL REVIEW · SYN-N02-PLAYER\n\n통화와 접수 내용 대조\n\nN02 독립 합성 통화 검토\n\n합성 시연 사례\n1. 통화 다시 듣기\n사전 생성한 합성 음성\n재생 준비\n0:00 / 0:03\n재생 속도\n0.75배\n1배\n1.25배\n1.5배\n2배\n볼륨 100%\n음소거\n\n음성을 처음부터 끝까지 재생하면 분석 준비가 됩니다. 구간 재생이나 끝으로 이동은 전체 재생 완료로 처리하지 않습니다.\n\n처음부터 전체 통화 재생\n2. 합성 통화 원대본\n원문 보존\n\n음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.\n\n경영주: 주문은 18 EA였지만 받은 것은 1 BOX입니다. 상담원: 1 EA가 아니라 1 BOX로 확인하겠습니다.\n화자별 대화록\n\n실제 STT 결과 · 인식 오류 확인 필요\n\n자막 표시\n경영주\n발화 1\n\n주문은 18 EA였지만 받은 것은 1 BOX입니다.\n\n0:00.150–0:00.800 구간 재생\n상담원\n발화 2\n\n1 EA가 아니라 1 BOX로 확인하겠습니다.\n\n0:01–0:01.700 구간 재생\n3. AI 제안과 상담 입력 대조\n사람 확인 필요\nAI 요약 · 확인 전 제안\n\n경영주 진술은 수령 1 BOX이며 상담원 입력 1 EA와 단위가 다릅니다.\n\n수령 값은 경영주 진술입니다. 주문·출고 수량으로 채우거나 BOX를 EA로 환산하지 않습니다.\n\n점포 ID\n미확인 포함\nAI 제안 · 확인 전\n미확인\n현재 상담 입력\nSYN-OPERATOR\n상품·문의 대상\n동일\nAI 제안 · 확인 전\n합성 테스트 상품\n현재 상담 입력\n합성 테스트 상품\n수령 수량(경영주 진술)\n동일\nAI 제안 · 확인 전\n1\n현재 상담 입력\n1\n수령 단위(경영주 진술)\n차이 확인 필요\nAI 제안 · 확인 전\nBOX\n현재 상담 입력\nEA\n요청사항\n동일\nAI 제안 · 확인 전\n단위 정정과 출고 확인\n현재 상담 입력\n단위 정정과 출고 확인\n\n현재 상담 입력은 사람의 최종 확인 완료를 뜻하지 않습니다. 이 화면은 값을 변경하거나 저장하지 않습니다.\n\n주문 정보와 수령 진술은 다릅니다\n주문 정보 · 합성 사례\n합성 테스트 상품 · 18 EA\n수령 진술 · 합성 사례 참고값\n합성 테스트 상품 · 1 BOX\n\n대조용 사례 정보입니다. AI가 식별하지 못한 점포·수량의 자동 보정값이나 실제 물류 확인 결과로 사용하지 않습니다.\n\n4. 인용 근거와 추가 확인\n확인 필요 · 수령 단위(경영주 진술)\n\n수령 단위 1 BOX / 상담 입력 1 EA 불일치\n\nAI가 연결한 인용 · 원문 대조 필요\n1 EA가 아니라 1 BOX\n아직 확인되지 않은 내용\n점포와 실제 물류 수량 미확인\n통화 후 추가로 물어볼 질문\n점포를 다시 확인해 주세요.\n수령 단위가 BOX인지 확인해 주세요.\nAI 추천 부서 · 센터 확인 담당\n\n합성 출고 문의\n\n상담원 확인 전 제안 · 자동 이관하지 않습니다.\n0 / 0",
+            "unknown": "N02 통화 검토 독립 렌더\n\n합성 입력 · 실제 CallReview 컴포넌트 · 외부 API 없음\n\nCALL REVIEW · SYN-N02-PLAYER\n\n통화와 접수 내용 대조\n\nN02 독립 합성 통화 검토\n\n합성 시연 사례\n1. 통화 다시 듣기\n사전 생성한 합성 음성\n재생 준비\n0:00 / 0:03\n재생 속도\n0.75배\n1배\n1.25배\n1.5배\n2배\n볼륨 100%\n음소거\n\n음성을 처음부터 끝까지 재생하면 분석 준비가 됩니다. 구간 재생이나 끝으로 이동은 전체 재생 완료로 처리하지 않습니다.\n\n처음부터 전체 통화 재생\n2. 합성 통화 원대본\n원문 보존\n\n음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.\n\n경영주: 주문은 18 EA였지만 받은 것은 1 BOX입니다. 상담원: 1 EA가 아니라 1 BOX로 확인하겠습니다.\n화자별 대화록\n\n전사 출처 미확인\n\n자막 표시\n경영주\n발화 1\n\n주문은 18 EA였지만 받은 것은 1 BOX입니다.\n\n0:00.150–0:00.800 구간 재생\n상담원\n발화 2\n\n1 EA가 아니라 1 BOX로 확인하겠습니다.\n\n0:01–0:01.700 구간 재생\n3. AI 제안과 상담 입력 대조\n사람 확인 필요\nAI 요약 · 확인 전 제안\n\n경영주 진술은 수령 1 BOX이며 상담원 입력 1 EA와 단위가 다릅니다.\n\n수령 값은 경영주 진술입니다. 주문·출고 수량으로 채우거나 BOX를 EA로 환산하지 않습니다.\n\n점포 ID\n미확인 포함\nAI 제안 · 확인 전\n미확인\n현재 상담 입력\nSYN-OPERATOR\n상품·문의 대상\n동일\nAI 제안 · 확인 전\n합성 테스트 상품\n현재 상담 입력\n합성 테스트 상품\n수령 수량(경영주 진술)\n동일\nAI 제안 · 확인 전\n1\n현재 상담 입력\n1\n수령 단위(경영주 진술)\n차이 확인 필요\nAI 제안 · 확인 전\nBOX\n현재 상담 입력\nEA\n요청사항\n동일\nAI 제안 · 확인 전\n단위 정정과 출고 확인\n현재 상담 입력\n단위 정정과 출고 확인\n\n현재 상담 입력은 사람의 최종 확인 완료를 뜻하지 않습니다. 이 화면은 값을 변경하거나 저장하지 않습니다.\n\n주문 정보와 수령 진술은 다릅니다\n주문 정보 · 합성 사례\n합성 테스트 상품 · 18 EA\n수령 진술 · 합성 사례 참고값\n합성 테스트 상품 · 1 BOX\n\n대조용 사례 정보입니다. AI가 식별하지 못한 점포·수량의 자동 보정값이나 실제 물류 확인 결과로 사용하지 않습니다.\n\n4. 인용 근거와 추가 확인\n확인 필요 · 수령 단위(경영주 진술)\n\n수령 단위 1 BOX / 상담 입력 1 EA 불일치\n\nAI가 연결한 인용 · 원문 대조 필요\n1 EA가 아니라 1 BOX\n아직 확인되지 않은 내용\n점포와 실제 물류 수량 미확인\n통화 후 추가로 물어볼 질문\n점포를 다시 확인해 주세요.\n수령 단위가 BOX인지 확인해 주세요.\nAI 추천 부서 · 센터 확인 담당\n\n합성 출고 문의\n\n상담원 확인 전 제안 · 자동 이관하지 않습니다.\n0 / 0"
+          },
+          "durationMs": 377
+        },
+        {
+          "id": "C07-missing",
+          "status": "PASS",
+          "expected": "Missing/unusable media visibly distinguished; completion0 and no other case substituted",
+          "actual": {
+            "callbacks": 0,
+            "retries": 0,
+            "audio": null,
+            "visibleText": "N02 통화 검토 독립 렌더\n\n합성 입력 · 실제 CallReview 컴포넌트 · 외부 API 없음\n\nCALL REVIEW · SYN-N02-PLAYER\n\n통화와 접수 내용 대조\n\nN02 독립 합성 통화 검토\n\n합성 시연 사례\n1. 통화 다시 듣기\n사전 생성한 합성 음성\n\n음원 없음 · 이 사건에 연결된 음성 파일이 없습니다. 다른 사건 음원으로 대체하지 않습니다.\n\n2. 합성 통화 원대본\n원문 보존\n\n음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.\n\n경영주: 주문은 18 EA였지만 받은 것은 1 BOX입니다. 상담원: 1 EA가 아니라 1 BOX로 확인하겠습니다.\n화자별 대화록\n\n합성 대화록 · 저장 결과 재생\n\n자막 표시\n경영주\n발화 1\n\n주문은 18 EA였지만 받은 것은 1 BOX입니다.\n\n구간 재생 불가\n\n음원 없음 · 구간 재생 불가\n\n상담원\n발화 2\n\n1 EA가 아니라 1 BOX로 확인하겠습니다.\n\n구간 재생 불가\n\n음원 없음 · 구간 재생 불가\n\n3. AI 제안과 상담 입력 대조\n사람 확인 필요\n저장된 AI 제안 · 재생 자료\n\n경영주 진술은 수령 1 BOX이며 상담원 입력 1 EA와 단위가 다릅니다.\n\n수령 값은 경영주 진술입니다. 주문·출고 수량으로 채우거나 BOX를 EA로 환산하지 않습니다.\n\n점포 ID\n미확인 포함\nAI 제안 · 확인 전\n미확인\n현재 상담 입력\nSYN-OPERATOR\n상품·문의 대상\n동일\nAI 제안 · 확인 전\n합성 테스트 상품\n현재 상담 입력\n합성 테스트 상품\n수령 수량(경영주 진술)\n동일\nAI 제안 · 확인 전\n1\n현재 상담 입력\n1\n수령 단위(경영주 진술)\n차이 확인 필요\nAI 제안 · 확인 전\nBOX\n현재 상담 입력\nEA\n요청사항\n동일\nAI 제안 · 확인 전\n단위 정정과 출고 확인\n현재 상담 입력\n단위 정정과 출고 확인\n\n현재 상담 입력은 사람의 최종 확인 완료를 뜻하지 않습니다. 이 화면은 값을 변경하거나 저장하지 않습니다.\n\n주문 정보와 수령 진술은 다릅니다\n주문 정보 · 합성 사례\n합성 테스트 상품 · 18 EA\n수령 진술 · 합성 사례 참고값\n합성 테스트 상품 · 1 BOX\n\n대조용 사례 정보입니다. AI가 식별하지 못한 점포·수량의 자동 보정값이나 실제 물류 확인 결과로 사용하지 않습니다.\n\n4. 인용 근거와 추가 확인\n확인 필요 · 수령 단위(경영주 진술)\n\n수령 단위 1 BOX / 상담 입력 1 EA 불일치\n\nAI가 연결한 인용 · 원문 대조 필요\n1 EA가 아니라 1 BOX\n아직 확인되지 않은 내용\n점포와 실제 물류 수량 미확인\n통화 후 추가로 물어볼 질문\n점포를 다시 확인해 주세요.\n수령 단위가 BOX인지 확인해 주세요.\nAI 추천 부서 · 센터 확인 담당\n\n합성 출고 문의\n\n상담원 확인 전 제안 · 자동 이관하지 않습니다.\n0 / 0"
+          },
+          "durationMs": 158
+        },
+        {
+          "id": "C07-404",
+          "status": "PASS",
+          "expected": "Missing/unusable media visibly distinguished; completion0 and no other case substituted",
+          "actual": {
+            "callbacks": 0,
+            "retries": 0,
+            "audio": {
+              "paused": true,
+              "currentTime": 0,
+              "duration": null,
+              "ended": false,
+              "rate": 1,
+              "muted": false,
+              "volume": 1,
+              "controls": true,
+              "error": 4,
+              "src": "http://127.0.0.1:3122/test-audio/not-found.wav",
+              "played": []
+            },
+            "visibleText": "N02 통화 검토 독립 렌더\n\n합성 입력 · 실제 CallReview 컴포넌트 · 외부 API 없음\n\nCALL REVIEW · SYN-N02-PLAYER\n\n통화와 접수 내용 대조\n\nN02 독립 합성 통화 검토\n\n합성 시연 사례\n1. 통화 다시 듣기\n사전 생성한 합성 음성\n음원 오류\n0:00 / 길이 확인 중\n재생 속도\n0.75배\n1배\n1.25배\n1.5배\n2배\n볼륨 100%\n음소거\n\n음성을 처음부터 끝까지 재생하면 분석 준비가 됩니다. 구간 재생이나 끝으로 이동은 전체 재생 완료로 처리하지 않습니다.\n\n음성 파일을 불러오지 못했습니다. 파일 없음·네트워크·음원 형식을 확인해 주세요.\n\n처음부터 전체 통화 재생\n음원 다시 불러오기\n2. 합성 통화 원대본\n원문 보존\n\n음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.\n\n경영주: 주문은 18 EA였지만 받은 것은 1 BOX입니다. 상담원: 1 EA가 아니라 1 BOX로 확인하겠습니다.\n화자별 대화록\n\n합성 대화록 · 저장 결과 재생\n\n자막 표시\n경영주\n발화 1\n\n주문은 18 EA였지만 받은 것은 1 BOX입니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n상담원\n발화 2\n\n1 EA가 아니라 1 BOX로 확인하겠습니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n3. AI 제안과 상담 입력 대조\n사람 확인 필요\n저장된 AI 제안 · 재생 자료\n\n경영주 진술은 수령 1 BOX이며 상담원 입력 1 EA와 단위가 다릅니다.\n\n수령 값은 경영주 진술입니다. 주문·출고 수량으로 채우거나 BOX를 EA로 환산하지 않습니다.\n\n점포 ID\n미확인 포함\nAI 제안 · 확인 전\n미확인\n현재 상담 입력\nSYN-OPERATOR\n상품·문의 대상\n동일\nAI 제안 · 확인 전\n합성 테스트 상품\n현재 상담 입력\n합성 테스트 상품\n수령 수량(경영주 진술)\n동일\nAI 제안 · 확인 전\n1\n현재 상담 입력\n1\n수령 단위(경영주 진술)\n차이 확인 필요\nAI 제안 · 확인 전\nBOX\n현재 상담 입력\nEA\n요청사항\n동일\nAI 제안 · 확인 전\n단위 정정과 출고 확인\n현재 상담 입력\n단위 정정과 출고 확인\n\n현재 상담 입력은 사람의 최종 확인 완료를 뜻하지 않습니다. 이 화면은 값을 변경하거나 저장하지 않습니다.\n\n주문 정보와 수령 진술은 다릅니다\n주문 정보 · 합성 사례\n합성 테스트 상품 · 18 EA\n수령 진술 · 합성 사례 참고값\n합성 테스트 상품 · 1 BOX\n\n대조용 사례 정보입니다. AI가 식별하지 못한 점포·수량의 자동 보정값이나 실제 물류 확인 결과로 사용하지 않습니다.\n\n4. 인용 근거와 추가 확인\n확인 필요 · 수령 단위(경영주 진술)\n\n수령 단위 1 BOX / 상담 입력 1 EA 불일치\n\nAI가 연결한 인용 · 원문 대조 필요\n1 EA가 아니라 1 BOX\n아직 확인되지 않은 내용\n점포와 실제 물류 수량 미확인\n통화 후 추가로 물어볼 질문\n점포를 다시 확인해 주세요.\n수령 단위가 BOX인지 확인해 주세요.\nAI 추천 부서 · 센터 확인 담당\n\n합성 출고 문의\n\n상담원 확인 전 제안 · 자동 이관하지 않습니다.\n0 / 0"
+          },
+          "durationMs": 250
+        },
+        {
+          "id": "C07-damaged",
+          "status": "PASS",
+          "expected": "Missing/unusable media visibly distinguished; completion0 and no other case substituted",
+          "actual": {
+            "callbacks": 0,
+            "retries": 0,
+            "audio": {
+              "paused": true,
+              "currentTime": 0,
+              "duration": null,
+              "ended": false,
+              "rate": 1,
+              "muted": false,
+              "volume": 1,
+              "controls": true,
+              "error": 4,
+              "src": "http://127.0.0.1:3122/test-audio/damaged.wav",
+              "played": []
+            },
+            "visibleText": "N02 통화 검토 독립 렌더\n\n합성 입력 · 실제 CallReview 컴포넌트 · 외부 API 없음\n\nCALL REVIEW · SYN-N02-PLAYER\n\n통화와 접수 내용 대조\n\nN02 독립 합성 통화 검토\n\n합성 시연 사례\n1. 통화 다시 듣기\n사전 생성한 합성 음성\n음원 오류\n0:00 / 길이 확인 중\n재생 속도\n0.75배\n1배\n1.25배\n1.5배\n2배\n볼륨 100%\n음소거\n\n음성을 처음부터 끝까지 재생하면 분석 준비가 됩니다. 구간 재생이나 끝으로 이동은 전체 재생 완료로 처리하지 않습니다.\n\n음성 파일을 불러오지 못했습니다. 파일 없음·네트워크·음원 형식을 확인해 주세요.\n\n처음부터 전체 통화 재생\n음원 다시 불러오기\n2. 합성 통화 원대본\n원문 보존\n\n음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.\n\n경영주: 주문은 18 EA였지만 받은 것은 1 BOX입니다. 상담원: 1 EA가 아니라 1 BOX로 확인하겠습니다.\n화자별 대화록\n\n합성 대화록 · 저장 결과 재생\n\n자막 표시\n경영주\n발화 1\n\n주문은 18 EA였지만 받은 것은 1 BOX입니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n상담원\n발화 2\n\n1 EA가 아니라 1 BOX로 확인하겠습니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n3. AI 제안과 상담 입력 대조\n사람 확인 필요\n저장된 AI 제안 · 재생 자료\n\n경영주 진술은 수령 1 BOX이며 상담원 입력 1 EA와 단위가 다릅니다.\n\n수령 값은 경영주 진술입니다. 주문·출고 수량으로 채우거나 BOX를 EA로 환산하지 않습니다.\n\n점포 ID\n미확인 포함\nAI 제안 · 확인 전\n미확인\n현재 상담 입력\nSYN-OPERATOR\n상품·문의 대상\n동일\nAI 제안 · 확인 전\n합성 테스트 상품\n현재 상담 입력\n합성 테스트 상품\n수령 수량(경영주 진술)\n동일\nAI 제안 · 확인 전\n1\n현재 상담 입력\n1\n수령 단위(경영주 진술)\n차이 확인 필요\nAI 제안 · 확인 전\nBOX\n현재 상담 입력\nEA\n요청사항\n동일\nAI 제안 · 확인 전\n단위 정정과 출고 확인\n현재 상담 입력\n단위 정정과 출고 확인\n\n현재 상담 입력은 사람의 최종 확인 완료를 뜻하지 않습니다. 이 화면은 값을 변경하거나 저장하지 않습니다.\n\n주문 정보와 수령 진술은 다릅니다\n주문 정보 · 합성 사례\n합성 테스트 상품 · 18 EA\n수령 진술 · 합성 사례 참고값\n합성 테스트 상품 · 1 BOX\n\n대조용 사례 정보입니다. AI가 식별하지 못한 점포·수량의 자동 보정값이나 실제 물류 확인 결과로 사용하지 않습니다.\n\n4. 인용 근거와 추가 확인\n확인 필요 · 수령 단위(경영주 진술)\n\n수령 단위 1 BOX / 상담 입력 1 EA 불일치\n\nAI가 연결한 인용 · 원문 대조 필요\n1 EA가 아니라 1 BOX\n아직 확인되지 않은 내용\n점포와 실제 물류 수량 미확인\n통화 후 추가로 물어볼 질문\n점포를 다시 확인해 주세요.\n수령 단위가 BOX인지 확인해 주세요.\nAI 추천 부서 · 센터 확인 담당\n\n합성 출고 문의\n\n상담원 확인 전 제안 · 자동 이관하지 않습니다.\n0 / 0"
+          },
+          "durationMs": 261
+        },
+        {
+          "id": "C07-zero",
+          "status": "PASS",
+          "expected": "Missing/unusable media visibly distinguished; completion0 and no other case substituted",
+          "actual": {
+            "callbacks": 0,
+            "retries": 0,
+            "audio": {
+              "paused": true,
+              "currentTime": 0,
+              "duration": null,
+              "ended": false,
+              "rate": 1,
+              "muted": false,
+              "volume": 1,
+              "controls": true,
+              "error": null,
+              "src": "http://127.0.0.1:3122/test-audio/zero.wav",
+              "played": []
+            },
+            "visibleText": "N02 통화 검토 독립 렌더\n\n합성 입력 · 실제 CallReview 컴포넌트 · 외부 API 없음\n\nCALL REVIEW · SYN-N02-PLAYER\n\n통화와 접수 내용 대조\n\nN02 독립 합성 통화 검토\n\n합성 시연 사례\n1. 통화 다시 듣기\n사전 생성한 합성 음성\n음원 오류\n0:00 / 길이 확인 중\n재생 속도\n0.75배\n1배\n1.25배\n1.5배\n2배\n볼륨 100%\n음소거\n\n음성을 처음부터 끝까지 재생하면 분석 준비가 됩니다. 구간 재생이나 끝으로 이동은 전체 재생 완료로 처리하지 않습니다.\n\n음원 길이를 확인할 수 없습니다. 유효한 음원인지 확인해 주세요.\n\n처음부터 전체 통화 재생\n음원 다시 불러오기\n2. 합성 통화 원대본\n원문 보존\n\n음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.\n\n경영주: 주문은 18 EA였지만 받은 것은 1 BOX입니다. 상담원: 1 EA가 아니라 1 BOX로 확인하겠습니다.\n화자별 대화록\n\n합성 대화록 · 저장 결과 재생\n\n자막 표시\n경영주\n발화 1\n\n주문은 18 EA였지만 받은 것은 1 BOX입니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n상담원\n발화 2\n\n1 EA가 아니라 1 BOX로 확인하겠습니다.\n\n구간 재생 불가\n\n음원 길이 확인 후 구간 재생 가능\n\n3. AI 제안과 상담 입력 대조\n사람 확인 필요\n저장된 AI 제안 · 재생 자료\n\n경영주 진술은 수령 1 BOX이며 상담원 입력 1 EA와 단위가 다릅니다.\n\n수령 값은 경영주 진술입니다. 주문·출고 수량으로 채우거나 BOX를 EA로 환산하지 않습니다.\n\n점포 ID\n미확인 포함\nAI 제안 · 확인 전\n미확인\n현재 상담 입력\nSYN-OPERATOR\n상품·문의 대상\n동일\nAI 제안 · 확인 전\n합성 테스트 상품\n현재 상담 입력\n합성 테스트 상품\n수령 수량(경영주 진술)\n동일\nAI 제안 · 확인 전\n1\n현재 상담 입력\n1\n수령 단위(경영주 진술)\n차이 확인 필요\nAI 제안 · 확인 전\nBOX\n현재 상담 입력\nEA\n요청사항\n동일\nAI 제안 · 확인 전\n단위 정정과 출고 확인\n현재 상담 입력\n단위 정정과 출고 확인\n\n현재 상담 입력은 사람의 최종 확인 완료를 뜻하지 않습니다. 이 화면은 값을 변경하거나 저장하지 않습니다.\n\n주문 정보와 수령 진술은 다릅니다\n주문 정보 · 합성 사례\n합성 테스트 상품 · 18 EA\n수령 진술 · 합성 사례 참고값\n합성 테스트 상품 · 1 BOX\n\n대조용 사례 정보입니다. AI가 식별하지 못한 점포·수량의 자동 보정값이나 실제 물류 확인 결과로 사용하지 않습니다.\n\n4. 인용 근거와 추가 확인\n확인 필요 · 수령 단위(경영주 진술)\n\n수령 단위 1 BOX / 상담 입력 1 EA 불일치\n\nAI가 연결한 인용 · 원문 대조 필요\n1 EA가 아니라 1 BOX\n아직 확인되지 않은 내용\n점포와 실제 물류 수량 미확인\n통화 후 추가로 물어볼 질문\n점포를 다시 확인해 주세요.\n수령 단위가 BOX인지 확인해 주세요.\nAI 추천 부서 · 센터 확인 담당\n\n합성 출고 문의\n\n상담원 확인 전 제안 · 자동 이관하지 않습니다.\n0 / 0"
+          },
+          "durationMs": 154
+        },
+        {
+          "id": "C08-invalid-timestamps",
+          "status": "PASS",
+          "expected": "Missing/negative/reversed/equal/NaN/infinite/out-of-range timestamps cannot initiate segment playback; text preserved",
+          "actual": {
+            "invalidInputs": 8,
+            "segmentButtons": 8,
+            "callbacks": 0,
+            "retries": 0,
+            "audio": {
+              "paused": true,
+              "currentTime": 0,
+              "duration": 3,
+              "ended": false,
+              "rate": 1,
+              "muted": false,
+              "volume": 1,
+              "controls": true,
+              "error": null,
+              "src": "http://127.0.0.1:3122/test-audio/short.wav",
+              "played": []
+            }
+          },
+          "durationMs": 312
+        },
+        {
+          "id": "C09-seek-cannot-unlock",
+          "status": "PASS",
+          "expected": "Seeking to end and synthetic ended without continuous playback must not emit callback",
+          "actual": {
+            "callbacks": 0,
+            "retries": 0,
+            "audio": {
+              "paused": true,
+              "currentTime": 3,
+              "duration": 3,
+              "ended": true,
+              "rate": 1,
+              "muted": false,
+              "volume": 1,
+              "controls": true,
+              "error": null,
+              "src": "http://127.0.0.1:3122/test-audio/short.wav",
+              "played": [
+                [
+                  2.85,
+                  3
+                ]
+              ]
+            }
+          },
+          "durationMs": 734
+        },
+        {
+          "id": "C10-controls-keyboard",
+          "status": "PASS",
+          "expected": "Native controls retained; speed/mute/volume UI matches actual audio; keyboard can start full playback with visible focus",
+          "actual": {
+            "tabTarget": {
+              "tag": "INPUT",
+              "name": "통화 볼륨"
+            },
+            "focusOutline": "solid",
+            "callbacks": 0,
+            "retries": 0,
+            "audio": {
+              "paused": false,
+              "currentTime": 0,
+              "duration": 3,
+              "ended": false,
+              "rate": 1.5,
+              "muted": true,
+              "volume": 0,
+              "controls": true,
+              "error": null,
+              "src": "http://127.0.0.1:3122/test-audio/short.wav",
+              "played": []
+            }
+          },
+          "durationMs": 1027
+        },
+        {
+          "id": "C11-case-url-stale-event",
+          "status": "PASS",
+          "expected": "Case and same-ID URL switches stop old audio, clear completion and ignore detached ended/error events",
+          "actual": {
+            "oldPaused": true,
+            "callbacks": 0,
+            "retries": 0,
+            "audio": {
+              "paused": true,
+              "currentTime": 0,
+              "duration": 3,
+              "ended": false,
+              "rate": 1,
+              "muted": false,
+              "volume": 1,
+              "controls": false,
+              "error": null,
+              "src": "http://127.0.0.1:3122/test-audio/short.wav",
+              "played": []
+            }
+          },
+          "durationMs": 1564
+        },
+        {
+          "id": "C12-layout-1440",
+          "status": "PASS",
+          "expected": "Long unbroken transcript/fields/question/error preserve zero document horizontal overflow and visible focus",
+          "actual": {
+            "scroll": 1440,
+            "client": 1440,
+            "inner": 1440,
+            "fullButton": {
+              "x": 37,
+              "y": 483.171875,
+              "width": 166.6875,
+              "height": 40
+            }
+          },
+          "durationMs": 1434
+        },
+        {
+          "id": "C12-layout-1024",
+          "status": "PASS",
+          "expected": "Long unbroken transcript/fields/question/error preserve zero document horizontal overflow and visible focus",
+          "actual": {
+            "scroll": 1024,
+            "client": 1024,
+            "inner": 1024,
+            "fullButton": {
+              "x": 37,
+              "y": 521.90625,
+              "width": 166.6875,
+              "height": 40
+            }
+          },
+          "durationMs": 1239
+        },
+        {
+          "id": "C12-layout-390",
+          "status": "PASS",
+          "expected": "Long unbroken transcript/fields/question/error preserve zero document horizontal overflow and visible focus",
+          "actual": {
+            "scroll": 390,
+            "client": 390,
+            "inner": 390,
+            "fullButton": {
+              "x": 33,
+              "y": 677.703125,
+              "width": 324,
+              "height": 40
+            }
+          },
+          "durationMs": 951
+        },
+        {
+          "id": "C13-silent-technical-only",
+          "status": "PASS",
+          "expected": "Silent WAV may decode/end, but UI/test makes no human intelligibility or speaker-output success claim",
+          "actual": {
+            "callbacks": 1,
+            "retries": 0,
+            "audio": {
+              "paused": true,
+              "currentTime": 0.4,
+              "duration": 0.4,
+              "ended": true,
+              "rate": 1,
+              "muted": false,
+              "volume": 1,
+              "controls": true,
+              "error": null,
+              "src": "http://127.0.0.1:3122/test-audio/silent.wav",
+              "played": [
+                [
+                  0,
+                  0.4
+                ]
+              ]
+            },
+            "humanListeningVerified": false,
+            "actualSampleContent": "all PCM samples0"
+          },
+          "durationMs": 1151
+        },
+        {
+          "id": "C14-frozen-props",
+          "status": "PASS",
+          "expected": "Playback, transcript interaction and repeated prop updates do not mutate frozen source/analysis/intake",
+          "actual": {
+            "unchanged": true,
+            "frozenNestedFields": true
+          },
+          "durationMs": 1014
+        },
+        {
+          "id": "C16-disabled-midplay-and-resume",
+          "status": "PASS",
+          "expected": "Disabled mid-play pauses audio and blocks controls; reenable + jump to end cannot unlock, fresh full replay can",
+          "actual": {
+            "callbacks": 1,
+            "retries": 0,
+            "audio": {
+              "paused": true,
+              "currentTime": 3,
+              "duration": 3,
+              "ended": true,
+              "rate": 1,
+              "muted": false,
+              "volume": 1,
+              "controls": true,
+              "error": null,
+              "src": "http://127.0.0.1:3122/test-audio/short.wav",
+              "played": [
+                [
+                  0,
+                  3
+                ]
+              ]
+            }
+          },
+          "durationMs": 5094
+        },
+        {
+          "id": "C17-seek-outside-segment",
+          "status": "PASS",
+          "expected": "Seeking outside a selected interval pauses it and cannot emit whole-call completion",
+          "actual": {
+            "callbacks": 0,
+            "retries": 0,
+            "audio": {
+              "paused": true,
+              "currentTime": 2.5,
+              "duration": 3,
+              "ended": false,
+              "rate": 1,
+              "muted": false,
+              "volume": 1,
+              "controls": true,
+              "error": null,
+              "src": "http://127.0.0.1:3122/test-audio/short.wav",
+              "played": []
+            }
+          },
+          "durationMs": 486
+        },
+        {
+          "id": "C15-no-external-no-render-error",
+          "status": "PASS",
+          "expected": "No product API/external network attempt or React page exception",
+          "actual": {
+            "externalRequests": 0,
+            "paidCalls": 0,
+            "pageErrors": 0,
+            "intentional404OrDecodeConsoleMessages": [
+              "Failed to load resource: the server responded with a status of 404 (Not Found)"
+            ]
+          },
+          "durationMs": 0
+        }
+      ],
+      "media": [
+        {
+          "name": "CASE-0001.wav",
+          "hash": "d4eeb6448ff8969f27034ecade9a050ee212468585c6300b19c9a0ebdc372931",
+          "expectedSeconds": 47.15,
+          "wallElapsedMs": 49825,
+          "callbacks": 1,
+          "retries": 0,
+          "audio": {
+            "paused": true,
+            "currentTime": 47.15,
+            "duration": 47.15,
+            "ended": true,
+            "rate": 1,
+            "muted": false,
+            "volume": 1,
+            "controls": true,
+            "error": null,
+            "src": "http://127.0.0.1:3122/demo/CASE-0001.wav",
+            "played": [
+              [
+                0,
+                47.15
+              ]
+            ]
+          }
+        },
+        {
+          "name": "CASE-0002.wav",
+          "hash": "333897f4f10426674ec97b9e3a44c2f8da21f1f7931b4f911c82a29abcf6b914",
+          "expectedSeconds": 49.55,
+          "wallElapsedMs": 52910,
+          "callbacks": 1,
+          "retries": 0,
+          "audio": {
+            "paused": true,
+            "currentTime": 49.55,
+            "duration": 49.55,
+            "ended": true,
+            "rate": 1,
+            "muted": false,
+            "volume": 1,
+            "controls": true,
+            "error": null,
+            "src": "http://127.0.0.1:3122/demo/CASE-0002.wav",
+            "played": [
+              [
+                0,
+                49.55
+              ]
+            ]
+          }
+        }
+      ],
+      "backgroundSegmentObservation": null,
+      "sourceHashes": {
+        "apps/web/components/CallReview.tsx": "1e70dc3f5dd126268e1092164be9d574e4dde32cef895e81f111f3dd2a703974",
+        "apps/web/components/CallReview.module.css": "decc14c878b152c1ceab08070f21abb29a7acf1b56edc19440e97a2cc01f4d13",
+        "apps/web/app/tokens.css": "31a08dbc4cfd532d4a4d44ca0cf1fa8629ed57e25a9629b5caf748b41d1c01c3",
+        "apps/web/app/globals.css": "9d303f73ec32aa9832461932a065d84a7204968e8001edb8c2e6f0e9de15bce4",
+        "apps/web/lib/types.ts": "3871af57d8633ae73b27c160de4bbe84fb9018263c43b56fc011efd7919a1461",
+        "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+        "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf"
+      },
+      "sourceUnchangedDuringRun": true,
+      "note": "Prior assertions, successful media measurements and environment errors retained; current results below are separate re-execution."
+    }
+  ],
+  "sourceHashesStart": {
+    "apps/web/components/CallReview.tsx": "e861bc8ff7775e51be35c67f72364fdda261bd43407f4962be06367831fd6161",
+    "apps/web/components/CallReview.module.css": "decc14c878b152c1ceab08070f21abb29a7acf1b56edc19440e97a2cc01f4d13",
+    "apps/web/app/tokens.css": "31a08dbc4cfd532d4a4d44ca0cf1fa8629ed57e25a9629b5caf748b41d1c01c3",
+    "apps/web/app/globals.css": "9d303f73ec32aa9832461932a065d84a7204968e8001edb8c2e6f0e9de15bce4",
+    "apps/web/lib/types.ts": "3871af57d8633ae73b27c160de4bbe84fb9018263c43b56fc011efd7919a1461",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf",
+    "reports/e2e/normalized-voice-live.json": "17e8f171c6cf61c9d8d7a11a8420f5b41374c82c70cd4ec889bb0ad45b491d5c"
+  },
+  "ownedBrowserPid": 34740,
+  "browserVersion": "153.0.4234.48",
+  "browserLaunch": {
+    "headless": true,
+    "channel": "msedge"
+  },
+  "cleanup": [
+    {
+      "name": "real-1-page",
+      "status": "complete",
+      "elapsedMs": 8
+    },
+    {
+      "name": "real-2-page",
+      "status": "complete",
+      "elapsedMs": 8
+    },
+    {
+      "name": "final-page",
+      "status": "complete",
+      "elapsedMs": 10
+    },
+    {
+      "name": "browser-connection",
+      "status": "complete",
+      "elapsedMs": 3
+    },
+    {
+      "name": "owned-browser-server",
+      "status": "complete",
+      "elapsedMs": 2675
+    },
+    {
+      "name": "owned-http-server",
+      "status": "complete",
+      "elapsedMs": 1
+    }
+  ],
+  "passed": 26,
+  "failed": 0,
+  "total": 26,
+  "backgroundSegmentObservation": {
+    "injected": "requestAnimationFrame and cancelAnimationFrame suspended",
+    "actualVisibility": "visible",
+    "expectedEnd": 0.8,
+    "callbacks": 0,
+    "retries": 0,
+    "audio": {
+      "paused": true,
+      "currentTime": 0.8,
+      "duration": 3,
+      "ended": false,
+      "rate": 1,
+      "muted": false,
+      "volume": 1,
+      "controls": true,
+      "error": null,
+      "src": "http://127.0.0.1:3122/test-audio/short.wav",
+      "played": [
+        [
+          0.15,
+          0.90143
+        ]
+      ]
+    },
+    "timeUpdates": [
+      {
+        "time": 0.15,
+        "paused": false,
+        "trusted": true
+      },
+      {
+        "time": 0.37045,
+        "paused": false,
+        "trusted": true
+      },
+      {
+        "time": 0.628312,
+        "paused": false,
+        "trusted": true
+      },
+      {
+        "time": 0.8,
+        "paused": true,
+        "trusted": true
+      },
+      {
+        "time": 0.8,
+        "paused": true,
+        "trusted": true
+      },
+      {
+        "time": 0.8,
+        "paused": true,
+        "trusted": true
+      }
+    ]
+  },
+  "serverRequests": [
+    {
+      "at": "2026-09-21T10:10:31.552Z",
+      "method": "GET",
+      "pathname": "/"
+    },
+    {
+      "at": "2026-09-21T10:10:31.746Z",
+      "method": "GET",
+      "pathname": "/harness.js"
+    },
+    {
+      "at": "2026-09-21T10:10:32.182Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:10:32.258Z",
+      "method": "GET",
+      "pathname": "/demo/CASE-0002.wav"
+    },
+    {
+      "at": "2026-09-21T10:10:32.381Z",
+      "method": "GET",
+      "pathname": "/demo/CASE-0002.wav"
+    },
+    {
+      "at": "2026-09-21T10:10:32.941Z",
+      "method": "GET",
+      "pathname": "/"
+    },
+    {
+      "at": "2026-09-21T10:10:32.974Z",
+      "method": "GET",
+      "pathname": "/harness.js"
+    },
+    {
+      "at": "2026-09-21T10:10:33.115Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:10:33.210Z",
+      "method": "GET",
+      "pathname": "/demo/CASE-0002.wav"
+    },
+    {
+      "at": "2026-09-21T10:10:33.386Z",
+      "method": "GET",
+      "pathname": "/demo/CASE-0001.wav"
+    },
+    {
+      "at": "2026-09-21T10:10:35.188Z",
+      "method": "GET",
+      "pathname": "/demo/CASE-0001.wav"
+    },
+    {
+      "at": "2026-09-21T10:10:35.291Z",
+      "method": "GET",
+      "pathname": "/demo/CASE-0001.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:23.897Z",
+      "method": "GET",
+      "pathname": "/"
+    },
+    {
+      "at": "2026-09-21T10:11:23.924Z",
+      "method": "GET",
+      "pathname": "/harness.js"
+    },
+    {
+      "at": "2026-09-21T10:11:24.155Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:24.226Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:25.227Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:25.416Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:25.455Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:25.534Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:28.812Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:28.889Z",
+      "method": "GET",
+      "pathname": "/demo/CASE-0002.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:29.198Z",
+      "method": "GET",
+      "pathname": "/test-audio/not-found.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:29.237Z",
+      "method": "GET",
+      "pathname": "/test-audio/damaged.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:29.278Z",
+      "method": "GET",
+      "pathname": "/test-audio/zero.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:29.330Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:29.400Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:29.801Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:29.964Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:30.011Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:30.101Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:30.102Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:30.152Z",
+      "method": "GET",
+      "pathname": "/test-audio/silent.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:30.191Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:30.230Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:30.269Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:30.359Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:30.416Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:30.694Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:31.332Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:31.564Z",
+      "method": "GET",
+      "pathname": "/test-audio/silent.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:31.631Z",
+      "method": "GET",
+      "pathname": "/test-audio/silent.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:32.279Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:32.457Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:32.532Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:33.231Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:36.475Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:36.575Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:36.650Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:36.748Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:38.471Z",
+      "method": "GET",
+      "pathname": "/"
+    },
+    {
+      "at": "2026-09-21T10:11:38.496Z",
+      "method": "GET",
+      "pathname": "/harness.js"
+    },
+    {
+      "at": "2026-09-21T10:11:38.752Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:38.812Z",
+      "method": "GET",
+      "pathname": "/favicon.ico"
+    },
+    {
+      "at": "2026-09-21T10:11:38.861Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:39.336Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:39.414Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:42.690Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:42.761Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:46.004Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:46.075Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:11:49.316Z",
+      "method": "GET",
+      "pathname": "/test-audio/silent.wav"
+    }
+  ],
+  "sourceHashesEnd": {
+    "apps/web/components/CallReview.tsx": "e861bc8ff7775e51be35c67f72364fdda261bd43407f4962be06367831fd6161",
+    "apps/web/components/CallReview.module.css": "decc14c878b152c1ceab08070f21abb29a7acf1b56edc19440e97a2cc01f4d13",
+    "apps/web/app/tokens.css": "31a08dbc4cfd532d4a4d44ca0cf1fa8629ed57e25a9629b5caf748b41d1c01c3",
+    "apps/web/app/globals.css": "9d303f73ec32aa9832461932a065d84a7204968e8001edb8c2e6f0e9de15bce4",
+    "apps/web/lib/types.ts": "3871af57d8633ae73b27c160de4bbe84fb9018263c43b56fc011efd7919a1461",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf",
+    "reports/e2e/normalized-voice-live.json": "17e8f171c6cf61c9d8d7a11a8420f5b41374c82c70cd4ec889bb0ad45b491d5c"
+  },
+  "sourceUnchangedDuringRun": true,
+  "finishedAt": "2026-09-21T10:11:52.296Z"
+}

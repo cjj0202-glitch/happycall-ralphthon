@@ -1,0 +1,722 @@
+{
+  "suite": "N02 isolated actual CallReview browser acceptance",
+  "startedAt": "2026-09-21T10:08:02.983Z",
+  "base": "http://127.0.0.1:3122",
+  "harness": "tests/remote/pc2/harness.tsx imports the actual component, CSS module, app tokens/globals and read-only synthetic fixture",
+  "executor": "AI Playwright technical observation, not human listening or Silent Test",
+  "checkFilter": "^(C02|C05|C06|C09|C11|C16|C17|C18|C19|C20)",
+  "checks": [
+    {
+      "id": "C02-segment-clock",
+      "status": "PASS",
+      "expected": "Selected timed utterance plays the same source, pauses around its end, completion callback remains 0",
+      "actual": {
+        "label": "경영주 발화 1 구간 재생 0:00.150~0:00.800",
+        "callbacks": 0,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 0.8,
+          "duration": 3,
+          "ended": false,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": true,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/short.wav",
+          "played": [
+            [
+              0.15,
+              0.804512
+            ]
+          ]
+        }
+      },
+      "durationMs": 2324
+    },
+    {
+      "id": "C05-analysis-states-retry",
+      "status": "PASS",
+      "expected": "Loading/error visible; retry disabled before full playback, calls only supplied callback after full playback, disabled prop blocks",
+      "actual": {
+        "callbacks": 1,
+        "retries": 1,
+        "audio": {
+          "paused": true,
+          "currentTime": 3,
+          "duration": 3,
+          "ended": true,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": false,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/short.wav",
+          "played": [
+            [
+              0,
+              3
+            ]
+          ]
+        }
+      },
+      "durationMs": 3468
+    },
+    {
+      "id": "C06-source-provenance",
+      "status": "PASS",
+      "expected": "Explicit replay/demo-live labels and unknown default; original text remains distinct, no source inference from fixture presence",
+      "actual": {
+        "scope": "region: 화자별 대화록, exact text only",
+        "replayLabel": "합성 대화록 · 저장 결과 재생",
+        "liveLabel": "실제 STT 결과 · 인식 오류 확인 필요",
+        "unknownLabel": "전사 출처 미확인",
+        "analysisModeFallback": "demo-live",
+        "explicitPropOverridesFallback": true,
+        "storedResponse": "reports/e2e/normalized-voice-live.json",
+        "storedSegments": 14,
+        "storedSpeakerColors": {
+          "A": "rgb(0, 91, 168)",
+          "B": "rgb(109, 40, 217)"
+        },
+        "storeId": null,
+        "newApiCalls": 0
+      },
+      "durationMs": 398
+    },
+    {
+      "id": "C09-seek-cannot-unlock",
+      "status": "PASS",
+      "expected": "Seeking to end and synthetic ended without continuous playback must not emit callback",
+      "actual": {
+        "callbacks": 0,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 3,
+          "duration": 3,
+          "ended": true,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": true,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/short.wav",
+          "played": [
+            [
+              2.85,
+              3
+            ]
+          ]
+        }
+      },
+      "durationMs": 396
+    },
+    {
+      "id": "C11-case-url-stale-event",
+      "status": "PASS",
+      "expected": "Case and same-ID URL switches stop old audio, clear completion and ignore detached ended/error events",
+      "actual": {
+        "oldPaused": true,
+        "callbacks": 0,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 0,
+          "duration": 3,
+          "ended": false,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": false,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/short.wav",
+          "played": []
+        }
+      },
+      "durationMs": 309
+    },
+    {
+      "id": "C16-disabled-midplay-and-resume",
+      "status": "PASS",
+      "expected": "Disabled mid-play pauses audio and blocks controls; reenable + jump to end cannot unlock, fresh full replay can",
+      "actual": {
+        "callbacks": 1,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 3,
+          "duration": 3,
+          "ended": true,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": true,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/short.wav",
+          "played": [
+            [
+              0,
+              3
+            ]
+          ]
+        }
+      },
+      "durationMs": 3943
+    },
+    {
+      "id": "C17-seek-outside-segment",
+      "status": "PASS",
+      "expected": "Seeking outside a selected interval pauses it and cannot emit whole-call completion",
+      "actual": {
+        "callbacks": 0,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 2.5,
+          "duration": 3,
+          "ended": false,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": true,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/short.wav",
+          "played": []
+        }
+      },
+      "durationMs": 168
+    },
+    {
+      "id": "C18-background-segment",
+      "status": "PASS",
+      "expected": "A real short-WAV segment stops at its boundary when requestAnimationFrame callbacks are suspended; this injected condition is not proof of real hidden-tab behavior",
+      "actual": {
+        "rafSuspension": {
+          "injected": "requestAnimationFrame and cancelAnimationFrame suspended",
+          "actualVisibility": "visible",
+          "expectedEnd": 0.8,
+          "callbacks": 0,
+          "retries": 0,
+          "audio": {
+            "paused": true,
+            "currentTime": 0.8,
+            "duration": 3,
+            "ended": false,
+            "rate": 1,
+            "muted": false,
+            "volume": 1,
+            "controls": true,
+            "error": null,
+            "src": "http://127.0.0.1:3122/test-audio/short.wav",
+            "played": [
+              [
+                0.15,
+                0.900211
+              ]
+            ]
+          },
+          "timeUpdates": [
+            {
+              "time": 0.15,
+              "paused": false,
+              "trusted": true
+            },
+            {
+              "time": 0.366505,
+              "paused": false,
+              "trusted": true
+            },
+            {
+              "time": 0.62696,
+              "paused": false,
+              "trusted": true
+            },
+            {
+              "time": 0.8,
+              "paused": true,
+              "trusted": true
+            },
+            {
+              "time": 0.8,
+              "paused": true,
+              "trusted": true
+            },
+            {
+              "time": 0.8,
+              "paused": true,
+              "trusted": true
+            }
+          ]
+        },
+        "realTabSwitchObservation": {
+          "hidden": false,
+          "visibilityState": "visible"
+        },
+        "realHiddenTabVerified": false,
+        "injectedVisibilitySegment": {
+          "callbacks": 0,
+          "retries": 0,
+          "audio": {
+            "paused": true,
+            "currentTime": 0.318369,
+            "duration": 3,
+            "ended": false,
+            "rate": 1,
+            "muted": false,
+            "volume": 1,
+            "controls": true,
+            "error": null,
+            "src": "http://127.0.0.1:3122/test-audio/short.wav",
+            "played": [
+              [
+                0.15,
+                0.318369
+              ]
+            ]
+          }
+        },
+        "injectedVisibilityFullPlayback": {
+          "callbacks": 1,
+          "retries": 0,
+          "audio": {
+            "paused": true,
+            "currentTime": 3,
+            "duration": 3,
+            "ended": true,
+            "rate": 1,
+            "muted": false,
+            "volume": 1,
+            "controls": true,
+            "error": null,
+            "src": "http://127.0.0.1:3122/test-audio/short.wav",
+            "played": [
+              [
+                0,
+                3
+              ]
+            ]
+          }
+        }
+      },
+      "durationMs": 6763
+    },
+    {
+      "id": "C19-completed-source-reset",
+      "status": "PASS",
+      "expected": "After a completed call enables retry, case-ID and then same-ID audio-URL changes each reset the retry gate and ignore old events",
+      "actual": {
+        "idChangeLockedRetry": true,
+        "sameIdUrlChangeLockedRetry": true,
+        "completedCallbacks": 2,
+        "callbacks": 2,
+        "retries": 0,
+        "audio": {
+          "paused": true,
+          "currentTime": 0,
+          "duration": 0.4,
+          "ended": false,
+          "rate": 1,
+          "muted": false,
+          "volume": 1,
+          "controls": true,
+          "error": null,
+          "src": "http://127.0.0.1:3122/test-audio/silent.wav",
+          "played": []
+        }
+      },
+      "durationMs": 6860
+    },
+    {
+      "id": "C20-text-intake",
+      "status": "PASS",
+      "expected": "Text intake has no audio gate, keeps its input visible, allows error retry immediately and still honors disabled",
+      "actual": {
+        "voiceGateNotRequired": true,
+        "callbacks": 0,
+        "retries": 1,
+        "audio": null
+      },
+      "durationMs": 291
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [
+    "Failed to load resource: net::ERR_EMPTY_RESPONSE"
+  ],
+  "unexpectedRequests": [],
+  "media": [],
+  "limitations": [
+    "No paid AI/API calls; no real customer, operational data, server mutation or shared product-file edits.",
+    "Headless browser media completion proves decoding and event/clock behavior, not OS speaker output or human intelligibility.",
+    "Artificial short/silent/invalid WAV and timestamps are explicit test fixtures; timestamp tests do not prove linguistic alignment of v2 STT.",
+    "The harness tests component props and local callbacks. Parent analysis gating, API persistence and whole-service integration remain pc1 acceptance work.",
+    "Comparison is AI suggestion versus current caseData.intake. This component cannot restore operator input already overwritten upstream."
+  ],
+  "previousRuns": [
+    {
+      "startedAt": "2026-09-21T10:03:00.798Z",
+      "finishedAt": "2026-09-21T10:03:08.593Z",
+      "checkFilter": "^C06-source-provenance$",
+      "passed": 1,
+      "failed": 0,
+      "total": 1,
+      "failures": [],
+      "sourceHashes": {
+        "apps/web/components/CallReview.tsx": "1e70dc3f5dd126268e1092164be9d574e4dde32cef895e81f111f3dd2a703974",
+        "apps/web/components/CallReview.module.css": "decc14c878b152c1ceab08070f21abb29a7acf1b56edc19440e97a2cc01f4d13",
+        "apps/web/app/tokens.css": "31a08dbc4cfd532d4a4d44ca0cf1fa8629ed57e25a9629b5caf748b41d1c01c3",
+        "apps/web/app/globals.css": "9d303f73ec32aa9832461932a065d84a7204968e8001edb8c2e6f0e9de15bce4",
+        "apps/web/lib/types.ts": "3871af57d8633ae73b27c160de4bbe84fb9018263c43b56fc011efd7919a1461",
+        "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+        "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf"
+      },
+      "note": "Original failed assertions/environment errors retained; current results below are separate re-execution."
+    },
+    {
+      "startedAt": "2026-09-21T10:05:19.981Z",
+      "finishedAt": "2026-09-21T10:05:27.660Z",
+      "checkFilter": "^C18-background-segment$",
+      "passed": 0,
+      "failed": 1,
+      "total": 1,
+      "failures": [
+        {
+          "id": "C18-background-segment",
+          "status": "FAIL",
+          "expected": "A real short-WAV segment stops at its boundary when requestAnimationFrame callbacks are suspended; this injected condition is not proof of real hidden-tab behavior",
+          "error": "AssertionError [ERR_ASSERTION]: {\"injected\":\"requestAnimationFrame and cancelAnimationFrame suspended\",\"actualVisibility\":\"visible\",\"expectedEnd\":0.8,\"callbacks\":0,\"retries\":0,\"audio\":{\"paused\":false,\"currentTime\":0.224686,\"duration\":3,\"ended\":false,\"rate\":1,\"muted\":false,\"volume\":1,\"controls\":true,\"error\":null,\"src\":\"http://127.0.0.1:3122/test-audio/short.wav\",\"played\":[[0.15,0.224686]]},\"timeUpdates\":[{\"time\":0.15,\"paused\":false,\"trusted\":true}]}\n    at file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:372:14\n    at async check (file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:53:20)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:352:3",
+          "durationMs": 1555
+        }
+      ],
+      "sourceHashes": {
+        "apps/web/components/CallReview.tsx": "1e70dc3f5dd126268e1092164be9d574e4dde32cef895e81f111f3dd2a703974",
+        "apps/web/components/CallReview.module.css": "decc14c878b152c1ceab08070f21abb29a7acf1b56edc19440e97a2cc01f4d13",
+        "apps/web/app/tokens.css": "31a08dbc4cfd532d4a4d44ca0cf1fa8629ed57e25a9629b5caf748b41d1c01c3",
+        "apps/web/app/globals.css": "9d303f73ec32aa9832461932a065d84a7204968e8001edb8c2e6f0e9de15bce4",
+        "apps/web/lib/types.ts": "3871af57d8633ae73b27c160de4bbe84fb9018263c43b56fc011efd7919a1461",
+        "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+        "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf"
+      },
+      "note": "Original failed assertions/environment errors retained; current results below are separate re-execution."
+    },
+    {
+      "startedAt": "2026-09-21T10:05:43.037Z",
+      "finishedAt": "2026-09-21T10:05:52.841Z",
+      "checkFilter": "^C18-background-segment$",
+      "passed": 0,
+      "failed": 1,
+      "total": 1,
+      "failures": [
+        {
+          "id": "C18-background-segment",
+          "status": "FAIL",
+          "expected": "A real short-WAV segment stops at its boundary when requestAnimationFrame callbacks are suspended; this injected condition is not proof of real hidden-tab behavior",
+          "error": "AssertionError [ERR_ASSERTION]: {\"injected\":\"requestAnimationFrame and cancelAnimationFrame suspended\",\"actualVisibility\":\"visible\",\"expectedEnd\":0.8,\"callbacks\":0,\"retries\":0,\"audio\":{\"paused\":false,\"currentTime\":1.76513,\"duration\":3,\"ended\":false,\"rate\":1,\"muted\":false,\"volume\":1,\"controls\":true,\"error\":null,\"src\":\"http://127.0.0.1:3122/test-audio/short.wav\",\"played\":[[0.15,1.76513]]},\"timeUpdates\":[{\"time\":0.15,\"paused\":false,\"trusted\":true},{\"time\":0.310496,\"paused\":false,\"trusted\":true},{\"time\":0.581971,\"paused\":false,\"trusted\":true},{\"time\":0.842395,\"paused\":false,\"trusted\":true},{\"time\":1.103278,\"paused\":false,\"trusted\":true},{\"time\":1.373331,\"paused\":false,\"trusted\":true},{\"time\":1.632364,\"paused\":false,\"trusted\":true}]}\n    at file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:373:14\n    at async check (file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:53:20)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/run.mjs:352:3",
+          "durationMs": 3039
+        }
+      ],
+      "sourceHashes": {
+        "apps/web/components/CallReview.tsx": "1e70dc3f5dd126268e1092164be9d574e4dde32cef895e81f111f3dd2a703974",
+        "apps/web/components/CallReview.module.css": "decc14c878b152c1ceab08070f21abb29a7acf1b56edc19440e97a2cc01f4d13",
+        "apps/web/app/tokens.css": "31a08dbc4cfd532d4a4d44ca0cf1fa8629ed57e25a9629b5caf748b41d1c01c3",
+        "apps/web/app/globals.css": "9d303f73ec32aa9832461932a065d84a7204968e8001edb8c2e6f0e9de15bce4",
+        "apps/web/lib/types.ts": "3871af57d8633ae73b27c160de4bbe84fb9018263c43b56fc011efd7919a1461",
+        "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+        "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf"
+      },
+      "note": "Original failed assertions/environment errors retained; current results below are separate re-execution."
+    }
+  ],
+  "sourceHashesStart": {
+    "apps/web/components/CallReview.tsx": "e861bc8ff7775e51be35c67f72364fdda261bd43407f4962be06367831fd6161",
+    "apps/web/components/CallReview.module.css": "decc14c878b152c1ceab08070f21abb29a7acf1b56edc19440e97a2cc01f4d13",
+    "apps/web/app/tokens.css": "31a08dbc4cfd532d4a4d44ca0cf1fa8629ed57e25a9629b5caf748b41d1c01c3",
+    "apps/web/app/globals.css": "9d303f73ec32aa9832461932a065d84a7204968e8001edb8c2e6f0e9de15bce4",
+    "apps/web/lib/types.ts": "3871af57d8633ae73b27c160de4bbe84fb9018263c43b56fc011efd7919a1461",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf",
+    "reports/e2e/normalized-voice-live.json": "17e8f171c6cf61c9d8d7a11a8420f5b41374c82c70cd4ec889bb0ad45b491d5c"
+  },
+  "ownedBrowserPid": 31316,
+  "browserVersion": "153.0.4234.48",
+  "browserLaunch": {
+    "headless": true,
+    "channel": "msedge"
+  },
+  "passed": 10,
+  "failed": 0,
+  "total": 10,
+  "backgroundSegmentObservation": {
+    "injected": "requestAnimationFrame and cancelAnimationFrame suspended",
+    "actualVisibility": "visible",
+    "expectedEnd": 0.8,
+    "callbacks": 0,
+    "retries": 0,
+    "audio": {
+      "paused": true,
+      "currentTime": 0.8,
+      "duration": 3,
+      "ended": false,
+      "rate": 1,
+      "muted": false,
+      "volume": 1,
+      "controls": true,
+      "error": null,
+      "src": "http://127.0.0.1:3122/test-audio/short.wav",
+      "played": [
+        [
+          0.15,
+          0.900211
+        ]
+      ]
+    },
+    "timeUpdates": [
+      {
+        "time": 0.15,
+        "paused": false,
+        "trusted": true
+      },
+      {
+        "time": 0.366505,
+        "paused": false,
+        "trusted": true
+      },
+      {
+        "time": 0.62696,
+        "paused": false,
+        "trusted": true
+      },
+      {
+        "time": 0.8,
+        "paused": true,
+        "trusted": true
+      },
+      {
+        "time": 0.8,
+        "paused": true,
+        "trusted": true
+      },
+      {
+        "time": 0.8,
+        "paused": true,
+        "trusted": true
+      }
+    ]
+  },
+  "cleanup": [
+    {
+      "name": "final-page",
+      "status": "complete",
+      "elapsedMs": 10
+    },
+    {
+      "name": "browser-connection",
+      "status": "complete",
+      "elapsedMs": 3
+    },
+    {
+      "name": "owned-browser-server",
+      "status": "complete",
+      "elapsedMs": 3141
+    },
+    {
+      "name": "owned-http-server",
+      "status": "complete",
+      "elapsedMs": 1
+    }
+  ],
+  "serverRequests": [
+    {
+      "at": "2026-09-21T10:08:06.760Z",
+      "method": "GET",
+      "pathname": "/"
+    },
+    {
+      "at": "2026-09-21T10:08:06.887Z",
+      "method": "GET",
+      "pathname": "/harness.js"
+    },
+    {
+      "at": "2026-09-21T10:08:08.754Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:08.838Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:11.168Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:11.283Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:14.635Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:14.733Z",
+      "method": "GET",
+      "pathname": "/demo/CASE-0002.wav"
+    },
+    {
+      "pathname": "/demo/CASE-0002.wav",
+      "readError": "EPERM"
+    },
+    {
+      "at": "2026-09-21T10:08:14.738Z",
+      "method": "GET",
+      "pathname": "/demo/CASE-0002.wav"
+    },
+    {
+      "pathname": "/demo/CASE-0002.wav",
+      "readError": "EPERM"
+    },
+    {
+      "at": "2026-09-21T10:08:15.028Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:15.428Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:15.517Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:15.574Z",
+      "method": "GET",
+      "pathname": "/test-audio/silent.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:15.609Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:15.678Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:15.740Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:15.788Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:15.811Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:16.494Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:19.696Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:19.867Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:20.016Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:20.195Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:22.042Z",
+      "method": "GET",
+      "pathname": "/"
+    },
+    {
+      "at": "2026-09-21T10:08:22.087Z",
+      "method": "GET",
+      "pathname": "/harness.js"
+    },
+    {
+      "at": "2026-09-21T10:08:22.508Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:22.643Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:23.226Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:23.312Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:26.630Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:26.711Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:30.048Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:30.129Z",
+      "method": "GET",
+      "pathname": "/test-audio/short.wav"
+    },
+    {
+      "at": "2026-09-21T10:08:33.435Z",
+      "method": "GET",
+      "pathname": "/test-audio/silent.wav"
+    }
+  ],
+  "sourceHashesEnd": {
+    "apps/web/components/CallReview.tsx": "e861bc8ff7775e51be35c67f72364fdda261bd43407f4962be06367831fd6161",
+    "apps/web/components/CallReview.module.css": "decc14c878b152c1ceab08070f21abb29a7acf1b56edc19440e97a2cc01f4d13",
+    "apps/web/app/tokens.css": "31a08dbc4cfd532d4a4d44ca0cf1fa8629ed57e25a9629b5caf748b41d1c01c3",
+    "apps/web/app/globals.css": "9d303f73ec32aa9832461932a065d84a7204968e8001edb8c2e6f0e9de15bce4",
+    "apps/web/lib/types.ts": "3871af57d8633ae73b27c160de4bbe84fb9018263c43b56fc011efd7919a1461",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf",
+    "reports/e2e/normalized-voice-live.json": "17e8f171c6cf61c9d8d7a11a8420f5b41374c82c70cd4ec889bb0ad45b491d5c"
+  },
+  "sourceUnchangedDuringRun": true,
+  "finishedAt": "2026-09-21T10:08:36.917Z"
+}
