@@ -269,18 +269,11 @@
       "id": "N03",
       "pc": "pc3",
       "latestAssignment": {
-        "id": "N03-M4",
-        "card": "reports/channel/N03-M4-full-animation.md",
-        "state": "CODE_ACCEPTED_FULL_RENDER_RUNNING",
-        "ackAtKST": "2026-09-21T22:47:21+09:00",
-        "ackCommentId": 5761535254,
+        "id": "N03-M5",
+        "card": "reports/channel/N03-M5-full-output-intake.md",
+        "state": "SENT_ACK_PENDING",
         "accepted": false,
-        "prior72FrameIntake": "reports/pc3-real-short-main-intake.md",
-        "sourceCommit": "a39cd664758575a81e1fcce437db245f60fc2c1b",
-        "mainEvidence": "reports/pc3-full-render-main-start.md",
-        "renderPid": 13052,
-        "renderDirectory": ".local/pc3-render-intake/full1080-a39cd66-01",
-        "startedAtKST": "2026-09-21T23:11:14+09:00"
+        "baseCommit": "f745920e52c0e0910294a9b836f7def1d423b210"
       },
       "outcome": "WMS 공정·합성 CCTV",
       "state": "FIX_RESULT_RECEIVED_REVIEW",
@@ -391,6 +384,20 @@
         "card": "reports/channel/N03-M3-render-intake-validator.md",
         "ackComment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5760683253",
         "accepted": false
+      },
+      "fullRenderExecution": {
+        "id": "N03-M4",
+        "card": "reports/channel/N03-M4-full-animation.md",
+        "state": "CODE_ACCEPTED_FULL_RENDER_RUNNING",
+        "ackAtKST": "2026-09-21T22:47:21+09:00",
+        "ackCommentId": 5761535254,
+        "accepted": false,
+        "prior72FrameIntake": "reports/pc3-real-short-main-intake.md",
+        "sourceCommit": "a39cd664758575a81e1fcce437db245f60fc2c1b",
+        "mainEvidence": "reports/pc3-full-render-main-start.md",
+        "renderPid": 13052,
+        "renderDirectory": ".local/pc3-render-intake/full1080-a39cd66-01",
+        "startedAtKST": "2026-09-21T23:11:14+09:00"
       }
     },
     {

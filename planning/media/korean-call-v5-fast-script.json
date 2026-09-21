@@ -1,0 +1,668 @@
+{
+  "schemaVersion": "oneflow-korean-call-v5-fast-candidate-2",
+  "createdAt": "2026-09-21T22:29:58+09:00",
+  "status": "SCRIPT_CANDIDATE_NOT_SYNTHESIZED",
+  "synthetic": true,
+  "source": {
+    "commit": "663bbe5bb0ae0a780e328dce9a69188112de8d0e",
+    "fixturePath": "data/fixtures/cases.json",
+    "fixtureSha256": "5edf80669f7def9d3e10ceea910086c41026ff1252fbc638b97641562f3d84f4",
+    "previousCandidate": "planning/media/korean-call-v4-script.json",
+    "previousCandidateUnchanged": true
+  },
+  "reason": "사용자는 아라/승표 비교 음원을 듣고 속도 +2 적용 후에도 더 빠르게, 특히 승표가 너무 느리다고 피드백했습니다. 서로 바쁜 현대인의 대화라는 요구에 따라 중복 복창·사과·센터 전달 설명을 줄였습니다. 상담원은 CLOVA 아나운서 조수빈 후보이며 사용자 호칭은 조수연입니다. 30~40초는 합성 전 추정 목표입니다.",
+  "synthesis": {
+    "providerDisplayName": "CLOVA Dubbing",
+    "candidateVoiceDisplayNames": {
+      "상담원": "아나운서 조수빈",
+      "경영주": "승표"
+    },
+    "voiceIds": {
+      "상담원": null,
+      "경영주": null
+    },
+    "model": null,
+    "speed": null,
+    "status": "NOT_RUN_FOR_THIS_SCRIPT",
+    "quality": null,
+    "directionsAreNotSpoken": true,
+    "spokenTextOnly": true,
+    "realPersonVoiceClone": false,
+    "voiceNotice": "상담원 제공 보이스 후보명은 아나운서 조수빈이며 사용자는 조수연으로 호칭했습니다. 실제 인물이 상담에 참여하거나 제품을 보증한다는 뜻이 아닙니다. 내부 voice ID·지원 범위·최종 합성 값은 메인의 공식 편집기 확인 후 기록합니다. 승표는 이전 후보보다 빠르고 바로 용건을 말하는 연기를 우선하되 숫자·단위·부정어를 보존합니다."
+  },
+  "timing": {
+    "targetOnly": true,
+    "targetDurationPerCaseSeconds": [
+      30,
+      40
+    ],
+    "measuredDurationSeconds": null,
+    "pausePolicy": "80~220ms는 제작 시작 제안입니다. 공급자 자체 말미 쉼과 합산하여 실측하고, 빠르게 하더라도 단위 정정의 부정어·상품·수량은 자르지 않습니다.",
+    "noPadding": true
+  },
+  "cases": [
+    {
+      "caseId": "CASE-0001",
+      "title": "미도착 — 기다리는 경영주와 배송 확인 접수",
+      "store": {
+        "id": "SYN-ST01",
+        "name": "가상 한빛점"
+      },
+      "occurredAsOf": "2026-09-18T07:00:00+09:00",
+      "targetDurationSeconds": {
+        "min": 30,
+        "max": 40,
+        "classification": "UNMEASURED_PRODUCTION_TARGET"
+      },
+      "actualDurationSeconds": null,
+      "turns": [
+        {
+          "id": "F5-M01",
+          "speaker": "상담원",
+          "text": "안녕하세요, 해피콜입니다.",
+          "spokenText": "안녕하세요, 해피콜입니다.",
+          "direction": "정중하지만 바로 본론으로 연결합니다. 뉴스 도입부처럼 늘이지 않습니다.",
+          "pauseAfterMs": 100,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-M02",
+          "speaker": "경영주",
+          "text": "가상 한빛점인데요. 아침 5시 배송이 7시 다 되도록 안 왔어요.",
+          "spokenText": "가상 한빛점인데요. 아침 다섯 시 배송이 일곱 시 다 되도록 안 왔어요.",
+          "direction": "급히 용건을 말합니다. 시각은 또렷하고 문장 끝은 늘이지 않습니다.",
+          "pauseAfterMs": 100,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-M03",
+          "speaker": "상담원",
+          "text": "오늘 배송을 아예 못 받으셨어요?",
+          "spokenText": "오늘 배송을 아예 못 받으셨어요?",
+          "direction": "한 가지 확인 질문만 빠르게 합니다.",
+          "pauseAfterMs": 90,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-M04",
+          "speaker": "경영주",
+          "text": "네, 하나도요. 어제도 바빴는데 오늘까지 이러니 화가 나요. 가게 앞 공사로 길이 막힌 건가 싶고요.",
+          "spokenText": "네, 하나도요. 어제도 바빴는데 오늘까지 이러니 화가 나요. 가게 앞 공사로 길이 막힌 건가 싶고요.",
+          "direction": "화난 불만을 짧고 빠르게 전합니다. 한숨이나 느린 뜸을 추가하지 않고 '싶고요'로 추측임을 살립니다.",
+          "pauseAfterMs": 140,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-M05",
+          "speaker": "상담원",
+          "text": "공사 때문인지는 확인해 봐야겠네요.",
+          "spokenText": "공사 때문인지는 확인해 봐야겠네요.",
+          "direction": "추측을 사실로 받아 적지 않으며 짧게 응답합니다.",
+          "pauseAfterMs": 90,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-M06",
+          "speaker": "경영주",
+          "text": "지금 어디 있는지, 언제 오는지 좀 알려 주세요.",
+          "spokenText": "지금 어디 있는지, 언제 오는지 좀 알려 주세요.",
+          "direction": "원하는 정보 두 가지를 명확하게 요청합니다.",
+          "pauseAfterMs": 100,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-M07",
+          "speaker": "상담원",
+          "text": "네, 센터 배송 담당자에게 확인 요청하겠습니다.",
+          "spokenText": "네, 센터 배송 담당자에게 확인 요청하겠습니다.",
+          "direction": "재복창 없이 요청을 받습니다.",
+          "pauseAfterMs": 90,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-M08",
+          "speaker": "경영주",
+          "text": "아직 언제 올지는 모르는 거죠?",
+          "spokenText": "아직 언제 올지는 모르는 거죠?",
+          "direction": "바로 답을 받을 수 있는지 짧게 묻습니다.",
+          "pauseAfterMs": 100,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-M09",
+          "speaker": "상담원",
+          "text": "네, 아직 확인 전입니다. 센터 담당자가 확인하고 연락드리도록 하겠습니다.",
+          "spokenText": "네, 아직 확인 전입니다. 센터 담당자가 확인하고 연락드리도록 하겠습니다.",
+          "direction": "빠르고 명확한 현장 응대. 도착 약속이나 완료 보고 어조는 피합니다.",
+          "pauseAfterMs": 130,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-M10",
+          "speaker": "경영주",
+          "text": "네, 확인되면 연락 주세요.",
+          "spokenText": "네, 확인되면 연락 주세요.",
+          "direction": "해결을 선언하지 않고 확인 연락을 요청하며 끝냅니다.",
+          "pauseAfterMs": 220,
+          "startSeconds": null,
+          "endSeconds": null
+        }
+      ],
+      "criticalFacts": [
+        {
+          "id": "M-F01",
+          "meaning": "점포는 기존 독립 합성 점포 가상 한빛점 / SYN-ST01입니다.",
+          "turnIds": [
+            "F5-M02"
+          ],
+          "sourcePointers": [
+            "/cases/0/store"
+          ],
+          "v4TurnIds": [
+            "M02"
+          ]
+        },
+        {
+          "id": "M-F02",
+          "meaning": "경영주는 당일 아침 5시 배송을 7시가 다 되도록 받지 못했다고 진술합니다. 실제 미도착이 확정된 것은 아닙니다.",
+          "turnIds": [
+            "F5-M02",
+            "F5-M04"
+          ],
+          "sourcePointers": [
+            "/cases/0/transcript/1/text",
+            "/cases/0/asOf"
+          ],
+          "v4TurnIds": [
+            "M02",
+            "M04"
+          ]
+        },
+        {
+          "id": "M-F03",
+          "meaning": "문의 대상은 당일 배송 전체이며, 상품별 수량·단위는 null을 유지합니다. '하나도 안 왔다'를 수량 0개로 추출하지 않습니다.",
+          "turnIds": [
+            "F5-M03",
+            "F5-M04"
+          ],
+          "sourcePointers": [
+            "/cases/0/expected",
+            "/cases/0/received",
+            "/cases/0/intake"
+          ],
+          "v4TurnIds": [
+            "M03",
+            "M04",
+            "M05"
+          ]
+        },
+        {
+          "id": "M-F04",
+          "meaning": "어제도 바빴고 오늘까지 이어지는 불편에 화가 난다는 불만을 보존합니다. 새 고객 항의·매출 손해 수치는 만들지 않습니다.",
+          "turnIds": [
+            "F5-M04"
+          ],
+          "sourcePointers": [
+            "/cases/0/transcript/3/text"
+          ],
+          "v4TurnIds": [
+            "M04"
+          ]
+        },
+        {
+          "id": "M-F05",
+          "meaning": "공사로 길이 막혔을 수 있다는 말은 경영주의 추측입니다.",
+          "turnIds": [
+            "F5-M04",
+            "F5-M05"
+          ],
+          "sourcePointers": [
+            "/cases/0/transcript/3/text",
+            "/cases/0/replayAnalysis/unknowns"
+          ],
+          "v4TurnIds": [
+            "M06",
+            "M07",
+            "M08",
+            "M09"
+          ]
+        },
+        {
+          "id": "M-F06",
+          "meaning": "경영주는 현재 운행 위치와 도착 가능 시간을 센터에서 확인해 안내해 달라고 요청합니다.",
+          "turnIds": [
+            "F5-M06",
+            "F5-M07",
+            "F5-M10"
+          ],
+          "sourcePointers": [
+            "/cases/0/transcript/5/text",
+            "/cases/0/transcript/7/text",
+            "/cases/0/intake/request"
+          ],
+          "v4TurnIds": [
+            "M08",
+            "M10",
+            "M11",
+            "M14"
+          ]
+        },
+        {
+          "id": "M-F07",
+          "meaning": "상담원은 확인되지 않은 도착 시각을 확답하지 않고 센터 확인·후속 안내를 전달합니다.",
+          "turnIds": [
+            "F5-M07",
+            "F5-M09"
+          ],
+          "sourcePointers": [
+            "/cases/0/transcript/6/text"
+          ],
+          "v4TurnIds": [
+            "M09",
+            "M11",
+            "M13"
+          ]
+        }
+      ],
+      "prohibitedInferences": [
+        "미수령 진술을 실제 미도착·기사 귀책 확정으로 바꾸지 않습니다.",
+        "'하나도'를 숫자 0이나 개/BOX 단위로 채우지 않습니다.",
+        "공사→길 막힘→배송 지연의 인과관계를 확정하지 않습니다.",
+        "통화자가 알지 못하는 04:20 출고 스캔, 차량·토트·노선 코드를 발화에 넣지 않습니다.",
+        "센터가 이미 확인했거나 연락을 마쳤다고 말하지 않습니다."
+      ],
+      "preview": {
+        "turnIds": [
+          "F5-M02",
+          "F5-M03",
+          "F5-M04",
+          "F5-M05"
+        ],
+        "actualDurationSeconds": null,
+        "status": "SCRIPT_ONLY_NOT_SYNTHESIZED"
+      }
+    },
+    {
+      "caseId": "CASE-0002",
+      "title": "오출고 — 단위 오청을 바로잡고 회송과 주문 상품 처리를 요청",
+      "store": {
+        "id": "SYN-ST02",
+        "name": "가상 새봄점"
+      },
+      "occurredAsOf": "2026-09-18T07:00:00+09:00",
+      "targetDurationSeconds": {
+        "min": 30,
+        "max": 40,
+        "classification": "UNMEASURED_PRODUCTION_TARGET"
+      },
+      "actualDurationSeconds": null,
+      "turns": [
+        {
+          "id": "F5-W01",
+          "speaker": "상담원",
+          "text": "안녕하세요, 해피콜입니다.",
+          "spokenText": "안녕하세요, 해피콜입니다.",
+          "direction": "정중한 업무 인사. 뉴스·광고 낭독처럼 여유를 두지 않습니다.",
+          "pauseAfterMs": 100,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-W02",
+          "speaker": "경영주",
+          "text": "가상 새봄점인데요. 비스킷 18개 시켰는데 휴지 1박스가 왔어요. 이게 대체 뭡니까.",
+          "spokenText": "가상 새봄점인데요. 비스킷 열여덟 개 시켰는데 휴지 한 박스가 왔어요. 이게 대체 뭡니까.",
+          "direction": "바쁜 경영주가 바로 문제를 말합니다. 불만은 짧게, 상품·수량은 또렷하게 읽습니다.",
+          "pauseAfterMs": 110,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-W03",
+          "speaker": "상담원",
+          "text": "휴지 1개를 받으셨다고요?",
+          "spokenText": "휴지 한 개를 받으셨다고요?",
+          "direction": "상담원의 단위 오청입니다. 1박스로 자동 수정하거나 느린 공감 문장을 붙이지 않습니다.",
+          "pauseAfterMs": 80,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-W04",
+          "speaker": "경영주",
+          "text": "아니요, 1개가 아니라 1박스요. 단위 좀 제대로 적어 주세요.",
+          "spokenText": "아니요, 한 개가 아니라 한 박스요. 단위 좀 제대로 적어 주세요.",
+          "direction": "즉시 바로잡습니다. 부정과 박스 단위는 생략·가속 뭉개짐 없이 읽습니다.",
+          "pauseAfterMs": 100,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-W05",
+          "speaker": "상담원",
+          "text": "죄송합니다. 주문은 비스킷 18개, 받은 건 휴지 1박스로 고치겠습니다.",
+          "spokenText": "죄송합니다. 주문은 비스킷 열여덟 개, 받은 건 휴지 한 박스로 고치겠습니다.",
+          "direction": "사과 한 번, 주문과 수령 구분 한 번으로 마칩니다. 장황한 해명은 없습니다.",
+          "pauseAfterMs": 100,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-W06",
+          "speaker": "경영주",
+          "text": "주말 장사도 해야 하는데 곤란하잖아요. 이 휴지는 어떻게 해요?",
+          "spokenText": "주말 장사도 해야 하는데 곤란하잖아요. 이 휴지는 어떻게 해요?",
+          "direction": "불편을 짧게 남기고 처리 질문으로 바로 넘어갑니다.",
+          "pauseAfterMs": 110,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-W07",
+          "speaker": "상담원",
+          "text": "잘못 온 내용과 돌려보내는 방법, 센터 상품 담당자에게 확인하겠습니다.",
+          "spokenText": "잘못 온 내용과 돌려보내는 방법, 센터 상품 담당자에게 확인하겠습니다.",
+          "direction": "담당자와 요청 범위를 간결하게 설명합니다. 회송 결정으로 말하지 않습니다.",
+          "pauseAfterMs": 100,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-W08",
+          "speaker": "경영주",
+          "text": "주문한 비스킷은 어떻게 할지도 알려 주세요.",
+          "spokenText": "주문한 비스킷은 어떻게 할지도 알려 주세요.",
+          "direction": "누락되기 쉬운 주문 상품 처리 요청을 명확히 추가합니다.",
+          "pauseAfterMs": 90,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-W09",
+          "speaker": "상담원",
+          "text": "네, 두 가지 다 센터 담당자가 확인해 안내드리도록 하겠습니다.",
+          "spokenText": "네, 두 가지 다 센터 담당자가 확인해 안내드리도록 하겠습니다.",
+          "direction": "센터 확인 필요와 후속 안내를 짧게 연결합니다. 재배송·보상을 약속하지 않습니다.",
+          "pauseAfterMs": 130,
+          "startSeconds": null,
+          "endSeconds": null
+        },
+        {
+          "id": "F5-W10",
+          "speaker": "경영주",
+          "text": "네, 연락 주세요.",
+          "spokenText": "네, 연락 주세요.",
+          "direction": "추가 여운 없이 확인 요청을 남기고 끝냅니다.",
+          "pauseAfterMs": 220,
+          "startSeconds": null,
+          "endSeconds": null
+        }
+      ],
+      "criticalFacts": [
+        {
+          "id": "W-F01",
+          "meaning": "점포는 기존 독립 합성 점포 가상 새봄점 / SYN-ST02입니다.",
+          "turnIds": [
+            "F5-W02"
+          ],
+          "sourcePointers": [
+            "/cases/1/store"
+          ],
+          "v4TurnIds": [
+            "W02"
+          ]
+        },
+        {
+          "id": "W-F02",
+          "meaning": "경영주 주문은 비스킷 18 EA(18개)입니다.",
+          "turnIds": [
+            "F5-W02",
+            "F5-W05"
+          ],
+          "sourcePointers": [
+            "/cases/1/expected",
+            "/cases/1/transcript/1/text"
+          ],
+          "v4TurnIds": [
+            "W02",
+            "W03",
+            "W07"
+          ]
+        },
+        {
+          "id": "W-F03",
+          "meaning": "경영주가 실제 받았다고 말하는 상품은 휴지 1 BOX(1박스)입니다.",
+          "turnIds": [
+            "F5-W02",
+            "F5-W04",
+            "F5-W05"
+          ],
+          "sourcePointers": [
+            "/cases/1/received",
+            "/cases/1/transcript/1/text",
+            "/cases/1/transcript/3/text"
+          ],
+          "v4TurnIds": [
+            "W02",
+            "W04",
+            "W05",
+            "W07",
+            "W08"
+          ]
+        },
+        {
+          "id": "W-F04",
+          "meaning": "상담원이 1개로 잘못 재진술하고 경영주가 1박스로 정정합니다. 오류 발화자는 상담원이며 경영주 자기정정으로 바꾸지 않습니다.",
+          "turnIds": [
+            "F5-W03",
+            "F5-W04",
+            "F5-W05"
+          ],
+          "sourcePointers": [
+            "/cases/1/transcript/2/text",
+            "/cases/1/transcript/3/text",
+            "/cases/1/transcript/4/text"
+          ],
+          "v4TurnIds": [
+            "W03",
+            "W04",
+            "W05"
+          ]
+        },
+        {
+          "id": "W-F05",
+          "meaning": "기존 intake.unit=EA는 발견해야 할 잘못된 상담 입력입니다. 정정된 접수 의미는 quantity=1, unit=BOX입니다.",
+          "turnIds": [
+            "F5-W03",
+            "F5-W04",
+            "F5-W05"
+          ],
+          "sourcePointers": [
+            "/cases/1/intake",
+            "/cases/1/replayAnalysis/fields",
+            "/cases/1/replayAnalysis/issues/0"
+          ],
+          "v4TurnIds": [
+            "W03",
+            "W04",
+            "W05",
+            "W07"
+          ]
+        },
+        {
+          "id": "W-F06",
+          "meaning": "주문 18개와 수령 진술 1박스는 다른 상품·단위입니다. 차감·환산하지 않습니다.",
+          "turnIds": [
+            "F5-W02",
+            "F5-W05"
+          ],
+          "sourcePointers": [
+            "/cases/1/replayAnalysis/issues/1"
+          ],
+          "v4TurnIds": [
+            "W02",
+            "W07"
+          ]
+        },
+        {
+          "id": "W-F07",
+          "meaning": "주말 장사를 해야 해 곤란하다는 불만과 '이게 대체 뭡니까'의 화난 의미를 보존합니다.",
+          "turnIds": [
+            "F5-W02",
+            "F5-W04",
+            "F5-W06"
+          ],
+          "sourcePointers": [
+            "/cases/1/transcript/1/text",
+            "/cases/1/transcript/3/text",
+            "/cases/1/transcript/5/text"
+          ],
+          "v4TurnIds": [
+            "W02",
+            "W04",
+            "W06"
+          ]
+        },
+        {
+          "id": "W-F08",
+          "meaning": "경영주는 잘못 온 상품의 회송 방법과 주문한 비스킷의 처리 모두를 요청합니다.",
+          "turnIds": [
+            "F5-W06",
+            "F5-W08",
+            "F5-W10"
+          ],
+          "sourcePointers": [
+            "/cases/1/transcript/5/text",
+            "/cases/1/transcript/7/text",
+            "/cases/1/intake/request"
+          ],
+          "v4TurnIds": [
+            "W08",
+            "W10",
+            "W14"
+          ]
+        },
+        {
+          "id": "W-F09",
+          "meaning": "상담원은 오출고 확인과 회송·주문 상품 처리 요청을 센터 상품 담당자에게 전달합니다. 최종 회신은 센터 담당자입니다.",
+          "turnIds": [
+            "F5-W07",
+            "F5-W09"
+          ],
+          "sourcePointers": [
+            "/cases/1/transcript/6/text",
+            "/cases/1/replayAnalysis/department"
+          ],
+          "v4TurnIds": [
+            "W09",
+            "W11",
+            "W13"
+          ]
+        }
+      ],
+      "prohibitedInferences": [
+        "상담원의 '1개' 오류를 TTS가 1박스로 자동 수정하지 않습니다.",
+        "경영주가 처음에 1개라고 말한 것처럼 발화자를 바꾸지 않습니다.",
+        "주문 18 EA에서 수령 1 BOX를 빼거나 BOX당 수량을 추정하지 않습니다.",
+        "경영주 발화에 02:33 소터·03:02 출고·05:10 배송 실적·토트 A/B 기록을 넣지 않습니다.",
+        "수령 진술을 영상으로 확정하거나 작업자·기사 실수로 단정하지 않습니다.",
+        "회송·재배송 시각·무료 보상·환불·기사 재방문을 약속하지 않습니다."
+      ],
+      "preview": {
+        "turnIds": [
+          "F5-W02",
+          "F5-W03",
+          "F5-W04",
+          "F5-W05"
+        ],
+        "actualDurationSeconds": null,
+        "status": "SCRIPT_ONLY_NOT_SYNTHESIZED"
+      }
+    }
+  ],
+  "qualityGates": {
+    "mandatoryFacts": 16,
+    "caseTurnRange": [
+      10,
+      14
+    ],
+    "spokenCharacterTargetPerCase": [
+      250,
+      320
+    ],
+    "characterCountIncludesWhitespaceAndPunctuation": true,
+    "hardFactsOverrideLengthTarget": true,
+    "mustKeep": [
+      "상담원 오청→경영주 정정",
+      "주문 18개와 수령 진술 1박스 구분",
+      "미도착 상품별 수량·단위 null",
+      "공사 원인 추측",
+      "센터 확인 전 ETA·회송·재배송 미확정",
+      "센터 최종 확인·회신",
+      "원문 불만·두 업무 요청"
+    ],
+    "mustNotAdd": [
+      "새 욕설",
+      "실 점포·고객·기사 개인정보",
+      "WMS/TMS 공정 사실을 통화자가 아는 듯한 발언",
+      "원인·귀책 확정",
+      "도착 시각 약속",
+      "회송·재배송·보상 완료"
+    ],
+    "technicalCheck": {
+      "status": "TEXT_CONSISTENCY_VERIFIED",
+      "checkedAt": "2026-09-21T23:07:13+09:00",
+      "host": "CJJ",
+      "head": "7d186fd9c3f99f39eb2b26d729706582d968b383",
+      "counts": {
+        "cases": 2,
+        "turnSchemaSpeakerOrder": 20,
+        "spokenConversions": 20,
+        "markdownTurns": 20,
+        "facts": 16,
+        "fixturePointers": 34,
+        "factTurnReferences": 35,
+        "coreFixtureContracts": 10
+      },
+      "caseMetrics": [
+        {
+          "caseId": "CASE-0001",
+          "turns": 10,
+          "spokenCharacters": 273,
+          "pauseAfterMsTotal": 1160
+        },
+        {
+          "caseId": "CASE-0002",
+          "turns": 10,
+          "spokenCharacters": 302,
+          "pauseAfterMsTotal": 1140
+        }
+      ],
+      "independentReviewInputSha256": "eb697c3ddda47efb86306aca141c047465891d4cfac74c05c9f1a7b5fe23f305",
+      "independentReviewScope": "fixture 원문 16턴과 최종 JSON 20턴의 필수 사실 16개 의미 검토. MD·음성·STT·제품 실행은 포함하지 않습니다.",
+      "audioMeasured": false
+    },
+    "independentScriptReview": "AI_TEXT_REVIEW_16_OF_16_NOT_AUDIO",
+    "humanListening": "NOT_RUN_FOR_V5",
+    "actualStt": "NOT_RUN",
+    "fullFlow": "NOT_RUN",
+    "qualityScore": null
+  },
+  "limitations": [
+    "v4와 공용 fixture, 정제 결과, 음원, 타임라인을 수정하지 않았습니다.",
+    "전체20턴이므로 기존 생성기 전체16턴 제한을 넘습니다. 메인이 승인된 공식 편집기/어댑터·기존 예산으로 별도 합성해야 합니다.",
+    "30~40초는 합성 전 추정 목표이며 문자 수로 재생 시간을 선언하지 않습니다.",
+    "32.17초/26.44초 관측은 이전 비교 후보에 대한 메인 전달 정보이며 이 v5 전체 통화 측정값이 아닙니다.",
+    "짧은 프리뷰4턴은 전체 통화가 아니므로 위치·도착·회송·주문 상품 처리의 전체 흐름을 검증하지 않습니다.",
+    "보이스가 아나운서여도 뉴스처럼 천천히 강조하지 않고 빠르고 정중한 상담 말투를 적용해야 합니다."
+  ]
+}
