@@ -26,11 +26,15 @@ STAMP_SCHEMA = "oneflow-next-build-v1"
 BUNDLE_SCHEMA = "oneflow-deployment-bundle-v1"
 MEDIA_MANIFEST = "data/demo-media-manifest.json"
 MEDIA_NAMES = ("CASE-0001.wav", "CASE-0002.wav", "sorter-demo.mp4")
+# These JSON files are imported into the WMS/TMS client bundle from outside web/.
+# A build is stale if any of them changes, even when public asset bytes do not.
+FRONTEND_DATA_FILES = ("data/fixtures/cases.json", MEDIA_MANIFEST, "data/overlays/pc4-tms.json")
 SOURCE_FILES = (
     "server/__init__.py", "server/analysis_schema.py", "server/budget.py",
     "server/cas_budget.py", "server/cas_repository.py", "server/cas_store.py",
     "server/deployment_access.py", "server/deployment_app.py", "server/errors.py",
     "server/handlers.py", "server/live.py", "server/repository.py",
+    "server/intake_idempotency.py", "server/claim_grounding.py",
     "server/runtime_config.py", "server/runtime_storage.py", "server/service.py",
     "server/vercel_blob_store.py", "server/openapi.yaml", "scripts/demo_openai_env.py",
     "data/fixtures/cases.json", MEDIA_MANIFEST, "pyproject.toml", "uv.lock",
@@ -168,7 +172,7 @@ def _inventory_fingerprint(files: dict[str, bytes]) -> str:
 def source_fingerprint(root: Path) -> str:
     root = _root(root)
     web = _secure_path(root, "apps/web")
-    selected = []
+    selected = list(FRONTEND_DATA_FILES)
     for child in web.iterdir():
         if child.name.startswith(".env"):
             raise _error("FRONTEND_ENV_FILE_REJECTED")

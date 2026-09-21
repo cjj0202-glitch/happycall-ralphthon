@@ -11,6 +11,7 @@ from typing import Callable, Protocol
 from filelock import FileLock
 
 from server.errors import DemoError
+from server import intake_idempotency
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -31,7 +32,8 @@ def atomic_json(path: Path, value: object) -> None:
 class CaseRepository(Protocol):
     def list(self) -> list[dict]: ...
     def get(self, case_id: str) -> dict: ...
-    def create(self, case: dict) -> dict: ...
+    def create(self, case: dict, identity: tuple[str, str] | None = None) -> dict: ...
+    def intake_result(self, key_digest: str, payload_hash: str | None = None) -> dict | None: ...
     def update(self, case_id: str, transform: Callable[[dict], dict]) -> dict: ...
     def fixtures(self) -> dict: ...
 
@@ -69,13 +71,22 @@ class JsonCaseRepository:
                 return case
         raise DemoError("CASE_NOT_FOUND", "해당 접수를 찾을 수 없습니다.", 404)
 
-    def create(self, case: dict) -> dict:
+    def intake_result(self, key_digest: str, payload_hash: str | None = None) -> dict | None:
+        with self.lock:
+            return intake_idempotency.lookup(self._read(), key_digest, payload_hash)
+
+    def create(self, case: dict, identity: tuple[str, str] | None = None) -> dict:
         case = {**copy.deepcopy(case), "revision": 0}
         with self.lock:
             data = self._read()
+            if identity is not None:
+                existing = intake_idempotency.lookup(data, *identity)
+                if existing is not None:
+                    return existing
             if any(row["id"] == case["id"] for row in data["cases"]):
                 raise DemoError("DUPLICATE_CASE", "이미 존재하는 접수입니다.", 409)
             data["cases"].append(copy.deepcopy(case))
+            intake_idempotency.record(data, identity, case["id"])
             atomic_json(self.path, data)
         return copy.deepcopy(case)
 

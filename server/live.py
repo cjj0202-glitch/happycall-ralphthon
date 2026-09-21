@@ -12,6 +12,7 @@ from jsonschema import validate
 from openai import OpenAI
 
 from server.analysis_schema import ANALYSIS_SCHEMA, MODEL_ANALYSIS_SCHEMA
+from server.claim_grounding import order_assertion_scope, reconcile_unknown, supported_values
 from server.budget import Budget
 from server.errors import DemoError
 from server.repository import ROOT
@@ -58,10 +59,11 @@ def _explicit_order_candidate(quote, transcript):
     negated/uncertain/reported assertions. Unsupported phrasing stays unknown; this
     filter never extracts a product, quantity, unit or department from the quote.
     """
-    compact = _compact(quote)
+    scoped_quote = order_assertion_scope(quote)
+    compact = _compact(scoped_quote)
     action = (re.search(r"(?:주문|발주)(?:을|를)?(?:했(?:습니다|어요|는데|지만|다|어|죠|고)|하였(?:습니다|어요|는데|지만|다)|해서)", compact)
-              or re.search(r"(?:주문|발주)(?:을|를)?\s*한\s+", quote))
-    uncertain = ("아니", "않", "못", "안했", "안한", "안하", "적없", "모르", "모릅",
+              or re.search(r"(?:주문|발주)(?:을|를)?\s*한\s+", scoped_quote))
+    uncertain = ("아니", "아닙", "않", "못", "안했", "안한", "안하", "적없", "모르", "모릅",
                  "기억", "불확실", "여부", "만약", "가정", "예시", "예문", "연습용", "예를", "한척", "한셈", "했으면",
                  "했을", "했는지", "했나요", "했습니까", "했니", "했나", "했다고", "하였다고",
                  "했다는", "했다면", "했다가", "하였다는", "하였다면", "라는", "라고",
@@ -84,7 +86,7 @@ def _explicit_order_candidate(quote, transcript):
             if not quote.rstrip().endswith((".", "!", "?")) or tail.startswith(('"', "'", "”", "’", "」", "』", "〉", "》", "»", "›", "라고", "라는")):
                 boundaries = [text.find(mark, end) for mark in (".", "!", "?", "\n")]
                 right = min((position + 1 for position in boundaries if position >= 0), default=len(text))
-            contexts.append(_compact(text[left:right]))
+            contexts.append(_compact(order_assertion_scope(text[left:right])))
             start = text.find(quote.strip(), end)
     return bool(contexts) and all(not any(marker in context for marker in uncertain)
                                   for context in contexts)
@@ -165,7 +167,6 @@ def normalize_analysis(model_analysis, transcript, case, departments):
     result = {key: copy.deepcopy(model_analysis[key]) for key in ANALYSIS_SCHEMA["properties"]
               if key not in {"fields", "facts"}}
     result["questions"] = list(dict.fromkeys(result["questions"]))
-    result["unknowns"] = ["AI 검토 제안·미확인: " + value for value in result["unknowns"]]
     # Do not retain generated diagnoses for the fields we derive below.
     derived_fields = {"quantity", "unit", "storeid", "store", "수량", "단위", "점포", "점포명"}
     result["issues"] = [{**issue, "message": "AI 검토 제안: " + issue["message"]}
@@ -191,12 +192,18 @@ def normalize_analysis(model_analysis, transcript, case, departments):
             question("인용문에서 명시적인 긍정 주문 진술을 확인하지 못했습니다. 주문 여부와 내용을 원문에서 직접 확인해 주세요.")
             return {"product": None, "quantity": None, "unit": None, "evidenceQuote": None}
         claim["unit"] = _unit(claim["unit"])
+        supported_quantity, supported_unit = supported_values(claim, key, transcript)
+        if (supported_quantity, supported_unit) != (claim["quantity"], claim["unit"]):
+            question(f"{label} 인용문에서 같은 대상·시점의 수량 또는 단위를 대조하지 못해 해당 값은 자동 채우지 않았습니다. 원문을 직접 확인해 주세요.")
+        claim["quantity"], claim["unit"] = supported_quantity, supported_unit
         if claim["quantity"] is None or claim["unit"] is None:
             question(f"{label} 수량 또는 단위가 미확인입니다. 경영주에게 확인해 주세요.")
         return claim
 
     ordered = checked_claim("orderedClaim", "주문")
     received = checked_claim("receivedClaim", "수령")
+    result["unknowns"] = ["AI 검토 제안·미확인: " + reconcile_unknown(value, received)
+                          for value in result["unknowns"]]
     store_claim, master = model_analysis["storeClaim"], case.get("store", {})
     declared_name, master_name = _compact(store_claim["name"]), _compact(master.get("name"))
     exact_store = (bool(declared_name) and declared_name == master_name

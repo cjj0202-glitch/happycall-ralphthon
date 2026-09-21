@@ -12,7 +12,7 @@ def create_app():
     # This governs browser cross-origin access; it does not authenticate callers.
     return CORSMiddleware(api, allow_origins=allowed_origins, allow_credentials=False,
                           allow_methods=["GET", "POST", "PATCH", "OPTIONS"],
-                          allow_headers=["Content-Type", "X-Demo-Role"])
+                          allow_headers=["Content-Type", "X-Demo-Role", "X-Idempotency-Key"])
 
 
 app = create_app()

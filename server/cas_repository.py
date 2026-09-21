@@ -9,6 +9,7 @@ from typing import Callable
 from server.cas_store import CasConflict, CasStore, CasValue
 from server.errors import DemoError
 from server.repository import ROOT
+from server import intake_idempotency
 
 
 class CasCaseRepository:
@@ -73,19 +74,31 @@ class CasCaseRepository:
                 return case
         raise DemoError("CASE_NOT_FOUND", "해당 접수를 찾을 수 없습니다.", 404)
 
-    def create(self, case: dict) -> dict:
+    def intake_result(self, key_digest: str, payload_hash: str | None = None) -> dict | None:
+        return intake_idempotency.lookup(self._read()[1], key_digest, payload_hash)
+
+    def create(self, case: dict, identity: tuple[str, str] | None = None) -> dict:
         result = {**copy.deepcopy(case), "revision": 0}
         self._document(CasValue({"cases": [result]}, "create-validation"))
         value, data = self._read()
         for attempt in range(self.max_attempts):
+            if identity is not None:
+                existing = intake_idempotency.lookup(data, *identity)
+                if existing is not None:
+                    return existing
             if any(row["id"] == result["id"] for row in data["cases"]):
                 raise DemoError("DUPLICATE_CASE", "이미 존재하는 접수입니다.", 409)
             data["cases"].append(copy.deepcopy(result))
+            intake_idempotency.record(data, identity, result["id"])
             try:
                 self.store.compare_and_swap(self.key, data, value.version)
                 return copy.deepcopy(result)
             except CasConflict:
                 value, data = self._existing()
+                if identity is not None:
+                    existing = intake_idempotency.lookup(data, *identity)
+                    if existing is not None:
+                        return existing
                 if any(row["id"] == result["id"] for row in data["cases"]):
                     raise DemoError("DUPLICATE_CASE", "이미 존재하는 접수입니다.", 409) from None
         raise self._busy()

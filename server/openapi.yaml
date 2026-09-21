@@ -83,6 +83,12 @@ paths:
   /api/intake:
     post:
       operationId: server.handlers.create_intake
+      parameters:
+        - name: X-Idempotency-Key
+          in: header
+          required: false
+          schema: {type: string}
+          description: UUID v4 for this intake attempt. Same key and unchanged JSON body return the same case without creating a duplicate. Keep the key after an uncertain response.
       requestBody:
         required: true
         content:
@@ -101,5 +107,15 @@ paths:
                   minLength: 1
                   description: Explicit synthetic source case ID. Store, subject and type must match; omitting it leaves all logistics records unlinked.
       responses:
-        '201': {description: Created synthetic text case with revision 0}
+        '201': {description: 'Created synthetic text case, or current state of the case previously created by the same idempotency key and body'}
+        '409': {description: Idempotency key reused with different input}
         '422': {description: Invalid intake}
+  /api/intake-attempts/{request_key}:
+    get:
+      operationId: server.handlers.get_intake_attempt
+      parameters:
+        - {name: request_key, in: path, required: true, schema: {type: string}}
+      responses:
+        '200': {description: Current state of the case created by this intake attempt}
+        '404': {description: No stored result found yet. An in-flight request may still finish; retry only the same key and body.}
+        '422': {description: Invalid intake attempt key}

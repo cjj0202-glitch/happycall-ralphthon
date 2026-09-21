@@ -8,6 +8,7 @@ import uuid
 from server.errors import DemoError
 from server.live import LiveAnalyzer
 from server.repository import CaseRepository
+from server import intake_idempotency
 
 DEFAULT_DEPARTMENTS = [
     {"id": "delivery", "name": "배송 운영"},
@@ -42,13 +43,26 @@ class CaseService:
     def get(self, case_id):
         return self.repo.get(case_id)
 
-    def intake(self, body):
+    def intake_attempt(self, request_key):
+        result = self.repo.intake_result(intake_idempotency.key_digest(request_key))
+        if result is None:
+            raise DemoError("INTAKE_ATTEMPT_NOT_FOUND", "이 접수 시도의 저장 결과를 아직 확인하지 못했습니다. 같은 내용으로 다시 확인하거나 재시도해 주세요.", 404)
+        return result
+
+    def intake(self, body, request_key=None):
         if set(body) - {"storeId", "subject", "text", "type", "referenceCaseId"}:
             raise DemoError("UNKNOWN_FIELD", "허용되지 않은 접수 필드입니다.")
         if any(not nonempty(body.get(k)) for k in ("storeId", "subject", "text")) or body.get("type") not in ("missing", "wrong"):
             raise DemoError("INVALID_INTAKE", "점포·문의 대상·문의 내용을 입력해 주세요.", 422)
         if len(body["text"]) > 8000:
             raise DemoError("INPUT_LIMIT", "문의 내용은 8,000자 이하여야 합니다.", 422)
+        identity = intake_idempotency.request_identity(request_key, body)
+        # A committed attempt is bound to its original validated input, not to a
+        # later version of the fixture. create() still checks atomically for races.
+        if identity is not None:
+            existing = self.repo.intake_result(*identity)
+            if existing is not None:
+                return existing
         # Matching descriptions do not identify the same delivery or date.
         # A caller must explicitly select the source case before any records are joined.
         reference_id = body.get("referenceCaseId")
@@ -76,7 +90,7 @@ class CaseService:
             for key in ("wms", "tms", "asOf", "expected", "received", "provenance"):
                 if key in linked:
                     case[key] = copy.deepcopy(linked[key])
-        return self.repo.create(case)
+        return self.repo.create(case, identity=identity)
 
     def _validate_source_context(self, case):
         source_id = case.get("linkedFixtureId") or case["id"]

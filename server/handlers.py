@@ -46,9 +46,19 @@ async def get_case(case_id):
         return error(exc)
 
 
-async def create_intake(body):
+async def create_intake(body, x_idempotency_key=None):
     try:
-        return await run_in_threadpool(lambda: service().intake(body)), 201
+        # Connexion does not inject header parameters into the handler. Its local
+        # request proxy is false outside an operation (e.g. direct adapter checks).
+        request_key = request.headers.get("X-Idempotency-Key") if request else x_idempotency_key
+        return await run_in_threadpool(lambda: service().intake(body, request_key)), 201
+    except DemoError as exc:
+        return error(exc)
+
+
+async def get_intake_attempt(request_key):
+    try:
+        return await run_in_threadpool(lambda: service().intake_attempt(request_key))
     except DemoError as exc:
         return error(exc)
 

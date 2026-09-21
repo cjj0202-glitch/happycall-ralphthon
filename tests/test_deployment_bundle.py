@@ -57,6 +57,7 @@ def source_repo(tmp_path):
         'dependencies = []\n[tool.uv]\npackage = false\n')
     put(root, "uv.lock", 'version = 1\nrevision = 1\nrequires-python = ">=3.12,<3.13"\n')
     put(root, "data/fixtures/cases.json", '[{"id":"SYN-TEST-1","synthetic":true}]\n')
+    put(root, "data/overlays/pc4-tms.json", '{"synthetic":true,"visits":[]}\n')
     for name, content in {
         "app/page.tsx": "export default function Page(){return 'synthetic';}\n",
         "app/layout.tsx": "export default function Layout(){return 'synthetic';}\n",
@@ -247,6 +248,25 @@ def test_source_change_during_build_cannot_receive_completion_stamp(source_repo)
         bundle.write_build_stamp(source_repo, before)
     with pytest.raises(bundle.BundleError):
         build(source_repo)
+
+
+@pytest.mark.parametrize('name', bundle.FRONTEND_DATA_FILES)
+def test_external_client_json_change_invalidates_build(source_repo, name):
+    before = bundle.source_fingerprint(source_repo)
+    # Valid JSON whitespace change suffices: the export must bind the exact input.
+    with (source_repo / name).open('a', encoding='utf-8') as stream:
+        stream.write('\n ')
+    assert bundle.source_fingerprint(source_repo) != before
+    with pytest.raises(bundle.BundleError, match='STALE_OR_CHANGED_BUILD_STAMP'):
+        build(source_repo)
+    assert_no_complete_bundle(source_repo)
+
+
+@pytest.mark.parametrize('name', bundle.FRONTEND_DATA_FILES)
+def test_missing_external_client_json_cannot_receive_stamp(source_repo, name):
+    (source_repo / name).unlink()
+    with pytest.raises(bundle.BundleError):
+        bundle.source_fingerprint(source_repo)
 
 
 def test_output_change_after_build_stamp_is_rejected(source_repo):
