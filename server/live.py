@@ -198,12 +198,21 @@ def normalize_analysis(model_analysis, transcript, case, departments):
         if (supported_quantity, supported_unit) != (claim["quantity"], claim["unit"]):
             question(f"{label} 인용문에서 같은 대상·시점의 수량 또는 단위를 대조하지 못해 해당 값은 자동 채우지 않았습니다. 원문을 직접 확인해 주세요.")
         claim["quantity"], claim["unit"] = supported_quantity, supported_unit
-        if claim["quantity"] is None or claim["unit"] is None:
-            question(f"{label} 수량 또는 단위가 미확인입니다. 경영주에게 확인해 주세요.")
+        if key == "orderedClaim" and (claim["quantity"] is None or claim["unit"] is None):
+            missing = [name for field, name in (("quantity", "수량"), ("unit", "단위")) if claim[field] is None]
+            question("AI 추가 확인: 주문 " + "·".join(missing)
+                     + ("을" if missing == ["수량"] else "를")
+                     + " 원문과 대조해 주세요. 원문에서도 불명확한 항목만 경영주에게 추가 확인해 주세요.")
         return claim
 
     ordered = checked_claim("orderedClaim", "주문")
     received = checked_claim("receivedClaim", "수령")
+    # This describes the projected value's omission, not a unit inferred from
+    # the quote. Keep the quote for human review and leave all nulls untouched.
+    if received["product"] and received["evidenceQuote"] and received["unit"] is None:
+        result["issues"].append({"field": "unit",
+            "message": "AI가 수령 단위를 자동 확인하지 못했습니다. 인용문을 원문과 대조해 주세요. 원문에서도 불명확하면 경영주에게 추가 확인해 주세요.",
+            "evidence": received["evidenceQuote"]})
     result["unknowns"] = ["AI 검토 제안·미확인: " + reconcile_unknown(value, received)
                           for value in result["unknowns"]]
     store_claim, master = model_analysis["storeClaim"], case.get("store", {})

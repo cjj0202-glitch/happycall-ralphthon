@@ -235,7 +235,10 @@ class AnalysisRepairTests(unittest.TestCase):
                 result = self.project()
                 self.assertEqual((result["fields"]["quantity"], result["fields"]["unit"]), (quantity, unit))
                 if quantity is None or unit is None:
-                    self.assertTrue(any("수령 수량 또는 단위" in value for value in result["questions"]))
+                    followups = [value for value in result["questions"] if value.startswith("AI 추가 확인: 실제 수령 ")]
+                    self.assertEqual(len(followups), 1)
+                    self.assertIn("원문과 대조", followups[0])
+                    self.assertIn("원문에서도 불명확한 항목만", followups[0])
 
     def test_past_receipt_does_not_fill_current_unknown(self):
         past = "지난달 구름바다칫솔 두 박스를 받았습니다."

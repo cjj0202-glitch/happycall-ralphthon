@@ -286,7 +286,7 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisSt
           {!!analysis?.issues?.length && <ul className={styles.issueList}>{analysis.issues.map((issue, index) => <li key={index}><span className={`${styles.badge} ${styles.warningBadge}`}>확인 필요 · {fields.find(field => field.key === issue.field)?.label || issue.field}</span><p>{issue.message}</p>{issue.evidence ? <blockquote><span>AI가 연결한 인용 · 원문 대조 필요</span>{issue.evidence}</blockquote> : <p className={styles.help}>제공된 인용 근거 없음</p>}</li>)}</ul>}
           <h4 className={styles.subheading}>아직 확인되지 않은 내용</h4>
           {analysis?.unknowns?.length ? <ul className={styles.list}>{analysis.unknowns.map((unknown, index) => <li key={index}>{unknown}</li>)}</ul> : <p className={styles.help}>{analysis ? '별도 미확인 목록이 제공되지 않았습니다. 모든 사실이 확인됐다는 뜻은 아닙니다.' : '분석 결과와 원문을 대조한 뒤 확인합니다.'}</p>}
-          <h4 className={styles.subheading}>통화 후 추가로 물어볼 질문</h4>
+          <h4 className={styles.subheading}>통화 후 확인할 항목</h4>
           {analysis?.questions?.length ? <ol className={styles.list}>{analysis.questions.map((question, index) => <li key={index}>{question}</li>)}</ol> : <p className={styles.help}>제공된 추가 질문 없음</p>}
           {analysis?.department && <div className={styles.department}><strong>AI 추천 부서 · {valueText(analysis.department.name)}</strong><p>{valueText(analysis.department.reason)}</p><span className={styles.help}>상담원 확인 전 제안 · 자동 이관하지 않습니다.</span></div>}
         </section>

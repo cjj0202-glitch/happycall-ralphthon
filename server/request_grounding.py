@@ -144,4 +144,5 @@ def receipt_followup(fields, transcript, received_product):
     if not missing:
         return None
     return ('AI 추가 확인: 실제 수령 ' + '·'.join(missing)
-            + '를 원문과 대조해 주세요. 원문에서도 불명확한 항목만 경영주에게 추가 확인해 주세요.')
+            + ('을' if missing == ['수량'] else '를')
+            + ' 원문과 대조해 주세요. 원문에서도 불명확한 항목만 경영주에게 추가 확인해 주세요.')
