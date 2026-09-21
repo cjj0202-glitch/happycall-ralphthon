@@ -1,0 +1,105 @@
+openapi: 3.0.3
+info:
+  title: OneFlow Local Synthetic Demo
+  version: 0.1.0
+paths:
+  /api/health:
+    get:
+      operationId: server.handlers.health
+      responses:
+        '200': {description: Local runtime and conservative budget state}
+  /api/cases:
+    get:
+      operationId: server.handlers.list_cases
+      responses:
+        '200': {description: Synthetic cases. Each case includes a nonnegative integer revision.}
+  /api/cases/{case_id}:
+    parameters:
+      - {name: case_id, in: path, required: true, schema: {type: string}}
+    get:
+      operationId: server.handlers.get_case
+      responses:
+        '200': {description: Synthetic case including a nonnegative integer revision. Legacy stored cases start at revision 0.}
+        '404': {description: Case not found}
+    patch:
+      operationId: server.handlers.patch_case
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                expectedRevision:
+                  type: integer
+                  minimum: 0
+                  description: Required by the service (428 if omitted). The revision displayed when the user reviewed this form; never refresh it silently before saving.
+                intake:
+                  type: object
+                  additionalProperties: false
+                  properties:
+                    storeId: {type: string, nullable: true}
+                    subject: {type: string, nullable: true}
+                    quantity: {type: number, nullable: true, minimum: 0}
+                    unit: {type: string, nullable: true}
+                    request: {type: string, nullable: true}
+                departmentId: {type: string, nullable: true}
+                reviewConfirmed: {type: boolean}
+                status: {type: string, enum: [draft, review, handed_off, in_progress, closed]}
+                reply: {type: string, maxLength: 8000}
+                pendingActions: {type: array, items: {type: string}, maxItems: 50}
+                selectedEvidence: {type: array, items: {type: string}, maxItems: 50}
+      responses:
+        '200': {description: Updated case}
+        '400': {description: Invalid input}
+        '403': {description: Demo role not allowed}
+        '404': {description: Case not found}
+        '409': {description: State conflict}
+        '422': {description: Workflow gate failed}
+        '428': {description: expectedRevision is required}
+  /api/cases/{case_id}/analyze:
+    parameters:
+      - {name: case_id, in: path, required: true, schema: {type: string}}
+    post:
+      operationId: server.handlers.analyze_case
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [mode]
+              properties:
+                mode: {type: string, enum: [replay, demo-live]}
+      responses:
+        '200': {description: Explicit-mode analysis with requestId and the saved case revision. Concurrent edits reject the save with STATE_CONFLICT.}
+        '409': {description: Audio unavailable or state conflict}
+        '422': {description: Input limit}
+        '429': {description: Budget reservation stopped request}
+        '502': {description: 'Actual AI request failed, no automatic replay'}
+        '503': {description: Local credential or fixture unavailable}
+  /api/intake:
+    post:
+      operationId: server.handlers.create_intake
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [storeId, subject, text, type]
+              properties:
+                storeId: {type: string, minLength: 1, maxLength: 100}
+                subject: {type: string, minLength: 1, maxLength: 300}
+                text: {type: string, minLength: 1, maxLength: 8000}
+                type: {type: string, enum: [missing, wrong]}
+                referenceCaseId:
+                  type: string
+                  minLength: 1
+                  description: Explicit synthetic source case ID. Store, subject and type must match; omitting it leaves all logistics records unlinked.
+      responses:
+        '201': {description: Created synthetic text case with revision 0}
+        '422': {description: Invalid intake}

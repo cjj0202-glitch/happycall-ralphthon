@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "repository": "cjj0202-glitch/happycall-ralphthon",
+  "releaseTag": "demo-media-20260921",
+  "releaseStateAtPreparation": "not-published",
+  "measuredAt": "2026-09-21T17:03:34+09:00",
+  "measuredHost": "CJJ",
+  "notice": "Synthetic demo media; not actual calls, CCTV, or logistics evidence. Publication and downloads must be verified separately.",
+  "assets": [
+    {
+      "name": "CASE-0001.wav",
+      "bytes": 2263244,
+      "sha256": "1432d1b44b66d7edd53408811ab73ede98303555235b14b4587671a390a51b92",
+      "synthetic": true,
+      "durationSeconds": 47.15,
+      "durationMethod": "Python wave decoded PCM byte count",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "name": "CASE-0002.wav",
+      "bytes": 2378444,
+      "sha256": "f9fa70afaeb575876ab2dd18f1f395fbd38d6fec99b7cc0f70cb723650fb2e0c",
+      "synthetic": true,
+      "durationSeconds": 49.55,
+      "durationMethod": "Python wave decoded PCM byte count",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "name": "sorter-demo.mp4",
+      "bytes": 1097133,
+      "sha256": "e6cad3cf9f999b596a0fef3e3d463170e0d279568a31a4be49366e5383908881",
+      "synthetic": true,
+      "durationSeconds": 12.0,
+      "durationMethod": "imageio-ffmpeg metadata (ffprobe unavailable)",
+      "width": 960,
+      "height": 540,
+      "fps": 24.0,
+      "codec": "h264"
+    }
+  ]
+}

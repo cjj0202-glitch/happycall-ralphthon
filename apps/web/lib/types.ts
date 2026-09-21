@@ -1,0 +1,29 @@
+export type View = 'desk' | 'owner' | 'center' | 'wms' | 'tms';
+export type Mode = 'demo-live' | 'replay';
+export type CaseStatus = 'draft' | 'review' | 'handed_off' | 'in_progress' | 'closed';
+export type Intake = { storeId: string | null; subject: string | null; quantity: string | number | null; unit: string | null; request: string | null };
+export type Transcript = { speaker: string; text: string; start?: number; end?: number };
+export type Analysis = {
+  summary: string;
+  fields: Intake;
+  issues: { field: string; message: string; evidence?: string }[];
+  questions: string[];
+  department: { id: string; name: string; reason: string };
+  facts: string[];
+  unknowns: string[];
+  replyDraft: string;
+};
+export type Evidence = { id: string; system: string; label: string; time?: string; value?: string | number; status?: 'fact' | 'unknown'; source?: string };
+export type CaseData = {
+  id: string; type: 'missing' | 'wrong'; title: string;
+  revision?: number;
+  store: { id: string; name: string }; channel: 'voice' | 'text';
+  sourceText: string; audioUrl?: string; transcript?: Transcript[]; asOf?: string;
+  status?: CaseStatus; analysis?: Analysis; intake?: Intake; departmentId?: string;
+  reviewConfirmed?: boolean; reply?: string; pendingActions?: string[]; selectedEvidence?: string[];
+  expected?: { product?: string; quantity?: number; unit?: string };
+  received?: { product?: string; quantity?: number; unit?: string };
+  wms?: Record<string, unknown>; tms?: Record<string, unknown>; evidence?: Evidence[];
+  [key: string]: unknown;
+};
+export type AnalyzeResult = { transcript: Transcript[]; analysis: Analysis; mode: Mode; requestId: string; revision?: number };

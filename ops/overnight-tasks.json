@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "deadlineKST": "2026-09-22T09:00:00+09:00",
+  "owner": "pc1",
+  "note": "기존45개 공식작업표와별개. 실제수신/인수전완료처리금지. docs24의사용자즉시분산요청적용",
+  "tasks": [
+    {
+      "id": "N01",
+      "pc": "pc1",
+      "outcome": "공통 계약·API·통합·인수",
+      "state": "IN_PROGRESS",
+      "design": "PENDING",
+      "implementation": "PENDING",
+      "unit": "PENDING",
+      "functional": "PENDING",
+      "adversarial": "PENDING",
+      "accepted": false
+    },
+    {
+      "id": "N02",
+      "pc": "pc2",
+      "outcome": "음성 명료도·통화 검토 UX",
+      "state": "ASSIGNED_AWAITING_ACK",
+      "design": "PENDING",
+      "implementation": "PENDING",
+      "unit": "PENDING",
+      "functional": "PENDING",
+      "adversarial": "PENDING",
+      "accepted": false
+    },
+    {
+      "id": "N03",
+      "pc": "pc3",
+      "outcome": "WMS 공정·합성 CCTV",
+      "state": "ASSIGNED_AWAITING_ACK",
+      "design": "PENDING",
+      "implementation": "PENDING",
+      "unit": "PENDING",
+      "functional": "PENDING",
+      "adversarial": "PENDING",
+      "accepted": false
+    },
+    {
+      "id": "N04",
+      "pc": "pc4",
+      "outcome": "TMS·타모듈 시나리오 검증",
+      "state": "ASSIGNED_AWAITING_ACK",
+      "design": "PENDING",
+      "implementation": "PENDING",
+      "unit": "PENDING",
+      "functional": "PENDING",
+      "adversarial": "PENDING",
+      "accepted": false
+    }
+  ]
+}
