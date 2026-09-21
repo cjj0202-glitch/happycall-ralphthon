@@ -6,7 +6,7 @@ PC3에는 확인한 범위에서 Blender 실행파일이 없어 **생성기를 �
 
 ## 사전 조건
 
-- 소유 브랜치의 `build_scene.py`, `scene_contract.py`, `look_presets.py`를 함께 사용한다. 환경 옵션 통합본에서는 `environment_detail.py`도 같은 커밋에서 사용한다.
+- 소유 브랜치의 `build_scene.py`, `scene_contract.py`, `look_presets.py`, `shadow_settings.py`를 함께 사용한다. 환경 옵션 통합본에서는 `environment_detail.py`도 같은 커밋에서 사용한다.
 - 공용 기준의 layout JSON과 `data/fixtures/cases.json`을 읽을 수 있어야 한다.
 - 기존 `.blend`나 출력 폴더를 덮지 않는다. 실행마다 새로운 빈 output 디렉터리를 선택한다.
 - 아래 `$blenderExe`는 **실행하는 PC에서 확인한 실제 경로**다. PC3/pc1의 경로를 서로 추측하거나 복사하지 않는다.
@@ -43,15 +43,23 @@ pc1이 c208597의 대표3장을 실제 렌더했고 pc3도 다운로드 SHA 검�
 
 `--look baseline`이 기본값이다. `--look contrast_material_v1`은 fill/world 조명, 콘크리트/강철 재질을 바꾸는 B 설정이다. A/B는 **동일한 기하 수정과 preset 통합 커밋**에서 각각 새 폴더로 생성한다. 이전 geometry의 Release PNG를 A로 재사용하지 않는다. 카메라/경로/seed/샘플/노출/프레임을 고정하며, 원본 크기로 접촉·물성·그림자를 비교한다. 21:00 pc1 #9 후속 피드백에서 실제 A/B 6장 렌더와 B 선택이 전달됐다. 이는 아래 새 배경 설비의 시각 수용을 뜻하지 않는다.
 
+## pc1이 선택한 후속 후보: EEVEE96 / shadow rays4 / threads2
+
+pc1은 구버전 기하의 실제 비교에서 samples32→96의 바닥 입자 완화와 frame133의 shadow rays1→4에 따른 발판 입자 감소를 보고했다. 실제 Blender4.5.14 RNA의 rays 범위는 **1..4**였으며 8은 지원되지 않았다. pc1의 단일 프레임 전체 프로세스 시간은 EEVEE96/rays4 28.453초, Cycles CPU16+OIDN 34.953초였다. 이는 PC1 관측이며 새 환경·전체 영상의 시간 보장이 아니다. [그림자 설정 전달](../../reports/pc3/shadow-settings-handoff.md)에 정본 보고서와 측정 한계를 연결했다.
+
+기본값은 여전히 `--samples 32 --shadow-rays 1`이다. `--shadow-rays`는 정수1..4만 허용하며 EEVEE 실제 RNA 범위 확인·설정 후 엄격한 readback을 수행한다. report의 `shadowRays`에서 requested/actual/applied/property/runtime 범위를 구분한다. Cycles의 기본 rays1은 미적용/actual=null이며 비기본 rays2..4는 거부한다. EEVEE 샘플 property를 Cycles 실효값으로 쓰지 않는다.
+
+**21:18 전달 예시의 samples32 후보 명령은 pc1의 명시적 후속 요청에 따라 아래 96/4 후보 명령으로 대체한다.** 기존 기본값·48개 환경 geometry·조명·look·경로를 변경한다는 뜻은 아니다. `--threads 2`는 Blender 인자이므로 Python용 `--`보다 앞에 둔다.
+
 ## 선택형 정적 배경 설비: prepare와 대표 3장
 
 `--environment-detail none`은 기본값으로 추가 객체가 없다. `--environment-detail staging_v1`은 컨베이어 뒤쪽에 정적 롤케이지 2대, 낮은 2단 랙과 상자 4개, 바닥 구역선만 추가한다. 사람·작업 움직임은 없다. 기존 geometry/재질/조명/카메라/사건 경로/tracked 목록을 바꾸지 않는다. 정확한 위치·열린 통로·광선 검사는 [환경 설계](../../reports/pc3/environment-detail-design.md)를 따른다.
 
-아래는 환경 옵션 통합 커밋에서 사용할 명령이다. **문서 작성 시 새 환경 렌더는 미실행**이며, 실행 PC의 검증된 `$blenderExe`와 새 빈 output 폴더를 사용한다. B look, CCTV, EEVEE, 1280×720, 요청 sample32를 고정하고 실효 sample readback도 확인한다.
+아래는 환경·shadow 옵션 통합 커밋에서 사용할 명령이다. **문서 작성 시 새 환경 렌더는 미실행**이며, 실행 PC의 검증된 `$blenderExe`와 새 빈 output 폴더를 사용한다. B look, CCTV, EEVEE, 1280×720, samples96/shadow rays4/threads2를 명시하고 실효 readback도 확인한다.
 
 ```powershell
-& $blenderExe --background --factory-startup --python-exit-code 1 --python scripts/media_pc3/build_scene.py -- --layout planning/media/scene-layout-v1.json --fixture data/fixtures/cases.json --output .local/pc3-blender/staging-prepare-01 --mode prepare --engine eevee --camera cctv --resolution 1280 720 --samples 32 --look contrast_material_v1 --environment-detail staging_v1
-& $blenderExe --background --factory-startup --python-exit-code 1 --python scripts/media_pc3/build_scene.py -- --layout planning/media/scene-layout-v1.json --fixture data/fixtures/cases.json --output .local/pc3-blender/staging-representatives-01 --mode representatives --engine eevee --camera cctv --resolution 1280 720 --samples 32 --look contrast_material_v1 --environment-detail staging_v1
+& $blenderExe --background --factory-startup --threads 2 --python-exit-code 1 --python scripts/media_pc3/build_scene.py -- --layout planning/media/scene-layout-v1.json --fixture data/fixtures/cases.json --output .local/pc3-blender/staging-shadow4-prepare-01 --mode prepare --engine eevee --camera cctv --resolution 1280 720 --samples 96 --shadow-rays 4 --look contrast_material_v1 --environment-detail staging_v1
+& $blenderExe --background --factory-startup --threads 2 --python-exit-code 1 --python scripts/media_pc3/build_scene.py -- --layout planning/media/scene-layout-v1.json --fixture data/fixtures/cases.json --output .local/pc3-blender/staging-shadow4-representatives-01 --mode representatives --engine eevee --camera cctv --resolution 1280 720 --samples 96 --shadow-rays 4 --look contrast_material_v1 --environment-detail staging_v1
 ```
 
 prepare의 288행 pose/투영 metadata는 288프레임 렌더가 아니다. 새 환경 대표 1/133/288에서 상자·분기 방향·가드 접촉·가림·물성·그림자 입자를 다시 확인하고 결과·환경 객체 목록·해시를 기록한다. none/staging은 geometry가 다르므로 동일 geometry 조건의 A/B 수신 검사기를 환경 비교에 그대로 적용하지 않는다.
@@ -61,13 +69,13 @@ prepare의 288행 pose/투영 metadata는 288프레임 렌더가 아니다. 새 
 pc1이 **staging_v1 대표 3장**을 명시적으로 수용한 뒤에만 같은 코드/seed/B/environment 설정으로 아래 short를 실행할 수 있다. 기존 B 선택만으로 새 환경의 확대를 시작하지 않는다. 아래 명령은 현재 미실행이며 자동 실행 지시가 아니다.
 
 ```powershell
-& $blenderExe --background --factory-startup --python-exit-code 1 --python scripts/media_pc3/build_scene.py -- --layout planning/media/scene-layout-v1.json --fixture data/fixtures/cases.json --output .local/pc3-blender/staging-short-01 --mode short --engine eevee --camera cctv --resolution 1280 720 --samples 32 --look contrast_material_v1 --environment-detail staging_v1
+& $blenderExe --background --factory-startup --threads 2 --python-exit-code 1 --python scripts/media_pc3/build_scene.py -- --layout planning/media/scene-layout-v1.json --fixture data/fixtures/cases.json --output .local/pc3-blender/staging-shadow4-short-01 --mode short --engine eevee --camera cctv --resolution 1280 720 --samples 96 --shadow-rays 4 --look contrast_material_v1 --environment-detail staging_v1
 ```
 
 short는 `[3,6)`초의 frame73..144 72장이다. 실제 FFmpeg 경로를 확인한 뒤 다음처럼 인코딩한다. 덮어쓰기 거부 `-n`, H264/yuv420p/faststart를 사용한다.
 
 ```powershell
-& $ffmpegExe -n -framerate 24 -start_number 73 -i .local/pc3-blender/staging-short-01/frame-%04d.png -frames:v 72 -an -c:v libx264 -crf 18 -pix_fmt yuv420p -movflags +faststart .local/pc3-blender/staging-short-01/branch-preview.mp4
+& $ffmpegExe -n -framerate 24 -start_number 73 -i .local/pc3-blender/staging-shadow4-short-01/frame-%04d.png -frames:v 72 -an -c:v libx264 -crf 18 -pix_fmt yuv420p -movflags +faststart .local/pc3-blender/staging-shadow4-short-01/branch-preview.mp4
 ```
 
 **이번 범위에서는 288프레임 animation 후보 렌더·인코딩을 실행하지 않는다.** short 인코딩 성공만으로 재생/탐색/디코딩/전체화면 합성표시/bbox 일치를 통과 처리하지 않는다. 후보는 별도 Release와 해시로 제출하며 기존 v1 Release·정본 fixture/manifest/public을 덮지 않는다. 현재 생성기는 자산 업로드나 등록을 실행하지 않는다.
@@ -79,6 +87,7 @@ python -m py_compile scripts/media_pc3/build_scene.py scripts/media_pc3/scene_co
 python -m unittest discover -s tests/remote/pc3 -p test_scene_contract.py -v
 python -m unittest discover -s scripts/media_pc3 -p test_look_presets.py -v
 python -m unittest discover -s scripts/media_pc3 -p test_environment_detail.py -v
+python -m unittest discover -s scripts/media_pc3 -p test_shadow_settings.py -v
 python scripts/media_pc3/audit_guard_supports.py --layout planning/media/scene-layout-v1.json
 ```
 

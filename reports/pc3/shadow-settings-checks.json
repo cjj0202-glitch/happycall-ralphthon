@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "pc3-shadow-settings-pure-checks-v1",
+  "checkedAt": "2026-09-21T12:24:54.920121+00:00",
+  "samePhysicalPc": "pc3",
+  "baselineCommit": "8823de240e769dd7c5ed668a11ea4800a155b404",
+  "blenderExecuted": false,
+  "runtimeRnaVerified": false,
+  "renderedPixelsVerified": false,
+  "visualAccepted": false,
+  "tests": {
+    "shadowSettings": {
+      "run": 11,
+      "failures": 0,
+      "errors": 0,
+      "command": "python -B -m unittest discover -s scripts/media_pc3 -p test_shadow_settings.py -v",
+      "observedSeconds": 0.514
+    },
+    "changedRegressions": {
+      "run": 22,
+      "failures": 0,
+      "errors": 0,
+      "suites": {
+        "environment": 11,
+        "lookPresets": 11
+      }
+    },
+    "totalRun": 33,
+    "passed": true
+  },
+  "fakeRuntimeScenarios": {
+    "acceptedEeveeRequestedValues": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "rangeReadback": {
+      "normal": [
+        1,
+        4
+      ],
+      "narrowed": [
+        1,
+        2
+      ]
+    },
+    "requestOutsideNarrowedRangeRejectedBeforeWrite": true,
+    "missingRuntimeCases": 6,
+    "malformedRangeCases": 7,
+    "setterAndReadbackFailureCases": [
+      "raises",
+      "clamps to 2",
+      "ignores and stays 1",
+      "returns boolean",
+      "returns float",
+      "returns null"
+    ],
+    "invalidRequests": [
+      "0",
+      "5",
+      "8",
+      "-1",
+      "true",
+      "false",
+      "1.0",
+      "4.0",
+      "string 4",
+      "null",
+      "array",
+      "object"
+    ],
+    "cycles": {
+      "requested": 1,
+      "actual": null,
+      "applied": false,
+      "property": null,
+      "eeveeAccessed": false,
+      "nondefaultRejected": [
+        2,
+        3,
+        4
+      ]
+    },
+    "samplesUnchanged": {
+      "eevee": 32,
+      "cycles": 64
+    }
+  },
+  "integration": {
+    "actualMainHookAstExecutedWithFakeScene": true,
+    "hookPosition": "immediately after build and before tracks/save/render",
+    "reportUsesHelperReadbackObject": true,
+    "defaultShadowRays": 1,
+    "cliRange": [
+      1,
+      4
+    ],
+    "sourceDependencyAlwaysIncluded": "shadow_settings.py",
+    "dependenciesWithNoEnvironment": 3,
+    "dependenciesWithStagingEnvironment": 4,
+    "geometryAndLightAstUnchanged": true,
+    "mainAstUnchangedAfterRemovingOnlyShadowHookReportFieldDependency": true
+  },
+  "environmentRecheck": {
+    "poses": 288,
+    "parcelParts": 3,
+    "props": 48,
+    "routePairs": 41472,
+    "cameraSegments": 6912,
+    "segmentBoxPairs": 331776,
+    "routeIntersections": 0,
+    "rayIntersections": 0,
+    "maxParcelCornerY": 7.7489416406628715
+  },
+  "limitations": [
+    "Pure Python fake scene/RNA property tests on pc3, not Blender execution.",
+    "Fake setter/readback confirms handling logic only; actual Blender RNA availability, range and rendered shadows are unverified.",
+    "Default value 1 is a CLI contract; this test does not independently prove Blender default behavior.",
+    "Scene contract suite was not rerun because its source was unchanged; prior run is separate evidence."
+  ],
+  "sources": [
+    {
+      "path": "scripts/media_pc3/build_scene.py",
+      "sha256": "ff03e34ae903272af3a99659ed36964a6e52c20518b2489939a22b067d3ea854"
+    },
+    {
+      "path": "scripts/media_pc3/shadow_settings.py",
+      "sha256": "4d1357cde51530be813e3a1505972b253b9b23ae8c35a99cbb1b304fe5c374fe"
+    },
+    {
+      "path": "scripts/media_pc3/test_shadow_settings.py",
+      "sha256": "3302ca676e3fc3e3baa4141efc8a9d028e49dacc5ee7991504fa4fe51872d127"
+    },
+    {
+      "path": "scripts/media_pc3/test_environment_detail.py",
+      "sha256": "21c682d347ec866dbaf75fb0714381ed285a541fcf141087f59db812542f2049"
+    },
+    {
+      "path": "scripts/media_pc3/test_look_presets.py",
+      "sha256": "05dfe78c4c2a11183d07480c490f089d97e818a0c14798f2998d204e15c1f66e"
+    }
+  ]
+}

@@ -167,8 +167,9 @@ class LookPresetTests(unittest.TestCase):
         previous = actual_arguments(self.baseline_source, self.flags)
         self.assertEqual(current.look, "baseline")
         self.assertEqual(current.environment_detail, "none")
+        self.assertEqual(current.shadow_rays, 1)
         self.assertEqual({key: value for key, value in vars(current).items()
-                          if key not in {"look", "environment_detail"}}, vars(previous))
+                          if key not in {"look", "environment_detail", "shadow_rays"}}, vars(previous))
         self.assertEqual((current.mode, current.engine, current.camera, current.samples),
                          ("representatives", "eevee", "cctv", 32))
         self.assertEqual(current.resolution, [1280, 720])

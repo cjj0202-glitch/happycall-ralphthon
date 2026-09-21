@@ -26,6 +26,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from scene_contract import SCENE_SEED, FRAME_COUNT, evaluate_motion, load_layout
 from look_presets import settings_for
 from environment_detail import environment_specs
+from shadow_settings import configure_shadow_rays
 
 
 def arguments():
@@ -38,12 +39,15 @@ def arguments():
     parser.add_argument('--camera', choices=['cctv', 'overview'], default='cctv')
     parser.add_argument('--resolution', nargs=2, type=int, default=[1280, 720])
     parser.add_argument('--samples', type=int, default=32)
+    parser.add_argument('--shadow-rays', type=int, choices=range(1, 5), default=1)
     parser.add_argument('--look', choices=['baseline', 'contrast_material_v1'], default='baseline')
     parser.add_argument('--environment-detail', choices=['none', 'staging_v1'], default='none')
     argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
     args = parser.parse_args(argv)
     if min(args.resolution) < 64 or max(args.resolution) > 3840 or not 1 <= args.samples <= 256:
         parser.error('Resolution must be 64..3840 and samples 1..256.')
+    if args.engine == 'cycles' and args.shadow_rays != 1:
+        parser.error('--shadow-rays is EEVEE-only; Cycles allows only the unapplied default 1.')
     if args.mode == 'animation' and args.camera != 'cctv':
         parser.error('Final event candidate must use the fixed registered CCTV camera.')
     if args.mode == 'animation' and (args.look != 'baseline' or args.environment_detail != 'none'):
@@ -368,6 +372,7 @@ def main():
         raise RuntimeError('Output directory is not empty; choose a new run directory. No overwrite.')
     started = time.time()
     scene, parcel, tracked = build(layout, args)
+    shadow_rays = configure_shadow_rays(scene, args.engine, args.shadow_rays)
     tracking = tracks(scene, layout, tracked)
     (args.output / 'tracks.json').write_text(json.dumps(tracking, ensure_ascii=False, indent=2), encoding='utf-8')
     scene.frame_set(1)
@@ -394,6 +399,7 @@ def main():
               'blenderVersion': bpy.app.version_string, 'engine': scene.render.engine,
               'engineDevice': 'CPU' if args.engine == 'cycles' else 'Blender EEVEE runtime device; inspect actual log',
               'requestedSamples': args.samples, 'resolution': args.resolution, 'fps': 24,
+              'shadowRays': shadow_rays,
               'runtimeSamples': {'property': 'scene.cycles.samples' if args.engine == 'cycles' else 'scene.eevee.taa_render_samples',
                                  'value': scene.cycles.samples if args.engine == 'cycles' else getattr(getattr(scene, 'eevee', None), 'taa_render_samples', None),
                                  'note': 'Runtime property readback; null means unverified, not the requested count.'},
@@ -404,7 +410,8 @@ def main():
               'candidateDurationSeconds': 12, 'candidateFrameCount': FRAME_COUNT,
               'renderedFrameCount': len(rendered), 'wallSeconds': time.time() - started,
               'layout': digest(args.layout), 'generator': digest(__file__), 'eventAnchor': layout['eventAnchor'],
-              'sourceDependencies': [digest(Path(__file__).with_name('scene_contract.py')), digest(Path(__file__).with_name('look_presets.py'))],
+              'sourceDependencies': [digest(Path(__file__).with_name('scene_contract.py')), digest(Path(__file__).with_name('look_presets.py')),
+                                     digest(Path(__file__).with_name('shadow_settings.py'))],
               'cameraId': scene.camera.name, 'clockMode': layout['animation']['clockMode'],
               'representativeFrames': [1, 133, FRAME_COUNT], 'rendered': rendered,
               'blend': digest(blend_path), 'tracks': digest(args.output / 'tracks.json'),

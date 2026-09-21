@@ -218,7 +218,9 @@ class EnvironmentDetailTests(unittest.TestCase):
         flags = ["--layout", "layout.json", "--output", "output"]
         current, previous = actual_arguments(self.source, flags), actual_arguments(self.previous, flags)
         self.assertEqual(current.environment_detail, "none")
-        self.assertEqual({k: v for k, v in vars(current).items() if k != "environment_detail"}, vars(previous))
+        self.assertEqual(current.shadow_rays, 1)
+        self.assertEqual({k: v for k, v in vars(current).items()
+                          if k not in {"environment_detail", "shadow_rays"}}, vars(previous))
         for look, env, mode in itertools.product(("baseline", "contrast_material_v1"),
                                                 ("none", "staging_v1"),
                                                 ("prepare", "representatives", "short", "animation")):
@@ -244,16 +246,27 @@ class EnvironmentDetailTests(unittest.TestCase):
         dependency_if = next(n for n in main.body if isinstance(n, ast.If)
                              and "args.environment_detail" in ast.unparse(n.test))
         main.body.remove(dependency_if)
+        # Permit only the reviewed shadow hook/metadata/dependency, never geometry edits.
+        shadow_hook = next(n for n in main.body if isinstance(n, ast.Assign)
+                           and ast.unparse(n) == "shadow_rays = configure_shadow_rays(scene, args.engine, args.shadow_rays)")
+        main.body.remove(shadow_hook)
+        shadow_index = next(i for i, key in enumerate(report.keys) if key.value == "shadowRays")
+        self.assertEqual(ast.unparse(report.values.pop(shadow_index)), "shadow_rays")
+        report.keys.pop(shadow_index)
+        deps = report.values[next(i for i, key in enumerate(report.keys) if key.value == "sourceDependencies")]
+        self.assertIsInstance(deps, ast.List)
+        shadow_dep = next(n for n in deps.elts if ast.unparse(n) == "digest(Path(__file__).with_name('shadow_settings.py'))")
+        deps.elts.remove(shadow_dep)
         self.assertEqual(ast.dump(main), ast.dump(function(ast.parse(self.previous), "main")))
         for name in ("none", "staging_v1"):
             scope = {"args": SimpleNamespace(environment_detail=name), "environment_specs": environment_specs,
-                     "report": {"sourceDependencies": ["scene_contract.py", "look_presets.py"]},
+                     "report": {"sourceDependencies": ["scene_contract.py", "look_presets.py", "shadow_settings.py"]},
                      "digest": lambda path: Path(path).name, "Path": Path, "__file__": str(GENERATOR)}
             detail = eval(compile(expression, "<actual-environment-report>", "eval"), scope)
             self.assertEqual(detail, environment_specs(name))
             exec(compile(ast.Module(body=[dependency_if], type_ignores=[]), "<actual-dependency-gate>", "exec"), scope)
             self.assertEqual(scope["report"]["sourceDependencies"],
-                             ["scene_contract.py", "look_presets.py"] +
+                             ["scene_contract.py", "look_presets.py", "shadow_settings.py"] +
                              (["environment_detail.py"] if name == "staging_v1" else []))
 
     def test_aisle_and_floor_contact_cartons_supported(self):

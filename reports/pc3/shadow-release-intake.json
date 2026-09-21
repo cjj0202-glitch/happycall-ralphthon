@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "pc3-shadow-release-intake-v1",
+  "release": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/tag/demo-wms-blender-representatives-20260921",
+  "sourceCommit": "d67b2c7c60c9bf08ec7d29555366e0e33a9790f6",
+  "localDirectory": "D:\\hwana\\Downloads\\happycall-blender-shadow-review-20260921",
+  "assets": [
+    {
+      "name": "B-cycles16-denoised-frame0133.png",
+      "bytes": 1062667,
+      "sha256": "5f66cdb1e58badf0fdebcd44a8ac48bc5bdbab4ecc2420dbd315e0de31eccb89",
+      "matchesAuthenticatedReleaseMetadata": true
+    },
+    {
+      "name": "B-eevee32-rays1-frame0133.png",
+      "bytes": 1050075,
+      "sha256": "8882290042f2fe11cca1ae04a1a62d14403152ed668384caf47682557dd5399c",
+      "matchesAuthenticatedReleaseMetadata": true
+    },
+    {
+      "name": "B-eevee96-rays4-frame0133.png",
+      "bytes": 1011439,
+      "sha256": "c08beec1be3263327b00a043f0cc62520c2e5fc8f615180851cbb7073cb5513f",
+      "matchesAuthenticatedReleaseMetadata": true
+    },
+    {
+      "name": "shadow-review-manifest.json",
+      "bytes": 971,
+      "sha256": "0d63e97941f58ca96092c94ceb4ce6151e1b4051e3551c4e22914bbf842e34d9",
+      "matchesAuthenticatedReleaseMetadata": true
+    }
+  ],
+  "verifiedAssets": 4,
+  "manifestPngMatches": 3,
+  "bytesTotal": 3125152,
+  "renderedBy": "pc1",
+  "rendererExecutedOnPc3": false,
+  "originalPngsDirectlyViewedOnPc3": 3,
+  "visualQualityAccepted": false,
+  "observations": [
+    "EEVEE96/rays4 has fewer bright speckles on feet and a smoother floor-shadow region than EEVEE32/rays1, with roller/guard boundaries still visible.",
+    "Cycles16+denoise has rough discontinuous reflections along rollers and side frames.",
+    "This PC3 comparison changes samples and rays together; it does not isolate ray-count causality. PC1 separately reported a fixed96-sample comparison."
+  ],
+  "limits": [
+    "One frame133 per condition, old d67 environment without staging_v1; no movement/flicker/updated surroundings reviewed.",
+    "PC3 inspected downloaded originals but did not execute Blender or independently repeat PC1 runtime/performance measurements."
+  ]
+}
