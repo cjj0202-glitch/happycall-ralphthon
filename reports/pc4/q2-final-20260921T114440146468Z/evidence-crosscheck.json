@@ -1,0 +1,70 @@
+{
+  "audioSources": [
+    {
+      "flow": "CASE-0001-1",
+      "actualSource": "http://127.0.0.1:18105/demo/CASE-0001.wav",
+      "expectedSource": "http://127.0.0.1:18105/demo/CASE-0001.wav",
+      "matched": true,
+      "duration": 47.15,
+      "wallSeconds": 47.52880000000074,
+      "coverage": 1
+    },
+    {
+      "flow": "CASE-0001-2",
+      "actualSource": "http://127.0.0.1:18105/demo/CASE-0001.wav",
+      "expectedSource": "http://127.0.0.1:18105/demo/CASE-0001.wav",
+      "matched": true,
+      "duration": 47.15,
+      "wallSeconds": 47.3835,
+      "coverage": 1
+    },
+    {
+      "flow": "CASE-0001-3",
+      "actualSource": "http://127.0.0.1:18105/demo/CASE-0001.wav",
+      "expectedSource": "http://127.0.0.1:18105/demo/CASE-0001.wav",
+      "matched": true,
+      "duration": 47.15,
+      "wallSeconds": 47.27319999999926,
+      "coverage": 1
+    },
+    {
+      "flow": "CASE-0002-1",
+      "actualSource": "http://127.0.0.1:18105/demo/CASE-0002.wav",
+      "expectedSource": "http://127.0.0.1:18105/demo/CASE-0002.wav",
+      "matched": true,
+      "duration": 49.55,
+      "wallSeconds": 49.69290000000037,
+      "coverage": 1
+    },
+    {
+      "flow": "CASE-0002-2",
+      "actualSource": "http://127.0.0.1:18105/demo/CASE-0002.wav",
+      "expectedSource": "http://127.0.0.1:18105/demo/CASE-0002.wav",
+      "matched": true,
+      "duration": 49.55,
+      "wallSeconds": 49.75070000000112,
+      "coverage": 1
+    },
+    {
+      "flow": "CASE-0002-3",
+      "actualSource": "http://127.0.0.1:18105/demo/CASE-0002.wav",
+      "expectedSource": "http://127.0.0.1:18105/demo/CASE-0002.wav",
+      "matched": true,
+      "duration": 49.55,
+      "wallSeconds": 49.70029999999888,
+      "coverage": 1
+    }
+  ],
+  "previousNativeEndedTrusted": true,
+  "currentGateEnabledByPreviousCase": false,
+  "independentReview": "read-only source and result review; no extra product run",
+  "guards": {
+    "sameSource": true,
+    "sameBuild": true,
+    "sameTester": true,
+    "originalStatePreserved": true,
+    "apiStopped": true,
+    "paidAnalyzerInvocations": 0,
+    "blockedExternalConnections": []
+  }
+}

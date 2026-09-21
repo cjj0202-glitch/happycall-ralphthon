@@ -51,8 +51,8 @@ try{
  assert.ok(typeof capability.selectors?.naturalCompletionControl==='string'&&capability.selectors.naturalCompletionControl.trim(),'Actual PC2 completion-gate selector is required');
 }catch(error){console.log(JSON.stringify({status:'NOT_RUN',classification:'SETUP_CAPABILITY',error:error.message,ui:{planned:6,executed:0,passed:0,failed:0,notRun:6},browserStarted:false}));process.exit(2);}
 const report={startedAt:new Date().toISOString(),suite:'N04-Q2-frozen-source-ui',finalSha,expectedIdentity,plannedBoundaryIds:PLANNED_BOUNDARIES,ui:UI,api:API,executor:'AI Playwright; not human review or live AI',newTmsIntegrated:capability.newTmsIntegrated===true,capabilityClaims:capability,flows:[],boundaries:[],setupErrors:[],consoleErrors:[],blockedExternal:[],blockedLive:[],http:[],requests:[],network:[],limitations:['Capability claims require actual DOM/HTTP verification; they are not passes','All six CASE repetitions require full, natural, rate-one playback without seek','Test-only temporary stores; original state and budget remain untouched','Replay is saved fixture analysis, not actual STT/LLM; text STT absence is scoped to observed requests and runner guards','Real HTTP is relayed without automatic redirects; native browser offline uses route.continue to preserve Chromium offline behavior']};
-let fixtures;
-try{fixtures=JSON.parse(await readFile('data/fixtures/cases.json','utf8')).cases;assert.ok(Array.isArray(fixtures));}
+let fixtures,approvedMedia;
+try{fixtures=JSON.parse(await readFile('data/fixtures/cases.json','utf8')).cases;approvedMedia=JSON.parse(await readFile('data/demo-media-manifest.json','utf8')).assets;assert.ok(Array.isArray(fixtures)&&Array.isArray(approvedMedia));}
 catch(error){console.log(JSON.stringify({status:'NOT_RUN',classification:'SETUP_FIXTURE',error:error.message,ui:{planned:6,executed:0,passed:0,failed:0,notRun:6},browserStarted:false}));process.exit(2);}
 const persist=()=>writeFile(path.join(OUT,'results.json'),JSON.stringify(report,null,2));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
@@ -83,7 +83,7 @@ async function context(options={}){
  });
  c.on('request',request=>{let body;try{body=request.postDataJSON();}catch{}report.requests.push({url:request.url(),method:request.method(),mode:body?.mode,redirectedFrom:request.redirectedFrom()?.url()||null});});
  c.on('page',page=>{page.setDefaultTimeout(15000);page.on('pageerror',e=>report.consoleErrors.push({kind:'pageerror',message:e.message}));page.on('console',m=>{if(m.type()==='error')report.consoleErrors.push({kind:'console',message:m.text()});});});
- c.on('response',r=>{let data;try{data=r.request().postDataJSON();}catch{}const row={url:r.url(),method:r.request().method(),status:r.status(),sentRevision:data?.expectedRevision,mode:data?.mode,redirectedFrom:r.request().redirectedFrom()?.url()||null,location:r.headers()['location']||null};report.network.push({kind:'browser-response',...row});if(!allowedHttpUrl(r.url(),origin))report.blockedExternal.push({unexpectedResponse:r.url()});if(r.url().startsWith(API+'/api/'))report.http.push(row);});
+ c.on('response',r=>{let data;try{data=r.request().postDataJSON();}catch{}const row={url:r.url(),method:r.request().method(),status:r.status(),sentRevision:data?.expectedRevision,mode:data?.mode,redirectedFrom:r.request().redirectedFrom()?.url()||null,location:r.headers()['location']||null};report.network.push({kind:'browser-response',...row});if(['http:','https:'].includes(new URL(r.url()).protocol)&&!allowedHttpUrl(r.url(),origin))report.blockedExternal.push({unexpectedResponse:r.url()});if(r.url().startsWith(API+'/api/'))report.http.push(row);});
  const page=await c.newPage();
  return {context:c,page};
 }
@@ -102,6 +102,7 @@ async function actualControl(page,name,defaultSelector){
  if(await locator.count()!==1)throw new CapabilityBlocker(`NOT_RUN: ${name} does not identify one actual integrated control`);
  return locator;
 }
+async function openReviewDetails(page,label){const summary=page.locator('summary').filter({hasText:label});if(await summary.count()!==1)throw new CapabilityBlocker(`NOT_RUN: review disclosure missing: ${label}`);const details=summary.locator('..');if(!await details.evaluate(el=>el.open))await summary.click();assert.equal(await details.evaluate(el=>el.open),true);return details;}
 async function observeAudio(page,id){
  const audio=page.locator('audio');
  if(await audio.count()!==1)throw new CapabilityBlocker('NOT_RUN: one current-case native audio element is required');
@@ -123,57 +124,78 @@ async function observeAudio(page,id){
 }
 async function finishObservation(page){return page.evaluate(()=>window.__pc4AudioObservation.finish());}
 async function playAudio(page,audio){
- if(capability.selectors?.audioPlayControl){await (await actualControl(page,'audioPlayControl')).click();return;}
- if(!await audio.isVisible()||!await audio.evaluate(a=>a.controls))throw new CapabilityBlocker('NOT_RUN: integrated player needs an actual audioPlayControl selector');
+ // The custom "처음부터 전체 통화 재생" replaces this node and invalidates its observation.
+ if(!await audio.isVisible()||!await audio.evaluate(a=>a.controls))throw new CapabilityBlocker('NOT_RUN: current observed native audio controls are unavailable');
  await audio.click({position:{x:24,y:27}});
 }
 async function audioEnd(page,id){
  const gate=await actualControl(page,'naturalCompletionControl');
  assert.equal(await gate.isEnabled(),false,'Completion gate must be unavailable before full playback');
  const audio=await observeAudio(page,id);let observation;
+ const fixture=fixtures.find(item=>item.id===id);assert.ok(typeof fixture?.audioUrl==='string'&&fixture.audioUrl.startsWith('/'),'Current-case fixture audio registration required');const expectedSource=new URL(fixture.audioUrl,UI).href;
  try{
+  assert.equal(await audio.evaluate(a=>a.currentSrc),expectedSource,'Native player must use this exact case fixture audio');
   const duration=await audio.evaluate(a=>a.duration);assert.ok(Number.isFinite(duration)&&duration>0&&duration<=180,'Unexpected asset duration; review frozen media contract');
   await playAudio(page,audio);
   await page.waitForFunction(()=>{const a=document.querySelector('audio');return a&&!a.paused&&a.currentTime>0;},null,{timeout:15000});
   await page.waitForFunction(()=>document.querySelector('audio')?.ended===true,null,{timeout:duration*1000+30000});
  }finally{observation=await finishObservation(page);}
+ assert.equal(observation.source,expectedSource,'Observed audio source differs from the exact case fixture');
  const judgement=judgePlayback(observation);assert.equal(judgement.accepted,true,JSON.stringify(judgement));
  await gate.waitFor({state:'visible'});assert.equal(await gate.isEnabled(),true,'Actual PC2 gate did not accept full natural playback');
- return {method:'native controls, full duration from zero, rate one, no seek, natural ended',...observation,judgement,syntheticEventsDispatched:0};
+ return {method:'native controls, full duration from zero, rate one, no seek, natural ended',expectedFixtureAudio:expectedSource,...observation,judgement,syntheticEventsDispatched:0};
 }
 async function eventually(check,message,timeout=15000){const deadline=Date.now()+timeout;while(Date.now()<deadline){if(await check())return;await sleep(100);}assert.fail(message);}
+async function nativeVideoPlay(page,video){
+ if(!await video.isVisible()||!await video.evaluate(v=>v.controls))throw new CapabilityBlocker('NOT_RUN: actual native video controls unavailable');
+ assert.equal(await video.evaluate(v=>v.paused),true,'Video must wait for explicit native playback input');
+ await video.evaluate(v=>{const events=[];for(const type of ['play','playing'])v.addEventListener(type,e=>events.push({type,trusted:e.isTrusted,time:v.currentTime,source:v.currentSrc}),{once:true});window.__pc4NativeVideoPlay={events};});
+ await video.focus();assert.equal(await video.evaluate(v=>v.ownerDocument.activeElement===v),true,'Native video must hold keyboard focus before Space');await page.keyboard.press('Space');
+ await eventually(()=>page.evaluate(()=>['play','playing'].every(type=>window.__pc4NativeVideoPlay.events.some(e=>e.type===type&&e.trusted))),'Space did not produce native trusted video play/playing');
+ return {method:'native video focus + keyboard Space',focusVerified:true,events:await page.evaluate(()=>window.__pc4NativeVideoPlay.events)};
+}
+async function selectRegisteredVideoEvent(page,clip){const eventId=clip.eventIds?.[0];if(!eventId)throw new CapabilityBlocker('NOT_RUN: clip event registration missing');await (await actualControl(page,'wmsVideoEventControl',`[data-testid="event-${eventId}"]`)).click();await eventually(()=>page.locator(capability.selectors?.wmsMediaOpenControl||'[data-testid="open-video"]').count().then(n=>n===1),'Registered clip opener did not appear after selecting its actual WMS event');}
+async function verifyVideoAsset(video,clip){
+ const expected=approvedMedia.find(asset=>`/demo/${asset.name}`===clip.url);assert.ok(expected?.synthetic===true&&Number.isInteger(expected.bytes)&&/^[0-9a-f]{64}$/.test(expected.sha256),'Registered approved manifest asset required');
+ const actual=await video.evaluate(async v=>{const source=v.currentSrc;const url=new URL(source);if(url.origin!==location.origin||!['blob:','http:','https:'].includes(url.protocol))throw new Error('Video source is not this runner origin');const response=await fetch(source,{redirect:'error'});if(!response.ok)throw new Error(`Video source fetch ${response.status}`);const bytes=await response.arrayBuffer();const digest=await crypto.subtle.digest('SHA-256',bytes);return {source,sourceKind:url.protocol,bytes:bytes.byteLength,sha256:Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('')};});
+ assert.equal(actual.bytes,expected.bytes,'Rendered video bytes differ from approved manifest');assert.equal(actual.sha256,expected.sha256,'Rendered video hash differs from approved manifest');return {...actual,registeredUrl:clip.url};
+}
 async function registeredVideo(page,source,label){
  const clip=source.media?.find(m=>m.system==='WMS'&&m.caseId===source.id&&m.synthetic===true&&m.url?.startsWith('/'));
  if(!clip)throw new CapabilityBlocker('NOT_RUN: current-case registered synthetic WMS clip absent');
  const start=clip.startSeconds,end=clip.endSeconds;assert.ok(Number.isFinite(start)&&Number.isFinite(end)&&start>=0&&end>start&&end-start<=180);
- const opener=capability.selectors?.wmsMediaOpenControl?await actualControl(page,'wmsMediaOpenControl'):page.getByRole('button',{name:/AI 합성 CCTV 구간 보기/}).first();
+ await selectRegisteredVideoEvent(page,clip);
+ const opener=await actualControl(page,'wmsMediaOpenControl','[data-testid="open-video"]');
  if(await opener.count()!==1)throw new CapabilityBlocker('NOT_RUN: registered WMS clip opener is not mapped');await opener.click();
  const dialog=await actualControl(page,'mediaDialog','dialog[open]');await dialog.waitFor({state:'visible'});
  assert.ok((await dialog.innerText()).includes(source.id),'Video dialog must identify the current case');assert.match(await dialog.innerText(),/합성/);
+ await eventually(()=>page.locator(capability.selectors?.mediaVideo||'dialog[open] video').count().then(n=>n===1),'Verified video did not render after the product asset check');
  const video=await actualControl(page,'mediaVideo','dialog[open] video');
  await eventually(()=>video.evaluate(v=>v.readyState>=1),'Registered video metadata did not load');
  await eventually(()=>video.evaluate((v,start)=>!v.seeking&&Math.abs(v.currentTime-start)<.35,start),'Player did not initialize at the registered segment start');
+ const assetVerification=await verifyVideoAsset(video,clip);
  await video.evaluate(v=>{const started=performance.now();const events=[];const listeners=[];for(const type of ['play','playing','timeupdate','pause','ended','seeking','seeked','ratechange']){const fn=e=>events.push({type,trusted:e.isTrusted,time:v.currentTime,rate:v.playbackRate,source:v.currentSrc});v.addEventListener(type,fn);listeners.push([type,fn]);}window.__pc4VideoObservation={initialTime:v.currentTime,finish(){for(const[type,fn]of listeners)v.removeEventListener(type,fn);return{initialTime:this.initialTime,source:v.currentSrc,duration:v.duration,finalTime:v.currentTime,paused:v.paused,wallSeconds:(performance.now()-started)/1000,events,played:Array.from({length:v.played.length},(_,i)=>[v.played.start(i),v.played.end(i)])};}};});
- if(capability.selectors?.mediaPlayControl)await (await actualControl(page,'mediaPlayControl')).click();
- else {if(!await video.isVisible()||!await video.evaluate(v=>v.controls))throw new CapabilityBlocker('NOT_RUN: actual video play control not mapped');const box=await video.boundingBox();await video.click({position:{x:24,y:box.height-24}});}
+ const playbackInput=await nativeVideoPlay(page,video);
  await eventually(()=>video.evaluate((v,start)=>!v.paused&&v.currentTime>start,start),'Registered segment did not begin native playback');
  await eventually(()=>video.evaluate((v,end)=>v.paused&&v.currentTime>=end-.25,end),'Registered segment did not reach its natural stopping point',(end-start)*1000+30000);
- const observation=await page.evaluate(()=>window.__pc4VideoObservation.finish());assert.equal(observation.source,new URL(clip.url,UI).href);assert.ok(observation.finalTime<=end+.5);assert.ok(observation.wallSeconds>=end-start-.75);
+ const observation=await page.evaluate(()=>window.__pc4VideoObservation.finish());assert.equal(observation.source,assetVerification.source);assert.ok(observation.finalTime<=end+.5);assert.ok(observation.wallSeconds>=end-start-.75);
  for(const type of ['play','playing'])assert.ok(observation.events.some(e=>e.type===type&&e.trusted),`Missing native video ${type}`);
  assert.ok(observation.events.every(e=>Math.abs(e.rate-1)<.001&&e.source===observation.source&&!['seeking','seeked'].includes(e.type)),'Video playback changed source/rate or sought');
  let coverageEnd=start;for(const[a,b]of observation.played){if(a>coverageEnd+.1)break;if(b>=start)coverageEnd=Math.max(coverageEnd,b);}assert.ok(coverageEnd>=end-.25,'Registered video segment has missing played coverage');
  await screenshot(page,label+'-registered-cctv');await page.keyboard.press('Escape');await dialog.waitFor({state:'hidden'});await eventually(()=>opener.evaluate(el=>el.ownerDocument.activeElement===el),'Escape did not restore focus to the actual media opener');
- return {asset:clip.id,registeredRange:[start,end],observation,escapeClosed:true,focusReturnedToOpener:true,syntheticEventsDispatched:0};
+ return {asset:clip.id,registeredRange:[start,end],assetVerification,playbackInput,observation,escapeClosed:true,focusReturnedToOpener:true,syntheticEventsDispatched:0};
 }
 async function flow(id,repeat){
  const row={id:`${id}-${repeat}`,caseId:id,repetition:repeat,status:'RUNNING',startedAt:new Date().toISOString(),steps:[],store:await reset()};report.flows.push(row);await persist();
  const {context:c,page}=await context();const startHttp=report.http.length;
  try{
   await openCase(page,id);const source=await readCase(id);
+  await openReviewDetails(page,'원문과 화자별 대화록 확인');await page.getByRole('heading',{name:'화자별 대화록',exact:true}).waitFor();row.steps.push('source-and-speaker-transcript-disclosure-opened');
   row.audio=await audioEnd(page,id);row.steps.push('full-natural-rate-one-audio-ended');
   const replay=capability.selectors?.replayControl?await actualControl(page,'replayControl'):page.getByRole('button',{name:'저장된 분석 결과 재생',exact:false});
   const analyzed=await action(page,replay,id,'POST','/analyze');
   assert.equal(analyzed.mode,'replay');row.steps.push('replay-analysis-via-ui');
+  await openReviewDetails(page,'AI 제안과 현재 입력 상세 대조');await page.getByRole('region',{name:'점포 ID 비교',exact:true}).waitFor();row.steps.push('ai-proposal-and-current-intake-comparison-opened');
   for(const [kind,label] of [['WMS','WMS 작업 확인'],['TMS','TMS 배송 확인']]){
    await nav(page,label);const region=await actualControl(page,`${kind.toLowerCase()}Region`,`[role="region"][aria-label="${kind} 물류 확인"],section[aria-label="${kind} 물류 확인"]`);await region.waitFor();
    assert.ok((await region.innerText()).includes(id));
@@ -226,7 +248,7 @@ async function boundaries(){
   return {scope:'negative only; never one of six completions',observation,judged,actualGateEnabled:false};
  });
  await boundary('audio-segment-must-not-complete',async page=>{
-  await openCase(page,'CASE-0001');const segment=await actualControl(page,'segmentControl');const gate=await actualControl(page,'naturalCompletionControl');
+  await openCase(page,'CASE-0001');await openReviewDetails(page,'원문과 화자별 대화록 확인');const segment=await actualControl(page,'segmentControl');const gate=await actualControl(page,'naturalCompletionControl');
   await observeAudio(page,'CASE-0001');await segment.click();await page.waitForFunction(()=>{const a=document.querySelector('audio');return a&&!a.paused&&a.currentTime>0;});
   await page.waitForFunction(()=>document.querySelector('audio')?.paused===true,null,{timeout:capability.segmentTimeoutMs||30000});
   const observation=await finishObservation(page);const judged=judgePlayback(observation);assert.equal(judged.accepted,false);assert.equal(await gate.isEnabled(),false,'Partial segment incorrectly granted whole-call completion');return {observation,judged,actualGateEnabled:false};
@@ -257,14 +279,14 @@ async function boundaries(){
  await boundary('explicit-reference-text-media-missing',async page=>{
   await openCase(page,'CASE-0002');await nav(page,'경영주 접수');await page.locator('.owner-form select').selectOption('CASE-0002');await page.getByLabel('상세 내용',{exact:true}).fill('PC4: 같은 합성 배송건 확인을 요청합니다. 영상은 기록된 등록 여부로만 판단해 주세요.');
   const waiting=page.waitForResponse(r=>r.url()===API+'/api/intake'&&r.request().method()==='POST');await page.getByRole('button',{name:'문의 접수하기',exact:false}).click();const response=await waiting;assert.equal(response.status(),201);const created=await response.json();assert.equal(created.linkedFixtureId,'CASE-0002');assert.ok(!created.media?.length);
-  await nav(page,'WMS 작업 확인');const region=page.getByRole('region',{name:'WMS 물류 확인'});assert.ok((await region.innerText()).includes('미등록'));assert.equal(await region.getByRole('button',{name:/연결 영상/}).count(),0);await screenshot(page,'reference-text-media-missing');return {caseId:created.id,reference:'CASE-0002',mediaCopied:false,missingShown:true};
+  await nav(page,'WMS 작업 확인');const region=await actualControl(page,'wmsRegion','section[aria-label="WMS 공정 확인"]');assert.ok((await region.innerText()).includes('미등록'));assert.equal(await region.locator('[data-testid="open-video"]').count(),0);await screenshot(page,'reference-text-media-missing');return {caseId:created.id,reference:'CASE-0002',mediaCopied:false,missingShown:true};
  });
  await boundary('media-404-and-retry',async(page,c)=>{
   const frozen=await readCase('CASE-0002');const clip=frozen.media?.find(m=>m.system==='WMS'&&m.caseId==='CASE-0002'&&m.synthetic===true&&m.url?.startsWith('/'));
   if(!clip)throw new CapabilityBlocker('NOT_RUN: frozen CASE-0002 has no approved WMS clip for media 404 control');
-  const mediaUrl=new URL(clip.url,UI).href;await openCase(page,'CASE-0002');await nav(page,'WMS 작업 확인');await c.route(mediaUrl,route=>route.fulfill({status:404,body:'Test missing synthetic asset'}));
-  const videoButton=page.getByRole('button',{name:/AI 합성 CCTV 구간 보기/}).first();await videoButton.click();await page.getByRole('alert').filter({hasText:'연결 영상 또는 등록 구간을 재생할 수 없습니다'}).waitFor();assert.ok((await page.getByRole('dialog').innerText()).includes('원본 스캔과 비교'));await screenshot(page,'media-404');
-  await c.unroute(mediaUrl);await page.getByRole('button',{name:'영상 다시 불러오기',exact:true}).click();await page.waitForFunction(()=>document.querySelector('dialog video')?.readyState>=1);const position=await page.getByRole('dialog').locator('video').evaluate(v=>v.currentTime);await page.getByRole('dialog').locator('video').evaluate(v=>v.play());await page.waitForFunction(start=>{const v=document.querySelector('dialog video');return v && v.currentTime>start+.25;},position);await page.keyboard.press('Escape');assert.equal(await page.getByRole('dialog').count(),0);return {asset:clip.id,url:mediaUrl,injectedStatus:404,errorDisplayed:true,originalScanPreserved:true,retryMetadataLoaded:true,nativeVideoAdvanced:true,escapeClosed:true};
+  const mediaUrl=new URL(clip.url,UI).href;await openCase(page,'CASE-0002');await nav(page,'WMS 작업 확인');await selectRegisteredVideoEvent(page,clip);await c.route(mediaUrl,route=>route.fulfill({status:404,body:'Test missing synthetic asset'}));
+  const videoButton=await actualControl(page,'wmsMediaOpenControl','[data-testid="open-video"]');await videoButton.click();const error=page.getByRole('alert').filter({hasText:'영상 재생 차단'});await error.waitFor();assert.match(await error.innerText(),/영상 응답 404/);assert.equal(await page.locator('dialog video').count(),0,'Failed verification must not render a playable video');assert.ok((await page.getByRole('dialog').innerText()).includes('원본 스캔과 비교'));await screenshot(page,'media-404');
+  await c.unroute(mediaUrl);await page.getByRole('button',{name:'영상 다시 불러오기',exact:true}).click();await page.waitForFunction(()=>document.querySelector('dialog video')?.readyState>=1);const video=page.getByRole('dialog').locator('video');const assetVerification=await verifyVideoAsset(video,clip);const position=await video.evaluate(v=>v.currentTime);const playbackInput=await nativeVideoPlay(page,video);await page.waitForFunction(start=>{const v=document.querySelector('dialog video');return v && v.currentTime>start+.25;},position);await page.keyboard.press('Escape');assert.equal(await page.getByRole('dialog').count(),0);await eventually(()=>videoButton.evaluate(el=>el.ownerDocument.activeElement===el),'404 retry dialog did not restore opener focus');return {asset:clip.id,url:mediaUrl,injectedStatus:404,errorDisplayed:true,originalScanPreserved:true,retryMetadataLoaded:true,assetVerification,playbackInput,nativeVideoAdvanced:true,escapeClosed:true,focusReturned:true};
  });
  await boundary('api-error-and-recovery-no-false-save',async(page,c)=>{
   await openCase(page,'CASE-0001');const original=await readCase('CASE-0001');await page.locator('.form-grid textarea').fill('PC4 임시 장애에서 저장하면 안 되는 변경');
@@ -285,19 +307,23 @@ async function boundaries(){
   await openCase(page,'CASE-0001');const second=await c.newPage();await openCase(second,'CASE-0001');
   const input=await actualControl(page,'requestTextarea','.form-grid textarea');await input.fill('PC4 stale editor must not overwrite');
   await (await actualControl(second,'requestTextarea','.form-grid textarea')).fill('PC4 current editor preserved');await action(second,second.getByRole('button',{name:'접수 내용 저장',exact:true}),'CASE-0001');
-  const before=await readCase('CASE-0001');const waiting=page.waitForResponse(r=>r.url()===API+'/api/cases/CASE-0001'&&r.request().method()==='PATCH');await page.getByRole('button',{name:'접수 내용 저장',exact:true}).click();const response=await waiting;assert.equal(response.status(),409);await page.getByRole('alert').waitFor();const after=await readCase('CASE-0001');assert.equal(after.revision,before.revision);assert.equal(after.intake.request,'PC4 current editor preserved');return {status:409,scope:'two actual UI submissions to real isolated API',freshStatePreserved:true};
+  const before=await readCase('CASE-0001');const waiting=page.waitForResponse(r=>r.url()===API+'/api/cases/CASE-0001'&&r.request().method()==='PATCH');await page.getByRole('button',{name:'접수 내용 저장',exact:true}).click();const response=await waiting;assert.equal(response.status(),409);await page.getByRole('alert').filter({hasText:'다른 작업자가 접수를 수정했습니다'}).waitFor();const after=await readCase('CASE-0001');assert.equal(after.revision,before.revision);assert.equal(after.intake.request,'PC4 current editor preserved');return {status:409,scope:'two actual UI submissions to real isolated API',freshStatePreserved:true};
  });
  await boundary('future-evidence-hidden-in-investigation-ui',async(page,c)=>{
-  const marker='PC4 FUTURE EVIDENCE MUST NOT BE ADOPTED';let injected=false;
-  await c.route(API+'/api/cases',async route=>{if(route.request().method()!=='GET'){await route.fallback();return;}const response=await route.fetch({maxRedirects:0});assert.equal(response.status(),200);const data=await response.json();const item=data.cases.find(x=>x.id==='CASE-0001');const evidence=item?.evidence?.find(e=>e.system.toUpperCase()==='TMS');const stop=item?.tms?.stops?.find(s=>s.id===item.store.id);if(!evidence||!stop)throw new Error('Frozen fixture has no TMS evidence/target stop');const future=new Date(Date.parse(item.asOf)+3600000).toISOString();evidence.time=future;evidence.label=marker;stop.actual=future;stop.planned=future;stop.mobileEntry=future;stop.mobileExit=future;injected=true;await route.fulfill({response,json:data});});
+  const source=await readCase('CASE-0001');const original=source.evidence.find(e=>e.id==='E-M1');assert.ok(original);assert.match(source.asOf,/T07:00:00\+09:00$/);assert.match(original.time,/T05:00:00\+09:00$/);
+  await openCase(page,'CASE-0001');await nav(page,'TMS 배송 확인');const originalLink=()=>page.getByRole('heading',{name:original.label,exact:true}).locator('xpath=ancestor::article[1]').getByRole('button',{name:'이 근거 연결',exact:true});assert.equal(await originalLink().isEnabled(),true,'07:00 cutoff must allow registered 05:00 E-M1 evidence');
+  const marker='PC4 FUTURE EVIDENCE MUST NOT BE ADOPTED';let injected=false,phase='early-cutoff';
+  await c.route(API+'/api/cases',async route=>{if(route.request().method()!=='GET'){await route.fallback();return;}const response=await route.fetch({maxRedirects:0});assert.equal(response.status(),200);const data=await response.json();const item=data.cases.find(x=>x.id==='CASE-0001');const evidence=item?.evidence?.find(e=>e.id==='E-M1');const stop=item?.tms?.stops?.find(s=>s.id===item.store.id);if(!evidence||!stop)throw new Error('Frozen fixture has no E-M1/target stop');if(phase==='early-cutoff'){item.asOf=item.asOf.replace('T07:00:00','T04:30:00');}else{const future=new Date(Date.parse(item.asOf)+3600000).toISOString();evidence.time=future;evidence.label=marker;stop.actual=future;stop.mobileEntry=future;stop.mobileExit=future;}injected=true;await route.fulfill({response,json:data});});
+  await openCase(page,'CASE-0001');await nav(page,'TMS 배송 확인');assert.equal(injected,true);assert.equal(await originalLink().isEnabled(),false,'04:30 cutoff must withhold the 05:00 E-M1 observation');
+  const earlyPlanned=await actualControl(page,'futurePlannedValue','[aria-label="선택 방문 상세"] dt:text-is("계획 도착") + dd');const futurePlan=await earlyPlanned.innerText();assert.match(futurePlan,/05:00.*기준 이후 계획/,'05:00 future plan remains labelled at 04:30 cutoff');assert.doesNotMatch(futurePlan,/미채택/);
+  phase='future-records';injected=false;
   await openCase(page,'CASE-0001');await nav(page,'TMS 배송 확인');assert.equal(injected,true);
   const actual=await actualControl(page,'futureActualValue','[data-testid="tms-actual"]');assert.match(await actual.innerText(),/기준 이후.*미채택/,'Future actual must not appear as current completed delivery');
-  const futureFields={actual:await actual.innerText()};
+  const futureFields={actual:await actual.innerText(),plannedAt0430Cutoff:futurePlan};
   for(const[name,label]of [['futureGpsEntryValue','모바일 GPS 진입'],['futureGpsExitValue','모바일 GPS 이탈']]){const value=await actualControl(page,name,`[aria-label="선택 방문 상세"] dt:text-is("${label}") + dd`);futureFields[name]=await value.innerText();assert.match(futureFields[name],/기준 이후.*미채택/,'Future GPS must not appear as a current observed movement');}
-  const planned=await actualControl(page,'futurePlannedValue','[aria-label="선택 방문 상세"] dt:text-is("계획 도착") + dd');futureFields.planned=await planned.innerText();assert.match(futureFields.planned,/기준 이후 계획/,'Future planned time must remain a labelled plan');assert.doesNotMatch(futureFields.planned,/미채택/,'Future planned time must not be rejected as if it were an actual');
   const marked=page.getByRole('heading',{name:marker,exact:true});let futureLinkDisabled=true;
   if(await marked.count()){const card=marked.locator('xpath=ancestor::article[1]');const link=card.getByRole('button',{name:'이 근거 연결',exact:true});if(await link.count()!==1)throw new CapabilityBlocker('NOT_RUN: future evidence link control not identified');futureLinkDisabled=!await link.isEnabled();assert.equal(futureLinkDisabled,true,'Future evidence remained selectable');}
-  return {scope:'explicit adverse read-only HTTP response injection; no stored source mutation',futureOffsetSeconds:3600,futureActualWithheld:true,futureGpsWithheld:true,futurePlanRetained:true,futureFields,futureLinkDisabled};
+  return {scope:'separate 07:00 positive, 04:30 cutoff counterexample, and +1h actual/GPS read-only HTTP injections; no stored source mutation',normal0700Allows0500Evidence:true,cutoff0430Withholds0500Evidence:true,futureOffsetSeconds:3600,futureActualWithheld:true,futureGpsWithheld:true,futurePlanRetained:true,futureFields,futureLinkDisabled};
  });
  await boundary('different-business-totes-not-continuous-tracking',async page=>{
   const fixture=await readCase('CASE-0002');assert.ok(fixture.wms?.picking?.toteId&&fixture.wms?.shipping?.toteId);assert.notEqual(fixture.wms.picking.toteId,fixture.wms.shipping.toteId);

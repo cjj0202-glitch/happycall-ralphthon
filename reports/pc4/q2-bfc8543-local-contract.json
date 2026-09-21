@@ -1,0 +1,77 @@
+{
+  "schema": "pc4-final-release-v1",
+  "status": "PC4_LOCAL_BUILD_VERIFIED_CANDIDATE",
+  "referenceMainSha": "52af4c1681cadb7490dfc201301de034f1521867",
+  "finalSha": "bfc8543aa65316682948f2e3d5b77a3ee56b21ff",
+  "fixtureSha256": "071b4599c4a8a733accb201aaa4dd1535b216d8a2dbb6a0004b67043ffda8916",
+  "manifestSha256": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf",
+  "frontendSourceFingerprint": "0e80c944bd7a870d4228b355a54266a88b5d99bc7c9c72b1e3b6826cf6bccc47",
+  "frontendOutputFingerprint": "b769128ff1443dcd7bc361efa23d40709d411dba2aebfc6682d600c48d310f67",
+  "targetUrl": "http://127.0.0.1:18105",
+  "apiBase": "same-origin",
+  "integratedComponents": {
+    "CallReview": true,
+    "WmsScene": true,
+    "TmsScene": true
+  },
+  "capabilities": {
+    "callReviewIntegrated": true,
+    "newTmsIntegrated": true,
+    "selectors": {
+      "naturalCompletionControl": "button:has-text(\"저장된 분석 결과 재생\")",
+      "segmentControl": "button[aria-label*=\"발화 1 구간 재생\"]",
+      "differentToteNotice": "section[aria-label=\"WMS 공정 확인\"] dt:text-is(\"토트 연속 연결\") + dd",
+      "wmsRegion": "section[aria-label=\"WMS 공정 확인\"]",
+      "wmsRawSourceControl": "section[aria-label=\"WMS 공정 확인\"] summary:text-is(\"선택 이벤트 · 원본 보기\")",
+      "wmsRawSourceText": "section[aria-label=\"WMS 공정 확인\"] details:has(summary:text-is(\"선택 이벤트 · 원본 보기\")) pre",
+      "wmsEvidenceLinkControl": "section[aria-label=\"상담 근거\"] button[data-testid^=\"link-\"]:enabled >> nth=0",
+      "wmsMediaOpenControl": "[data-testid=\"open-video\"]",
+      "tmsRegion": "[data-testid=\"tms-scene\"]",
+      "tmsRawSourceControl": "[aria-label=\"선택 방문 상세\"] summary:text-is(\"선택 방문 · 합성 입력 확인\")",
+      "tmsRawSourceText": "[aria-label=\"선택 방문 상세\"] details[open] pre"
+    }
+  },
+  "assets": [
+    {
+      "path": "demo/CASE-0001.wav",
+      "kind": "audio",
+      "caseId": "CASE-0001",
+      "bytes": 2263278,
+      "sha256": "d4eeb6448ff8969f27034ecade9a050ee212468585c6300b19c9a0ebdc372931",
+      "synthetic": true,
+      "durationSeconds": 47.15
+    },
+    {
+      "path": "demo/CASE-0002.wav",
+      "kind": "audio",
+      "caseId": "CASE-0002",
+      "bytes": 2378478,
+      "sha256": "333897f4f10426674ec97b9e3a44c2f8da21f1f7931b4f911c82a29abcf6b914",
+      "synthetic": true,
+      "durationSeconds": 49.55
+    },
+    {
+      "path": "demo/sorter-demo.mp4",
+      "kind": "video",
+      "caseId": "CASE-0002",
+      "bytes": 1097133,
+      "sha256": "e6cad3cf9f999b596a0fef3e3d463170e0d279568a31a4be49366e5383908881",
+      "synthetic": true,
+      "durationSeconds": 12.0
+    }
+  ],
+  "pc4InputNormalizationEvidence": [
+    {
+      "path": "data/fixtures/cases.json",
+      "providedCRLFSha256": "79c3b01aed139352b5cc0a695f2829e76f78eabb61d7cfd6b8055db32f61a73b",
+      "verifiedGitBlobAndLocalLFSha256": "071b4599c4a8a733accb201aaa4dd1535b216d8a2dbb6a0004b67043ffda8916",
+      "sameContentExceptCRLF": true
+    },
+    {
+      "path": "data/demo-media-manifest.json",
+      "providedCRLFSha256": "6e09467b5d2ba7b3d8518b994dc437ab334d6c100ff1f59e1337e5a029c04200",
+      "verifiedGitBlobAndLocalLFSha256": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf",
+      "sameContentExceptCRLF": true
+    }
+  ]
+}
