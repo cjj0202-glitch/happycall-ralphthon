@@ -129,6 +129,14 @@
     {
       "id": "N02",
       "pc": "pc2",
+      "latestAssignment": {
+        "id": "N02-M4",
+        "card": "reports/channel/N02-M4-media-delivery.md",
+        "state": "ACKNOWLEDGED_IMPLEMENTING",
+        "ackAtKST": "2026-09-21T22:46:40+09:00",
+        "ackCommentId": 5761525060,
+        "accepted": false
+      },
       "outcome": "음성 명료도·통화 검토 UX",
       "state": "RESULT_RECEIVED_REVIEW",
       "design": "PENDING",
@@ -242,6 +250,15 @@
     {
       "id": "N03",
       "pc": "pc3",
+      "latestAssignment": {
+        "id": "N03-M4",
+        "card": "reports/channel/N03-M4-full-animation.md",
+        "state": "ACKNOWLEDGED_IMPLEMENTING",
+        "ackAtKST": "2026-09-21T22:47:21+09:00",
+        "ackCommentId": 5761535254,
+        "accepted": false,
+        "prior72FrameIntake": "reports/pc3-real-short-main-intake.md"
+      },
       "outcome": "WMS 공정·합성 CCTV",
       "state": "FIX_RESULT_RECEIVED_REVIEW",
       "design": "REPORTED_WITH_EVIDENCE",
@@ -356,6 +373,14 @@
     {
       "id": "N04",
       "pc": "pc4",
+      "latestAssignment": {
+        "id": "N04-U1",
+        "card": "reports/channel/N04-U1-center-evidence-return.md",
+        "state": "ACKNOWLEDGED_IMPLEMENTING",
+        "ackAtKST": "2026-09-21T22:47:08+09:00",
+        "ackCommentId": 5761531994,
+        "accepted": false
+      },
       "outcome": "TMS·타모듈 시나리오 검증",
       "state": "RESULT_RECEIVED_REVIEW",
       "design": "REPORTED_WITH_EVIDENCE",

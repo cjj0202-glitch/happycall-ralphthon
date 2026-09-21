@@ -9,7 +9,9 @@ pc3 정준화 / LAPTOP-U2AL73UH / mcjun86-oss는 검수된 장면을 전체288�
 메인에서 동일 장면의 720p72장 및 1080p 대표1/133/288을 실제 렌더·열람했습니다. 1080p 대표3장은131.391초, frame당38.676~43.006초입니다. 전체288장은 약186~206분 추정으로 실행 시간이 필요하므로 후속 코드 작업을 시작합니다. 보고서 `reports/media/pc3-1080p-representative-review.md`를 공유합니다. 합성 CG 후보의 제작 승인이지 실사·최종제품 품질 인수는 아닙니다.
 
 ## 해줘야 할 일
-소유는 `scripts/media_pc3/build_scene.py`, 신규 `scripts/media_pc3/full_render_gate.py`, `scripts/media_pc3/test_full_render_gate.py`, 기존 look/environment CLI 가드 테스트의 해당 부분, `reports/pc3/full-render-*`입니다. 다른 작업자가 있으므로 타인 변경을 되돌리지 마세요. 기하·재질·빛·카메라·동작·tracks 수식은 바꾸지 않습니다.
+소유는 `scripts/media_pc3/build_scene.py`, 신규 `scripts/media_pc3/full_render_gate.py`, `scripts/media_pc3/test_full_render_gate.py`, 기존 look/environment CLI 가드 테스트의 해당 부분, `scripts/media_pc3/test_shadow_settings.py`의 신규 CLI·readback 통합 기대값, `reports/pc3/full-render-*`입니다. 기존 shadow 설정·순서·기하 검사의 분모와 검증은 유지합니다. 다른 작업자가 있으므로 타인 변경을 되돌리지 마세요. 기하·재질·빛·카메라·동작·tracks 수식은 바꾸지 않습니다.
+
+후속 정정: 대표3장 보고서의 실제 포함 커밋은 `ed2b188de31091a71f1596f50961239d02813107`이며 이전 기준 `1d517cb`에는 아직 없었습니다. `reports/pc3-real-short-main-intake.md`는 `06c649a`에 있습니다. 메인이 실제72장 수신 결과의 독립538/538 대조 범위를 인수했으며 전체288장·최종 제품 등록 인수는 아닙니다.
 
 현재 nonbaseline look/environment의 animation 금지 기본값은 보존하되, 메인이 발급한 실제 검토 receipt 파일과 기대 SHA를 명시하면 검수한 조합만 animation을 허용하세요. `--animation-review`와 `--animation-review-sha256`를 함께 요구하고 임의 approved=true만으로 통과시키지 않습니다.
 
