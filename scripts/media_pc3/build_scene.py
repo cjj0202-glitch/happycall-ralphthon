@@ -24,6 +24,7 @@ from mathutils import Vector
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from scene_contract import SCENE_SEED, FRAME_COUNT, evaluate_motion, load_layout
+from look_presets import settings_for
 
 
 def arguments():
@@ -36,12 +37,15 @@ def arguments():
     parser.add_argument('--camera', choices=['cctv', 'overview'], default='cctv')
     parser.add_argument('--resolution', nargs=2, type=int, default=[1280, 720])
     parser.add_argument('--samples', type=int, default=32)
+    parser.add_argument('--look', choices=['baseline', 'contrast_material_v1'], default='baseline')
     argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
     args = parser.parse_args(argv)
     if min(args.resolution) < 64 or max(args.resolution) > 3840 or not 1 <= args.samples <= 256:
         parser.error('Resolution must be 64..3840 and samples 1..256.')
     if args.mode == 'animation' and args.camera != 'cctv':
         parser.error('Final event candidate must use the fixed registered CCTV camera.')
+    if args.look != 'baseline' and args.mode not in ['prepare', 'representatives']:
+        parser.error('The unreviewed look candidate is limited to preparation or representative frames.')
     return args
 
 
@@ -53,7 +57,7 @@ def digest(path):
     return {'name': Path(path).name, 'bytes': Path(path).stat().st_size, 'sha256': h.hexdigest()}
 
 
-def material(name, color, metallic=0.0, roughness=0.5, noise=False):
+def material(name, color, metallic=0.0, roughness=0.5, noise=False, bump_strength=0.16, bump_distance=None):
     mat = bpy.data.materials.new(name)
     mat.use_nodes = True
     tree = mat.node_tree
@@ -71,8 +75,8 @@ def material(name, color, metallic=0.0, roughness=0.5, noise=False):
         tree.links.new(tex.outputs['Fac'], ramp.inputs['Fac'])
         tree.links.new(ramp.outputs['Color'], bsdf.inputs['Base Color'])
         bump = tree.nodes.new('ShaderNodeBump')
-        bump.inputs['Strength'].default_value = 0.16
-        bump.inputs['Distance'].default_value = 0.008 if name == 'Concrete' else 0.001
+        bump.inputs['Strength'].default_value = bump_strength
+        bump.inputs['Distance'].default_value = bump_distance if bump_distance is not None else (0.008 if name == 'Concrete' else 0.001)
         tree.links.new(tex.outputs['Fac'], bump.inputs['Height'])
         tree.links.new(bump.outputs['Normal'], bsdf.inputs['Normal'])
     return mat
@@ -139,6 +143,7 @@ def build(layout, args):
     bpy.ops.object.select_all(action='SELECT')
     bpy.ops.object.delete(use_global=False)
     random.seed(SCENE_SEED)
+    look = settings_for(args.look)
     scene = bpy.context.scene
     scene.unit_settings.system = 'METRIC'
     scene.render.engine = 'BLENDER_EEVEE_NEXT' if args.engine == 'eevee' else 'CYCLES'
@@ -160,14 +165,16 @@ def build(layout, args):
     scene.render.image_settings.color_mode = 'RGB'
     scene.render.film_transparent = False
     scene.view_settings.view_transform = 'AgX'
+    scene.view_settings.exposure, scene.view_settings.gamma = 0, 1
     scene.world = bpy.data.worlds.new('Independent synthetic warehouse environment')
     scene.world.use_nodes = True
     scene.world.node_tree.nodes['Background'].inputs['Color'].default_value = (0.58, 0.67, 0.8, 1)
-    scene.world.node_tree.nodes['Background'].inputs['Strength'].default_value = 0.32
+    scene.world.node_tree.nodes['Background'].inputs['Strength'].default_value = look['worldStrength']
 
     mats = {
-        'floor': material('Concrete', (0.28, 0.30, 0.31), roughness=0.36, noise=True),
-        'steel': material('Brushed galvanized steel', (0.42, 0.46, 0.49), metallic=0.78, roughness=0.29),
+        'floor': material('Concrete', look['concrete']['color'], roughness=look['concrete']['roughness'], noise=True,
+                          bump_strength=look['concrete']['bumpStrength'], bump_distance=look['concrete']['bumpDistance']),
+        'steel': material('Brushed galvanized steel', look['steel']['color'], metallic=look['steel']['metallic'], roughness=look['steel']['roughness']),
         'frame': material('Powder coated graphite', (0.085, 0.105, 0.12), metallic=0.45, roughness=0.4),
         'belt': material('Black rubber belt', (0.022, 0.028, 0.035), roughness=0.82, noise=True),
         'yellow': material('Safety yellow', (0.95, 0.61, 0.035), metallic=0.1, roughness=0.37),
@@ -287,10 +294,10 @@ def build(layout, args):
     cctv = camera(spec['id'], spec['position'], spec['lookAt'], spec['lensMm'])
     overview = camera('SYN-OVERVIEW-NOT-CCTV', (32, -9, 24), (15, 9, 0), 36)
     scene.camera = cctv if args.camera == 'cctv' else overview
-    area('Large soft loading-side light', (15, 0, 10), (16, 7, 0), 3800, 8, (0.88, 0.94, 1.0))
-    area('Ceiling key', (15, 10, 9), (17, 7, 0), 3300, 6, (1.0, 0.94, 0.84))
-    area('Warehouse fill', (5, 10, 7), (14, 8, 0), 2100, 5, (0.87, 0.93, 1.0))
-    area('Chute rim', (25, 7, 7), (18, 6, 0), 1700, 4, (1.0, 0.93, 0.80))
+    area('Large soft loading-side light', (15, 0, 10), (16, 7, 0), look['lightEnergies']['Large soft loading-side light'], 8, (0.88, 0.94, 1.0))
+    area('Ceiling key', (15, 10, 9), (17, 7, 0), look['lightEnergies']['Ceiling key'], 6, (1.0, 0.94, 0.84))
+    area('Warehouse fill', (5, 10, 7), (14, 8, 0), look['lightEnergies']['Warehouse fill'], 5, (0.87, 0.93, 1.0))
+    area('Chute rim', (25, 7, 7), (18, 6, 0), look['lightEnergies']['Chute rim'], 4, (1.0, 0.93, 0.80))
     # This watermark survives a raw PNG/full-screen playback; detailed Korean UI is separate.
     scene.render.use_stamp = True
     scene.render.use_stamp_note = True
@@ -371,9 +378,16 @@ def main():
               'blenderVersion': bpy.app.version_string, 'engine': scene.render.engine,
               'engineDevice': 'CPU' if args.engine == 'cycles' else 'Blender EEVEE runtime device; inspect actual log',
               'requestedSamples': args.samples, 'resolution': args.resolution, 'fps': 24,
+              'runtimeSamples': {'property': 'scene.cycles.samples' if args.engine == 'cycles' else 'scene.eevee.taa_render_samples',
+                                 'value': scene.cycles.samples if args.engine == 'cycles' else getattr(getattr(scene, 'eevee', None), 'taa_render_samples', None),
+                                 'note': 'Runtime property readback; null means unverified, not the requested count.'},
+              'look': {'name': args.look, 'settings': settings_for(args.look)},
+              'colorManagement': {'viewTransform': scene.view_settings.view_transform,
+                                  'exposure': scene.view_settings.exposure, 'gamma': scene.view_settings.gamma},
               'candidateDurationSeconds': 12, 'candidateFrameCount': FRAME_COUNT,
               'renderedFrameCount': len(rendered), 'wallSeconds': time.time() - started,
               'layout': digest(args.layout), 'generator': digest(__file__), 'eventAnchor': layout['eventAnchor'],
+              'sourceDependencies': [digest(Path(__file__).with_name('scene_contract.py')), digest(Path(__file__).with_name('look_presets.py'))],
               'cameraId': scene.camera.name, 'clockMode': layout['animation']['clockMode'],
               'representativeFrames': [1, 133, FRAME_COUNT], 'rendered': rendered,
               'blend': digest(blend_path), 'tracks': digest(args.output / 'tracks.json'),

@@ -6,7 +6,7 @@ PC3에는 확인한 범위에서 Blender 실행파일이 없어 **생성기를 �
 
 ## 사전 조건
 
-- 소유 브랜치의 `build_scene.py`와 `scene_contract.py`를 함께 사용한다.
+- 소유 브랜치의 `build_scene.py`, `scene_contract.py`, `look_presets.py`를 함께 사용한다.
 - 공용 기준의 layout JSON과 `data/fixtures/cases.json`을 읽을 수 있어야 한다.
 - 기존 `.blend`나 출력 폴더를 덮지 않는다. 실행마다 새로운 빈 output 디렉터리를 선택한다.
 - 아래 `$blenderExe`는 **실행하는 PC에서 확인한 실제 경로**다. PC3/pc1의 경로를 서로 추측하거나 복사하지 않는다.
@@ -31,15 +31,21 @@ PowerShell, 해당 PC의 저장소 루트에서 실행한다. 경로를 변수�
 - `case-0002-ww3.blend`: seed/카메라/프레임별 위치·회전을 포함하는 3D 장면.
 - `frame-0001.png`, `frame-0133.png`, `frame-0288.png`: 대표 렌더일 때만 생성.
 - `tracks.json`: 같은 카메라의 정규화 top-left bbox와 world position/yaw, 고정 사건·별도 경과시각. `synthetic-scene-ground-truth`.
-- `render-report.json`: 실제 Blender 버전/engine/해상도, 렌더된 수/실측 시간, 입력·생성기·blend·PNG·tracks 해시. `visualGateAccepted=false`, `mainRegistration=false` 유지.
+- `render-report.json`: 실제 Blender 버전/engine/해상도, 렌더된 수/실측 시간, 입력·생성기·의존 모듈·blend·PNG·tracks 해시, look 이름/전체 값, 노출/gamma, 요청/실효 sample 값. 실효 sample 속성이 없으면 null이며 검증되지 않은 값이다. `visualGateAccepted=false`, `mainRegistration=false` 유지.
 
 floor/장면은 지지면 상단0.85m, parcel mesh의 실제 바닥0.85m를 사용한다. 원점은 지지면에 두고 몸체 중심을 로컬0.175m에 둔다. runtime의 접촉 간격 검사는 world-space mesh bound의 minZ를 사용하며, 가드 관통·렌더 픽셀·가림까지 검증했다는 뜻은 아니다.
 
 `clippedFrames`는 프레임 밖이나 카메라 뒤의 투영을 기록한다. bbox를 clamp해 정상으로 숨기지 않는다. 가림 검사는 `occlusionTested=false`이며 대표 렌더의 실제 물체 윤곽·마스크와 별도로 대조해야 한다. 전체 개요는 `--camera overview`로 새 output에만 만든다. `SYN-OVERVIEW-NOT-CCTV`의 bbox를 SYN-CAM-02에 등록하지 않는다.
 
+## 기하 수정 뒤 동일 조건의 조명·재질 A/B
+
+pc1이 c208597의 대표3장을 실제 렌더했고 pc3도 다운로드 SHA 검증과 이미지 확인을 마쳤다. 제작 품질은 미통과이며, 부유한 가드의 받침 수정은 별도 `03291cc`로 먼저 전달했다. [기하 보고](../../reports/pc3/blender-guard-fix.md)와 [A/B 실험](../../reports/pc3/blender-look-ab.md)을 따른다.
+
+`--look baseline`이 기본값이다. `--look contrast_material_v1`은 fill/world 조명, 콘크리트/강철 재질만 바꾸는 비교 후보이며 prepare/representatives에서만 허용한다. A/B는 **동일한 기하 수정과 preset 통합 커밋**에서 각각 새 폴더로 생성한다. 이전 geometry의 Release PNG를 A로 재사용하지 않는다. 카메라/경로/seed/샘플/노출/프레임을 고정하며, 원본 크기로 접촉·물성·그림자를 비교한다. B 효과는 아직 미렌더 가설이다.
+
 ## 검수 뒤에만 짧은 동작·최종 후보
 
-대표3장의 물성·접촉·관통/부유·카메라·분기 방향을 pc1이 확인한 다음, 같은 코드/seed에서 확장한다. 아래 명령은 **현재 미실행**이다.
+대표3장의 물성·접촉·관통/부유·카메라·분기 방향을 pc1이 확인한 다음, 같은 코드/seed에서 확장한다. 아래 명령은 **현재 미실행이며 20:17 피드백은 아직 확장을 허용하지 않았다.** 검수된 B가 선택된다면 preset의 대표 프레임 제한을 후속 배정에서 명시적으로 갱신한 뒤 확장해야 한다.
 
 ```powershell
 & $blenderExe --background --factory-startup --python-exit-code 1 --python scripts/media_pc3/build_scene.py -- --layout planning/media/scene-layout-v1.json --output .local/pc3-blender/short-01 --mode short --resolution 1280 720 --samples 32
@@ -60,6 +66,8 @@ short는 `[3,6)`초의 frame73..144 72장이다. final은 frame1..288 288장이�
 ```powershell
 python -m py_compile scripts/media_pc3/build_scene.py scripts/media_pc3/scene_contract.py
 python -m unittest discover -s tests/remote/pc3 -p test_scene_contract.py -v
+python -m unittest discover -s scripts/media_pc3 -p test_look_presets.py -v
+python scripts/media_pc3/audit_guard_supports.py --layout planning/media/scene-layout-v1.json
 ```
 
 이는 문법/순수 데이터·기하 검사이며 bpy API 호환, 실제 장면 생성·렌더·시각 게이트를 대신하지 않는다. 성능 벤치마크·대표이미지·MP4가 없으면 미실행으로 회신한다.
