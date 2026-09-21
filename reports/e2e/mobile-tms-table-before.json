@@ -1,0 +1,30 @@
+{
+  "at": "2026-09-21T07:51:36.459Z",
+  "viewport": 390,
+  "measured": [
+    {
+      "text": "가상 한빛점 · 문의 점포",
+      "width": 40.71875,
+      "height": 194,
+      "fontSize": "12px",
+      "lineHeight": "18px",
+      "whiteSpace": "normal"
+    },
+    {
+      "text": "가상 푸른점",
+      "width": 40.71875,
+      "height": 104,
+      "fontSize": "12px",
+      "lineHeight": "18px",
+      "whiteSpace": "normal"
+    },
+    {
+      "text": "가상 나무점",
+      "width": 40.71875,
+      "height": 104,
+      "fontSize": "12px",
+      "lineHeight": "18px",
+      "whiteSpace": "normal"
+    }
+  ]
+}

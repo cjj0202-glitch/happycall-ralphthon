@@ -1,0 +1,16 @@
+{
+  "at": "2026-09-21T07:47:45.925Z",
+  "url": "http://127.0.0.1:3100/",
+  "title": "",
+  "body": "Internal Server Error",
+  "errors": [
+    {
+      "kind": "console",
+      "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+    },
+    {
+      "kind": "console",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "happycall-independent-e2e",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node replay-check.mjs" },
+  "devDependencies": { "playwright": "1.58.2" }
+}

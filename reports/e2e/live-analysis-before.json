@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "analysis-quality-before-v1",
+  "synthetic": true,
+  "capturedAt": "2026-09-21T07:58:55.990367+00:00",
+  "source": ".local/cases-store.json",
+  "caseId": "CASE-0002",
+  "requestId": "edde4b9b-76e2-49b2-913e-0286e8865c76",
+  "mode": "demo-live",
+  "storedAt": "2026-09-21T07:51:54.214472+00:00",
+  "transcript": [
+    {
+      "speaker": "A",
+      "text": " 안녕하세요.",
+      "start": 0.0,
+      "end": 0.3999999999999999
+    },
+    {
+      "speaker": "A",
+      "text": " 캡티쿨 상담원입니다.",
+      "start": 0.95,
+      "end": 2.2
+    },
+    {
+      "speaker": "A",
+      "text": " 어떤 불편이 있으신가요?",
+      "start": 2.75,
+      "end": 4.1000000000000005
+    },
+    {
+      "speaker": "B",
+      "text": " 가산 세범점인데요.",
+      "start": 4.6000000000000005,
+      "end": 5.9
+    },
+    {
+      "speaker": "B",
+      "text": " 비스킷 18개를 주문했는데 휴지 한 박스가 왔어요.",
+      "start": 6.5,
+      "end": 10.25
+    },
+    {
+      "speaker": "B",
+      "text": " 이게 대체 뭡니까?",
+      "start": 10.85,
+      "end": 11.799999999999999
+    },
+    {
+      "speaker": "A",
+      "text": " 비스킷 18개 대신 휴지 1개가 왔다는 말씀이시죠?",
+      "start": 12.549999999999999,
+      "end": 16.4
+    },
+    {
+      "speaker": "B",
+      "text": " 아니요. 휴지 1개가 아니라 한 박스예요.",
+      "start": 17.349999999999998,
+      "end": 20.65
+    },
+    {
+      "speaker": "B",
+      "text": " 단위를 제대로 적어주세요.",
+      "start": 21.15,
+      "end": 22.799999999999997
+    },
+    {
+      "speaker": "A",
+      "text": " 네,",
+      "start": 23.188,
+      "end": 23.587999999999997
+    },
+    {
+      "speaker": "A",
+      "text": " 점정하겠습니다.",
+      "start": 24.038,
+      "end": 24.738
+    },
+    {
+      "speaker": "A",
+      "text": " 주문은 비스킷 18개,",
+      "start": 25.387999999999998,
+      "end": 26.988
+    },
+    {
+      "speaker": "A",
+      "text": " 받은 상품은 휴지 한 박스입니다.",
+      "start": 27.287999999999997,
+      "end": 29.238
+    },
+    {
+      "speaker": "B",
+      "text": " 주말 장사도 해야 하는데 정말 곤란해요.",
+      "start": 29.938,
+      "end": 33.038
+    },
+    {
+      "speaker": "B",
+      "text": " 잘못 온 상품은 어떻게 해야 하나요?",
+      "start": 33.738,
+      "end": 36.087999999999994
+    },
+    {
+      "speaker": "A",
+      "text": " 오출부 확인과 회송 안내가 필요한 것으로 접수하고 센터 상품 담당자에게 전달하겠습니다.",
+      "start": 36.638,
+      "end": 43.488
+    },
+    {
+      "speaker": "B",
+      "text": " 네,",
+      "start": 44.288,
+      "end": 44.488
+    },
+    {
+      "speaker": "B",
+      "text": " 주문한 상품 처리도 같이 확인해 주세요.",
+      "start": 45.388,
+      "end": 48.337999999999994
+    }
+  ],
+  "analysis": {
+    "summary": "가상 새봄점에서 비스킷 18개 주문했으나 휴지 한 박스가 배송됨. 주문과 출고 간 상품 및 단위 불일치 확인됨. 고객은 오출고 확인, 회송 방법 및 주문 상품 처리 안내를 원함.",
+    "fields": {
+      "storeId": "SYN-ST02",
+      "subject": "비스킷 주문 대신 휴지 입고",
+      "quantity": 18,
+      "unit": "EA",
+      "request": "오출고 확인·회송 방법·주문 상품 처리 안내"
+    },
+    "issues": [
+      {
+        "field": "quantity",
+        "message": "상담원 입력 수량이 1개(EA)로 되어 있으나 비스킷 주문 수량은 18EA임.",
+        "evidence": "transcript 및 syntheticEvidence E-W1, E-W2"
+      },
+      {
+        "field": "unit",
+        "message": "상담원 입력 단위 EA이지만 주문 상품은 18EA로 다수임. 단위는 맞으나 수량 불일치임.",
+        "evidence": "transcript 및 syntheticEvidence E-W1, E-W2"
+      }
+    ],
+    "questions": [],
+    "department": {
+      "id": "warehouse",
+      "name": "센터 상품 담당",
+      "reason": "상품 오출고 및 교환 처리 관련 문의"
+    },
+    "facts": [
+      "가상 새봄점에서 비스킷 18EA 주문됨 (E-W1)",
+      "피킹 스캔은 비스킷 18EA로 기록됨 (E-W2)",
+      "출고 스캔은 휴지 1BOX로 기록되어 상품 및 단위 불일치 발생 (E-W3)",
+      "배송완료(05:10) 등록됨만 정확한 상품 인도 여부는 추가 확인 필요 (E-W5)"
+    ],
+    "unknowns": [
+      "누가 출고 스캔 오류의 귀책이 있는지 미확인 (E-W4)"
+    ],
+    "replyDraft": "고객님, 가상 새봄점에서 비스킷 18개 주문하셨으나 휴지 한 박스가 출고된 점 확인했습니다. 이 문제에 대해 상품 담당부서에서 오출고 확인 및 회수 방법, 주문 상품 처리 절차를 안내해 드리겠습니다. 추가 조사 후 신속히 연락드리도록 하겠습니다."
+  },
+  "originalCounselorInput": {
+    "storeId": "SYN-ST02",
+    "subject": "비스킷 주문 대신 휴지 입고",
+    "quantity": 1,
+    "unit": "EA",
+    "request": "오출고 확인·회송 방법·주문 상품 처리 안내"
+  },
+  "originalCounselorInputProvenance": "Reconstructed from unchanged synthetic fixture and main-session report; original outbound request body was not separately captured. Quantity/unit mean received amount, intentionally incorrect initial unit 1 EA.",
+  "currentStoredIntake": {
+    "storeId": "SYN-ST02",
+    "subject": "비스킷 주문 대신 휴지 입고",
+    "quantity": 18,
+    "unit": "EA",
+    "request": "오출고 확인·회송 방법·주문 상품 처리 안내"
+  },
+  "expectedReceiptFields": {
+    "quantity": 1,
+    "unit": "BOX"
+  },
+  "evaluatorExpectationOrigin": "Manual review of customer correction in actual STT, not a model output or production postprocessing rule.",
+  "wav": {
+    "path": "apps/web/public/demo/CASE-0002.wav",
+    "sha256AtCapture": "f9fa70afaeb575876ab2dd18f1f395fbd38d6fec99b7cc0f70cb723650fb2e0c"
+  },
+  "codeSha256AtCapture": {
+    "server\\live.py": "1bf3d80f81610d11717cf8afb2511c3d3e3fa5be264213c1c34b84e438f6f2f0",
+    "server\\analysis_schema.py": "185903d83c2f3248da9f03ee0dd919368eefbf50224a05edb1c2ececea7b81f8"
+  },
+  "contains": "Allowlisted synthetic transcript, analysis, input reconstruction, identifiers and hashes only. No environment, credentials, headers, or billing ledger."
+}

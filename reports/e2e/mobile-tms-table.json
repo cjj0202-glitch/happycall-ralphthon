@@ -1,0 +1,60 @@
+{
+  "at": "2026-09-21T07:55:39.942Z",
+  "viewport": 390,
+  "cssHash": "62d44b23f06eccdc44268b686c17d38c3ff6de1fa184df72e5ee0c9b30b812f0",
+  "measured": [
+    {
+      "text": "가상 한빛점 · 문의 점포",
+      "width": 150.109375,
+      "height": 32,
+      "fontSize": "12px",
+      "lineHeight": "18px",
+      "whiteSpace": "nowrap",
+      "textLineCount": 1
+    },
+    {
+      "text": "가상 푸른점",
+      "width": 89.3125,
+      "height": 32,
+      "fontSize": "12px",
+      "lineHeight": "18px",
+      "whiteSpace": "nowrap",
+      "textLineCount": 1
+    },
+    {
+      "text": "가상 나무점",
+      "width": 89.3125,
+      "height": 32,
+      "fontSize": "12px",
+      "lineHeight": "18px",
+      "whiteSpace": "nowrap",
+      "textLineCount": 1
+    }
+  ],
+  "dimensions": {
+    "clientWidth": 322,
+    "scrollWidth": 628,
+    "overflowX": "auto",
+    "scrollLeft": 0
+  },
+  "scroll": {
+    "scrollLeft": 306,
+    "maxScrollLeft": 306,
+    "lastHeaderRight": 356.46875,
+    "wrapperRight": 357
+  },
+  "documentSize": {
+    "viewport": 390,
+    "body": 390,
+    "root": 390,
+    "scrollX": 0
+  },
+  "errors": [],
+  "analyzeRequests": 0,
+  "checks": {
+    "storesAreSingleLine": true,
+    "tableScrolls": true,
+    "noPageOverflow": true,
+    "noPageErrorsOrAnalyze": true
+  }
+}

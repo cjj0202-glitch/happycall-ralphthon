@@ -1,5 +1,7 @@
 # 합성 데모 미디어 공유 준비
 
+**후속 발행 확인:** 2026-09-21 17:25:46 KST에 메인이 [합성 자산 Release](https://github.com/cjj0202-glitch/happycall-ralphthon/releases/tag/demo-media-20260921)를 발행했습니다. GitHub 자산3건의 크기·SHA256이 아래 manifest와 일치했고, pc1의 별도 `.local/release-received/`로 실제 재다운로드한 3건도 같은 해시였습니다. 다른 물리 PC의 수신 성공은 별도 ACK 전입니다. 아래 최초 준비 기록은 당시 상태로 보존합니다.
+
 2026-09-21 17:03 KST / pc1 CJJ. **Release 발행 전 준비 결과**입니다. 이 작업에서는 업로드·커밋·push·유료 API 호출을 하지 않았습니다. 원격 Release의 실제 발행 여부와 다른 PC의 다운로드 성공은 메인 통합 작업에서 별도로 확인해야 합니다.
 
 ## 공유 계약

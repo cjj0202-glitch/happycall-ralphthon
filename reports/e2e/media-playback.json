@@ -1,0 +1,35 @@
+{
+  "started": "2026-09-21T07:50:48.178Z",
+  "mode": "read-only playback, no analysis API",
+  "checks": [
+    {
+      "id": "CASE-0001",
+      "audio": {
+        "duration": 47.15,
+        "currentTime": 47.15,
+        "ended": true,
+        "error": null
+      },
+      "errors": []
+    },
+    {
+      "id": "CASE-0002",
+      "audio": {
+        "duration": 49.55,
+        "currentTime": 49.55,
+        "ended": true,
+        "error": null
+      },
+      "errors": [],
+      "video": {
+        "duration": 12,
+        "currentTime": 12,
+        "ended": true,
+        "width": 960,
+        "height": 540,
+        "error": null
+      }
+    }
+  ],
+  "finished": "2026-09-21T07:51:52.532Z"
+}

@@ -1,0 +1,107 @@
+[
+  {
+    "width": 1365,
+    "view": "상담 작업대",
+    "viewport": 1365,
+    "body": 1365,
+    "root": 1365
+  },
+  {
+    "width": 1365,
+    "view": "경영주 접수",
+    "viewport": 1365,
+    "body": 1365,
+    "root": 1365
+  },
+  {
+    "width": 1365,
+    "view": "센터 회신",
+    "viewport": 1365,
+    "body": 1365,
+    "root": 1365
+  },
+  {
+    "width": 1365,
+    "view": "WMS 작업 확인",
+    "viewport": 1365,
+    "body": 1365,
+    "root": 1365
+  },
+  {
+    "width": 1365,
+    "view": "TMS 배송 확인",
+    "viewport": 1365,
+    "body": 1365,
+    "root": 1365
+  },
+  {
+    "width": 921,
+    "view": "상담 작업대",
+    "viewport": 921,
+    "body": 921,
+    "root": 921
+  },
+  {
+    "width": 921,
+    "view": "경영주 접수",
+    "viewport": 921,
+    "body": 921,
+    "root": 921
+  },
+  {
+    "width": 921,
+    "view": "센터 회신",
+    "viewport": 921,
+    "body": 921,
+    "root": 921
+  },
+  {
+    "width": 921,
+    "view": "WMS 작업 확인",
+    "viewport": 921,
+    "body": 921,
+    "root": 921
+  },
+  {
+    "width": 921,
+    "view": "TMS 배송 확인",
+    "viewport": 921,
+    "body": 921,
+    "root": 921
+  },
+  {
+    "width": 390,
+    "view": "상담 작업대",
+    "viewport": 390,
+    "body": 390,
+    "root": 390
+  },
+  {
+    "width": 390,
+    "view": "경영주 접수",
+    "viewport": 390,
+    "body": 390,
+    "root": 390
+  },
+  {
+    "width": 390,
+    "view": "센터 회신",
+    "viewport": 390,
+    "body": 390,
+    "root": 390
+  },
+  {
+    "width": 390,
+    "view": "WMS 작업 확인",
+    "viewport": 390,
+    "body": 390,
+    "root": 390
+  },
+  {
+    "width": 390,
+    "view": "TMS 배송 확인",
+    "viewport": 390,
+    "body": 390,
+    "root": 390
+  }
+]

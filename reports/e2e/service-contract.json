@@ -1,0 +1,81 @@
+{
+  "at": "2026-09-21T07:48:34.830512+00:00",
+  "kind": "isolated service contract, not browser or human test",
+  "checks": [
+    {
+      "name": "fixture-replay-null",
+      "status": "PASS",
+      "evidence": {
+        "mode": "replay",
+        "quantity": null
+      }
+    },
+    {
+      "name": "unconfirmed-handoff-denied",
+      "status": "PASS",
+      "evidence": {
+        "code": "REVIEW_REQUIRED",
+        "unchanged": true
+      }
+    },
+    {
+      "name": "foreign-evidence-denied",
+      "status": "PASS",
+      "evidence": {
+        "code": "INVALID_EVIDENCE",
+        "unchanged": true
+      }
+    },
+    {
+      "name": "null-quantity-handoff-allowed",
+      "status": "PASS",
+      "evidence": {
+        "status": "handed_off",
+        "quantity": null
+      }
+    },
+    {
+      "name": "counselor-cannot-register-center-reply",
+      "status": "PASS",
+      "evidence": {
+        "code": "CENTER_ROLE_REQUIRED",
+        "unchanged": true
+      }
+    },
+    {
+      "name": "intermediate-pending-remains-progress",
+      "status": "PASS",
+      "evidence": {
+        "status": "in_progress",
+        "pendingActions": [
+          "운행 확인"
+        ]
+      }
+    },
+    {
+      "name": "pending-blocks-close",
+      "status": "PASS",
+      "evidence": {
+        "code": "ACTIONS_PENDING",
+        "unchanged": true
+      }
+    },
+    {
+      "name": "final-reply-after-actions-closes",
+      "status": "PASS",
+      "evidence": {
+        "status": "closed",
+        "pendingActions": [],
+        "reply": "확인 조치를 완료했습니다"
+      }
+    },
+    {
+      "name": "closed-immutable",
+      "status": "PASS",
+      "evidence": {
+        "code": "CASE_CLOSED",
+        "unchanged": true
+      }
+    }
+  ]
+}

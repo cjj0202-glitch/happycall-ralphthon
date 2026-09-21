@@ -1,0 +1,143 @@
+{
+  "at": "2026-09-21T08:25:53.622377+00:00",
+  "kind": "isolated revision/reference service contract, not browser or human test",
+  "checks": [
+    {
+      "name": "fixture-replay-null",
+      "status": "PASS",
+      "evidence": {
+        "mode": "replay",
+        "quantity": null
+      }
+    },
+    {
+      "name": "same-description-new-intake-unlinked",
+      "status": "PASS",
+      "evidence": {
+        "reference": null,
+        "evidence": [],
+        "revision": 0
+      }
+    },
+    {
+      "name": "mismatched-explicit-reference-denied",
+      "status": "PASS",
+      "evidence": {
+        "code": "INVALID_REFERENCE_CASE"
+      }
+    },
+    {
+      "name": "matching-explicit-reference-links",
+      "status": "PASS",
+      "evidence": {
+        "reference": "CASE-0001",
+        "revision": 0
+      }
+    },
+    {
+      "name": "missing-revision-denied-428",
+      "status": "PASS",
+      "evidence": {
+        "code": "REVISION_REQUIRED",
+        "status": 428,
+        "sentRevision": null,
+        "storedRevision": 0,
+        "unchanged": true
+      }
+    },
+    {
+      "name": "accepted-write-then-stale-revision-denied-409",
+      "status": "PASS",
+      "evidence": {
+        "code": "STATE_CONFLICT",
+        "status": 409,
+        "sentRevision": 0,
+        "storedRevision": 1,
+        "unchanged": true,
+        "winningRevision": 1
+      }
+    },
+    {
+      "name": "unconfirmed-handoff-denied",
+      "status": "PASS",
+      "evidence": {
+        "code": "REVIEW_REQUIRED",
+        "status": 422,
+        "sentRevision": 0,
+        "storedRevision": 0,
+        "unchanged": true
+      }
+    },
+    {
+      "name": "foreign-evidence-denied",
+      "status": "PASS",
+      "evidence": {
+        "code": "INVALID_EVIDENCE",
+        "status": 422,
+        "sentRevision": 0,
+        "storedRevision": 0,
+        "unchanged": true
+      }
+    },
+    {
+      "name": "null-quantity-handoff-allowed",
+      "status": "PASS",
+      "evidence": {
+        "status": "handed_off",
+        "quantity": null
+      }
+    },
+    {
+      "name": "counselor-cannot-register-center-reply",
+      "status": "PASS",
+      "evidence": {
+        "code": "CENTER_ROLE_REQUIRED",
+        "status": 403,
+        "sentRevision": 1,
+        "storedRevision": 1,
+        "unchanged": true
+      }
+    },
+    {
+      "name": "intermediate-pending-remains-progress",
+      "status": "PASS",
+      "evidence": {
+        "status": "in_progress",
+        "pendingActions": [
+          "운행 확인"
+        ]
+      }
+    },
+    {
+      "name": "pending-blocks-close",
+      "status": "PASS",
+      "evidence": {
+        "code": "ACTIONS_PENDING",
+        "status": 422,
+        "sentRevision": 2,
+        "storedRevision": 2,
+        "unchanged": true
+      }
+    },
+    {
+      "name": "final-reply-after-actions-closes",
+      "status": "PASS",
+      "evidence": {
+        "status": "closed",
+        "pendingActions": [],
+        "reply": "확인 조치를 완료했습니다"
+      }
+    },
+    {
+      "name": "closed-immutable",
+      "status": "PASS",
+      "evidence": {
+        "code": "CASE_CLOSED",
+        "status": 409,
+        "sentRevision": 3,
+        "storedRevision": 3,
+        "unchanged": true
+      }
+    }
+  ]
+}
