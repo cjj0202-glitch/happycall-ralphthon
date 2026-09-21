@@ -52,12 +52,12 @@
       "id": "N03",
       "pc": "pc3",
       "outcome": "WMS 공정·합성 CCTV",
-      "state": "IN_PROGRESS_REPORTED",
-      "design": "PENDING",
-      "implementation": "IN_PROGRESS_REPORTED",
-      "unit": "PENDING",
-      "functional": "PENDING",
-      "adversarial": "PENDING",
+      "state": "REVIEW_FIX_REQUESTED",
+      "design": "REPORTED_WITH_EVIDENCE",
+      "implementation": "REPORTED_WITH_EVIDENCE",
+      "unit": "REPORTED_WITH_EVIDENCE",
+      "functional": "REPORTED_WITH_EVIDENCE",
+      "adversarial": "MAIN_FINDING_OPEN",
       "accepted": false,
       "issueUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9",
       "sentAtKST": "2026-09-21T18:28:13+09:00",
@@ -65,7 +65,10 @@
       "ackUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5758340623",
       "reportedHead": "d4b4a8137fbc608911e9f6f71bd4b5e289e0a958",
       "reportedBranch": "work/pc3-n03-wms-scenes",
-      "reportedRepo": "D:/hwana/Work/happycall-ralphthon"
+      "reportedRepo": "D:/hwana/Work/happycall-ralphthon",
+      "resultCommit": "577a31b8511c9bb73a1f66c5763077cd776ef6a7",
+      "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5758639802",
+      "mainFinding": "Explicitly linked INT text cases rejected by canonicalCase lookup; repair requested in issue9 before shell integration."
     },
     {
       "id": "N04",
@@ -90,6 +93,6 @@
       "reportedAutoWakeKST": "2026-09-21T18:41:41+09:00"
     }
   ],
-  "updatedAtKST": "2026-09-21T18:51:39.708617+09:00",
+  "updatedAtKST": "2026-09-21T19:05:38.930085+09:00",
   "sharedBaseCommit": "d4b4a8137fbc608911e9f6f71bd4b5e289e0a958"
 }
