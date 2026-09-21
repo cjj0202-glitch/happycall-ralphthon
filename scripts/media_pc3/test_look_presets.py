@@ -168,8 +168,12 @@ class LookPresetTests(unittest.TestCase):
         self.assertEqual(current.look, "baseline")
         self.assertEqual(current.environment_detail, "none")
         self.assertEqual(current.shadow_rays, 1)
+        self.assertIsNone(current.threads)
+        self.assertIsNone(current.animation_review)
+        self.assertIsNone(current.animation_review_sha256)
         self.assertEqual({key: value for key, value in vars(current).items()
-                          if key not in {"look", "environment_detail", "shadow_rays"}}, vars(previous))
+                          if key not in {"look", "environment_detail", "shadow_rays", "threads",
+                                         "animation_review", "animation_review_sha256"}}, vars(previous))
         self.assertEqual((current.mode, current.engine, current.camera, current.samples),
                          ("representatives", "eevee", "cctv", 32))
         self.assertEqual(current.resolution, [1280, 720])
@@ -187,10 +191,50 @@ class LookPresetTests(unittest.TestCase):
                     with self.assertRaises(SystemExit) as failure:
                         actual_arguments(self.source, flags)
                     self.assertEqual(failure.exception.code, 2)
+                    # Parsing a pair is not acceptance: main must verify real bytes
+                    # before output creation, as covered by test_full_render_gate.
+                    paired = flags + ["--animation-review", "artificial-review.json",
+                                      "--animation-review-sha256", "a" * 64]
+                    args = actual_arguments(self.source, paired)
+                    self.assertEqual(args.animation_review, Path("artificial-review.json"))
+                    self.assertEqual(args.animation_review_sha256, "a" * 64)
+
+    def test_actual_cli_requires_both_animation_receipt_arguments(self):
+        base = self.flags + ["--mode", "animation", "--look", "contrast_material_v1"]
+        for incomplete in (["--animation-review", "artificial-review.json"],
+                           ["--animation-review-sha256", "a" * 64]):
+            with self.subTest(incomplete=incomplete), self.assertRaises(SystemExit) as failure:
+                actual_arguments(self.source, base + incomplete)
+            self.assertEqual(failure.exception.code, 2)
+
+    def test_actual_cli_threads_are_optional_and_explicit_values_are_bounded(self):
+        self.assertIsNone(actual_arguments(self.source, self.flags).threads)
+        for value in (1, 2, 256):
+            with self.subTest(value=value):
+                self.assertEqual(actual_arguments(self.source, self.flags + ["--threads", str(value)]).threads,
+                                 value)
+        for value in ("0", "-1", "257", "2.5", "true"):
+            with self.subTest(value=value), self.assertRaises(SystemExit) as failure:
+                actual_arguments(self.source, self.flags + ["--threads", value])
+            self.assertEqual(failure.exception.code, 2)
+
+    def test_actual_cli_receipt_pair_is_animation_only(self):
+        pair = ["--animation-review", "artificial-review.json", "--animation-review-sha256", "a" * 64]
+        for mode in ("prepare", "representatives", "short"):
+            with self.subTest(mode=mode), self.assertRaises(SystemExit) as failure:
+                actual_arguments(self.source, self.flags + ["--mode", mode] + pair)
+            self.assertEqual(failure.exception.code, 2)
+        # The parser permits a pair on baseline animation; the real gate rejects
+        # settings inconsistent with that receipt before any output is created.
+        parsed = actual_arguments(self.source, self.flags + ["--mode", "animation"] + pair)
+        self.assertEqual((parsed.mode, parsed.look, parsed.environment_detail),
+                         ("animation", "baseline", "none"))
 
     def test_actual_cli_rejects_unregistered_look_and_preserves_camera_gate(self):
         for flags in (["--look", "unknown"], ["--look", "BASELINE"], ["--look", "contrast-material-v1"],
-                      ["--mode", "animation", "--camera", "overview"]):
+                      ["--mode", "animation", "--camera", "overview"],
+                      ["--mode", "animation", "--camera", "overview",
+                       "--animation-review", "artificial-review.json", "--animation-review-sha256", "a" * 64]):
             with self.subTest(flags=flags), self.assertRaises(SystemExit) as failure:
                 actual_arguments(self.source, self.flags + flags)
             self.assertEqual(failure.exception.code, 2)

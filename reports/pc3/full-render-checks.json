@@ -1,0 +1,426 @@
+{
+  "schemaVersion": "pc3-full-render-m4-checks-v1",
+  "recordedAtUtc": "2026-09-21T14:02:15.231611+00:00",
+  "identity": {
+    "slot": "pc3",
+    "hostname": "LAPTOP-U2AL73UH",
+    "github": "mcjun86-oss"
+  },
+  "assignmentComment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5761425934",
+  "scopeExpansionComment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5761626092",
+  "intakeHead": "c7fd1c06a4bd167d7d02fc1b3c9869193eec76d2",
+  "status": "IMPLEMENTED_PASS_WITH_OS_SKIP_AWAITING_PC1_REVIEW",
+  "unitTotals": {
+    "run": 53,
+    "passed": 52,
+    "skipped": 1,
+    "failures": 0,
+    "errors": 0
+  },
+  "gateTests": {
+    "schemaVersion": "pc3-full-render-gate-test-evidence-v1",
+    "createdAtUtc": "2026-09-21T14:00:14.763897+00:00",
+    "sourceCommitBeforeUncommittedM4Changes": "c7fd1c06a4bd167d7d02fc1b3c9869193eec76d2",
+    "status": "PASS_WITH_SKIP",
+    "command": "python -B -m unittest discover -s scripts/media_pc3 -p test_full_render_gate.py -v",
+    "suite": {
+      "testsRun": 17,
+      "passed": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "elapsedSeconds": 17.601,
+      "exitCode": 0
+    },
+    "skip": {
+      "test": "test_symlink_evidence_rejected_if_os_allows_creation",
+      "reason": "OS WinError 1314 denied symlink creation; no privilege or security settings changed"
+    },
+    "negativeCasesCoveredByPassingMethods": 83,
+    "negativeCountBasis": "Declared independent negative branches from the final passing methods; excludes the skipped symlink and the separate mutation trial. Not a captured runtime set counter.",
+    "negativeCaseCounts": {
+      "missing_receipt_pair_and_wrong_sha": 5,
+      "execution_settings_drift": 11,
+      "receipt_schema_roles_duplicates_and_settings": 20,
+      "changed_or_missing_source_input_and_evidence": 13,
+      "corrupted_representative_and_wrong_short_report_with_updated_hash": 3,
+      "required_runtime_readback_dimensions": 22,
+      "actual_hardlink_and_junction_with_guard_message": 2,
+      "actual_main_wrong_sha_before_mkdir": 1,
+      "actual_main_parser_missing_pair_and_overview_before_mkdir": 3,
+      "actual_main_runtime_mismatch_before_tracks": 1,
+      "actual_main_changed_input_after_tracks_before_render": 1,
+      "actual_main_changed_scene_after_tracks_before_render": 1
+    },
+    "mainBoundaryMethods": 6,
+    "mainHarness": {
+      "actualFunctions": [
+        "arguments",
+        "scene_readback",
+        "main"
+      ],
+      "actualGateFunctions": [
+        "verify_animation_review",
+        "validate_scene_readback"
+      ],
+      "stubbed": [
+        "bpy",
+        "Vector/matrix/scene",
+        "build",
+        "load_layout",
+        "tracks",
+        "configure_shadow_rays",
+        "save_as_mainfile",
+        "render"
+      ],
+      "positiveBoundary": "First renderer stub invocation raises MockRenderReached immediately; no pixels rendered.",
+      "negativeBoundaries": [
+        "wrong SHA and CLI missing pair/overview: before output mkdir/build",
+        "runtime 32 with request 96: after build, before tracks/save/render",
+        "input tamper after tracks: rejected by second verification before first render",
+        "actual scene samples changed after tracks: rejected by second readback before first render"
+      ]
+    },
+    "mutationTrials": [
+      {
+        "mutation": "receipt SHA require condition replaced by True in memory only",
+        "negative": "test_actual_main_wrong_receipt_sha_rejects_before_mkdir",
+        "testsRun": 1,
+        "failures": 1,
+        "errors": 0,
+        "killed": true,
+        "observedAssertion": "Wrong expected receipt SHA reached the renderer",
+        "sourceFilesChanged": false
+      }
+    ],
+    "sources": {
+      "full_render_gate.py": {
+        "path": "scripts\\media_pc3\\full_render_gate.py",
+        "bytes": 23306,
+        "sha256": "382d764b06da18abd710a50edecdf874883038fffea1a5e55bbd747e61fa12c5"
+      },
+      "build_scene.py": {
+        "path": "scripts\\media_pc3\\build_scene.py",
+        "bytes": 28295,
+        "sha256": "c255e94d9f93a08734bf49cc0a7da1edc5304f4b0a9955e6508864dc72998320"
+      },
+      "test_full_render_gate.py": {
+        "path": "scripts\\media_pc3\\test_full_render_gate.py",
+        "bytes": 28727,
+        "sha256": "85e2f89abf1fc0fe326400d88d094be8a558f0bcd9f877ac4bada36a71e47955"
+      }
+    },
+    "originalSourceBackupBytesEqual": true,
+    "rawOutput": {
+      "path": ".local\\pc3-full-render-gate\\gate-suite-unittest-output.txt",
+      "bytes": 3603,
+      "sha256": "66f2e3f9e26b1f09ea97a4b3679cf18ef0e8419ad0118b65fea448a10a9b8810"
+    },
+    "rawOutputNote": "Exact tool-returned stdout/stderr chunks concatenated; console-decoded Korean OS error text contains replacement characters. WinError 1314 and all test lines retained.",
+    "inputPreservation": "Direct rejected verification snapshots every readable fixture file before and after; unchanged. Intentional injected test tampering is isolated to TemporaryDirectory fixtures.",
+    "limits": [
+      "All receipts and PNGs are artificial test fixtures, not pc1 approval or Blender output.",
+      "No actual Blender/RNA/render/image-quality or issuer authentication claim.",
+      "Positive short report came from existing independent synthetic make_package helper; actual reviewed artifacts were not edited.",
+      "Symlink behavior is unmeasured on this host because creation was denied; hardlink and junction guard messages were measured.",
+      "Main harness stops at the first render call; completing all 288 renders is outside this test."
+    ],
+    "actualBlenderRenders": 0,
+    "approvedReceiptIssued": false,
+    "networkUsed": false
+  },
+  "legacyRegression": {
+    "schemaVersion": "pc3-full-render-legacy-regression-record-v1",
+    "recordedAtUtc": "2026-09-21T14:01:02.878009+00:00",
+    "workingDirectory": "D:\\hwana\\Work\\happycall-ralphthon",
+    "evidenceSource": "Previously returned exec_command/write_stdin tool outputs in this task; no tests rerun to create this record.",
+    "rawLogSaved": false,
+    "rawLogNotice": "No separate raw log files were saved for these four runs. Command, counts, unittest durations, failures and exit codes below are transcribed from the already returned tool outputs.",
+    "runs": [
+      {
+        "suite": "look",
+        "command": "python -B -m unittest discover -s scripts/media_pc3 -p test_look_presets.py -v",
+        "tests": 14,
+        "passed": 14,
+        "failures": 0,
+        "errors": 0,
+        "exitCode": 0,
+        "unittestElapsedSeconds": 2.812,
+        "stage": "after CLI compatibility changes",
+        "toolOutputChunkIds": [
+          "06258c",
+          "b0f46f"
+        ]
+      },
+      {
+        "suite": "environment",
+        "command": "python -B -m unittest discover -s scripts/media_pc3 -p test_environment_detail.py -v",
+        "tests": 11,
+        "passed": 11,
+        "failures": 0,
+        "errors": 0,
+        "exitCode": 0,
+        "unittestElapsedSeconds": 6.993,
+        "stage": "after exact AST whitelist and metadata compatibility changes",
+        "toolOutputChunkIds": [
+          "f7bf42",
+          "9469d9"
+        ]
+      },
+      {
+        "suite": "shadow",
+        "command": "python -B -m unittest discover -s scripts/media_pc3 -p test_shadow_settings.py -v",
+        "tests": 11,
+        "passed": 9,
+        "failures": 2,
+        "errors": 0,
+        "exitCode": 1,
+        "unittestElapsedSeconds": 0.819,
+        "stage": "initial unchanged shadow suite against new main/CLI",
+        "toolOutputChunkIds": [
+          "8c9c4b"
+        ],
+        "failureDetails": [
+          {
+            "test": "test_actual_cli_defaults_and_invalid_values",
+            "reason": "Existing default dictionary comparison did not account for new threads, animation_review and animation_review_sha256 values of None."
+          },
+          {
+            "test": "test_actual_main_hook_runs_before_tracks_save_render_and_report_uses_readback",
+            "reason": "The expected immediate predecessor of the shadow hook was build; the approved optional threads block now occurs between them."
+          }
+        ]
+      },
+      {
+        "suite": "shadow",
+        "command": "python -B -m unittest discover -s scripts/media_pc3 -p test_shadow_settings.py -v",
+        "tests": 11,
+        "passed": 11,
+        "failures": 0,
+        "errors": 0,
+        "exitCode": 0,
+        "unittestElapsedSeconds": 0.498,
+        "stage": "after PC1-authorized updates to the two CLI/main integration test methods",
+        "toolOutputChunkIds": [
+          "b21cfd"
+        ]
+      }
+    ],
+    "finalUniqueSuiteTotal": {
+      "tests": 36,
+      "passed": 36,
+      "failures": 0,
+      "errors": 0
+    },
+    "preservedCoverage": [
+      "Existing geometry/material/light/camera/motion AST and geometry checks remain unchanged.",
+      "Approved new main statements and four metadata expressions are checked exactly before removal; the remaining entire main AST must equal the reviewed baseline.",
+      "Shadow fake-RNA, runtime bounds, setter/clamp, Cycles and geometry checks were not removed or reduced."
+    ],
+    "limits": [
+      "Pure Python tests only; no bpy execution, Blender render, browser or server was run.",
+      "Reported durations are the unittest summary durations, not tool orchestration wall times.",
+      "The initial shadow failure is preserved separately from the final passing suite; it is not counted as an extra final suite."
+    ],
+    "collectorEvidenceUnchanged": true
+  },
+  "collectorAudit": {
+    "schemaVersion": "pc3-scene-readback-collector-audit-v1",
+    "recordedAtUtc": "2026-09-21T13:55:45.701117+00:00",
+    "method": "Compile actual collector AST only and execute with explicit Python scene/vector/matrix stubs.",
+    "generator": {
+      "bytes": 28295,
+      "sha256": "c255e94d9f93a08734bf49cc0a7da1edc5304f4b0a9955e6508864dc72998320"
+    },
+    "auditScript": {
+      "bytes": 9620,
+      "sha256": "f3f760a8d40094ad04a11dfe5e2efe71b61099b47fcde6e658e1126e306f4b48"
+    },
+    "receivedPc1Readback": {
+      "bytes": 32478,
+      "sha256": "a6a7eb2eb3c7555f18db906a9b844cd450fa513aab57d9ab862d1cd92fd15b2d"
+    },
+    "checks": [
+      {
+        "name": "collector_has_no_requested_args_or_receipt_name_access",
+        "passed": true
+      },
+      {
+        "name": "view_layer_updated_once_before_read",
+        "passed": true
+      },
+      {
+        "name": "runtime_values_are_observed_not_review_constants",
+        "passed": true
+      },
+      {
+        "name": "runtime_camera_properties_are_observed",
+        "passed": true
+      },
+      {
+        "name": "identity_camera_looks_negative_z_with_positive_y_up",
+        "passed": true
+      },
+      {
+        "name": "ninety_degree_x_rotation_transforms_both_axes",
+        "passed": true
+      },
+      {
+        "name": "direction_vectors_normalized_after_nonuniform_scale",
+        "passed": true
+      },
+      {
+        "name": "second_call_does_not_cache_runtime_settings",
+        "passed": true
+      },
+      {
+        "name": "eevee_branch_needs_no_cycles_state",
+        "passed": true
+      },
+      {
+        "name": "missing_eevee_returns_none_not_requested_fallback",
+        "passed": true
+      },
+      {
+        "name": "missing_eevee_properties_return_none",
+        "passed": true
+      },
+      {
+        "name": "cycles_samples_come_from_cycles_not_eevee",
+        "passed": true
+      },
+      {
+        "name": "cycles_without_eevee_is_supported",
+        "passed": true
+      },
+      {
+        "name": "received_pc1_matrix_matches_registered_camera_direction_and_roll",
+        "passed": true
+      },
+      {
+        "name": "returned_lists_do_not_alias_scene_values",
+        "passed": true
+      },
+      {
+        "name": "missing_camera_fails_without_fabricated_readback",
+        "passed": true
+      },
+      {
+        "name": "production_generator_unchanged",
+        "passed": true
+      }
+    ],
+    "checkCount": 17,
+    "passed": 17,
+    "cameraMath": {
+      "receivedMatrixForward": [
+        -0.599974884397014,
+        0.5142642377157086,
+        -0.6128314873596744
+      ],
+      "receivedMatrixUp": [
+        -0.46529642971331064,
+        0.39882538771607023,
+        0.7902136056846734
+      ],
+      "expectedForward": [
+        -0.599974899534355,
+        0.5142641996008757,
+        -0.612831504524377
+      ],
+      "expectedUp": [
+        -0.4652963659475914,
+        0.39882545652650686,
+        0.7902136085024026
+      ],
+      "tolerance": 1e-05
+    },
+    "blenderExecutedOnPc3": false,
+    "rendered": false,
+    "visualAccepted": false,
+    "limitations": [
+      "Stubs exercise collector data flow and math; they do not prove current bpy/RNA availability or actual Blender execution.",
+      "The PC1 received matrix is an external prior Blender observation, not a new PC3 runtime measurement.",
+      "Cycles shadowRays is the raw stored EEVEE property when present, not a claim that Cycles applied that value; separate shadowRays metadata records applied=false.",
+      "Camera scale/shear is normalized for direction only; the current unchanged generator creates an unparented, unscaled camera. This is not a general camera-transform audit.",
+      "Missing required camera/render properties fail; optional EEVEE sample/shadow properties return None without invented defaults.",
+      "No file receipt, rendering, pixel quality or product registration acceptance is performed here."
+    ]
+  },
+  "realShortCompatibility": {
+    "schemaVersion": "pc3-full-gate-short-compatibility-v1",
+    "source": "existing received PC1 short report; not a new Blender run",
+    "shortReport": {
+      "name": "render-report.json",
+      "bytes": 47567,
+      "sha256": "5679d20271eadab4addb4ce7043077b8fb68d5c701d50845196cd7100daf6c91",
+      "resolution": [
+        1280,
+        720
+      ],
+      "renderedFrameCount": 72
+    },
+    "shortReportContractAccepted": true,
+    "inputUnchanged": true,
+    "gateSourceSha256": "382d764b06da18abd710a50edecdf874883038fffea1a5e55bbd747e61fa12c5",
+    "gateSourceUnchanged": true,
+    "fullSceneReadbackValidation": "NOT_RUN_INCOMPLETE_EXTERNAL_READBACK",
+    "reason": "The existing PC1 sidecar lacks resolutionPercentage, pixelAspect, fpsBase, frameStart/frameEnd and camera type/shift/sensorFit. The actual short report is 1280x720, not the gated 1920x1080 candidate. Requested values were not substituted for observations.",
+    "receiptIssued": false,
+    "blenderExecutedOnPc3": false,
+    "full288Rendered": false
+  },
+  "sourceFiles": [
+    {
+      "path": "scripts/media_pc3/build_scene.py",
+      "bytes": 28295,
+      "sha256": "c255e94d9f93a08734bf49cc0a7da1edc5304f4b0a9955e6508864dc72998320"
+    },
+    {
+      "path": "scripts/media_pc3/full_render_gate.py",
+      "bytes": 23306,
+      "sha256": "382d764b06da18abd710a50edecdf874883038fffea1a5e55bbd747e61fa12c5"
+    },
+    {
+      "path": "scripts/media_pc3/test_full_render_gate.py",
+      "bytes": 28727,
+      "sha256": "85e2f89abf1fc0fe326400d88d094be8a558f0bcd9f877ac4bada36a71e47955"
+    },
+    {
+      "path": "scripts/media_pc3/test_look_presets.py",
+      "bytes": 18867,
+      "sha256": "5befb2602001f8c40a52d0670717729c8bc46b4bb83e73955523ccd1288a8446"
+    },
+    {
+      "path": "scripts/media_pc3/test_environment_detail.py",
+      "bytes": 23414,
+      "sha256": "768483c7e1627ca35929191d60a923c1b2f75fe36c92a4ddf50079e7f5921f23"
+    },
+    {
+      "path": "scripts/media_pc3/test_shadow_settings.py",
+      "bytes": 13816,
+      "sha256": "fcc9a2f9cbb2a20f5821fa978f4f46c13225508b4b0f29180bbf7961d5560293"
+    }
+  ],
+  "sourceCompileChecks": 6,
+  "evidenceMethod": "Preserves previously returned execution results. No verification rerun for aggregation. Source hashes describe actual Windows checkout bytes, not normalized Git blobs.",
+  "pc1ReviewRef": "ed2b188de31091a71f1596f50961239d02813107",
+  "pc1ReviewDocument": {
+    "path": ".local/pc3-full-render-gate/pc1-1080p-review.md",
+    "bytes": 9756,
+    "sha256": "6b5eed257ef87f8a15f57791a18015532868fd041b72133a6538294277f47989"
+  },
+  "blenderExecutedPc3": false,
+  "realReceiptIssued": false,
+  "full288Rendered": false,
+  "productRegistered": false,
+  "testRoundtrip": "PENDING",
+  "limits": [
+    "Pure Python stubs do not prove actual Blender runtime or image quality.",
+    "Symlink creation denied (WinError1314); one test skipped; actual hardlink/junction guards measured.",
+    "Receipt SHA is a trusted operator input, not cryptographic issuer authentication.",
+    "PNG bytes/CRC/dimensions are checked; compressed pixels and visual quality are not accepted.",
+    "Existing M3 fixed720p/four-dependency checker does not validate the new1080p/five-dependency full output.",
+    "Runtime/input files must remain unchanged after the last pre-render check; no immutable sandbox is claimed."
+  ]
+}

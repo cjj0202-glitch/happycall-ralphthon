@@ -27,6 +27,7 @@ from scene_contract import SCENE_SEED, FRAME_COUNT, evaluate_motion, load_layout
 from look_presets import settings_for
 from environment_detail import environment_specs
 from shadow_settings import configure_shadow_rays
+from full_render_gate import verify_animation_review, validate_scene_readback
 
 
 def arguments():
@@ -42,6 +43,9 @@ def arguments():
     parser.add_argument('--shadow-rays', type=int, choices=range(1, 5), default=1)
     parser.add_argument('--look', choices=['baseline', 'contrast_material_v1'], default='baseline')
     parser.add_argument('--environment-detail', choices=['none', 'staging_v1'], default='none')
+    parser.add_argument('--threads', type=int, default=None)
+    parser.add_argument('--animation-review', type=Path, default=None)
+    parser.add_argument('--animation-review-sha256', default=None)
     argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
     args = parser.parse_args(argv)
     if min(args.resolution) < 64 or max(args.resolution) > 3840 or not 1 <= args.samples <= 256:
@@ -50,8 +54,14 @@ def arguments():
         parser.error('--shadow-rays is EEVEE-only; Cycles allows only the unapplied default 1.')
     if args.mode == 'animation' and args.camera != 'cctv':
         parser.error('Final event candidate must use the fixed registered CCTV camera.')
-    if args.mode == 'animation' and (args.look != 'baseline' or args.environment_detail != 'none'):
-        parser.error('Look/environment candidates allow prepare, representatives and short only; full animation awaits review.')
+    if args.threads is not None and not 1 <= args.threads <= 256:
+        parser.error('--threads must be 1..256 when explicitly provided.')
+    if bool(args.animation_review) != bool(args.animation_review_sha256):
+        parser.error('--animation-review and --animation-review-sha256 must be provided together.')
+    if args.animation_review and args.mode != 'animation':
+        parser.error('Review receipts apply only to full animation mode.')
+    if args.mode == 'animation' and (args.look != 'baseline' or args.environment_detail != 'none') and not args.animation_review:
+        parser.error('Look/environment full animation requires a reviewed receipt and its expected SHA-256.')
     return args
 
 
@@ -364,15 +374,46 @@ def tracks(scene, layout, tracked):
             'frames': output, 'clippedFrames': clipped}
 
 
+def scene_readback(scene):
+    """Observe actual Blender state, never substitute requested CLI values."""
+    bpy.context.view_layer.update()
+    camera_obj = scene.camera
+    camera_data = camera_obj.data
+    forward = -(camera_obj.matrix_world.to_3x3() @ Vector((0, 0, 1)))
+    forward.normalize()
+    up = camera_obj.matrix_world.to_3x3() @ Vector((0, 1, 0))
+    up.normalize()
+    return {'engine': scene.render.engine,
+            'samples': scene.cycles.samples if scene.render.engine == 'CYCLES' else getattr(getattr(scene, 'eevee', None), 'taa_render_samples', None),
+            'shadowRays': getattr(getattr(scene, 'eevee', None), 'shadow_ray_count', None),
+            'threadsMode': scene.render.threads_mode, 'threads': scene.render.threads,
+            'resolution': [scene.render.resolution_x, scene.render.resolution_y],
+            'resolutionPercentage': scene.render.resolution_percentage,
+            'pixelAspect': [scene.render.pixel_aspect_x, scene.render.pixel_aspect_y],
+            'fps': scene.render.fps, 'fpsBase': scene.render.fps_base,
+            'frameStart': scene.frame_start, 'frameEnd': scene.frame_end,
+            'camera': {'name': camera_obj.name, 'position': list(camera_obj.matrix_world.translation),
+                       'forward': list(forward), 'up': list(up), 'type': camera_data.type,
+                       'shift': [camera_data.shift_x, camera_data.shift_y], 'lens': camera_data.lens,
+                       'sensorWidth': camera_data.sensor_width, 'sensorFit': camera_data.sensor_fit}}
+
+
 def main():
     args = arguments()
+    animation_review = verify_animation_review(args, Path(__file__)) if args.animation_review else None
     layout = load_layout(args.layout, fixture_path=args.fixture)
     args.output.mkdir(parents=True, exist_ok=True)
     if any(args.output.iterdir()):
         raise RuntimeError('Output directory is not empty; choose a new run directory. No overwrite.')
     started = time.time()
     scene, parcel, tracked = build(layout, args)
+    if args.threads is not None:
+        scene.render.threads_mode = 'FIXED'
+        scene.render.threads = args.threads
     shadow_rays = configure_shadow_rays(scene, args.engine, args.shadow_rays)
+    runtime_readback = scene_readback(scene)
+    if animation_review is not None:
+        validate_scene_readback(runtime_readback, layout)
     tracking = tracks(scene, layout, tracked)
     (args.output / 'tracks.json').write_text(json.dumps(tracking, ensure_ascii=False, indent=2), encoding='utf-8')
     scene.frame_set(1)
@@ -386,6 +427,10 @@ def main():
     elif args.mode == 'animation':
         selected_frames = list(range(1, FRAME_COUNT + 1))
     rendered = []
+    if animation_review is not None:
+        animation_review = verify_animation_review(args, Path(__file__))
+        runtime_readback = scene_readback(scene)
+        validate_scene_readback(runtime_readback, layout)
     for frame in selected_frames:
         scene.frame_set(frame)
         path = args.output / f'frame-{frame:04d}.png'
@@ -400,6 +445,10 @@ def main():
               'engineDevice': 'CPU' if args.engine == 'cycles' else 'Blender EEVEE runtime device; inspect actual log',
               'requestedSamples': args.samples, 'resolution': args.resolution, 'fps': 24,
               'shadowRays': shadow_rays,
+              'fixture': digest(args.fixture),
+              'threads': {'requested': args.threads, 'actual': runtime_readback['threads'], 'mode': runtime_readback['threadsMode']},
+              'sceneReadback': runtime_readback,
+              'animationReview': {'requestedSha256': args.animation_review_sha256, 'verified': animation_review},
               'runtimeSamples': {'property': 'scene.cycles.samples' if args.engine == 'cycles' else 'scene.eevee.taa_render_samples',
                                  'value': scene.cycles.samples if args.engine == 'cycles' else getattr(getattr(scene, 'eevee', None), 'taa_render_samples', None),
                                  'note': 'Runtime property readback; null means unverified, not the requested count.'},
@@ -419,6 +468,7 @@ def main():
               'videoEncoded': False, 'note': 'Visual review and motion/occlusion inspection remain required. No actual incident reconstruction.'}
     if args.environment_detail != 'none':
         report['sourceDependencies'].append(digest(Path(__file__).with_name('environment_detail.py')))
+    report['sourceDependencies'].append(digest(Path(__file__).with_name('full_render_gate.py')))
     (args.output / 'render-report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
     print(json.dumps({'output': str(args.output.resolve()), 'rendered': len(rendered), 'clippedFrames': tracking['clippedFrames'], 'seconds': report['wallSeconds']}))
 

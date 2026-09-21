@@ -137,7 +137,12 @@ class ShadowSettingsTests(unittest.TestCase):
     def test_actual_cli_defaults_and_invalid_values(self):
         current, previous = actual_arguments(self.source, self.flags), actual_arguments(self.previous, self.flags)
         self.assertEqual(current.shadow_rays, 1)
-        self.assertEqual({k: v for k, v in vars(current).items() if k != "shadow_rays"}, vars(previous))
+        self.assertIsNone(current.threads)
+        self.assertIsNone(current.animation_review)
+        self.assertIsNone(current.animation_review_sha256)
+        self.assertEqual({k: v for k, v in vars(current).items()
+                          if k not in {"shadow_rays", "threads", "animation_review", "animation_review_sha256"}},
+                         vars(previous))
         for value in ("1", "2", "3", "4"):
             args = actual_arguments(self.source, self.flags + ["--shadow-rays", value, "--samples", "16"])
             self.assertEqual((args.shadow_rays, args.samples), (int(value), 16))
@@ -155,8 +160,16 @@ class ShadowSettingsTests(unittest.TestCase):
         hook = next(n for n in main.body if isinstance(n, ast.Assign)
                     and ast.unparse(n) == "shadow_rays = configure_shadow_rays(scene, args.engine, args.shadow_rays)")
         hook_index = main.body.index(hook)
-        self.assertEqual(ast.unparse(main.body[hook_index - 1]), "scene, parcel, tracked = build(layout, args)")
-        self.assertEqual(ast.unparse(main.body[hook_index + 1]), "tracking = tracks(scene, layout, tracked)")
+        # Only the approved thread/readback additions may separate the original
+        # build -> shadow hook -> tracking sequence. Keep strict ordering.
+        self.assertEqual(ast.unparse(main.body[hook_index - 2]), "scene, parcel, tracked = build(layout, args)")
+        self.assertEqual(ast.unparse(main.body[hook_index - 1]),
+                         "if args.threads is not None:\n    scene.render.threads_mode = 'FIXED'\n"
+                         "    scene.render.threads = args.threads")
+        self.assertEqual(ast.unparse(main.body[hook_index + 1]), "runtime_readback = scene_readback(scene)")
+        self.assertEqual(ast.unparse(main.body[hook_index + 2]),
+                         "if animation_review is not None:\n    validate_scene_readback(runtime_readback, layout)")
+        self.assertEqual(ast.unparse(main.body[hook_index + 3]), "tracking = tracks(scene, layout, tracked)")
         runtime = FakeEevee()
         scope = {"configure_shadow_rays": configure_shadow_rays,
                  "scene": SimpleNamespace(eevee=runtime), "args": SimpleNamespace(engine="eevee", shadow_rays=4)}
@@ -174,6 +187,44 @@ class ShadowSettingsTests(unittest.TestCase):
         added = [n for n in dependencies.elts if ast.unparse(n) == "digest(Path(__file__).with_name('shadow_settings.py'))"]
         self.assertEqual(len(added), 1)
         dependencies.elts.remove(added[0])
+        # Explicit full-render gate whitelist: every other main statement and
+        # report field remains subject to the complete baseline AST comparison.
+        allowed_statements = [
+            "animation_review = verify_animation_review(args, Path(__file__)) if args.animation_review else None",
+            "if args.threads is not None:\n    scene.render.threads_mode = 'FIXED'\n"
+            "    scene.render.threads = args.threads",
+            "runtime_readback = scene_readback(scene)",
+            "if animation_review is not None:\n    validate_scene_readback(runtime_readback, layout)",
+            "if animation_review is not None:\n"
+            "    animation_review = verify_animation_review(args, Path(__file__))\n"
+            "    runtime_readback = scene_readback(scene)\n"
+            "    validate_scene_readback(runtime_readback, layout)",
+            "report['sourceDependencies'].append(digest(Path(__file__).with_name('full_render_gate.py')))",
+        ]
+        additions = []
+        for source in allowed_statements:
+            expected = ast.dump(ast.parse(source).body[0])
+            matches = [node for node in main.body if ast.dump(node) == expected]
+            self.assertEqual(len(matches), 1, source)
+            additions.append(matches[0])
+        self.assertEqual(main.body.index(additions[0]), 1)
+        render_loop = next(node for node in main.body if isinstance(node, ast.For)
+                           and ast.unparse(node.iter) == "selected_frames")
+        self.assertEqual(main.body.index(additions[4]), main.body.index(render_loop) - 1)
+        for node in additions:
+            main.body.remove(node)
+        for name, expected in {
+            "fixture": "digest(args.fixture)",
+            "threads": "{'requested': args.threads, 'actual': runtime_readback['threads'], "
+                       "'mode': runtime_readback['threadsMode']}",
+            "sceneReadback": "runtime_readback",
+            "animationReview": "{'requestedSha256': args.animation_review_sha256, 'verified': animation_review}",
+        }.items():
+            indices = [i for i, key in enumerate(report.keys) if key.value == name]
+            self.assertEqual(len(indices), 1, name)
+            index = indices[0]
+            self.assertEqual(ast.dump(report.values.pop(index)), ast.dump(ast.parse(expected, mode="eval").body), name)
+            report.keys.pop(index)
         self.assertEqual(ast.dump(main), ast.dump(function(ast.parse(self.previous), "main")))
 
     def test_all_preexisting_scene_geometry_and_light_helpers_unchanged(self):

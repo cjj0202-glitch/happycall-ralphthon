@@ -219,8 +219,12 @@ class EnvironmentDetailTests(unittest.TestCase):
         current, previous = actual_arguments(self.source, flags), actual_arguments(self.previous, flags)
         self.assertEqual(current.environment_detail, "none")
         self.assertEqual(current.shadow_rays, 1)
+        self.assertIsNone(current.threads)
+        self.assertIsNone(current.animation_review)
+        self.assertIsNone(current.animation_review_sha256)
         self.assertEqual({k: v for k, v in vars(current).items()
-                          if k not in {"environment_detail", "shadow_rays"}}, vars(previous))
+                          if k not in {"environment_detail", "shadow_rays", "threads",
+                                       "animation_review", "animation_review_sha256"}}, vars(previous))
         for look, env, mode in itertools.product(("baseline", "contrast_material_v1"),
                                                 ("none", "staging_v1"),
                                                 ("prepare", "representatives", "short", "animation")):
@@ -230,6 +234,11 @@ class EnvironmentDetailTests(unittest.TestCase):
                     with self.assertRaises(SystemExit) as err:
                         actual_arguments(self.source, options)
                     self.assertEqual(err.exception.code, 2)
+                    paired = options + ["--animation-review", "artificial-review.json",
+                                        "--animation-review-sha256", "a" * 64]
+                    args = actual_arguments(self.source, paired)
+                    self.assertEqual(args.environment_detail, env)
+                    self.assertEqual(args.animation_review, Path("artificial-review.json"))
                 else:
                     self.assertEqual(actual_arguments(self.source, options).environment_detail, env)
         for env in ("STAGING_V1", "../staging_v1", "unknown"):
@@ -257,6 +266,54 @@ class EnvironmentDetailTests(unittest.TestCase):
         self.assertIsInstance(deps, ast.List)
         shadow_dep = next(n for n in deps.elts if ast.unparse(n) == "digest(Path(__file__).with_name('shadow_settings.py'))")
         deps.elts.remove(shadow_dep)
+        # Whitelist exact reviewed additions, not arbitrary assignments/calls.
+        # The remaining complete main AST must still equal the pre-feature main.
+        def exact_statement(source):
+            expected = ast.dump(ast.parse(source).body[0])
+            matches = [node for node in main.body if ast.dump(node) == expected]
+            self.assertEqual(len(matches), 1, source)
+            return matches[0]
+
+        preflight = exact_statement(
+            "animation_review = verify_animation_review(args, Path(__file__)) if args.animation_review else None")
+        threads = exact_statement("if args.threads is not None:\n"
+                                  "    scene.render.threads_mode = 'FIXED'\n"
+                                  "    scene.render.threads = args.threads")
+        readback = exact_statement("runtime_readback = scene_readback(scene)")
+        validate = exact_statement("if animation_review is not None:\n"
+                                   "    validate_scene_readback(runtime_readback, layout)")
+        revalidate = exact_statement("if animation_review is not None:\n"
+                                     "    animation_review = verify_animation_review(args, Path(__file__))\n"
+                                     "    runtime_readback = scene_readback(scene)\n"
+                                     "    validate_scene_readback(runtime_readback, layout)")
+        gate_dependency = exact_statement(
+            "report['sourceDependencies'].append(digest(Path(__file__).with_name('full_render_gate.py')))")
+        # Keep the preflight before mkdir/build, readback before tracking/save,
+        # and the second receipt/readback check immediately before the first render.
+        self.assertEqual(main.body.index(preflight), 1)
+        build = exact_statement("scene, parcel, tracked = build(layout, args)")
+        tracking = exact_statement("tracking = tracks(scene, layout, tracked)")
+        self.assertEqual(main.body.index(threads), main.body.index(build) + 1)
+        self.assertEqual(main.body.index(readback), main.body.index(threads) + 1)
+        self.assertEqual(main.body.index(validate), main.body.index(readback) + 1)
+        self.assertEqual(main.body.index(tracking), main.body.index(validate) + 1)
+        render_loop = next(node for node in main.body if isinstance(node, ast.For)
+                           and ast.unparse(node.iter) == "selected_frames")
+        self.assertEqual(main.body.index(revalidate), main.body.index(render_loop) - 1)
+        for node in (preflight, threads, readback, validate, revalidate, gate_dependency):
+            main.body.remove(node)
+        for name, expected in {
+            "fixture": "digest(args.fixture)",
+            "threads": "{'requested': args.threads, 'actual': runtime_readback['threads'], "
+                       "'mode': runtime_readback['threadsMode']}",
+            "sceneReadback": "runtime_readback",
+            "animationReview": "{'requestedSha256': args.animation_review_sha256, 'verified': animation_review}",
+        }.items():
+            indices = [i for i, key in enumerate(report.keys) if key.value == name]
+            self.assertEqual(len(indices), 1, name)
+            index = indices[0]
+            self.assertEqual(ast.dump(report.values.pop(index)), ast.dump(ast.parse(expected, mode="eval").body), name)
+            report.keys.pop(index)
         self.assertEqual(ast.dump(main), ast.dump(function(ast.parse(self.previous), "main")))
         for name in ("none", "staging_v1"):
             scope = {"args": SimpleNamespace(environment_detail=name), "environment_specs": environment_specs,
