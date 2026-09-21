@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useId, useRef, useState } from 'react';
+import type { ReactNode } from 'react';
 import type { CaseData, Intake, Mode, Transcript } from '@/lib/types';
 import styles from './CallReview.module.css';
 
@@ -14,6 +15,9 @@ export type CallReviewProps = {
   onRetryAnalysis?: () => void;
   /** Describe the supplied transcript, not the mode of a future request. */
   transcriptMode?: Mode;
+  /** Parent-owned actions/editing slots; no API or persistence is added here. */
+  analysisActions?: ReactNode;
+  intakeEditor?: ReactNode;
 };
 
 type Clip = { start: number; end: number; index: number };
@@ -71,7 +75,7 @@ export default function CallReview(props: CallReviewProps) {
   return <ReviewSession key={sourceKey} {...props} />;
 }
 
-function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisState = 'idle', analysisError, onRetryAnalysis, transcriptMode }: CallReviewProps) {
+function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisState = 'idle', analysisError, onRetryAnalysis, transcriptMode, analysisActions, intakeEditor }: CallReviewProps) {
   const id = useId();
   const audioRef = useRef<HTMLAudioElement>(null);
   const alive = useRef(false);
@@ -219,6 +223,72 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisSt
 
   const playbackLabel = disabled ? '재생 일시 중지 · 현재 조작할 수 없습니다' : mediaError ? '음원 오류' : segmentIndex !== null ? '선택 발화 구간 재생' : playback === 'playing' ? `통화 재생 중${complete ? ' · 이전 전체 재생 완료' : ''}` : complete ? '전체 통화 재생 완료' : playback === 'paused' ? '통화 일시정지' : playback === 'ended' ? '재생 종료 · 전체 재생 확인 필요' : '재생 준비';
 
+  const analysisFeedback = <>
+          {analysisState === 'loading' && <p className={styles.notice} role="status">AI 분석 중 · 원문과 현재 상담 입력을 보존하고 있습니다.</p>}
+          {analysisState === 'error' && <div className={styles.error}><p role="alert">{analysisError || 'AI 분석에 실패했습니다. 원문과 현재 상담 입력은 유지됩니다.'}</p>{onRetryAnalysis ? <button type="button" disabled={!canRetryAnalysis} onClick={() => { if (canRetryAnalysis) onRetryAnalysis(); }}>AI 분석 다시 시도</button> : <p>상위 화면에서 분석을 다시 실행해 주세요.</p>}{voice && !complete && <p>정상 전체 통화 재생 후 분석을 다시 시도할 수 있습니다.</p>}</div>}
+  </>;
+  const sourceContent = <>
+        <section className={styles.card} aria-labelledby={`${id}-source-title`}>
+          <div className={styles.sectionHeading}><h3 id={`${id}-source-title`}>2. {voice ? '합성 통화 원대본' : '접수 원문'}</h3><span className={styles.badge}>원문 보존</span></div>
+          <p className={styles.help}>{voice ? '음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.' : '경영주가 입력한 원문입니다. AI 제안과 상담원 수정 내용이 아닙니다.'}</p>
+          <div className={styles.sourceText}>{valueText(caseData.sourceText)}</div>
+        </section>
+
+        <section className={styles.card} aria-labelledby={`${id}-transcript-title`}>
+          <div className={styles.sectionHeading}><div><h3 id={`${id}-transcript-title`}>화자별 대화록</h3><p className={styles.help}>{transcriptLabel}</p></div><label className={styles.checkbox}><input type="checkbox" checked={showTranscript} disabled={disabled} onChange={event => setShowTranscript(event.target.checked)} aria-label="대화록 표시" />자막 표시</label></div>
+          <p className={styles.help}>구간은 제공된 발화 시각 기준입니다. 저장된 합성 대화록의 구간은 음성 생성 파일의 경계이며 STT·단어 정렬 결과가 아닙니다.</p>
+          {showTranscript && (transcript.length ? <ol className={styles.transcript}>{transcript.map((line, index) => {
+            const range = clipFor(line, duration);
+            const valid = range.start !== undefined && range.end !== undefined;
+            const active = valid && position >= range.start! && position < range.end! && playback === 'playing';
+            const speaker = valueText(line.speaker);
+            // A/B are source labels, not inferred counselor/owner roles.
+            const ownerTone = speaker === '경영주' || (speaker !== '상담원' && (unnamedSpeakers.indexOf(speaker) % 2 === 0) === unknownStartsWithOwnerTone);
+            const reason = !voice ? '텍스트 접수 · 음성 구간 없음' : !audioUrl ? '음원 없음 · 구간 재생 불가' : range.reason;
+            return <li key={index} className={`${styles.speech} ${active ? styles.activeSpeech : ''}`} aria-current={active ? 'true' : undefined}>
+              <div className={styles.speechHeading}><strong className={ownerTone ? styles.ownerSpeaker : styles.agentSpeaker}>{speaker}</strong><span className={styles.help}>발화 {index + 1}{active ? ' · 재생 중' : ''}</span></div>
+              <p>{line.text}</p>
+              <button type="button" className={styles.clipButton} disabled={disabled || !voice || !audioUrl || !!mediaError || !valid} aria-describedby={reason ? `${id}-range-${index}` : undefined} aria-label={`${speaker} 발화 ${index + 1} 구간 재생${valid ? ` ${clipClock(range.start!)}~${clipClock(range.end!)}` : ''}`} onClick={() => playClip(line, index)}>{valid ? `${clipClock(range.start!)}–${clipClock(range.end!)} 구간 재생` : '구간 재생 불가'}</button>
+              {reason && <p id={`${id}-range-${index}`} className={styles.help}>{reason}</p>}
+            </li>;
+          })}</ol> : <p className={styles.empty}>제공된 대화록이 없습니다. 원대본을 전사 결과로 대신 표시하지 않습니다.</p>)}
+        </section>
+  </>;
+  const comparisonContent = <>
+        <section className={styles.card} aria-labelledby={`${id}-compare-title`} aria-busy={analysisState === 'loading'}>
+          <div className={styles.sectionHeading}><h3 id={`${id}-compare-title`}>3. AI 제안과 상담 입력 대조</h3><span className={styles.badge}>사람 확인 필요</span></div>
+          {!intakeEditor && analysisFeedback}
+          {analysis ? <div className={styles.summary}><strong>{mode === 'replay' ? '저장된 AI 제안 · 재생 자료' : 'AI 요약 · 확인 전 제안'}</strong><p>{analysis.summary}</p></div> : <p className={styles.empty}>분석 전 · AI 제안이 아직 없습니다. 현재 상담 입력은 아래에서 확인할 수 있습니다.</p>}
+          <p className={styles.help}>수령 값은 경영주 진술입니다. 주문·출고 수량으로 채우거나 BOX를 EA로 환산하지 않습니다.</p>
+          <div className={styles.compareList}>{fields.map(({ key, label }) => {
+            const suggested = valueText(analysis?.fields?.[key]);
+            const current = valueText(caseData.intake?.[key]);
+            const unknown = suggested === '미확인' || current === '미확인';
+            const status = !analysis ? 'AI 제안 대기' : unknown ? '미확인 포함' : suggested === current ? '동일' : '차이 확인 필요';
+            return <section key={key} className={styles.compareRow} aria-label={`${label} 비교`}>
+              <div className={styles.compareHeading}><h4>{label}</h4><span className={`${styles.badge} ${status === '차이 확인 필요' || unknown ? styles.warningBadge : ''}`}>{status}</span></div>
+              <dl className={styles.values}><div><dt>AI 제안 · 확인 전</dt><dd>{analysis ? suggested : '제안 없음'}</dd></div><div><dt>현재 상담 입력</dt><dd>{current}</dd></div></dl>
+            </section>;
+          })}</div>
+          <p className={styles.help}>{caseData.reviewConfirmed ? '부모 화면에 상담원 확인 완료로 기록된 접수입니다.' : '현재 상담 입력은 사람의 최종 확인 완료를 뜻하지 않습니다.'} 이 화면은 값을 변경하거나 저장하지 않습니다.</p>
+        </section>
+
+        {(caseData.expected || caseData.received) && <section className={styles.card} aria-labelledby={`${id}-quantity-title`}>
+          <h3 id={`${id}-quantity-title`}>주문 정보와 수령 진술은 다릅니다</h3>
+          <dl className={styles.contextValues}><div><dt>주문 정보 · 합성 사례</dt><dd>{valueText(caseData.expected?.product)} · {valueText(caseData.expected?.quantity)} {valueText(caseData.expected?.unit)}</dd></div><div><dt>수령 진술 · 합성 사례 참고값</dt><dd>{valueText(caseData.received?.product)} · {valueText(caseData.received?.quantity)} {valueText(caseData.received?.unit)}</dd></div></dl>
+          <p className={styles.help}>대조용 사례 정보입니다. AI가 식별하지 못한 점포·수량의 자동 보정값이나 실제 물류 확인 결과로 사용하지 않습니다.</p>
+        </section>}
+
+        <section className={styles.card} aria-labelledby={`${id}-questions-title`}>
+          <h3 id={`${id}-questions-title`}>4. 인용 근거와 추가 확인</h3>
+          {!!analysis?.issues?.length && <ul className={styles.issueList}>{analysis.issues.map((issue, index) => <li key={index}><span className={`${styles.badge} ${styles.warningBadge}`}>확인 필요 · {fields.find(field => field.key === issue.field)?.label || issue.field}</span><p>{issue.message}</p>{issue.evidence ? <blockquote><span>AI가 연결한 인용 · 원문 대조 필요</span>{issue.evidence}</blockquote> : <p className={styles.help}>제공된 인용 근거 없음</p>}</li>)}</ul>}
+          <h4 className={styles.subheading}>아직 확인되지 않은 내용</h4>
+          {analysis?.unknowns?.length ? <ul className={styles.list}>{analysis.unknowns.map((unknown, index) => <li key={index}>{unknown}</li>)}</ul> : <p className={styles.help}>{analysis ? '별도 미확인 목록이 제공되지 않았습니다. 모든 사실이 확인됐다는 뜻은 아닙니다.' : '분석 결과와 원문을 대조한 뒤 확인합니다.'}</p>}
+          <h4 className={styles.subheading}>통화 후 추가로 물어볼 질문</h4>
+          {analysis?.questions?.length ? <ol className={styles.list}>{analysis.questions.map((question, index) => <li key={index}>{question}</li>)}</ol> : <p className={styles.help}>제공된 추가 질문 없음</p>}
+          {analysis?.department && <div className={styles.department}><strong>AI 추천 부서 · {valueText(analysis.department.name)}</strong><p>{valueText(analysis.department.reason)}</p><span className={styles.help}>상담원 확인 전 제안 · 자동 이관하지 않습니다.</span></div>}
+        </section>
+  </>;
   return <section className={styles.review} aria-labelledby={`${id}-title`}>
     <header className={styles.header}>
       <div><p className={styles.eyebrow}>CALL REVIEW · {caseData.id}</p><h2 id={`${id}-title`}>통화와 접수 내용 대조</h2><p className={styles.description}>{caseData.title}</p></div>
@@ -226,7 +296,7 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisSt
     </header>
 
     <div className={styles.columns}>
-      <div className={styles.stack}>
+      <div className={`${styles.stack} ${styles.listenPane}`}>
         {voice ? <section className={styles.card} aria-labelledby={`${id}-audio-title`}>
           <div className={styles.sectionHeading}><h3 id={`${id}-audio-title`}>1. 통화 다시 듣기</h3><span className={styles.badge}>사전 생성한 합성 음성</span></div>
           {audioUrl ? <>
@@ -311,68 +381,23 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisSt
           </> : <p className={styles.warning} role="status">음원 없음 · 이 사건에 연결된 음성 파일이 없습니다. 다른 사건 음원으로 대체하지 않습니다.</p>}
         </section> : <p className={styles.notice}>텍스트 접수 · 음성 전사 없이 입력 원문과 분석 내용을 대조합니다.</p>}
 
-        <section className={styles.card} aria-labelledby={`${id}-source-title`}>
-          <div className={styles.sectionHeading}><h3 id={`${id}-source-title`}>2. {voice ? '합성 통화 원대본' : '접수 원문'}</h3><span className={styles.badge}>원문 보존</span></div>
-          <p className={styles.help}>{voice ? '음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.' : '경영주가 입력한 원문입니다. AI 제안과 상담원 수정 내용이 아닙니다.'}</p>
-          <div className={styles.sourceText}>{valueText(caseData.sourceText)}</div>
-        </section>
-
-        <section className={styles.card} aria-labelledby={`${id}-transcript-title`}>
-          <div className={styles.sectionHeading}><div><h3 id={`${id}-transcript-title`}>화자별 대화록</h3><p className={styles.help}>{transcriptLabel}</p></div><label className={styles.checkbox}><input type="checkbox" checked={showTranscript} disabled={disabled} onChange={event => setShowTranscript(event.target.checked)} aria-label="대화록 표시" />자막 표시</label></div>
-          {showTranscript && (transcript.length ? <ol className={styles.transcript}>{transcript.map((line, index) => {
-            const range = clipFor(line, duration);
-            const valid = range.start !== undefined && range.end !== undefined;
-            const active = valid && position >= range.start! && position < range.end! && playback === 'playing';
-            const speaker = valueText(line.speaker);
-            // A/B are source labels, not inferred counselor/owner roles.
-            const ownerTone = speaker === '경영주' || (speaker !== '상담원' && (unnamedSpeakers.indexOf(speaker) % 2 === 0) === unknownStartsWithOwnerTone);
-            const reason = !voice ? '텍스트 접수 · 음성 구간 없음' : !audioUrl ? '음원 없음 · 구간 재생 불가' : range.reason;
-            return <li key={index} className={`${styles.speech} ${active ? styles.activeSpeech : ''}`} aria-current={active ? 'true' : undefined}>
-              <div className={styles.speechHeading}><strong className={ownerTone ? styles.ownerSpeaker : styles.agentSpeaker}>{speaker}</strong><span className={styles.help}>발화 {index + 1}{active ? ' · 재생 중' : ''}</span></div>
-              <p>{line.text}</p>
-              <button type="button" className={styles.clipButton} disabled={disabled || !voice || !audioUrl || !!mediaError || !valid} aria-describedby={reason ? `${id}-range-${index}` : undefined} aria-label={`${speaker} 발화 ${index + 1} 구간 재생${valid ? ` ${clipClock(range.start!)}~${clipClock(range.end!)}` : ''}`} onClick={() => playClip(line, index)}>{valid ? `${clipClock(range.start!)}–${clipClock(range.end!)} 구간 재생` : '구간 재생 불가'}</button>
-              {reason && <p id={`${id}-range-${index}`} className={styles.help}>{reason}</p>}
-            </li>;
-          })}</ol> : <p className={styles.empty}>제공된 대화록이 없습니다. 원대본을 전사 결과로 대신 표시하지 않습니다.</p>)}
-        </section>
+        {analysisActions}
       </div>
 
-      <div className={styles.stack}>
-        <section className={styles.card} aria-labelledby={`${id}-compare-title`} aria-busy={analysisState === 'loading'}>
-          <div className={styles.sectionHeading}><h3 id={`${id}-compare-title`}>3. AI 제안과 상담 입력 대조</h3><span className={styles.badge}>사람 확인 필요</span></div>
-          {analysisState === 'loading' && <p className={styles.notice} role="status">AI 분석 중 · 원문과 현재 상담 입력을 보존하고 있습니다.</p>}
-          {analysisState === 'error' && <div className={styles.error}><p role="alert">{analysisError || 'AI 분석에 실패했습니다. 원문과 현재 상담 입력은 유지됩니다.'}</p>{onRetryAnalysis ? <button type="button" disabled={!canRetryAnalysis} onClick={() => { if (canRetryAnalysis) onRetryAnalysis(); }}>AI 분석 다시 시도</button> : <p>상위 화면에서 분석을 다시 실행해 주세요.</p>}{voice && !complete && <p>정상 전체 통화 재생 후 분석을 다시 시도할 수 있습니다.</p>}</div>}
-          {analysis ? <div className={styles.summary}><strong>{mode === 'replay' ? '저장된 AI 제안 · 재생 자료' : 'AI 요약 · 확인 전 제안'}</strong><p>{analysis.summary}</p></div> : <p className={styles.empty}>분석 전 · AI 제안이 아직 없습니다. 현재 상담 입력은 아래에서 확인할 수 있습니다.</p>}
-          <p className={styles.help}>수령 값은 경영주 진술입니다. 주문·출고 수량으로 채우거나 BOX를 EA로 환산하지 않습니다.</p>
-          <div className={styles.compareList}>{fields.map(({ key, label }) => {
-            const suggested = valueText(analysis?.fields?.[key]);
-            const current = valueText(caseData.intake?.[key]);
-            const unknown = suggested === '미확인' || current === '미확인';
-            const status = !analysis ? 'AI 제안 대기' : unknown ? '미확인 포함' : suggested === current ? '동일' : '차이 확인 필요';
-            return <section key={key} className={styles.compareRow} aria-label={`${label} 비교`}>
-              <div className={styles.compareHeading}><h4>{label}</h4><span className={`${styles.badge} ${status === '차이 확인 필요' || unknown ? styles.warningBadge : ''}`}>{status}</span></div>
-              <dl className={styles.values}><div><dt>AI 제안 · 확인 전</dt><dd>{analysis ? suggested : '제안 없음'}</dd></div><div><dt>현재 상담 입력</dt><dd>{current}</dd></div></dl>
-            </section>;
-          })}</div>
-          <p className={styles.help}>{caseData.reviewConfirmed ? '부모 화면에 상담원 확인 완료로 기록된 접수입니다.' : '현재 상담 입력은 사람의 최종 확인 완료를 뜻하지 않습니다.'} 이 화면은 값을 변경하거나 저장하지 않습니다.</p>
-        </section>
-
-        {(caseData.expected || caseData.received) && <section className={styles.card} aria-labelledby={`${id}-quantity-title`}>
-          <h3 id={`${id}-quantity-title`}>주문 정보와 수령 진술은 다릅니다</h3>
-          <dl className={styles.contextValues}><div><dt>주문 정보 · 합성 사례</dt><dd>{valueText(caseData.expected?.product)} · {valueText(caseData.expected?.quantity)} {valueText(caseData.expected?.unit)}</dd></div><div><dt>수령 진술 · 합성 사례 참고값</dt><dd>{valueText(caseData.received?.product)} · {valueText(caseData.received?.quantity)} {valueText(caseData.received?.unit)}</dd></div></dl>
-          <p className={styles.help}>대조용 사례 정보입니다. AI가 식별하지 못한 점포·수량의 자동 보정값이나 실제 물류 확인 결과로 사용하지 않습니다.</p>
-        </section>}
-
-        <section className={styles.card} aria-labelledby={`${id}-questions-title`}>
-          <h3 id={`${id}-questions-title`}>4. 인용 근거와 추가 확인</h3>
-          {!!analysis?.issues?.length && <ul className={styles.issueList}>{analysis.issues.map((issue, index) => <li key={index}><span className={`${styles.badge} ${styles.warningBadge}`}>확인 필요 · {fields.find(field => field.key === issue.field)?.label || issue.field}</span><p>{issue.message}</p>{issue.evidence ? <blockquote><span>AI가 연결한 인용 · 원문 대조 필요</span>{issue.evidence}</blockquote> : <p className={styles.help}>제공된 인용 근거 없음</p>}</li>)}</ul>}
-          <h4 className={styles.subheading}>아직 확인되지 않은 내용</h4>
-          {analysis?.unknowns?.length ? <ul className={styles.list}>{analysis.unknowns.map((unknown, index) => <li key={index}>{unknown}</li>)}</ul> : <p className={styles.help}>{analysis ? '별도 미확인 목록이 제공되지 않았습니다. 모든 사실이 확인됐다는 뜻은 아닙니다.' : '분석 결과와 원문을 대조한 뒤 확인합니다.'}</p>}
-          <h4 className={styles.subheading}>통화 후 추가로 물어볼 질문</h4>
-          {analysis?.questions?.length ? <ol className={styles.list}>{analysis.questions.map((question, index) => <li key={index}>{question}</li>)}</ol> : <p className={styles.help}>제공된 추가 질문 없음</p>}
-          {analysis?.department && <div className={styles.department}><strong>AI 추천 부서 · {valueText(analysis.department.name)}</strong><p>{valueText(analysis.department.reason)}</p><span className={styles.help}>상담원 확인 전 제안 · 자동 이관하지 않습니다.</span></div>}
-        </section>
+      <div className={`${styles.stack} ${styles.editorPane}`}>
+        {intakeEditor && analysisFeedback}
+        {intakeEditor}
+        {intakeEditor ? <details className={styles.reviewDetails}><summary>AI 제안과 현재 입력 상세 대조</summary><div className={styles.stack}>
+        {comparisonContent}
+        </div></details> : <>
+        {comparisonContent}
+        </>}
       </div>
+      {intakeEditor ? <details id={`${id}-source-panel`} className={`${styles.sourcePane} ${styles.reviewDetails}`}><summary>원문과 화자별 대화록 확인</summary><div className={styles.stack}>
+        {sourceContent}
+      </div></details> : <div className={`${styles.sourcePane} ${styles.stack}`}>
+        {sourceContent}
+      </div>}
     </div>
   </section>;
 }

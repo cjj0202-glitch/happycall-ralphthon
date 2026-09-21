@@ -1,0 +1,15 @@
+{
+  "version": "six-flow-rehearsal-v4-integrated-review-layout",
+  "observedAt": "2026-09-21T11:18:13.454Z",
+  "nodeVersion": "v24.19.0",
+  "files": {
+    "tests/e2e/six-flow-rehearsal.mjs": {
+      "sha256": "9e6d0c8c78dddc1db22f61e0a672f5eb2f42e093f151e6745344b5d0b5b2737e",
+      "bytes": 33451
+    },
+    "tests/helpers/rehearsal_server.py": {
+      "sha256": "7521fdf31d6b0d0295e29b31c66302e21f0cb7f9f5d388552fe0a2ad73747968",
+      "bytes": 6279
+    }
+  }
+}

@@ -7,7 +7,14 @@
 .header h2 { font-size: var(--font-size-22); margin: var(--space-6) 0; }
 .eyebrow { color: var(--text-muted); font-size: var(--font-size-11); letter-spacing: .06em; }
 .description { color: var(--text-secondary); line-height: var(--font-leading-relaxed); }
-.columns { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-20); align-items: start; }
+.columns { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: 'listen editor' 'source editor'; grid-template-rows: auto 1fr; gap: var(--space-20); align-items: start; }
+.listenPane { grid-area: listen; }
+.editorPane { grid-area: editor; }
+.sourcePane { grid-area: source; min-width: 0; }
+.reviewDetails { margin: 0; border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--surface-raised); padding: var(--space-16); min-width: 0; }
+.reviewDetails > summary { min-height: 40px; line-height: var(--font-leading-relaxed); padding: var(--space-8); }
+.reviewDetails > summary:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring); outline-offset: var(--focus-ring-offset); }
+.reviewDetails[open] > summary { margin-bottom: var(--space-16); }
 .stack { display: grid; min-width: 0; gap: var(--space-16); }
 .card { background: var(--surface-raised); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: var(--space-20); min-width: 0; box-shadow: var(--shadow-card); }
 .card h3 { font-size: var(--font-size-16); line-height: var(--font-leading-normal); margin: 0; }
@@ -68,7 +75,7 @@
 .department { margin-top: var(--space-20); padding: var(--space-12); background: var(--surface-sunken); border-radius: var(--radius-md); }
 .department p { margin-top: var(--space-8); line-height: var(--font-leading-relaxed); }
 .department .help { display: block; }
-@media (max-width: 900px) { .columns { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 900px) { .columns { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'listen' 'editor' 'source'; } }
 @media (max-width: 480px) {
   .header, .sectionHeading { flex-wrap: wrap; }
   .card { padding: var(--space-16); }

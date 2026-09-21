@@ -1,0 +1,99 @@
+C:\00.프로젝트\happycall-ralphthon\.venv\Lib\site-packages\connexion\apps\abstract.py:9: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient
+REHEARSAL_METADATA_READY
+The swagger_ui directory could not be found.
+    Please install connexion with extra install: pip install connexion[swagger-ui]
+    or provide the path to your local installation by passing swagger_path=<your path>
+
+The swagger_ui directory could not be found.
+    Please install connexion with extra install: pip install connexion[swagger-ui]
+    or provide the path to your local installation by passing swagger_path=<your path>
+
+Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다
+Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다
+Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다
+The swagger_ui directory could not be found.
+    Please install connexion with extra install: pip install connexion[swagger-ui]
+    or provide the path to your local installation by passing swagger_path=<your path>
+
+Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다
+Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다
+The swagger_ui directory could not be found.
+    Please install connexion with extra install: pip install connexion[swagger-ui]
+    or provide the path to your local installation by passing swagger_path=<your path>
+
+Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다
+Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다
+Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다
+Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다
+Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\choi8\AppData\Roaming\uv\python\cpython-3.12.14-windows-x86_64-none\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다
