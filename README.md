@@ -1,5 +1,9 @@
 # happycall-ralphthon
 
+**먼저 읽기:** [작업표](TODO.md) · [공식 일정·채점·제출 대조](docs/09_공식규정_전수대조.md) · [목표](docs/03_목표와_범위.md) · [상세 설계](docs/04_제품_상세설계.md) · [4PC 운영](docs/05_랄프톤_실행계획.md) · [노트북 사전 준비](docs/08_다른_노트북_사전준비.md) · [Goal 초안](GOAL.md) · [점수 전략](docs/11_점수전략과_증거설계.md) · [행사 Vercel 연결](docs/12_Vercel_행사계정_연결.md)
+
+**최종 제출은 9/22 12:00 KST.** 실제 `/goal` 원문과 Codex JSONL도 제출 대상입니다. 로그 원본은 GitHub에 올리지 않습니다. 제품 작업 완료 체크는 `ops/tasks.py`의 증거 검증을 거칩니다.
+
 노트북 4대가 랄프톤 방식으로 **해피콜 시스템**을 만듭니다.
 4대는 서로 직접 대화할 수 없으므로 **GitHub Issues 를 편지함으로** 씁니다.
 
@@ -21,8 +25,7 @@ cd happycall-ralphthon
 python channel/whoami.py            # ① 신원 확인 — 「미등록」이면 여기서 멈춘다
 ```
 
-「미등록」이 나오면 출력된 hostname 을 [`channel/pcs.json`](channel/pcs.json) 의 자기 슬롯에
-넣고 커밋합니다. **등록 전에 편지함을 읽지 마십시오** — 남의 편지를 처리하는 사고가 됩니다.
+「미등록」이 나오면 hostname과 본인 GitHub 계정을 메인에게 전달합니다. 메인이 [`channel/pcs.json`](channel/pcs.json)에 등록하고 공유하면 다시 확인합니다. **등록 전에 편지함을 읽지 마십시오** — 남의 편지를 처리하는 사고가 됩니다.
 
 ```bash
 python channel/mail.py board        # ② 4대 상태 한눈에

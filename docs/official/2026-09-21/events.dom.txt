@@ -1,0 +1,55 @@
+- img: 🔥
+- heading "이벤트 안내(필드리그 & 개발자리그)" [level=1]
+- img "💡"
+- text: 제5회 GS그룹 해커톤 필드리그(캠프파이어) & 개발자리그(나이트캠핑)의 이벤트 가이드 입니다. 무박 2일 27시간, 해킹에만 몰두하면 밤이 너무 길잖아요?
+- text: 현장 곳곳에 준비된 이벤트와 굿즈를 소개할게요. 캠프파이어의 밤을 뜨겁게 즐겨주세요
+- img "🔥"
+- generic: •
+- generic: "일시 : 9/21(월) 13시~9/22(화) 16시, 무박 2일"
+- generic: •
+- generic: "장소 : 웨스틴 서울 파르나스"
+- heading "🏕️ 필드리그 & 개발자리그 공통 이벤트" [level=2]:
+  - img "🏕️"
+  - text: 필드리그 & 개발자리그 공통 이벤트
+- generic: 모든 해커가 함께 즐기는 현장 이벤트
+- img "🔥"
+- generic: "현장에 도착하는 순간부터 밤까지, 필드리그를 더 뜨겁게 즐기는 5가지 방법 : 키트를 받고, 도전하고, 팀의 순간을 남기며 캠프의 밤까지 함께 즐겨보세요!"
+- button "collection tile":
+  - img "🎁"
+  - generic: "1. PLAI CAMP KIT : 필드리그의 첫 순간부터 완주까지 달리다!"
+- button "collection tile":
+  - img "🎬"
+  - generic: "2. PLAI MOVIE FESTIVAL : 우리의 PLAI를 영화로 만든다면?"
+- button "collection tile":
+  - img "⌨️"
+  - generic: "3. ENTER:PLAI : 마음에 드는 키캡 4개를 골라, 나만의 PLAI 키캡을 완성하다!"
+- button "collection tile":
+  - img "🔁"
+  - generic: "4. RE:PLAI : 내가 간직한 52g 굿즈를 꺼내고, 특별한 키캡으로 추억을 이어가다!"
+- button "collection tile":
+  - img "📢"
+  - generic: "5. SNS 인증 : 해커톤 사진을 세상에 공유하고, 신상 굿즈를 받다!"
+- heading "🔥 개발자리그 이벤트" [level=2]:
+  - img "🔥"
+  - text: 개발자리그 이벤트
+- generic: 필드리그의 이벤트는 기본, 개발자리그에서만 열리는 특별 이벤트
+- img "🔥"
+- text: "개발자리그에는 밤샘 개발의 순간을 더 즐겁게 만들어줄 전용 이벤트와 우수팀 리워드가 기다리고 있어요. : 가재탈을 쓰고, 밤새 달린 에이전트의 기록을 인증하고, 끝까지 완주해 맥 미니의 주인공팀"
+- text: 에 도전하세요!
+- img "🏆"
+- button "collection tile":
+  - img "🔒"
+  - generic: "6. 봉인 해제 & 최장 구동 인증 : 최장 구동 기록을 함께 인증하세요!"
+- button "collection tile":
+  - img "🏆"
+  - generic: "7. 우수팀 : 맥 미니의 주인공에 도전하세요!"
+- heading "⁉️ 자주 묻는 질문" [level=3]:
+  - img "⁉️"
+  - text: 자주 묻는 질문
+- generic: Q. GS칼텍스 서울 Kixx 배구단 저지는 언제 받나요? A. 저지는 완주자 대상이라 행사 마무리 시점에 지급됩니다. 나머지 키트는 체크인 때 바로 받습니다.
+- generic: Q. AI 무비 챌린지 Part1에 참여 못 했는데 PLAI MOVIE FESTIVAL에는 참여할 수 있나요? A. 물론이에요! 이번 해커톤에 참여하는 해커라면 AI 무비 챌린지 Part1 참여 여부와 무관하게 누구나 출품할 수 있어요.
+- generic: Q. 기존 굿즈는 어떤 것까지 인정되나요? A. 역대 해커톤, 52g 프로그램 굿즈라면 OK! 착용하고 오거나 소장 인증을 보여주세요.
+- generic: Q. RE:PLAI, SNS 인증은 어디서 하나요? A. 현장 굿즈존 부스에서 확인 후 바로 지급해 드려요.
+- button "TOP":
+  - text: TOP
+- alert

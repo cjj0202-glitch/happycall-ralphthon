@@ -32,6 +32,13 @@ Codex도 스킬을 지원합니다. `.agents/skills/mailbox`와 `.agents/skills/
 
 ## 2. 매 루프에서 하는 일
 
+제품 작업의 기준은 `TODO.md`와 `docs/03_목표와_범위.md`~`docs/06_검증과_시연.md`입니다.
+행사 일정·채점·제출은 `docs/09_공식규정_전수대조.md`가 우선입니다. `GOAL.md`는 미실행 초안이며 실제 Goal 원문과 로그를 구분해서 보존합니다. 원본 JSONL/ZIP은 GitHub에 올리지 않습니다.
+`ops/tasks.json`은 pc1만 변경합니다. 워커는 배정된 DOING 작업 하나를 끝내고 증거·커밋을 회신합니다.
+pc1이 REVIEW → 증거 대조 → `ops/tasks.py accept`를 마친 뒤에만 TODO를 체크하고 이슈를 닫습니다.
+신규 세션은 자기 열린 편지와 배정 작업을 한 번 확인합니다. 이후 `watch --once`는 변경 감지에 씁니다.
+알림이 없다는 사실은 미처리 작업이 없다는 뜻이 아닙니다. 더 배정된 일이 없으면 종료합니다.
+
 별도 터미널에서 감시기를 띄워 둡니다 — **새것이 있을 때만** 울립니다.
 
 ```bash
@@ -48,7 +55,8 @@ python channel/mail.py inbox                      # 내 앞 편지
 python channel/mail.py read <번호>                 # 본문
 # ... 실제 작업 ...
 python channel/mail.py status --set "지금 무엇을 하는 중"
-python channel/mail.py done <번호> --evidence "무엇을 어떻게 확인했는가"
+python channel/mail.py reply <번호> --body "작업 ID·커밋·증거 경로·기대/실측"
+# pc1이 인수 검증하고 tasks.py accept한 뒤에만 mail.py done으로 닫습니다.
 ```
 
 ## 3. 🚨 이것만은

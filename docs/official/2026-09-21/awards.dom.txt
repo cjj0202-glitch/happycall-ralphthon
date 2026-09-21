@@ -1,0 +1,15 @@
+- img: 🏆
+- 'heading "7. 우수팀 : 맥 미니의 주인공에 도전하세요!" [level=1]'
+- heading "🏆 우수팀" [level=3]:
+  - img "🏆"
+  - text: 우수팀
+- generic: AI 네이티브 개발자로서의 학습과 시도 과정을 중점 평가해요.
+- generic: •
+- text: 우수팀 전원 인당 맥 미니를
+- text: 제공
+- img "🖥️"
+- generic: •
+- generic: 결과물의 화려함보다 위임의 기술, 문제 설계, 실패 대응의 과정을 봅니다.
+- button "TOP":
+  - text: TOP
+- alert

@@ -1,0 +1,21 @@
+{
+  "task_id": "S01",
+  "spec_hash": "faaefbb1368e0905d813deb5262c6b2fc35f6e6eca9c8ada9edeedbc62eb4997",
+  "measured_at": "2026-09-21T06:22:44.861277+00:00",
+  "observer": "pc1/CJJ",
+  "checks": {
+    "C1": {
+      "expected": "공유 스킬·감시·작업표 검사 결과와 한계를 실제 출력으로 기록",
+      "observed": "최종 회귀 검사 27/27, 앞선 변이 5/5 검출, 스킬4/4, 실제 발견18개/오류0, pc1 준비 PASS. 줄바꿈 동등성과 완료 후 재검증 이력도 통과했습니다. PS1 정책 차단은 유지했습니다.",
+      "passed": true
+    },
+    "C2": {
+      "expected": "설계 03~08, 프롬프트, 준비 스크립트의 상호 참조와 완료 규약 일치",
+      "observed": "문서 상대 링크83개와 코드펜스를 점검했고, 작업표의 38개 의존성과 워커 회신→메인 검증→체크 규약을 정본들에 일치시켰습니다.",
+      "passed": true
+    }
+  },
+  "artifacts": [
+    "reports/setup-validation.md"
+  ]
+}

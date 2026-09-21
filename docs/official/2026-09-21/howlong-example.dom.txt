@@ -1,0 +1,136 @@
+- main:
+  - link "GS 52g Ralphthon 홈":
+    - /url: /
+    - img "GS"
+    - img "52g"
+    - generic: RALPHTHON
+  - navigation "주요 메뉴":
+    - link "진행 방식":
+      - /url: /#process
+    - link "가이드":
+      - /url: /guide
+    - link "심사 기준":
+      - /url: /criteria
+    - link "로그 분석":
+      - /url: /howlong
+    - link "로그인":
+      - /url: /login?next=%2Fteam
+  - button "세션 기록 파일 선택"
+  - region "내 에이전트의 최장 기록":
+    - generic: 예시 로그로 계산한 기록입니다.
+    - button "사진 모드":
+      - text: 사진 모드
+      - generic: ↗
+    - article "Codex 최장 실행 기록판":
+      - strong: PLAI Camp
+      - generic: 제5회 GS그룹 해커톤 / 개발자 리그
+      - generic: 주최
+      - generic "GS · 52g":
+        - generic: GS
+        - img "52g"
+      - generic: CODEX RUN
+      - generic: FINISH
+      - paragraph: MY LONGEST RUN
+      - heading "내 에이전트의 최장 기록" [level=1]
+      - generic: 예시 기록
+      - img "7시간 42분 18초":
+        - strong: "07"
+        - generic: 시간 HOURS
+        - generic: ":"
+        - strong: "42"
+        - generic: 분 MINUTES
+        - generic: ":"
+        - strong: "18"
+        - generic: 초 SECONDS
+      - generic: 실행 완료
+      - generic: CODEX / gpt-6-astra
+      - generic: 2026. 09. 22.
+      - generic: 개발자 리그 운영
+      - strong: RALPHTHON
+      - text: by
+      - img "Team Attention"
+      - generic: LONG
+      - strong: RUN.
+      - text: +
+    - text: +
+    - button "분석 JSON 저장 ↓"
+    - button "다른 기록 분석"
+    - generic: 다른 기록으로 결과를 교체할 수 있어요.
+    - button "새 파일 선택"
+    - button "텍스트 붙여넣기"
+    - generic "실행 목록과 분석 자세히 보기" [active]
+    - paragraph: 최장 기록의 시작 2026-09-21 22:00:00 UTC → 종료 2026-09-22 05:42:18 UTC
+    - generic "분석 요약":
+      - generic: 관측된 실행
+      - strong: "1"
+      - generic: 완료
+      - strong: "1"
+      - generic: 중단
+      - strong: "0"
+      - generic: 토큰
+      - strong: 14,300
+      - generic: 비용
+      - strong: 계산 안 함
+    - heading "모든 실행" [level=2]
+    - generic: 파일명·경로·세션 ID·대화 내용은 표시하지 않습니다.
+    - table "도구, 상태, 실행 시간, 시작 시각, 모델, 토큰별 실행 목록":
+      - caption: 도구, 상태, 실행 시간, 시작 시각, 모델, 토큰별 실행 목록
+      - rowgroup:
+        - row "실행 도구 정렬 상태 정렬 실행 시간 정렬, 현재 내림차순 시작 정렬 모델 토큰 정렬":
+          - columnheader "실행"
+          - columnheader "도구 정렬":
+            - button "도구 정렬":
+              - text: 도구
+              - generic: ↕
+          - columnheader "상태 정렬":
+            - button "상태 정렬":
+              - text: 상태
+              - generic: ↕
+          - columnheader "실행 시간 정렬, 현재 내림차순":
+            - button "실행 시간 정렬, 현재 내림차순":
+              - text: 실행 시간
+              - generic: ↓
+          - columnheader "시작 정렬":
+            - button "시작 정렬":
+              - text: 시작
+              - generic: ↕
+          - columnheader "모델"
+          - columnheader "토큰 정렬":
+            - button "토큰 정렬":
+              - text: 토큰
+              - generic: ↕
+      - rowgroup:
+        - row "codex-001 Codex 완료 7h 42m 18s 2026-09-21 22:00:00 UTC gpt-6-astra 14,300":
+          - cell "codex-001"
+          - cell "Codex"
+          - cell "완료":
+            - generic: 완료
+          - cell "7h 42m 18s"
+          - cell "2026-09-21 22:00:00 UTC":
+            - time: 2026-09-21 22:00:00 UTC
+          - cell "gpt-6-astra"
+          - cell "14,300"
+    - generic "가져온 기록 확인"
+  - region "기록은 어떻게 계산하나요?":
+    - paragraph: CODEX SESSION LOG
+    - heading "기록은 어떻게 계산하나요?" [level=2]:
+      - text: 기록은 어떻게
+      - text: 계산하나요?
+    - article:
+      - strong: Codex
+      - paragraph:
+        - code: rollout-*.jsonl
+        - text: 파일을 선택하거나 내용을 붙여 넣으세요. 시작과 완료가 확인된 실행 중 가장 긴 시간을 표시합니다.
+    - generic "계산 기준과 지원 범위"
+    - paragraph: 실행 수는 기록에 남은 턴 수입니다. 에이전트·서브에이전트 수와는 다릅니다. 완료 기록이 확인된 실행만 최장 실행에 포함합니다.
+    - paragraph: 같은 파일은 한 번만 계산합니다. 내용이 다른 포크·리플레이 파일에는 겹치는 기록이 있을 수 있습니다.
+    - paragraph: 가격 근거가 없어 비용은 계산하지 않습니다. 이 결과는 제출 확인이나 심사 점수가 아닙니다.
+    - paragraph: 최대 100개, 파일당 256MiB, 합계 512MiB를 지원합니다. 압축 파일은 풀어서 선택해 주세요.
+  - generic: HowLong · Team Attention × Ralphthon
+  - navigation "HowLong 문서":
+    - link "원본 프로젝트 ↗":
+      - /url: https://howlong.ralphthon.org
+    - link "MIT 라이선스":
+      - /url: /howlong/HOWLONG-LICENSE.txt
+    - link "서드파티 고지":
+      - /url: /howlong/THIRD_PARTY_NOTICES.md

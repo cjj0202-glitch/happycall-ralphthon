@@ -1,0 +1,179 @@
+- main:
+  - link "GS 52g Ralphthon 홈":
+    - /url: /
+    - img "GS"
+    - img "52g"
+    - generic: RALPHTHON
+  - navigation "주요 메뉴":
+    - link "진행 방식":
+      - /url: /#process
+    - link "가이드":
+      - /url: /guide
+    - link "심사 기준":
+      - /url: /criteria
+    - link "로그 분석":
+      - /url: /howlong
+    - link "로그인":
+      - /url: /login?next=%2Fteam
+  - paragraph: GS그룹 해커톤 · 개발자 리그
+  - heading "현장의 문제 오늘은 에이전트로 풀자" [level=1]:
+    - text: 현장의 문제
+    - text: 오늘은 에이전트로 풀자
+  - paragraph: 현장의 문제를 들고 와서 오늘은 에이전트에게 맡겨 봅시다. 직접 만들거나 에이전트에게 맡기고, 나온 결과를 함께 확인합니다.
+  - generic "OpenAI와 Team Attention":
+    - strong: OpenAI
+    - generic: ×
+    - generic: TEAM ATTENTION
+  - link "로그인하고 제출하기":
+    - /url: /login?next=%2Fteam
+  - link "진행 방식 보기":
+    - /url: "#process"
+  - complementary "행사 기본 정보":
+    - text: GS DEVELOPER LEAGUE
+    - strong:
+      - text: "09.21"
+      - text: — 09.22
+    - term: 장소
+    - definition: COEX PARNAS HOTEL
+    - term: 제출
+    - definition: ONE TEAM · ONE ENTRY
+  - navigation "페이지 바로가기":
+    - link "진행 방식":
+      - /url: "#process"
+    - link "일정":
+      - /url: "#schedule"
+    - link "제출":
+      - /url: "#submissions"
+    - link "심사":
+      - /url: "#judging"
+    - link "로그 분석":
+      - /url: /howlong
+    - link "지난 Ralphthon":
+      - /url: "#history"
+    - link "공간 운영":
+      - /url: "#room"
+  - heading "HOW IT WORKS" [level=2]
+  - article:
+    - text: "01"
+    - heading "문제를 발굴합니다" [level=3]
+    - paragraph: 현장에서 자주 부딪히는 문제를 꺼냅니다.
+  - article:
+    - text: "02"
+    - heading "질문을 주고받습니다" [level=3]
+    - paragraph: 다른 사람과 대화하며 문제를 뾰족하게 정의합니다.
+  - article:
+    - text: "03"
+    - heading "에이전트에게 맡깁니다" [level=3]
+    - paragraph: Astra에 목표와 기준을 전하고 작업을 맡깁니다.
+  - article:
+    - text: "04"
+    - heading "에이전트가 멈췄다면? 가재탈!" [level=3]
+    - paragraph: 에이전트를 직접 조작해야 한다면 가재탈을 쓰는 축제입니다.
+  - article:
+    - text: "05"
+    - heading "결과를 함께 확인합니다" [level=3]
+    - paragraph: 데모와 실행 근거를 살펴보고, 결선 발표와 참가자 투표를 진행합니다.
+  - heading "이틀의 일정" [level=2]
+  - paragraph: 9월 21일–22일 · 한국 시간
+  - heading "9.21 월요일" [level=3]
+  - term: 13:00
+  - definition: 개회식 현장 중계
+  - term: 14:10
+  - definition: 개발자 리그 오프닝
+  - term: 15:00
+  - definition: Vercel 세션
+  - term: 15:30
+  - definition: 문제와 스펙 정리
+  - term: 17:30
+  - definition: 첫 Ralph 실행 · 코칭과 가재존
+  - term: 18:00
+  - definition: 저녁 식사
+  - term: 19:00
+  - definition: Codex Ambassador 세션
+  - term: 19:30
+  - definition: 패널토크
+  - term: 20:00
+  - definition: 네트워킹 · Codex 활용 팁
+  - term: 21:00
+  - definition: 야식과 클로징
+  - heading "9.22 화요일" [level=3]
+  - term: 09:00
+  - definition: 체크인과 아침 간식
+  - term: 10:00
+  - definition: 봉인 해제 · 최종 제출 준비
+  - term: 12:00
+  - definition: 제출 마감 · 점심 · 1차 심사
+  - term: 13:00
+  - definition: 현업 AI 활용 패널토크
+  - term: 13:30
+  - definition: 결선 4팀 안내
+  - term: 14:00
+  - definition: 결선 발표와 질의응답
+  - term: 15:00
+  - definition: 참가자 투표와 심사
+  - term: 15:30
+  - definition: 시상과 마무리
+  - term: 16:00
+  - definition: 폐회식
+  - heading "제출할 것" [level=2]
+  - paragraph: 내 팀의 대표가 저장·제출합니다. 팀원은 같은 내용을 확인할 수 있습니다.
+  - paragraph: 권장 제출 시각 · 한국 시간
+  - strong: 문제와 아이디어
+  - generic: 9/21 17:30
+  - paragraph: 현업 문제, 만들 것과 성공 기준
+  - strong: /goal
+  - generic: 9/21 17:30
+  - paragraph: Codex에서 사용한 /goal 원문 전체
+  - strong: Codex 세션 로그
+  - generic: 9/22 10:00
+  - paragraph: 실제로 사용한 Codex JSONL 세션 로그. 파일당 1GiB, 팀 합계 10GiB까지 올릴 수 있습니다.
+  - strong: 최종 결과물
+  - generic: 9/22 12:00
+  - paragraph: 최종 설명 · 데모 링크 · 데모 영상 링크 · GitHub 저장소 · 발표자료(PDF/PPT/PPTX, 90MiB). 발표자료는 최대 5페이지로 제출해 주세요.
+  - paragraph: 한 번 제출한 뒤에도 9월 22일 낮 12시까지 계속 수정할 수 있습니다. 이후 제출본을 고정해 심사합니다.
+  - paragraph: 실제 업무 데이터 대신 합성·샘플 데이터를 사용하세요. 팀당 대표작 하나를 제출합니다.
+  - link "제출 전, 내 브라우저에서 세션 로그 분석하기 →":
+    - /url: /howlong
+  - heading "심사와 참가자 투표" [level=2]
+  - paragraph: 전 팀 1차 평가 → 상위 15팀 근거·데모 검증 → 결선 4팀 선정
+  - heading "1차 심사 · 100점" [level=3]
+  - definition: 에이전트 활용 기록
+  - term: 20점
+  - definition: /goal 기본 구성
+  - term: 20점
+  - definition: 결과 중심 위임 설계
+  - term: 30점
+  - definition: 완료와 검증 설계
+  - term: 30점
+  - paragraph: 자동 분석 근거와 제출 내용을 심사위원이 확인해 점수를 확정합니다.
+  - heading "결선 · 100점" [level=3]
+  - definition: 검증된 1차 심사 원점수 × 0.5
+  - term: 50점
+  - definition: 발표와 질의응답
+  - term: 25점
+  - definition: 참가자 투표
+  - term: 25점
+  - paragraph: 결선 발표 5분, 질의응답 3분. 발표 자료의 화려함과 말솜씨는 별도 점수로 평가하지 않습니다.
+  - paragraph: "투표 질문: 우리 업무에서도 실제로 써보고 싶은 결과물은 무엇입니까? 참가자 한 명당 다른 한 팀에 투표하며, 확정한 표는 바꿀 수 없습니다. 투표 점수는 득표수 ÷ 최다 득표수 × 25로 계산합니다."
+  - paragraph: 검증을 통과한 상위 10팀에는 팀당 OpenAI API Credit 1,000달러를 제공합니다. 최종 1·2위는 심사위원이 확정하며, 동점은 근거를 함께 확인해 결정합니다.
+  - link "참가자 투표 →":
+    - /url: /vote
+  - paragraph: PAST RALPHTHON
+  - heading "Seoul → San Francisco → Singapore" [level=2]:
+    - text: Seoul → San Francisco
+    - text: → Singapore
+  - paragraph: 서울에서 시작해서 OpenAI, Weights & Biases, 카카오벤처스, 네이버 D2SF 등 다양한 파트너들과 협업하며 빌더들을 만난 Ralphthon. 이번에는 GS 개발자 리그에서 함께합니다.
+  - link "YouTube에서 보기 ↗":
+    - /url: https://www.youtube.com/watch?v=Y7qXj6O_5Jk
+  - iframe
+  - heading "Team Attention 코칭 데스크" [level=2]:
+    - text: Team Attention
+    - text: 코칭 데스크
+  - paragraph: 에이전트를 더 잘 쓰는 법을 코치와 대화하세요. 에이전트가 일하는 동안 다른 팀과 질문을 나누고 동료를 만듭니다.
+  - figure:
+    - img "팀 작업 공간과 가재탈 코딩 공간, Team Attention 코칭 데스크가 배치된 행사장 운영 이미지"
+  - generic: GS · 52g · TEAM ATTENTION
+  - link "GS 개발자 리그 안내 ↗":
+    - /url: https://52g.oopy.io/dev_league
+  - link "GS 해커톤 팀 페이지 ↗":
+    - /url: https://www.52g-hackathon.com/league/3

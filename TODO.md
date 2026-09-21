@@ -3,19 +3,31 @@
 > 정본: ops/tasks.json. 이 파일은 `python ops/tasks.py render`로 생성합니다.
 > 체크는 pc1의 증거 검증 뒤에만 붙습니다. 담당 슬롯은 역할 제안이며 PC 등록 전에는 배정되지 않습니다.
 
-전체 31개 중 0개 완료. 준비 작업을 포함한 수치이며 제품 완성률이 아닙니다.
+전체 38개 중 2개 완료. 준비 작업을 포함한 수치이며 제품 완성률이 아닙니다.
 
 ## 0 사전 운영 준비
 
-- [ ] **S01 설계·작업표·사전 준비 패키지 검증** — pc1 · TODO · 45분
-  선행: 없음 / 산출물: reports/setup-validation.md
+- [x] **O01 공식 공개 안내·채점·Goal·제출 규정 반영** — pc1 · DONE · 30분
+  선행: 없음 / 산출물: reports/official-review.md
+  - C1: 공개 홈·가이드·채점·로그 기준과 공식 다운로드를 대조하고 출처·캡처 보존
+  - C2: 9/22 12시·5분/3분·5페이지·100점 구성·로그 한도를 설계와 TODO에 반영
+  - 검증 기록: [reports/O01.evidence.json](reports/O01.evidence.json)
+
+- [x] **S01 설계·작업표·사전 준비 패키지 검증** — pc1 · DONE · 45분
+  선행: O01 / 산출물: reports/setup-validation.md
   - C1: 공유 스킬·감시·작업표 검사 결과와 한계를 실제 출력으로 기록
   - C2: 설계 03~08, 프롬프트, 준비 스크립트의 상호 참조와 완료 규약 일치
+  - 검증 기록: [reports/S01.recheck.evidence.json](reports/S01.recheck.evidence.json)
 
-- [ ] **G01 공식 일정·심사·제출·API 예산 확인** — pc1 · TODO · 30분
+- [ ] **G01 공개 규정 외 팀 조건·API 예산 최종 확인** — pc1 · TODO · 30분
   선행: S01 / 산출물: reports/event-constraints.md
-  - C1: 공식 안내 출처·일정·발표 시간·필수 AI 조건을 기록
+  - C1: 공식 공개 규정 docs/09와 팀 추가 조건을 확인하고 발표5분·자료5페이지·9/22 12시 마감을 고정
   - C2: 제품 API 사용 여부·건수/금액 상한과 P0 승격 여부 결정
+
+- [ ] **U00 공식 로그인 후 팀 제출 화면 확인** — pc1 · TODO · 30분
+  선행: O01 / 산출물: reports/submission-access.md
+  - C1: 실제 팀명·대표 권한·네 제출 항목·필드 제한 확인
+  - C2: 팀 전용 추가 안내와 공개 규정 차이 기록
 
 - [ ] **R01 팀원 3명 계정·hostname·역할 등록** — pc1 · TODO · 30분
   선행: S01 / 산출물: reports/team-registration.md
@@ -59,12 +71,22 @@
   - C1: 4PC 준비 기록과 역할·소유 경로 확인
   - C2: 공식 조건을 반영한 P0 완료선과 첫 작업 ID를 확정
 
+- [ ] **L01 실제 제품 Goal 실행·원문과 로그 보존 시작** — pc1 · TODO · 30분
+  선행: G02 / 산출물: submission/goal-used.md, reports/log-start.md
+  - C1: 미실행 초안이 아닌 실제 사용한 Goal 원문·시각·주요 세션 위치를 로컬 확인
+  - C2: 4PC 실행 로그 원본 보존·GitHub 제외 경로와 변경 지시 기록 준비
+
 ## 2 제품 구현
 
 - [ ] **S02 공통 앱 골격·lock·테스트 명령 고정** — pc1 · TODO · 60분
-  선행: G02 / 산출물: reports/app-baseline.md
+  선행: G02, L01 / 산출물: reports/app-baseline.md
   - C1: T1 결정에 맞춘 앱 구조·lock·실행 명령을 기록
   - C2: 깨끗한 설치에서 타입 검사·빌드·계약 샘플 실행 성공
+
+- [ ] **U01 문제·아이디어와 실제 Goal 초기 제출** — pc1 · TODO · 30분
+  선행: L01, U00 / 산출물: reports/initial-submission.md
+  - C1: 실제 Goal 전체 원문과 문제·성공 기준을 대표 제출란에 반영
+  - C2: 저장/제출 상태·시각 확인, 9/21 17:30 권장과 최종 마감 구분
 
 - [ ] **M01 미도착·오출 합성 음성 제작** — pc2 · TODO · 60분
   선행: G02 / 산출물: assets/audio-manifest.json
@@ -133,16 +155,36 @@
   - C1: 3명×2케이스 원시 시간·화면 전환·교차 순서 기록
   - C2: 중앙값 감소율과 한계 공개, 예시 숫자를 실측으로 사용하지 않음
 
+- [ ] **H01 Vercel 로그인·g-23 연결** — pc1 · TODO · 30분
+  선행: S02 / 산출물: reports/vercel-link.md
+  - C1: hackathon02 이메일 인증 후 52g Studio Enterprise의 기존 g-23만 확인
+  - C2: 제품 앱 폴더의 기존 g-23 연결, 키 없이 설정 근거 기록
+
+- [ ] **H02 Vercel Preview 배포·브라우저 확인** — pc1 · TODO · 60분
+  선행: H01 / 산출물: reports/vercel-preview.md
+  - C1: Root Directory·빌드·인증·자산 공개 범위와 BE 필요 여부 확인
+  - C2: Preview URL에서 JS·데이터·영상·두 흐름·오류 모드 확인
+
+- [ ] **Q04 공식 배점별 증거·5페이지 전략 검토** — pc1 · TODO · 30분
+  선행: Q03, L01 / 산출물: reports/scoring-review.md
+  - C1: 20/20/30/30 네 항목의 실제 증거와 Goal-실행-수정-재검증 연결을 대조
+  - C2: 5페이지·5분/3분 구성, 로그 수치 의미, 사용자 가치와 한계를 확인
+
 ## 4 시연·제출
 
 - [ ] **F01 기능 동결·핵심 결함 정리** — pc1 · TODO · 30분
-  선행: Q03 / 산출물: reports/freeze.md
+  선행: Q03, Q04 / 산출물: reports/freeze.md
   - C1: 핵심 경로 차단 결함 0건, 제외 범위·알려진 한계 기록
   - C2: 동결 SHA와 이후 변경 허용 조건 기록
 
+- [ ] **L02 주요 JSONL·선택 ZIP 점검·제출 준비** — pc1 · TODO · 30분
+  선행: F01, L01 / 산출물: reports/log-readiness.md
+  - C1: Goal 입력·결과를 포함한 주요 JSONL 1개 및 나머지 선택 ZIP 1개, 비밀정보 점검
+  - C2: 파일 1GiB·팀 10GiB 한도, 중복·포크 구분, 실제 HowLong 분석과 제출 구분
+
 - [ ] **D01 시연 대본·백업 녹화** — pc2 · TODO · 60분
   선행: F01 / 산출물: demo/script.md, assets/presentation-manifest.json
-  - C1: 공식 발표 시간에 맞춘 문제·두 흐름·실측·한계 대본
+  - C1: 발표5분·질의응답3분·최대5페이지로 문제·Goal·위임·두 흐름·실측·한계 구성
   - C2: 백업 녹화 재생·SHA·다운로드 경로 확인
 
 - [ ] **D02 3회 연속 리허설·장애 시연** — pc1 · TODO · 60분
@@ -153,7 +195,12 @@
 - [ ] **D03 제출 묶음 최종 확인** — pc1 · TODO · 30분
   선행: D02 / 산출물: reports/release-check.md
   - C1: 코드·설계·평가·대본·백업·실행 방법을 제출 조건에 대조
-  - C2: 다른 PC에서 릴리스 재현, 필요한 접근 권한 확인
+  - C2: 다른 PC에서 재현하고 데모·영상·GitHub·발표자료 링크의 심사 접근 방법 확인; 호스팅 미완료 시 수용 여부 기록
+
+- [ ] **U02 공식 네 항목 최종 제출·확인** — pc1 · TODO · 30분
+  선행: D03, L02, U01, U00 / 산출물: reports/final-submission.md
+  - C1: 설명·데모/영상/GitHub 링크·최대5페이지 90MiB 이하 발표자료와 로그 제출
+  - C2: 9/22 12:00 이전 대표 저장/제출 완료 상태·시각·팀원 열람 확인
 
 ## 5 선택 확장 P1
 
@@ -161,13 +208,3 @@
   선행: F01 / 산출물: reports/live-ai.md
   - C1: 허용된 API 권한·예산 내 실제 호출과 모드 표시
   - C2: 동일 20입력 평가와 timeout·오류·fallback 확인
-
-- [ ] **H01 Vercel 로그인·g-23 연결** — pc1 · TODO · 30분
-  선행: F01 / 산출물: reports/vercel-link.md
-  - C1: whoami 계정과 실제 team/project 권한 확인
-  - C2: 제품 앱 폴더의 기존 g-23 연결, 키 없이 설정 근거 기록
-
-- [ ] **H02 Vercel Preview 배포·브라우저 확인** — pc1 · TODO · 60분
-  선행: H01 / 산출물: reports/vercel-preview.md
-  - C1: Root Directory·빌드·인증·자산 공개 범위와 BE 필요 여부 확인
-  - C2: Preview URL에서 JS·데이터·영상·두 흐름·오류 모드 확인

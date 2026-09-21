@@ -1,0 +1,180 @@
+{
+  "captured_at": "2026-09-21T06:09:10.873118+00:00",
+  "records": [
+    {
+      "file": "awards.dom.txt",
+      "source": "https://52g.oopy.io/63cf800b-d1c1-82a9-a39f-81254102d286",
+      "note": "우수팀 이벤트",
+      "bytes": 517,
+      "sha256": "2e1029fe0a49497c58532d29df2eefb7732e53e77a3a7c8103b84e189683e078"
+    },
+    {
+      "file": "awards.png",
+      "source": "https://52g.oopy.io/63cf800b-d1c1-82a9-a39f-81254102d286",
+      "note": "우수팀 이벤트",
+      "bytes": 52486,
+      "sha256": "6a3ad946247b19dc8052bbc4c1115b42ac2d610e15dfb553f74bb9bbc57c9ae8"
+    },
+    {
+      "file": "criteria.dom.txt",
+      "source": "https://52g-hackathon.ralphthon.org/criteria",
+      "note": "채점 기준",
+      "bytes": 1763,
+      "sha256": "13777fa640bbde8ccf95c3edf88ab6feadeb57b070d7533498b5ea55f2e9e0ea"
+    },
+    {
+      "file": "criteria.png",
+      "source": "https://52g-hackathon.ralphthon.org/criteria",
+      "note": "채점 기준",
+      "bytes": 30383,
+      "sha256": "45e70f6db4c3d7656e1ce54c77d0b50d30adead049f0ea2dafc621c1b8ef6fc2"
+    },
+    {
+      "file": "dev-league.dom.txt",
+      "source": "https://52g.oopy.io/dev_league",
+      "note": "행사 소개",
+      "bytes": 4197,
+      "sha256": "0b2352833668908bf9493135e4846d71e343091767cb51d4012fd3f25506b132"
+    },
+    {
+      "file": "dev-league.png",
+      "source": "https://52g.oopy.io/dev_league",
+      "note": "행사 소개",
+      "bytes": 508086,
+      "sha256": "bcdcc083f40f96248ccf676d0cdfb2b009f6e586f249d52bf4cb7d35358f8f85"
+    },
+    {
+      "file": "events.dom.txt",
+      "source": "https://52g.oopy.io/event_filed",
+      "note": "공통·개발자 이벤트 목록",
+      "bytes": 3490,
+      "sha256": "1901666f464b3421429902976cc595e5f1c0f81de9fecece93d97d7389994c4f"
+    },
+    {
+      "file": "events.png",
+      "source": "https://52g.oopy.io/event_filed",
+      "note": "공통·개발자 이벤트 목록",
+      "bytes": 362326,
+      "sha256": "aa927732a0f09cae729741cda588ecc3bdb7df90e191c9301aaaf5586d8f9a4b"
+    },
+    {
+      "file": "gs-astra-guide.md",
+      "source": "https://52g-hackathon.ralphthon.org/guides/gs-astra-guide.md",
+      "note": "공식 배포 원본",
+      "bytes": 4497,
+      "sha256": "7007dec03d60f55b9eddd6214906d3503a048be8ba9c434961640db59f75c948"
+    },
+    {
+      "file": "gs-astra-guide.pdf",
+      "source": "https://52g-hackathon.ralphthon.org/guides/gs-astra-guide.pdf",
+      "note": "공식 배포 원본",
+      "bytes": 86980,
+      "sha256": "7972c7d1fd194aba5352714c6fb657a9ce4bbc59c0a2814b97a93fe67e90e9d5"
+    },
+    {
+      "file": "guide.dom.txt",
+      "source": "https://52g-hackathon.ralphthon.org/guide",
+      "note": "Goal·제출 가이드",
+      "bytes": 11134,
+      "sha256": "131cfd5dd421bf350c03a4c9bc8fe450a8f8742777f3e956b97b386072e25dd7"
+    },
+    {
+      "file": "guide.png",
+      "source": "https://52g-hackathon.ralphthon.org/guide",
+      "note": "Goal·제출 가이드",
+      "bytes": 248733,
+      "sha256": "c04f853e4cb0d9b8632d266e36b1610b9dfa8b20fd06a1e1f699841cb253ffb8"
+    },
+    {
+      "file": "home.dom.txt",
+      "source": "https://52g-hackathon.ralphthon.org/",
+      "note": "공개 홈 모든 섹션",
+      "bytes": 7651,
+      "sha256": "33e1b9fdae19cc247a56ee619ba1bc2d3727fc301dff9d2d74d9fa60c162309f"
+    },
+    {
+      "file": "home.png",
+      "source": "https://52g-hackathon.ralphthon.org/",
+      "note": "공개 홈 모든 섹션",
+      "bytes": 263718,
+      "sha256": "bb35c091225d11d9fb854f74273b2ee20bd9c6955977ee0466a38d153b911205"
+    },
+    {
+      "file": "howlong-example.dom.txt",
+      "source": "https://52g-hackathon.ralphthon.org/howlong",
+      "note": "예시 기록판; 팀 실적 아님",
+      "bytes": 5394,
+      "sha256": "962b25b748334d0f08e35f524c1a87cf1762c234185f603aa417095ddfdb0df8"
+    },
+    {
+      "file": "howlong-example.png",
+      "source": "https://52g-hackathon.ralphthon.org/howlong",
+      "note": "예시 기록판; 팀 실적 아님",
+      "bytes": 74453,
+      "sha256": "3bc7feec430f389f3fcc44111e54eb66d9d2b970e5d200be1ab7cd556a7ea235"
+    },
+    {
+      "file": "howlong.dom.txt",
+      "source": "https://52g-hackathon.ralphthon.org/howlong",
+      "note": "계산 기준 펼침",
+      "bytes": 2965,
+      "sha256": "81c838ff719897ff813f92f3116e78c576899bd12664e333bd425c78698fdc29"
+    },
+    {
+      "file": "howlong.png",
+      "source": "https://52g-hackathon.ralphthon.org/howlong",
+      "note": "계산 기준 펼침",
+      "bytes": 50305,
+      "sha256": "31bce618a516488e4ffeb80bc455aa7c5e53db157b5bc2b2c323e869621c5f16"
+    },
+    {
+      "file": "login.dom.txt",
+      "source": "https://52g-hackathon.ralphthon.org/login?next=%2Fteam",
+      "note": "로그인 화면; 제출 폼 미확인",
+      "bytes": 942,
+      "sha256": "e92275c69e5d521fbbf14716332f1e87f56d6e39b4c83a0e42b4897a38873416"
+    },
+    {
+      "file": "login.png",
+      "source": "https://52g-hackathon.ralphthon.org/login?next=%2Fteam",
+      "note": "로그인 화면; 제출 폼 미확인",
+      "bytes": 16088,
+      "sha256": "855bf8691a488e65c0eb65cac12e06499cbf53fd03dc4e02c9f1ba6a23cca7a6"
+    },
+    {
+      "file": "unseal.dom.txt",
+      "source": "https://52g.oopy.io/badf800b-d1c1-8266-85de-810554a6df8b",
+      "note": "봉인 해제 이벤트",
+      "bytes": 636,
+      "sha256": "16edd0f2d8974a048dffd786c2f6e377ed212db90166af7f658d4d0f94b4f0b3"
+    },
+    {
+      "file": "unseal.png",
+      "source": "https://52g.oopy.io/badf800b-d1c1-8266-85de-810554a6df8b",
+      "note": "봉인 해제 이벤트",
+      "bytes": 47665,
+      "sha256": "1e60f4c412d94fb5658cdc323d186d89de0a9ed7b74e36ab361d836dc41a5a4a"
+    },
+    {
+      "file": "vote-login.dom.txt",
+      "source": "https://52g-hackathon.ralphthon.org/vote",
+      "note": "로그인으로 이동; 투표하지 않음",
+      "bytes": 942,
+      "sha256": "e92275c69e5d521fbbf14716332f1e87f56d6e39b4c83a0e42b4897a38873416"
+    },
+    {
+      "file": "vercel-guide.dom.txt",
+      "source": "https://gsholdings.notion.site/vercel-3e2f800bd1c1800cb3d9e5fc29aefeca",
+      "note": "행사 그룹 이메일·워크스페이스·프로젝트 연결",
+      "bytes": 3390,
+      "sha256": "1ccd6145ba52a436c3530c545561a2f4e104b1f81bcdccc81efd6f6e80542326"
+    },
+    {
+      "file": "vercel-guide.png",
+      "source": "https://gsholdings.notion.site/vercel-3e2f800bd1c1800cb3d9e5fc29aefeca",
+      "note": "행사 그룹 이메일·워크스페이스·프로젝트 연결",
+      "bytes": 22387,
+      "sha256": "7c08aeb63cbcd82a85d3ade3845d8e678ab74cc796663133e9ee9e5a44c2cf9f"
+    }
+  ]
+}

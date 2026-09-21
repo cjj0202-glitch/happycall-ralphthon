@@ -1,0 +1,41 @@
+- main:
+  - link "GS 52g Ralphthon 홈":
+    - /url: /
+    - img "GS"
+    - img "52g"
+    - generic: RALPHTHON
+  - navigation "주요 메뉴":
+    - link "진행 방식":
+      - /url: /#process
+    - link "가이드":
+      - /url: /guide
+    - link "심사 기준":
+      - /url: /criteria
+    - link "로그 분석":
+      - /url: /howlong
+    - link "로그인":
+      - /url: /login?next=%2Fteam
+  - paragraph: JUDGING CRITERIA
+  - heading "심사 기준" [level=1]
+  - paragraph: 제출한 /goal과 Codex 세션 로그를 같은 기준으로 살펴봅니다. AI가 근거를 정리하고, 심사위원이 제출물과 데모를 확인합니다.
+  - region "네 가지 심사 기준":
+    - article:
+      - generic: "01"
+      - heading "에이전트 활용 기록" [level=2]
+      - paragraph: 실행 시간, 실행 수, 토큰 사용량과 API 사용 규모를 세션 로그로 확인합니다.
+    - article:
+      - generic: "02"
+      - heading "/goal 기본 구성" [level=2]
+      - paragraph: 목표, 완료 상태, 완료 확인 기준과 제약이 들어 있는지 봅니다.
+    - article:
+      - generic: "03"
+      - heading "결과 중심 위임 설계" [level=2]
+      - paragraph: 사용자가 얻을 결과와 에이전트가 스스로 판단할 범위가 분명한지 봅니다.
+    - article:
+      - generic: "04"
+      - heading "완료와 검증 설계" [level=2]
+      - paragraph: 실행, 결과 확인, 실패 수정, 검증 범위와 종료 조건이 구체적인지 봅니다.
+  - complementary "심사 안내": 추가 지시 횟수 자체를 감점하지 않습니다. 목표 전달과 실제 결과, 검증 근거를 함께 봅니다.
+  - generic: GS / 52g / TEAM ATTENTION
+  - link "참가자 가이드로":
+    - /url: /guide

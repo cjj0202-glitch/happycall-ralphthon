@@ -1,0 +1,21 @@
+{
+  "task_id": "O01",
+  "spec_hash": "a9e1fb766e823be8d8941bb442295f81b10a739670dc5f0e4b93d545c0b88bd9",
+  "measured_at": "2026-09-21T06:19:13.606061+00:00",
+  "observer": "pc1/CJJ",
+  "checks": {
+    "C1": {
+      "expected": "공개 홈·가이드·채점·로그 기준과 공식 다운로드를 대조하고 출처·캡처 보존",
+      "observed": "공개 안내의 전체 DOM·11개 PNG·공식 MD/PDF 25개 파일을 확보하고 25개 해시를 대조했습니다. 비공개 팀 페이지는 미확인으로 분리했습니다.",
+      "passed": true
+    },
+    "C2": {
+      "expected": "9/22 12시·5분/3분·5페이지·100점 구성·로그 한도를 설계와 TODO에 반영",
+      "observed": "docs/03,05,06,07,09~12 및 38개 작업에 12시 마감·5/3분·5페이지·20/20/30/30·두 로그 한도를 반영했습니다.",
+      "passed": true
+    }
+  },
+  "artifacts": [
+    "reports/official-review.md"
+  ]
+}

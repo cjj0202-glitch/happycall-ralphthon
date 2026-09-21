@@ -1,0 +1,174 @@
+- main:
+  - link "GS 52g Ralphthon 홈":
+    - /url: /
+    - img "GS"
+    - img "52g"
+    - generic: RALPHTHON
+  - navigation "주요 메뉴":
+    - link "진행 방식":
+      - /url: /#process
+    - link "가이드":
+      - /url: /guide
+    - link "심사 기준":
+      - /url: /criteria
+    - link "로그 분석":
+      - /url: /howlong
+    - link "로그인":
+      - /url: /login?next=%2Fteam
+  - paragraph: GS 개발자 리그 · 참가자 가이드
+  - heading "GPT-6 Astra 큰 작업을 끝까지 맡기는 법" [level=1]:
+    - text: GPT-6 Astra
+    - text: 큰 작업을 끝까지 맡기는 법
+  - paragraph: 큰 작업을 맡길 때는 목표와 완료 기준을 구체적으로 전달하세요. 필요한 자료와 작업 범위를 주고 구현·실행·검증·수정까지 요청하세요. 한 번의 입력이 성공을 보장하지는 않습니다.
+  - link "가이드 PDF":
+    - /url: /guides/gs-astra-guide.pdf
+  - link "편집용 원본 받기 ↓":
+    - /url: /guides/gs-astra-guide.md
+  - region "팀의 문제와 기준을 바꿔 붙여 넣으세요":
+    - paragraph: 바로 쓰는 Handoff
+    - heading "팀의 문제와 기준을 바꿔 붙여 넣으세요" [level=2]
+    - button "예시 복사"
+    - status: 재고 부족 확인 업무를 예로 든 문안입니다. 필요한 자료를 먼저 준비하세요.
+    - generic "복사할 Handoff 예시": "/goal 목표: 재고 부족 품목을 매일 수작업으로 확인하는 시간을 줄이는 웹 도구를 완성해 줘. 합성 데이터로 시연할 대표작 하나에 집중해. 맥락·자료: 첨부한 업무 흐름 설명과 공개 문서를 먼저 읽어. 실제 업무 데이터는 사용하지 마. 자료가 부족하면 가상의 품목·재고·기준 수량 20건을 만들고 가정을 밝혀. 결과물: 실행 가능한 코드, 합성 샘플 데이터, 실행 방법과 한계가 적힌 README, 시연 화면을 만들어. 완료 기준: 재고가 기준 수량보다 적은 품목을 정확히 표시해야 해. 정상·빈 입력·잘못된 숫자를 직접 확인하고, PC와 모바일에서 핵심 동작을 검증해. 실행 명령과 실제 결과를 남겨. 허용 범위: 내가 지정한 프로젝트의 코드·문서 수정, 합성 데이터 생성, 실행·검증·오류 수정은 진행해. 기존 작업은 보존해. 실제 시스템 연결, 유료 결제, 외부 공개·전송, 기존 데이터 삭제는 먼저 물어봐. 진행 방식: 짧게 계획한 뒤 구현 → 실행 → 검증 → 수정을 이어가. 사소한 선택은 합리적으로 판단하고 가정을 기록해. 계획이나 초안에서 끝내지 말고 완료 기준을 충족할 때까지 진행해. 막히면 시도한 일과 필요한 결정만 물어봐. 결과 보고: 완성한 것, 실행·검증 결과, 남은 한계, 결과물 위치를 간단히 알려 줘. 실제 에이전트 세션 로그를 제출용으로 보존하고, 수행하지 않은 검증을 완료했다고 쓰지 마."
+  - region "끝났다고 하면, 이 네 가지를 확인하세요":
+    - heading "끝났다고 하면, 이 네 가지를 확인하세요" [level=2]
+    - list:
+      - generic: □
+      - text: 핵심 기능을 직접 실행했다
+      - generic: □
+      - text: 완료 기준의 성공·실패를 확인했다
+      - generic: □
+      - text: 결과물과 실행 방법을 남겼다
+      - generic: □
+      - text: 실제로 쓴 지시와 세션 로그를 보존했다
+    - paragraph: 기준을 충족했으면 결과를 직접 열어 보고 마무리하세요. 실패한 항목은 같은 작업에서 수정하도록 요청하세요.
+  - complementary "시작 설정과 제출 안내":
+    - paragraph: 공식 안내
+    - heading "모델과 강도를 고르세요" [level=2]
+    - paragraph:
+      - text: GPT-6 Astra는 모델입니다. 기본 추론 강도로 시작하고 필요할 때 높이세요. Max는 한 작업을 더 오래 추론하는 설정입니다. Ultra는 독립적으로 나눌 수 있는 작업에 여러 에이전트의 병렬 처리를 활용합니다.
+      - link "출처 ↗":
+        - /url: https://learn.chatgpt.com/docs/models
+    - heading "Goal로 시작하세요" [level=2]
+    - paragraph:
+      - text: 지원되는 데스크톱 앱·Codex CLI·IDE에서 /goal을 입력하고 목표를 전달하세요. 설정된 권한과 승인 절차를 따르며, 사람의 결정이 필요하면 멈춥니다.
+      - link "출처 ↗":
+        - /url: https://learn.chatgpt.com/docs/long-running-work
+    - paragraph: 높은 강도는 시간과 토큰을 더 씁니다. 선택지는 계정·앱·배포 단계에 따라 다를 수 있으니 모델 선택기에서 확인하세요.
+    - paragraph: GS에서 적용하기
+    - heading "대표작과 실행 근거를 남기세요" [level=2]
+    - list:
+      - listitem: 실제 현업 문제를 고르고 합성·샘플 데이터로 작동을 시연하세요.
+      - listitem: Codex에서 실제 사용한 /goal 원문 전체를 홈페이지 /goal 입력란에 붙여 넣으세요.
+      - listitem: /goal 입력과 결과가 담긴 주요 세션 JSONL 1개를 제출하세요. 나머지 JSONL은 ZIP 1개로 묶어 추가할 수 있습니다. 로그의 비밀정보를 점검하고 공개 링크에 올리지 마세요.
+      - listitem: 최종 설명, 데모 링크, 데모 영상, GitHub 저장소와 발표자료를 제출하세요. 발표자료는 최대 5페이지로 제출해 주세요.
+    - paragraph: 문제와 아이디어, /goal, Codex 세션 로그, 최종 결과물의 네 항목을 제출합니다. 한 번 제출한 뒤에도 9월 22일 낮 12시까지 계속 수정할 수 있습니다.
+  - heading "이틀의 일정" [level=2]
+  - paragraph: 9월 21일–22일 · 한국 시간
+  - heading "9.21 월요일" [level=3]
+  - term: 13:00
+  - definition: 개회식 현장 중계
+  - term: 14:10
+  - definition: 개발자 리그 오프닝
+  - term: 15:00
+  - definition: Vercel 세션
+  - term: 15:30
+  - definition: 문제와 스펙 정리
+  - term: 17:30
+  - definition: 첫 Ralph 실행 · 코칭과 가재존
+  - term: 18:00
+  - definition: 저녁 식사
+  - term: 19:00
+  - definition: Codex Ambassador 세션
+  - term: 19:30
+  - definition: 패널토크
+  - term: 20:00
+  - definition: 네트워킹 · Codex 활용 팁
+  - term: 21:00
+  - definition: 야식과 클로징
+  - heading "9.22 화요일" [level=3]
+  - term: 09:00
+  - definition: 체크인과 아침 간식
+  - term: 10:00
+  - definition: 봉인 해제 · 최종 제출 준비
+  - term: 12:00
+  - definition: 제출 마감 · 점심 · 1차 심사
+  - term: 13:00
+  - definition: 현업 AI 활용 패널토크
+  - term: 13:30
+  - definition: 결선 4팀 안내
+  - term: 14:00
+  - definition: 결선 발표와 질의응답
+  - term: 15:00
+  - definition: 참가자 투표와 심사
+  - term: 15:30
+  - definition: 시상과 마무리
+  - term: 16:00
+  - definition: 폐회식
+  - heading "제출할 것" [level=2]
+  - paragraph: 내 팀의 대표가 저장·제출합니다. 팀원은 같은 내용을 확인할 수 있습니다.
+  - paragraph: 권장 제출 시각 · 한국 시간
+  - strong: 문제와 아이디어
+  - generic: 9/21 17:30
+  - paragraph: 현업 문제, 만들 것과 성공 기준
+  - strong: /goal
+  - generic: 9/21 17:30
+  - paragraph: Codex에서 사용한 /goal 원문 전체
+  - strong: Codex 세션 로그
+  - generic: 9/22 10:00
+  - paragraph: 실제로 사용한 Codex JSONL 세션 로그. 파일당 1GiB, 팀 합계 10GiB까지 올릴 수 있습니다.
+  - strong: 최종 결과물
+  - generic: 9/22 12:00
+  - paragraph: 최종 설명 · 데모 링크 · 데모 영상 링크 · GitHub 저장소 · 발표자료(PDF/PPT/PPTX, 90MiB). 발표자료는 최대 5페이지로 제출해 주세요.
+  - paragraph: 한 번 제출한 뒤에도 9월 22일 낮 12시까지 계속 수정할 수 있습니다. 이후 제출본을 고정해 심사합니다.
+  - paragraph: 실제 업무 데이터 대신 합성·샘플 데이터를 사용하세요. 팀당 대표작 하나를 제출합니다.
+  - link "제출 전, 내 브라우저에서 세션 로그 분석하기 →":
+    - /url: /howlong
+  - heading "심사와 참가자 투표" [level=2]
+  - paragraph: 전 팀 1차 평가 → 상위 15팀 근거·데모 검증 → 결선 4팀 선정
+  - heading "1차 심사 · 100점" [level=3]
+  - definition: 에이전트 활용 기록
+  - term: 20점
+  - definition: /goal 기본 구성
+  - term: 20점
+  - definition: 결과 중심 위임 설계
+  - term: 30점
+  - definition: 완료와 검증 설계
+  - term: 30점
+  - paragraph: 자동 분석 근거와 제출 내용을 심사위원이 확인해 점수를 확정합니다.
+  - heading "결선 · 100점" [level=3]
+  - definition: 검증된 1차 심사 원점수 × 0.5
+  - term: 50점
+  - definition: 발표와 질의응답
+  - term: 25점
+  - definition: 참가자 투표
+  - term: 25점
+  - paragraph: 결선 발표 5분, 질의응답 3분. 발표 자료의 화려함과 말솜씨는 별도 점수로 평가하지 않습니다.
+  - paragraph: "투표 질문: 우리 업무에서도 실제로 써보고 싶은 결과물은 무엇입니까? 참가자 한 명당 다른 한 팀에 투표하며, 확정한 표는 바꿀 수 없습니다. 투표 점수는 득표수 ÷ 최다 득표수 × 25로 계산합니다."
+  - paragraph: 검증을 통과한 상위 10팀에는 팀당 OpenAI API Credit 1,000달러를 제공합니다. 최종 1·2위는 심사위원이 확정하며, 동점은 근거를 함께 확인해 결정합니다.
+  - link "참가자 투표 →":
+    - /url: /vote
+  - region "공식 출처":
+    - heading "공식 출처" [level=2]
+    - paragraph: 확인일 2026-09-07
+    - paragraph: OpenAI 원문을 확인해 요약했습니다. 위 Handoff와 제출 체크리스트는 행사에 맞춘 적용 예시입니다.
+    - list:
+      - link "Astra 프롬프팅 가이드 ↗":
+        - /url: https://developers.openai.com/api/docs/guides/latest-model
+      - generic: 작업을 끝까지 이어가기, 질문의 경계, 필요한 검증
+      - link "모델·Max·Ultra 선택 ↗":
+        - /url: https://learn.chatgpt.com/docs/models
+      - generic: 기본 강도에서 시작, Max와 Ultra의 차이, 클라이언트별 가용성
+      - link "Goal과 장시간 작업 ↗":
+        - /url: https://learn.chatgpt.com/docs/long-running-work
+      - generic: 목표·제약·완료 기준, /goal 지원, 기존 권한 유지
+      - link "Astra로 게임을 만든 공식 사례 ↗":
+        - /url: https://developers.openai.com/blog/how-to-build-games-with-astra
+      - generic: 실제 조작·화면·상태 확인과 수정 후 재실행
+      - link "GPT-6 Astra 모델 명세 ↗":
+        - /url: https://developers.openai.com/api/docs/models/gpt-6-astra
+      - generic: 공개 모델 ID와 API reasoning.effort 지원 값
+    - paragraph: "미확인: “Codex Gold”라는 공식 제품명은 확인하지 못했습니다. 이 가이드에서는 확인된 Goal 기능을 별도로 안내합니다."
+  - generic: GS · 52g · TEAM ATTENTION
+  - link "행사 홈으로":
+    - /url: /

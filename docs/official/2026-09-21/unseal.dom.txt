@@ -1,0 +1,16 @@
+- img: 🔒
+- 'heading "6. 봉인 해제 & 최장 구동 인증 : 최장 구동 기록을 함께 인증하세요!" [level=1]'
+- heading "🔓 봉인 해제 & 최장 구동 인증" [level=3]:
+  - img "🔓"
+  - text: 봉인 해제 & 최장 구동 인증
+- generic: 밤새 달린 에이전트의 결과를 동시에 여는 시간이에요.
+- generic: •
+- generic: "일시 : 9/22(화) 10:00~11:00"
+- generic: •
+- generic: 밤샘 결과 동시 오픈 + 최장 구동 기록 인증 이벤트
+- generic: •
+- text: 인증 포토타임에서 우리 에이전트의 기록을 남기세요
+- img "📸"
+- button "TOP":
+  - text: TOP
+- alert

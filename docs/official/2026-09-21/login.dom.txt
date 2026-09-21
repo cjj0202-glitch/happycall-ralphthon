@@ -1,0 +1,27 @@
+- main:
+  - link "GS 52g Ralphthon 홈":
+    - /url: /
+    - img "GS"
+    - img "52g"
+    - generic: RALPHTHON
+  - navigation "주요 메뉴":
+    - link "진행 방식":
+      - /url: /#process
+    - link "가이드":
+      - /url: /guide
+    - link "심사 기준":
+      - /url: /criteria
+    - link "로그 분석":
+      - /url: /howlong
+    - link "로그인":
+      - /url: /login?next=%2Fteam
+  - generic: GS RALPHTHON
+  - heading "로그인" [level=1]
+  - paragraph: 참가자와 운영진 모두 회사 이메일과 비밀번호로 들어갑니다.
+  - text: 회사 이메일
+  - textbox "회사 이메일":
+    - /placeholder: name@company.com
+  - text: 비밀번호
+  - textbox "비밀번호"
+  - button "로그인"
+  - paragraph: 처음 로그인하는 경우 초기 비밀번호는 휴대폰 번호 뒤 4자리입니다. 로그인 후 새 비밀번호를 설정합니다. 이후에는 새 비밀번호로 로그인해 주세요.

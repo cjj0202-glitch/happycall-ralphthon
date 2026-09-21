@@ -93,7 +93,11 @@ def verify_evidence(root, task, filename):
         artifact = local_file(root, name)
         if not artifact.is_file() or artifact.stat().st_size == 0:
             raise ValueError(f"산출물이 없거나 비었습니다: {name}")
-        hashes[name] = hashlib.sha256(artifact.read_bytes()).hexdigest()
+        content = artifact.read_bytes()
+        # Git can normalize Windows CRLF during checkout. Hash text canonically.
+        if artifact.suffix.lower() in {".md", ".txt", ".json", ".py", ".ts", ".tsx", ".yaml", ".yml"}:
+            content = content.replace(b"\r\n", b"\n")
+        hashes[name] = hashlib.sha256(content).hexdigest()
     return hashes
 
 
@@ -109,18 +113,18 @@ def transition(plan, task_id, action, root, evidence=None, reason=None):
     if task is None:
         raise ValueError("작업 ID가 없습니다")
     before = task["state"]
-    target = {"start": "DOING", "review": "REVIEW", "accept": "DONE", "block": "BLOCKED", "resume": "TODO", "reject": "TODO"}[action]
-    allowed = {"start": {"TODO"}, "review": {"DOING"}, "accept": {"REVIEW"}, "block": {"DOING", "REVIEW"}, "resume": {"BLOCKED"}, "reject": {"REVIEW"}}
+    target = {"start": "DOING", "review": "REVIEW", "accept": "DONE", "reverify": "DONE", "block": "BLOCKED", "resume": "TODO", "reject": "TODO"}[action]
+    allowed = {"start": {"TODO"}, "review": {"DOING"}, "accept": {"REVIEW"}, "reverify": {"DONE"}, "block": {"DOING", "REVIEW"}, "resume": {"BLOCKED"}, "reject": {"REVIEW"}}
     if before not in allowed[action]:
         raise ValueError(f"{before}에서 {action}할 수 없습니다")
-    if action in {"block", "resume", "reject"} and not reason:
+    if action in {"block", "resume", "reject", "reverify"} and not reason:
         raise ValueError("상태 변경 사유가 필요합니다")
     if action == "start":
         slot = read(root / "channel/pcs.json")["slots"][task["owner"]]
         if not slot.get("hostname") or not slot.get("github") or slot.get("role") == "미정":
             raise ValueError("담당 PC의 hostname·GitHub·역할 등록이 필요합니다")
-    hashes = verify_evidence(root, task, evidence) if action == "accept" and evidence else None
-    if action == "accept" and hashes is None:
+    hashes = verify_evidence(root, task, evidence) if action in {"accept", "reverify"} and evidence else None
+    if action in {"accept", "reverify"} and hashes is None:
         raise ValueError("완료에는 --evidence 파일이 필요합니다")
     # Validate the proposed state before committing any mutation.
     proposed = json.loads(json.dumps(plan))
@@ -131,6 +135,8 @@ def transition(plan, task_id, action, root, evidence=None, reason=None):
         changed["artifact_hashes"] = hashes
         changed["reviewer"] = "pc1"
     changed.setdefault("history", []).append({"at": stamp(), "from": before, "to": target, "reason": reason or action})
+    if action == "reverify":
+        changed["history"][-1]["previous_artifact_hashes"] = task.get("artifact_hashes", {})
     validate(proposed)
     return proposed
 
@@ -174,7 +180,7 @@ def lock(root):
 
 def run():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=["status", "next", "show", "template", "check", "render", "start", "review", "accept", "block", "resume", "reject"])
+    parser.add_argument("command", choices=["status", "next", "show", "template", "check", "render", "start", "review", "accept", "reverify", "block", "resume", "reject"])
     parser.add_argument("task", nargs="?")
     parser.add_argument("--pc", choices=["pc1", "pc2", "pc3", "pc4"])
     parser.add_argument("--evidence")

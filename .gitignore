@@ -34,3 +34,6 @@ desktop.ini
 ops/.tasks.lock
 ops/*.tmp
 TODO.md.tmp
+# Raw session logs are only for local review and the official submission portal.
+*.jsonl
+submission-private/
