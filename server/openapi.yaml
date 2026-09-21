@@ -12,14 +12,14 @@ paths:
     get:
       operationId: server.handlers.list_cases
       responses:
-        '200': {description: Synthetic cases. Each case includes a nonnegative integer revision.}
+        '200': {description: Synthetic cases. Each case includes a nonnegative integer revision and may include server-owned notificationOutbox intents. Intents with status not_connected have not been externally sent.}
   /api/cases/{case_id}:
     parameters:
       - {name: case_id, in: path, required: true, schema: {type: string}}
     get:
       operationId: server.handlers.get_case
       responses:
-        '200': {description: Synthetic case including a nonnegative integer revision. Legacy stored cases start at revision 0.}
+        '200': {description: Synthetic case including a nonnegative integer revision. Legacy stored cases start at revision 0 and may omit notificationOutbox. Stored notification intents are not delivery receipts.}
         '404': {description: Case not found}
     patch:
       operationId: server.handlers.patch_case
@@ -51,7 +51,7 @@ paths:
                 pendingActions: {type: array, items: {type: string}, maxItems: 50}
                 selectedEvidence: {type: array, items: {type: string}, maxItems: 50}
       responses:
-        '200': {description: Updated case}
+        '200': {description: Updated case. Workflow changes and optional server-owned notificationOutbox intents share the same committed revision. A successful save is not external notification delivery.}
         '400': {description: Invalid input}
         '403': {description: Demo role not allowed}
         '404': {description: Case not found}

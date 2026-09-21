@@ -37,7 +37,7 @@ SOURCE_FILES = (
     "server/__init__.py", "server/analysis_schema.py", "server/budget.py",
     "server/cas_budget.py", "server/cas_repository.py", "server/cas_store.py",
     "server/deployment_access.py", "server/deployment_app.py", "server/errors.py",
-    "server/media_contract.py",
+    "server/media_contract.py", "server/notifications.py",
     "server/handlers.py", "server/live.py", "server/repository.py",
     "server/intake_idempotency.py", "server/claim_grounding.py", "server/request_grounding.py",
     "server/runtime_config.py", "server/runtime_storage.py", "server/service.py",

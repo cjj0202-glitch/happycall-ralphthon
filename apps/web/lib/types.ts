@@ -14,6 +14,19 @@ export type Analysis = {
   replyDraft: string;
 };
 export type Evidence = { id: string; system: string; label: string; time?: string; value?: string | number; status?: 'fact' | 'unknown'; source?: string };
+export type NotificationIntent = {
+  schemaVersion: 1;
+  id: string;
+  caseId: string;
+  caseRevision: number;
+  kind: 'handoff' | 'interim_reply' | 'final_reply';
+  channel: 'teams' | 'kakao';
+  recipientRole: 'center' | 'counselor' | 'owner';
+  recipientRef: string | null;
+  createdAt: string;
+  status: 'not_connected';
+  reason: 'delivery_not_configured' | 'missing_recipient';
+};
 export type CaseData = {
   id: string; type: 'missing' | 'wrong'; title: string;
   revision?: number;
@@ -21,6 +34,7 @@ export type CaseData = {
   sourceText: string; audioUrl?: string; transcript?: Transcript[]; asOf?: string;
   status?: CaseStatus; analysis?: Analysis; intake?: Intake; departmentId?: string;
   reviewConfirmed?: boolean; reply?: string; pendingActions?: string[]; selectedEvidence?: string[];
+  notificationOutbox?: NotificationIntent[];
   expected?: { product?: string; quantity?: number; unit?: string };
   received?: { product?: string; quantity?: number; unit?: string };
   wms?: Record<string, unknown>; tms?: Record<string, unknown>; evidence?: Evidence[];

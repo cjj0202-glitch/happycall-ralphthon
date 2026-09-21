@@ -9,6 +9,7 @@ from server.errors import DemoError
 from server.live import LiveAnalyzer
 from server.repository import CaseRepository
 from server import intake_idempotency
+from server import notifications
 
 DEFAULT_DEPARTMENTS = [
     {"id": "delivery", "name": "배송 운영"},
@@ -156,7 +157,9 @@ class CaseService:
             # The repository invokes this transform inside its read-modify-write lock.
             if case["revision"] != expected_revision:
                 raise DemoError("STATE_CONFLICT", "다른 작업자가 접수를 수정했습니다. 최신 내용을 다시 확인해 주세요.", 409)
+            notifications.validate_stored_notification_outbox(case)
             old_status = case.get("status", "draft")
+            old_reply = case.get("reply")
             target = body.get("status", old_status)
             if target not in TRANSITIONS.get(old_status, set()):
                 raise DemoError("INVALID_TRANSITION", "허용되지 않은 상태 전이입니다.", 409)
@@ -214,6 +217,8 @@ class CaseService:
                 fields = case.get("intake", {})
                 if not nonempty(fields.get("storeId")) or not nonempty(fields.get("subject")) or not nonempty(case.get("departmentId")):
                     raise DemoError("HANDOFF_FIELDS_REQUIRED", "점포·문의 대상·담당 부서를 확인해 주세요. 미확인 수량은 질문으로 남길 수 있습니다.", 422)
+                if case["departmentId"] not in {d["id"] for d in self.departments()}:
+                    raise DemoError("INVALID_DEPARTMENT", "등록된 담당 부서를 선택해 주세요.", 422)
                 self._validate_source_context(case)
                 if case.get("reviewConfirmed") is not True:
                     raise DemoError("REVIEW_REQUIRED", "상담사가 접수 대상과 담당 부서를 확인한 뒤 이관할 수 있습니다.", 422)
@@ -226,5 +231,7 @@ class CaseService:
             case["updatedAt"] = now()
             case.setdefault("history", []).append({"at": now(), "actor": role, "action": target,
                 "message": "센터 회신 등록" if "reply" in body else "접수 상태 저장"})
+            notifications.append_notification_intents(case, previous_status=old_status,
+                previous_reply=old_reply, created_at=case["updatedAt"])
             return case
         return self.repo.update(case_id, mutate)
