@@ -1,0 +1,168 @@
+{
+  "startedAt": "2026-09-21T15:32:46.756478+00:00",
+  "completedAt": "2026-09-21T15:32:51.751935+00:00",
+  "sourceSha256": "577031deb93695eb375c8c49db7cb96eb3588bfc0a346d78469021827233c6a5",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "run": "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\.local\\clova-v5-intake\\final-bolt-b5af0b1cb9",
+  "origin": "artificial",
+  "results": [
+    {
+      "name": "positive",
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "scripts/media_pc2/validate_clova_timeline.py",
+        "--script",
+        "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\.local\\clova-v5-intake\\final-bolt-b5af0b1cb9\\inputs\\fixed-script.json",
+        "--case-0001-wav",
+        "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\.local\\clova-v5-intake\\final-bolt-b5af0b1cb9\\inputs\\CASE-0001.wav",
+        "--case-0002-wav",
+        "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\.local\\clova-v5-intake\\final-bolt-b5af0b1cb9\\inputs\\CASE-0002.wav",
+        "--expected",
+        "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\.local\\clova-v5-intake\\final-bolt-b5af0b1cb9\\inputs\\expected.json",
+        "--observations",
+        "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\.local\\clova-v5-intake\\final-bolt-b5af0b1cb9\\inputs\\observations.json",
+        "--output",
+        "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\.local\\clova-v5-intake\\final-bolt-b5af0b1cb9\\positive-result"
+      ],
+      "returncode": 0,
+      "stdout": "{\"status\": \"PASS\", \"candidate\": true, \"accepted\": false, \"origin\": \"artificial\", \"errors\": [], \"unresolved\": []}\n",
+      "stderr": "",
+      "status": "PASS",
+      "errors": [],
+      "candidate": true,
+      "accepted": false,
+      "checks": {
+        "rawWavUnchanged": 2,
+        "scriptAlignedTurns": 20,
+        "derivedIntervals": 20
+      },
+      "officialAudio": {
+        "status": "NOT_RUN",
+        "verified": 0,
+        "total": 2
+      },
+      "officialTimeline": {
+        "status": "NOT_RUN",
+        "verified": 0,
+        "total": 20
+      },
+      "inputHashes": {
+        "script": {
+          "bytes": 25175,
+          "sha256": "47ae253daf158335e92fa136f3e9ba8b3af118fb278b66fcf137e91c3242ade6",
+          "afterSha256": "47ae253daf158335e92fa136f3e9ba8b3af118fb278b66fcf137e91c3242ade6",
+          "unchanged": true
+        },
+        "expected": {
+          "bytes": 804,
+          "sha256": "fb7b784b8df52993ee7788b8b28d1b29aa8103664ac59169e4931c1acb4c87f0",
+          "afterSha256": "fb7b784b8df52993ee7788b8b28d1b29aa8103664ac59169e4931c1acb4c87f0",
+          "unchanged": true
+        },
+        "observations": {
+          "bytes": 10406,
+          "sha256": "89b18749c17fb6610143696708f4b092df413b6fa4659d65f45d53bf79b7912e",
+          "afterSha256": "89b18749c17fb6610143696708f4b092df413b6fa4659d65f45d53bf79b7912e",
+          "unchanged": true
+        },
+        "CASE-0001": {
+          "bytes": 16044,
+          "sha256": "e960aed9f811ccff67d49e06bb908f92053394bcf2f05a09e51b29c74e904612",
+          "afterSha256": "e960aed9f811ccff67d49e06bb908f92053394bcf2f05a09e51b29c74e904612",
+          "unchanged": true
+        },
+        "CASE-0002": {
+          "bytes": 17644,
+          "sha256": "1a052bfe59a2a8d8f6132235106efcb2b5c37c42b6b6393a011282013cadbbec",
+          "afterSha256": "1a052bfe59a2a8d8f6132235106efcb2b5c37c42b6b6393a011282013cadbbec",
+          "unchanged": true
+        }
+      },
+      "outputFiles": [
+        "fixture-candidate.json",
+        "timeline-candidate.json",
+        "validation.json"
+      ]
+    },
+    {
+      "name": "wrong-gap",
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "scripts/media_pc2/validate_clova_timeline.py",
+        "--script",
+        "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\.local\\clova-v5-intake\\final-bolt-b5af0b1cb9\\inputs\\fixed-script.json",
+        "--case-0001-wav",
+        "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\.local\\clova-v5-intake\\final-bolt-b5af0b1cb9\\inputs\\CASE-0001.wav",
+        "--case-0002-wav",
+        "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\.local\\clova-v5-intake\\final-bolt-b5af0b1cb9\\inputs\\CASE-0002.wav",
+        "--expected",
+        "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\.local\\clova-v5-intake\\final-bolt-b5af0b1cb9\\wrong-gap-expected.json",
+        "--observations",
+        "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\.local\\clova-v5-intake\\final-bolt-b5af0b1cb9\\wrong-gap-observations.json",
+        "--output",
+        "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\.local\\clova-v5-intake\\final-bolt-b5af0b1cb9\\wrong-gap-result"
+      ],
+      "returncode": 2,
+      "stdout": "{\"status\": \"REJECTED\", \"candidate\": false, \"accepted\": false, \"origin\": \"artificial\", \"errors\": [{\"code\": \"TIME_BOUNDS\", \"field\": \"F5-M01\", \"detail\": \"Require 0 <= start < derived end <= decoded EOF\"}], \"unresolved\": []}\n",
+      "stderr": "",
+      "status": "REJECTED",
+      "errors": [
+        {
+          "code": "TIME_BOUNDS",
+          "field": "F5-M01",
+          "detail": "Require 0 <= start < derived end <= decoded EOF"
+        }
+      ],
+      "candidate": false,
+      "accepted": false,
+      "checks": null,
+      "officialAudio": {
+        "status": "NOT_RUN",
+        "verified": 0,
+        "total": 2
+      },
+      "officialTimeline": {
+        "status": "NOT_RUN",
+        "verified": 0,
+        "total": 20
+      },
+      "inputHashes": {
+        "script": {
+          "bytes": 25175,
+          "sha256": "47ae253daf158335e92fa136f3e9ba8b3af118fb278b66fcf137e91c3242ade6",
+          "afterSha256": "47ae253daf158335e92fa136f3e9ba8b3af118fb278b66fcf137e91c3242ade6",
+          "unchanged": true
+        },
+        "expected": {
+          "bytes": 674,
+          "sha256": "b67e5aedb37e44b1e2b437f39d12009b4efb2dfabae8be03f59796f0e2e7290b",
+          "afterSha256": "b67e5aedb37e44b1e2b437f39d12009b4efb2dfabae8be03f59796f0e2e7290b",
+          "unchanged": true
+        },
+        "observations": {
+          "bytes": 8149,
+          "sha256": "18723c334ddd1d8323e622631b8d759498096c12a5a60d52ede125ccbd8a99c1",
+          "afterSha256": "18723c334ddd1d8323e622631b8d759498096c12a5a60d52ede125ccbd8a99c1",
+          "unchanged": true
+        },
+        "CASE-0001": {
+          "bytes": 16044,
+          "sha256": "e960aed9f811ccff67d49e06bb908f92053394bcf2f05a09e51b29c74e904612",
+          "afterSha256": "e960aed9f811ccff67d49e06bb908f92053394bcf2f05a09e51b29c74e904612",
+          "unchanged": true
+        },
+        "CASE-0002": {
+          "bytes": 17644,
+          "sha256": "1a052bfe59a2a8d8f6132235106efcb2b5c37c42b6b6393a011282013cadbbec",
+          "afterSha256": "1a052bfe59a2a8d8f6132235106efcb2b5c37c42b6b6393a011282013cadbbec",
+          "unchanged": true
+        }
+      },
+      "outputFiles": [
+        "validation.json"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "startedAt": "2026-09-22T00:32:12.155426+09:00",
+  "cwd": "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon",
+  "command": [
+    "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/media_pc2",
+    "-p",
+    "test_clova_timeline.py",
+    "-v"
+  ],
+  "sourceBefore": {
+    "scripts/media_pc2/validate_clova_timeline.py": {
+      "bytes": 25361,
+      "sha256": "577031deb93695eb375c8c49db7cb96eb3588bfc0a346d78469021827233c6a5"
+    },
+    "tests/media_pc2/test_clova_timeline.py": {
+      "bytes": 32384,
+      "sha256": "4939c444589ff5d048311abe3209a1c0b80eb270c9f804db1f92b5b34c8a24ba"
+    }
+  },
+  "networkCalls": 0,
+  "officialAudio": "NOT_RUN 0/2",
+  "officialTimeline": "NOT_RUN 0/20"
+}
+
+test_case_mapping_does_not_infer_from_filename (test_clova_timeline.ClovaTimelineTests.test_case_mapping_does_not_infer_from_filename) ... ok
+test_case_order_swap_rejected (test_clova_timeline.ClovaTimelineTests.test_case_order_swap_rejected) ... ok
+test_decimal_zero_length_gap_rejected (test_clova_timeline.ClovaTimelineTests.test_decimal_zero_length_gap_rejected) ... ok
+test_deep_json_is_rejected_with_safe_validation_report (test_clova_timeline.ClovaTimelineTests.test_deep_json_is_rejected_with_safe_validation_report) ... ok
+test_display_text_cannot_replace_editor_spoken_input (test_clova_timeline.ClovaTimelineTests.test_display_text_cannot_replace_editor_spoken_input) ... ok
+test_display_text_mismatch_rejected (test_clova_timeline.ClovaTimelineTests.test_display_text_mismatch_rejected) ... ok
+test_duplicate_case_rejected (test_clova_timeline.ClovaTimelineTests.test_duplicate_case_rejected) ... ok
+test_duplicate_expected_case_mapping_rejected (test_clova_timeline.ClovaTimelineTests.test_duplicate_expected_case_mapping_rejected) ... ok
+test_duplicate_surrogate_json_key_has_serializable_rejection (test_clova_timeline.ClovaTimelineTests.test_duplicate_surrogate_json_key_has_serializable_rejection) ... ok
+test_duplicate_turn_id_rejected (test_clova_timeline.ClovaTimelineTests.test_duplicate_turn_id_rejected) ... ok
+test_eleven_turns_rejected (test_clova_timeline.ClovaTimelineTests.test_eleven_turns_rejected) ... ok
+test_empty_observation_source_rejected_even_when_descriptor_agrees (test_clova_timeline.ClovaTimelineTests.test_empty_observation_source_rejected_even_when_descriptor_agrees) ... ok
+test_empty_observation_time_rejected_even_when_descriptor_agrees (test_clova_timeline.ClovaTimelineTests.test_empty_observation_time_rejected_even_when_descriptor_agrees) ... ok
+test_equal_starts_rejected (test_clova_timeline.ClovaTimelineTests.test_equal_starts_rejected) ... ok
+test_existing_output_directory_is_never_overwritten (test_clova_timeline.ClovaTimelineTests.test_existing_output_directory_is_never_overwritten) ... ok
+test_existing_output_file_is_never_overwritten (test_clova_timeline.ClovaTimelineTests.test_existing_output_file_is_never_overwritten) ... ok
+test_expected_bytes_boolean_is_not_integer_measurement (test_clova_timeline.ClovaTimelineTests.test_expected_bytes_boolean_is_not_integer_measurement) ... ok
+test_fixed_script_bytes_cannot_be_reapproved_by_descriptor (test_clova_timeline.ClovaTimelineTests.test_fixed_script_bytes_cannot_be_reapproved_by_descriptor) ... ok
+test_frame_alignment_rejected (test_clova_timeline.ClovaTimelineTests.test_frame_alignment_rejected) ... ok
+test_gap_negative_end_rejected (test_clova_timeline.ClovaTimelineTests.test_gap_negative_end_rejected) ... ok
+test_gap_zero_length_rejected (test_clova_timeline.ClovaTimelineTests.test_gap_zero_length_rejected) ... ok
+test_hardlinked_input_rejected_and_original_preserved (test_clova_timeline.ClovaTimelineTests.test_hardlinked_input_rejected_and_original_preserved) ... ok
+test_inconsistent_riff_size_rejected (test_clova_timeline.ClovaTimelineTests.test_inconsistent_riff_size_rejected) ... ok
+test_input_parent_traversal_is_rejected (test_clova_timeline.ClovaTimelineTests.test_input_parent_traversal_is_rejected) ... ok
+test_invalid_officialGapAfterSeconds_bool (test_clova_timeline.ClovaTimelineTests.test_invalid_officialGapAfterSeconds_bool) ... ok
+test_invalid_officialGapAfterSeconds_infinity (test_clova_timeline.ClovaTimelineTests.test_invalid_officialGapAfterSeconds_infinity) ... ok
+test_invalid_officialGapAfterSeconds_nan (test_clova_timeline.ClovaTimelineTests.test_invalid_officialGapAfterSeconds_nan) ... ok
+test_invalid_officialGapAfterSeconds_negative (test_clova_timeline.ClovaTimelineTests.test_invalid_officialGapAfterSeconds_negative) ... ok
+test_invalid_officialGapAfterSeconds_null (test_clova_timeline.ClovaTimelineTests.test_invalid_officialGapAfterSeconds_null) ... ok
+test_invalid_officialGapAfterSeconds_string (test_clova_timeline.ClovaTimelineTests.test_invalid_officialGapAfterSeconds_string) ... ok
+test_invalid_startSeconds_bool (test_clova_timeline.ClovaTimelineTests.test_invalid_startSeconds_bool) ... ok
+test_invalid_startSeconds_infinity (test_clova_timeline.ClovaTimelineTests.test_invalid_startSeconds_infinity) ... ok
+test_invalid_startSeconds_nan (test_clova_timeline.ClovaTimelineTests.test_invalid_startSeconds_nan) ... ok
+test_invalid_startSeconds_negative (test_clova_timeline.ClovaTimelineTests.test_invalid_startSeconds_negative) ... ok
+test_invalid_startSeconds_null (test_clova_timeline.ClovaTimelineTests.test_invalid_startSeconds_null) ... ok
+test_invalid_startSeconds_string (test_clova_timeline.ClovaTimelineTests.test_invalid_startSeconds_string) ... ok
+test_last_null_requires_not_displayed_status (test_clova_timeline.ClovaTimelineTests.test_last_null_requires_not_displayed_status) ... ok
+test_last_observed_huge_gap_does_not_reduce_decoded_end (test_clova_timeline.ClovaTimelineTests.test_last_observed_huge_gap_does_not_reduce_decoded_end) ... ok
+test_last_start_at_eof_rejected (test_clova_timeline.ClovaTimelineTests.test_last_start_at_eof_rejected) ... ok
+test_lone_surrogate_source_rejected_with_matching_descriptor (test_clova_timeline.ClovaTimelineTests.test_lone_surrogate_source_rejected_with_matching_descriptor) ... ok
+test_middle_end_past_eof_rejected (test_clova_timeline.ClovaTimelineTests.test_middle_end_past_eof_rejected) ... ok
+test_middle_not_displayed_exception_rejected (test_clova_timeline.ClovaTimelineTests.test_middle_not_displayed_exception_rejected) ... ok
+test_middle_null_gap_cannot_borrow_script_pause (test_clova_timeline.ClovaTimelineTests.test_middle_null_gap_cannot_borrow_script_pause) ... ok
+test_missing_case_rejected (test_clova_timeline.ClovaTimelineTests.test_missing_case_rejected) ... ok
+test_missing_output_parent_rejected (test_clova_timeline.ClovaTimelineTests.test_missing_output_parent_rejected) ... ok
+test_missing_wav_mapping_is_rejected_with_report (test_clova_timeline.ClovaTimelineTests.test_missing_wav_mapping_is_rejected_with_report) ... ok
+test_mutation_removed_expected_sha_guard_is_detected (test_clova_timeline.ClovaTimelineTests.test_mutation_removed_expected_sha_guard_is_detected) ... ok
+test_nine_turns_rejected (test_clova_timeline.ClovaTimelineTests.test_nine_turns_rejected) ... ok
+test_non_riff_header_rejected (test_clova_timeline.ClovaTimelineTests.test_non_riff_header_rejected) ... ok
+test_normal_real_pcm_two_cases_and_originals_preserved (test_clova_timeline.ClovaTimelineTests.test_normal_real_pcm_two_cases_and_originals_preserved) ... ok
+test_not_displayed_last_gap_must_remain_null (test_clova_timeline.ClovaTimelineTests.test_not_displayed_last_gap_must_remain_null) ... ok
+test_observation_origin_mismatch_rejected (test_clova_timeline.ClovaTimelineTests.test_observation_origin_mismatch_rejected) ... ok
+test_observation_source_mismatch_rejected (test_clova_timeline.ClovaTimelineTests.test_observation_source_mismatch_rejected) ... ok
+test_observation_time_mismatch_rejected (test_clova_timeline.ClovaTimelineTests.test_observation_time_mismatch_rejected) ... ok
+test_observed_zero_gap_is_valid (test_clova_timeline.ClovaTimelineTests.test_observed_zero_gap_is_valid) ... ok
+test_output_input_collision_rejected (test_clova_timeline.ClovaTimelineTests.test_output_input_collision_rejected) ... ok
+test_output_outside_intake_rejected (test_clova_timeline.ClovaTimelineTests.test_output_outside_intake_rejected) ... ok
+test_pcm24_is_unsupported_without_conversion (test_clova_timeline.ClovaTimelineTests.test_pcm24_is_unsupported_without_conversion) ... ok
+test_pcm8_is_unsupported_without_conversion (test_clova_timeline.ClovaTimelineTests.test_pcm8_is_unsupported_without_conversion) ... ok
+test_prepare_artificial_helper_never_reuses_run (test_clova_timeline.ClovaTimelineTests.test_prepare_artificial_helper_never_reuses_run) ... ok
+test_prepare_artificial_helper_produces_usable_not_run_inputs (test_clova_timeline.ClovaTimelineTests.test_prepare_artificial_helper_produces_usable_not_run_inputs) ... ok
+test_real_input_bytes_change_during_decode_is_rejected (test_clova_timeline.ClovaTimelineTests.test_real_input_bytes_change_during_decode_is_rejected) ... ok
+test_real_input_identity_replacement_with_same_bytes_is_rejected (test_clova_timeline.ClovaTimelineTests.test_real_input_identity_replacement_with_same_bytes_is_rejected) ... ok
+test_reverse_starts_rejected (test_clova_timeline.ClovaTimelineTests.test_reverse_starts_rejected) ... ok
+test_simulated_ctime_only_change_is_rejected (test_clova_timeline.ClovaTimelineTests.test_simulated_ctime_only_change_is_rejected) ... ok
+test_simulated_junction_attribute_is_rejected (test_clova_timeline.ClovaTimelineTests.test_simulated_junction_attribute_is_rejected) ... ok
+test_speaker_mismatch_not_automatically_corrected (test_clova_timeline.ClovaTimelineTests.test_speaker_mismatch_not_automatically_corrected) ... ok
+test_spoken_text_mismatch_rejected (test_clova_timeline.ClovaTimelineTests.test_spoken_text_mismatch_rejected) ... ok
+test_start_past_eof_rejected (test_clova_timeline.ClovaTimelineTests.test_start_past_eof_rejected) ... ok
+test_stereo_pcm16_is_measured_without_mono_conversion (test_clova_timeline.ClovaTimelineTests.test_stereo_pcm16_is_measured_without_mono_conversion) ... ok
+test_symlink_input_rejected_if_os_allows_creation (test_clova_timeline.ClovaTimelineTests.test_symlink_input_rejected_if_os_allows_creation) ... skipped 'Windows denied symlink creation; no security changes attempted'
+test_truncated_data_rejected (test_clova_timeline.ClovaTimelineTests.test_truncated_data_rejected) ... ok
+test_turn_order_swapped_rejected (test_clova_timeline.ClovaTimelineTests.test_turn_order_swapped_rejected) ... ok
+test_unobserved_last_and_missing_middle_source_distinguished (test_clova_timeline.ClovaTimelineTests.test_unobserved_last_and_missing_middle_source_distinguished) ... ok
+test_windows_output_rename_during_write_is_blocked (test_clova_timeline.ClovaTimelineTests.test_windows_output_rename_during_write_is_blocked) ... ok
+test_wrong_expected_descriptor_schema_rejected (test_clova_timeline.ClovaTimelineTests.test_wrong_expected_descriptor_schema_rejected) ... ok
+test_wrong_expected_wav_bytes_rejected (test_clova_timeline.ClovaTimelineTests.test_wrong_expected_wav_bytes_rejected) ... ok
+test_wrong_expected_wav_sha_rejected (test_clova_timeline.ClovaTimelineTests.test_wrong_expected_wav_sha_rejected) ... ok
+test_wrong_observation_schema_rejected (test_clova_timeline.ClovaTimelineTests.test_wrong_observation_schema_rejected) ... ok
+test_wrong_observation_sha_rejected (test_clova_timeline.ClovaTimelineTests.test_wrong_observation_sha_rejected) ... ok
+test_zero_frame_wav_rejected (test_clova_timeline.ClovaTimelineTests.test_zero_frame_wav_rejected) ... ok
+test_zero_sample_rate_rejected (test_clova_timeline.ClovaTimelineTests.test_zero_sample_rate_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 82 tests in 94.732s
+
+OK (skipped=1)
+
+{
+  "finishedAt": "2026-09-22T00:33:47.313123+09:00",
+  "exitCode": 0,
+  "sourceAfter": {
+    "scripts/media_pc2/validate_clova_timeline.py": {
+      "bytes": 25361,
+      "sha256": "577031deb93695eb375c8c49db7cb96eb3588bfc0a346d78469021827233c6a5"
+    },
+    "tests/media_pc2/test_clova_timeline.py": {
+      "bytes": 32384,
+      "sha256": "4939c444589ff5d048311abe3209a1c0b80eb270c9f804db1f92b5b34c8a24ba"
+    }
+  },
+  "sourceUnchanged": true
+}

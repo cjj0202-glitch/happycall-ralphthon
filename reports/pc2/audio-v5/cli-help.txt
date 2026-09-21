@@ -1,0 +1,20 @@
+usage: validate_clova_timeline.py [-h] --script SCRIPT --case-0001-wav
+                                  CASE_0001_WAV --case-0002-wav CASE_0002_WAV
+                                  --expected EXPECTED --observations
+                                  OBSERVATIONS --output OUTPUT
+
+Offline N02-M5 metadata validator. Never edits, converts, or plays audio. All
+candidates require independent pc1 review. No metadata check proves speech,
+speaker identity, listening quality, STT, or application playback behavior.
+
+options:
+  -h, --help            show this help message and exit
+  --script SCRIPT
+  --case-0001-wav CASE_0001_WAV
+  --case-0002-wav CASE_0002_WAV
+  --expected EXPECTED
+  --observations OBSERVATIONS
+  --output OUTPUT
+
+Output must be a new run under .local/clova-v5-intake. Existing run is never
+reused. No official inputs are bundled.

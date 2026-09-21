@@ -1,0 +1,79 @@
+{
+  "checkedAt": "2026-09-21T15:37:28.640791+00:00",
+  "scope": "New M5 files only. This evidence file excludes itself. Runtime/source hashes are not substituted by Git normalized hashes.",
+  "priorHead": "ceec704755c3558be03be72938b6cb369bbb1d3b",
+  "observedMain": "866a738cfa260f3a5d73a945a118b93d555e70e4",
+  "integrationDecision": "main 866a738 changes shared globals.css and focus review only; reviewed names, no integration into work branch required for offline M5. pc3 advanced to 3a223f1; pc2 branch unchanged before new commit.",
+  "files": [
+    {
+      "path": "reports/pc2/audio-v5/cli-help.txt",
+      "executedOrReviewedBytes": 868,
+      "executedOrReviewedSha256": "fdbd50d19068639b702bcb7f059a63c0f203d6ba04cfa653b67cb31e3f75bb71",
+      "gitBlobBytes": 848,
+      "gitBlobSha256": "90423262aba549440e143499d7243ec38afe412ddae773c79e6532fb0d0393fc",
+      "gitObjectId": "1e11dd39248ed920d982da2c6d7b221a2ae0608f",
+      "rawIdentical": false,
+      "onlyCRLFNormalization": true
+    },
+    {
+      "path": "reports/pc2/audio-v5/design.md",
+      "executedOrReviewedBytes": 8869,
+      "executedOrReviewedSha256": "de962dbe18758e406ddde6b5ef426c85df003108e5d4e767ac458cf33c967091",
+      "gitBlobBytes": 8869,
+      "gitBlobSha256": "de962dbe18758e406ddde6b5ef426c85df003108e5d4e767ac458cf33c967091",
+      "gitObjectId": "7255e35e9a3fa5417fc48ec461d68916648be554",
+      "rawIdentical": true,
+      "onlyCRLFNormalization": false
+    },
+    {
+      "path": "reports/pc2/audio-v5/first-bolt.json",
+      "executedOrReviewedBytes": 7547,
+      "executedOrReviewedSha256": "b9f117cddf47a774613fbf9b2b1138a6a0f78467365879f2114429c6746be98a",
+      "gitBlobBytes": 7379,
+      "gitBlobSha256": "68f6077195b0b75b2be6e8506a6da9f526784d3dba90ee30a537a0da3f29c633",
+      "gitObjectId": "4292a0846a3b33afb95426dd68ea7a2e642b376a",
+      "rawIdentical": false,
+      "onlyCRLFNormalization": true
+    },
+    {
+      "path": "reports/pc2/audio-v5/tests-final.txt",
+      "executedOrReviewedBytes": 12336,
+      "executedOrReviewedSha256": "f2c2adbd0e4d18aba5fea971c32edc68a4d26e247d5874eaaf8c3313c4c8ff82",
+      "gitBlobBytes": 12336,
+      "gitBlobSha256": "f2c2adbd0e4d18aba5fea971c32edc68a4d26e247d5874eaaf8c3313c4c8ff82",
+      "gitObjectId": "54523ec4eac5f0a580c131465a7eb08016abe663",
+      "rawIdentical": true,
+      "onlyCRLFNormalization": false
+    },
+    {
+      "path": "reports/pc2/audio-v5/validation.md",
+      "executedOrReviewedBytes": 8195,
+      "executedOrReviewedSha256": "4d004f13992c368465461fcb6960783de97f45fee671bdfc206f7e1ffc76ce90",
+      "gitBlobBytes": 8195,
+      "gitBlobSha256": "4d004f13992c368465461fcb6960783de97f45fee671bdfc206f7e1ffc76ce90",
+      "gitObjectId": "daa4b5f107a675fd71950290c92d6f907e130292",
+      "rawIdentical": true,
+      "onlyCRLFNormalization": false
+    },
+    {
+      "path": "scripts/media_pc2/validate_clova_timeline.py",
+      "executedOrReviewedBytes": 25361,
+      "executedOrReviewedSha256": "577031deb93695eb375c8c49db7cb96eb3588bfc0a346d78469021827233c6a5",
+      "gitBlobBytes": 25361,
+      "gitBlobSha256": "577031deb93695eb375c8c49db7cb96eb3588bfc0a346d78469021827233c6a5",
+      "gitObjectId": "24b415ff0157d2f412ac7bbc7e2564c8baf4922d",
+      "rawIdentical": true,
+      "onlyCRLFNormalization": false
+    },
+    {
+      "path": "tests/media_pc2/test_clova_timeline.py",
+      "executedOrReviewedBytes": 32384,
+      "executedOrReviewedSha256": "4939c444589ff5d048311abe3209a1c0b80eb270c9f804db1f92b5b34c8a24ba",
+      "gitBlobBytes": 32384,
+      "gitBlobSha256": "4939c444589ff5d048311abe3209a1c0b80eb270c9f804db1f92b5b34c8a24ba",
+      "gitObjectId": "10826c09d66ede67cceac08872f19447a3df94c7",
+      "rawIdentical": true,
+      "onlyCRLFNormalization": false
+    }
+  ]
+}
