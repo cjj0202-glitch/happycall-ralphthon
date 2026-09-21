@@ -206,6 +206,7 @@ class ClaimProjectionTests(unittest.TestCase):
                  "source": "미확인", "status": "unknown"},
             ]}
         self.model = {"summary": "MODEL_ALIAS_TRAP", "fields": {"subject": "휴지 오출고", "request": "확인"},
+            "draftContext": {"subjectQuote": "휴지 한 박스가 왔어요.", "requestQuote": None},
             "orderedClaim": {"product": "비스킷", "quantity": 18, "unit": "EA", "evidenceQuote": "비스킷 18개를 주문했습니다."},
             "receivedClaim": {"product": "휴지", "quantity": 1, "unit": "BOX", "evidenceQuote": "휴지 한 박스가 왔어요."},
             "storeClaim": {"name": "가상새봄점", "evidenceQuote": "가상새봄점입니다."},
@@ -339,9 +340,9 @@ class ClaimProjectionTests(unittest.TestCase):
         client.chat.completions.create.assert_called_once()
         arguments = client.chat.completions.create.call_args.kwargs
         payload = json.loads(arguments["messages"][1]["content"])
-        self.assertEqual(set(payload), {"transcript", "counselorInputToCheck", "syntheticStoreMaster",
+        self.assertEqual(set(payload), {"transcript", "syntheticStoreMaster",
                                        "syntheticEvidence", "allowedDepartments"})
-        self.assertEqual(payload["counselorInputToCheck"], self.case["intake"])
+        self.assertNotIn("counselorInputToCheck", payload)
         self.assertEqual(payload["transcript"][0]["text"], self.case["text"])
         schema = arguments["response_format"]["json_schema"]["schema"]
         self.assertEqual(schema, self.model_schema)
