@@ -1,0 +1,43 @@
+{
+  "page_count": 5,
+  "page_limit": 5,
+  "planned_seconds": 300,
+  "actual_rehearsal": "NOT_RUN",
+  "pdf_bytes": 499964,
+  "max_bytes": 94371840,
+  "pdf_sha256": "ffd794cd5a55dc2fc56b4cd2498acff13e0c38260dae2bab70c8a4686a43ce3c",
+  "missing_glyphs": [],
+  "text_box_overlaps": [],
+  "text_image_overlaps": [],
+  "korean_fonts": {
+    "/AAAAAA+MalgunGothicBold": {
+      "embedded": true,
+      "to_unicode": true
+    },
+    "/AAAAAA+MalgunGothic": {
+      "embedded": true,
+      "to_unicode": true
+    },
+    "/AAAAAB+MalgunGothic": {
+      "embedded": true,
+      "to_unicode": true
+    }
+  },
+  "unused_default_resource": "Helvetica appears in resources but all authored paragraphs use embedded Malgun fonts",
+  "source_inputs_matched": 19,
+  "exact_source_images_matched": 3,
+  "fixed_github_paths_verified": 28,
+  "product_runs": 0,
+  "new_servers": 0,
+  "new_browsers": 0,
+  "new_installs": 0,
+  "paid_calls": 0,
+  "notes": [
+    "pdffonts executable was unavailable; inspected FontFile2 and ToUnicode using installed pypdf instead.",
+    "Initial page4 image/caption overlap corrected and regenerated.",
+    "Initial artifact Python command used project venv without Pillow; used already-installed bundled runtime instead."
+  ],
+  "visual_pages_inspected": 5,
+  "independent_content_review": "Same-pc4 read-only reviewer compared original inputs, draft sources and final five renders; no remaining factual discrepancy found.",
+  "review_limit": "Not a human rehearsal, product retest, remote PC acceptance or guarantee."
+}

@@ -1,0 +1,135 @@
+[
+  {
+    "path": "docs/09_공식규정_전수대조.md",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "git_blob": "6cb6ce434a8577d178562424c6f202ee2da69ee2",
+    "sha256": "e08956d910977461fcde9451a3ccd13aa424cbb0b1c78a1bb596c13e9832d635",
+    "bytes": 11813
+  },
+  {
+    "path": "docs/10_Goal과_로그_운영.md",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "git_blob": "2e4bf1d19938da25c1caed8490256291d10ad072",
+    "sha256": "260d0cc48c6078fd71ad7e8d9e68b2920b2927eebc9cd0ad0badf256035547c5",
+    "bytes": 5160
+  },
+  {
+    "path": "docs/11_점수전략과_증거설계.md",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "git_blob": "90613b98105d28bd9e29d73ac30df56eb6d8b39c",
+    "sha256": "a57d5a33116d04f2531de6b3c62ae9a0253058086fdf28f775af672b5b062fd8",
+    "bytes": 7433
+  },
+  {
+    "path": "PROMPT_team.md",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "git_blob": "850b84d92b098e55705d93493dc9604f3f56f2c6",
+    "sha256": "005865b26f23f090191bbed0c2841a6c5adba93f59001c9179e53c6680fabc5e",
+    "bytes": 12379
+  },
+  {
+    "path": "reports/goal-start-20260921.md",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "git_blob": "17f80bee81d0e52b5e0fce1c82bbba916f36d346",
+    "sha256": "4ef55b570bfaa244d7e557ea687cc228635d7b3c5355da574bc20f30b3b7a7d0",
+    "bytes": 2123
+  },
+  {
+    "path": "reports/prototype-resilience.md",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "git_blob": "9dfd4688850de027b6979b73f2615df177dc283d",
+    "sha256": "4c5390433e8c806916b9820c8348994b79fcba8558f6d080ffe6352f603821b1",
+    "bytes": 9542
+  },
+  {
+    "path": "reports/prototype-independent-acceptance.md",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "git_blob": "a124929f87a33853b5f6a804acd9ee4eafbaa633",
+    "sha256": "67e559fc8bab49127b147207f2e1ddf7f7335797df8be6b4ce9097fb3bc51ebb",
+    "bytes": 11369
+  },
+  {
+    "path": "reports/media/pc2-pause-adoption.md",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "git_blob": "3dfff92cb2ba554995d56dd2eaae95659a264df5",
+    "sha256": "aea5122c3bc69341cefb0090fa4438904dbd383b46eb90ccd1fa8d26ec6305d3",
+    "bytes": 3758
+  },
+  {
+    "path": "reports/request-grounding-final-independent.md",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "git_blob": "939ac61ce2756827c67c9f58db05700f0aa16ced",
+    "sha256": "4631d12a3606239c13cb24923ff09b3fc4cb249d0e3f261dd67e34327f6d5d4e",
+    "bytes": 8322
+  },
+  {
+    "path": "reports/cctv-inspector.md",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "git_blob": "007b8b969bb0ee3c45e741aafe441e0678a8512b",
+    "sha256": "815aa108d0a0918b17bf060c250926604631b9cfa963a32dd57738f360e1a99c",
+    "bytes": 9363
+  },
+  {
+    "path": "reports/cctv-inspector-independent.md",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "git_blob": "351165d6b43a3a4bd0a7fac14cf04f27e70e95f0",
+    "sha256": "baf51fd9af0e61da2d026fc80fead75864c5e062284acb42b67bc090f0cc7264",
+    "bytes": 4585
+  },
+  {
+    "path": "reports/deployment/account-auth-status.md",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "git_blob": "0b251a183d30f577a3be2db01b341a1204255b1f",
+    "sha256": "6a21d56e0f46b07dc966e47f16b1f70d2465216a0f4ecbb7d06606ddcfbbdbbe",
+    "bytes": 13035
+  },
+  {
+    "path": "docs/16_FDE_First_Bolt_적용.md",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "git_blob": "e4f3435a3c7fa1b16a7b6a50115b42b0c09900d6",
+    "sha256": "6f9bd758b41a2a2adb8a6af2c5617bfdc748c50fd147e2547089007173967d7b",
+    "bytes": 18792
+  },
+  {
+    "path": "reports/analysis-grounding-repair.md",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "git_blob": "2a510fa83a8e86ad675db87c92e1bfcb23f2242b",
+    "sha256": "bb665afd6f22b2d9ab1ea4d766d200e8037765695f10627617b8bd3eab7186dc",
+    "bytes": 14785
+  },
+  {
+    "path": "reports/analysis-grounding-final-independent.md",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "git_blob": "1b2cd2359f6b850408035d50eb414424026ff7e7",
+    "sha256": "a950a81944c7d07f10b0ee78eb75934a71412c4e3022ba6466a959adaf867a1e",
+    "bytes": 1741
+  },
+  {
+    "path": "reports/design/evidence-cards-bolt.md",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "git_blob": "b8980aeca875167d6ee09063e60638d16af6a088",
+    "sha256": "d8ea41995c6dee03c8edd7301c93395e87449a3ff311df9991b6826e721ca5a9",
+    "bytes": 11111
+  },
+  {
+    "path": "reports/pc4/q2-candidate-bfc8543.md",
+    "source_commit": "d7841717e8181d4f9315a20dee5099c073251019",
+    "git_blob": "d2487f604c7985d5de40471518c84557c489ada4",
+    "sha256": "2d4a90635760f62b93b453390b1f5a1146b5b888112030c7db828b65c12dd955",
+    "bytes": 9906
+  },
+  {
+    "path": "reports/pc4/q3-c6f734f-results.md",
+    "source_commit": "d7841717e8181d4f9315a20dee5099c073251019",
+    "git_blob": "52c337808d2a9aa9489c0e863876f88337accced",
+    "sha256": "d5436e70ee6b6fb7a9ca395fc84150c86718d4a78a2966f9f5fc94d69979ddca",
+    "bytes": 10931
+  },
+  {
+    "path": "reports/pc4/q3-attempts-summary.json",
+    "source_commit": "d7841717e8181d4f9315a20dee5099c073251019",
+    "git_blob": "013b37aab2574df001c1c37821be6602f5d12cf5",
+    "sha256": "d5e3e5e8585f6963af08e1d041191131baf81edd4655d43e444ad8cafd37769e",
+    "bytes": 9066
+  }
+]

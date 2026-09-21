@@ -1,0 +1,36 @@
+[
+  {
+    "file": "desk-full-1440.png",
+    "source_path": "reports/e2e/prototype-independent-20260921-2102/desk-full-1440.png",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "product_git_sha": "not specified by source report",
+    "product_source_fingerprint": "a519e346e7a097f00961441373e858a088d86bce119640531fecd10762441292",
+    "product_output_fingerprint": "65c40b09aa68ef178eca9d73847c68a92cf237910b65c9040b79c3ba1d2fe40a",
+    "actor": "pc1 independent AI",
+    "synthetic": true,
+    "sha256": "e0fdb5a2e8f5fe75287ba98fa0e685b73db54476fdb3844318620958aacf60ad",
+    "use": "Original screenshot. PDF may show a labelled viewport excerpt, not a new product run."
+  },
+  {
+    "file": "tms-full-1024.png",
+    "source_path": "reports/e2e/prototype-independent-20260921-2102/tms-full-1024.png",
+    "source_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+    "product_git_sha": "not specified by source report",
+    "product_source_fingerprint": "a519e346e7a097f00961441373e858a088d86bce119640531fecd10762441292",
+    "product_output_fingerprint": "65c40b09aa68ef178eca9d73847c68a92cf237910b65c9040b79c3ba1d2fe40a",
+    "actor": "pc1 independent AI",
+    "synthetic": true,
+    "sha256": "fc9b9a6a820f7998a5a3d5de0746248b2a7c710de5cd4f72c6d19f930771f1d6",
+    "use": "Original screenshot. PDF may show a labelled viewport excerpt, not a new product run."
+  },
+  {
+    "file": "q3-uncertain-390.png",
+    "source_path": "reports/pc4/q3-run-20260921T123023563161Z/Q3-08-q3-08-uncertain-390.png",
+    "source_commit": "d7841717e8181d4f9315a20dee5099c073251019",
+    "product_git_sha": "c6f734f60d0dbe0151a69e35b8dfd8a41f3c5bd5",
+    "actor": "remote pc4",
+    "synthetic": true,
+    "sha256": "b861ae3b3adb3fab196a5c8611455716b98ef52dfe47bb8629b05909b29881da",
+    "use": "Original screenshot, prior success and current uncertain-save notice. PDF shows labelled top excerpt."
+  }
+]
