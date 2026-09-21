@@ -26,7 +26,7 @@ CANDIDATE = "candidate.NOT-APPROVED.jsonl"
 CHANGES = "changes.NOT-APPROVED.jsonl"
 MANIFEST = "manifest.NOT-APPROVED.json"
 PROTECTED = frozenset({
-    "timestamp", "time", "date", "datetime", "id", "type", "role", "name",
+    "timestamp", "time", "date", "datetime", "id", "ids", "type", "role", "name",
     "model", "effort", "reasoning_effort", "encrypted_content", "call_id",
     "created_at", "updated_at", "started_at", "completed_at", "finished_at",
     "duration_ms", "status", "namespace", "comp_hash", "sender", "recipient",
@@ -71,7 +71,10 @@ def leaf_bytes(value: str) -> bytes:
 
 def protected(key):
     lowered = key.lower()
-    return lowered in PROTECTED or lowered.endswith(("_id", "_ids", "_timestamp"))
+    # Id/Ids are explicit case boundaries. All-cap ID/IDs requires a preceding
+    # lower-case/digit/underscore boundary, so ordinary GRID/VALID stay text.
+    camel_id = bool(re.search(r"(?:Id|Ids)$|(?:^|[a-z0-9_])(?:ID|IDs)$", key))
+    return lowered in PROTECTED or lowered.endswith(("_id", "_ids", "_timestamp")) or camel_id
 
 
 def unique_object(pairs):
@@ -213,10 +216,21 @@ def pure_base64(value):
         return False
 
 
+def png_base64(value):
+    """Recognize an untyped, whole Base64 leaf only by decoded PNG magic."""
+    if len(value) < 12:
+        return False
+    try:
+        header = base64.b64decode(value[:12], validate=True)
+    except (ValueError, binascii.Error):
+        return False
+    return header.startswith(b"\x89PNG\r\n\x1a\n") and pure_base64(value)
+
+
 def redact_text(value, policy, media=False):
     if sha(leaf_bytes(value)) in policy:
         return "[REDACTED:CORPORATE_SOURCE]", ["CORPORATE_SOURCE"]
-    if media and pure_base64(value):
+    if (media and pure_base64(value)) or png_base64(value):
         return "[REDACTED:EMBEDDED_MEDIA]", ["EMBEDDED_MEDIA"]
     # Scan large inline media once, then only scan the surrounding free text.
     hits, segments, offset = [], [], 0

@@ -7,10 +7,12 @@ import io
 import json
 import os
 from pathlib import Path
+import struct
 import tempfile
 import types
 import unittest
 from unittest.mock import patch
+import zlib
 
 
 SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "prepare_submission_log.py"
@@ -25,6 +27,15 @@ def synthetic_key():
 
 def digest(value):
     return hashlib.sha256(value).hexdigest()
+
+
+def synthetic_png():
+    def chunk(kind, data):
+        body = kind + data
+        return struct.pack(">I", len(data)) + body + struct.pack(">I", zlib.crc32(body))
+    image = (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", 1, 1, 8, 2, 0, 0, 0))
+             + chunk(b"IDAT", zlib.compress(b"\x00\x10\x20\x30")) + chunk(b"IEND", b""))
+    return base64.b64encode(image).decode("ascii")
 
 
 def transform(module, value, policy=frozenset()):
@@ -199,6 +210,63 @@ class SubmissionLogTests(unittest.TestCase):
         self.assertEqual(result["caption"], event["caption"])
         self.assertEqual(counts["changed_leaves"], 1)
         self.assertEqual(len(entries), 1)
+
+    def test_untyped_png_base64_end_to_end_preserves_protected_and_opaque(self):
+        png = synthetic_png()
+        events = [{"type": "tool_result", "payload": {"item": {"result": png}}},
+                  {"id": png, "encrypted_content": png, "text": "평범한 Goal 결과입니다."}]
+        self.write(events)
+        original = self.source.read_bytes()
+        code, stdout, stderr = self.run_cli()
+        self.assertEqual((code, stderr), (0, ""))
+        result = self.load_output()
+        self.assertEqual(result[0]["payload"]["item"]["result"], "[REDACTED:EMBEDDED_MEDIA]")
+        self.assertEqual(result[1], events[1])
+        manifest_text = (self.output / SUT.MANIFEST).read_text()
+        audit_text = (self.output / SUT.CHANGES).read_text()
+        self.assertNotIn(png, stdout + stderr + manifest_text + audit_text)
+        counts = json.loads(manifest_text)["counts"]
+        self.assertEqual(counts["changed_leaves"], 1)
+        self.assertEqual(counts["unresolved_protected_leaves"], 1)
+        self.assertEqual(counts["opaque_unreviewed_leaves"], 1)
+        self.assertEqual(self.source.read_bytes(), original)
+
+    def test_untyped_base64_without_png_magic_and_malformed_png_are_preserved(self):
+        cases = ["test", "aGVsbG8=", base64.b64encode(b"ordinary English description").decode(),
+                 synthetic_png() + "!", synthetic_png()[:-1], "description " + synthetic_png(),
+                 base64.b64encode(b"\x89PNX\r\n\x1a\nordinary").decode()]
+        for value in cases:
+            with self.subTest(length=len(value)):
+                event = {"text": value, "alt": value, "caption": value}
+                result, entries, counts = transform(SUT, event)
+                self.assertEqual(result, event)
+                self.assertEqual(entries, [])
+                self.assertEqual(counts["changed_leaves"], 0)
+
+    def test_camel_pascal_id_fields_and_arrays_preserve_suspicious_values(self):
+        png, token = synthetic_png(), synthetic_key()
+        event = {"threadId": png, "responseId": token, "callId": png, "nestedID": token,
+                 "ThreadId": png, "ResponseID": token, "APIId": png,
+                 "threadIds": [png, token], "callIDs": [token], "Ids": [png], "ids": [png],
+                 "nested": {"responseID": png}, "encrypted_content": png}
+        result, entries, counts = transform(SUT, event)
+        self.assertEqual(result, event)
+        self.assertEqual(counts["changed_leaves"], 0)
+        self.assertEqual(counts["unresolved_protected_leaves"], 13)
+        self.assertEqual(counts["opaque_unreviewed_leaves"], 1)
+        self.assertEqual(len(entries), 13)
+        self.assertTrue(all(e["kind"].startswith("UNRESOLVED_PROTECTED:") for e in entries))
+        self.assertNotIn(png, json.dumps(entries))
+        self.assertNotIn(token, json.dumps(entries))
+
+    def test_id_suffix_boundary_does_not_protect_ordinary_words(self):
+        event = {key: synthetic_key() for key in ("grid", "valid", "solid", "fluid", "Grid", "VALID", "GRID")}
+        result, entries, counts = transform(SUT, event)
+        self.assertEqual(list(result), list(event))
+        self.assertTrue(all(value == "[REDACTED:OPENAI_KEY]" for value in result.values()))
+        self.assertEqual(counts["changed_leaves"], len(event))
+        self.assertEqual(counts["unresolved_protected_leaves"], 0)
+        self.assertEqual(len(entries), len(event))
 
     def test_suspicious_object_key_is_preserved_and_unresolved(self):
         key = synthetic_key()
@@ -384,6 +452,31 @@ class MutationControls(unittest.TestCase):
             result, _, _ = transform(module, {"text": "키는" + synthetic_key() + "입니다"})
             self.assertEqual(result["text"], "키는[REDACTED:OPENAI_KEY]입니다")
 
+        def untyped_png_probe(module):
+            result, _, _ = transform(module, {"payload": {"item": {"result": synthetic_png()}}})
+            self.assertEqual(result["payload"]["item"]["result"], "[REDACTED:EMBEDDED_MEDIA]")
+
+        def png_magic_probe(module):
+            value = base64.b64encode(b"ordinary English description").decode()
+            result, _, _ = transform(module, {"caption": value})
+            self.assertEqual(result["caption"], value)
+
+        def png_complete_base64_probe(module):
+            value = synthetic_png() + "!"
+            result, _, _ = transform(module, {"text": value})
+            self.assertEqual(result["text"], value)
+
+        def camel_id_probe(module):
+            event = {"threadId": synthetic_png()}
+            result, _, counts = transform(module, event)
+            self.assertEqual(result, event)
+            self.assertEqual(counts["unresolved_protected_leaves"], 1)
+
+        def id_boundary_probe(module):
+            result, _, counts = transform(module, {"valid": synthetic_key()})
+            self.assertEqual(result["valid"], "[REDACTED:OPENAI_KEY]")
+            self.assertEqual(counts["unresolved_protected_leaves"], 0)
+
         mutations = [
             ("masking", 'return "".join(result), sorted(kinds)', 'return value, []', mask_probe),
             ("protection", "locked = inherited_protection or protected(key)", "locked = False", protection_probe),
@@ -392,6 +485,14 @@ class MutationControls(unittest.TestCase):
             ("media_field_guard", "media and key.lower() in MEDIA_PAYLOAD_FIELDS", "media", media_field_probe),
             ("unresolved_key_guard", "if key_kinds:", "if False:", suspicious_key_probe),
             ("unicode_boundary", "(?<![A-Za-z0-9_-])sk-", r"(?<![\w-])sk-", korean_boundary_probe),
+            ("untyped_png", "if (media and pure_base64(value)) or png_base64(value):",
+             "if media and pure_base64(value):", untyped_png_probe),
+            ("png_magic", 'return header.startswith(b"\\x89PNG\\r\\n\\x1a\\n") and pure_base64(value)',
+             "return pure_base64(value)", png_magic_probe),
+            ("png_complete_base64", 'return header.startswith(b"\\x89PNG\\r\\n\\x1a\\n") and pure_base64(value)',
+             'return header.startswith(b"\\x89PNG\\r\\n\\x1a\\n")', png_complete_base64_probe),
+            ("camel_id_protection", " or camel_id", "", camel_id_probe),
+            ("id_suffix_boundary", " or camel_id", ' or lowered.endswith("id")', id_boundary_probe),
         ]
         for name, before, after, probe in mutations:
             with self.subTest(mutation=name):
