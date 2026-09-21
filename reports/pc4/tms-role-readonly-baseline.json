@@ -1,7 +1,7 @@
 {
   "task": "N04-U1",
   "scope": "actual TypeScript component JSX/callback execution with controlled hooks; not browser or build acceptance",
-  "startedAt": "2026-09-21T13:54:50.275Z",
+  "startedAt": "2026-09-21T14:00:58.173Z",
   "sourceRef": "ed2b188de31091a71f1596f50961239d02813107",
   "dependencyRef": "ed2b188de31091a71f1596f50961239d02813107",
   "baselineExpectedToFail": true,
@@ -9,7 +9,7 @@
     "component": "a5ce72f0539004f0130946ee898c5111ebd879f2ad962cefff935e5bab915744",
     "fixtures": "c7449e66a89c6c2b43b9b09868d651379a376e25a27f3f227b99375c7fa51449",
     "overlay": "a7cada3fa82c321d0bb2d8692d2cbdde251601489f4dbb44cd777e0b289df28a",
-    "checker": "e590fd12cd5bfa4d24419f28699ffcb6db98908b08634252ece5d6f4be0019fe"
+    "checker": "04f1ed592f4b9b3d17ed8ecad29c0ef240faf87ffc4f79ef3bd6503de3f62327"
   },
   "serverStarts": 0,
   "browserStarts": 0,
@@ -169,6 +169,46 @@
       "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
     },
     {
+      "name": "forced readOnly true + draft: actual JSX and callback guard with truthful notice",
+      "status": "FAIL",
+      "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
+    },
+    {
+      "name": "forced readOnly true + review: actual JSX and callback guard with truthful notice",
+      "status": "FAIL",
+      "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
+    },
+    {
+      "name": "forced readOnly false + handed_off: explicit false cannot unlock status",
+      "status": "FAIL",
+      "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
+    },
+    {
+      "name": "forced readOnly false + in_progress: explicit false cannot unlock status",
+      "status": "FAIL",
+      "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
+    },
+    {
+      "name": "forced readOnly false + closed: explicit false cannot unlock status",
+      "status": "FAIL",
+      "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
+    },
+    {
+      "name": "forced readOnly prop-only transition isolates delayed resolve and stale callback",
+      "status": "FAIL",
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ []\n- [\n-   '읽기 전용 · 이 접수의 근거는 조회만 할 수 있습니다.'\n- ]\n"
+    },
+    {
+      "name": "forced readOnly prop-only transition isolates delayed reject and stale callback",
+      "status": "FAIL",
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ []\n- [\n-   '읽기 전용 · 이 접수의 근거는 조회만 할 수 있습니다.'\n- ]\n"
+    },
+    {
+      "name": "forced readOnly true to false: same draft case resumes editing",
+      "status": "FAIL",
+      "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
+    },
+    {
       "name": "read-only query controls: visits, sorting, details markup and back remain usable; frozen props unchanged",
       "status": "PASS",
       "detail": {
@@ -219,12 +259,12 @@
     "workingTreeParity": false
   },
   "summary": {
-    "checks": 28,
+    "checks": 36,
     "passed": 8,
-    "failed": 20,
+    "failed": 28,
     "mutationsDetected": 0,
     "mutationsNotRun": 2
   },
   "status": "FAIL",
-  "finishedAt": "2026-09-21T13:54:51.623Z"
+  "finishedAt": "2026-09-21T14:01:00.506Z"
 }

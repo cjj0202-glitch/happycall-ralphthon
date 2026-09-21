@@ -33,3 +33,9 @@ Props에 backLabel?: string을 추가합니다. 기본값은 상담으로 돌아
 소유: TmsScene.tsx, 필요 시 TmsScene.module.css, 새 tms-role-readonly-unit.mjs, reports/pc4/tms-role-readonly-*. 기존 다른 소유 코드·PDF·중앙 작업표는 변경하지 않습니다. 결과 SHA와 명시 경로·명령·실측·실패/수정·한계를 #10에 제출하고 pc1 독립 인수를 기다립니다.
 
 독립 코드 검토에서 handed_off를 이미 조사 중으로 표시하지 말라는 의견을 반영해 센터 전달/센터 조사 중/처리완료를 구분했습니다. 상태 전환 remount는 선택 방문과 정렬도 초기화하며, 연결 요청 취소나 센터의 실제 조사 착수 증거를 뜻하지 않습니다.
+
+## 추가 props 계약 (메인 댓글 5761510081)
+
+`readOnly?: boolean` 기본 false를 받습니다. 최종 잠금은 부모 readOnly OR 사건 상태 잠금이며 부모 false는 상태 잠금을 해제하지 않습니다. 센터의 전체보기에서 이관 전 draft/review도 부모 true로 조회만 허용할 수 있습니다. 이 경우 ‘이관된 접수’ 대신 ‘읽기 전용 · 이 접수의 근거는 조회만 할 수 있습니다.’로 알립니다. 부모 prop도 remount 컨텍스트에 포함해 prop만 바뀐 뒤 늦은 callback의 화면 반영을 차단합니다. 부모 false/생략+draft/review의 기존 정상 동작은 유지합니다.
+
+추가 대조: true+draft/review 직접 연결0·disabled, false+잠금3상태 해제불가, 같은 상태에서 prop만 바뀔 때 pending resolve/reject·이전콜백 차단 및 false복귀 정상 연결. 실제 API/React DOM 실행과 구분합니다. 첫 상태잠금 결과8d0eebd는 중간 커밋으로 보존하고 추가계약 반영 후 결과를 최종 제출합니다.

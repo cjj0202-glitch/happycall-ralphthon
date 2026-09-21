@@ -115,7 +115,7 @@
       "path": "apps/web/components/TmsScene.tsx",
       "baseline_blob": "363b9aa2f4329b27937aa1bf85fe112de9d66c70",
       "baseline_sha256": "a5ce72f0539004f0130946ee898c5111ebd879f2ad962cefff935e5bab915744",
-      "candidate_sha256": "73c742940822a227a8241d52f6a35a3ed9df9124f8fd4e63f6ccbd4a1f5d10ff",
+      "candidate_sha256": "2480e2d9b86b1c62941e05146c99781c8646f8fa2923a80eb5d07de5e6a0e9a2",
       "changed": true
     },
     {
@@ -244,5 +244,5 @@
   "paid_calls": 0,
   "new_installs": 0,
   "parent_center_navigation": "NOT_RUN; pc1 must pass backLabel and appropriate onBack",
-  "candidate_checked_at": "2026-09-21T22:52:19.551919+09:00"
+  "candidate_checked_at": "2026-09-21T23:01:18.433593+09:00"
 }

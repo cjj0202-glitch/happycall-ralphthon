@@ -98,6 +98,7 @@ function textOf(node) { if (Array.isArray(node)) return node.map(textOf).join(' 
 function one(tree, predicate, label) { const matches = nodes(tree, predicate); assert.equal(matches.length, 1, `${label}: actual JSX selection must be unique`); return matches[0]; }
 function evidenceButton(r, evidence) { const article = one(r.tree, node => node.type === 'article' && nodes(node, child => child.type === 'h3' && textOf(child) === evidence.label).length === 1, 'actual evidence article'); return one(article, node => node.type === 'button', 'actual evidence button'); }
 function readOnlyNotice(r, status) { const notices = nodes(r.tree, node => node.props.role === 'status').map(textOf).filter(value => /조회만/.test(value)); assert.equal(notices.length, 1, 'Exactly one read-only status notice is rendered'); const prefix = { handed_off: '센터 전달', in_progress: '센터 조사 중', closed: '처리완료' }[status]; assert.equal(notices[0], `${prefix} · 이관된 접수의 근거는 조회만 할 수 있습니다.`); return notices[0]; }
+function forcedReadOnlyNotice(r) { const notices = nodes(r.tree, node => node.props.role === 'status').map(textOf).filter(value => /조회만/.test(value)); assert.deepEqual(notices, ['읽기 전용 · 이 접수의 근거는 조회만 할 수 있습니다.']); return notices[0]; }
 const caseData = (status, changes = {}) => ({ ...structuredClone(fixtures.find(item => item.id === 'CASE-0001')), status, ...changes });
 const evidenceFor = c => c.evidence.find(item => item.system === 'TMS');
 async function suite(text) {
@@ -144,6 +145,23 @@ async function suite(text) {
     assert.ok(r.lifecycle.cleanups > 0, 'Actual keyed effect cleanup runs for status-only transition'); return { sameCaseId: c.id, sameRevision: c.revision ?? null, outcome, callbackCalls: 1, lifecycle: r.lifecycle };
   });
   await test('read-only to review: valid evidence becomes editable', async () => { const c = caseData('closed'), r = renderer(text, { caseData: c }), item = evidenceFor(c); assert.equal(evidenceButton(r, item).props.disabled, true); r.updateProps({ caseData: { ...structuredClone(c), status: 'review' } }); const button = evidenceButton(r, item); assert.equal(button.props.disabled, false); await r.invoke(button); assert.deepEqual(r.calls, [item.id]); return { callbackCalls: 1 }; });
+  for (const status of ['draft', 'review']) await test(`forced readOnly true + ${status}: actual JSX and callback guard with truthful notice`, async () => {
+    const c = caseData(status), r = renderer(text, { caseData: c, readOnly: true }), item = evidenceFor(c), button = evidenceButton(r, item);
+    assert.equal(button.props.disabled, true); await r.invoke(button); assert.deepEqual(r.calls, []); const notice = forcedReadOnlyNotice(r); return { status, readOnly: true, disabled: true, callbackCalls: 0, notice };
+  });
+  for (const status of ['handed_off', 'in_progress', 'closed']) await test(`forced readOnly false + ${status}: explicit false cannot unlock status`, async () => {
+    const c = caseData(status), r = renderer(text, { caseData: c, readOnly: false }), button = evidenceButton(r, evidenceFor(c)); assert.equal(button.props.disabled, true); await r.invoke(button); assert.deepEqual(r.calls, []); return { status, readOnly: false, disabled: true, callbackCalls: 0, notice: readOnlyNotice(r, status) };
+  });
+  for (const outcome of ['resolve', 'reject']) await test(`forced readOnly prop-only transition isolates delayed ${outcome} and stale callback`, async () => {
+    const c = caseData('review'), r = renderer(text, { caseData: c, readOnly: false }), item = evidenceFor(c), stale = evidenceButton(r, item); assert.equal(stale.props.disabled, false); r.setPending(); await r.invoke(stale);
+    r.updateProps({ readOnly: true }); assert.equal(evidenceButton(r, item).props.disabled, true); forcedReadOnlyNotice(r); await r.finishPending(outcome === 'reject');
+    assert.equal(textOf(evidenceButton(r, item)), '이 근거 연결'); assert.equal(nodes(r.tree, node => node.props.role === 'alert').length, 0); assert.ok(!nodes(r.tree, node => node.props.role === 'status').map(textOf).join(' ').includes('상담에 연결했습니다.'));
+    await r.invoke(stale); await r.invoke(evidenceButton(r, item)); assert.deepEqual(r.calls, [item.id]); assert.ok(r.lifecycle.cleanups > 0, 'Actual keyed cleanup runs for readOnly prop-only transition'); return { sameCaseId: c.id, sameStatus: c.status, sameRevision: c.revision ?? null, outcome, callbackCalls: 1, lifecycle: r.lifecycle };
+  });
+  await test('forced readOnly true to false: same draft case resumes editing', async () => {
+    const c = caseData('draft'), r = renderer(text, { caseData: c, readOnly: true }), item = evidenceFor(c); assert.equal(evidenceButton(r, item).props.disabled, true); forcedReadOnlyNotice(r);
+    r.updateProps({ readOnly: false }); const button = evidenceButton(r, item); assert.equal(button.props.disabled, false); assert.equal(nodes(r.tree, node => node.props.role === 'status' && /조회만/.test(textOf(node))).length, 0); await r.invoke(button); assert.deepEqual(r.calls, [item.id]); assert.equal(textOf(evidenceButton(r, item)), '연결됨'); return { sameCaseId: c.id, sameStatus: c.status, callbackCalls: 1 };
+  });
   await test('read-only query controls: visits, sorting, details markup and back remain usable; frozen props unchanged', async () => {
     const c = caseData('closed'), before = JSON.stringify(c), r = renderer(text, { caseData: c }); const list = one(r.tree, node => node.props['aria-label'] === '방문 선택', 'visit list');
     const other = nodes(list, node => node.type === 'button').find(button => button.props['aria-pressed'] === false); assert.ok(other); assert.notEqual(other.props.disabled, true); await r.invoke(other);

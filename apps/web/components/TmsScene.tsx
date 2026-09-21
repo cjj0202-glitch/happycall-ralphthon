@@ -12,6 +12,7 @@ type Props = {
   onLinkEvidence: (id: string) => Promise<void> | void;
   onBack: () => void;
   backLabel?: string;
+  readOnly?: boolean;
 };
 type Row = Record<string, unknown>;
 type TimeState = 'missing' | 'local' | 'invalid' | 'unbounded' | 'future' | 'recorded';
@@ -134,13 +135,16 @@ export function tmsEvidenceIssue(caseData: CaseData, evidence: Evidence): string
 
 export default function TmsScene(props: Props) {
   // Remount on relevant context changes, including same-ID replacement and late async callbacks.
-  const contextKey = JSON.stringify([props.caseData.id, props.caseData.status, props.caseData.revision, props.caseData.selectedEvidence, props.caseData.store, props.caseData.type, props.caseData.asOf, props.caseData.tms, props.caseData.evidence, props.caseData.linkedFixtureId, props.caseData.channel, props.caseData.synthetic, props.caseData.intake?.storeId, props.caseData.storeId, props.caseData.subject, props.caseData.title]);
+  const contextKey = JSON.stringify([props.caseData.id, props.caseData.status, props.readOnly, props.caseData.revision, props.caseData.selectedEvidence, props.caseData.store, props.caseData.type, props.caseData.asOf, props.caseData.tms, props.caseData.evidence, props.caseData.linkedFixtureId, props.caseData.channel, props.caseData.synthetic, props.caseData.intake?.storeId, props.caseData.storeId, props.caseData.subject, props.caseData.title]);
   return <TmsContent key={contextKey} {...props}/>;
 }
 
-function TmsContent({ caseData, onLinkEvidence, onBack, backLabel = '상담으로 돌아가기' }: Props) {
-  const readOnly = caseData.status === 'handed_off' || caseData.status === 'in_progress' || caseData.status === 'closed';
-  const readOnlyReason = `${caseData.status === 'closed' ? '처리완료' : caseData.status === 'handed_off' ? '센터 전달' : '센터 조사 중'} · 이관된 접수의 근거는 조회만 할 수 있습니다.`;
+function TmsContent({ caseData, onLinkEvidence, onBack, backLabel = '상담으로 돌아가기', readOnly: forcedReadOnly = false }: Props) {
+  const statusLocked = caseData.status === 'handed_off' || caseData.status === 'in_progress' || caseData.status === 'closed';
+  const readOnly = forcedReadOnly || statusLocked;
+  const readOnlyReason = statusLocked
+    ? `${caseData.status === 'closed' ? '처리완료' : caseData.status === 'handed_off' ? '센터 전달' : '센터 조사 중'} · 이관된 접수의 근거는 조회만 할 수 있습니다.`
+    : '읽기 전용 · 이 접수의 근거는 조회만 할 수 있습니다.';
   const tms = rowOf(caseData.tms);
   const stops = stopsFor(tms);
   const target = stops.find(stop => stop.id === caseData.store.id && isStore(stop));
