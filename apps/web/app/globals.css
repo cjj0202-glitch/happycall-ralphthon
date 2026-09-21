@@ -376,8 +376,10 @@ details p { margin-top: var(--space-12); }
 
 /* Keep task navigation available for return trips; it does not mark work complete. */
 .work-navigation { position: sticky; top: 0; z-index: var(--z-sticky-header); box-shadow: var(--shadow-card); }
-.task-anchor, #intake-editor { scroll-margin-top: calc(var(--control-xl) * 2); }
+/* Reserve the sticky navigation space for both anchors and keyboard focus. */
+html { scroll-padding-top: calc(var(--control-xl) * 2); }
+.task-anchor, #intake-editor { scroll-margin-top: 0; }
 .quantity-context { margin-block: var(--space-12); padding: var(--space-12); border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--surface-zebra); font-size: var(--font-size-12); line-height: var(--font-leading-relaxed); }
 .quantity-context p { margin-top: var(--space-6); }
 .reply-readiness { font-size: var(--font-size-12); line-height: var(--font-leading-relaxed); color: var(--text-secondary); margin-block: var(--space-12); }
-@media (max-width: 768px) { .task-anchor, #intake-editor { scroll-margin-top: calc(var(--control-xl) * 3); } }
+@media (max-width: 768px) { html { scroll-padding-top: calc(var(--control-xl) * 3); } }
