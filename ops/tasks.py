@@ -16,7 +16,7 @@ STATES = {"TODO", "DOING", "REVIEW", "DONE", "BLOCKED", "DEFERRED"}
 
 
 def read(path):
-    return json.loads(path.read_text(encoding="utf-8"))
+    return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
 def stamp():

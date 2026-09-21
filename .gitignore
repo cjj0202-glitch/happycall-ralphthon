@@ -29,3 +29,8 @@ desktop.ini
 .vscode/
 .idea/
 .mailbox_state.*.json
+.local/
+.vercel/
+ops/.tasks.lock
+ops/*.tmp
+TODO.md.tmp
