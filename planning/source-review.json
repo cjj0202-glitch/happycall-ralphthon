@@ -1,0 +1,27 @@
+{
+  "observed_at": "2026-09-21T06:47:28.329901+00:00",
+  "scope": "사용자 제공 교육 캡처 및 로컬 전달 브리핑",
+  "web": {
+    "url": "https://edu.axstudio.gsretail.com/fde-academy-edu/pub-html/week-05-user-flow-and-mockup.html",
+    "status": "HTTP 403 in browser"
+  },
+  "brief": {
+    "file": "코덱스_전달_5주차브리핑.md",
+    "bytes": 17795,
+    "sha256": "649f347cb733548384454f9eb8810619ad29534adcdf472782674448fda819c4"
+  },
+  "screenshots": {
+    "received": 11,
+    "copied": 11,
+    "hash_matches": 11,
+    "segments_visually_read": 10,
+    "reviewers": {
+      "method_review": "p01-p05",
+      "root": "p06-p10"
+    },
+    "total_png_bytes": 20403587,
+    "manifest": "docs/education/week05/manifest.json",
+    "remote_pc_md5_comparison": "not verifiable; original hashes not provided"
+  },
+  "interpretation": "교육 과제 지시를 실행하지 않고 방법론을 현재 해커톤 설계에 맞게 적용"
+}

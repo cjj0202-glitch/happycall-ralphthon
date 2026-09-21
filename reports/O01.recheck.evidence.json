@@ -1,0 +1,21 @@
+{
+  "task_id": "O01",
+  "spec_hash": "a9e1fb766e823be8d8941bb442295f81b10a739670dc5f0e4b93d545c0b88bd9",
+  "measured_at": "2026-09-21T06:47:28.329901+00:00",
+  "observer": "pc1/CJJ",
+  "checks": {
+    "C1": {
+      "expected": "공개 홈·가이드·채점·로그 기준과 공식 다운로드를 대조하고 출처·캡처 보존",
+      "observed": "공개 안내 DOM·PNG13개·공식 MD/PDF를 포함한 27개 파일의 SHA256을 27/27 대조했습니다. Notion 내부 스크롤 구간을 3개로 보완했습니다. 로그인 뒤 팀 페이지는 별도 미확인입니다.",
+      "passed": true
+    },
+    "C2": {
+      "expected": "9/22 12시·5분/3분·5페이지·100점 구성·로그 한도를 설계와 TODO에 반영",
+      "observed": "공식 제출시각·5/3분·5페이지·100점 구성과 로그 한도는 docs/09 및 기존 설계에 유지했습니다. 새 교육/회의/실험 작업은 공식 규정을 대체하지 않습니다.",
+      "passed": true
+    }
+  },
+  "artifacts": [
+    "reports/official-review.md"
+  ]
+}

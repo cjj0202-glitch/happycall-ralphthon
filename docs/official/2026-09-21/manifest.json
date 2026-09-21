@@ -156,11 +156,18 @@
       "sha256": "1e60f4c412d94fb5658cdc323d186d89de0a9ed7b74e36ab361d836dc41a5a4a"
     },
     {
-      "file": "vote-login.dom.txt",
-      "source": "https://52g-hackathon.ralphthon.org/vote",
-      "note": "로그인으로 이동; 투표하지 않음",
-      "bytes": 942,
-      "sha256": "e92275c69e5d521fbbf14716332f1e87f56d6e39b4c83a0e42b4897a38873416"
+      "file": "vercel-guide-02.png",
+      "source": "https://gsholdings.notion.site/vercel-3e2f800bd1c1800cb3d9e5fc29aefeca",
+      "note": "Vercel 안내 내부 스크롤 중간 구간",
+      "bytes": 56898,
+      "sha256": "11127d8e9e639d1e708c1eae02a29f6a656b031c560de95e352a56857e4e3527"
+    },
+    {
+      "file": "vercel-guide-03.png",
+      "source": "https://gsholdings.notion.site/vercel-3e2f800bd1c1800cb3d9e5fc29aefeca",
+      "note": "Vercel 안내 내부 스크롤 하단 구간",
+      "bytes": 49872,
+      "sha256": "ba3298d0817a1393ae5a0e5c615f24eed0865d752e5a31f7bb5f056e0bd16f5c"
     },
     {
       "file": "vercel-guide.dom.txt",
@@ -172,9 +179,17 @@
     {
       "file": "vercel-guide.png",
       "source": "https://gsholdings.notion.site/vercel-3e2f800bd1c1800cb3d9e5fc29aefeca",
-      "note": "행사 그룹 이메일·워크스페이스·프로젝트 연결",
-      "bytes": 22387,
-      "sha256": "7c08aeb63cbcd82a85d3ade3845d8e678ab74cc796663133e9ee9e5a44c2cf9f"
+      "note": "Vercel 안내 내부 스크롤 상단 구간",
+      "bytes": 46412,
+      "sha256": "ee81ba7b6fc93f5e22b2c1d684c5d46650fbc3ff80d2aa03be096ad99dd8ffdc"
+    },
+    {
+      "file": "vote-login.dom.txt",
+      "source": "https://52g-hackathon.ralphthon.org/vote",
+      "note": "로그인으로 이동; 투표하지 않음",
+      "bytes": 942,
+      "sha256": "e92275c69e5d521fbbf14716332f1e87f56d6e39b4c83a0e42b4897a38873416"
     }
-  ]
+  ],
+  "updated_at": "2026-09-21T06:47:28.329901+00:00"
 }

@@ -1,6 +1,8 @@
 # Vercel 행사 계정 연결 — G-23
 
-근거: 사용자 제공 [공식 Notion 안내](https://gsholdings.notion.site/vercel-3e2f800bd1c1800cb3d9e5fc29aefeca), 2026-09-21 확인. [화면](official/2026-09-21/vercel-guide.png)과 [본문](official/2026-09-21/vercel-guide.dom.txt)을 보존했습니다.
+근거: 사용자 제공 [공식 Notion 안내](https://gsholdings.notion.site/vercel-3e2f800bd1c1800cb3d9e5fc29aefeca), 2026-09-21 확인. 내부 스크롤 화면을 나눈 [상단](official/2026-09-21/vercel-guide.png)·[중간](official/2026-09-21/vercel-guide-02.png)·[하단](official/2026-09-21/vercel-guide-03.png)과 [본문](official/2026-09-21/vercel-guide.dom.txt)을 보존했습니다. 세 이미지는 구간 캡처이며 원문 대조는 본문과 함께 합니다.
+
+**현재 사용자 요청으로 보류 중입니다.** 사용자가 재개하기 전에는 인증 재요청·CLI 로그인·프로젝트 연결·배포를 실행하지 않습니다. 아래는 재개할 때 사용할 안내입니다.
 
 ## 1. 우리 팀의 정확한 대상
 

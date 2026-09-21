@@ -1,0 +1,28 @@
+{
+  "task_id": "SRC01",
+  "spec_hash": "1432137e9b637d5c4f52e656432c72bceb3a057599f9fbce97e420eaf732365f",
+  "measured_at": "2026-09-21T06:50:44.626416+00:00",
+  "observer": "pc1/CJJ + method_review(p01-p05), root(p06-p10)",
+  "checks": {
+    "C1": {
+      "expected": "week05_full.png 및 p01~p10 총 11개 실파일의 크기·해시·출처를 기록하고 분할 10장 전부를 읽어 First Bolt·용어·10단계 내용을 대조",
+      "observed": "PNG11개20,403,587바이트 수신/복사, SHA25611/11 일치, 분할p01~05 method_review·p06~10 root 직접열람10/10; manifest에 크기와출처 기록",
+      "passed": true
+    },
+    "C2": {
+      "expected": "공개 강의 웹의 접근 결과·시각과 가능한 원문 대조를 기록; 웹이 계속 403이면 11장 검증 범위와 웹 미확인 한계를 구분",
+      "observed": "2026-09-21 브라우저의 CloudFront403 관측. 현재 웹 최신성은미확인, 사용자제공11개캡처검증은완료로 분리기록",
+      "passed": true
+    },
+    "C3": {
+      "expected": "로컬 전달 브리핑과 원본의 일치·차이·설계 반영처를 기록; 파일 미수신이나 AI 추정만으로 완료하지 않음",
+      "observed": "브리핑과 Journey/Flow/CTA/Bolt/테스트/인수인계 일치; 원본에서 10단계·비선형반복·관찰인터뷰로그·품질구분·32용어 추가확인하고 docs13/16 및 프롬프트에반영",
+      "passed": true
+    }
+  },
+  "artifacts": [
+    "reports/FDE-source-review.md",
+    "planning/source-review.json",
+    "docs/education/week05/manifest.json"
+  ]
+}
