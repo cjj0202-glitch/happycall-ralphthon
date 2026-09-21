@@ -30,6 +30,22 @@ for _prefix, _tens in [('열', 10), ('스물', 20), ('서른', 30), ('마흔', 4
 NUMBER = r'(?:\d+(?:\.\d+)?|' + '|'.join(sorted(NATIVE, key=len, reverse=True)) + r'|[일이삼사오육칠팔구십백천]+)'
 MEASURE = re.compile(r'(?<!\d)(?P<number>\d+(?:\.\d+)?|(?<![가-힣])' + NUMBER + r')\s*(?P<unit>낱개|개|박스|상자|EA\b|BOX\b)', re.I)
 UNITS = {'낱개': 'EA', '개': 'EA', '박스': 'BOX', '상자': 'BOX'}
+# Time expressions and their ordinary particles are grammatical bridges, not
+# arbitrary product names. Clock numerals here never enter the amount set.
+VALUE_TIME = (
+    r'(?:오늘|이번|어제|방금|현재|지난\s*(?:주|달|번)|이전\s*배송)(?:에는|에도|에|은|는|도)?'
+    r'|(?:오전|오후|새벽|아침|점심|저녁|밤)(?:에는|에도|에)?'
+    r'|(?:(?:오전|오후)\s*)?\d{1,2}\s*시(?:\s*\d{1,2}\s*분)?(?:쯤|경)?(?:에는|에도|에)?')
+# Only grammar/quantity-role words may bridge a named product and its value.
+# An arbitrary intervening noun is not evidence that the next amount belongs
+# to that product. This is deliberately a support check, not product extraction.
+VALUE_LINK = re.compile(
+    r'^\s*(?:(?:은|는|이|가|의|을|를|도|만)\s*'
+    r'|(?:' + VALUE_TIME + r')\s*'
+    r'|(?:최종|실제(?:로)?(?:는)?|그중|정확히|딱'
+    r'|받은\s*(?:것|수량)?|수령한|주문한|발주한|수령\s*예정대로'
+    r'|수령(?:\s*수량|량)?|주문량|수량|낱개|총|모두|합계)'
+    r'(?:은|는|이|가|의)?\s*)*$')
 
 
 def _number(raw):
@@ -141,35 +157,39 @@ def _receipt_ellipsis(part):
     return bool(re.match(r'^' + prefix + nominal + r'(?:' + NUMBER + r'\s*(?:개|박스|상자|EA|BOX)|박스|상자|낱개)', part))
 
 
+def _value_belongs_to_target(scope, product, start):
+    named = list(_product_pattern(product).finditer(scope))
+    preceding = [match.end() for match in named if match.end() <= start]
+    if named and not preceding:
+        return False
+    # A nameless scope has already passed _scopes' explicit ellipsis check.
+    prefix = scope[preceding[-1]:start] if preceding else scope[:start]
+    return bool(VALUE_LINK.fullmatch(prefix))
+
+
 def supported_values(claim, kind, transcript):
-    """Return independently supported proposed quantity/unit, never a new value."""
+    """Keep proposed values bound to the target and original measure pairing."""
     scopes = _scopes(claim, kind, transcript)
-    quantities, units = set(), set()
+    values = set()
     for scope in scopes:
-        matches = list(MEASURE.finditer(scope))
-        # If multiple products/amounts share an order clause, support only the
-        # first amount after the explicitly named target, not a neighbour's.
-        product_match = _product_pattern(claim['product']).search(scope)
-        if len(matches) > 1 and product_match:
-            following = [match for match in matches if match.start() >= product_match.end()]
-            matches = following[:1]
+        matches = [match for match in MEASURE.finditer(scope)
+                   if _value_belongs_to_target(scope, claim['product'], match.start())]
         for match in matches:
-            raw = match['number']
-            number = _number(raw)
-            if number is not None:
-                quantities.add(number)
-            units.add(UNITS.get(match['unit'], match['unit'].upper()))
+            values.add((_number(match['number']), UNITS.get(match['unit'], match['unit'].upper())))
         # Explicit quantity without a unit does not become a clock, SKU or other
         # arbitrary numeral merely because it appears somewhere in the quote.
         for match in re.finditer(r'(?:수량|수령량|주문량)(?:은|는|이|가|:)?\s*(\d+(?:\.\d+)?)(?=\s*(?:입니다|이고|이며|이지만|$))', scope):
-            quantities.add(float(match[1]))
+            if _value_belongs_to_target(scope, claim['product'], match.start()):
+                values.add((float(match[1]), None))
         # A known unit without a number is allowed only in a receipt/order scope.
         if not matches:
             for match in re.finditer(r'박스|상자|낱개|(?<![가-힣])개(?=\s*(?:단위|로|를|는|$))|\bEA\b|\bBOX\b', scope, re.I):
-                units.add(UNITS.get(match[0], match[0].upper()))
+                if _value_belongs_to_target(scope, claim['product'], match.start()):
+                    values.add((None, UNITS.get(match[0], match[0].upper())))
     quantity, unit = claim['quantity'], claim['unit']
-    return (quantity if quantity is None or quantity in quantities else None,
-            unit if unit is None or unit in units else None)
+    return (quantity if quantity is None or any(quantity == amount for amount, _ in values) else None,
+            unit if unit is None or any(unit == label and (quantity is None or quantity == amount)
+                                       for amount, label in values) else None)
 
 
 def reconcile_unknown(value, received):
