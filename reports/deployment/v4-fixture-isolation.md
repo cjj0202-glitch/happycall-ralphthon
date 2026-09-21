@@ -64,3 +64,11 @@ SKIP은 Windows의 물리 symlink 생성 권한 부족입니다. `test_demo_medi
 - `git diff --check -- tests/test_deployment_app.py` 통과. `git diff --numstat -- server tests/test_deployment_bundle.py` 출력 없음.
 - 실제 API 과금, 새 서버·브라우저, 기존 원장 접근, 기존 미디어 인코딩·다운로드·업로드, 커밋·push는 수행하지 않았습니다. API 검사는 임시 저장소와 ASGI in-process 호출입니다.
 - 이번 결과는 테스트의 배포 입력 격리와 기존 영향 범위 통과입니다. v4 UI 시각 검수 및 별도 프레임 이동 수정의 완료 판정은 메인 범위입니다.
+
+## 메인 독립 인수 — 02:22 KST
+
+별도 읽기 전용 검토자가 실제 diff와 제품 경로를 검토하고 메모리 ASGI 대조를 실행했습니다(exit0, 파일 생성·네트워크 0). factory 16곳 중 12곳은 명시 fixture, 나머지 4곳은 기본 packaged loader 전용 검사에 남아 있습니다. 제품 배포·인증·미디어 계약 파일은 변경되지 않았습니다.
+
+기본 로더는 고정 경로를 실제 1회 읽었습니다. 등록 sidecar는 인증 요청200 및 원문 바이트 일치, 미인증401이었습니다. 같은 크기의 MP4 및 tracks 변조는 각각 시작 거부와 기존 요청404를 만들었습니다. 명시 legacy fixture는 기본 로더 호출0회/tracks404, descriptor의 bytes=True는 기본·명시 경로 모두 무결성 오류였습니다. 265PASS suite의 독립 반복 실행이 아니라 서로 다른 경로의 별도 대조입니다.
+
+메인은 이 근거로 fixture 분리 변경을 인수하고 `b9a2a18`로 커밋했습니다. 실제 호스팅·전체 사용자 흐름의 인수로 확대하지 않습니다.
