@@ -1,0 +1,175 @@
+{
+  "scope": "N02-M3 exact evidence bytes; index excludes itself",
+  "files": [
+    {
+      "path": "reports/pc2/audio-m3/.gitattributes",
+      "bytes": 161,
+      "sha256": "72e32dc913382fead2cf5c858711a68d1a0db1af8770008fd1c0a5fe590456b6"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-47-08-539Z/build-stamp.json",
+      "bytes": 519,
+      "sha256": "9ed82a57094709ca8eb1f5a54a0c63a5383e8f0644b98d6aa5faa8f18c4ef144"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-47-08-539Z/execution.json",
+      "bytes": 11737,
+      "sha256": "a826fa0cde2fd5e72bd8c551f325357be3ea8293ddbf0a6beca9ac3450446418"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-47-08-539Z/failure-analysis-failure-preserves-draft.png",
+      "bytes": 186102,
+      "sha256": "6c03b50074e270d808c3f9539be397195c35fc59773e476160a9cdfb20ac17ec"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-47-08-539Z/failure-CASE-0001-real-replay-analysis-and-form.png",
+      "bytes": 181886,
+      "sha256": "10f4687432206221619ad931f05a724a37483e54b5d589036dc3ed15a1b1da9b"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-47-08-539Z/failure-CASE-0002-real-replay-analysis-and-form.png",
+      "bytes": 189751,
+      "sha256": "80db5c54f2d0a4a21059bb3da051048eb133fe65dbed6b5e364abb6c075c8cb5"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-47-08-539Z/failure-parent-request-and-error-integrity.png",
+      "bytes": 168800,
+      "sha256": "6daaa529dc335dc8367fa62b5119f803e38aaa9b610f6643d0f0278c628facce"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-47-08-539Z/parent-layout-1440.png",
+      "bytes": 272823,
+      "sha256": "5231de8be50255c5348d0eb6bbe1d3348ee67072164b1b9c005f83dcc0c6f1f3"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-47-08-539Z/parent-layout-390.png",
+      "bytes": 254032,
+      "sha256": "1b6b1a866e06e99d9543b2be8ffacc42696455ae450c718fa94280f1ca851576"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-47-08-539Z/parent-layout-768.png",
+      "bytes": 264996,
+      "sha256": "4b2ff20c8bccc191f5a6ab172e8001480b3d07061d2976bd14ade58ae261c297"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-47-08-539Z/results.json",
+      "bytes": 89889,
+      "sha256": "3ca792194c4f2407b9cc43fc8ecba36ac9395ad116c61d14d4a398fba01fabce"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-47-08-539Z/server.json",
+      "bytes": 1536,
+      "sha256": "9fb18c9c57bc9f58a975598956f1a266c3455c64b83a7e40df75af7404227e6f"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-47-08-539Z/server.log",
+      "bytes": 3259,
+      "sha256": "33e19396a28fd982b99551f99d4c1dad8828e56e06ca1cee5d1d994bd379e730"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-47-08-539Z/source-checker.mjs",
+      "bytes": 24964,
+      "sha256": "22283be41117abc122ffc0cca4c44e3ae119adb4b2cdd5c5eb157b635b1cd60a"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-47-08-539Z/source-host.py",
+      "bytes": 4672,
+      "sha256": "a07c64c68056c16d9afe100465425259caaf5a83bc8810a4c2c4bafb5ef3f27a"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-47-08-539Z/source-run.mjs",
+      "bytes": 5498,
+      "sha256": "216640611bb703360a20f534fed3b5f3f404842a1aca40c30f9316e20c6ab359"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-51-25-545Z/build-stamp.json",
+      "bytes": 519,
+      "sha256": "9ed82a57094709ca8eb1f5a54a0c63a5383e8f0644b98d6aa5faa8f18c4ef144"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-51-25-545Z/execution.json",
+      "bytes": 11854,
+      "sha256": "ef8d18019a21235f4478463edf7a79fa61d76ddf1a283df04c00f685a2c37656"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-51-25-545Z/parent-layout-1440.png",
+      "bytes": 272720,
+      "sha256": "5fbf1f1288f13c8503a191bc92ff31548b91524f8cbf562093c5ef72da2c8471"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-51-25-545Z/parent-layout-390.png",
+      "bytes": 254008,
+      "sha256": "4f67d66d40216a5b1de9935a2702d3fe0fae75f9e151a02c18d0134bd16fe3b3"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-51-25-545Z/parent-layout-768.png",
+      "bytes": 264887,
+      "sha256": "84bb75b7eee7b70b46ebf70782bd91f5a38b55db56521b2e8330c8e857ddf092"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-51-25-545Z/results.json",
+      "bytes": 71435,
+      "sha256": "daaf0993bb1a80aeee2789ff402dab75ec2b8b4735c16dd188ab8537190afd84"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-51-25-545Z/server.json",
+      "bytes": 1670,
+      "sha256": "4a43e454b3850bf78803edd8148ad5e5cd47c6de0d7a96e2a5c485a3dd1af0a2"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-51-25-545Z/server.log",
+      "bytes": 487,
+      "sha256": "94c37c958c4f36636e8cabb1a6854d3a0e36263ffe20cfe6ecb33c7f4ed36cf2"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-51-25-545Z/source-checker.mjs",
+      "bytes": 25473,
+      "sha256": "cb4558737077e3536fa1bfc43f72201bf8cf5ab14c6e9ea06ce76ac1137d6fb8"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-51-25-545Z/source-host.py",
+      "bytes": 5051,
+      "sha256": "18989e7cbbf807b66c8bd78cdf711b26cd17565b09d392742f970694e89a2061"
+    },
+    {
+      "path": "reports/pc2/audio-m3/parent-2026-09-21T12-51-25-545Z/source-run.mjs",
+      "bytes": 6101,
+      "sha256": "0c336e0d516eb8b1c82639111a5d19c4370f35948437be15e6d8c50f4f664db0"
+    },
+    {
+      "path": "reports/pc2/audio-m3/plan.md",
+      "bytes": 3290,
+      "sha256": "a868192f7ec9e68b2c074d36b5c06c74f5a6f894fa9eec67ba56dad2c4512985"
+    },
+    {
+      "path": "reports/pc2/audio-m3/preparation.json",
+      "bytes": 4136,
+      "sha256": "e0faec480db8e22c21107164c480cd0585d1f3f6faa54a11e8b335555ca387c4"
+    },
+    {
+      "path": "reports/pc2/audio-m3/result.md",
+      "bytes": 8847,
+      "sha256": "cec2565d5ee3993a48b9001a6cb8baf3b3f65e7c63e59e4045f829e7ce89376c"
+    },
+    {
+      "path": "reports/pc2/audio-m3/runtime-requirements.txt",
+      "bytes": 18399,
+      "sha256": "bb596a114f28c48efecb91e4143a2997a1afe68bc1d63a96517deb83e9882c19"
+    },
+    {
+      "path": "tests/remote/pc2/m3/checker.mjs",
+      "bytes": 25473,
+      "sha256": "cb4558737077e3536fa1bfc43f72201bf8cf5ab14c6e9ea06ce76ac1137d6fb8"
+    },
+    {
+      "path": "tests/remote/pc2/m3/host.py",
+      "bytes": 5051,
+      "sha256": "18989e7cbbf807b66c8bd78cdf711b26cd17565b09d392742f970694e89a2061"
+    },
+    {
+      "path": "tests/remote/pc2/m3/run.mjs",
+      "bytes": 6101,
+      "sha256": "0c336e0d516eb8b1c82639111a5d19c4370f35948437be15e6d8c50f4f664db0"
+    }
+  ]
+}

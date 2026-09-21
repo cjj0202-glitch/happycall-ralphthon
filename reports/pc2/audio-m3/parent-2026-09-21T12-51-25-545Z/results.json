@@ -1,0 +1,2251 @@
+{
+  "version": "pc2-m3-parent-replay-v2-scoped-editor-controls",
+  "started": "2026-09-21T12:51:32.507Z",
+  "productCommit": "92d2ecbad981f366a9e5ffc850d9c2bb7fd5d3a2",
+  "fixtureSha256": "c7449e66a89c6c2b43b9b09868d651379a376e25a27f3f227b99375c7fa51449",
+  "browser": "153.0.4234.48",
+  "playwright": "1.58.2",
+  "method": "Actual exported parent page, actual isolated replay API, native Edge audio; only declared fault/source-input responses are injected.",
+  "limits": [
+    "AI technical inspection, human listening 0.",
+    "Replay results are cached synthetic data, not live AI accuracy.",
+    "No production service, persistence deployment, or final acceptance claim."
+  ],
+  "target": {
+    "normal": 4,
+    "sourceChange": 1,
+    "completionCounterexamples": 2,
+    "failureRecovery": 2,
+    "viewportKeyboard": 3,
+    "integrity": 2,
+    "total": 14
+  },
+  "checks": [
+    {
+      "id": "baseline-audio-and-timeline",
+      "expected": "Actual CASE2 version URL and SHA match candidate B; turns4–8 shifted by 0.20 s; CASE1 remains approved audio",
+      "status": "PASS",
+      "actual": [
+        {
+          "id": "CASE-0001",
+          "url": "/demo/CASE-0001.wav",
+          "bytes": 2263278,
+          "sha256": "d4eeb6448ff8969f27034ecade9a050ee212468585c6300b19c9a0ebdc372931",
+          "transcript": [
+            {
+              "speaker": "상담원",
+              "text": "안녕하세요. 해피콜 상담원입니다. 어떤 점포에서 연락 주셨나요?",
+              "start": 0,
+              "end": 5.1
+            },
+            {
+              "speaker": "경영주",
+              "text": "가상 한빛점이에요. 아침 다섯 시 배송인데 일곱 시가 다 돼도 물건이 안 왔어요. 정말 답답하네요.",
+              "start": 5.45,
+              "end": 11.9
+            },
+            {
+              "speaker": "상담원",
+              "text": "오늘 배송 전체가 도착하지 않았다는 말씀이시죠?",
+              "start": 12.25,
+              "end": 16.35
+            },
+            {
+              "speaker": "경영주",
+              "text": "네. 어제도 바빴는데 오늘까지 이러니 화가 나요. 가게 앞 공사 때문에 길이 막혔을 수도 있고요.",
+              "start": 16.7,
+              "end": 23
+            },
+            {
+              "speaker": "상담원",
+              "text": "배송 전체 미도착으로 접수하겠습니다. 마지막 말씀은 확인이 필요한 내용으로 남기겠습니다.",
+              "start": 23.35,
+              "end": 30.2
+            },
+            {
+              "speaker": "경영주",
+              "text": "지금 어디 있는지, 언제 올 수 있는지 센터에서 확인해서 알려 주세요.",
+              "start": 30.55,
+              "end": 35.8
+            },
+            {
+              "speaker": "상담원",
+              "text": "센터에 운행 상황 확인을 요청하겠습니다. 확인되지 않은 도착 시간은 확답드리기 어렵습니다.",
+              "start": 36.15,
+              "end": 44
+            },
+            {
+              "speaker": "경영주",
+              "text": "네. 확인 후 연락 부탁드립니다.",
+              "start": 44.35,
+              "end": 46.8
+            }
+          ]
+        },
+        {
+          "id": "CASE-0002",
+          "url": "/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "bytes": 2388044,
+          "sha256": "6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "transcript": [
+            {
+              "speaker": "상담원",
+              "text": "안녕하세요. 해피콜 상담원입니다. 어떤 불편이 있으신가요?",
+              "start": 0,
+              "end": 4.3
+            },
+            {
+              "speaker": "경영주",
+              "text": "가상 새봄점인데요. 비스킷 열여덟 개를 주문했는데 휴지 한 박스가 왔어요. 이게 대체 뭡니까.",
+              "start": 4.65,
+              "end": 12.2
+            },
+            {
+              "speaker": "상담원",
+              "text": "비스킷 열여덟 개 대신 휴지 한 개가 왔다는 말씀이시죠?",
+              "start": 12.55,
+              "end": 17.2
+            },
+            {
+              "speaker": "경영주",
+              "text": "아니요. 휴지 한 개가 아니라 한 박스예요. 단위를 제대로 적어 주세요.",
+              "start": 17.75,
+              "end": 23.3
+            },
+            {
+              "speaker": "상담원",
+              "text": "네. 정정하겠습니다. 주문은 비스킷 열여덟 개, 받은 상품은 휴지 한 박스입니다.",
+              "start": 23.65,
+              "end": 29.8
+            },
+            {
+              "speaker": "경영주",
+              "text": "주말 장사도 해야 하는데 정말 곤란해요. 잘못 온 상품은 어떻게 해야 하나요?",
+              "start": 30.15,
+              "end": 36.55
+            },
+            {
+              "speaker": "상담원",
+              "text": "오출고 확인과 회송 안내가 필요한 것으로 접수하고 센터 상품 담당자에게 전달하겠습니다.",
+              "start": 36.9,
+              "end": 44.25
+            },
+            {
+              "speaker": "경영주",
+              "text": "네. 주문한 상품 처리도 같이 확인해 주세요.",
+              "start": 44.6,
+              "end": 49.4
+            }
+          ]
+        }
+      ],
+      "ms": 169
+    },
+    {
+      "id": "CASE-0001-natural-full-parent-gate",
+      "expected": "Natural 1x playback from start to end; trusted ended1; real parent analysis disabled before and enabled after",
+      "status": "PASS",
+      "actual": {
+        "id": "CASE-0001",
+        "expectedDuration": 47.15,
+        "elapsed": 48.368,
+        "before": {
+          "src": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+          "time": 0,
+          "duration": 47.15,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": []
+        },
+        "audio": {
+          "src": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+          "time": 47.15,
+          "duration": 47.15,
+          "paused": true,
+          "ended": true,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": [
+            [
+              0,
+              47.15
+            ]
+          ]
+        },
+        "events": [
+          {
+            "type": "loadedmetadata",
+            "id": 2,
+            "at": 1745.6000000014901,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+            "time": 0,
+            "duration": 47.15,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "play",
+            "id": 2,
+            "at": 1747.6000000014901,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+            "time": 0,
+            "duration": 47.15,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "playing",
+            "id": 2,
+            "at": 1748.8999999985099,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+            "time": 0,
+            "duration": 47.15,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "pause",
+            "id": 2,
+            "at": 50019.89999999851,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+            "time": 47.15,
+            "duration": 47.15,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                0,
+                47.15
+              ]
+            ]
+          },
+          {
+            "type": "ended",
+            "id": 2,
+            "at": 50021.89999999851,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+            "time": 47.15,
+            "duration": 47.15,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                0,
+                47.15
+              ]
+            ]
+          }
+        ],
+        "parentAnalysisEnabled": true
+      },
+      "ms": 50084
+    },
+    {
+      "id": "CASE-0001-real-replay-analysis-and-form",
+      "expected": "One real POST mode=replay; response fields/8 turns/questions render in parent; original preserved; quantity/unit retain source meaning",
+      "status": "PASS",
+      "actual": {
+        "request": {
+          "method": "POST",
+          "mode": "replay"
+        },
+        "responseMode": "replay",
+        "fields": {
+          "storeId": "SYN-ST01",
+          "subject": "당일 1회차 배송 전체",
+          "quantity": "",
+          "unit": "",
+          "request": "운행 위치와 도착 예정 확인"
+        },
+        "transcriptRows": 8,
+        "sourcePreserved": true,
+        "questions": [
+          "차량의 현재 운행 상태를 확인해 주세요.",
+          "실제 인도 여부와 완료 기록 누락 여부를 확인해 주세요."
+        ],
+        "requests": 1
+      },
+      "ms": 409
+    },
+    {
+      "id": "CASE-0002-natural-full-parent-gate",
+      "expected": "Natural 1x playback from start to end; trusted ended1; real parent analysis disabled before and enabled after",
+      "status": "PASS",
+      "actual": {
+        "id": "CASE-0002",
+        "expectedDuration": 49.75,
+        "elapsed": 50.045,
+        "before": {
+          "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 0,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": []
+        },
+        "audio": {
+          "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 49.75,
+          "duration": 49.75,
+          "paused": true,
+          "ended": true,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": [
+            [
+              0,
+              49.75
+            ]
+          ]
+        },
+        "events": [
+          {
+            "type": "loadedmetadata",
+            "id": 3,
+            "at": 442.1000000014901,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 0,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "play",
+            "id": 3,
+            "at": 447.80000000447035,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 0,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "playing",
+            "id": 3,
+            "at": 449.40000000596046,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 0,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "pause",
+            "id": 3,
+            "at": 50388.40000000596,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.75,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                0,
+                49.75
+              ]
+            ]
+          },
+          {
+            "type": "ended",
+            "id": 3,
+            "at": 50389.10000000149,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.75,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                0,
+                49.75
+              ]
+            ]
+          }
+        ],
+        "parentAnalysisEnabled": true
+      },
+      "ms": 50417
+    },
+    {
+      "id": "CASE-0002-real-replay-analysis-and-form",
+      "expected": "One real POST mode=replay; response fields/8 turns/questions render in parent; original preserved; quantity/unit retain source meaning",
+      "status": "PASS",
+      "actual": {
+        "request": {
+          "method": "POST",
+          "mode": "replay"
+        },
+        "responseMode": "replay",
+        "fields": {
+          "storeId": "SYN-ST02",
+          "subject": "비스킷 주문 대신 휴지 입고",
+          "quantity": "1",
+          "unit": "BOX",
+          "request": "오출고 확인·회송 방법·주문 상품 처리 안내"
+        },
+        "transcriptRows": 8,
+        "sourcePreserved": true,
+        "questions": [
+          "주문 상품과 실제 입고 상품의 라벨을 센터에서 대조해 주세요.",
+          "피킹 토트와 출고 토트 연결 및 회송·재처리 방안을 확인해 주세요."
+        ],
+        "requests": 1
+      },
+      "ms": 351
+    },
+    {
+      "id": "analysis-failure-preserves-draft",
+      "expected": "Intentional HTTP503 is visible; actual parent edited form/question and original remain byte-for-byte; retry available",
+      "status": "PASS",
+      "actual": {
+        "before": {
+          "storeId": "SYN-ST02",
+          "subject": "비스킷 주문 대신 휴지 입고",
+          "quantity": "1",
+          "unit": "BOX",
+          "request": "합성 점검 메모: 정정한 1BOX 확인 후 회송 절차 문의"
+        },
+        "after": {
+          "storeId": "SYN-ST02",
+          "subject": "비스킷 주문 대신 휴지 입고",
+          "quantity": "1",
+          "unit": "BOX",
+          "request": "합성 점검 메모: 정정한 1BOX 확인 후 회송 절차 문의"
+        },
+        "question": "합성 점검 질문: 바깥 박스 라벨을 확인할 수 있나요?",
+        "originalSha256": "f96013ec46482ae7d44e064ff43a302b4ad4c97693bdb44342e4afd54973bee8",
+        "retryEnabled": true,
+        "expectedStatus": 503
+      },
+      "ms": 235
+    },
+    {
+      "id": "same-id-new-audio-parent-reset",
+      "expected": "Actual /api/cases input changes only CASE2 audioURL; real reload resets completion; detached old ended cannot unlock analysis",
+      "status": "PASS",
+      "actual": {
+        "before": {
+          "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 49.75,
+          "duration": 49.75,
+          "paused": true,
+          "ended": true,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": [
+            [
+              0,
+              49.75
+            ]
+          ]
+        },
+        "after": {
+          "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0&pc2-m3-source=replacement",
+          "time": 0,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": []
+        },
+        "detached": {
+          "connected": false,
+          "paused": true
+        },
+        "gateReset": true,
+        "onlyInputInjection": "GET /api/cases CASE2 audioUrl query"
+      },
+      "ms": 138
+    },
+    {
+      "id": "end-seek-does-not-complete-parent",
+      "expected": "Native ended after seeking near end does not unlock actual parent analysis",
+      "status": "PASS",
+      "actual": {
+        "audio": {
+          "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 49.75,
+          "duration": 49.75,
+          "paused": true,
+          "ended": true,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": [
+            [
+              49.67,
+              49.75
+            ]
+          ]
+        },
+        "parentDisabled": true,
+        "events": [
+          {
+            "type": "seeking",
+            "id": 2,
+            "at": 367.5,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.67,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "seeked",
+            "id": 2,
+            "at": 485.40000000596046,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.67,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "play",
+            "id": 2,
+            "at": 491,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.67,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "playing",
+            "id": 2,
+            "at": 493.80000000447035,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.67,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "pause",
+            "id": 2,
+            "at": 678.1000000014901,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.75,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                49.67,
+                49.75
+              ]
+            ]
+          },
+          {
+            "type": "ended",
+            "id": 2,
+            "at": 679,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.75,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                49.67,
+                49.75
+              ]
+            ]
+          }
+        ]
+      },
+      "ms": 748
+    },
+    {
+      "id": "segment-does-not-complete-parent",
+      "expected": "Actual final segment 44.60–49.40 pauses at boundary; parent remains disabled",
+      "status": "PASS",
+      "actual": {
+        "audio": {
+          "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 49.4,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": [
+            [
+              44.6,
+              49.41559
+            ]
+          ]
+        },
+        "parentDisabled": true,
+        "expected": [
+          44.6,
+          49.4
+        ],
+        "events": [
+          {
+            "type": "seeking",
+            "id": 2,
+            "at": 494.40000000596046,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 44.6,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "play",
+            "id": 2,
+            "at": 495.1000000014901,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 44.6,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "seeked",
+            "id": 2,
+            "at": 593.3000000044703,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 44.6,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "playing",
+            "id": 2,
+            "at": 593.6000000014901,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 44.6,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "pause",
+            "id": 2,
+            "at": 5489.20000000298,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.4,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                44.6,
+                49.41559
+              ]
+            ]
+          },
+          {
+            "type": "seeking",
+            "id": 2,
+            "at": 5490.9000000059605,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.4,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                44.6,
+                49.41559
+              ]
+            ]
+          },
+          {
+            "type": "seeked",
+            "id": 2,
+            "at": 5492,
+            "trusted": true,
+            "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.4,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                44.6,
+                49.41559
+              ]
+            ]
+          }
+        ]
+      },
+      "ms": 5510
+    },
+    {
+      "id": "audio-404-recovery",
+      "expected": "Missing audio produces real error, parent gate stays locked; UI reload after recovery obtains 49.75s metadata and can play",
+      "status": "PASS",
+      "actual": {
+        "fault": {
+          "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 0,
+          "duration": null,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": 4,
+          "played": []
+        },
+        "recovered": {
+          "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 0,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": []
+        },
+        "playable": {
+          "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 0.109279,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": [
+            [
+              0,
+              0.109279
+            ]
+          ]
+        },
+        "parentStillDisabledBeforeFullEnd": true
+      },
+      "ms": 907
+    },
+    {
+      "id": "parent-layout-keyboard-1440",
+      "expected": "Actual page at target width: 0 horizontal overflow; playback controls, source disclosure, editor link and keyboard reachability",
+      "status": "PASS",
+      "actual": {
+        "width": 1440,
+        "geometry": {
+          "viewport": 1440,
+          "overflow": 0,
+          "audio": {
+            "x": 69,
+            "y": 814.4375,
+            "width": 620,
+            "height": 54
+          },
+          "actions": {
+            "x": 48,
+            "y": 1151.21875,
+            "width": 662,
+            "height": 118.046875
+          },
+          "editor": {
+            "x": 730,
+            "y": 752.9375,
+            "width": 662,
+            "height": 1220.34375
+          }
+        },
+        "focused": {
+          "tag": "SUMMARY",
+          "insideEditor": true
+        },
+        "keyboard": [
+          "source Enter/Space",
+          "rate ArrowDown",
+          "mute Space",
+          "editor link Enter then Tab"
+        ],
+        "screenshot": "parent-layout-1440.png"
+      },
+      "ms": 830
+    },
+    {
+      "id": "parent-layout-keyboard-768",
+      "expected": "Actual page at target width: 0 horizontal overflow; playback controls, source disclosure, editor link and keyboard reachability",
+      "status": "PASS",
+      "actual": {
+        "width": 768,
+        "geometry": {
+          "viewport": 768,
+          "overflow": 0,
+          "audio": {
+            "x": 37,
+            "y": 961.9375,
+            "width": 694,
+            "height": 54
+          },
+          "actions": {
+            "x": 16,
+            "y": 1280.125,
+            "width": 736,
+            "height": 86.546875
+          },
+          "editor": {
+            "x": 16,
+            "y": 1386.671875,
+            "width": 736,
+            "height": 1249.34375
+          }
+        },
+        "focused": {
+          "tag": "SUMMARY",
+          "insideEditor": true
+        },
+        "keyboard": [
+          "source Enter/Space",
+          "rate ArrowDown",
+          "mute Space",
+          "editor link Enter then Tab"
+        ],
+        "screenshot": "parent-layout-768.png"
+      },
+      "ms": 779
+    },
+    {
+      "id": "parent-layout-keyboard-390",
+      "expected": "Actual page at target width: 0 horizontal overflow; playback controls, source disclosure, editor link and keyboard reachability",
+      "status": "PASS",
+      "actual": {
+        "width": 390,
+        "geometry": {
+          "viewport": 390,
+          "overflow": 0,
+          "audio": {
+            "x": 33,
+            "y": 1011.4375,
+            "width": 324,
+            "height": 54
+          },
+          "actions": {
+            "x": 16,
+            "y": 1381.40625,
+            "width": 358,
+            "height": 187.09375
+          },
+          "editor": {
+            "x": 16,
+            "y": 1588.5,
+            "width": 358,
+            "height": 1414.21875
+          }
+        },
+        "focused": {
+          "tag": "SUMMARY",
+          "insideEditor": true
+        },
+        "keyboard": [
+          "source Enter/Space",
+          "rate ArrowDown",
+          "mute Space",
+          "editor link Enter then Tab"
+        ],
+        "screenshot": "parent-layout-390.png"
+      },
+      "ms": 753
+    },
+    {
+      "id": "parent-request-and-error-integrity",
+      "expected": "No external/live/non-replay calls; no uncaught page errors or unexpected console errors; real replay POST2 plus deliberate failure1",
+      "status": "PASS",
+      "actual": {
+        "realReplaySuccess": 2,
+        "deliberateAnalysisFailure": 1,
+        "totalPOST": 3,
+        "pageErrors": 0,
+        "unexpectedConsoleErrors": 0,
+        "expectedConsoleErrors": 2,
+        "blockedRequests": 0
+      },
+      "ms": 1
+    }
+  ],
+  "requests": [
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:51:33.980Z",
+      "url": "http://127.0.0.1:63880/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:51:34.024Z",
+      "url": "http://127.0.0.1:63880/_next/static/css/c51028af84ba3eb0.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:51:34.029Z",
+      "url": "http://127.0.0.1:63880/_next/static/css/8539327adedac84e.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:51:34.031Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/webpack-f777753e94ab0e86.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:51:34.033Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/49ea6767-0552f1e6d98592e5.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:51:34.034Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/802-aa61581df1c5cf6c.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:51:34.036Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/main-app-297ff8eb55f160d4.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:51:34.037Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/app/page-cd945035eca7ec5b.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:51:35.221Z",
+      "url": "http://127.0.0.1:63880/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:51:35.223Z",
+      "url": "http://127.0.0.1:63880/api/cases",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:51:35.351Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:51:35.683Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:51:35.733Z",
+      "url": "http://127.0.0.1:63880/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:51:36.377Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-real-replay-analysis-and-form",
+      "at": "2026-09-21T12:52:24.111Z",
+      "url": "http://127.0.0.1:63880/api/cases/CASE-0001/analyze",
+      "method": "POST",
+      "body": {
+        "mode": "replay"
+      }
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:52:24.453Z",
+      "url": "http://127.0.0.1:63880/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:52:24.491Z",
+      "url": "http://127.0.0.1:63880/_next/static/css/c51028af84ba3eb0.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:52:24.494Z",
+      "url": "http://127.0.0.1:63880/_next/static/css/8539327adedac84e.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:52:24.495Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/webpack-f777753e94ab0e86.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:52:24.497Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/49ea6767-0552f1e6d98592e5.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:52:24.499Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/802-aa61581df1c5cf6c.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:52:24.500Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/main-app-297ff8eb55f160d4.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:52:24.502Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/app/page-cd945035eca7ec5b.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:52:24.617Z",
+      "url": "http://127.0.0.1:63880/api/cases",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:52:24.619Z",
+      "url": "http://127.0.0.1:63880/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:52:24.673Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:52:24.762Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:52:24.866Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:52:24.900Z",
+      "url": "http://127.0.0.1:63880/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:52:24.985Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-real-replay-analysis-and-form",
+      "at": "2026-09-21T12:53:14.909Z",
+      "url": "http://127.0.0.1:63880/api/cases/CASE-0002/analyze",
+      "method": "POST",
+      "body": {
+        "mode": "replay"
+      }
+    },
+    {
+      "phase": "analysis-failure-preserves-draft",
+      "at": "2026-09-21T12:53:15.339Z",
+      "url": "http://127.0.0.1:63880/api/cases/CASE-0002/analyze",
+      "method": "POST",
+      "body": {
+        "mode": "replay"
+      }
+    },
+    {
+      "phase": "same-id-new-audio-parent-reset",
+      "at": "2026-09-21T12:53:15.503Z",
+      "url": "http://127.0.0.1:63880/api/cases",
+      "method": "GET",
+      "body": null,
+      "inputInjection": {
+        "id": "CASE-0002",
+        "previousAudioUrl": "/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+        "replacementAudioUrl": "/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0&pc2-m3-source=replacement"
+      }
+    },
+    {
+      "phase": "same-id-new-audio-parent-reset",
+      "at": "2026-09-21T12:53:15.540Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0&pc2-m3-source=replacement",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:53:15.649Z",
+      "url": "http://127.0.0.1:63880/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:53:15.688Z",
+      "url": "http://127.0.0.1:63880/_next/static/css/c51028af84ba3eb0.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:53:15.689Z",
+      "url": "http://127.0.0.1:63880/_next/static/css/8539327adedac84e.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:53:15.690Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/webpack-f777753e94ab0e86.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:53:15.692Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/49ea6767-0552f1e6d98592e5.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:53:15.693Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/802-aa61581df1c5cf6c.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:53:15.694Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/main-app-297ff8eb55f160d4.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:53:15.698Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/app/page-cd945035eca7ec5b.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:53:15.827Z",
+      "url": "http://127.0.0.1:63880/api/cases",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:53:15.828Z",
+      "url": "http://127.0.0.1:63880/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:53:15.860Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:53:15.957Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:53:16.104Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:53:16.141Z",
+      "url": "http://127.0.0.1:63880/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:53:16.356Z",
+      "url": "http://127.0.0.1:63880/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:53:16.397Z",
+      "url": "http://127.0.0.1:63880/_next/static/css/c51028af84ba3eb0.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:53:16.399Z",
+      "url": "http://127.0.0.1:63880/_next/static/css/8539327adedac84e.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:53:16.400Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/webpack-f777753e94ab0e86.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:53:16.400Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/49ea6767-0552f1e6d98592e5.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:53:16.403Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/802-aa61581df1c5cf6c.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:53:16.403Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/main-app-297ff8eb55f160d4.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:53:16.404Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/app/page-cd945035eca7ec5b.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:53:16.527Z",
+      "url": "http://127.0.0.1:63880/api/cases",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:53:16.531Z",
+      "url": "http://127.0.0.1:63880/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:53:16.566Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:53:16.676Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:53:16.857Z",
+      "url": "http://127.0.0.1:63880/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:53:16.925Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:53:21.874Z",
+      "url": "http://127.0.0.1:63880/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:53:21.910Z",
+      "url": "http://127.0.0.1:63880/_next/static/css/c51028af84ba3eb0.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:53:21.912Z",
+      "url": "http://127.0.0.1:63880/_next/static/css/8539327adedac84e.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:53:21.913Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/webpack-f777753e94ab0e86.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:53:21.914Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/49ea6767-0552f1e6d98592e5.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:53:21.916Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/802-aa61581df1c5cf6c.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:53:21.917Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/main-app-297ff8eb55f160d4.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:53:21.918Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/app/page-cd945035eca7ec5b.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:53:22.034Z",
+      "url": "http://127.0.0.1:63880/api/cases",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:53:22.036Z",
+      "url": "http://127.0.0.1:63880/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:53:22.085Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:53:22.241Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:53:22.333Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:53:22.445Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:53:22.475Z",
+      "url": "http://127.0.0.1:63880/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:53:22.556Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:53:22.774Z",
+      "url": "http://127.0.0.1:63880/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:53:22.806Z",
+      "url": "http://127.0.0.1:63880/_next/static/css/c51028af84ba3eb0.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:53:22.810Z",
+      "url": "http://127.0.0.1:63880/_next/static/css/8539327adedac84e.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:53:22.815Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/webpack-f777753e94ab0e86.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:53:22.816Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/49ea6767-0552f1e6d98592e5.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:53:22.817Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/802-aa61581df1c5cf6c.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:53:22.817Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/main-app-297ff8eb55f160d4.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:53:22.818Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/app/page-cd945035eca7ec5b.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:53:22.936Z",
+      "url": "http://127.0.0.1:63880/api/cases",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:53:22.938Z",
+      "url": "http://127.0.0.1:63880/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:53:22.978Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:53:23.097Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:53:23.278Z",
+      "url": "http://127.0.0.1:63880/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:53:23.608Z",
+      "url": "http://127.0.0.1:63880/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:53:23.642Z",
+      "url": "http://127.0.0.1:63880/_next/static/css/c51028af84ba3eb0.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:53:23.643Z",
+      "url": "http://127.0.0.1:63880/_next/static/css/8539327adedac84e.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:53:23.645Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/webpack-f777753e94ab0e86.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:53:23.646Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/49ea6767-0552f1e6d98592e5.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:53:23.647Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/802-aa61581df1c5cf6c.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:53:23.647Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/main-app-297ff8eb55f160d4.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:53:23.648Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/app/page-cd945035eca7ec5b.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:53:23.785Z",
+      "url": "http://127.0.0.1:63880/api/cases",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:53:23.786Z",
+      "url": "http://127.0.0.1:63880/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:53:23.846Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:53:23.934Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:53:24.127Z",
+      "url": "http://127.0.0.1:63880/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:53:24.390Z",
+      "url": "http://127.0.0.1:63880/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:53:24.425Z",
+      "url": "http://127.0.0.1:63880/_next/static/css/c51028af84ba3eb0.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:53:24.426Z",
+      "url": "http://127.0.0.1:63880/_next/static/css/8539327adedac84e.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:53:24.427Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/webpack-f777753e94ab0e86.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:53:24.428Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/49ea6767-0552f1e6d98592e5.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:53:24.429Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/802-aa61581df1c5cf6c.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:53:24.430Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/main-app-297ff8eb55f160d4.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:53:24.430Z",
+      "url": "http://127.0.0.1:63880/_next/static/chunks/app/page-cd945035eca7ec5b.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:53:24.536Z",
+      "url": "http://127.0.0.1:63880/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:53:24.537Z",
+      "url": "http://127.0.0.1:63880/api/cases",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:53:24.581Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:53:24.713Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:53:24.920Z",
+      "url": "http://127.0.0.1:63880/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    }
+  ],
+  "blockedRequests": [],
+  "expectedFaults": [
+    {
+      "phase": "analysis-failure-preserves-draft",
+      "at": "2026-09-21T12:53:15.339Z",
+      "url": "http://127.0.0.1:63880/api/cases/CASE-0002/analyze",
+      "method": "POST",
+      "body": {
+        "mode": "replay"
+      },
+      "status": 503,
+      "type": "analysis-503"
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:53:22.241Z",
+      "url": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null,
+      "status": 404,
+      "type": "audio-404"
+    }
+  ],
+  "responses": [
+    {
+      "caseId": "CASE-0001",
+      "phase": "CASE-0001-real-replay-analysis-and-form",
+      "status": 200,
+      "data": {
+        "transcript": [
+          {
+            "speaker": "상담원",
+            "text": "안녕하세요. 해피콜 상담원입니다. 어떤 점포에서 연락 주셨나요?",
+            "start": 0,
+            "end": 5.1
+          },
+          {
+            "speaker": "경영주",
+            "text": "가상 한빛점이에요. 아침 다섯 시 배송인데 일곱 시가 다 돼도 물건이 안 왔어요. 정말 답답하네요.",
+            "start": 5.45,
+            "end": 11.9
+          },
+          {
+            "speaker": "상담원",
+            "text": "오늘 배송 전체가 도착하지 않았다는 말씀이시죠?",
+            "start": 12.25,
+            "end": 16.35
+          },
+          {
+            "speaker": "경영주",
+            "text": "네. 어제도 바빴는데 오늘까지 이러니 화가 나요. 가게 앞 공사 때문에 길이 막혔을 수도 있고요.",
+            "start": 16.7,
+            "end": 23
+          },
+          {
+            "speaker": "상담원",
+            "text": "배송 전체 미도착으로 접수하겠습니다. 마지막 말씀은 확인이 필요한 내용으로 남기겠습니다.",
+            "start": 23.35,
+            "end": 30.2
+          },
+          {
+            "speaker": "경영주",
+            "text": "지금 어디 있는지, 언제 올 수 있는지 센터에서 확인해서 알려 주세요.",
+            "start": 30.55,
+            "end": 35.8
+          },
+          {
+            "speaker": "상담원",
+            "text": "센터에 운행 상황 확인을 요청하겠습니다. 확인되지 않은 도착 시간은 확답드리기 어렵습니다.",
+            "start": 36.15,
+            "end": 44
+          },
+          {
+            "speaker": "경영주",
+            "text": "네. 확인 후 연락 부탁드립니다.",
+            "start": 44.35,
+            "end": 46.8
+          }
+        ],
+        "analysis": {
+          "summary": "경영주는 규정 05:00인 당일 1회차 배송을 07:00 현재 받지 못했다고 진술했습니다. 운행 위치와 도착 예정 안내를 요청하며, 인근 공사 영향은 확인되지 않았습니다.",
+          "fields": {
+            "storeId": "SYN-ST01",
+            "subject": "당일 1회차 배송 전체",
+            "quantity": null,
+            "unit": null,
+            "request": "운행 위치와 도착 예정 확인"
+          },
+          "issues": [
+            {
+              "field": "도착 시각",
+              "message": "규정 시각은 실제 도착 기록이 아닙니다.",
+              "evidence": "E-M1"
+            },
+            {
+              "field": "지연 원인",
+              "message": "공사 영향은 경영주 추측으로 추가 확인이 필요합니다.",
+              "evidence": "발화 4"
+            }
+          ],
+          "questions": [
+            "차량의 현재 운행 상태를 확인해 주세요.",
+            "실제 인도 여부와 완료 기록 누락 여부를 확인해 주세요."
+          ],
+          "department": {
+            "id": "delivery",
+            "name": "센터 배송 담당",
+            "reason": "배송 전체 미수령 문의로 운행·점착 확인이 필요합니다."
+          },
+          "facts": [
+            "규정 도착은 05:00입니다.",
+            "센터 출고 스캔 기록은 04:20입니다."
+          ],
+          "unknowns": [
+            "배송완료 시각이 미등록입니다.",
+            "실제 미도착 여부·지연 원인·예상 도착은 센터 확인이 필요합니다."
+          ],
+          "replyDraft": "경영주님, 배송을 받지 못하셨다는 문의를 접수했습니다. 센터 출고 기록은 확인했으나 배송완료 기록이 없어 운행 상태와 실제 도착 여부를 확인 중입니다. 확인되는 내용을 센터 담당자가 안내드리겠습니다."
+        },
+        "mode": "replay",
+        "requestId": "replay-9981e14c33d24dd08cef02c230c2eb8b",
+        "revision": 1
+      }
+    },
+    {
+      "caseId": "CASE-0002",
+      "phase": "CASE-0002-real-replay-analysis-and-form",
+      "status": 200,
+      "data": {
+        "transcript": [
+          {
+            "speaker": "상담원",
+            "text": "안녕하세요. 해피콜 상담원입니다. 어떤 불편이 있으신가요?",
+            "start": 0,
+            "end": 4.3
+          },
+          {
+            "speaker": "경영주",
+            "text": "가상 새봄점인데요. 비스킷 열여덟 개를 주문했는데 휴지 한 박스가 왔어요. 이게 대체 뭡니까.",
+            "start": 4.65,
+            "end": 12.2
+          },
+          {
+            "speaker": "상담원",
+            "text": "비스킷 열여덟 개 대신 휴지 한 개가 왔다는 말씀이시죠?",
+            "start": 12.55,
+            "end": 17.2
+          },
+          {
+            "speaker": "경영주",
+            "text": "아니요. 휴지 한 개가 아니라 한 박스예요. 단위를 제대로 적어 주세요.",
+            "start": 17.75,
+            "end": 23.3
+          },
+          {
+            "speaker": "상담원",
+            "text": "네. 정정하겠습니다. 주문은 비스킷 열여덟 개, 받은 상품은 휴지 한 박스입니다.",
+            "start": 23.65,
+            "end": 29.8
+          },
+          {
+            "speaker": "경영주",
+            "text": "주말 장사도 해야 하는데 정말 곤란해요. 잘못 온 상품은 어떻게 해야 하나요?",
+            "start": 30.15,
+            "end": 36.55
+          },
+          {
+            "speaker": "상담원",
+            "text": "오출고 확인과 회송 안내가 필요한 것으로 접수하고 센터 상품 담당자에게 전달하겠습니다.",
+            "start": 36.9,
+            "end": 44.25
+          },
+          {
+            "speaker": "경영주",
+            "text": "네. 주문한 상품 처리도 같이 확인해 주세요.",
+            "start": 44.6,
+            "end": 49.4
+          }
+        ],
+        "analysis": {
+          "summary": "경영주는 비스킷 18개 주문에 휴지 1박스를 받았다고 진술했습니다. 상담원이 중간에 ‘1개’로 잘못 재진술했으나 경영주가 ‘1박스’로 정정했습니다. 오출고 확인·회송 방법·주문 상품 처리를 요청합니다.",
+          "fields": {
+            "storeId": "SYN-ST02",
+            "subject": "비스킷 주문 대신 휴지 입고",
+            "quantity": 1,
+            "unit": "BOX",
+            "request": "오출고 확인·회송 방법·주문 상품 처리 안내"
+          },
+          "issues": [
+            {
+              "field": "unit",
+              "message": "상담원 입력 EA와 경영주가 정정한 BOX가 다릅니다. 원문 확인 후 수정해 주세요.",
+              "evidence": "발화 3~5"
+            },
+            {
+              "field": "quantity",
+              "message": "주문 18 EA와 입고 1 BOX를 단순 차감하지 마세요.",
+              "evidence": "E-W1/E-W3"
+            }
+          ],
+          "questions": [
+            "주문 상품과 실제 입고 상품의 라벨을 센터에서 대조해 주세요.",
+            "피킹 토트와 출고 토트 연결 및 회송·재처리 방안을 확인해 주세요."
+          ],
+          "department": {
+            "id": "warehouse",
+            "name": "센터 상품 담당",
+            "reason": "주문/출고 상품이 달라 피킹·출고 대조와 회송 확인이 필요합니다."
+          },
+          "facts": [
+            "주문/피킹은 비스킷 18 EA입니다.",
+            "출고 스캔은 휴지 1 BOX로 기록돼 불일치합니다.",
+            "배송완료 등록은 05:10입니다."
+          ],
+          "unknowns": [
+            "불일치 발생 공정과 원인은 미확인입니다.",
+            "상품 회송·주문 상품 재처리 완료 여부는 확인이 필요합니다."
+          ],
+          "replyDraft": "경영주님, 주문하신 비스킷 18개와 출고 기록의 휴지 1박스가 다른 점을 확인했습니다. 발생 경위와 회송·주문 상품 처리 방안은 센터에서 추가 확인 후 안내드리겠습니다."
+        },
+        "mode": "replay",
+        "requestId": "replay-b604cecfc4fa4220b6aa614885e42a42",
+        "revision": 1
+      }
+    }
+  ],
+  "consoleErrors": [
+    {
+      "phase": "analysis-failure-preserves-draft",
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "expectedFault": true,
+      "location": {
+        "url": "http://127.0.0.1:63880/api/cases/CASE-0002/analyze",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "phase": "audio-404-recovery",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "expectedFault": true,
+      "location": {
+        "url": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "pageErrors": [],
+  "screenshots": [
+    {
+      "file": "parent-layout-1440.png",
+      "width": 1440,
+      "sha256": "5fbf1f1288f13c8503a191bc92ff31548b91524f8cbf562093c5ef72da2c8471"
+    },
+    {
+      "file": "parent-layout-768.png",
+      "width": 768,
+      "sha256": "84bb75b7eee7b70b46ebf70782bd91f5a38b55db56521b2e8330c8e857ddf092"
+    },
+    {
+      "file": "parent-layout-390.png",
+      "width": 390,
+      "sha256": "4f67d66d40216a5b1de9935a2702d3fe0fae75f9e151a02c18d0134bd16fe3b3"
+    }
+  ],
+  "media": [
+    {
+      "id": "CASE-0001",
+      "expectedDuration": 47.15,
+      "elapsed": 48.368,
+      "before": {
+        "src": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+        "time": 0,
+        "duration": 47.15,
+        "paused": true,
+        "ended": false,
+        "rate": 1,
+        "volume": 1,
+        "muted": false,
+        "error": null,
+        "played": []
+      },
+      "audio": {
+        "src": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+        "time": 47.15,
+        "duration": 47.15,
+        "paused": true,
+        "ended": true,
+        "rate": 1,
+        "volume": 1,
+        "muted": false,
+        "error": null,
+        "played": [
+          [
+            0,
+            47.15
+          ]
+        ]
+      },
+      "events": [
+        {
+          "type": "loadedmetadata",
+          "id": 2,
+          "at": 1745.6000000014901,
+          "trusted": true,
+          "src": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+          "time": 0,
+          "duration": 47.15,
+          "rate": 1,
+          "error": null,
+          "played": []
+        },
+        {
+          "type": "play",
+          "id": 2,
+          "at": 1747.6000000014901,
+          "trusted": true,
+          "src": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+          "time": 0,
+          "duration": 47.15,
+          "rate": 1,
+          "error": null,
+          "played": []
+        },
+        {
+          "type": "playing",
+          "id": 2,
+          "at": 1748.8999999985099,
+          "trusted": true,
+          "src": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+          "time": 0,
+          "duration": 47.15,
+          "rate": 1,
+          "error": null,
+          "played": []
+        },
+        {
+          "type": "pause",
+          "id": 2,
+          "at": 50019.89999999851,
+          "trusted": true,
+          "src": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+          "time": 47.15,
+          "duration": 47.15,
+          "rate": 1,
+          "error": null,
+          "played": [
+            [
+              0,
+              47.15
+            ]
+          ]
+        },
+        {
+          "type": "ended",
+          "id": 2,
+          "at": 50021.89999999851,
+          "trusted": true,
+          "src": "http://127.0.0.1:63880/demo/CASE-0001.wav",
+          "time": 47.15,
+          "duration": 47.15,
+          "rate": 1,
+          "error": null,
+          "played": [
+            [
+              0,
+              47.15
+            ]
+          ]
+        }
+      ],
+      "parentAnalysisEnabled": true
+    },
+    {
+      "id": "CASE-0002",
+      "expectedDuration": 49.75,
+      "elapsed": 50.045,
+      "before": {
+        "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+        "time": 0,
+        "duration": 49.75,
+        "paused": true,
+        "ended": false,
+        "rate": 1,
+        "volume": 1,
+        "muted": false,
+        "error": null,
+        "played": []
+      },
+      "audio": {
+        "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+        "time": 49.75,
+        "duration": 49.75,
+        "paused": true,
+        "ended": true,
+        "rate": 1,
+        "volume": 1,
+        "muted": false,
+        "error": null,
+        "played": [
+          [
+            0,
+            49.75
+          ]
+        ]
+      },
+      "events": [
+        {
+          "type": "loadedmetadata",
+          "id": 3,
+          "at": 442.1000000014901,
+          "trusted": true,
+          "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 0,
+          "duration": 49.75,
+          "rate": 1,
+          "error": null,
+          "played": []
+        },
+        {
+          "type": "play",
+          "id": 3,
+          "at": 447.80000000447035,
+          "trusted": true,
+          "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 0,
+          "duration": 49.75,
+          "rate": 1,
+          "error": null,
+          "played": []
+        },
+        {
+          "type": "playing",
+          "id": 3,
+          "at": 449.40000000596046,
+          "trusted": true,
+          "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 0,
+          "duration": 49.75,
+          "rate": 1,
+          "error": null,
+          "played": []
+        },
+        {
+          "type": "pause",
+          "id": 3,
+          "at": 50388.40000000596,
+          "trusted": true,
+          "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 49.75,
+          "duration": 49.75,
+          "rate": 1,
+          "error": null,
+          "played": [
+            [
+              0,
+              49.75
+            ]
+          ]
+        },
+        {
+          "type": "ended",
+          "id": 3,
+          "at": 50389.10000000149,
+          "trusted": true,
+          "src": "http://127.0.0.1:63880/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 49.75,
+          "duration": 49.75,
+          "rate": 1,
+          "error": null,
+          "played": [
+            [
+              0,
+              49.75
+            ]
+          ]
+        }
+      ],
+      "parentAnalysisEnabled": true
+    }
+  ],
+  "cleanup": [
+    {
+      "context": "closed"
+    }
+  ],
+  "summary": {
+    "executed": 14,
+    "passed": 14,
+    "failed": 0
+  },
+  "finished": "2026-09-21T12:53:25.166Z"
+}

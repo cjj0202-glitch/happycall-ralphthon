@@ -1,0 +1,41 @@
+{
+  "startedAt": "2026-09-21T12:51:26.198132+00:00",
+  "pid": 18100,
+  "productRoot": "C:\\Users\\Administrator\\Desktop\\hackerton\\.local\\pc2-m3-product",
+  "mode": "real-product-isolated-replay",
+  "existingProcessesTouched": false,
+  "counts": {
+    "paidAttempts": 0,
+    "keyReadAttempts": 0,
+    "externalAttempts": 0
+  },
+  "port": 63880,
+  "host": "127.0.0.1",
+  "base": "http://127.0.0.1:63880",
+  "buildStamp": {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "completedAt": "2026-09-21T12:42:02.336730+00:00",
+    "nextPublicApiBase": "",
+    "outputFileCount": 26,
+    "outputFingerprint": "cb90493da4b397022185a770d9943d7869a1cf4a70f639007b080e0879f32497",
+    "recordDigest": "e4a51a177de3feeca72efa39b761f01e2a69837224e9f277219238435876e7b4",
+    "schemaVersion": "oneflow-next-build-v1",
+    "sourceAfter": "8198a3dceb74ebd3952a2b8540cd961c73f57060f83deb0ca6e9ec3bcfd2af7d",
+    "sourceBefore": "8198a3dceb74ebd3952a2b8540cd961c73f57060f83deb0ca6e9ec3bcfd2af7d",
+    "status": "complete"
+  },
+  "mediaHashes": {
+    "demo/CASE-0001.wav": "d4eeb6448ff8969f27034ecade9a050ee212468585c6300b19c9a0ebdc372931",
+    "demo/CASE-0002.wav": "6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+    "demo/sorter-demo.mp4": "e6cad3cf9f999b596a0fef3e3d463170e0d279568a31a4be49366e5383908881"
+  },
+  "stateDir": "C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\.local\\pc2-m3-states\\2026-09-21T12-51-25-545Z",
+  "statePreserved": true,
+  "shutdownRequestedAt": "2026-09-21T12:53:28.662764+00:00",
+  "stoppedAt": "2026-09-21T12:53:28.834992+00:00",
+  "stopped": true
+}

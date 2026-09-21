@@ -1,0 +1,4 @@
+# Keep exact checker/helper and result bytes for independent evidence intake.
+* -text whitespace=cr-at-eol
+*.png binary
+*.log whitespace=cr-at-eol,-blank-at-eof

@@ -1,0 +1,2162 @@
+{
+  "version": "pc2-m3-parent-replay-v1",
+  "started": "2026-09-21T12:47:17.644Z",
+  "productCommit": "92d2ecbad981f366a9e5ffc850d9c2bb7fd5d3a2",
+  "fixtureSha256": "c7449e66a89c6c2b43b9b09868d651379a376e25a27f3f227b99375c7fa51449",
+  "browser": "153.0.4234.48",
+  "playwright": "1.58.2",
+  "method": "Actual exported parent page, actual isolated replay API, native Edge audio; only declared fault/source-input responses are injected.",
+  "limits": [
+    "AI technical inspection, human listening 0.",
+    "Replay results are cached synthetic data, not live AI accuracy.",
+    "No production service, persistence deployment, or final acceptance claim."
+  ],
+  "target": {
+    "normal": 4,
+    "sourceChange": 1,
+    "completionCounterexamples": 2,
+    "failureRecovery": 2,
+    "viewportKeyboard": 3,
+    "integrity": 2,
+    "total": 14
+  },
+  "checks": [
+    {
+      "id": "baseline-audio-and-timeline",
+      "expected": "Actual CASE2 version URL and SHA match candidate B; turns4–8 shifted by 0.20 s; CASE1 remains approved audio",
+      "status": "PASS",
+      "actual": [
+        {
+          "id": "CASE-0001",
+          "url": "/demo/CASE-0001.wav",
+          "bytes": 2263278,
+          "sha256": "d4eeb6448ff8969f27034ecade9a050ee212468585c6300b19c9a0ebdc372931",
+          "transcript": [
+            {
+              "speaker": "상담원",
+              "text": "안녕하세요. 해피콜 상담원입니다. 어떤 점포에서 연락 주셨나요?",
+              "start": 0,
+              "end": 5.1
+            },
+            {
+              "speaker": "경영주",
+              "text": "가상 한빛점이에요. 아침 다섯 시 배송인데 일곱 시가 다 돼도 물건이 안 왔어요. 정말 답답하네요.",
+              "start": 5.45,
+              "end": 11.9
+            },
+            {
+              "speaker": "상담원",
+              "text": "오늘 배송 전체가 도착하지 않았다는 말씀이시죠?",
+              "start": 12.25,
+              "end": 16.35
+            },
+            {
+              "speaker": "경영주",
+              "text": "네. 어제도 바빴는데 오늘까지 이러니 화가 나요. 가게 앞 공사 때문에 길이 막혔을 수도 있고요.",
+              "start": 16.7,
+              "end": 23
+            },
+            {
+              "speaker": "상담원",
+              "text": "배송 전체 미도착으로 접수하겠습니다. 마지막 말씀은 확인이 필요한 내용으로 남기겠습니다.",
+              "start": 23.35,
+              "end": 30.2
+            },
+            {
+              "speaker": "경영주",
+              "text": "지금 어디 있는지, 언제 올 수 있는지 센터에서 확인해서 알려 주세요.",
+              "start": 30.55,
+              "end": 35.8
+            },
+            {
+              "speaker": "상담원",
+              "text": "센터에 운행 상황 확인을 요청하겠습니다. 확인되지 않은 도착 시간은 확답드리기 어렵습니다.",
+              "start": 36.15,
+              "end": 44
+            },
+            {
+              "speaker": "경영주",
+              "text": "네. 확인 후 연락 부탁드립니다.",
+              "start": 44.35,
+              "end": 46.8
+            }
+          ]
+        },
+        {
+          "id": "CASE-0002",
+          "url": "/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "bytes": 2388044,
+          "sha256": "6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "transcript": [
+            {
+              "speaker": "상담원",
+              "text": "안녕하세요. 해피콜 상담원입니다. 어떤 불편이 있으신가요?",
+              "start": 0,
+              "end": 4.3
+            },
+            {
+              "speaker": "경영주",
+              "text": "가상 새봄점인데요. 비스킷 열여덟 개를 주문했는데 휴지 한 박스가 왔어요. 이게 대체 뭡니까.",
+              "start": 4.65,
+              "end": 12.2
+            },
+            {
+              "speaker": "상담원",
+              "text": "비스킷 열여덟 개 대신 휴지 한 개가 왔다는 말씀이시죠?",
+              "start": 12.55,
+              "end": 17.2
+            },
+            {
+              "speaker": "경영주",
+              "text": "아니요. 휴지 한 개가 아니라 한 박스예요. 단위를 제대로 적어 주세요.",
+              "start": 17.75,
+              "end": 23.3
+            },
+            {
+              "speaker": "상담원",
+              "text": "네. 정정하겠습니다. 주문은 비스킷 열여덟 개, 받은 상품은 휴지 한 박스입니다.",
+              "start": 23.65,
+              "end": 29.8
+            },
+            {
+              "speaker": "경영주",
+              "text": "주말 장사도 해야 하는데 정말 곤란해요. 잘못 온 상품은 어떻게 해야 하나요?",
+              "start": 30.15,
+              "end": 36.55
+            },
+            {
+              "speaker": "상담원",
+              "text": "오출고 확인과 회송 안내가 필요한 것으로 접수하고 센터 상품 담당자에게 전달하겠습니다.",
+              "start": 36.9,
+              "end": 44.25
+            },
+            {
+              "speaker": "경영주",
+              "text": "네. 주문한 상품 처리도 같이 확인해 주세요.",
+              "start": 44.6,
+              "end": 49.4
+            }
+          ]
+        }
+      ],
+      "ms": 213
+    },
+    {
+      "id": "CASE-0001-natural-full-parent-gate",
+      "expected": "Natural 1x playback from start to end; trusted ended1; real parent analysis disabled before and enabled after",
+      "status": "PASS",
+      "actual": {
+        "id": "CASE-0001",
+        "expectedDuration": 47.15,
+        "elapsed": 49.655,
+        "before": {
+          "src": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+          "time": 0,
+          "duration": 47.15,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": []
+        },
+        "audio": {
+          "src": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+          "time": 47.15,
+          "duration": 47.15,
+          "paused": true,
+          "ended": true,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": [
+            [
+              0,
+              47.15
+            ]
+          ]
+        },
+        "events": [
+          {
+            "type": "loadedmetadata",
+            "id": 2,
+            "at": 4748,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+            "time": 0,
+            "duration": 47.15,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "play",
+            "id": 2,
+            "at": 4751.79999999702,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+            "time": 0,
+            "duration": 47.15,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "playing",
+            "id": 2,
+            "at": 4753.89999999851,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+            "time": 0,
+            "duration": 47.15,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "pause",
+            "id": 2,
+            "at": 54268.5,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+            "time": 47.15,
+            "duration": 47.15,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                0,
+                47.15
+              ]
+            ]
+          },
+          {
+            "type": "ended",
+            "id": 2,
+            "at": 54270.19999999553,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+            "time": 47.15,
+            "duration": 47.15,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                0,
+                47.15
+              ]
+            ]
+          }
+        ],
+        "parentAnalysisEnabled": true
+      },
+      "ms": 54352
+    },
+    {
+      "id": "CASE-0001-real-replay-analysis-and-form",
+      "expected": "One real POST mode=replay; response fields/8 turns/questions render in parent; original preserved; quantity/unit retain source meaning",
+      "status": "FAIL",
+      "error": "locator.inputValue: Error: strict mode violation: getByLabel('상품·문의 대상') resolved to 2 elements:\n    1) <input value=\"당일 1회차 배송 전체\" placeholder=\"상품명 또는 문의 대상\"/> aka getByRole('textbox', { name: '상품·문의 대상 필수' })\n    2) <section aria-label=\"상품·문의 대상 비교\" class=\"CallReview_compareRow__HJ_zu\">…</section> aka getByLabel('상품·문의 대상 비교')\n\nCall log:\n\u001b[2m  - waiting for getByLabel('상품·문의 대상')\u001b[22m\n\n    at formValues (C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\tests\\remote\\pc2\\m3\\checker.mjs:122:68)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/m3/checker.mjs:168:24\n    at async check (C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\tests\\remote\\pc2\\m3\\checker.mjs:40:26)\n    at async runChecks (C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\tests\\remote\\pc2\\m3\\checker.mjs:158:7)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/m3/run.mjs:60:10",
+      "ms": 659,
+      "failureScreenshot": "failure-CASE-0001-real-replay-analysis-and-form.png",
+      "pageText": "본문으로 이동\nHappyCall OneFlow\n합성 데이터 시연\n김\n김하나 상담원\n상담 작업대\n경영주 접수\n센터 회신\nWMS 작업 확인\nTMS 배송 확인\n접수부터 회신까지, 한 흐름으로\n\nHAPPYCALL WORKSPACE\n\n상담 작업대\n\n흩어진 문의와 물류 근거를 모아, 정확한 접수로 연결합니다.\n\n분석 방식\n저장 결과 재생 · API 호출 없음\n실제 AI 분석 · API 사용\n저장된 분석 결과를 불러왔습니다. 실제 AI 호출은 하지 않았습니다.\n접수 현황\n\n다른 담당자가 등록한 내용은 목록 새로고침으로 확인하세요.\n\n최종 서버 확인 21시 47분 25초\n목록 새로고침\nTODAY'S CASES\n접수 목록\n2\n아침 배송 미도착 확인\n가상 한빛점 · CASE-0001\n상담원 확인\n주문 상품과 다른 상품 입고\n가상 새봄점 · CASE-0002\n접수 대기\n미도착 문의\nCASE-0001\n아침 배송 미도착 확인\n상담원 확인\n기준 2026-09-18 07:00\n1\n문의 듣기\n2\nAI 정제·사람 확인\n3\n센터 전달·회신\n\nCALL REVIEW · CASE-0001\n\n통화와 접수 내용 대조\n\n아침 배송 미도착 확인\n\n합성 시연 사례\n1. 통화 다시 듣기\n사전 생성한 합성 음성\n전체 통화 재생 완료\n0:47 / 0:47\n재생 속도\n0.75배\n1배\n1.25배\n1.5배\n2배\n볼륨 100%\n음소거\n\n음성을 처음부터 끝까지 재생하면 분석 준비가 됩니다. 구간 재생이나 끝으로 이동은 전체 재생 완료로 처리하지 않습니다.\n\n구간 재생 중 다른 탭으로 이동하면 선택 구간을 멈춥니다. 전체 통화 재생은 계속될 수 있습니다.\n\n처음부터 전체 통화 재생\n접수 내용을 정리할 준비가 되었습니다\n\n저장된 결과를 불러옵니다. 실제 AI API 비용은 발생하지 않습니다.\n\n저장된 분석 결과 재생 →\n접수 편집으로 이동 ↓\n02 / REFINE & REVIEW\nAI 정제와 접수 확인\n저장 결과 재생\nAI 요약 · 확인 전 초안\n\n경영주는 규정 05:00인 당일 1회차 배송을 07:00 현재 받지 못했다고 진술했습니다. 운행 위치와 도착 예정 안내를 요청하며, 인근 공사 영향은 확인되지 않았습니다.\n\n확인 필요\n규정 시각은 실제 도착 기록이 아닙니다.\n\n원문 근거: E-M1\n\n확인 필요\n공사 영향은 경영주 추측으로 추가 확인이 필요합니다.\n\n원문 근거: 발화 4\n\n원문 보존\n→\nAI 초안\n→\n상담원 편집·확인\nAI가 제안한 접수 정보 원본\n점포코드\n필수\n상품·문의 대상\n필수\n수령 수량(경영주 진술)\n수령 단위\n요청사항\n추가 확인 질문\n2\n01\n차량의 현재 운행 상태를 확인해 주세요.\n＋\n02\n실제 인도 여부와 완료 기록 누락 여부를 확인해 주세요.\n＋\n추가 질문 메모\n전달 부서\n\n배송 전체 미수령 문의로 운행·점착 확인이 필요합니다.\n\n전달 부서\n부서 선택\n출고 운영\n배송 운영\n고객 지원\n점포·상품·전달 부서를 원문과 대조하고, 접수 정보를 편집·확인했습니다.\n\n접수 정보를 한 번 편집한 뒤 확인 체크를 해 주세요. 미확인 정보는 비워 둘 수 있습니다.\n\n접수 내용 저장\n확인 후 센터 전달 →\nAI 제안과 현재 입력 상세 대조\n원문과 화자별 대화록 확인\n03 / CONNECTED EVIDENCE\n물류 근거와 남은 질문\nWMS 작업 확인 ↗\nTMS 배송 확인 ↗\nAI가 정리한 사실 · 확인 전 초안\n규정 도착은 05:00입니다.\n센터 출고 스캔 기록은 04:20입니다.\nAI가 정리한 추가 확인 사항\n배송완료 시각이 미등록입니다.\n실제 미도착 여부·지연 원인·예상 도착은 센터 확인이 필요합니다.\n연결한 물류 근거\n선택 0건 · 표시 0건\n접수 CASE-0001\n접수 기준 2026. 09. 18. 07:00:00 KST\n\n연결한 근거가 없습니다. WMS 작업 확인 또는 TMS 배송 확인에서 현재 접수에 필요한 근거를 연결해 주세요.\n\n기록 상태와 합성 여부를 구분합니다. 기록 확인만으로 실제 도착·발생 원인·작업자 귀책을 확정할 수 없습니다.\n\nHappyCall OneFlow\n전화·점포·물류 데이터는 시연용 합성 데이터입니다. 실제 고객 통화가 아닙니다."
+    },
+    {
+      "id": "CASE-0002-natural-full-parent-gate",
+      "expected": "Natural 1x playback from start to end; trusted ended1; real parent analysis disabled before and enabled after",
+      "status": "PASS",
+      "actual": {
+        "id": "CASE-0002",
+        "expectedDuration": 49.75,
+        "elapsed": 51.47,
+        "before": {
+          "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 0,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": []
+        },
+        "audio": {
+          "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 49.75,
+          "duration": 49.75,
+          "paused": true,
+          "ended": true,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": [
+            [
+              0,
+              49.75
+            ]
+          ]
+        },
+        "events": [
+          {
+            "type": "loadedmetadata",
+            "id": 3,
+            "at": 1730,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 0,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "play",
+            "id": 3,
+            "at": 1739,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 0,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "playing",
+            "id": 3,
+            "at": 1745.3999999985099,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 0,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "pause",
+            "id": 3,
+            "at": 52914,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.75,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                0,
+                49.75
+              ]
+            ]
+          },
+          {
+            "type": "ended",
+            "id": 3,
+            "at": 52914.60000000149,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.75,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                0,
+                49.75
+              ]
+            ]
+          }
+        ],
+        "parentAnalysisEnabled": true
+      },
+      "ms": 52961
+    },
+    {
+      "id": "CASE-0002-real-replay-analysis-and-form",
+      "expected": "One real POST mode=replay; response fields/8 turns/questions render in parent; original preserved; quantity/unit retain source meaning",
+      "status": "FAIL",
+      "error": "locator.inputValue: Error: strict mode violation: getByLabel('상품·문의 대상') resolved to 2 elements:\n    1) <input value=\"비스킷 주문 대신 휴지 입고\" placeholder=\"상품명 또는 문의 대상\"/> aka getByRole('textbox', { name: '상품·문의 대상 필수' })\n    2) <section aria-label=\"상품·문의 대상 비교\" class=\"CallReview_compareRow__HJ_zu\">…</section> aka getByLabel('상품·문의 대상 비교')\n\nCall log:\n\u001b[2m  - waiting for getByLabel('상품·문의 대상')\u001b[22m\n\n    at formValues (C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\tests\\remote\\pc2\\m3\\checker.mjs:122:68)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/m3/checker.mjs:168:24\n    at async check (C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\tests\\remote\\pc2\\m3\\checker.mjs:40:26)\n    at async runChecks (C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\tests\\remote\\pc2\\m3\\checker.mjs:158:7)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/m3/run.mjs:60:10",
+      "ms": 179,
+      "failureScreenshot": "failure-CASE-0002-real-replay-analysis-and-form.png",
+      "pageText": "본문으로 이동\nHappyCall OneFlow\n합성 데이터 시연\n김\n김하나 상담원\n상담 작업대\n경영주 접수\n센터 회신\nWMS 작업 확인\nTMS 배송 확인\n접수부터 회신까지, 한 흐름으로\n\nHAPPYCALL WORKSPACE\n\n상담 작업대\n\n흩어진 문의와 물류 근거를 모아, 정확한 접수로 연결합니다.\n\n분석 방식\n저장 결과 재생 · API 호출 없음\n실제 AI 분석 · API 사용\n저장된 분석 결과를 불러왔습니다. 실제 AI 호출은 하지 않았습니다.\n접수 현황\n\n다른 담당자가 등록한 내용은 목록 새로고침으로 확인하세요.\n\n최종 서버 확인 21시 48분 17초\n목록 새로고침\nTODAY'S CASES\n접수 목록\n2\n아침 배송 미도착 확인\n가상 한빛점 · CASE-0001\n상담원 확인\n주문 상품과 다른 상품 입고\n가상 새봄점 · CASE-0002\n상담원 확인\n오출고 문의\nCASE-0002\n주문 상품과 다른 상품 입고\n상담원 확인\n기준 2026-09-18 07:00\n1\n문의 듣기\n2\nAI 정제·사람 확인\n3\n센터 전달·회신\n\nCALL REVIEW · CASE-0002\n\n통화와 접수 내용 대조\n\n주문 상품과 다른 상품 입고\n\n합성 시연 사례\n1. 통화 다시 듣기\n사전 생성한 합성 음성\n전체 통화 재생 완료\n0:49 / 0:49\n재생 속도\n0.75배\n1배\n1.25배\n1.5배\n2배\n볼륨 100%\n음소거\n\n음성을 처음부터 끝까지 재생하면 분석 준비가 됩니다. 구간 재생이나 끝으로 이동은 전체 재생 완료로 처리하지 않습니다.\n\n구간 재생 중 다른 탭으로 이동하면 선택 구간을 멈춥니다. 전체 통화 재생은 계속될 수 있습니다.\n\n처음부터 전체 통화 재생\n접수 내용을 정리할 준비가 되었습니다\n\n저장된 결과를 불러옵니다. 실제 AI API 비용은 발생하지 않습니다.\n\n저장된 분석 결과 재생 →\n접수 편집으로 이동 ↓\n02 / REFINE & REVIEW\nAI 정제와 접수 확인\n저장 결과 재생\nAI 요약 · 확인 전 초안\n\n경영주는 비스킷 18개 주문에 휴지 1박스를 받았다고 진술했습니다. 상담원이 중간에 ‘1개’로 잘못 재진술했으나 경영주가 ‘1박스’로 정정했습니다. 오출고 확인·회송 방법·주문 상품 처리를 요청합니다.\n\n확인 필요\n상담원 입력 EA와 경영주가 정정한 BOX가 다릅니다. 원문 확인 후 수정해 주세요.\n\n원문 근거: 발화 3~5\n\n확인 필요\n주문 18 EA와 입고 1 BOX를 단순 차감하지 마세요.\n\n원문 근거: E-W1/E-W3\n\n원문 보존\n→\nAI 초안\n→\n상담원 편집·확인\nAI가 제안한 접수 정보 원본\n점포코드\n필수\n상품·문의 대상\n필수\n수령 수량(경영주 진술)\n수령 단위\n요청사항\n추가 확인 질문\n2\n01\n주문 상품과 실제 입고 상품의 라벨을 센터에서 대조해 주세요.\n＋\n02\n피킹 토트와 출고 토트 연결 및 회송·재처리 방안을 확인해 주세요.\n＋\n추가 질문 메모\n전달 부서\n\n주문/출고 상품이 달라 피킹·출고 대조와 회송 확인이 필요합니다.\n\n전달 부서\n부서 선택\n출고 운영\n배송 운영\n고객 지원\n점포·상품·전달 부서를 원문과 대조하고, 접수 정보를 편집·확인했습니다.\n\n접수 정보를 한 번 편집한 뒤 확인 체크를 해 주세요. 미확인 정보는 비워 둘 수 있습니다.\n\n접수 내용 저장\n확인 후 센터 전달 →\nAI 제안과 현재 입력 상세 대조\n원문과 화자별 대화록 확인\n03 / CONNECTED EVIDENCE\n물류 근거와 남은 질문\nWMS 작업 확인 ↗\nTMS 배송 확인 ↗\nAI가 정리한 사실 · 확인 전 초안\n주문/피킹은 비스킷 18 EA입니다.\n출고 스캔은 휴지 1 BOX로 기록돼 불일치합니다.\n배송완료 등록은 05:10입니다.\nAI가 정리한 추가 확인 사항\n불일치 발생 공정과 원인은 미확인입니다.\n상품 회송·주문 상품 재처리 완료 여부는 확인이 필요합니다.\n연결한 물류 근거\n선택 0건 · 표시 0건\n접수 CASE-0002\n접수 기준 2026. 09. 18. 07:00:00 KST\n\n연결한 근거가 없습니다. WMS 작업 확인 또는 TMS 배송 확인에서 현재 접수에 필요한 근거를 연결해 주세요.\n\n기록 상태와 합성 여부를 구분합니다. 기록 확인만으로 실제 도착·발생 원인·작업자 귀책을 확정할 수 없습니다.\n\nHappyCall OneFlow\n전화·점포·물류 데이터는 시연용 합성 데이터입니다. 실제 고객 통화가 아닙니다."
+    },
+    {
+      "id": "analysis-failure-preserves-draft",
+      "expected": "Intentional HTTP503 is visible; actual parent edited form/question and original remain byte-for-byte; retry available",
+      "status": "FAIL",
+      "error": "locator.fill: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('요청사항', { exact: true })\u001b[22m\n\n    at C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\tests\\remote\\pc2\\m3\\checker.mjs:187:54\n    at check (C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\tests\\remote\\pc2\\m3\\checker.mjs:40:32)\n    at runChecks (C:\\Users\\Administrator\\Desktop\\hackerton\\happycall-ralphthon\\tests\\remote\\pc2\\m3\\checker.mjs:186:11)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/m3/run.mjs:60:10",
+      "ms": 8006,
+      "failureScreenshot": "failure-analysis-failure-preserves-draft.png",
+      "pageText": "본문으로 이동\nHappyCall OneFlow\n합성 데이터 시연\n김\n김하나 상담원\n상담 작업대\n경영주 접수\n센터 회신\nWMS 작업 확인\nTMS 배송 확인\n접수부터 회신까지, 한 흐름으로\n\nHAPPYCALL WORKSPACE\n\n상담 작업대\n\n흩어진 문의와 물류 근거를 모아, 정확한 접수로 연결합니다.\n\n분석 방식\n저장 결과 재생 · API 호출 없음\n실제 AI 분석 · API 사용\n접수 현황\n\n다른 담당자가 등록한 내용은 목록 새로고침으로 확인하세요.\n\n최종 서버 확인 21시 48분 17초\n목록 새로고침\nTODAY'S CASES\n접수 목록\n2\n아침 배송 미도착 확인\n가상 한빛점 · CASE-0001\n상담원 확인\n주문 상품과 다른 상품 입고\n가상 새봄점 · CASE-0002\n상담원 확인\n오출고 문의\nCASE-0002\n주문 상품과 다른 상품 입고\n상담원 확인\n기준 2026-09-18 07:00\n1\n문의 듣기\n2\nAI 정제·사람 확인\n3\n센터 전달·회신\n\nCALL REVIEW · CASE-0002\n\n통화와 접수 내용 대조\n\n주문 상품과 다른 상품 입고\n\n합성 시연 사례\n1. 통화 다시 듣기\n사전 생성한 합성 음성\n전체 통화 재생 완료\n0:49 / 0:49\n재생 속도\n0.75배\n1배\n1.25배\n1.5배\n2배\n볼륨 100%\n음소거\n\n음성을 처음부터 끝까지 재생하면 분석 준비가 됩니다. 구간 재생이나 끝으로 이동은 전체 재생 완료로 처리하지 않습니다.\n\n구간 재생 중 다른 탭으로 이동하면 선택 구간을 멈춥니다. 전체 통화 재생은 계속될 수 있습니다.\n\n처음부터 전체 통화 재생\n접수 내용을 정리할 준비가 되었습니다\n\n저장된 결과를 불러옵니다. 실제 AI API 비용은 발생하지 않습니다.\n\n저장된 분석 결과 재생 →\n접수 편집으로 이동 ↓\n02 / REFINE & REVIEW\nAI 정제와 접수 확인\n저장 결과 재생\nAI 요약 · 확인 전 초안\n\n경영주는 비스킷 18개 주문에 휴지 1박스를 받았다고 진술했습니다. 상담원이 중간에 ‘1개’로 잘못 재진술했으나 경영주가 ‘1박스’로 정정했습니다. 오출고 확인·회송 방법·주문 상품 처리를 요청합니다.\n\n확인 필요\n상담원 입력 EA와 경영주가 정정한 BOX가 다릅니다. 원문 확인 후 수정해 주세요.\n\n원문 근거: 발화 3~5\n\n확인 필요\n주문 18 EA와 입고 1 BOX를 단순 차감하지 마세요.\n\n원문 근거: E-W1/E-W3\n\n원문 보존\n→\nAI 초안\n→\n상담원 편집·확인\nAI가 제안한 접수 정보 원본\n점포코드\n필수\n상품·문의 대상\n필수\n수령 수량(경영주 진술)\n수령 단위\n요청사항\n추가 확인 질문\n2\n01\n주문 상품과 실제 입고 상품의 라벨을 센터에서 대조해 주세요.\n＋\n02\n피킹 토트와 출고 토트 연결 및 회송·재처리 방안을 확인해 주세요.\n＋\n추가 질문 메모\n전달 부서\n\n주문/출고 상품이 달라 피킹·출고 대조와 회송 확인이 필요합니다.\n\n전달 부서\n부서 선택\n출고 운영\n배송 운영\n고객 지원\n점포·상품·전달 부서를 원문과 대조하고, 접수 정보를 편집·확인했습니다.\n\n접수 정보를 한 번 편집한 뒤 확인 체크를 해 주세요. 미확인 정보는 비워 둘 수 있습니다.\n\n접수 내용 저장\n확인 후 센터 전달 →\nAI 제안과 현재 입력 상세 대조\n원문과 화자별 대화록 확인\n03 / CONNECTED EVIDENCE\n물류 근거와 남은 질문\nWMS 작업 확인 ↗\nTMS 배송 확인 ↗\nAI가 정리한 사실 · 확인 전 초안\n주문/피킹은 비스킷 18 EA입니다.\n출고 스캔은 휴지 1 BOX로 기록돼 불일치합니다.\n배송완료 등록은 05:10입니다.\nAI가 정리한 추가 확인 사항\n불일치 발생 공정과 원인은 미확인입니다.\n상품 회송·주문 상품 재처리 완료 여부는 확인이 필요합니다.\n연결한 물류 근거\n선택 0건 · 표시 0건\n접수 CASE-0002\n접수 기준 2026. 09. 18. 07:00:00 KST\n\n연결한 근거가 없습니다. WMS 작업 확인 또는 TMS 배송 확인에서 현재 접수에 필요한 근거를 연결해 주세요.\n\n기록 상태와 합성 여부를 구분합니다. 기록 확인만으로 실제 도착·발생 원인·작업자 귀책을 확정할 수 없습니다.\n\nHappyCall OneFlow\n전화·점포·물류 데이터는 시연용 합성 데이터입니다. 실제 고객 통화가 아닙니다."
+    },
+    {
+      "id": "same-id-new-audio-parent-reset",
+      "expected": "Actual /api/cases input changes only CASE2 audioURL; real reload resets completion; detached old ended cannot unlock analysis",
+      "status": "PASS",
+      "actual": {
+        "before": {
+          "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 49.75,
+          "duration": 49.75,
+          "paused": true,
+          "ended": true,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": [
+            [
+              0,
+              49.75
+            ]
+          ]
+        },
+        "after": {
+          "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0&pc2-m3-source=replacement",
+          "time": 0,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": []
+        },
+        "detached": {
+          "connected": false,
+          "paused": true
+        },
+        "gateReset": true,
+        "onlyInputInjection": "GET /api/cases CASE2 audioUrl query"
+      },
+      "ms": 166
+    },
+    {
+      "id": "end-seek-does-not-complete-parent",
+      "expected": "Native ended after seeking near end does not unlock actual parent analysis",
+      "status": "PASS",
+      "actual": {
+        "audio": {
+          "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 49.75,
+          "duration": 49.75,
+          "paused": true,
+          "ended": true,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": [
+            [
+              49.67,
+              49.75
+            ]
+          ]
+        },
+        "parentDisabled": true,
+        "events": [
+          {
+            "type": "seeking",
+            "id": 2,
+            "at": 446.29999999701977,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.67,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "seeked",
+            "id": 2,
+            "at": 553.1000000014901,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.67,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "play",
+            "id": 2,
+            "at": 560.8999999985099,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.67,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "playing",
+            "id": 2,
+            "at": 562.1000000014901,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.67,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "pause",
+            "id": 2,
+            "at": 743.2000000029802,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.75,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                49.67,
+                49.75
+              ]
+            ]
+          },
+          {
+            "type": "ended",
+            "id": 2,
+            "at": 744.2999999970198,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.75,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                49.67,
+                49.75
+              ]
+            ]
+          }
+        ]
+      },
+      "ms": 780
+    },
+    {
+      "id": "segment-does-not-complete-parent",
+      "expected": "Actual final segment 44.60–49.40 pauses at boundary; parent remains disabled",
+      "status": "PASS",
+      "actual": {
+        "audio": {
+          "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 49.4,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": [
+            [
+              44.6,
+              49.41261
+            ]
+          ]
+        },
+        "parentDisabled": true,
+        "expected": [
+          44.6,
+          49.4
+        ],
+        "events": [
+          {
+            "type": "seeking",
+            "id": 2,
+            "at": 493.09999999403954,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 44.6,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "play",
+            "id": 2,
+            "at": 493.69999999552965,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 44.6,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "seeked",
+            "id": 2,
+            "at": 590.7999999970198,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 44.6,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "playing",
+            "id": 2,
+            "at": 591,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 44.6,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": []
+          },
+          {
+            "type": "pause",
+            "id": 2,
+            "at": 5489.39999999851,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.4,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                44.6,
+                49.41261
+              ]
+            ]
+          },
+          {
+            "type": "seeking",
+            "id": 2,
+            "at": 5491.19999999553,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.4,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                44.6,
+                49.41261
+              ]
+            ]
+          },
+          {
+            "type": "seeked",
+            "id": 2,
+            "at": 5493.0999999940395,
+            "trusted": true,
+            "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+            "time": 49.4,
+            "duration": 49.75,
+            "rate": 1,
+            "error": null,
+            "played": [
+              [
+                44.6,
+                49.41261
+              ]
+            ]
+          }
+        ]
+      },
+      "ms": 5519
+    },
+    {
+      "id": "audio-404-recovery",
+      "expected": "Missing audio produces real error, parent gate stays locked; UI reload after recovery obtains 49.75s metadata and can play",
+      "status": "PASS",
+      "actual": {
+        "fault": {
+          "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 0,
+          "duration": null,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": 4,
+          "played": []
+        },
+        "recovered": {
+          "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 0,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": []
+        },
+        "playable": {
+          "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 0.102786,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "error": null,
+          "played": [
+            [
+              0,
+              0.102786
+            ]
+          ]
+        },
+        "parentStillDisabledBeforeFullEnd": true
+      },
+      "ms": 865
+    },
+    {
+      "id": "parent-layout-keyboard-1440",
+      "expected": "Actual page at target width: 0 horizontal overflow; playback controls, source disclosure, editor link and keyboard reachability",
+      "status": "PASS",
+      "actual": {
+        "width": 1440,
+        "geometry": {
+          "viewport": 1440,
+          "overflow": 0,
+          "audio": {
+            "x": 69,
+            "y": 814.4375,
+            "width": 620,
+            "height": 54
+          },
+          "actions": {
+            "x": 48,
+            "y": 1151.21875,
+            "width": 662,
+            "height": 118.046875
+          },
+          "editor": {
+            "x": 730,
+            "y": 752.9375,
+            "width": 662,
+            "height": 1220.34375
+          }
+        },
+        "focused": {
+          "tag": "SUMMARY",
+          "insideEditor": true
+        },
+        "keyboard": [
+          "source Enter/Space",
+          "rate ArrowDown",
+          "mute Space",
+          "editor link Enter then Tab"
+        ],
+        "screenshot": "parent-layout-1440.png"
+      },
+      "ms": 857
+    },
+    {
+      "id": "parent-layout-keyboard-768",
+      "expected": "Actual page at target width: 0 horizontal overflow; playback controls, source disclosure, editor link and keyboard reachability",
+      "status": "PASS",
+      "actual": {
+        "width": 768,
+        "geometry": {
+          "viewport": 768,
+          "overflow": 0,
+          "audio": {
+            "x": 37,
+            "y": 961.9375,
+            "width": 694,
+            "height": 54
+          },
+          "actions": {
+            "x": 16,
+            "y": 1280.125,
+            "width": 736,
+            "height": 86.546875
+          },
+          "editor": {
+            "x": 16,
+            "y": 1386.671875,
+            "width": 736,
+            "height": 1249.34375
+          }
+        },
+        "focused": {
+          "tag": "SUMMARY",
+          "insideEditor": true
+        },
+        "keyboard": [
+          "source Enter/Space",
+          "rate ArrowDown",
+          "mute Space",
+          "editor link Enter then Tab"
+        ],
+        "screenshot": "parent-layout-768.png"
+      },
+      "ms": 852
+    },
+    {
+      "id": "parent-layout-keyboard-390",
+      "expected": "Actual page at target width: 0 horizontal overflow; playback controls, source disclosure, editor link and keyboard reachability",
+      "status": "PASS",
+      "actual": {
+        "width": 390,
+        "geometry": {
+          "viewport": 390,
+          "overflow": 0,
+          "audio": {
+            "x": 33,
+            "y": 1011.4375,
+            "width": 324,
+            "height": 54
+          },
+          "actions": {
+            "x": 16,
+            "y": 1381.40625,
+            "width": 358,
+            "height": 187.09375
+          },
+          "editor": {
+            "x": 16,
+            "y": 1588.5,
+            "width": 358,
+            "height": 1414.21875
+          }
+        },
+        "focused": {
+          "tag": "SUMMARY",
+          "insideEditor": true
+        },
+        "keyboard": [
+          "source Enter/Space",
+          "rate ArrowDown",
+          "mute Space",
+          "editor link Enter then Tab"
+        ],
+        "screenshot": "parent-layout-390.png"
+      },
+      "ms": 808
+    },
+    {
+      "id": "parent-request-and-error-integrity",
+      "expected": "No external/live/non-replay calls; no uncaught page errors or unexpected console errors; real replay POST2 plus deliberate failure1",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n2 !== 3\n\n    at file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/m3/checker.mjs:271:14\n    at check (file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/m3/checker.mjs:40:32)\n    at runChecks (file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/m3/checker.mjs:267:11)\n    at async file:///C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon/tests/remote/pc2/m3/run.mjs:60:10",
+      "ms": 2,
+      "failureScreenshot": "failure-parent-request-and-error-integrity.png",
+      "pageText": "본문으로 이동\nHappyCall OneFlow\n합성 데이터 시연\n상담 작업대\n경영주 접수\n센터 회신\nWMS 작업 확인\nTMS 배송 확인\n\nHAPPYCALL WORKSPACE\n\n상담 작업대\n\n흩어진 문의와 물류 근거를 모아, 정확한 접수로 연결합니다.\n\n분석 방식\n저장 결과 재생 · API 호출 없음\n실제 AI 분석 · API 사용\n접수 현황\n\n다른 담당자가 등록한 내용은 목록 새로고침으로 확인하세요.\n\n최종 서버 확인 21시 49분 27초\n목록 새로고침\nTODAY'S CASES\n접수 목록\n2\n아침 배송 미도착 확인\n가상 한빛점 · CASE-0001\n상담원 확인\n주문 상품과 다른 상품 입고\n가상 새봄점 · CASE-0002\n상담원 확인\n오출고 문의\nCASE-0002\n주문 상품과 다른 상품 입고\n상담원 확인\n1\n문의 듣기\n2\nAI 정제·사람 확인\n3\n센터 전달·회신\n\nCALL REVIEW · CASE-0002\n\n통화와 접수 내용 대조\n\n주문 상품과 다른 상품 입고\n\n합성 시연 사례\n1. 통화 다시 듣기\n사전 생성한 합성 음성\n재생 준비\n0:00 / 0:49\n재생 속도\n0.75배\n1배\n1.25배\n1.5배\n2배\n볼륨 100%\n음소거\n\n음성을 처음부터 끝까지 재생하면 분석 준비가 됩니다. 구간 재생이나 끝으로 이동은 전체 재생 완료로 처리하지 않습니다.\n\n구간 재생 중 다른 탭으로 이동하면 선택 구간을 멈춥니다. 전체 통화 재생은 계속될 수 있습니다.\n\n처음부터 전체 통화 재생\n통화를 먼저 끝까지 재생해 주세요\n\n저장된 결과를 불러옵니다. 실제 AI API 비용은 발생하지 않습니다.\n\n저장된 분석 결과 재생 →\n접수 편집으로 이동 ↓\n02 / REFINE & REVIEW\nAI 정제와 접수 확인\n저장 결과 재생\nAI 요약 · 확인 전 초안\n\n경영주는 비스킷 18개 주문에 휴지 1박스를 받았다고 진술했습니다. 상담원이 중간에 ‘1개’로 잘못 재진술했으나 경영주가 ‘1박스’로 정정했습니다. 오출고 확인·회송 방법·주문 상품 처리를 요청합니다.\n\n확인 필요\n상담원 입력 EA와 경영주가 정정한 BOX가 다릅니다. 원문 확인 후 수정해 주세요.\n\n원문 근거: 발화 3~5\n\n확인 필요\n주문 18 EA와 입고 1 BOX를 단순 차감하지 마세요.\n\n원문 근거: E-W1/E-W3\n\n원문 보존\n→\nAI 초안\n→\n상담원 편집·확인\nAI가 제안한 접수 정보 원본\n점포코드\n필수\n상품·문의 대상\n필수\n수령 수량(경영주 진술)\n수령 단위\n요청사항\n추가 확인 질문\n2\n01\n주문 상품과 실제 입고 상품의 라벨을 센터에서 대조해 주세요.\n＋\n02\n피킹 토트와 출고 토트 연결 및 회송·재처리 방안을 확인해 주세요.\n＋\n추가 질문 메모\n전달 부서\n\n주문/출고 상품이 달라 피킹·출고 대조와 회송 확인이 필요합니다.\n\n전달 부서\n부서 선택\n출고 운영\n배송 운영\n고객 지원\n점포·상품·전달 부서를 원문과 대조하고, 접수 정보를 편집·확인했습니다.\n\n접수 정보를 한 번 편집한 뒤 확인 체크를 해 주세요. 미확인 정보는 비워 둘 수 있습니다.\n\n접수 내용 저장\n확인 후 센터 전달 →\nAI 제안과 현재 입력 상세 대조\n원문과 화자별 대화록 확인\n03 / CONNECTED EVIDENCE\n물류 근거와 남은 질문\nWMS 작업 확인 ↗\nTMS 배송 확인 ↗\nAI가 정리한 사실 · 확인 전 초안\n주문/피킹은 비스킷 18 EA입니다.\n출고 스캔은 휴지 1 BOX로 기록돼 불일치합니다.\n배송완료 등록은 05:10입니다.\nAI가 정리한 추가 확인 사항\n불일치 발생 공정과 원인은 미확인입니다.\n상품 회송·주문 상품 재처리 완료 여부는 확인이 필요합니다.\n연결한 물류 근거\n선택 0건 · 표시 0건\n접수 CASE-0002\n접수 기준 2026. 09. 18. 07:00:00 KST\n\n연결한 근거가 없습니다. WMS 작업 확인 또는 TMS 배송 확인에서 현재 접수에 필요한 근거를 연결해 주세요.\n\n기록 상태와 합성 여부를 구분합니다. 기록 확인만으로 실제 도착·발생 원인·작업자 귀책을 확정할 수 없습니다.\n\nHappyCall OneFlow\n전화·점포·물류 데이터는 시연용 합성 데이터입니다. 실제 고객 통화가 아닙니다."
+    }
+  ],
+  "requests": [
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:47:20.913Z",
+      "url": "http://127.0.0.1:55337/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:47:20.979Z",
+      "url": "http://127.0.0.1:55337/_next/static/css/c51028af84ba3eb0.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:47:20.981Z",
+      "url": "http://127.0.0.1:55337/_next/static/css/8539327adedac84e.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:47:20.989Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/webpack-f777753e94ab0e86.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:47:20.991Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/49ea6767-0552f1e6d98592e5.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:47:20.992Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/802-aa61581df1c5cf6c.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:47:20.994Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/main-app-297ff8eb55f160d4.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:47:20.996Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/app/page-cd945035eca7ec5b.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:47:25.169Z",
+      "url": "http://127.0.0.1:55337/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:47:25.187Z",
+      "url": "http://127.0.0.1:55337/api/cases",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:47:25.365Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:47:25.604Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:47:25.670Z",
+      "url": "http://127.0.0.1:55337/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-natural-full-parent-gate",
+      "at": "2026-09-21T12:47:27.140Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0001-real-replay-analysis-and-form",
+      "at": "2026-09-21T12:48:15.326Z",
+      "url": "http://127.0.0.1:55337/api/cases/CASE-0001/analyze",
+      "method": "POST",
+      "body": {
+        "mode": "replay"
+      }
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:48:16.787Z",
+      "url": "http://127.0.0.1:55337/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:48:16.926Z",
+      "url": "http://127.0.0.1:55337/_next/static/css/c51028af84ba3eb0.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:48:16.930Z",
+      "url": "http://127.0.0.1:55337/_next/static/css/8539327adedac84e.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:48:16.960Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/webpack-f777753e94ab0e86.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:48:16.967Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/49ea6767-0552f1e6d98592e5.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:48:16.970Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/802-aa61581df1c5cf6c.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:48:16.974Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/main-app-297ff8eb55f160d4.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:48:16.975Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/app/page-cd945035eca7ec5b.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:48:17.588Z",
+      "url": "http://127.0.0.1:55337/api/cases",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:48:17.600Z",
+      "url": "http://127.0.0.1:55337/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:48:17.722Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:48:18.032Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:48:18.372Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:48:18.523Z",
+      "url": "http://127.0.0.1:55337/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-natural-full-parent-gate",
+      "at": "2026-09-21T12:48:19.742Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "CASE-0002-real-replay-analysis-and-form",
+      "at": "2026-09-21T12:49:09.755Z",
+      "url": "http://127.0.0.1:55337/api/cases/CASE-0002/analyze",
+      "method": "POST",
+      "body": {
+        "mode": "replay"
+      }
+    },
+    {
+      "phase": "same-id-new-audio-parent-reset",
+      "at": "2026-09-21T12:49:18.402Z",
+      "url": "http://127.0.0.1:55337/api/cases",
+      "method": "GET",
+      "body": null,
+      "inputInjection": {
+        "id": "CASE-0002",
+        "previousAudioUrl": "/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+        "replacementAudioUrl": "/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0&pc2-m3-source=replacement"
+      }
+    },
+    {
+      "phase": "same-id-new-audio-parent-reset",
+      "at": "2026-09-21T12:49:18.461Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0&pc2-m3-source=replacement",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:49:18.518Z",
+      "url": "http://127.0.0.1:55337/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:49:18.561Z",
+      "url": "http://127.0.0.1:55337/_next/static/css/c51028af84ba3eb0.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:49:18.567Z",
+      "url": "http://127.0.0.1:55337/_next/static/css/8539327adedac84e.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:49:18.569Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/webpack-f777753e94ab0e86.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:49:18.571Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/49ea6767-0552f1e6d98592e5.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:49:18.573Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/802-aa61581df1c5cf6c.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:49:18.575Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/main-app-297ff8eb55f160d4.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:49:18.577Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/app/page-cd945035eca7ec5b.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:49:18.708Z",
+      "url": "http://127.0.0.1:55337/api/cases",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:49:18.714Z",
+      "url": "http://127.0.0.1:55337/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:49:18.757Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:49:18.911Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:49:19.049Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "end-seek-does-not-complete-parent",
+      "at": "2026-09-21T12:49:19.083Z",
+      "url": "http://127.0.0.1:55337/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:49:19.302Z",
+      "url": "http://127.0.0.1:55337/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:49:19.347Z",
+      "url": "http://127.0.0.1:55337/_next/static/css/c51028af84ba3eb0.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:49:19.348Z",
+      "url": "http://127.0.0.1:55337/_next/static/css/8539327adedac84e.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:49:19.349Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/webpack-f777753e94ab0e86.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:49:19.350Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/49ea6767-0552f1e6d98592e5.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:49:19.351Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/802-aa61581df1c5cf6c.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:49:19.352Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/main-app-297ff8eb55f160d4.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:49:19.352Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/app/page-cd945035eca7ec5b.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:49:19.471Z",
+      "url": "http://127.0.0.1:55337/api/cases",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:49:19.476Z",
+      "url": "http://127.0.0.1:55337/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:49:19.507Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:49:19.618Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:49:19.798Z",
+      "url": "http://127.0.0.1:55337/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "segment-does-not-complete-parent",
+      "at": "2026-09-21T12:49:19.863Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:49:24.823Z",
+      "url": "http://127.0.0.1:55337/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:49:24.866Z",
+      "url": "http://127.0.0.1:55337/_next/static/css/c51028af84ba3eb0.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:49:24.872Z",
+      "url": "http://127.0.0.1:55337/_next/static/css/8539327adedac84e.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:49:24.874Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/webpack-f777753e94ab0e86.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:49:24.874Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/49ea6767-0552f1e6d98592e5.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:49:24.875Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/802-aa61581df1c5cf6c.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:49:24.877Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/main-app-297ff8eb55f160d4.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:49:24.878Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/app/page-cd945035eca7ec5b.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:49:24.999Z",
+      "url": "http://127.0.0.1:55337/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:49:25.003Z",
+      "url": "http://127.0.0.1:55337/api/cases",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:49:25.056Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:49:25.162Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:49:25.264Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:49:25.362Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:49:25.397Z",
+      "url": "http://127.0.0.1:55337/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:49:25.471Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:49:25.690Z",
+      "url": "http://127.0.0.1:55337/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:49:25.731Z",
+      "url": "http://127.0.0.1:55337/_next/static/css/c51028af84ba3eb0.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:49:25.738Z",
+      "url": "http://127.0.0.1:55337/_next/static/css/8539327adedac84e.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:49:25.740Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/webpack-f777753e94ab0e86.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:49:25.741Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/49ea6767-0552f1e6d98592e5.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:49:25.742Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/802-aa61581df1c5cf6c.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:49:25.743Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/main-app-297ff8eb55f160d4.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:49:25.746Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/app/page-cd945035eca7ec5b.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:49:25.862Z",
+      "url": "http://127.0.0.1:55337/api/cases",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:49:25.863Z",
+      "url": "http://127.0.0.1:55337/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:49:25.902Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:49:26.033Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-1440",
+      "at": "2026-09-21T12:49:26.246Z",
+      "url": "http://127.0.0.1:55337/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:49:26.555Z",
+      "url": "http://127.0.0.1:55337/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:49:26.591Z",
+      "url": "http://127.0.0.1:55337/_next/static/css/c51028af84ba3eb0.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:49:26.593Z",
+      "url": "http://127.0.0.1:55337/_next/static/css/8539327adedac84e.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:49:26.594Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/webpack-f777753e94ab0e86.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:49:26.594Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/49ea6767-0552f1e6d98592e5.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:49:26.599Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/802-aa61581df1c5cf6c.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:49:26.600Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/main-app-297ff8eb55f160d4.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:49:26.601Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/app/page-cd945035eca7ec5b.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:49:26.731Z",
+      "url": "http://127.0.0.1:55337/api/cases",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:49:26.735Z",
+      "url": "http://127.0.0.1:55337/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:49:26.768Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:49:26.896Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-768",
+      "at": "2026-09-21T12:49:27.087Z",
+      "url": "http://127.0.0.1:55337/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:49:27.404Z",
+      "url": "http://127.0.0.1:55337/",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:49:27.438Z",
+      "url": "http://127.0.0.1:55337/_next/static/css/c51028af84ba3eb0.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:49:27.441Z",
+      "url": "http://127.0.0.1:55337/_next/static/css/8539327adedac84e.css",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:49:27.442Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/webpack-f777753e94ab0e86.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:49:27.443Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/49ea6767-0552f1e6d98592e5.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:49:27.443Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/802-aa61581df1c5cf6c.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:49:27.444Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/main-app-297ff8eb55f160d4.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:49:27.444Z",
+      "url": "http://127.0.0.1:55337/_next/static/chunks/app/page-cd945035eca7ec5b.js",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:49:27.562Z",
+      "url": "http://127.0.0.1:55337/api/cases",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:49:27.566Z",
+      "url": "http://127.0.0.1:55337/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:49:27.605Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:49:27.752Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null
+    },
+    {
+      "phase": "parent-layout-keyboard-390",
+      "at": "2026-09-21T12:49:27.975Z",
+      "url": "http://127.0.0.1:55337/icon.svg?fe1919a8c69ce403",
+      "method": "GET",
+      "body": null
+    }
+  ],
+  "blockedRequests": [],
+  "expectedFaults": [
+    {
+      "phase": "audio-404-recovery",
+      "at": "2026-09-21T12:49:25.162Z",
+      "url": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "method": "GET",
+      "body": null,
+      "status": 404,
+      "type": "audio-404"
+    }
+  ],
+  "responses": [
+    {
+      "caseId": "CASE-0001",
+      "phase": "CASE-0001-real-replay-analysis-and-form",
+      "status": 200,
+      "data": {
+        "transcript": [
+          {
+            "speaker": "상담원",
+            "text": "안녕하세요. 해피콜 상담원입니다. 어떤 점포에서 연락 주셨나요?",
+            "start": 0,
+            "end": 5.1
+          },
+          {
+            "speaker": "경영주",
+            "text": "가상 한빛점이에요. 아침 다섯 시 배송인데 일곱 시가 다 돼도 물건이 안 왔어요. 정말 답답하네요.",
+            "start": 5.45,
+            "end": 11.9
+          },
+          {
+            "speaker": "상담원",
+            "text": "오늘 배송 전체가 도착하지 않았다는 말씀이시죠?",
+            "start": 12.25,
+            "end": 16.35
+          },
+          {
+            "speaker": "경영주",
+            "text": "네. 어제도 바빴는데 오늘까지 이러니 화가 나요. 가게 앞 공사 때문에 길이 막혔을 수도 있고요.",
+            "start": 16.7,
+            "end": 23
+          },
+          {
+            "speaker": "상담원",
+            "text": "배송 전체 미도착으로 접수하겠습니다. 마지막 말씀은 확인이 필요한 내용으로 남기겠습니다.",
+            "start": 23.35,
+            "end": 30.2
+          },
+          {
+            "speaker": "경영주",
+            "text": "지금 어디 있는지, 언제 올 수 있는지 센터에서 확인해서 알려 주세요.",
+            "start": 30.55,
+            "end": 35.8
+          },
+          {
+            "speaker": "상담원",
+            "text": "센터에 운행 상황 확인을 요청하겠습니다. 확인되지 않은 도착 시간은 확답드리기 어렵습니다.",
+            "start": 36.15,
+            "end": 44
+          },
+          {
+            "speaker": "경영주",
+            "text": "네. 확인 후 연락 부탁드립니다.",
+            "start": 44.35,
+            "end": 46.8
+          }
+        ],
+        "analysis": {
+          "summary": "경영주는 규정 05:00인 당일 1회차 배송을 07:00 현재 받지 못했다고 진술했습니다. 운행 위치와 도착 예정 안내를 요청하며, 인근 공사 영향은 확인되지 않았습니다.",
+          "fields": {
+            "storeId": "SYN-ST01",
+            "subject": "당일 1회차 배송 전체",
+            "quantity": null,
+            "unit": null,
+            "request": "운행 위치와 도착 예정 확인"
+          },
+          "issues": [
+            {
+              "field": "도착 시각",
+              "message": "규정 시각은 실제 도착 기록이 아닙니다.",
+              "evidence": "E-M1"
+            },
+            {
+              "field": "지연 원인",
+              "message": "공사 영향은 경영주 추측으로 추가 확인이 필요합니다.",
+              "evidence": "발화 4"
+            }
+          ],
+          "questions": [
+            "차량의 현재 운행 상태를 확인해 주세요.",
+            "실제 인도 여부와 완료 기록 누락 여부를 확인해 주세요."
+          ],
+          "department": {
+            "id": "delivery",
+            "name": "센터 배송 담당",
+            "reason": "배송 전체 미수령 문의로 운행·점착 확인이 필요합니다."
+          },
+          "facts": [
+            "규정 도착은 05:00입니다.",
+            "센터 출고 스캔 기록은 04:20입니다."
+          ],
+          "unknowns": [
+            "배송완료 시각이 미등록입니다.",
+            "실제 미도착 여부·지연 원인·예상 도착은 센터 확인이 필요합니다."
+          ],
+          "replyDraft": "경영주님, 배송을 받지 못하셨다는 문의를 접수했습니다. 센터 출고 기록은 확인했으나 배송완료 기록이 없어 운행 상태와 실제 도착 여부를 확인 중입니다. 확인되는 내용을 센터 담당자가 안내드리겠습니다."
+        },
+        "mode": "replay",
+        "requestId": "replay-6f0f64a58bd64a7ebf42b55ea3f106a1",
+        "revision": 1
+      }
+    },
+    {
+      "caseId": "CASE-0002",
+      "phase": "CASE-0002-real-replay-analysis-and-form",
+      "status": 200,
+      "data": {
+        "transcript": [
+          {
+            "speaker": "상담원",
+            "text": "안녕하세요. 해피콜 상담원입니다. 어떤 불편이 있으신가요?",
+            "start": 0,
+            "end": 4.3
+          },
+          {
+            "speaker": "경영주",
+            "text": "가상 새봄점인데요. 비스킷 열여덟 개를 주문했는데 휴지 한 박스가 왔어요. 이게 대체 뭡니까.",
+            "start": 4.65,
+            "end": 12.2
+          },
+          {
+            "speaker": "상담원",
+            "text": "비스킷 열여덟 개 대신 휴지 한 개가 왔다는 말씀이시죠?",
+            "start": 12.55,
+            "end": 17.2
+          },
+          {
+            "speaker": "경영주",
+            "text": "아니요. 휴지 한 개가 아니라 한 박스예요. 단위를 제대로 적어 주세요.",
+            "start": 17.75,
+            "end": 23.3
+          },
+          {
+            "speaker": "상담원",
+            "text": "네. 정정하겠습니다. 주문은 비스킷 열여덟 개, 받은 상품은 휴지 한 박스입니다.",
+            "start": 23.65,
+            "end": 29.8
+          },
+          {
+            "speaker": "경영주",
+            "text": "주말 장사도 해야 하는데 정말 곤란해요. 잘못 온 상품은 어떻게 해야 하나요?",
+            "start": 30.15,
+            "end": 36.55
+          },
+          {
+            "speaker": "상담원",
+            "text": "오출고 확인과 회송 안내가 필요한 것으로 접수하고 센터 상품 담당자에게 전달하겠습니다.",
+            "start": 36.9,
+            "end": 44.25
+          },
+          {
+            "speaker": "경영주",
+            "text": "네. 주문한 상품 처리도 같이 확인해 주세요.",
+            "start": 44.6,
+            "end": 49.4
+          }
+        ],
+        "analysis": {
+          "summary": "경영주는 비스킷 18개 주문에 휴지 1박스를 받았다고 진술했습니다. 상담원이 중간에 ‘1개’로 잘못 재진술했으나 경영주가 ‘1박스’로 정정했습니다. 오출고 확인·회송 방법·주문 상품 처리를 요청합니다.",
+          "fields": {
+            "storeId": "SYN-ST02",
+            "subject": "비스킷 주문 대신 휴지 입고",
+            "quantity": 1,
+            "unit": "BOX",
+            "request": "오출고 확인·회송 방법·주문 상품 처리 안내"
+          },
+          "issues": [
+            {
+              "field": "unit",
+              "message": "상담원 입력 EA와 경영주가 정정한 BOX가 다릅니다. 원문 확인 후 수정해 주세요.",
+              "evidence": "발화 3~5"
+            },
+            {
+              "field": "quantity",
+              "message": "주문 18 EA와 입고 1 BOX를 단순 차감하지 마세요.",
+              "evidence": "E-W1/E-W3"
+            }
+          ],
+          "questions": [
+            "주문 상품과 실제 입고 상품의 라벨을 센터에서 대조해 주세요.",
+            "피킹 토트와 출고 토트 연결 및 회송·재처리 방안을 확인해 주세요."
+          ],
+          "department": {
+            "id": "warehouse",
+            "name": "센터 상품 담당",
+            "reason": "주문/출고 상품이 달라 피킹·출고 대조와 회송 확인이 필요합니다."
+          },
+          "facts": [
+            "주문/피킹은 비스킷 18 EA입니다.",
+            "출고 스캔은 휴지 1 BOX로 기록돼 불일치합니다.",
+            "배송완료 등록은 05:10입니다."
+          ],
+          "unknowns": [
+            "불일치 발생 공정과 원인은 미확인입니다.",
+            "상품 회송·주문 상품 재처리 완료 여부는 확인이 필요합니다."
+          ],
+          "replyDraft": "경영주님, 주문하신 비스킷 18개와 출고 기록의 휴지 1박스가 다른 점을 확인했습니다. 발생 경위와 회송·주문 상품 처리 방안은 센터에서 추가 확인 후 안내드리겠습니다."
+        },
+        "mode": "replay",
+        "requestId": "replay-254efdc72066488b87d7424c4f023c2a",
+        "revision": 1
+      }
+    }
+  ],
+  "consoleErrors": [
+    {
+      "phase": "audio-404-recovery",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "expectedFault": true,
+      "location": {
+        "url": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "pageErrors": [],
+  "screenshots": [
+    {
+      "file": "parent-layout-1440.png",
+      "width": 1440,
+      "sha256": "5231de8be50255c5348d0eb6bbe1d3348ee67072164b1b9c005f83dcc0c6f1f3"
+    },
+    {
+      "file": "parent-layout-768.png",
+      "width": 768,
+      "sha256": "4b2ff20c8bccc191f5a6ab172e8001480b3d07061d2976bd14ade58ae261c297"
+    },
+    {
+      "file": "parent-layout-390.png",
+      "width": 390,
+      "sha256": "1b6b1a866e06e99d9543b2be8ffacc42696455ae450c718fa94280f1ca851576"
+    }
+  ],
+  "media": [
+    {
+      "id": "CASE-0001",
+      "expectedDuration": 47.15,
+      "elapsed": 49.655,
+      "before": {
+        "src": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+        "time": 0,
+        "duration": 47.15,
+        "paused": true,
+        "ended": false,
+        "rate": 1,
+        "volume": 1,
+        "muted": false,
+        "error": null,
+        "played": []
+      },
+      "audio": {
+        "src": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+        "time": 47.15,
+        "duration": 47.15,
+        "paused": true,
+        "ended": true,
+        "rate": 1,
+        "volume": 1,
+        "muted": false,
+        "error": null,
+        "played": [
+          [
+            0,
+            47.15
+          ]
+        ]
+      },
+      "events": [
+        {
+          "type": "loadedmetadata",
+          "id": 2,
+          "at": 4748,
+          "trusted": true,
+          "src": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+          "time": 0,
+          "duration": 47.15,
+          "rate": 1,
+          "error": null,
+          "played": []
+        },
+        {
+          "type": "play",
+          "id": 2,
+          "at": 4751.79999999702,
+          "trusted": true,
+          "src": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+          "time": 0,
+          "duration": 47.15,
+          "rate": 1,
+          "error": null,
+          "played": []
+        },
+        {
+          "type": "playing",
+          "id": 2,
+          "at": 4753.89999999851,
+          "trusted": true,
+          "src": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+          "time": 0,
+          "duration": 47.15,
+          "rate": 1,
+          "error": null,
+          "played": []
+        },
+        {
+          "type": "pause",
+          "id": 2,
+          "at": 54268.5,
+          "trusted": true,
+          "src": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+          "time": 47.15,
+          "duration": 47.15,
+          "rate": 1,
+          "error": null,
+          "played": [
+            [
+              0,
+              47.15
+            ]
+          ]
+        },
+        {
+          "type": "ended",
+          "id": 2,
+          "at": 54270.19999999553,
+          "trusted": true,
+          "src": "http://127.0.0.1:55337/demo/CASE-0001.wav",
+          "time": 47.15,
+          "duration": 47.15,
+          "rate": 1,
+          "error": null,
+          "played": [
+            [
+              0,
+              47.15
+            ]
+          ]
+        }
+      ],
+      "parentAnalysisEnabled": true
+    },
+    {
+      "id": "CASE-0002",
+      "expectedDuration": 49.75,
+      "elapsed": 51.47,
+      "before": {
+        "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+        "time": 0,
+        "duration": 49.75,
+        "paused": true,
+        "ended": false,
+        "rate": 1,
+        "volume": 1,
+        "muted": false,
+        "error": null,
+        "played": []
+      },
+      "audio": {
+        "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+        "time": 49.75,
+        "duration": 49.75,
+        "paused": true,
+        "ended": true,
+        "rate": 1,
+        "volume": 1,
+        "muted": false,
+        "error": null,
+        "played": [
+          [
+            0,
+            49.75
+          ]
+        ]
+      },
+      "events": [
+        {
+          "type": "loadedmetadata",
+          "id": 3,
+          "at": 1730,
+          "trusted": true,
+          "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 0,
+          "duration": 49.75,
+          "rate": 1,
+          "error": null,
+          "played": []
+        },
+        {
+          "type": "play",
+          "id": 3,
+          "at": 1739,
+          "trusted": true,
+          "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 0,
+          "duration": 49.75,
+          "rate": 1,
+          "error": null,
+          "played": []
+        },
+        {
+          "type": "playing",
+          "id": 3,
+          "at": 1745.3999999985099,
+          "trusted": true,
+          "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 0,
+          "duration": 49.75,
+          "rate": 1,
+          "error": null,
+          "played": []
+        },
+        {
+          "type": "pause",
+          "id": 3,
+          "at": 52914,
+          "trusted": true,
+          "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 49.75,
+          "duration": 49.75,
+          "rate": 1,
+          "error": null,
+          "played": [
+            [
+              0,
+              49.75
+            ]
+          ]
+        },
+        {
+          "type": "ended",
+          "id": 3,
+          "at": 52914.60000000149,
+          "trusted": true,
+          "src": "http://127.0.0.1:55337/demo/CASE-0002.wav?v=6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+          "time": 49.75,
+          "duration": 49.75,
+          "rate": 1,
+          "error": null,
+          "played": [
+            [
+              0,
+              49.75
+            ]
+          ]
+        }
+      ],
+      "parentAnalysisEnabled": true
+    }
+  ],
+  "cleanup": [
+    {
+      "context": "closed"
+    }
+  ],
+  "summary": {
+    "executed": 14,
+    "passed": 10,
+    "failed": 4
+  },
+  "finished": "2026-09-21T12:49:28.356Z"
+}
