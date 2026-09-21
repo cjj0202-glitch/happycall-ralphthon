@@ -6,6 +6,9 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url), root = path.resolve(import.meta.dirname, '../..');
 const ts = require(path.join(root, 'apps/web/node_modules/typescript'));
 const sourcePath = path.join(root, 'apps/web/app/page.tsx'), source = fs.readFileSync(sourcePath, 'utf8');
+const workflowSource = fs.readFileSync(path.join(root, 'apps/web/lib/workflow.ts'), 'utf8');
+const workflowModule = { exports: {} };
+new Function('exports', ts.transpileModule(workflowSource, { compilerOptions: { target: ts.ScriptTarget.ES2020, module: ts.ModuleKind.CommonJS } }).outputText)(workflowModule.exports);
 const sha = value => crypto.createHash('sha256').update(value).digest('hex');
 const output = path.resolve(process.env.TOAST_UNIT_OUTPUT || path.join(root, '.local', 'save-toast-unit-' + Date.now()));
 fs.mkdirSync(output, { recursive: true });
@@ -53,7 +56,7 @@ function setup(overrides = {}) {
   let resolve, reject;
   const deferred = new Promise((yes, no) => { resolve = yes; reject = no; });
   const env = {
-    fallback: false, view: 'desk', payload: {}, reloadInFlight: { current: false },
+    fallback: false, view: 'desk', role: 'counselor', isEvidenceEditable: workflowModule.exports.isEvidenceEditable, payload: {}, reloadInFlight: { current: false },
     setToast: value => { state.toast = value; state.toastLog.push(value); }, onToast: value => { state.toast = value; state.toastLog.push(value); },
     request: (...args) => { state.requests.push(args); return deferred; }, fetch: (...args) => { state.requests.push(args); return deferred; },
     update: value => state.updates.push(value), onUpdate: value => state.updates.push(value),
@@ -82,7 +85,7 @@ const fail = new ApiError('새 저장 응답 유실', 503, true);
 for (const [component, name, args, override] of [
   ['Home', 'save', ['CASE-TEST', { expectedRevision: 4, reply: '수정' }], {}],
   ['Desk', 'persist', [false], {}], ['Desk', 'persist', [true], {}],
-  ['Center', 'submit', [false], { view: 'center' }], ['Center', 'submit', [true], { view: 'center' }],
+  ['Center', 'submit', [false], { view: 'center', role: 'center' }], ['Center', 'submit', [true], { view: 'center', role: 'center' }],
   ['Desk', 'analyze', [], {}], ['Owner', 'submit', [], {}], ['Owner', 'verifyAttempt', [], { attempt: { key: 'existing-key', payload: { text: '원문 유지' } } }],
   ['Desk', 'inspectLatest', [], {}], ['Center', 'inspectLatest', [], {}], ['Home', 'reload', [], {}], ['Home', 'loadExample', [], {}]
 ]) {
