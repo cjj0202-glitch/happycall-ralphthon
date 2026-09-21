@@ -100,7 +100,16 @@ function Inspector({ clip, event, picking, shipping, opener, onClose, tracks: de
   function close() { video.current?.pause(); if (document.fullscreenElement === surface.current) void document.exitFullscreen().catch(() => {}); onClose(); }
   async function togglePlay() { const player = video.current; if (!player) return; setControlError(''); if (!player.paused) { player.pause(); return; } if (player.currentTime >= clip.endSeconds) player.currentTime = clip.startSeconds; try { await player.play(); } catch { setControlError('브라우저가 재생을 시작하지 못했습니다. 재생 버튼을 다시 눌러 주세요.'); } }
   function seek(value: number) { const player = video.current; if (!player) return; player.currentTime = Math.max(clip.startSeconds, Math.min(clip.endSeconds, value)); setTime(player.currentTime); }
-  function step(direction: number) { const player = video.current; if (!player || !validatedTracks) return; player.pause(); const fps = validatedTracks.fps; const index = Math.min(validatedTracks.frameCount - 1, Math.floor(player.currentTime * fps + 1e-6)); const lastIndex = Math.min(validatedTracks.frameCount - 1, Math.floor(clip.endSeconds * fps + 1e-6)); seek(Math.min(lastIndex, Math.max(Math.floor(clip.startSeconds * fps), index + direction)) / fps); }
+  function step(direction: number) {
+    const player = video.current; if (!player || !validatedTracks) return;
+    player.pause();
+    const fps = validatedTracks.fps;
+    const index = Math.min(validatedTracks.frameCount - 1, Math.floor(player.currentTime * fps + 1e-6));
+    const lastIndex = Math.min(validatedTracks.frameCount - 1, Math.floor(clip.endSeconds * fps + 1e-6));
+    const target = Math.min(lastIndex, Math.max(Math.floor(clip.startSeconds * fps), index + direction)) / fps;
+    // A saturated next step must not rewind a time within the last available frame.
+    seek(direction > 0 ? Math.max(player.currentTime, target) : Math.min(player.currentTime, target));
+  }
   async function fullscreen() { setControlError(''); try { if (document.fullscreenElement === surface.current) await document.exitFullscreen(); else if (surface.current?.requestFullscreen) await surface.current.requestFullscreen(); else throw new Error(); } catch { setControlError('이 브라우저에서는 전체 화면을 사용할 수 없습니다. 현재 창에서 조사할 수 있습니다.'); } }
   const phase = current ? ({ approach: '접근', branch: '분기', chute: '슈트 이동', settle: '정지' }[current.phase]) : '좌표 없음';
 
