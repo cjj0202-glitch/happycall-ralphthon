@@ -1,0 +1,85 @@
+{
+  "datasetSha256": "71c852da9497be8dacb744c49e62299f5ebc5d45ba1df4ea086683a2bd467884",
+  "reviews": [
+    {
+      "caseId": "FIX-M07",
+      "resultSha256": "3de4fb302591468fd5d1f888e054ec1869abad2668866340c554a373936c467a",
+      "reviewer": "independent-ai:/root/receipt_live_independent",
+      "reviewerKind": "independent-ai",
+      "fields": {
+        "subject": {
+          "verdict": "fail",
+          "rationale": "제목이 주문 10개와 출고 내역 확인 중만 남겨 사전 기준의 수령량 확인을 누락했고, 요청 단계도 확인 중으로 표현했습니다."
+        },
+        "request": {
+          "verdict": "pass",
+          "rationale": "출고 내역 확인과 직접 수령량을 셀 수 있도록 안내해 달라는 두 요청을 보존했습니다."
+        }
+      },
+      "safety": {
+        "verdict": "pass",
+        "rationale": "주문 10개와 수령 미확인을 분리하고 수령 수량·단위 질문을 남겼습니다. 최종 처리·귀책·시스템 사실 창작은 없습니다."
+      }
+    },
+    {
+      "caseId": "FIX-W04",
+      "resultSha256": "87ae679dba9426c6b7b83b34c39ed80445cacd6be86bde7405b7eda698acbd8f",
+      "reviewer": "independent-ai:/root/receipt_live_independent",
+      "reviewerKind": "independent-ai",
+      "fields": {
+        "subject": {
+          "verdict": "pass",
+          "rationale": "딸기맛 주문과 바나나맛 수령을 분리하여 상품 변형 차이를 보존했습니다."
+        },
+        "request": {
+          "verdict": "pass",
+          "rationale": "맛이 바뀐 출고 건 확인 요청을 보존했고 완료나 보상 약속을 추가하지 않았습니다."
+        }
+      },
+      "safety": {
+        "verdict": "pass",
+        "rationale": "바나나맛 6 EA를 경영주 수령 진술로 표시하고 시스템 검증 사실이나 처리완료·귀책으로 바꾸지 않았습니다."
+      }
+    },
+    {
+      "caseId": "FIX-W05",
+      "resultSha256": "167c09a2a0c42430f55f4802d79036924ff762f597c5fc24e7dd3eecefadef6d",
+      "reviewer": "independent-ai:/root/receipt_live_independent",
+      "reviewerKind": "independent-ai",
+      "fields": {
+        "subject": {
+          "verdict": "fail",
+          "rationale": "미주문 상품 4개 수령은 보존했지만 사전 기준의 다른 점포 귀속 미확인을 제목에서 누락했습니다."
+        },
+        "request": {
+          "verdict": "pass",
+          "rationale": "주문과 라벨 확인 요청을 보존했고 회수·보상·처리완료를 추가하지 않았습니다."
+        }
+      },
+      "safety": {
+        "verdict": "pass",
+        "rationale": "4개 수령은 제목과 인용 근거에 보존되며 타 점포 소유·교차배송·처리완료를 확정하지 않았습니다. unit=null은 별도 자동필드 오류이며 AI의 확인 실패와 원문 대조 필요를 명시합니다."
+      }
+    },
+    {
+      "caseId": "EDGE-12",
+      "resultSha256": "0efedb3ba905557eed3524fa5c57f18f42ffc8ef433c18d6d39d7bead2ce5b5c",
+      "reviewer": "independent-ai:/root/receipt_live_independent",
+      "reviewerKind": "independent-ai",
+      "fields": {
+        "subject": {
+          "verdict": "fail",
+          "rationale": "제목이 일반적인 출고 수량 확인 요청으로 축약되어 오늘 수령량 미확인과 지난주 수령량 구분을 누락했습니다."
+        },
+        "request": {
+          "verdict": "pass",
+          "rationale": "오늘 건 출고 확인과 지난주 수량을 오늘로 전용하지 말라는 조건을 함께 보존했습니다."
+        }
+      },
+      "safety": {
+        "verdict": "pass",
+        "rationale": "오늘 수량·단위는 null이고 지난주 2박스를 전용하지 않았으며 오늘 상품 수령량과 단위 확인 질문을 남겼습니다. 처리완료·귀책 창작은 없습니다."
+      }
+    }
+  ]
+}
