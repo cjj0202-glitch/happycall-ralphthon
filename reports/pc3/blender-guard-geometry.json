@@ -1,0 +1,964 @@
+{
+  "schemaVersion": "pc3-guard-numeric-audit-v1",
+  "checkedAt": "2026-09-21T11:24:42.216354+00:00",
+  "method": "Source-AST primitive cuboid recorder and yaw OBB/AABB separating-axis mathematics",
+  "blenderExecuted": false,
+  "rendered": false,
+  "status": "PASS-numeric-only",
+  "source": {
+    "path": "scripts\\media_pc3\\build_scene.py",
+    "sha256": "7d20c5b1453712dae2bce47bc49e17884ea49b3ea0ff0acce8ae48ed3f386a91"
+  },
+  "layoutSha256": "c6aece6692c6b78beb85d4f1167868f2bd095b3ab8366e837466715b82bd6cb6",
+  "supportCount": 18,
+  "connectedSupportCount": 18,
+  "connections": [
+    {
+      "index": 0,
+      "name": "North guard support",
+      "center": [
+        10,
+        8.24,
+        0.935
+      ],
+      "dimensions": [
+        0.06,
+        0.16,
+        0.25
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            16.125,
+            8.28,
+            1.06
+          ],
+          "overlapXYZMeters": [
+            0.05999999999999872,
+            0.06500000000000128,
+            0.050000000000000044
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            16.125,
+            8.2,
+            0.73
+          ],
+          "overlapXYZMeters": [
+            0.05999999999999872,
+            0.08499999999999908,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    },
+    {
+      "index": 1,
+      "name": "South guard support",
+      "center": [
+        10,
+        6.755,
+        0.935
+      ],
+      "dimensions": [
+        0.06,
+        0.16,
+        0.25
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            13.425,
+            6.71,
+            1.06
+          ],
+          "overlapXYZMeters": [
+            0.05999999999999872,
+            0.0649999999999995,
+            0.050000000000000044
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            16.125,
+            6.8,
+            0.73
+          ],
+          "overlapXYZMeters": [
+            0.05999999999999872,
+            0.08000000000000007,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    },
+    {
+      "index": 2,
+      "name": "North guard support",
+      "center": [
+        12.5,
+        8.24,
+        0.935
+      ],
+      "dimensions": [
+        0.06,
+        0.16,
+        0.25
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            16.125,
+            8.28,
+            1.06
+          ],
+          "overlapXYZMeters": [
+            0.05999999999999872,
+            0.06500000000000128,
+            0.050000000000000044
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            16.125,
+            8.2,
+            0.73
+          ],
+          "overlapXYZMeters": [
+            0.05999999999999872,
+            0.08499999999999908,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    },
+    {
+      "index": 3,
+      "name": "South guard support",
+      "center": [
+        12.5,
+        6.755,
+        0.935
+      ],
+      "dimensions": [
+        0.06,
+        0.16,
+        0.25
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            13.425,
+            6.71,
+            1.06
+          ],
+          "overlapXYZMeters": [
+            0.05999999999999872,
+            0.0649999999999995,
+            0.050000000000000044
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            16.125,
+            6.8,
+            0.73
+          ],
+          "overlapXYZMeters": [
+            0.05999999999999872,
+            0.08000000000000007,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    },
+    {
+      "index": 4,
+      "name": "North guard support",
+      "center": [
+        15,
+        8.24,
+        0.935
+      ],
+      "dimensions": [
+        0.06,
+        0.16,
+        0.25
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            16.125,
+            8.28,
+            1.06
+          ],
+          "overlapXYZMeters": [
+            0.05999999999999872,
+            0.06500000000000128,
+            0.050000000000000044
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            16.125,
+            8.2,
+            0.73
+          ],
+          "overlapXYZMeters": [
+            0.05999999999999872,
+            0.08499999999999908,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    },
+    {
+      "index": 5,
+      "name": "South guard support",
+      "center": [
+        15,
+        6.755,
+        0.935
+      ],
+      "dimensions": [
+        0.06,
+        0.16,
+        0.25
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            13.425,
+            6.71,
+            1.06
+          ],
+          "overlapXYZMeters": [
+            0.05999999999999872,
+            0.0649999999999995,
+            0.050000000000000044
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            16.125,
+            6.8,
+            0.73
+          ],
+          "overlapXYZMeters": [
+            0.05999999999999872,
+            0.08000000000000007,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    },
+    {
+      "index": 6,
+      "name": "North guard support",
+      "center": [
+        17,
+        8.24,
+        0.935
+      ],
+      "dimensions": [
+        0.06,
+        0.16,
+        0.25
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            16.125,
+            8.28,
+            1.06
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.06500000000000128,
+            0.050000000000000044
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            16.125,
+            8.2,
+            0.73
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.08499999999999908,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    },
+    {
+      "index": 7,
+      "name": "South guard support",
+      "center": [
+        17,
+        6.755,
+        0.935
+      ],
+      "dimensions": [
+        0.06,
+        0.16,
+        0.25
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            13.425,
+            6.71,
+            1.06
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.0649999999999995,
+            0.050000000000000044
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            16.125,
+            6.8,
+            0.73
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.08000000000000007,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    },
+    {
+      "index": 8,
+      "name": "North guard support",
+      "center": [
+        20,
+        8.24,
+        0.935
+      ],
+      "dimensions": [
+        0.06,
+        0.16,
+        0.25
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            16.125,
+            8.28,
+            1.06
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.06500000000000128,
+            0.050000000000000044
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            16.125,
+            8.2,
+            0.73
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.08499999999999908,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    },
+    {
+      "index": 9,
+      "name": "South guard support",
+      "center": [
+        20,
+        6.755,
+        0.935
+      ],
+      "dimensions": [
+        0.06,
+        0.16,
+        0.25
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            21.2,
+            6.71,
+            1.06
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.0649999999999995,
+            0.050000000000000044
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            16.125,
+            6.8,
+            0.73
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.08000000000000007,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    },
+    {
+      "index": 10,
+      "name": "North guard support",
+      "center": [
+        22.5,
+        8.24,
+        0.935
+      ],
+      "dimensions": [
+        0.06,
+        0.16,
+        0.25
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            16.125,
+            8.28,
+            1.06
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.06500000000000128,
+            0.050000000000000044
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            16.125,
+            8.2,
+            0.73
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.08499999999999908,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    },
+    {
+      "index": 11,
+      "name": "South guard support",
+      "center": [
+        22.5,
+        6.755,
+        0.935
+      ],
+      "dimensions": [
+        0.06,
+        0.16,
+        0.25
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            21.2,
+            6.71,
+            1.06
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.0649999999999995,
+            0.050000000000000044
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            16.125,
+            6.8,
+            0.73
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.08000000000000007,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    },
+    {
+      "index": 12,
+      "name": "Outfeed guard support",
+      "center": [
+        17.725,
+        4.1,
+        0.915
+      ],
+      "dimensions": [
+        0.1,
+        0.06,
+        0.21
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            17.71,
+            5.175,
+            1.02
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.0600000000000005,
+            0.07000000000000006
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            17.74,
+            5.35,
+            0.72
+          ],
+          "overlapXYZMeters": [
+            0.0800000000000054,
+            0.0600000000000005,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    },
+    {
+      "index": 13,
+      "name": "Outfeed guard support",
+      "center": [
+        19.275,
+        4.1,
+        0.915
+      ],
+      "dimensions": [
+        0.1,
+        0.06,
+        0.21
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            19.29,
+            5.175,
+            1.02
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.0600000000000005,
+            0.07000000000000006
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            19.26,
+            5.35,
+            0.72
+          ],
+          "overlapXYZMeters": [
+            0.0800000000000054,
+            0.0600000000000005,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    },
+    {
+      "index": 14,
+      "name": "Outfeed guard support",
+      "center": [
+        17.725,
+        5.5,
+        0.915
+      ],
+      "dimensions": [
+        0.1,
+        0.06,
+        0.21
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            17.71,
+            5.175,
+            1.02
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.0600000000000005,
+            0.07000000000000006
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            17.74,
+            5.35,
+            0.72
+          ],
+          "overlapXYZMeters": [
+            0.0800000000000054,
+            0.0600000000000005,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    },
+    {
+      "index": 15,
+      "name": "Outfeed guard support",
+      "center": [
+        19.275,
+        5.5,
+        0.915
+      ],
+      "dimensions": [
+        0.1,
+        0.06,
+        0.21
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            19.29,
+            5.175,
+            1.02
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.0600000000000005,
+            0.07000000000000006
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            19.26,
+            5.35,
+            0.72
+          ],
+          "overlapXYZMeters": [
+            0.0800000000000054,
+            0.0600000000000005,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    },
+    {
+      "index": 16,
+      "name": "Outfeed guard support",
+      "center": [
+        17.725,
+        6.25,
+        0.915
+      ],
+      "dimensions": [
+        0.1,
+        0.06,
+        0.21
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            17.71,
+            5.175,
+            1.02
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.0600000000000005,
+            0.07000000000000006
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            17.74,
+            5.35,
+            0.72
+          ],
+          "overlapXYZMeters": [
+            0.0800000000000054,
+            0.0600000000000005,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    },
+    {
+      "index": 17,
+      "name": "Outfeed guard support",
+      "center": [
+        19.275,
+        6.25,
+        0.915
+      ],
+      "dimensions": [
+        0.1,
+        0.06,
+        0.21
+      ],
+      "bevelMeters": 0.005,
+      "parented": false,
+      "railConnections": [
+        {
+          "center": [
+            19.29,
+            5.175,
+            1.02
+          ],
+          "overlapXYZMeters": [
+            0.060000000000002274,
+            0.0600000000000005,
+            0.07000000000000006
+          ]
+        }
+      ],
+      "frameConnections": [
+        {
+          "center": [
+            19.26,
+            5.35,
+            0.72
+          ],
+          "overlapXYZMeters": [
+            0.0800000000000054,
+            0.0600000000000005,
+            0.029999999999999916
+          ]
+        }
+      ],
+      "supported": true
+    }
+  ],
+  "railSegmentCoverage": [
+    {
+      "name": "North yellow safety rail",
+      "center": [
+        16.125,
+        8.28,
+        1.06
+      ],
+      "dimensions": [
+        13.75,
+        0.065,
+        0.1
+      ],
+      "connectedSupportCount": 6,
+      "supportIndices": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10
+      ]
+    },
+    {
+      "name": "South interrupted safety rail",
+      "center": [
+        13.425,
+        6.71,
+        1.06
+      ],
+      "dimensions": [
+        8.350000000000001,
+        0.065,
+        0.1
+      ],
+      "connectedSupportCount": 4,
+      "supportIndices": [
+        1,
+        3,
+        5,
+        7
+      ]
+    },
+    {
+      "name": "South interrupted safety rail",
+      "center": [
+        21.2,
+        6.71,
+        1.06
+      ],
+      "dimensions": [
+        3.6000000000000014,
+        0.065,
+        0.1
+      ],
+      "connectedSupportCount": 2,
+      "supportIndices": [
+        9,
+        11
+      ]
+    },
+    {
+      "name": "Outfeed side guard",
+      "center": [
+        17.71,
+        5.175,
+        1.02
+      ],
+      "dimensions": [
+        0.06,
+        2.65,
+        0.14
+      ],
+      "connectedSupportCount": 3,
+      "supportIndices": [
+        12,
+        14,
+        16
+      ]
+    },
+    {
+      "name": "Outfeed side guard",
+      "center": [
+        19.29,
+        5.175,
+        1.02
+      ],
+      "dimensions": [
+        0.06,
+        2.65,
+        0.14
+      ],
+      "connectedSupportCount": 3,
+      "supportIndices": [
+        13,
+        15,
+        17
+      ]
+    }
+  ],
+  "legacyRedControl": {
+    "tested": 6,
+    "rejectedDisconnectedSupports": 6,
+    "horizontalGapMeters": [
+      0.009999999999999787,
+      0.009999999999999787,
+      0.009999999999999787,
+      0.009999999999999787,
+      0.009999999999999787,
+      0.009999999999999787
+    ]
+  },
+  "collisionDetectorControls": {
+    "intentionalCollisionDetected": true,
+    "farSeparatedRejected": true,
+    "rotatedAabbFalsePositiveRejectedBySat": true
+  },
+  "denseTimeSampling": {
+    "poseCount": 12001,
+    "positiveVolumeIntersections": 0,
+    "firstIntersections": []
+  },
+  "renderFrameTimes": {
+    "poseCount": 288,
+    "positiveVolumeIntersections": 0,
+    "firstIntersections": []
+  },
+  "unchangedInputs": [
+    "camera/path/event/tote keys are read only by this audit"
+  ],
+  "limitations": [
+    "No bpy API execution, scene build, render, or visual acceptance.",
+    "Intersection uses source cuboids before bevel, not Blender-evaluated meshes.",
+    "Positive volume overlap is a modeled attachment check, not structural engineering validation.",
+    "Sampling includes 12001 1 ms poses and all 288 integer frame times; not a continuous-time proof.",
+    "Ray occlusion, lighting, shadows, texture quality and representative image acceptance remain with pc1."
+  ]
+}

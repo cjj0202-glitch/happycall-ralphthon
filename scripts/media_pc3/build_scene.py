@@ -241,7 +241,14 @@ def build(layout, args):
     for side in [-1, 1]:
         cube('Outfeed side guard', (branch_x + side * 0.79, (branch_end + 6.5) / 2, 1.02), (0.06, 6.5 - branch_end, 0.14), mats['yellow'], 0.015)
     for x in [10, 12.5, 15, 17, 20, 22.5]:
-        cube('Guard support', (x, y_main + 0.78, 0.94), (0.04, 0.05, 0.24), mats['frame'], 0.005)
+        # Span both rail and side channel in Y, with 30 mm vertical overlap
+        # into the channel. The old north-only post missed its channel by 10 mm.
+        cube('North guard support', (x, y_main + 0.74, 0.935), (0.06, 0.16, 0.25), mats['frame'], 0.005)
+        # These X positions stay outside the interrupted branch opening.
+        cube('South guard support', (x, y_main - 0.745, 0.935), (0.06, 0.16, 0.25), mats['frame'], 0.005)
+    for y in [4.1, 5.5, 6.25]:
+        for side in [-1, 1]:
+            cube('Outfeed guard support', (branch_x + side * 0.775, y, 0.915), (0.10, 0.06, 0.21), mats['frame'], 0.005)
 
     cube('Electrical cabinet', (21.2, 8.7, 0.49), (0.65, 0.36, 0.98), mats['steel'], 0.035)
     cube('Cabinet door inset', (21.2, 8.505, 0.51), (0.57, 0.025, 0.86), mats['frame'], 0.012)
