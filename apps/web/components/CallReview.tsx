@@ -227,17 +227,18 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisSt
           {analysisState === 'loading' && <p className={styles.notice} role="status">AI 분석 중 · 원문과 현재 상담 입력을 보존하고 있습니다.</p>}
           {analysisState === 'error' && <div className={styles.error}><p role="alert">{analysisError || 'AI 분석에 실패했습니다. 원문과 현재 상담 입력은 유지됩니다.'}</p>{onRetryAnalysis ? <button type="button" disabled={!canRetryAnalysis} onClick={() => { if (canRetryAnalysis) onRetryAnalysis(); }}>AI 분석 다시 시도</button> : <p>상위 화면에서 분석을 다시 실행해 주세요.</p>}{voice && !complete && <p>정상 전체 통화 재생 후 분석을 다시 시도할 수 있습니다.</p>}</div>}
   </>;
-  const sourceContent = <>
-        <section className={styles.card} aria-labelledby={`${id}-source-title`}>
-          <div className={styles.sectionHeading}><h3 id={`${id}-source-title`}>2. {voice ? '합성 통화 원대본' : '접수 원문'}</h3><span className={styles.badge}>원문 보존</span></div>
+  const sourceTextContent = <section className={styles.card} aria-labelledby={`${id}-source-title`}>
+          <div className={styles.sectionHeading}><h3 id={`${id}-source-title`}>{voice ? '합성 통화 원대본' : '접수 원문'}</h3><span className={styles.badge}>원문 보존</span></div>
           <p className={styles.help}>{voice ? '음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.' : '경영주가 입력한 원문입니다. AI 제안과 상담원 수정 내용이 아닙니다.'}</p>
-          <div className={styles.sourceText}>{valueText(caseData.sourceText)}</div>
-        </section>
+          <div className={`${styles.sourceText} ${styles.scrollRegion}`} role="region" tabIndex={0} aria-labelledby={`${id}-source-title`}>{valueText(caseData.sourceText)}</div>
+        </section>;
+  const sourceContent = <>
+        {!voice && sourceTextContent}
 
         <section className={styles.card} aria-labelledby={`${id}-transcript-title`}>
           <div className={styles.sectionHeading}><div><h3 id={`${id}-transcript-title`}>화자별 대화록</h3><p className={styles.help}>{transcriptLabel}</p></div><label className={styles.checkbox}><input type="checkbox" checked={showTranscript} disabled={disabled} onChange={event => setShowTranscript(event.target.checked)} aria-label="대화록 표시" />자막 표시</label></div>
           <p className={styles.help}>구간은 제공된 발화 시각 기준입니다. 저장된 합성 대화록의 구간은 음성 생성 파일의 경계이며 STT·단어 정렬 결과가 아닙니다.</p>
-          {showTranscript && (transcript.length ? <ol className={styles.transcript}>{transcript.map((line, index) => {
+          {showTranscript && (transcript.length ? <div className={styles.scrollRegion} role="region" tabIndex={0} aria-labelledby={`${id}-transcript-title`}><ol className={styles.transcript}>{transcript.map((line, index) => {
             const range = clipFor(line, duration);
             const valid = range.start !== undefined && range.end !== undefined;
             const active = valid && position >= range.start! && position < range.end! && playback === 'playing';
@@ -251,8 +252,9 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisSt
               <button type="button" className={styles.clipButton} disabled={disabled || !voice || !audioUrl || !!mediaError || !valid} aria-describedby={reason ? `${id}-range-${index}` : undefined} aria-label={`${speaker} 발화 ${index + 1} 구간 재생${valid ? ` ${clipClock(range.start!)}~${clipClock(range.end!)}` : ''}`} onClick={() => playClip(line, index)}>{valid ? `${clipClock(range.start!)}–${clipClock(range.end!)} 구간 재생` : '구간 재생 불가'}</button>
               {reason && <p id={`${id}-range-${index}`} className={styles.help}>{reason}</p>}
             </li>;
-          })}</ol> : <p className={styles.empty}>제공된 대화록이 없습니다. 원대본을 전사 결과로 대신 표시하지 않습니다.</p>)}
+          })}</ol></div> : <p className={styles.empty}>제공된 대화록이 없습니다. 원대본을 전사 결과로 대신 표시하지 않습니다.</p>)}
         </section>
+        {voice && <details className={styles.reviewDetails}><summary>합성 통화 원대본 · 음성 제작 원본, STT 아님</summary>{sourceTextContent}</details>}
   </>;
   const comparisonContent = <>
         <section className={styles.card} aria-labelledby={`${id}-compare-title`} aria-busy={analysisState === 'loading'}>
@@ -291,7 +293,7 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisSt
   </>;
   return <section className={styles.review} aria-labelledby={`${id}-title`}>
     <header className={styles.header}>
-      <div><p className={styles.eyebrow}>CALL REVIEW · {caseData.id}</p><h2 id={`${id}-title`}>통화와 접수 내용 대조</h2><p className={styles.description}>{caseData.title}</p></div>
+      <h2 id={`${id}-title`}>{voice ? '통화와 원문 대조' : '접수 원문 대조'}</h2>
       <span className={styles.badge}>합성 시연 사례</span>
     </header>
 
@@ -370,7 +372,7 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisSt
             </div>
             {(muted || volume === 0) && <p className={styles.warning}>현재 소리가 꺼져 있습니다. 재생 완료는 실제 청취 확인을 뜻하지 않습니다.</p>}
             <p id={`${id}-audio-help`} className={styles.help}>음성을 처음부터 끝까지 재생하면 분석 준비가 됩니다. 구간 재생이나 끝으로 이동은 전체 재생 완료로 처리하지 않습니다.</p>
-            <p className={styles.help}>구간 재생 중 다른 탭으로 이동하면 선택 구간을 멈춥니다. 전체 통화 재생은 계속될 수 있습니다.</p>
+            <details className={styles.playbackHelp}><summary>구간 재생 안내</summary><p className={styles.help}>구간 재생 중 다른 탭으로 이동하면 선택 구간을 멈춥니다. 전체 통화 재생은 계속될 수 있습니다.</p></details>
             {hiddenClipNotice && <p className={styles.warning} role="status">탭이 숨겨져 선택 발화 재생을 멈췄습니다. 돌아온 뒤 구간 재생 버튼을 다시 눌러 주세요.</p>}
             {!complete && seekNotice && <p className={styles.warning}>재생 위치가 변경됐습니다. 분석 전 ‘처음부터 전체 통화 재생’을 사용해 주세요.</p>}
             {mediaError && <p className={styles.error} role="alert">{mediaError}</p>}
@@ -384,6 +386,11 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisSt
         {analysisActions}
       </div>
 
+      {intakeEditor ? <details open id={`${id}-source-panel`} className={`${styles.sourcePane} ${styles.reviewDetails}`}><summary>{voice ? '원문과 화자별 대화록 확인' : '접수 원문과 입력 내용 확인'}</summary><div className={styles.stack}>
+        {sourceContent}
+      </div></details> : <div className={`${styles.sourcePane} ${styles.stack}`}>
+        {sourceContent}
+      </div>}
       <div className={`${styles.stack} ${styles.editorPane}`}>
         {intakeEditor && analysisFeedback}
         {intakeEditor}
@@ -393,11 +400,6 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisSt
         {comparisonContent}
         </>}
       </div>
-      {intakeEditor ? <details id={`${id}-source-panel`} className={`${styles.sourcePane} ${styles.reviewDetails}`}><summary>원문과 화자별 대화록 확인</summary><div className={styles.stack}>
-        {sourceContent}
-      </div></details> : <div className={`${styles.sourcePane} ${styles.stack}`}>
-        {sourceContent}
-      </div>}
     </div>
   </section>;
 }

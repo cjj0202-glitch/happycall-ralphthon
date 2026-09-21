@@ -57,7 +57,7 @@ function instance(overrides = {}, moduleSource = source[files[1]], workflowApi =
   return { states, calls, draftWrites, render, button, child };
 }
 let app = instance(), tree = app.render();
-check('actual primary navigation has only three role tabs', findAll(tree, n => n.type === 'nav')[0].props.children[0].length === 3);
+check('actual primary navigation has only three role tabs', findAll(findAll(tree, n => n.type === 'nav' && n.props['aria-label'] === '업무 역할')[0], n => n.type === 'button').length === 3);
 check('actual counselor defaults to attention queue, selected case visible', app.child(tree, 'Desk').props.caseData.id === 'CASE-0');
 app.button(tree, '센터 작업대').props.onClick(); tree = app.render();
 check('role change sets center and new-handoff queue', app.states.role === 'center' && app.states.view === 'center' && app.states.queue === 'handed_off');

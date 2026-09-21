@@ -23,7 +23,17 @@
           "reports/role-flow-live-check.md"
         ],
         "accepted": true,
-        "acceptanceScope": "Role queues and case-context corrections only"
+        "acceptanceScope": "Role queues and case-context corrections only",
+        "uxV2": {
+          "state": "DESKTOP_TARGETED_VERIFIED_RESPONSIVE_PENDING",
+          "design": "planning/role-workflow-ux-v2.md",
+          "evidence": "reports/claude-workflow-ux-review.md",
+          "claudeCode": "2.1.278; actual two-turn read-only dialogue",
+          "browser": "1201x791 existing IAB; voice49.75sec and anchors/drafts/center-readonly; no new saved flow",
+          "responsive": "1024/390 overrides not applied; NOT_VERIFIED",
+          "unit": "87/87+mutations7/7; save48/48+mutations3/3; tsc exit0",
+          "productionBuild": "NOT_RUN for v2"
+        }
       },
       "outcome": "공통 계약·API·통합·인수",
       "state": "IN_PROGRESS",
@@ -41,7 +51,7 @@
         "reports/live-analysis-independent.md"
       ],
       "remaining": [
-        "고객 요청 공통어 과잉 철회 P2와 최종 고정평가 한계 보존; 최신 UI/미디어 통합",
+        "요청 철회 P2 한정 수정96fec8d 검증 완료, 실행 API 반영/최종 고정평가 및 최신 UI·미디어 통합 대기",
         "음성/Blender 제작 품질",
         "최신 후보 원격 독립 QA",
         "영속 저장·원격 전체 흐름",
@@ -108,7 +118,14 @@
         "newLiveCalls": 0,
         "evidence": "reports/request-grounding-final-independent.md",
         "accepted": true,
-        "acceptanceScope": "Original four defects and quoted-request projection only"
+        "acceptanceScope": "Original four defects and quoted-request projection only",
+        "cancelScopeRepair": {
+          "commit": "96fec8dce0e579a1d37f1c59b7dd7e0c88548436",
+          "evidence": "reports/request-cancel-scope-repair.md",
+          "status": "TARGETED_SOURCE_REPAIR_VERIFIED_LIVE_RUNTIME_PENDING",
+          "independent": "11/11; earlier five revived-cancellation regressions corrected",
+          "impact": "105 tests/213 subtests; stored36 unchanged; live calls0"
+        }
       },
       "cctvInspector": {
         "commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
@@ -150,10 +167,12 @@
       "latestAssignment": {
         "id": "N02-M4",
         "card": "reports/channel/N02-M4-media-delivery.md",
-        "state": "ACKNOWLEDGED_IMPLEMENTING",
+        "state": "RESULT_RECEIVED_MAIN_REVIEW",
         "ackAtKST": "2026-09-21T22:46:40+09:00",
         "ackCommentId": 5761525060,
-        "accepted": false
+        "accepted": false,
+        "resultCommit": "ceec704755c3558be03be72938b6cb369bbb1d3b",
+        "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5761755884"
       },
       "outcome": "음성 명료도·통화 검토 UX",
       "state": "RESULT_RECEIVED_REVIEW",
@@ -271,9 +290,12 @@
       "latestAssignment": {
         "id": "N03-M5",
         "card": "reports/channel/N03-M5-full-output-intake.md",
-        "state": "SENT_ACK_PENDING",
+        "state": "RESULT_RECEIVED_MAIN_REVIEW",
         "accepted": false,
-        "baseCommit": "f745920e52c0e0910294a9b836f7def1d423b210"
+        "baseCommit": "f745920e52c0e0910294a9b836f7def1d423b210",
+        "resultCommit": "de2c790a5e739a4aa9cdb2fc481fb10db3e43e29",
+        "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5762219833",
+        "ackUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5762000867"
       },
       "outcome": "WMS 공정·합성 CCTV",
       "state": "FIX_RESULT_RECEIVED_REVIEW",
