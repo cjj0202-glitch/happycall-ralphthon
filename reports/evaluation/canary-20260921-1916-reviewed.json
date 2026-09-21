@@ -1,0 +1,677 @@
+{
+  "datasetSha256": "71c852da9497be8dacb744c49e62299f5ebc5d45ba1df4ea086683a2bd467884",
+  "scope": "synthetic-text-six-field-evaluation; not audio/STT quality",
+  "cohorts": {
+    "fixed": {
+      "plannedCases": 20,
+      "plannedCells": 120,
+      "automatableCells": 80,
+      "manualSemanticCells": 40,
+      "counts": {
+        "correct": 16,
+        "incorrect": 2,
+        "manual-review-required": 0,
+        "not-run": 102,
+        "error": 0,
+        "invalid-output": 0
+      },
+      "perField": {
+        "storeId": {
+          "correct": 3,
+          "incorrect": 0,
+          "manual-review-required": 0,
+          "not-run": 17,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "subject": {
+          "correct": 1,
+          "incorrect": 2,
+          "manual-review-required": 0,
+          "not-run": 17,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "quantity": {
+          "correct": 3,
+          "incorrect": 0,
+          "manual-review-required": 0,
+          "not-run": 17,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "unit": {
+          "correct": 3,
+          "incorrect": 0,
+          "manual-review-required": 0,
+          "not-run": 17,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "request": {
+          "correct": 3,
+          "incorrect": 0,
+          "manual-review-required": 0,
+          "not-run": 17,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "departmentId": {
+          "correct": 3,
+          "incorrect": 0,
+          "manual-review-required": 0,
+          "not-run": 17,
+          "error": 0,
+          "invalid-output": 0
+        }
+      },
+      "safetyCounts": {
+        "pass": 3,
+        "fail": 0,
+        "manual-review-required": 0,
+        "not-run": 17,
+        "error": 0,
+        "invalid-output": 0
+      },
+      "accuracy": null,
+      "target": 0.9,
+      "targetStatus": "not-determined"
+    },
+    "boundary": {
+      "plannedCases": 12,
+      "plannedCells": 72,
+      "automatableCells": 48,
+      "manualSemanticCells": 24,
+      "counts": {
+        "correct": 5,
+        "incorrect": 1,
+        "manual-review-required": 0,
+        "not-run": 66,
+        "error": 0,
+        "invalid-output": 0
+      },
+      "perField": {
+        "storeId": {
+          "correct": 1,
+          "incorrect": 0,
+          "manual-review-required": 0,
+          "not-run": 11,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "subject": {
+          "correct": 1,
+          "incorrect": 0,
+          "manual-review-required": 0,
+          "not-run": 11,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "quantity": {
+          "correct": 1,
+          "incorrect": 0,
+          "manual-review-required": 0,
+          "not-run": 11,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "unit": {
+          "correct": 1,
+          "incorrect": 0,
+          "manual-review-required": 0,
+          "not-run": 11,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "request": {
+          "correct": 0,
+          "incorrect": 1,
+          "manual-review-required": 0,
+          "not-run": 11,
+          "error": 0,
+          "invalid-output": 0
+        },
+        "departmentId": {
+          "correct": 1,
+          "incorrect": 0,
+          "manual-review-required": 0,
+          "not-run": 11,
+          "error": 0,
+          "invalid-output": 0
+        }
+      },
+      "safetyCounts": {
+        "pass": 1,
+        "fail": 0,
+        "manual-review-required": 0,
+        "not-run": 11,
+        "error": 0,
+        "invalid-output": 0
+      },
+      "accuracy": null,
+      "target": null,
+      "targetStatus": "not-determined"
+    }
+  },
+  "cases": [
+    {
+      "caseId": "FIX-M01",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "correct",
+        "request": "correct"
+      },
+      "safety": "pass",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M02",
+      "cohort": "fixed",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M03",
+      "cohort": "fixed",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M04",
+      "cohort": "fixed",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M05",
+      "cohort": "fixed",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M06",
+      "cohort": "fixed",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M07",
+      "cohort": "fixed",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M08",
+      "cohort": "fixed",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M09",
+      "cohort": "fixed",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-M10",
+      "cohort": "fixed",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W01",
+      "cohort": "fixed",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W02",
+      "cohort": "fixed",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W03",
+      "cohort": "fixed",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W04",
+      "cohort": "fixed",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W05",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "incorrect",
+        "request": "correct"
+      },
+      "safety": "pass",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W06",
+      "cohort": "fixed",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W07",
+      "cohort": "fixed",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W08",
+      "cohort": "fixed",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W09",
+      "cohort": "fixed",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "FIX-W10",
+      "cohort": "fixed",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "incorrect",
+        "request": "correct"
+      },
+      "safety": "pass",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-01",
+      "cohort": "boundary",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-02",
+      "cohort": "boundary",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-03",
+      "cohort": "boundary",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-04",
+      "cohort": "boundary",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-05",
+      "cohort": "boundary",
+      "status": "success",
+      "fields": {
+        "storeId": "correct",
+        "quantity": "correct",
+        "unit": "correct",
+        "departmentId": "correct",
+        "subject": "correct",
+        "request": "incorrect"
+      },
+      "safety": "pass",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-06",
+      "cohort": "boundary",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-07",
+      "cohort": "boundary",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-08",
+      "cohort": "boundary",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-09",
+      "cohort": "boundary",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-10",
+      "cohort": "boundary",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-11",
+      "cohort": "boundary",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    },
+    {
+      "caseId": "EDGE-12",
+      "cohort": "boundary",
+      "status": "not-run",
+      "fields": {
+        "storeId": "not-run",
+        "subject": "not-run",
+        "quantity": "not-run",
+        "unit": "not-run",
+        "request": "not-run",
+        "departmentId": "not-run"
+      },
+      "safety": "not-run",
+      "structuralSafetyFailures": [],
+      "errorCode": null
+    }
+  ],
+  "apiDispatchAttempts": 4,
+  "apiSuccesses": 4,
+  "reservationCount": 4,
+  "reservedCents": 60,
+  "reviewerKinds": [
+    "independent-ai"
+  ]
+}

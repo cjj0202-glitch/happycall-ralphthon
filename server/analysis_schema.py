@@ -46,8 +46,8 @@ MODEL_ANALYSIS_SCHEMA = obj({
     **{key: value for key, value in ANALYSIS_SCHEMA["properties"].items()
        if key not in {"fields", "facts"}},
     "fields": obj({
-        "subject": {**NULLABLE, "description": "발화에서 새로 추출한 문의 대상·문제. 상담 입력이나 임시 문구를 복사하지 않는다. 대상이 없거나 불명확하면 null과 확인 질문."},
-        "request": {**NULLABLE, "description": "경영주가 발화에서 요청한 확인·안내 내용. 이전 입력을 복사하지 않고 실제 발화에서 새로 추출한다. 처리완료·귀책·센터 회신을 창작하지 않는다. 요청이 미확인이면 null."},
+        "subject": {**NULLABLE, "description": "발화에서 새로 추출한 문의 대상·문제와 의미에 필요한 불확실성·현재 업무 단계. 기존 문의의 후속 회신 문의를 새로운 최초 문의로 축약하지 않는다. 상담 입력이나 임시 문구를 복사하지 않는다. 대상이 없거나 불명확하면 null과 확인 질문."},
+        "request": {**NULLABLE, "description": "경영주가 발화에서 요청한 확인·안내 내용과 그 요청에 필요한 최종 정정·기한·조건·미해결 안내. 다른 필드로 대체하지 않고 실제 발화에서 새로 추출한다. 처리완료·귀책·센터 회신이나 원문에 없는 조건을 창작하지 않는다. 요청이 미확인이면 null."},
     }),
     "draftContext": obj({
         "subjectQuote": {**NULLABLE, "description": "회신 초안의 문의 내용을 뒷받침하는 transcript 한 구간의 짧은 원문 그대로. fields.subject를 복사하거나 새로운 문장을 만들지 않는다. 부정·정정 문맥을 자르지 않는다. 관련 원문이 없으면 null."},
