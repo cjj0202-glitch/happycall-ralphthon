@@ -7,17 +7,24 @@ from __future__ import annotations
 
 import os
 import stat
+import hashlib
+import json
+import re
 from collections.abc import Mapping
+from email.utils import formatdate
 from pathlib import Path
 
-from connexion import AsyncApp
 from starlette.responses import FileResponse, Response
 from starlette.types import ASGIApp, Receive, Scope, Send
 
 from server.deployment_access import AccessCredentials, DeploymentAccess
+from server.media_contract import TRACKS_NAME, TRACKS_URL, validate_media_manifest
 
 
 STATIC_ERROR = "ONEFLOW_STATIC_DIR must be an absolute, complete, regular Next export directory."
+MEDIA_ERROR = "Registered demo media manifest or files failed integrity validation."
+PACKAGE_ROOT = Path(__file__).absolute().parents[1]
+_PACKAGED_MANIFEST = object()
 ROOT_FILES = {"index.html", "404.html", "index.txt", "cases.json", "icon.svg", "favicon.ico"}
 NEXT_SUFFIXES = {".js", ".css", ".woff", ".woff2", ".ttf", ".otf", ".png", ".jpg",
                  ".jpeg", ".webp", ".avif", ".gif", ".svg", ".ico"}
@@ -34,7 +41,10 @@ MEDIA_TYPES = {".html": "text/html", ".txt": "text/plain", ".json": "application
 
 def _is_link(path: Path) -> bool:
     # Windows directory junctions do not satisfy is_symlink().
-    return path.is_symlink() or path.is_junction()
+    if path.is_symlink() or path.is_junction():
+        return True
+    return bool(getattr(path.lstat(), "st_file_attributes", 0)
+                & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0))
 
 
 def _regular_file(root: Path, relative: str) -> Path | None:
@@ -51,11 +61,98 @@ def _regular_file(root: Path, relative: str) -> Path | None:
         resolved = candidate.resolve(strict=True)
         if not resolved.is_relative_to(root):
             return None
-        if not stat.S_ISREG(resolved.stat().st_mode):
+        information = resolved.stat()
+        if not stat.S_ISREG(information.st_mode) or information.st_nlink != 1:
             return None
         return resolved
     except (OSError, ValueError, RuntimeError):
         return None
+
+
+def _read_regular_snapshot(root: Path, relative: str, maximum: int) -> tuple[bytes, os.stat_result] | None:
+    """Snapshot one regular file; never send a path that could change after validation."""
+    try:
+        candidate = _regular_file(root, relative)
+        if candidate is None:
+            return None
+        before = candidate.stat()
+        if before.st_size > maximum:
+            return None
+        flags = os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0)
+        with os.fdopen(os.open(candidate, flags), "rb") as stream:
+            opened = os.fstat(stream.fileno())
+            if (not stat.S_ISREG(opened.st_mode) or opened.st_nlink != 1
+                    or (opened.st_dev, opened.st_ino) != (before.st_dev, before.st_ino)):
+                return None
+            content = stream.read(maximum + 1)
+            after = os.fstat(stream.fileno())
+        current = _regular_file(root, relative)
+        if current is None or len(content) > maximum:
+            return None
+        now = current.stat()
+        signature = lambda item: (item.st_dev, item.st_ino, item.st_size,
+                                  item.st_mtime_ns, item.st_nlink,
+                                  getattr(item, "st_birthtime_ns", None))
+        if signature(before) != signature(opened) or signature(opened) != signature(after) or signature(after) != signature(now):
+            return None
+        # Windows stat/fstat can expose different ctime meanings. Each provider
+        # must still report an unchanged ctime across the complete read.
+        if before.st_ctime_ns != now.st_ctime_ns or opened.st_ctime_ns != after.st_ctime_ns:
+            return None
+        return content, after
+    except (OSError, ValueError, RuntimeError):
+        return None
+
+
+def _packaged_manifest() -> Mapping | None:
+    relative = "data/demo-media-manifest.json"
+    candidate = PACKAGE_ROOT / relative
+    # Only genuinely absent manifests mean no registration. Broken links fail closed.
+    if not os.path.lexists(candidate):
+        return None
+    snapshot = _read_regular_snapshot(PACKAGE_ROOT, relative, 10_000_000)
+    if snapshot is None:
+        raise ValueError(MEDIA_ERROR)
+    try:
+        manifest = json.loads(snapshot[0])
+        if not isinstance(manifest, dict):
+            raise ValueError(MEDIA_ERROR)
+        return manifest
+    except (ValueError, UnicodeError):
+        raise ValueError(MEDIA_ERROR) from None
+
+
+def _snapshot_response(content: bytes, scope: Scope, media_type: str, *, last_modified: str | None = None) -> Response:
+    """Serve immutable bytes; registered MP4 supports a single byte range."""
+    size = len(content)
+    etag = '"' + hashlib.sha256(content).hexdigest() + '"'
+    headers = {"accept-ranges": "bytes" if media_type == "video/mp4" else "none",
+               "etag": etag, "content-length": str(size)}
+    if last_modified is not None:
+        headers["last-modified"] = last_modified
+    request = {key.lower(): value.decode("latin-1") for key, value in scope.get("headers", [])}
+    range_value = request.get(b"range")
+    if media_type == "video/mp4" and range_value and request.get(b"if-range", etag) in {etag, last_modified}:
+        # Multiple ranges may be ignored by the server. Keep one immutable body
+        # instead of allocating an amplified multipart response for large video.
+        if "," in range_value:
+            return Response(b"" if scope["method"] == "HEAD" else content, media_type=media_type, headers=headers)
+        if len(range_value) > 4096:
+            return Response(status_code=400)
+        if not re.fullmatch(r"bytes=\s*\d*-\d*\s*", range_value):
+            return Response(status_code=400)
+        first, last = range_value[6:].strip().split("-")
+        if not first and not last:
+            return Response(status_code=400)
+        start = int(first) if first else max(0, size - int(last))
+        end = min(size - 1, int(last)) if first and last else size - 1
+        if start >= size or end < start or (not first and int(last) == 0):
+            return Response(status_code=416, headers={"content-range": f"bytes */{size}"})
+        body = content[start:end + 1]
+        headers.update({"content-range": f"bytes {start}-{end}/{size}", "content-length": str(len(body))})
+        return Response(b"" if scope["method"] == "HEAD" else body, status_code=206,
+                        media_type=media_type, headers=headers)
+    return Response(b"" if scope["method"] == "HEAD" else content, media_type=media_type, headers=headers)
 
 
 def _safe_relative(path: str) -> str | None:
@@ -108,9 +205,33 @@ def static_directory(environment: Mapping[str, str]) -> Path:
 
 
 class DeploymentRouter:
-    def __init__(self, api: ASGIApp, root: Path):
+    def __init__(self, api: ASGIApp, root: Path, *, media_manifest: Mapping | None = None):
         self.api = api
         self.root = root
+        self._registered: dict[str, dict] = {}
+        if media_manifest is not None:
+            try:
+                # Legacy three-file exports keep their offline release behavior.
+                # The shared validator still enforces the v3/v4 tag for tracks;
+                # packaged and injected manifests take the same validation path.
+                assets = validate_media_manifest(media_manifest, check_release=False)
+                indexed = {asset["name"]: dict(asset) for asset in assets}
+                if TRACKS_NAME in indexed:
+                    self._registered = {name: indexed[name] for name in ("sorter-demo.mp4", TRACKS_NAME)}
+                    if self._media_snapshot() is None:
+                        raise ValueError(MEDIA_ERROR)
+            except (ValueError, TypeError, KeyError):
+                raise ValueError(MEDIA_ERROR) from None
+
+    def _media_snapshot(self) -> dict[str, tuple[bytes, os.stat_result]] | None:
+        snapshot = {}
+        for name, descriptor in self._registered.items():
+            verified = _read_regular_snapshot(self.root, "demo/" + name, descriptor["bytes"])
+            if (verified is None or len(verified[0]) != descriptor["bytes"]
+                    or hashlib.sha256(verified[0]).hexdigest() != descriptor["sha256"]):
+                return None
+            snapshot[name] = verified
+        return snapshot
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
         if scope["type"] != "http":
@@ -125,6 +246,17 @@ class DeploymentRouter:
             await Response(status_code=405, headers={"Allow": "GET, HEAD"})(scope, receive, send)
             return
         relative = _safe_relative(path)
+        if relative in {TRACKS_URL.lstrip("/"), "demo/sorter-demo.mp4"} and self._registered:
+            snapshot = self._media_snapshot()
+            if snapshot is None:
+                await Response(status_code=404)(scope, receive, send)
+                return
+            name = relative.removeprefix("demo/")
+            content, information = snapshot[name]
+            response = _snapshot_response(content, scope, MEDIA_TYPES[Path(name).suffix],
+                                          last_modified=formatdate(information.st_mtime, usegmt=True))
+            await response(scope, receive, send)
+            return
         candidate = _regular_file(self.root, relative) if relative and _allowed(relative) else None
         if candidate is None:
             await Response(status_code=404)(scope, receive, send)
@@ -133,13 +265,17 @@ class DeploymentRouter:
 
 
 def create_deployment_app(*, environ: Mapping[str, str] | None = None,
-                          api_app: ASGIApp | None = None) -> ASGIApp:
+                          api_app: ASGIApp | None = None,
+                          media_manifest: Mapping | None | object = _PACKAGED_MANIFEST) -> ASGIApp:
     """Uvicorn factory; explicit arguments permit isolated synthetic tests."""
     environment = os.environ if environ is None else environ
     credentials = AccessCredentials.from_environment(environment)
     root = static_directory(environment)
+    manifest = _packaged_manifest() if media_manifest is _PACKAGED_MANIFEST else media_manifest
     if api_app is None:
+        from connexion import AsyncApp
+
         # Single-origin deployment needs no cross-origin browser permission.
         api_app = AsyncApp(__name__, specification_dir=str(Path(__file__).parent))
         api_app.add_api("openapi.yaml", strict_validation=True, validate_responses=True)
-    return DeploymentAccess(DeploymentRouter(api_app, root), credentials)
+    return DeploymentAccess(DeploymentRouter(api_app, root, media_manifest=manifest), credentials)

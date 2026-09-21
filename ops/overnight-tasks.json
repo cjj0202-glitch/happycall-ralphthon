@@ -167,12 +167,16 @@
       "latestAssignment": {
         "id": "N02-M4",
         "card": "reports/channel/N02-M4-media-delivery.md",
-        "state": "RESULT_RECEIVED_MAIN_REVIEW",
+        "state": "SOURCE_INTEGRATED_WITH_WINDOWS_REPAIR",
         "ackAtKST": "2026-09-21T22:46:40+09:00",
         "ackCommentId": 5761525060,
-        "accepted": false,
+        "accepted": true,
         "resultCommit": "ceec704755c3558be03be72938b6cb369bbb1d3b",
-        "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5761755884"
+        "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5761755884",
+        "acceptanceScope": "Delivery/ASGI source and synthetic integration; actual final media/deployment pending",
+        "mainEvidence": "reports/pc2-m4-main-intake.md",
+        "mainTests": "ASGI23/23; pytest263pass4skip; isolated runtime strict recheck1/1; snapshot16/16",
+        "remoteFiles": "17 received;14 unchanged3 main repairs"
       },
       "outcome": "음성 명료도·통화 검토 UX",
       "state": "RESULT_RECEIVED_REVIEW",

@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "productBase": "663bbe5bb0ae0a780e328dce9a69188112de8d0e",
+  "parentHead": "f0f9d2ae1410a84f23fbcd5540c2645f4a94099b",
+  "scope": "N02-M4 owned files only; this index excludes itself",
+  "validation": "34 PASS / 1 SKIP; ASGI NOT_RUN",
+  "files": [
+    {
+      "path": "reports/pc2/media-m4-bundle-checks.py",
+      "workingBytes": 12478,
+      "workingSha256": "43b56d9355f59bfe35c39c6c2ab8ccb9037a79e9d2f8db5ac814408ca51d741c",
+      "gitBytes": 12478,
+      "gitSha256": "43b56d9355f59bfe35c39c6c2ab8ccb9037a79e9d2f8db5ac814408ca51d741c",
+      "gitBlob": "3737dc2e7a856d0fb51c274ad4180e03d2d4b704",
+      "normalization": "identical"
+    },
+    {
+      "path": "reports/pc2/media-m4-bundle-run.txt",
+      "workingBytes": 2416,
+      "workingSha256": "d5d55bd0f85443dbcf9db2aa2eadc9ee9f97e67204ab47d8d9f936129b281540",
+      "gitBytes": 2394,
+      "gitSha256": "cc2e8a9f9d10fbf8257560012ae90491965e36db9382d492cfbae32ed93900d8",
+      "gitBlob": "54a8b4eb61d14795b6841e8f5282328480dfe31e",
+      "normalization": "CRLF-to-LF"
+    },
+    {
+      "path": "reports/pc2/media-m4-fetch-checks.py",
+      "workingBytes": 12659,
+      "workingSha256": "f3fd45fc03b3591db19921358a5201d46e3b69996d2c73a5ab4a10d815532ae8",
+      "gitBytes": 12659,
+      "gitSha256": "f3fd45fc03b3591db19921358a5201d46e3b69996d2c73a5ab4a10d815532ae8",
+      "gitBlob": "ccb8f8714fdccdd2bbfe804b68221d5b3aee01cc",
+      "normalization": "identical"
+    },
+    {
+      "path": "reports/pc2/media-m4-plan.md",
+      "workingBytes": 2733,
+      "workingSha256": "c243d55cd4eeb924660146fa1008e3d58c2f907e94f73aca9d63e9e52cded162",
+      "gitBytes": 2733,
+      "gitSha256": "c243d55cd4eeb924660146fa1008e3d58c2f907e94f73aca9d63e9e52cded162",
+      "gitBlob": "77d8b83775b4b2cfabdc7ea25c70996aff129b38",
+      "normalization": "identical"
+    },
+    {
+      "path": "reports/pc2/media-m4-result.md",
+      "workingBytes": 8731,
+      "workingSha256": "9758471fbfa213635232221a1098110543cf7d100bef4a995d18788bb4aad432",
+      "gitBytes": 8671,
+      "gitSha256": "1c3b3c568ad13c2a4bdcb36dd91dc34fde6b87371f366f3c7fd3648b13e63875",
+      "gitBlob": "6cd30bce5d9b8328de91976b0381ccce100033a7",
+      "normalization": "CRLF-to-LF"
+    },
+    {
+      "path": "reports/pc2/media-m4-server-checks.py",
+      "workingBytes": 14908,
+      "workingSha256": "c50d2b8fe0f2cdf48e4b86dfb5e023718be60b5a59914c558d0a9d9634fa1cd9",
+      "gitBytes": 14622,
+      "gitSha256": "399b7218d18e0a68ef490284e30ee556d65e7b380292a21e106d93edf652ebef",
+      "gitBlob": "ab113eea3883b55cd4842c833f4ba22a33b7e055",
+      "normalization": "CRLF-to-LF"
+    },
+    {
+      "path": "reports/pc2/media-m4-syntax.json",
+      "workingBytes": 1014,
+      "workingSha256": "532bbafc60e8c853ee1b57e1d422da11454aaeefaf654fb2d3187bb0459b59b5",
+      "gitBytes": 968,
+      "gitSha256": "390ec5f1ec9549329d911f2859ebc18fe2614de6bdccfd1ecaff4a5c56dd41a4",
+      "gitBlob": "1a9be0b3a73571ad63717f3497c1943711349587",
+      "normalization": "CRLF-to-LF"
+    },
+    {
+      "path": "reports/pc2/media-m4-validation.json",
+      "workingBytes": 368,
+      "workingSha256": "23f1b5408153749ede7e6aa410c68b78f956854ac64d51de648ba86c791d5782",
+      "gitBytes": 351,
+      "gitSha256": "c6b2ee5100201f2ca4a21a2595d12b3cc43e36141325852e6c30ae10a094496d",
+      "gitBlob": "7424942b5d449ecc2583e0bfcd1b69afb605f957",
+      "normalization": "CRLF-to-LF"
+    },
+    {
+      "path": "reports/pc2/media-m4-validation.txt",
+      "workingBytes": 4808,
+      "workingSha256": "376da79c5baeabb81dc44862e61f59947c0c3cbc5c0049b15ea015b73c04424d",
+      "gitBytes": 4768,
+      "gitSha256": "1c70717daa6870332ea948c374484908cc851f68088b245b2b8d8f9c9a30938a",
+      "gitBlob": "310f0522e30913bca8f87262f6bd17af8a17bb98",
+      "normalization": "CRLF-to-LF"
+    },
+    {
+      "path": "scripts/build_deployment_bundle.py",
+      "workingBytes": 22572,
+      "workingSha256": "ec4816bc5338822170faefb09397b252016ad493302ce89306ad18c6e0cab75e",
+      "gitBytes": 22572,
+      "gitSha256": "ec4816bc5338822170faefb09397b252016ad493302ce89306ad18c6e0cab75e",
+      "gitBlob": "cb743f50cc875862055cde1c3e2a446e4ecaf232",
+      "normalization": "identical"
+    },
+    {
+      "path": "scripts/fetch_demo_media.py",
+      "workingBytes": 19351,
+      "workingSha256": "83bc82d4a0c4cce01e71f81aa825293884aec8f79f95a69c139f147601d84845",
+      "gitBytes": 19351,
+      "gitSha256": "83bc82d4a0c4cce01e71f81aa825293884aec8f79f95a69c139f147601d84845",
+      "gitBlob": "630b76985ff05609930fb8ce3053dca1587a8d46",
+      "normalization": "identical"
+    },
+    {
+      "path": "server/deployment_app.py",
+      "workingBytes": 13454,
+      "workingSha256": "6406c55a70791e622913842a8d2737b1b6de9061facae0d8fb5be345bca7aee8",
+      "gitBytes": 13454,
+      "gitSha256": "6406c55a70791e622913842a8d2737b1b6de9061facae0d8fb5be345bca7aee8",
+      "gitBlob": "76991bdfb7a08870f53d044711927b562b55a3cc",
+      "normalization": "identical"
+    },
+    {
+      "path": "server/media_contract.py",
+      "workingBytes": 3890,
+      "workingSha256": "369ed3cd8cf0bd4a1109bc493638f9d071f53844fcbb6c035777bd97dc8b86a9",
+      "gitBytes": 3890,
+      "gitSha256": "369ed3cd8cf0bd4a1109bc493638f9d071f53844fcbb6c035777bd97dc8b86a9",
+      "gitBlob": "66c5bec8787273b78f638c0cbaf3b54a1bafe7d1",
+      "normalization": "identical"
+    },
+    {
+      "path": "tests/test_demo_media_upgrade.py",
+      "workingBytes": 16122,
+      "workingSha256": "9eccdaac841a58f668c8df29471c4cf24cee282ca94639dafe64ffd301941435",
+      "gitBytes": 16122,
+      "gitSha256": "9eccdaac841a58f668c8df29471c4cf24cee282ca94639dafe64ffd301941435",
+      "gitBlob": "1c44b1f53c4035d7bbb6dc4c20a8c27c3807bddc",
+      "normalization": "identical"
+    },
+    {
+      "path": "tests/test_deployment_app.py",
+      "workingBytes": 28917,
+      "workingSha256": "d3ccd8e622c6986ce401a975e060bbd0da6d8912881a8f76bd697cdb024c36cd",
+      "gitBytes": 28917,
+      "gitSha256": "d3ccd8e622c6986ce401a975e060bbd0da6d8912881a8f76bd697cdb024c36cd",
+      "gitBlob": "3b81c4128172928b94fa9b703d138a32d88e4b89",
+      "normalization": "identical"
+    },
+    {
+      "path": "tests/test_deployment_bundle.py",
+      "workingBytes": 28567,
+      "workingSha256": "87b5ef097c8cd14397e99a0d025f0399f2dad77aed1b2abc3e51abd181476a59",
+      "gitBytes": 28567,
+      "gitSha256": "87b5ef097c8cd14397e99a0d025f0399f2dad77aed1b2abc3e51abd181476a59",
+      "gitBlob": "7361769ee061bd6040f702670682031e43e762ce",
+      "normalization": "identical"
+    }
+  ]
+}

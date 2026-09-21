@@ -21,6 +21,10 @@ import tomllib
 
 
 ROOT = Path(__file__).resolve().parents[1]
+# Keep direct ``python scripts/build_deployment_bundle.py`` compatible.
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from server.media_contract import validate_media_manifest
 BUILD_STAMP_NAME = ".oneflow-build.json"
 STAMP_SCHEMA = "oneflow-next-build-v1"
 BUNDLE_SCHEMA = "oneflow-deployment-bundle-v1"
@@ -33,6 +37,7 @@ SOURCE_FILES = (
     "server/__init__.py", "server/analysis_schema.py", "server/budget.py",
     "server/cas_budget.py", "server/cas_repository.py", "server/cas_store.py",
     "server/deployment_access.py", "server/deployment_app.py", "server/errors.py",
+    "server/media_contract.py",
     "server/handlers.py", "server/live.py", "server/repository.py",
     "server/intake_idempotency.py", "server/claim_grounding.py", "server/request_grounding.py",
     "server/runtime_config.py", "server/runtime_storage.py", "server/service.py",
@@ -81,6 +86,10 @@ def _no_links(path: Path) -> None:
     for component in (path, *path.parents):
         if component.is_symlink() or component.is_junction():
             raise _error("LINK_PATH_REJECTED")
+        if component.exists():
+            info = component.stat()
+            if stat.S_ISREG(info.st_mode) and info.st_nlink > 1:
+                raise _error("LINK_PATH_REJECTED")
 
 
 def _root(path: Path) -> Path:
@@ -202,6 +211,7 @@ def source_fingerprint(root: Path) -> str:
 def _output_files(root: Path) -> dict[str, bytes]:
     files = {}
     prefix = "apps/web/out/"
+    approved_media = {"demo/" + asset["name"] for asset in _registered_media(root)}
     for name in _walk(root, prefix.rstrip("/")):
         relative = name.removeprefix(prefix)
         if relative == BUILD_STAMP_NAME:
@@ -209,13 +219,14 @@ def _output_files(root: Path) -> dict[str, bytes]:
         _check_name(relative)
         allowed = (relative in ROOT_STATIC
                    or (relative.startswith("_next/static/") and Path(relative).suffix.lower() in NEXT_SUFFIXES)
-                   or relative in {"demo/" + name for name in MEDIA_NAMES})
+                   or relative in approved_media)
         if not allowed:
             raise _error("UNAPPROVED_EXPORT_FILE")
         content = _read(root, name)
         _check_content(name, content)
         files[relative] = content
-    if not REQUIRED_STATIC <= files.keys() or any(not files[name] for name in REQUIRED_STATIC):
+    required = REQUIRED_STATIC | approved_media
+    if not required <= files.keys() or any(not files[name] for name in required):
         raise _error("INCOMPLETE_NEXT_EXPORT")
     for directory, suffix in (("_next/static/chunks/", ".js"), ("_next/static/css/", ".css")):
         if not any(name.startswith(directory) and name.endswith(suffix) and content for name, content in files.items()):
@@ -230,32 +241,36 @@ def _parse_json(content: bytes) -> object:
         raise _error("INVALID_JSON_INPUT") from None
 
 
+def _registered_media(root: Path) -> list[dict]:
+    manifest = _parse_json(_read(root, MEDIA_MANIFEST))
+    try:
+        # This offline path never chooses a Release. Download tag restrictions
+        # are enforced by fetch; preserve legacy packaging callers here.
+        return validate_media_manifest(manifest, require_synthetic=True, check_release=False)
+    except ValueError:
+        raise _error("INVALID_MEDIA_MANIFEST") from None
+
+
 def _media(root: Path, manifest_path: Path) -> dict[str, bytes]:
     expected = _secure_path(root, MEDIA_MANIFEST)
     _no_links(manifest_path)
-    if Path(os.path.abspath(manifest_path)) != expected:
+    # Windows TEMP can use an 8.3 spelling while _root() resolves the long name.
+    # Both paths must still identify the one canonical, non-linked file.
+    if Path(os.path.abspath(manifest_path)).resolve(strict=True) != expected:
         raise _error("CANONICAL_MEDIA_MANIFEST_REQUIRED")
-    manifest = _parse_json(_read(root, MEDIA_MANIFEST))
-    if (not isinstance(manifest, dict) or type(manifest.get("schemaVersion")) is not int
-            or manifest["schemaVersion"] != 1
-            or manifest.get("repository") != "cjj0202-glitch/happycall-ralphthon"
-            or not isinstance(manifest.get("assets"), list) or len(manifest["assets"]) != 3):
-        raise _error("INVALID_MEDIA_MANIFEST")
+    assets = _registered_media(root)
     verified = {}
-    for asset in manifest["assets"]:
-        if (not isinstance(asset, dict) or asset.get("name") not in MEDIA_NAMES
-                or asset["name"] in verified or asset.get("synthetic") is not True
-                or type(asset.get("bytes")) is not int or asset["bytes"] <= 0
-                or not isinstance(asset.get("sha256"), str) or not _HEX.fullmatch(asset["sha256"])):
-            raise _error("INVALID_MEDIA_MANIFEST")
+    for asset in assets:
+        for directory in ("apps/web/public/demo/", "apps/web/out/demo/"):
+            path = _secure_path(root, directory + asset["name"])
+            if path.stat().st_size != asset["bytes"]:
+                raise _error("MEDIA_BYTES_OR_HASH_MISMATCH")
         content = _read(root, "apps/web/public/demo/" + asset["name"])
         exported = _read(root, "apps/web/out/demo/" + asset["name"])
         if (len(content) != asset["bytes"] or _digest(content) != asset["sha256"]
                 or exported != content):
             raise _error("MEDIA_BYTES_OR_HASH_MISMATCH")
         verified[asset["name"]] = content
-    if set(verified) != set(MEDIA_NAMES):
-        raise _error("INVALID_MEDIA_MANIFEST")
     return verified
 
 

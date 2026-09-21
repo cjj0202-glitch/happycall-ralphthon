@@ -3,6 +3,11 @@ from __future__ import annotations
 
 import asyncio
 import base64
+import copy
+import hashlib
+import inspect
+import json
+import os
 from pathlib import Path
 import types
 from unittest.mock import Mock
@@ -442,3 +447,199 @@ def test_guard_mutations_are_killed_with_unchanged_control(environment, export_d
             check(load_copy(module, source.replace(before, after)))
         killed += 1
     assert killed == 4
+
+
+@pytest.fixture
+def tracks_registration(export_dir):
+    from server.media_contract import MEDIA_NAMES, TRACKS_NAME, TRACKS_URL
+    tracks = b'{"syntheticM4Fixture":"opaque-sidecar"}'
+    (export_dir / "demo" / TRACKS_NAME).write_bytes(tracks)
+    digest = hashlib.sha256(MEDIA).hexdigest()
+    assets = [{"name": name, "bytes": len(MEDIA), "sha256": digest, "synthetic": True}
+              for name in MEDIA_NAMES]
+    assets[-1]["tracks"] = {"schemaVersion": "oneflow-cctv-tracks-v1", "url": TRACKS_URL,
+        "bytes": len(tracks), "sha256": hashlib.sha256(tracks).hexdigest(), "videoSha256": digest}
+    return {"schemaVersion": 1, "repository": "cjj0202-glitch/happycall-ralphthon",
+            "releaseTag": "demo-media-20260921-audio-v3", "assets": assets}, tracks
+
+
+def test_tracks_absent_registration_denies_even_if_cases_advertise_it(export_dir):
+    (export_dir / "demo/sorter-demo.tracks.json").write_bytes(b'{"synthetic":true}')
+    (export_dir / "cases.json").write_bytes(b'{"tracks":{"url":"/demo/sorter-demo.tracks.json"}}')
+    router = deployment.DeploymentRouter(EchoAPI(), export_dir)
+    assert run_request(router, path="/demo/sorter-demo.tracks.json").status_code == 404
+
+
+def test_registered_tracks_get_head_auth_and_exact_allowlist(environment, export_dir, tracks_registration):
+    manifest, tracks = tracks_registration
+    app = deployment.create_deployment_app(environ=environment, api_app=EchoAPI(), media_manifest=manifest)
+    assert run_request(app, path="/demo/sorter-demo.tracks.json").status_code == 401
+    got = authenticated(app, path="/demo/sorter-demo.tracks.json")
+    assert got.status_code == 200 and got.content == tracks
+    assert got.headers["content-type"] == "application/json"
+    assert got.headers["cache-control"] == "private, no-store"
+    head = authenticated(app, "HEAD", "/demo/sorter-demo.tracks.json")
+    assert head.status_code == 200 and head.content == b""
+    assert head.headers["content-length"] == str(len(tracks))
+    (export_dir / "demo/private.json").write_bytes(tracks)
+    assert authenticated(app, path="/demo/private.json").status_code == 404
+
+
+@pytest.mark.parametrize("name", ["sorter-demo.mp4", "sorter-demo.tracks.json"])
+@pytest.mark.parametrize("change", ["missing", "same-size-mismatch"])
+def test_registered_pair_is_verified_at_start_and_each_request(export_dir, tracks_registration, name, change):
+    manifest, _ = tracks_registration
+    app = deployment.DeploymentRouter(EchoAPI(), export_dir, media_manifest=manifest)
+    target = export_dir / "demo" / name
+    if change == "missing":
+        target.unlink()
+    else:
+        target.write_bytes(b"!" * target.stat().st_size)
+    with pytest.raises(ValueError, match="integrity"):
+        deployment.DeploymentRouter(EchoAPI(), export_dir, media_manifest=manifest)
+    for path in ("/demo/sorter-demo.mp4", "/demo/sorter-demo.tracks.json"):
+        result = run_request(app, path=path)
+        assert result.status_code == 404 and result.content == b""
+
+
+@pytest.mark.parametrize("key,value", [("url", "/demo/private.json"), ("bytes", True),
+    ("bytes", 0), ("bytes", 10_000_001), ("sha256", "A" * 64),
+    ("videoSha256", "0" * 64), ("schemaVersion", "other"), ("unexpected", True)])
+def test_injected_tracks_descriptor_is_never_exempt(export_dir, tracks_registration, key, value):
+    manifest, _ = tracks_registration
+    invalid = copy.deepcopy(manifest)
+    invalid["assets"][-1]["tracks"][key] = value
+    with pytest.raises(ValueError, match="integrity"):
+        deployment.DeploymentRouter(EchoAPI(), export_dir, media_manifest=invalid)
+
+
+def test_packaged_manifest_is_known_path_and_uses_same_validator(environment, tmp_path, monkeypatch, tracks_registration):
+    manifest, tracks = tracks_registration
+    package = tmp_path / "synthetic-package"
+    (package / "data").mkdir(parents=True)
+    monkeypatch.setattr(deployment, "PACKAGE_ROOT", package)
+    absent = deployment.create_deployment_app(environ=environment, api_app=EchoAPI())
+    assert authenticated(absent, path="/demo/sorter-demo.tracks.json").status_code == 404
+    path = package / "data/demo-media-manifest.json"
+    path.write_text(json.dumps(manifest), encoding="utf-8")
+    registered = deployment.create_deployment_app(environ=environment, api_app=EchoAPI())
+    assert authenticated(registered, path="/demo/sorter-demo.tracks.json").content == tracks
+    manifest["assets"][-1]["tracks"]["bytes"] = True
+    path.write_text(json.dumps(manifest), encoding="utf-8")
+    for args in ({}, {"media_manifest": manifest}):
+        with pytest.raises(ValueError, match="integrity"):
+            deployment.create_deployment_app(environ=environment, api_app=EchoAPI(), **args)
+
+
+@pytest.mark.parametrize("name", ["sorter-demo.mp4", "sorter-demo.tracks.json"])
+def test_registered_hardlinks_are_denied(export_dir, tmp_path, tracks_registration, name):
+    manifest, _ = tracks_registration
+    app = deployment.DeploymentRouter(EchoAPI(), export_dir, media_manifest=manifest)
+    os.link(export_dir / "demo" / name, tmp_path / ("linked-" + name))
+    assert run_request(app, path="/demo/sorter-demo.tracks.json").status_code == 404
+    with pytest.raises(ValueError, match="integrity"):
+        deployment.DeploymentRouter(EchoAPI(), export_dir, media_manifest=manifest)
+
+
+def test_verified_tracks_response_does_not_reopen_changed_path(export_dir, tracks_registration, monkeypatch):
+    manifest, tracks = tracks_registration
+    app = deployment.DeploymentRouter(EchoAPI(), export_dir, media_manifest=manifest)
+    original = deployment._snapshot_response
+    def change_after_validation(content, scope, media_type, **kwargs):
+        (export_dir / "demo/sorter-demo.tracks.json").write_bytes(b"UNAPPROVED-SYNTHETIC-BYTES")
+        return original(content, scope, media_type, **kwargs)
+    monkeypatch.setattr(deployment, "_snapshot_response", change_after_validation)
+    assert run_request(app, path="/demo/sorter-demo.tracks.json").content == tracks
+    assert run_request(app, path="/demo/sorter-demo.tracks.json").status_code == 404
+
+
+@pytest.mark.parametrize("tag", ["demo-media-20260921-audio-v2", "unregistered-release"])
+def test_tracks_release_is_not_exempt_from_offline_validation(export_dir, tracks_registration, tag):
+    manifest, _ = tracks_registration
+    manifest["releaseTag"] = tag
+    with pytest.raises(ValueError, match="integrity"):
+        deployment.DeploymentRouter(EchoAPI(), export_dir, media_manifest=manifest)
+
+
+@pytest.fixture
+def snapshot_observations(tmp_path):
+    """Stable file identity; Windows path/handle ctime providers may differ."""
+    target = tmp_path / "synthetic-snapshot.bin"
+    target.write_bytes(MEDIA)
+    common = dict(st_mode=target.stat().st_mode, st_dev=11, st_ino=17,
+                  st_size=len(MEDIA), st_mtime_ns=300, st_nlink=1, st_birthtime_ns=100)
+    observations = {name: types.SimpleNamespace(**common, st_ctime_ns=ctime)
+                    for name, ctime in zip(("before", "opened", "after", "now"),
+                                           (100, 200, 200, 100))}
+    return target, observations
+
+
+def read_observed_snapshot(monkeypatch, target, observations, reader=None):
+    """Patch metadata only; the real file is opened/read within the snapshot helper."""
+    with monkeypatch.context() as patched:
+        path_stat = Mock(side_effect=[observations["before"], observations["now"]])
+        handle_stat = Mock(side_effect=[observations["opened"], observations["after"]])
+        patched.setattr(deployment, "_regular_file", Mock(return_value=target))
+        patched.setattr(type(target), "stat", path_stat)
+        patched.setattr(deployment.os, "fstat", handle_stat)
+        result = (reader or deployment._read_regular_snapshot)(target.parent, target.name, len(MEDIA))
+        assert path_stat.call_count == handle_stat.call_count == 2
+        return result
+
+
+@pytest.mark.parametrize("profile", ["windows", "same-provider", "unix-no-birthtime"])
+def test_snapshot_accepts_stable_metadata_from_each_provider(snapshot_observations, monkeypatch, profile):
+    target, observations = snapshot_observations
+    if profile != "windows":
+        for value in observations.values():
+            value.st_ctime_ns = 100
+            if profile == "unix-no-birthtime":
+                del value.st_birthtime_ns
+    result = read_observed_snapshot(monkeypatch, target, observations)
+    assert result is not None and result[0] == MEDIA
+    assert result[1] is observations["after"]
+
+
+@pytest.mark.parametrize("profile", ["windows", "unix-no-birthtime"])
+@pytest.mark.parametrize("changed", ["now", "after"])
+def test_snapshot_rejects_ctime_change_within_each_provider(snapshot_observations, monkeypatch, profile, changed):
+    target, observations = snapshot_observations
+    if profile == "unix-no-birthtime":
+        for value in observations.values():
+            value.st_ctime_ns = 100
+            del value.st_birthtime_ns
+    observations[changed].st_ctime_ns += 1
+    assert read_observed_snapshot(monkeypatch, target, observations) is None
+
+
+@pytest.mark.parametrize("field", ["st_dev", "st_ino", "st_size", "st_mtime_ns", "st_nlink", "st_birthtime_ns"])
+def test_snapshot_rejects_changed_common_signature(snapshot_observations, monkeypatch, field):
+    target, observations = snapshot_observations
+    setattr(observations["after"], field, getattr(observations["after"], field) + 1)
+    assert read_observed_snapshot(monkeypatch, target, observations) is None
+
+
+def test_snapshot_rejects_birthtime_availability_change(snapshot_observations, monkeypatch):
+    target, observations = snapshot_observations
+    del observations["after"].st_birthtime_ns
+    assert read_observed_snapshot(monkeypatch, target, observations) is None
+
+
+@pytest.mark.parametrize("changed,guard", [
+    ("now", "before.st_ctime_ns != now.st_ctime_ns"),
+    ("after", "opened.st_ctime_ns != after.st_ctime_ns"),
+])
+def test_snapshot_ctime_guard_mutations_are_killed(snapshot_observations, monkeypatch, changed, guard):
+    target, observations = snapshot_observations
+    # A normal snapshot must reach the actual byte read before testing rejection.
+    assert read_observed_snapshot(monkeypatch, target, observations)[0] == MEDIA
+    observations[changed].st_ctime_ns += 1
+    assert read_observed_snapshot(monkeypatch, target, observations) is None
+
+    source = inspect.getsource(deployment._read_regular_snapshot)
+    assert source.count(guard) == 1
+    namespace = {**deployment.__dict__, "_regular_file": lambda root, relative: target}
+    exec(compile(source.replace(guard, "False"), "<synthetic-ctime-mutant>", "exec"), namespace)
+    reader = namespace["_read_regular_snapshot"]
+    with pytest.raises(AssertionError):
+        assert read_observed_snapshot(monkeypatch, target, observations, reader) is None

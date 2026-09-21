@@ -202,7 +202,7 @@ def test_missing_path_appearing_during_download_is_not_overwritten(setup):
 def test_invalid_asset_name_cannot_escape_destination(setup):
     assets, old, new, dest, backups, calls, download, run = setup
     assets[0]["name"] = "../escape.wav"
-    with pytest.raises(ValueError, match="exactly"):
+    with pytest.raises(ValueError, match="INVALID_MEDIA_ASSET"):
         run()
     assert not calls and not backups.exists()
 
@@ -326,7 +326,36 @@ def test_mutation_overwrite_publish_is_detected(setup):
 
 def test_mutation_overstrict_source_gate_rejects_positive_control(setup):
     assets, old, new, dest, backups, calls, download, run = setup
-    mutant = load_mutant('asset["name"] not in NAMES[:2]', 'asset["name"] in NAMES[:2]')
+    mutant = load_mutant('asset["name"] not in NAMES', 'asset["name"] in NAMES')
     with pytest.raises(ValueError, match="No approved source"):
         mutant["fetch"](assets, dest, upgrade_approved=True, backup_root=backups, downloader=download)
     assert not calls  # Baseline positive-control oracle requires successful two-WAV upgrade.
+
+
+def test_approved_mp4_upgrade_preserves_exact_source(setup):
+    assets, old, new, dest, backups, calls, download, run = setup
+    name = media.NAMES[2]
+    source = b"synthetic prior video"
+    (dest / name).write_bytes(source)
+    assets[2].update(sourceBytes=len(source), sourceSha256=hashlib.sha256(source).hexdigest())
+    result = run()
+    assert (Path(result["backupDirectory"]) / name).read_bytes() == source
+    assert (dest / name).read_bytes() == new[name]
+    assert name in result["upgraded"]
+
+
+def test_flat_sidecar_requires_exact_parent_registration(setup):
+    assets, old, new, dest, backups, calls, download, run = setup
+    sidecar = {"name": "sorter-demo.tracks.json", "bytes": 2,
+               "sha256": hashlib.sha256(b"{}").hexdigest()}
+    with pytest.raises(ValueError):
+        media.fetch([*assets, sidecar], dest, downloader=download)
+    assert not calls
+
+
+def test_default_fetch_rejects_arbitrary_list_filename(setup):
+    assets, old, new, dest, backups, calls, download, run = setup
+    with pytest.raises(ValueError):
+        media.fetch([{**assets[0], "name": "../escape.wav"}, *assets[1:]], dest,
+                    downloader=download)
+    assert not calls
