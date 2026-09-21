@@ -2,6 +2,8 @@
 
 **통합 실행 지침:** [PROMPT_team.md](PROMPT_team.md)에 제품 요구·BMAD·Grill-me·First Bolt·Ralph·공식 배점과 증거 프로토콜을 연결했습니다. 워커 시작 시 전체를 읽습니다.
 
+**PC 배정 기준:** [docs28](docs/28_PC_업무배정_기준.md)의 결과·소유·기준SHA·검증·인계 6칸을 후속 배정에 적용합니다. PC당 구현 카드 하나, 메인 독립검증 후 인수합니다.
+
 **09시까지 반복 운영:** 사용자가 요청한 [happycall-night-ops](.agents/skills/happycall-night-ops/SKILL.md)를 적용합니다. 기존 배정 회신→한 검증 단위→영향 테스트→명시 경로 커밋·공유→메인 인수를 반복하며, 현재 30분 heartbeat를 중복 생성하지 않습니다. 스킬 설치와 실제 재개·원격 착수는 별도 사실입니다.
 
 > Codex CLI 는 이 파일을 자동으로 읽습니다. Claude Code 도 같은 내용을 `CLAUDE.md` 로 읽습니다.
