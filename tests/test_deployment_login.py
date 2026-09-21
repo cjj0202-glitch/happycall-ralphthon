@@ -57,6 +57,7 @@ def test_public_login_redirect_form_and_existing_basic_contract():
     assert USER not in form.text and PASSWORD not in form.text and "evil.invalid" not in form.text
     assert "frame-ancestors 'none'" in form.headers["content-security-policy"]
     assert form.headers["cache-control"] == "private, no-store"
+    assert form.headers["referrer-policy"] == "same-origin"
     for path in ("/api/cases", "/demo/CASE-0001.wav", "/_next/static/app.js"):
         assert request(application, path=path).status_code == 401
     assert request(application, "HEAD").status_code == 401

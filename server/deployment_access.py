@@ -237,11 +237,16 @@ class DeploymentAccess:
 
         async def secure_send(message):
             if message["type"] == "http.response.start":
+                policy = dict(RESPONSE_HEADERS)
+                if scope["path"] == "/login":
+                    # HTML form POST uses no-cors: no-referrer turns its Origin
+                    # into null. Preserve same-origin login, never cross-site refs.
+                    policy["referrer-policy"] = "same-origin"
                 denied_names = {key.encode("ascii") for key in RESPONSE_HEADERS}
                 headers = [(key, value) for key, value in message.get("headers", [])
                            if key.lower() not in denied_names]
                 headers.extend((key.encode("ascii"), value.encode("ascii"))
-                               for key, value in RESPONSE_HEADERS.items())
+                               for key, value in policy.items())
                 message = {**message, "headers": headers}
             await send(message)
 
