@@ -523,7 +523,11 @@ authorization = "Basic " + base64.b64encode((os.environ["ONEFLOW_ACCESS_USER"] +
 async def check():
     async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="https://bundle.invalid") as client:
         assert (await client.get("/healthz")).json() == {"status": "ok"}
-        for path in ("/", "/demo/CASE-0001.wav", "/api/cases"):
+        landing = await client.get("/")
+        assert landing.status_code == 303 and landing.headers["location"] == "/login"
+        login = await client.get("/login")
+        assert login.status_code == 200 and "text/html" in login.headers["content-type"]
+        for path in ("/demo/CASE-0001.wav", "/api/cases"):
             assert (await client.get(path)).status_code == 401
         assert (await client.get("/", headers={"Authorization": authorization})).status_code == 200
         media = await client.get("/demo/sorter-demo.mp4", headers={"Authorization": authorization, "Range": "bytes=0-3"})

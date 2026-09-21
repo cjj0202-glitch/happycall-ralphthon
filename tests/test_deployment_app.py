@@ -128,8 +128,12 @@ def test_explicit_legacy_export_does_not_load_packaged_registration(request, mon
     ("OPTIONS", "/api/cases"), ("GET", "/missing"), ("GET", "/.env"), ("POST", "/healthz")])
 def test_every_nonpublic_path_requires_authentication(app, method, path):
     response = run_request(app, method, path, headers={"Range": "bytes=0-3"})
-    assert response.status_code == 401
-    assert response.headers["www-authenticate"] == access.CHALLENGE
+    if method == "GET" and path == "/":
+        assert response.status_code == 303
+        assert response.headers["location"] == "/login"
+    else:
+        assert response.status_code == 401
+        assert response.headers["www-authenticate"] == access.CHALLENGE
     assert "content-range" not in response.headers
     assert app.app.api.calls == []
 
@@ -465,8 +469,8 @@ def test_guard_mutations_are_killed_with_unchanged_control(environment, export_d
         assert authenticated(app, path="/private.json").status_code == 404
 
     mutations = [
-        (access, access_source, "if not self.credentials.accepts(scope.get(\"headers\", [])):", "if False:", protected),
-        (access, access_source, "if not self.credentials.accepts(scope.get(\"headers\", [])):", "if True:", allowed),
+        (access, access_source, "if not basic and not session:", "if False:", protected),
+        (access, access_source, "if not basic and not session:", "if True:", allowed),
         (deployment, app_source, "await self.api(scope, receive, send)\n            return\n        if path",
          "await self.api({**scope, 'path': path.removeprefix('/api')}, receive, send)\n            return\n        if path", original_path),
         (deployment, app_source, "if relative in ROOT_FILES:", "if relative in ROOT_FILES or relative.endswith('.json'):", secret_denied),
