@@ -1,0 +1,2190 @@
+{
+  "schemaVersion": 1,
+  "taskId": "N02-R1",
+  "synthetic": true,
+  "author": "pc2 / 안영일 / MR-A83",
+  "codeBaseline": "dce4e66c0815e477f51977cbd9e023db101b9d58",
+  "documentBaseline": "c20d411c8b5d430897db6d00fb96bee079a68a6d",
+  "expectedValueOrigin": "독립 작성한 합성 문장과 상담 과업/원문 근거 계약. 제품 출력·실제 STT·모델 원응답에서 복사하지 않음.",
+  "contractProposal": {
+    "status": "proposal-for-pc1-intake-not-product-implemented",
+    "activeMeaning": "현재 요청 원문 보존 후보. 고객 신원/사람 확인/센터 실행 완료를 뜻하지 않음. 역할 미확인은 별도 review reason.",
+    "joiningRule": "같은 비어 있지 않은 speaker의 인접 구간 원문을 순서대로 한 ASCII 공백으로 연결. 중간 문자·구간을 삭제하거나 띄어쓰기/숫자/단위를 교정하지 않음.",
+    "spans": "0-based Python Unicode code-point offsets; end exclusive; UTF-16/byte offset과 다름.",
+    "ordering": "transcript array의 순서. 타임스탬프는 합성/검사용이며 실제 STT 정렬 성공이 아님.",
+    "limit": "raw array length <= 8; 9개부터 전체 후보 거절/검토. dedup/truncation 전에 검사.",
+    "compatibility": "신형 key 존재 시 array 타입 검사. 구형만 존재 시 단일 비어 있지 않은 string을 1항목으로 변환. 양 key 동시 존재는 빈 값이어도 거절.",
+    "reviewReasons": "PC2 의미 코드로 제품 enum/API 추가 제안이 아님. 필요한 해당 행에만 나타남.",
+    "rejectedMeaning": "자동 활성 결과에서 제외. 원문/모델 원응답 삭제를 뜻하지 않음. duplicate는 proposalIndex로 구분.",
+    "httpCompatibility": "fields.request: string|null 유지. 살아 있는 인용마다 구분 표식/줄바꿈과 출처를 유지하고 가짜 연속 인용 표시 금지.",
+    "noNumericDerivation": "단위 정정 요청 보존에서 quantity/unit/상품/점포 필드를 자동 생성하지 않음."
+  },
+  "reasonCatalog": {
+    "NONCONTIGUOUS_QUOTE": "다른 화자/누락 구간을 건너뛴 합성 인용",
+    "QUOTE_NOT_IN_SOURCE": "허용된 연속 원문에 없는 인용",
+    "NON_CURRENT_CONTEXT": "과거·예문·요청 부정·미래 요청 계획 문맥",
+    "SPEAKER_ROLE_UNVERIFIED": "발화 문자열을 보존하되 고객 역할은 미확인",
+    "EMPTY_SPEAKER_JOIN": "빈 화자 라벨 구간은 하나로 연결하지 않음",
+    "WITHDRAWN": "동일 화자의 명시/분명한 지시 대상 요청 철회",
+    "OTHER_SPEAKER_CANCELLATION": "다른 화자의 취소는 원 요청자의 철회로 자동 확정 불가",
+    "AMBIGUOUS_CANCELLATION": "취소 대상이 불명확하여 활성 확정 유보",
+    "DUPLICATE_QUOTE": "동일 인용 중복 제거; 일반 경고를 추가하지 않음",
+    "AMBIGUOUS_OCCURRENCE": "동일 문자열의 상충 문맥/위치 중 선택 불가",
+    "MIXED_CONTRACT_KEYS": "신·구 키 동시 존재 거부",
+    "TOO_MANY_QUOTES": "정규화 전 인용 개수8 초과",
+    "MISSING_CORRECTION_CONTEXT": "단위 정정 대상/값 문맥이 잘려 요구 의미 유실",
+    "INVALID_QUOTES_TYPE": "requestQuotes는 문자열 배열이어야 함",
+    "PARTIAL_WITHDRAWAL": "한 인용의 일부 과업만 철회됨; 전체 인용 자동 채택을 유보하고 별도로 제안된 정확한 유효 부분 인용은 보존"
+  },
+  "cases": [
+    {
+      "id": "R01",
+      "scenario": "first-bolt-three-separated-requests",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "컵 여섯 개를 주문했는데 치약 한 박스가 왔어요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        },
+        {
+          "id": "t2",
+          "speaker": "agent",
+          "text": "치약 한 개를 받으셨나요?",
+          "startSeconds": 4.0,
+          "endSeconds": 7.5
+        },
+        {
+          "id": "t3",
+          "speaker": "customer",
+          "text": "치약은 한 개가 아니라 한 박스예요. 받은 단위를 한 박스로 기록해 주세요.",
+          "startSeconds": 8.0,
+          "endSeconds": 11.5
+        },
+        {
+          "id": "t4",
+          "speaker": "agent",
+          "text": "말씀을 확인하겠습니다.",
+          "startSeconds": 12.0,
+          "endSeconds": 15.5
+        },
+        {
+          "id": "t5",
+          "speaker": "customer",
+          "text": "잘못 온 치약 처리 방법을 알려 주세요.",
+          "startSeconds": 16.0,
+          "endSeconds": 19.5
+        },
+        {
+          "id": "t6",
+          "speaker": "agent",
+          "text": "센터에 전달할 내용을 적겠습니다.",
+          "startSeconds": 20.0,
+          "endSeconds": 23.5
+        },
+        {
+          "id": "t7",
+          "speaker": "customer",
+          "text": "주문한 컵의 처리 상황도 확인해 주세요.",
+          "startSeconds": 24.0,
+          "endSeconds": 27.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "치약은 한 개가 아니라 한 박스예요. 받은 단위를 한 박스로 기록해 주세요.",
+          "잘못 온 치약 처리 방법을 알려 주세요.",
+          "주문한 컵의 처리 상황도 확인해 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "치약은 한 개가 아니라 한 박스예요. 받은 단위를 한 박스로 기록해 주세요.",
+        "잘못 온 치약 처리 방법을 알려 주세요.",
+        "주문한 컵의 처리 상황도 확인해 주세요."
+      ],
+      "expectedActiveQuotes": [
+        "치약은 한 개가 아니라 한 박스예요. 받은 단위를 한 박스로 기록해 주세요.",
+        "잘못 온 치약 처리 방법을 알려 주세요.",
+        "주문한 컵의 처리 상황도 확인해 주세요."
+      ],
+      "expectedRejectedQuotes": [],
+      "expectedRejectedDetails": [],
+      "expectedReviewReasons": [],
+      "rationale": "독립 가상 대본. 주문 컵6개와 수령 치약1박스를 분리하고 정정·오출상품 처리·주문상품 처리 세 요청을 각각 유지한다. 처리 완료나 환산을 만들지 않는다.",
+      "expectedProvenance": [
+        {
+          "quote": "치약은 한 개가 아니라 한 박스예요. 받은 단위를 한 박스로 기록해 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t3",
+                  "startChar": 0,
+                  "endChar": 42
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "quote": "잘못 온 치약 처리 방법을 알려 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t5",
+                  "startChar": 0,
+                  "endChar": 22
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "quote": "주문한 컵의 처리 상황도 확인해 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t7",
+                  "startChar": 0,
+                  "endChar": 22
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R02",
+      "scenario": "single-current-request",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "배송 시각을 알려 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "배송 시각을 알려 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "배송 시각을 알려 주세요."
+      ],
+      "expectedActiveQuotes": [
+        "배송 시각을 알려 주세요."
+      ],
+      "expectedRejectedQuotes": [],
+      "expectedRejectedDetails": [],
+      "expectedReviewReasons": [],
+      "rationale": "한 개의 명시적 현재 정보 요청이다.",
+      "expectedProvenance": [
+        {
+          "quote": "배송 시각을 알려 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t1",
+                  "startChar": 0,
+                  "endChar": 14
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R03",
+      "scenario": "multiple-actions-one-utterance",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "배송 위치를 확인해 주시고, 도착 시각도 알려 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "배송 위치를 확인해 주시고, 도착 시각도 알려 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "배송 위치를 확인해 주시고, 도착 시각도 알려 주세요."
+      ],
+      "expectedActiveQuotes": [
+        "배송 위치를 확인해 주시고, 도착 시각도 알려 주세요."
+      ],
+      "expectedRejectedQuotes": [],
+      "expectedRejectedDetails": [],
+      "expectedReviewReasons": [],
+      "rationale": "한 실제 연속 인용이 두 과업을 담는다. 인용 개수와 의미 과업 개수를 혼동하거나 첫 과업만 남기지 않는다.",
+      "expectedProvenance": [
+        {
+          "quote": "배송 위치를 확인해 주시고, 도착 시각도 알려 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t1",
+                  "startChar": 0,
+                  "endChar": 30
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R04",
+      "scenario": "adjacent-same-speaker-correction",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "수령한 치약은 한 개가 아니라 한 박스예요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        },
+        {
+          "id": "t2",
+          "speaker": "customer",
+          "text": "그 단위를 한 박스로 기록해 주세요.",
+          "startSeconds": 4.0,
+          "endSeconds": 7.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "수령한 치약은 한 개가 아니라 한 박스예요. 그 단위를 한 박스로 기록해 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "수령한 치약은 한 개가 아니라 한 박스예요. 그 단위를 한 박스로 기록해 주세요."
+      ],
+      "expectedActiveQuotes": [
+        "수령한 치약은 한 개가 아니라 한 박스예요. 그 단위를 한 박스로 기록해 주세요."
+      ],
+      "expectedRejectedQuotes": [],
+      "expectedRejectedDetails": [],
+      "expectedReviewReasons": [],
+      "rationale": "인접한 같은 비어 있지 않은 화자의 두 구간이다. 경계 공백 한 개만 삽입하며 단위 정정 대상과 기록 요구를 함께 보존한다. 수령 필드 자동 추출/수정은 이 기대값의 범위 밖이다.",
+      "expectedProvenance": [
+        {
+          "quote": "수령한 치약은 한 개가 아니라 한 박스예요. 그 단위를 한 박스로 기록해 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t1",
+                  "startChar": 0,
+                  "endChar": 24
+                },
+                {
+                  "segmentId": "t2",
+                  "startChar": 0,
+                  "endChar": 20
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R05",
+      "scenario": "different-speaker-interruption",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "배송 위치를 확인해 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        },
+        {
+          "id": "t2",
+          "speaker": "agent",
+          "text": "현재 자료를 보겠습니다.",
+          "startSeconds": 4.0,
+          "endSeconds": 7.5
+        },
+        {
+          "id": "t3",
+          "speaker": "customer",
+          "text": "도착 시각도 알려 주세요.",
+          "startSeconds": 8.0,
+          "endSeconds": 11.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "배송 위치를 확인해 주세요.",
+          "도착 시각도 알려 주세요.",
+          "배송 위치를 확인해 주세요. 도착 시각도 알려 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "배송 위치를 확인해 주세요.",
+        "도착 시각도 알려 주세요.",
+        "배송 위치를 확인해 주세요. 도착 시각도 알려 주세요."
+      ],
+      "expectedActiveQuotes": [
+        "배송 위치를 확인해 주세요.",
+        "도착 시각도 알려 주세요."
+      ],
+      "expectedRejectedQuotes": [
+        "배송 위치를 확인해 주세요. 도착 시각도 알려 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 2,
+          "quote": "배송 위치를 확인해 주세요. 도착 시각도 알려 주세요.",
+          "reason": "NONCONTIGUOUS_QUOTE"
+        }
+      ],
+      "expectedReviewReasons": [
+        "NONCONTIGUOUS_QUOTE"
+      ],
+      "rationale": "두 개의 독립 인용은 유효하지만 상담원 구간을 지운 합성 연속 인용은 거부한다.",
+      "expectedProvenance": [
+        {
+          "quote": "배송 위치를 확인해 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t1",
+                  "startChar": 0,
+                  "endChar": 15
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "quote": "도착 시각도 알려 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t3",
+                  "startChar": 0,
+                  "endChar": 14
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R06",
+      "scenario": "absent-paraphrase",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "상품 라벨을 확인해 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "상품 라벨 검수를 완료해 주세요.",
+          "상품 라벨을 확인해 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "상품 라벨 검수를 완료해 주세요.",
+        "상품 라벨을 확인해 주세요."
+      ],
+      "expectedActiveQuotes": [
+        "상품 라벨을 확인해 주세요."
+      ],
+      "expectedRejectedQuotes": [
+        "상품 라벨 검수를 완료해 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "상품 라벨 검수를 완료해 주세요.",
+          "reason": "QUOTE_NOT_IN_SOURCE"
+        }
+      ],
+      "expectedReviewReasons": [
+        "QUOTE_NOT_IN_SOURCE"
+      ],
+      "rationale": "동일 의미처럼 보여도 원문에 없는 의역을 인용으로 허용하지 않는다. 유효한 다른 인용은 남긴다.",
+      "expectedProvenance": [
+        {
+          "quote": "상품 라벨을 확인해 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t1",
+                  "startChar": 0,
+                  "endChar": 15
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R07",
+      "scenario": "historical-quoted-request",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "어제는 \"반송 방법을 알려 주세요.\"라고 요청했지만 오늘은 별도 요청이 없습니다.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "반송 방법을 알려 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedActiveQuotes": [],
+      "expectedRejectedQuotes": [
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "반송 방법을 알려 주세요.",
+          "reason": "NON_CURRENT_CONTEXT"
+        }
+      ],
+      "expectedReviewReasons": [
+        "NON_CURRENT_CONTEXT"
+      ],
+      "rationale": "문자열이 있어도 과거 요청의 회상이다. 빈 결과는 현재 요청 부재 때문이다.",
+      "expectedProvenance": []
+    },
+    {
+      "id": "R08",
+      "scenario": "example-quoted-request",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "교육 예시 문장은 \"반송 방법을 알려 주세요.\"입니다.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "반송 방법을 알려 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedActiveQuotes": [],
+      "expectedRejectedQuotes": [
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "반송 방법을 알려 주세요.",
+          "reason": "NON_CURRENT_CONTEXT"
+        }
+      ],
+      "expectedReviewReasons": [
+        "NON_CURRENT_CONTEXT"
+      ],
+      "rationale": "예문 안의 명령형은 실제 요청이 아니다.",
+      "expectedProvenance": []
+    },
+    {
+      "id": "R09",
+      "scenario": "denial-of-request",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "\"반송 방법을 알려 주세요.\"라고 요청한 적은 없습니다.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "반송 방법을 알려 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedActiveQuotes": [],
+      "expectedRejectedQuotes": [
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "반송 방법을 알려 주세요.",
+          "reason": "NON_CURRENT_CONTEXT"
+        }
+      ],
+      "expectedReviewReasons": [
+        "NON_CURRENT_CONTEXT"
+      ],
+      "rationale": "요청했다는 사실을 부정하므로 자동 채택하지 않는다.",
+      "expectedProvenance": []
+    },
+    {
+      "id": "R10",
+      "scenario": "future-plan-not-current-request",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "내일 담당자에게 \"반송 방법을 알려 주세요.\"라고 요청할 생각입니다.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "반송 방법을 알려 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedActiveQuotes": [],
+      "expectedRejectedQuotes": [
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "반송 방법을 알려 주세요.",
+          "reason": "NON_CURRENT_CONTEXT"
+        }
+      ],
+      "expectedReviewReasons": [
+        "NON_CURRENT_CONTEXT"
+      ],
+      "rationale": "나중에 요청할 계획의 인용이며 이 통화의 현재 요청이 아니다.",
+      "expectedProvenance": []
+    },
+    {
+      "id": "R11",
+      "scenario": "current-request-about-tomorrow",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "내일 배송 시각을 확인해 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "내일 배송 시각을 확인해 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "내일 배송 시각을 확인해 주세요."
+      ],
+      "expectedActiveQuotes": [
+        "내일 배송 시각을 확인해 주세요."
+      ],
+      "expectedRejectedQuotes": [],
+      "expectedRejectedDetails": [],
+      "expectedReviewReasons": [],
+      "rationale": "내일의 사실을 지금 확인해 달라는 직접 요청은 과거/계획 서술과 다르다.",
+      "expectedProvenance": [
+        {
+          "quote": "내일 배송 시각을 확인해 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t1",
+                  "startChar": 0,
+                  "endChar": 18
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R12",
+      "scenario": "current-negative-action-request",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "확인 전에는 치약을 폐기하지 말아 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "확인 전에는 치약을 폐기하지 말아 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "확인 전에는 치약을 폐기하지 말아 주세요."
+      ],
+      "expectedActiveQuotes": [
+        "확인 전에는 치약을 폐기하지 말아 주세요."
+      ],
+      "expectedRejectedQuotes": [],
+      "expectedRejectedDetails": [],
+      "expectedReviewReasons": [],
+      "rationale": "행동을 하지 말라는 현재 요청이다. 부정어가 있다는 이유로 요청 자체 부정과 혼동하지 않는다.",
+      "expectedProvenance": [
+        {
+          "quote": "확인 전에는 치약을 폐기하지 말아 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t1",
+                  "startChar": 0,
+                  "endChar": 23
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R13",
+      "scenario": "opaque-speaker-label",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "A",
+          "text": "배송 위치를 확인해 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        }
+      ],
+      "speakerRoles": {
+        "A": "unverified"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "배송 위치를 확인해 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "배송 위치를 확인해 주세요."
+      ],
+      "expectedActiveQuotes": [
+        "배송 위치를 확인해 주세요."
+      ],
+      "expectedRejectedQuotes": [],
+      "expectedRejectedDetails": [],
+      "expectedReviewReasons": [
+        "SPEAKER_ROLE_UNVERIFIED"
+      ],
+      "rationale": "원문에 있는 현재 요청 문구는 보존하되 A를 경영주로 확정하지 않는다. active는 현재 발화의 보존이지 고객 확인/사람 승인 완료가 아니다.",
+      "expectedProvenance": [
+        {
+          "quote": "배송 위치를 확인해 주세요.",
+          "occurrences": [
+            {
+              "speaker": "A",
+              "spans": [
+                {
+                  "segmentId": "t1",
+                  "startChar": 0,
+                  "endChar": 15
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R14",
+      "scenario": "empty-speaker-must-not-join",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "",
+          "text": "한 박스로 받은 것입니다.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        },
+        {
+          "id": "t2",
+          "speaker": "",
+          "text": "단위를 정확히 적어 주세요.",
+          "startSeconds": 4.0,
+          "endSeconds": 7.5
+        }
+      ],
+      "speakerRoles": {
+        "": "unverified"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "한 박스로 받은 것입니다. 단위를 정확히 적어 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "한 박스로 받은 것입니다. 단위를 정확히 적어 주세요."
+      ],
+      "expectedActiveQuotes": [],
+      "expectedRejectedQuotes": [
+        "한 박스로 받은 것입니다. 단위를 정확히 적어 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "한 박스로 받은 것입니다. 단위를 정확히 적어 주세요.",
+          "reason": "EMPTY_SPEAKER_JOIN"
+        }
+      ],
+      "expectedReviewReasons": [
+        "EMPTY_SPEAKER_JOIN",
+        "SPEAKER_ROLE_UNVERIFIED"
+      ],
+      "rationale": "빈 라벨끼리 같다는 이유로 화자를 동일시하거나 구간을 잇지 않는다. 자동 보존할 인용이 없어 빈 결과다.",
+      "expectedProvenance": []
+    },
+    {
+      "id": "R15",
+      "scenario": "withdraw-only-one-same-speaker",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "반송 방법을 알려 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        },
+        {
+          "id": "t2",
+          "speaker": "customer",
+          "text": "배송 시각을 확인해 주세요.",
+          "startSeconds": 4.0,
+          "endSeconds": 7.5
+        },
+        {
+          "id": "t3",
+          "speaker": "customer",
+          "text": "반송 방법 요청은 취소합니다.",
+          "startSeconds": 8.0,
+          "endSeconds": 11.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "반송 방법을 알려 주세요.",
+          "배송 시각을 확인해 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "반송 방법을 알려 주세요.",
+        "배송 시각을 확인해 주세요."
+      ],
+      "expectedActiveQuotes": [
+        "배송 시각을 확인해 주세요."
+      ],
+      "expectedRejectedQuotes": [
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "반송 방법을 알려 주세요.",
+          "reason": "WITHDRAWN"
+        }
+      ],
+      "expectedReviewReasons": [
+        "WITHDRAWN"
+      ],
+      "rationale": "반송 방법 철회는 독립된 배송 시각 요청을 철회하지 않는다.",
+      "expectedProvenance": [
+        {
+          "quote": "배송 시각을 확인해 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t2",
+                  "startChar": 0,
+                  "endChar": 15
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R16",
+      "scenario": "withdraw-after-speaker-switch",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "반송 방법을 알려 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        },
+        {
+          "id": "t2",
+          "speaker": "agent",
+          "text": "두 내용을 확인하겠습니다.",
+          "startSeconds": 4.0,
+          "endSeconds": 7.5
+        },
+        {
+          "id": "t3",
+          "speaker": "customer",
+          "text": "배송 시각을 확인해 주세요.",
+          "startSeconds": 8.0,
+          "endSeconds": 11.5
+        },
+        {
+          "id": "t4",
+          "speaker": "agent",
+          "text": "추가 말씀 있으신가요?",
+          "startSeconds": 12.0,
+          "endSeconds": 15.5
+        },
+        {
+          "id": "t5",
+          "speaker": "customer",
+          "text": "반송 방법 요청은 취소합니다.",
+          "startSeconds": 16.0,
+          "endSeconds": 19.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "반송 방법을 알려 주세요.",
+          "배송 시각을 확인해 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "반송 방법을 알려 주세요.",
+        "배송 시각을 확인해 주세요."
+      ],
+      "expectedActiveQuotes": [
+        "배송 시각을 확인해 주세요."
+      ],
+      "expectedRejectedQuotes": [
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "반송 방법을 알려 주세요.",
+          "reason": "WITHDRAWN"
+        }
+      ],
+      "expectedReviewReasons": [
+        "WITHDRAWN"
+      ],
+      "rationale": "같은 customer의 명시적 반송 철회는 상담원 발화 이후라도 앞선 반송 요청에 적용한다. 배송 요청은 유지한다.",
+      "expectedProvenance": [
+        {
+          "quote": "배송 시각을 확인해 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t3",
+                  "startChar": 0,
+                  "endChar": 15
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R17",
+      "scenario": "other-speaker-cannot-withdraw-customer",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "반송 방법을 알려 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        },
+        {
+          "id": "t2",
+          "speaker": "agent",
+          "text": "반송 방법 요청은 취소합니다.",
+          "startSeconds": 4.0,
+          "endSeconds": 7.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "반송 방법을 알려 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedActiveQuotes": [
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedRejectedQuotes": [],
+      "expectedRejectedDetails": [],
+      "expectedReviewReasons": [
+        "OTHER_SPEAKER_CANCELLATION"
+      ],
+      "rationale": "상담원의 취소 발화만으로 고객 요청을 철회 확정하지 않는다. 역할 충돌 검토를 남긴다.",
+      "expectedProvenance": [
+        {
+          "quote": "반송 방법을 알려 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t1",
+                  "startChar": 0,
+                  "endChar": 14
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R18",
+      "scenario": "ambiguous-pronoun-after-separate-requests",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "반송 방법을 알려 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        },
+        {
+          "id": "t2",
+          "speaker": "customer",
+          "text": "배송 시각을 확인해 주세요.",
+          "startSeconds": 4.0,
+          "endSeconds": 7.5
+        },
+        {
+          "id": "t3",
+          "speaker": "customer",
+          "text": "그 요청은 취소합니다.",
+          "startSeconds": 8.0,
+          "endSeconds": 11.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "반송 방법을 알려 주세요.",
+          "배송 시각을 확인해 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "반송 방법을 알려 주세요.",
+        "배송 시각을 확인해 주세요."
+      ],
+      "expectedActiveQuotes": [],
+      "expectedRejectedQuotes": [
+        "반송 방법을 알려 주세요.",
+        "배송 시각을 확인해 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "반송 방법을 알려 주세요.",
+          "reason": "AMBIGUOUS_CANCELLATION"
+        },
+        {
+          "proposalIndex": 1,
+          "quote": "배송 시각을 확인해 주세요.",
+          "reason": "AMBIGUOUS_CANCELLATION"
+        }
+      ],
+      "expectedReviewReasons": [
+        "AMBIGUOUS_CANCELLATION"
+      ],
+      "rationale": "최근성만으로 그 요청의 대상을 고를 수 없다. 두 후보의 자동 활성 표시를 유보하고 원문을 대조한다. 두 요청이 모두 실제 철회됐다고 확정하는 뜻이 아니다. 독립 검토로 최근 요청만 철회하던 최초 기대값을 수정했다.",
+      "expectedProvenance": [],
+      "policyStatus": "pc2-proposal-pending-pc1-contract-decision"
+    },
+    {
+      "id": "R19",
+      "scenario": "ambiguous-pronoun-two-targets",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "반송 방법을 알려 주시고 배송 시각도 확인해 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        },
+        {
+          "id": "t2",
+          "speaker": "agent",
+          "text": "두 가지 말씀을 들었습니다.",
+          "startSeconds": 4.0,
+          "endSeconds": 7.5
+        },
+        {
+          "id": "t3",
+          "speaker": "customer",
+          "text": "그것은 취소합니다.",
+          "startSeconds": 8.0,
+          "endSeconds": 11.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "반송 방법을 알려 주시고 배송 시각도 확인해 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "반송 방법을 알려 주시고 배송 시각도 확인해 주세요."
+      ],
+      "expectedActiveQuotes": [],
+      "expectedRejectedQuotes": [
+        "반송 방법을 알려 주시고 배송 시각도 확인해 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "반송 방법을 알려 주시고 배송 시각도 확인해 주세요.",
+          "reason": "AMBIGUOUS_CANCELLATION"
+        }
+      ],
+      "expectedReviewReasons": [
+        "AMBIGUOUS_CANCELLATION"
+      ],
+      "rationale": "그것의 범위를 두 과업 중 하나/전체로 정할 근거가 없어 자동 활성 표시를 유보한다. 원문은 삭제하지 않고 사람 대조 대상으로 남긴다.",
+      "expectedProvenance": [],
+      "policyStatus": "pc2-proposal-pending-pc1-contract-decision"
+    },
+    {
+      "id": "R20",
+      "scenario": "duplicates-and-reversed-proposals",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "반송 방법을 알려 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        },
+        {
+          "id": "t2",
+          "speaker": "agent",
+          "text": "네.",
+          "startSeconds": 4.0,
+          "endSeconds": 7.5
+        },
+        {
+          "id": "t3",
+          "speaker": "customer",
+          "text": "배송 시각을 확인해 주세요.",
+          "startSeconds": 8.0,
+          "endSeconds": 11.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "배송 시각을 확인해 주세요.",
+          "반송 방법을 알려 주세요.",
+          "반송 방법을 알려 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "배송 시각을 확인해 주세요.",
+        "반송 방법을 알려 주세요.",
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedActiveQuotes": [
+        "반송 방법을 알려 주세요.",
+        "배송 시각을 확인해 주세요."
+      ],
+      "expectedRejectedQuotes": [
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 2,
+          "quote": "반송 방법을 알려 주세요.",
+          "reason": "DUPLICATE_QUOTE"
+        }
+      ],
+      "expectedReviewReasons": [],
+      "rationale": "유효 인용은 전사 순서로 정렬하고 같은 인용 중복은 한 번만 표시한다. 단순 중복/순서 정상화 자체로 일반 경고를 만들지 않는다.",
+      "expectedProvenance": [
+        {
+          "quote": "반송 방법을 알려 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t1",
+                  "startChar": 0,
+                  "endChar": 14
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "quote": "배송 시각을 확인해 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t3",
+                  "startChar": 0,
+                  "endChar": 15
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R21",
+      "scenario": "same-text-past-and-current-occurrences",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "어제 \"상품 라벨을 확인해 주세요.\"라고 요청했습니다.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        },
+        {
+          "id": "t2",
+          "speaker": "agent",
+          "text": "오늘은요?",
+          "startSeconds": 4.0,
+          "endSeconds": 7.5
+        },
+        {
+          "id": "t3",
+          "speaker": "customer",
+          "text": "상품 라벨을 확인해 주세요.",
+          "startSeconds": 8.0,
+          "endSeconds": 11.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "상품 라벨을 확인해 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "상품 라벨을 확인해 주세요."
+      ],
+      "expectedActiveQuotes": [],
+      "expectedRejectedQuotes": [
+        "상품 라벨을 확인해 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "상품 라벨을 확인해 주세요.",
+          "reason": "AMBIGUOUS_OCCURRENCE"
+        }
+      ],
+      "expectedReviewReasons": [
+        "AMBIGUOUS_OCCURRENCE"
+      ],
+      "rationale": "문자열만 제시한 계약에는 위치 선택 정보가 없다. 과거/현재 중 임의 occurrence를 골라 확정하지 말고 출처 범위 명시가 필요하다. 이는 유일한 현재 occurrence를 문맥으로 선택할 수 있는 경우까지 자동 채택하지 않는 보수적 PC2 정책 제안이다. 고정 문서에서 이미 확정된 제품 규칙이나 정확도 정답으로 주장하지 않으며 pc1이 위치 선택 계약을 결정해야 한다.",
+      "expectedProvenance": [],
+      "policyStatus": "pc2-proposal-pending-pc1-contract-decision"
+    },
+    {
+      "id": "R22",
+      "scenario": "legacy-single-request-quote",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "반송 방법을 알려 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuote": "반송 방법을 알려 주세요."
+      },
+      "proposedRequestQuotes": [
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedActiveQuotes": [
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedRejectedQuotes": [],
+      "expectedRejectedDetails": [],
+      "expectedReviewReasons": [],
+      "rationale": "신형 키가 없을 때만 구형 단일 인용을 명시적으로 배열 하나로 변환한다. 공개 fields.request 타입을 바꾸지 않는다.",
+      "expectedProvenance": [
+        {
+          "quote": "반송 방법을 알려 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t1",
+                  "startChar": 0,
+                  "endChar": 14
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R23",
+      "scenario": "both-keys-even-empty-new-array",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "반송 방법을 알려 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [],
+        "requestQuote": "반송 방법을 알려 주세요."
+      },
+      "proposedRequestQuotes": [
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedActiveQuotes": [],
+      "expectedRejectedQuotes": [
+        "반송 방법을 알려 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "반송 방법을 알려 주세요.",
+          "reason": "MIXED_CONTRACT_KEYS"
+        }
+      ],
+      "expectedReviewReasons": [
+        "MIXED_CONTRACT_KEYS"
+      ],
+      "rationale": "신형이 빈 배열이어도 키가 둘 다 있으면 혼용이다. truthiness fallback이나 묵시 병합을 거부한다.",
+      "expectedProvenance": [],
+      "policyStatus": "pc2-proposal-pending-pc1-contract-decision"
+    },
+    {
+      "id": "R24",
+      "scenario": "no-request-empty-array",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "오늘 받은 상품의 포장 색은 파란색입니다.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": []
+      },
+      "proposedRequestQuotes": [],
+      "expectedActiveQuotes": [],
+      "expectedRejectedQuotes": [],
+      "expectedRejectedDetails": [],
+      "expectedReviewReasons": [],
+      "rationale": "요청 없는 사실 진술이다. null 표현 후보와 빈 배열은 정상이며 상시 경고를 추가할 이유가 없다.",
+      "expectedProvenance": []
+    },
+    {
+      "id": "R25",
+      "scenario": "eight-raw-quotes-boundary",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "배송 위치를 확인해 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        },
+        {
+          "id": "t2",
+          "speaker": "customer",
+          "text": "도착 시각을 알려 주세요.",
+          "startSeconds": 4.0,
+          "endSeconds": 7.5
+        },
+        {
+          "id": "t3",
+          "speaker": "customer",
+          "text": "반송 방법을 알려 주세요.",
+          "startSeconds": 8.0,
+          "endSeconds": 11.5
+        },
+        {
+          "id": "t4",
+          "speaker": "customer",
+          "text": "상품 라벨을 확인해 주세요.",
+          "startSeconds": 12.0,
+          "endSeconds": 15.5
+        },
+        {
+          "id": "t5",
+          "speaker": "customer",
+          "text": "주문 내역을 확인해 주세요.",
+          "startSeconds": 16.0,
+          "endSeconds": 19.5
+        },
+        {
+          "id": "t6",
+          "speaker": "customer",
+          "text": "출고 시각을 확인해 주세요.",
+          "startSeconds": 20.0,
+          "endSeconds": 23.5
+        },
+        {
+          "id": "t7",
+          "speaker": "customer",
+          "text": "담당 부서를 알려 주세요.",
+          "startSeconds": 24.0,
+          "endSeconds": 27.5
+        },
+        {
+          "id": "t8",
+          "speaker": "customer",
+          "text": "확인 후 연락해 주세요.",
+          "startSeconds": 28.0,
+          "endSeconds": 31.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "배송 위치를 확인해 주세요.",
+          "도착 시각을 알려 주세요.",
+          "반송 방법을 알려 주세요.",
+          "상품 라벨을 확인해 주세요.",
+          "주문 내역을 확인해 주세요.",
+          "출고 시각을 확인해 주세요.",
+          "담당 부서를 알려 주세요.",
+          "확인 후 연락해 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "배송 위치를 확인해 주세요.",
+        "도착 시각을 알려 주세요.",
+        "반송 방법을 알려 주세요.",
+        "상품 라벨을 확인해 주세요.",
+        "주문 내역을 확인해 주세요.",
+        "출고 시각을 확인해 주세요.",
+        "담당 부서를 알려 주세요.",
+        "확인 후 연락해 주세요."
+      ],
+      "expectedActiveQuotes": [
+        "배송 위치를 확인해 주세요.",
+        "도착 시각을 알려 주세요.",
+        "반송 방법을 알려 주세요.",
+        "상품 라벨을 확인해 주세요.",
+        "주문 내역을 확인해 주세요.",
+        "출고 시각을 확인해 주세요.",
+        "담당 부서를 알려 주세요.",
+        "확인 후 연락해 주세요."
+      ],
+      "expectedRejectedQuotes": [],
+      "expectedRejectedDetails": [],
+      "expectedReviewReasons": [],
+      "rationale": "최대8은 원문 인용 항목 수이다. 정확히8개는 모두 검증하고 전사 순서로 보존한다.",
+      "expectedProvenance": [
+        {
+          "quote": "배송 위치를 확인해 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t1",
+                  "startChar": 0,
+                  "endChar": 15
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "quote": "도착 시각을 알려 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t2",
+                  "startChar": 0,
+                  "endChar": 14
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "quote": "반송 방법을 알려 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t3",
+                  "startChar": 0,
+                  "endChar": 14
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "quote": "상품 라벨을 확인해 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t4",
+                  "startChar": 0,
+                  "endChar": 15
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "quote": "주문 내역을 확인해 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t5",
+                  "startChar": 0,
+                  "endChar": 15
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "quote": "출고 시각을 확인해 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t6",
+                  "startChar": 0,
+                  "endChar": 15
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "quote": "담당 부서를 알려 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t7",
+                  "startChar": 0,
+                  "endChar": 14
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "quote": "확인 후 연락해 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t8",
+                  "startChar": 0,
+                  "endChar": 13
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R26",
+      "scenario": "nine-raw-quotes-over-limit",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "배송 위치를 확인해 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        },
+        {
+          "id": "t2",
+          "speaker": "customer",
+          "text": "도착 시각을 알려 주세요.",
+          "startSeconds": 4.0,
+          "endSeconds": 7.5
+        },
+        {
+          "id": "t3",
+          "speaker": "customer",
+          "text": "반송 방법을 알려 주세요.",
+          "startSeconds": 8.0,
+          "endSeconds": 11.5
+        },
+        {
+          "id": "t4",
+          "speaker": "customer",
+          "text": "상품 라벨을 확인해 주세요.",
+          "startSeconds": 12.0,
+          "endSeconds": 15.5
+        },
+        {
+          "id": "t5",
+          "speaker": "customer",
+          "text": "주문 내역을 확인해 주세요.",
+          "startSeconds": 16.0,
+          "endSeconds": 19.5
+        },
+        {
+          "id": "t6",
+          "speaker": "customer",
+          "text": "출고 시각을 확인해 주세요.",
+          "startSeconds": 20.0,
+          "endSeconds": 23.5
+        },
+        {
+          "id": "t7",
+          "speaker": "customer",
+          "text": "담당 부서를 알려 주세요.",
+          "startSeconds": 24.0,
+          "endSeconds": 27.5
+        },
+        {
+          "id": "t8",
+          "speaker": "customer",
+          "text": "확인 후 연락해 주세요.",
+          "startSeconds": 28.0,
+          "endSeconds": 31.5
+        },
+        {
+          "id": "t9",
+          "speaker": "customer",
+          "text": "회수 일정을 확인해 주세요.",
+          "startSeconds": 32.0,
+          "endSeconds": 35.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "배송 위치를 확인해 주세요.",
+          "도착 시각을 알려 주세요.",
+          "반송 방법을 알려 주세요.",
+          "상품 라벨을 확인해 주세요.",
+          "주문 내역을 확인해 주세요.",
+          "출고 시각을 확인해 주세요.",
+          "담당 부서를 알려 주세요.",
+          "확인 후 연락해 주세요.",
+          "회수 일정을 확인해 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "배송 위치를 확인해 주세요.",
+        "도착 시각을 알려 주세요.",
+        "반송 방법을 알려 주세요.",
+        "상품 라벨을 확인해 주세요.",
+        "주문 내역을 확인해 주세요.",
+        "출고 시각을 확인해 주세요.",
+        "담당 부서를 알려 주세요.",
+        "확인 후 연락해 주세요.",
+        "회수 일정을 확인해 주세요."
+      ],
+      "expectedActiveQuotes": [],
+      "expectedRejectedQuotes": [
+        "배송 위치를 확인해 주세요.",
+        "도착 시각을 알려 주세요.",
+        "반송 방법을 알려 주세요.",
+        "상품 라벨을 확인해 주세요.",
+        "주문 내역을 확인해 주세요.",
+        "출고 시각을 확인해 주세요.",
+        "담당 부서를 알려 주세요.",
+        "확인 후 연락해 주세요.",
+        "회수 일정을 확인해 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "배송 위치를 확인해 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        },
+        {
+          "proposalIndex": 1,
+          "quote": "도착 시각을 알려 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        },
+        {
+          "proposalIndex": 2,
+          "quote": "반송 방법을 알려 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        },
+        {
+          "proposalIndex": 3,
+          "quote": "상품 라벨을 확인해 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        },
+        {
+          "proposalIndex": 4,
+          "quote": "주문 내역을 확인해 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        },
+        {
+          "proposalIndex": 5,
+          "quote": "출고 시각을 확인해 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        },
+        {
+          "proposalIndex": 6,
+          "quote": "담당 부서를 알려 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        },
+        {
+          "proposalIndex": 7,
+          "quote": "확인 후 연락해 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        },
+        {
+          "proposalIndex": 8,
+          "quote": "회수 일정을 확인해 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        }
+      ],
+      "expectedReviewReasons": [
+        "TOO_MANY_QUOTES"
+      ],
+      "rationale": "9개부터 초과다. 앞8개만 남겨 성공으로 만들지 않고 원응답 보존/검토로 넘기는 fail-closed 제안이다.",
+      "expectedProvenance": [],
+      "policyStatus": "pc2-proposal-pending-pc1-contract-decision"
+    },
+    {
+      "id": "R27",
+      "scenario": "nine-with-duplicate-still-over-limit",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "배송 위치를 확인해 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        },
+        {
+          "id": "t2",
+          "speaker": "customer",
+          "text": "도착 시각을 알려 주세요.",
+          "startSeconds": 4.0,
+          "endSeconds": 7.5
+        },
+        {
+          "id": "t3",
+          "speaker": "customer",
+          "text": "반송 방법을 알려 주세요.",
+          "startSeconds": 8.0,
+          "endSeconds": 11.5
+        },
+        {
+          "id": "t4",
+          "speaker": "customer",
+          "text": "상품 라벨을 확인해 주세요.",
+          "startSeconds": 12.0,
+          "endSeconds": 15.5
+        },
+        {
+          "id": "t5",
+          "speaker": "customer",
+          "text": "주문 내역을 확인해 주세요.",
+          "startSeconds": 16.0,
+          "endSeconds": 19.5
+        },
+        {
+          "id": "t6",
+          "speaker": "customer",
+          "text": "출고 시각을 확인해 주세요.",
+          "startSeconds": 20.0,
+          "endSeconds": 23.5
+        },
+        {
+          "id": "t7",
+          "speaker": "customer",
+          "text": "담당 부서를 알려 주세요.",
+          "startSeconds": 24.0,
+          "endSeconds": 27.5
+        },
+        {
+          "id": "t8",
+          "speaker": "customer",
+          "text": "확인 후 연락해 주세요.",
+          "startSeconds": 28.0,
+          "endSeconds": 31.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "배송 위치를 확인해 주세요.",
+          "도착 시각을 알려 주세요.",
+          "반송 방법을 알려 주세요.",
+          "상품 라벨을 확인해 주세요.",
+          "주문 내역을 확인해 주세요.",
+          "출고 시각을 확인해 주세요.",
+          "담당 부서를 알려 주세요.",
+          "확인 후 연락해 주세요.",
+          "배송 위치를 확인해 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "배송 위치를 확인해 주세요.",
+        "도착 시각을 알려 주세요.",
+        "반송 방법을 알려 주세요.",
+        "상품 라벨을 확인해 주세요.",
+        "주문 내역을 확인해 주세요.",
+        "출고 시각을 확인해 주세요.",
+        "담당 부서를 알려 주세요.",
+        "확인 후 연락해 주세요.",
+        "배송 위치를 확인해 주세요."
+      ],
+      "expectedActiveQuotes": [],
+      "expectedRejectedQuotes": [
+        "배송 위치를 확인해 주세요.",
+        "도착 시각을 알려 주세요.",
+        "반송 방법을 알려 주세요.",
+        "상품 라벨을 확인해 주세요.",
+        "주문 내역을 확인해 주세요.",
+        "출고 시각을 확인해 주세요.",
+        "담당 부서를 알려 주세요.",
+        "확인 후 연락해 주세요.",
+        "배송 위치를 확인해 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "배송 위치를 확인해 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        },
+        {
+          "proposalIndex": 1,
+          "quote": "도착 시각을 알려 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        },
+        {
+          "proposalIndex": 2,
+          "quote": "반송 방법을 알려 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        },
+        {
+          "proposalIndex": 3,
+          "quote": "상품 라벨을 확인해 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        },
+        {
+          "proposalIndex": 4,
+          "quote": "주문 내역을 확인해 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        },
+        {
+          "proposalIndex": 5,
+          "quote": "출고 시각을 확인해 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        },
+        {
+          "proposalIndex": 6,
+          "quote": "담당 부서를 알려 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        },
+        {
+          "proposalIndex": 7,
+          "quote": "확인 후 연락해 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        },
+        {
+          "proposalIndex": 8,
+          "quote": "배송 위치를 확인해 주세요.",
+          "reason": "TOO_MANY_QUOTES"
+        }
+      ],
+      "expectedReviewReasons": [
+        "TOO_MANY_QUOTES"
+      ],
+      "rationale": "raw9개를 중복제거해8개로 줄여 상한을 우회하지 않는다. 개수 검증은 정렬/중복제거보다 먼저 한다.",
+      "expectedProvenance": [],
+      "policyStatus": "pc2-proposal-pending-pc1-contract-decision"
+    },
+    {
+      "id": "R28",
+      "scenario": "correction-context-omitted",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "한 개가 아니라 한 박스예요. 단위를 제대로 기록해 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "단위를 제대로 기록해 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "단위를 제대로 기록해 주세요."
+      ],
+      "expectedActiveQuotes": [],
+      "expectedRejectedQuotes": [
+        "단위를 제대로 기록해 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "단위를 제대로 기록해 주세요.",
+          "reason": "MISSING_CORRECTION_CONTEXT"
+        }
+      ],
+      "expectedReviewReasons": [
+        "MISSING_CORRECTION_CONTEXT"
+      ],
+      "rationale": "단위 정정 대상이 빠진 인용은 세 요청 보존의 기대를 충족하지 않는다. 정확한 앞 문맥을 포함한 새 인용을 검토해야 하며 검사기가 자동 창작해 채우지 않는다.",
+      "expectedProvenance": [],
+      "policyStatus": "pc2-proposal-pending-pc1-contract-decision"
+    },
+    {
+      "id": "R29",
+      "scenario": "same-speaker-omitted-middle-segment",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "배송 위치를 확인해 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        },
+        {
+          "id": "t2",
+          "speaker": "customer",
+          "text": "가게 문은 아직 닫혀 있습니다.",
+          "startSeconds": 4.0,
+          "endSeconds": 7.5
+        },
+        {
+          "id": "t3",
+          "speaker": "customer",
+          "text": "도착 시각을 알려 주세요.",
+          "startSeconds": 8.0,
+          "endSeconds": 11.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "배송 위치를 확인해 주세요. 도착 시각을 알려 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "배송 위치를 확인해 주세요. 도착 시각을 알려 주세요."
+      ],
+      "expectedActiveQuotes": [],
+      "expectedRejectedQuotes": [
+        "배송 위치를 확인해 주세요. 도착 시각을 알려 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "배송 위치를 확인해 주세요. 도착 시각을 알려 주세요.",
+          "reason": "NONCONTIGUOUS_QUOTE"
+        }
+      ],
+      "expectedReviewReasons": [
+        "NONCONTIGUOUS_QUOTE"
+      ],
+      "rationale": "같은 화자 run이라도 중간 원문을 삭제한 인용은 연속 원문이 아니다. 인접 두 구간 허용을 임의 subsequence 허용으로 넓히지 않는다.",
+      "expectedProvenance": []
+    },
+    {
+      "id": "R30",
+      "scenario": "new-key-wrong-type",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "배송 위치를 확인해 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer",
+        "agent": "synthetic-agent"
+      },
+      "draftContext": {
+        "requestQuotes": "배송 위치를 확인해 주세요."
+      },
+      "proposedRequestQuotes": [
+        "배송 위치를 확인해 주세요."
+      ],
+      "expectedActiveQuotes": [],
+      "expectedRejectedQuotes": [
+        "배송 위치를 확인해 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "배송 위치를 확인해 주세요.",
+          "reason": "INVALID_QUOTES_TYPE"
+        }
+      ],
+      "expectedReviewReasons": [
+        "INVALID_QUOTES_TYPE"
+      ],
+      "rationale": "신형은 문자열 배열만 허용한다. 문자열을 문자 단위 배열이나 구형 값으로 묵시 변환하지 않는다.",
+      "expectedProvenance": []
+    },
+    {
+      "id": "R31",
+      "scenario": "partial-withdrawal-inside-compound-quote",
+      "transcript": [
+        {
+          "id": "t1",
+          "speaker": "customer",
+          "text": "반송 방법을 알려 주세요. 배송 시각을 확인해 주세요.",
+          "startSeconds": 0.0,
+          "endSeconds": 3.5
+        },
+        {
+          "id": "t2",
+          "speaker": "customer",
+          "text": "반송 방법 요청은 취소합니다.",
+          "startSeconds": 4.0,
+          "endSeconds": 7.5
+        }
+      ],
+      "speakerRoles": {
+        "customer": "synthetic-customer"
+      },
+      "draftContext": {
+        "requestQuotes": [
+          "반송 방법을 알려 주세요. 배송 시각을 확인해 주세요.",
+          "배송 시각을 확인해 주세요."
+        ]
+      },
+      "proposedRequestQuotes": [
+        "반송 방법을 알려 주세요. 배송 시각을 확인해 주세요.",
+        "배송 시각을 확인해 주세요."
+      ],
+      "expectedActiveQuotes": [
+        "배송 시각을 확인해 주세요."
+      ],
+      "expectedRejectedQuotes": [
+        "반송 방법을 알려 주세요. 배송 시각을 확인해 주세요."
+      ],
+      "expectedRejectedDetails": [
+        {
+          "proposalIndex": 0,
+          "quote": "반송 방법을 알려 주세요. 배송 시각을 확인해 주세요.",
+          "reason": "PARTIAL_WITHDRAWAL"
+        }
+      ],
+      "expectedReviewReasons": [
+        "PARTIAL_WITHDRAWAL"
+      ],
+      "rationale": "한 연속 인용 안의 반송 과업만 명시 철회됐다. 철회된 과업을 포함한 전체 인용은 자동 채택하지 않지만 별도 제안된 정확한 배송 부분 인용은 보존한다. 전체만 제안됐다면 자동 창작 분리로 보충하지 말고 유효 부분을 원문 대조하도록 제안한다. 독립 검토가 찾은 복합 인용×부분 철회 결합 반례다.",
+      "expectedProvenance": [
+        {
+          "quote": "배송 시각을 확인해 주세요.",
+          "occurrences": [
+            {
+              "speaker": "customer",
+              "spans": [
+                {
+                  "segmentId": "t1",
+                  "startChar": 15,
+                  "endChar": 30
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "policyStatus": "pc2-proposal-pending-pc1-contract-decision"
+    }
+  ]
+}
