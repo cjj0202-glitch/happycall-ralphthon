@@ -1,0 +1,448 @@
+{
+  "schemaVersion": "pc3-wms-media-candidates-v1",
+  "synthetic": true,
+  "integrationStatus": "candidate-not-registered",
+  "notice": "코드로 그린 합성 공정 설명입니다. 실제 CCTV·연속 위치추적·AI 영상 모델 결과가 아니며 원인·휴먼에러·귀책을 입증하지 않습니다.",
+  "sourceHead": "d4b4a8137fbc608911e9f6f71bd4b5e289e0a958",
+  "sourceFixtureSha256": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+  "generatedAt": "2026-09-21T09:35:32.902429+00:00",
+  "reproductionRuntime": {
+    "python": "3.12.14",
+    "Pillow": "12.3.0",
+    "imageioFfmpeg": "0.6.0",
+    "ffmpeg": "7.1-essentials_build-www.gyan.dev",
+    "fontFile": "malgun.ttf",
+    "fontSha256": "7a183cf1c6c56b9609fcc16eda8b5229fbc11758a21e669ec00343239b02192f"
+  },
+  "generator": "scripts/media_pc3/generate_candidates.py",
+  "mediaCandidates": [
+    {
+      "id": "SYN-PC3-0001-PICKING",
+      "caseId": "CASE-0001",
+      "system": "WMS",
+      "cameraId": "SYN-PC3-CAM-0001-PICKING",
+      "cameraProvenance": "new-fictional-camera-for-procedural-clip",
+      "eventIds": [
+        "W-M1"
+      ],
+      "occurredAt": "2026-09-18T03:30:00+09:00",
+      "stage": "picking",
+      "label": "피킹 공정 코드 애니메이션 후보",
+      "url": "/demo/pc3/case-0001-picking.mp4",
+      "localRelativePath": ".local/pc3-media/case-0001-picking.mp4",
+      "synthetic": true,
+      "generationMethod": "procedural Pillow drawing + FFmpeg H.264; no AI media model",
+      "registrationStatus": "candidate-not-registered",
+      "publicationStatus": "local-only",
+      "startSeconds": 0,
+      "endSeconds": 6,
+      "durationSeconds": 6,
+      "notice": "코드로 그린 합성 공정 설명입니다. 실제 CCTV·연속 위치추적·AI 영상 모델 결과가 아니며 원인·휴먼에러·귀책을 입증하지 않습니다.",
+      "eventRelationStatus": "exact",
+      "relationStatus": "exact",
+      "relations": {
+        "storeId": "SYN-ST01",
+        "orderId": "SYN-ORDER01",
+        "businessDate": "2026-09-18",
+        "toteId": "SYN-TOTE01",
+        "toteRelationStatus": "recorded",
+        "pickingToteId": "SYN-TOTE01",
+        "shippingToteId": null,
+        "asOf": "2026-09-18T07:00:00+09:00"
+      },
+      "sourceRecordKey": "CASE-0001/wms/events/W-M1",
+      "source": {
+        "fixturePath": "data/fixtures/cases.json",
+        "event": {
+          "id": "W-M1",
+          "time": "2026-09-18T03:30:00+09:00",
+          "label": "피킹 스캔",
+          "location": "A-01",
+          "status": "fact",
+          "source": "합성 피킹 이벤트"
+        },
+        "processRecord": {
+          "orderId": "SYN-ORDER01",
+          "product": "당일 1회차 배송",
+          "quantity": null,
+          "unit": null,
+          "zone": "A",
+          "cell": "A-01",
+          "toteId": "SYN-TOTE01",
+          "pickedAt": "2026-09-18T03:30:00+09:00",
+          "workType": "FACILITY",
+          "workUnitType": "BOX"
+        }
+      },
+      "bytes": 69153,
+      "sha256": "94b5076150c739dc13fe1d10c370c040dd8a49f4848e581cedaca98536d63cc7",
+      "validation": {
+        "decodedFrames": 108,
+        "distinctSampleFrames": 4,
+        "width": 960,
+        "height": 540,
+        "fps": 18.0,
+        "durationSeconds": 6.0,
+        "codec": "h264"
+      }
+    },
+    {
+      "id": "SYN-PC3-0001-SORTING",
+      "caseId": "CASE-0001",
+      "system": "WMS",
+      "cameraId": "SYN-PC3-CAM-0001-SORTING",
+      "cameraProvenance": "new-fictional-camera-for-procedural-clip",
+      "eventIds": [
+        "W-M3"
+      ],
+      "occurredAt": "2026-09-18T03:44:00+09:00",
+      "stage": "sorting",
+      "label": "분기 공정 코드 애니메이션 후보",
+      "url": "/demo/pc3/case-0001-sorting.mp4",
+      "localRelativePath": ".local/pc3-media/case-0001-sorting.mp4",
+      "synthetic": true,
+      "generationMethod": "procedural Pillow drawing + FFmpeg H.264; no AI media model",
+      "registrationStatus": "candidate-not-registered",
+      "publicationStatus": "local-only",
+      "startSeconds": 0,
+      "endSeconds": 6,
+      "durationSeconds": 6,
+      "notice": "코드로 그린 합성 공정 설명입니다. 실제 CCTV·연속 위치추적·AI 영상 모델 결과가 아니며 원인·휴먼에러·귀책을 입증하지 않습니다.",
+      "eventRelationStatus": "exact",
+      "relationStatus": "needs_review",
+      "relations": {
+        "storeId": "SYN-ST01",
+        "orderId": "SYN-ORDER01",
+        "businessDate": "2026-09-18",
+        "toteId": null,
+        "toteRelationStatus": "unknown",
+        "pickingToteId": "SYN-TOTE01",
+        "shippingToteId": null,
+        "asOf": "2026-09-18T07:00:00+09:00"
+      },
+      "sourceRecordKey": "CASE-0001/wms/events/W-M3",
+      "source": {
+        "fixturePath": "data/fixtures/cases.json",
+        "event": {
+          "id": "W-M3",
+          "time": "2026-09-18T03:44:00+09:00",
+          "label": "분기 통과",
+          "location": "분기 01 → D-01",
+          "status": "fact",
+          "source": "합성 공정 시연 이벤트"
+        },
+        "processRecord": {
+          "sortedAt": "2026-09-18T03:44:00+09:00",
+          "schdChuteNo": "CH-01",
+          "rsltChuteNo": "CH-01",
+          "source": "30 필드 정의를 참고한 가상 분류실적"
+        }
+      },
+      "bytes": 80031,
+      "sha256": "f2b21ea3fb2ab5427a581c4e66a8625711f43ed9155fbcf36b8aad2b7757812c",
+      "validation": {
+        "decodedFrames": 108,
+        "distinctSampleFrames": 4,
+        "width": 960,
+        "height": 540,
+        "fps": 18.0,
+        "durationSeconds": 6.0,
+        "codec": "h264"
+      }
+    },
+    {
+      "id": "SYN-PC3-0001-SHIPPING",
+      "caseId": "CASE-0001",
+      "system": "WMS",
+      "cameraId": "SYN-PC3-CAM-0001-SHIPPING",
+      "cameraProvenance": "new-fictional-camera-for-procedural-clip",
+      "eventIds": [
+        "W-M4"
+      ],
+      "occurredAt": "2026-09-18T04:20:00+09:00",
+      "stage": "shipping",
+      "label": "출고 공정 코드 애니메이션 후보",
+      "url": "/demo/pc3/case-0001-shipping.mp4",
+      "localRelativePath": ".local/pc3-media/case-0001-shipping.mp4",
+      "synthetic": true,
+      "generationMethod": "procedural Pillow drawing + FFmpeg H.264; no AI media model",
+      "registrationStatus": "candidate-not-registered",
+      "publicationStatus": "local-only",
+      "startSeconds": 0,
+      "endSeconds": 6,
+      "durationSeconds": 6,
+      "notice": "코드로 그린 합성 공정 설명입니다. 실제 CCTV·연속 위치추적·AI 영상 모델 결과가 아니며 원인·휴먼에러·귀책을 입증하지 않습니다.",
+      "eventRelationStatus": "exact",
+      "relationStatus": "needs_review",
+      "relations": {
+        "storeId": "SYN-ST01",
+        "orderId": "SYN-ORDER01",
+        "businessDate": "2026-09-18",
+        "toteId": null,
+        "toteRelationStatus": "unknown",
+        "pickingToteId": "SYN-TOTE01",
+        "shippingToteId": null,
+        "asOf": "2026-09-18T07:00:00+09:00"
+      },
+      "sourceRecordKey": "CASE-0001/wms/events/W-M4",
+      "source": {
+        "fixturePath": "data/fixtures/cases.json",
+        "event": {
+          "id": "W-M4",
+          "time": "2026-09-18T04:20:00+09:00",
+          "label": "출고 스캔",
+          "location": "D-01",
+          "status": "fact",
+          "source": "합성 출고 이벤트"
+        },
+        "processRecord": {
+          "id": "SYN-OUT01",
+          "time": "2026-09-18T04:20:00+09:00",
+          "dock": "D-01",
+          "vehicle": "시연 차량 01"
+        }
+      },
+      "bytes": 70888,
+      "sha256": "dffdf1d94c9324aaecf8a04dacf9d4701d4a356d0a8696c3c008cba307717857",
+      "validation": {
+        "decodedFrames": 108,
+        "distinctSampleFrames": 4,
+        "width": 960,
+        "height": 540,
+        "fps": 18.0,
+        "durationSeconds": 6.0,
+        "codec": "h264"
+      }
+    },
+    {
+      "id": "SYN-PC3-0002-PICKING",
+      "caseId": "CASE-0002",
+      "system": "WMS",
+      "cameraId": "SYN-PC3-CAM-0002-PICKING",
+      "cameraProvenance": "new-fictional-camera-for-procedural-clip",
+      "eventIds": [
+        "W-W1"
+      ],
+      "occurredAt": "2026-09-18T02:15:00+09:00",
+      "stage": "picking",
+      "label": "피킹 공정 코드 애니메이션 후보",
+      "url": "/demo/pc3/case-0002-picking.mp4",
+      "localRelativePath": ".local/pc3-media/case-0002-picking.mp4",
+      "synthetic": true,
+      "generationMethod": "procedural Pillow drawing + FFmpeg H.264; no AI media model",
+      "registrationStatus": "candidate-not-registered",
+      "publicationStatus": "local-only",
+      "startSeconds": 0,
+      "endSeconds": 6,
+      "durationSeconds": 6,
+      "notice": "코드로 그린 합성 공정 설명입니다. 실제 CCTV·연속 위치추적·AI 영상 모델 결과가 아니며 원인·휴먼에러·귀책을 입증하지 않습니다.",
+      "eventRelationStatus": "exact",
+      "relationStatus": "exact",
+      "relations": {
+        "storeId": "SYN-ST02",
+        "orderId": "SYN-ORDER02",
+        "businessDate": "2026-09-18",
+        "toteId": "SYN-TOTE02-A",
+        "toteRelationStatus": "recorded",
+        "pickingToteId": "SYN-TOTE02-A",
+        "shippingToteId": "SYN-TOTE02-B",
+        "asOf": "2026-09-18T07:00:00+09:00"
+      },
+      "sourceRecordKey": "CASE-0002/wms/events/W-W1",
+      "source": {
+        "fixturePath": "data/fixtures/cases.json",
+        "event": {
+          "id": "W-W1",
+          "time": "2026-09-18T02:15:00+09:00",
+          "label": "피킹 스캔 · 비스킷 18 EA",
+          "location": "B-20-2 / SYN-TOTE02-A",
+          "status": "fact",
+          "source": "합성 피킹 이벤트"
+        },
+        "processRecord": {
+          "orderId": "SYN-ORDER02",
+          "product": "비스킷",
+          "quantity": 18,
+          "unit": "EA",
+          "zone": "B",
+          "cell": "B-20-2",
+          "toteId": "SYN-TOTE02-A",
+          "pickedAt": "2026-09-18T02:15:00+09:00",
+          "workType": "FACILITY",
+          "workUnitType": "BOX"
+        }
+      },
+      "bytes": 71660,
+      "sha256": "57e8d39e9c4d0c5de2889f6d87dbb5d9cc4c56d843194b39e1e47f2012c3b9f7",
+      "validation": {
+        "decodedFrames": 108,
+        "distinctSampleFrames": 4,
+        "width": 960,
+        "height": 540,
+        "fps": 18.0,
+        "durationSeconds": 6.0,
+        "codec": "h264"
+      }
+    },
+    {
+      "id": "SYN-PC3-0002-SORTING",
+      "caseId": "CASE-0002",
+      "system": "WMS",
+      "cameraId": "SYN-PC3-CAM-0002-SORTING",
+      "cameraProvenance": "new-fictional-camera-for-procedural-clip",
+      "eventIds": [
+        "W-W3"
+      ],
+      "occurredAt": "2026-09-18T02:33:00+09:00",
+      "stage": "sorting",
+      "label": "분기 공정 코드 애니메이션 후보",
+      "url": "/demo/pc3/case-0002-sorting.mp4",
+      "localRelativePath": ".local/pc3-media/case-0002-sorting.mp4",
+      "synthetic": true,
+      "generationMethod": "procedural Pillow drawing + FFmpeg H.264; no AI media model",
+      "registrationStatus": "candidate-not-registered",
+      "publicationStatus": "local-only",
+      "startSeconds": 0,
+      "endSeconds": 6,
+      "durationSeconds": 6,
+      "notice": "코드로 그린 합성 공정 설명입니다. 실제 CCTV·연속 위치추적·AI 영상 모델 결과가 아니며 원인·휴먼에러·귀책을 입증하지 않습니다.",
+      "eventRelationStatus": "exact",
+      "relationStatus": "needs_review",
+      "relations": {
+        "storeId": "SYN-ST02",
+        "orderId": "SYN-ORDER02",
+        "businessDate": "2026-09-18",
+        "toteId": null,
+        "toteRelationStatus": "unknown",
+        "pickingToteId": "SYN-TOTE02-A",
+        "shippingToteId": "SYN-TOTE02-B",
+        "asOf": "2026-09-18T07:00:00+09:00"
+      },
+      "sourceRecordKey": "CASE-0002/wms/events/W-W3",
+      "source": {
+        "fixturePath": "data/fixtures/cases.json",
+        "event": {
+          "id": "W-W3",
+          "time": "2026-09-18T02:33:00+09:00",
+          "label": "분기 이동",
+          "location": "분기 02 → D-02",
+          "status": "fact",
+          "source": "합성 공정 시연 이벤트"
+        },
+        "processRecord": {
+          "sortedAt": "2026-09-18T02:33:00+09:00",
+          "schdChuteNo": "CH-02",
+          "rsltChuteNo": "CH-02",
+          "source": "30 필드 정의를 참고한 가상 분류실적"
+        }
+      },
+      "bytes": 80507,
+      "sha256": "0482a749d028f2f1a9d6b76cda2a7ad252914fcc3051e6b005239ca23eb11414",
+      "validation": {
+        "decodedFrames": 108,
+        "distinctSampleFrames": 4,
+        "width": 960,
+        "height": 540,
+        "fps": 18.0,
+        "durationSeconds": 6.0,
+        "codec": "h264"
+      }
+    },
+    {
+      "id": "SYN-PC3-0002-SHIPPING",
+      "caseId": "CASE-0002",
+      "system": "WMS",
+      "cameraId": "SYN-PC3-CAM-0002-SHIPPING",
+      "cameraProvenance": "new-fictional-camera-for-procedural-clip",
+      "eventIds": [
+        "W-W4"
+      ],
+      "occurredAt": "2026-09-18T03:02:00+09:00",
+      "stage": "shipping",
+      "label": "출고 공정 코드 애니메이션 후보",
+      "url": "/demo/pc3/case-0002-shipping.mp4",
+      "localRelativePath": ".local/pc3-media/case-0002-shipping.mp4",
+      "synthetic": true,
+      "generationMethod": "procedural Pillow drawing + FFmpeg H.264; no AI media model",
+      "registrationStatus": "candidate-not-registered",
+      "publicationStatus": "local-only",
+      "startSeconds": 0,
+      "endSeconds": 6,
+      "durationSeconds": 6,
+      "notice": "코드로 그린 합성 공정 설명입니다. 실제 CCTV·연속 위치추적·AI 영상 모델 결과가 아니며 원인·휴먼에러·귀책을 입증하지 않습니다.",
+      "eventRelationStatus": "exact",
+      "relationStatus": "exact",
+      "relations": {
+        "storeId": "SYN-ST02",
+        "orderId": "SYN-ORDER02",
+        "businessDate": "2026-09-18",
+        "toteId": "SYN-TOTE02-B",
+        "toteRelationStatus": "recorded",
+        "pickingToteId": "SYN-TOTE02-A",
+        "shippingToteId": "SYN-TOTE02-B",
+        "asOf": "2026-09-18T07:00:00+09:00"
+      },
+      "sourceRecordKey": "CASE-0002/wms/events/W-W4",
+      "source": {
+        "fixturePath": "data/fixtures/cases.json",
+        "event": {
+          "id": "W-W4",
+          "time": "2026-09-18T03:02:00+09:00",
+          "label": "출고 스캔 · 휴지 1 BOX",
+          "location": "D-02 / SYN-TOTE02-B",
+          "status": "fact",
+          "source": "합성 출고 이벤트"
+        },
+        "processRecord": {
+          "id": "SYN-OUT02",
+          "product": "휴지",
+          "quantity": 1,
+          "unit": "BOX",
+          "toteId": "SYN-TOTE02-B",
+          "time": "2026-09-18T03:02:00+09:00",
+          "dock": "D-02",
+          "vehicle": "시연 차량 02"
+        }
+      },
+      "bytes": 71341,
+      "sha256": "ebbcca8b7eaba36efc89a79c170332c47123a490db8cb616879d97ed627eeb3c",
+      "validation": {
+        "decodedFrames": 108,
+        "distinctSampleFrames": 4,
+        "width": 960,
+        "height": 540,
+        "fps": 18.0,
+        "durationSeconds": 6.0,
+        "codec": "h264"
+      }
+    }
+  ],
+  "unregistered": [],
+  "existingRegistrationUnchanged": [
+    {
+      "caseId": "CASE-0001",
+      "media": []
+    },
+    {
+      "caseId": "CASE-0002",
+      "media": [
+        {
+          "id": "SYN-CCTV-CASE2-SORTER",
+          "caseId": "CASE-0002",
+          "system": "WMS",
+          "cameraId": "SYN-CAM-02",
+          "eventIds": [
+            "W-W3"
+          ],
+          "url": "/demo/sorter-demo.mp4",
+          "synthetic": true,
+          "startSeconds": 0,
+          "endSeconds": 12,
+          "occurredAt": "2026-09-18T02:33:00+09:00",
+          "label": "분기02 → D-02 공정 합성 영상",
+          "notice": "AI로 만든 공정 설명 영상. 실제 작업·휴먼에러·귀책 증거가 아님."
+        }
+      ]
+    }
+  ]
+}

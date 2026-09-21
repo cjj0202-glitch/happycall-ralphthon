@@ -1,0 +1,6 @@
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+html, body { margin: 0; min-width: 0; }
+body { font-family: Arial, "Malgun Gothic", sans-serif; background: var(--surface-sunken); color: var(--text-primary); }
+button, input, select, textarea { font: inherit; }
+#root { min-width: 0; padding: 12px; }

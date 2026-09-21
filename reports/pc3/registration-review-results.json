@@ -1,0 +1,104 @@
+{
+  "scope": "Same physical pc3; in-memory contract and static React rendering review. No browser/media playback or main acceptance claim.",
+  "passed": 24,
+  "total": 24,
+  "failed": 0,
+  "results": [
+    {
+      "name": "existing CASE2 W-W3 registration remains playable",
+      "passed": true
+    },
+    {
+      "name": "CASE1 remains without registered video",
+      "passed": true
+    },
+    {
+      "name": "previous-business-day process rows block same-day video",
+      "passed": true
+    },
+    {
+      "name": "foreign event caseId rejected",
+      "passed": true
+    },
+    {
+      "name": "foreign event system rejected",
+      "passed": true
+    },
+    {
+      "name": "foreign media relations.businessDate rejected",
+      "passed": true
+    },
+    {
+      "name": "foreign media relations.asOf rejected",
+      "passed": true
+    },
+    {
+      "name": "CASE1 evidence E-M3 cannot be linked from CASE2",
+      "passed": true
+    },
+    {
+      "name": "missing sorter-input event preserves subsequent stage labels",
+      "passed": true
+    },
+    {
+      "name": "selected branch after preceding events omitted has branch next action",
+      "passed": true
+    },
+    {
+      "name": "SYN-PC3-0001-PICKING: unregistered candidate stays blocked",
+      "passed": true
+    },
+    {
+      "name": "SYN-PC3-0001-PICKING: explicit fixture + nested manifest registration accepted",
+      "passed": true
+    },
+    {
+      "name": "SYN-PC3-0001-SORTING: unregistered candidate stays blocked",
+      "passed": true
+    },
+    {
+      "name": "SYN-PC3-0001-SORTING: explicit fixture + nested manifest registration accepted",
+      "passed": true
+    },
+    {
+      "name": "SYN-PC3-0001-SHIPPING: unregistered candidate stays blocked",
+      "passed": true
+    },
+    {
+      "name": "SYN-PC3-0001-SHIPPING: explicit fixture + nested manifest registration accepted",
+      "passed": true
+    },
+    {
+      "name": "SYN-PC3-0002-PICKING: unregistered candidate stays blocked",
+      "passed": true
+    },
+    {
+      "name": "SYN-PC3-0002-PICKING: explicit fixture + nested manifest registration accepted",
+      "passed": true
+    },
+    {
+      "name": "SYN-PC3-0002-SORTING: unregistered candidate stays blocked",
+      "passed": true
+    },
+    {
+      "name": "SYN-PC3-0002-SORTING: explicit fixture + nested manifest registration accepted",
+      "passed": true
+    },
+    {
+      "name": "SYN-PC3-0002-SHIPPING: unregistered candidate stays blocked",
+      "passed": true
+    },
+    {
+      "name": "SYN-PC3-0002-SHIPPING: explicit fixture + nested manifest registration accepted",
+      "passed": true
+    },
+    {
+      "name": "old plus new W-W3 active registrations remain blocked as ambiguous",
+      "passed": true
+    },
+    {
+      "name": "fixture and manifest files remain byte-for-byte unchanged",
+      "passed": true
+    }
+  ]
+}
