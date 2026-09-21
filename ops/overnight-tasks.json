@@ -288,14 +288,11 @@
       "id": "N03",
       "pc": "pc3",
       "latestAssignment": {
-        "id": "N03-M5",
-        "card": "reports/channel/N03-M5-full-output-intake.md",
-        "state": "RESULT_RECEIVED_MAIN_REVIEW",
-        "accepted": false,
-        "baseCommit": "f745920e52c0e0910294a9b836f7def1d423b210",
-        "resultCommit": "de2c790a5e739a4aa9cdb2fc481fb10db3e43e29",
-        "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5762219833",
-        "ackUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5762000867"
+        "id": "N03-M6",
+        "state": "PREPARED_NOT_SENT",
+        "card": "reports/channel/N03-M6-full-media-packaging.md",
+        "baseCommit": "de2c790a5e739a4aa9cdb2fc481fb10db3e43e29",
+        "accepted": false
       },
       "outcome": "WMS 공정·합성 CCTV",
       "state": "FIX_RESULT_RECEIVED_REVIEW",
@@ -419,7 +416,26 @@
         "mainEvidence": "reports/pc3-full-render-main-start.md",
         "renderPid": 13052,
         "renderDirectory": ".local/pc3-render-intake/full1080-a39cd66-01",
-        "startedAtKST": "2026-09-21T23:11:14+09:00"
+        "startedAtKST": "2026-09-21T23:11:14+09:00",
+        "expectedManifest": {
+          "path": ".local/pc3-render-intake/full1080-a39cd66-01/pc1-full-expectations.json",
+          "bytes": 28743,
+          "sha256": "1917e27f15157f14f95ad849386bdc93663b11bb62a5970810274efd9118c24b",
+          "inputFilesVerified": 12,
+          "outputReportUsed": false
+        }
+      },
+      "fullOutputChecker": {
+        "state": "SOURCE_AND_SYNTHETIC_TESTS_ACCEPTED_REAL_OUTPUT_PENDING",
+        "remoteCommit": "de2c790a5e739a4aa9cdb2fc481fb10db3e43e29",
+        "mainTests": "17 pass/1 skip M5;34 pass/2 skip legacy; UTF8 junction1/1",
+        "sourceBytes": "30/30 exact Git blobs including required baseline and synthetic test inputs",
+        "evidence": [
+          "reports/pc3-m5-main-intake.md",
+          "reports/pc3-m5-main-code-review.md"
+        ],
+        "accepted": true,
+        "acceptanceScope": "Checker source and artificial fixtures only, not completed actual video"
       }
     },
     {

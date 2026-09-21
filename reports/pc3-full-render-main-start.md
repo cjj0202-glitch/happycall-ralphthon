@@ -19,3 +19,10 @@
 ## 다음 인수 조건
 
 완주 후 실제288개 파일·픽셀 디코딩·해시·최종 scene readback·좌표/시간 범위를 검사하고 MP4로 인코딩합니다. 최종 MP4와 동일 구간의 tracks만 제품에 연결합니다. 기존3초 MP4에12초 좌표를 붙이지 않습니다. 새 전체 묶음은 기존720p/72프레임 수신 검사의 인수 완료를 계승하지 않습니다. 실제 현장 사건·작업자 과실 판정의 증거로 사용하지 않습니다.
+# 완주 전 독립 기대값 고정 — 23:50 KST
+
+기존 실행의 receipt SHA `9b8d841323db90df5ead12be88289a53950fb4ffeabc4dabc825714914b7a012`를 고정해 다시 읽고, 참조12파일을 각각 실제 바이트/크기/SHA로 대조했습니다. 생성기+의존6파일은 a39cd664 Git blob과 원바이트6/6 일치했습니다. 이 입력에서 look/environment 설정을 불러오고 기존 읽기 전용 gate로 검수 receipt를 다시 검증했습니다. 생성 중 animation 출력 report는 읽지 않았습니다.
+
+최종 기대 파일은 `.local/pc3-render-intake/full1080-a39cd66-01/pc1-full-expectations.json`, 28,743bytes, SHA256 `1917e27f15157f14f95ad849386bdc93663b11bb62a5970810274efd9118c24b`입니다. M5 expectation 스키마 검사를 통과했습니다. 최초 호출은 메인 호출 인자의 mode 누락으로 실패했고, CLI와 같은 mode/shadow_rays/environment_detail 인자를 명시한 뒤 재검증했습니다. 파일은 그 성공 뒤 한 번만 배타 생성했습니다.
+
+완주 후 명령은 `python -B scripts/media_pc3/verify_full_animation.py --package .local/pc3-render-intake/full1080-a39cd66-01/animation --expectations .local/pc3-render-intake/full1080-a39cd66-01/pc1-full-expectations.json`입니다. 지금 실행하거나 아직 없는288장으로 실패 판정을 만들지 않습니다. 구조 통과 이후에도 pixel decode/최종scene 확인/MP4/시각검수/제품등록은 별도입니다.
