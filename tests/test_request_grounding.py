@@ -121,6 +121,99 @@ class RequestGroundingTests(unittest.TestCase):
                               {'speaker': speaker, 'text': '그 요청은 취소합니다.'}]
                 self.assertEqual(current_request_quote(quote, transcript), expected)
 
+    def test_named_cancellation_scope_keeps_distinct_requests(self):
+        # Expectations fixed before changing cancellation matching. Shared
+        # business words alone must not erase a separately stated inquiry.
+        pairs = (
+            ('배송 시각을 알려 주세요.', '배송 상품 반송 요청은 취소합니다.'),
+            ('출고 시각을 알려 주세요.', '출고 상품 교환 요청은 취소합니다.'),
+            ('상품 라벨을 확인해 주세요.', '상품 반송 요청은 취소합니다.'),
+            ('주문 내역을 확인해 주세요.', '주문 상품 재배송 요청은 취소합니다.'),
+        )
+        for quote, tail in pairs:
+            with self.subTest(quote=quote, tail=tail):
+                self.assertEqual(self.project(quote + ' ' + tail, quote)['fields']['request'], quote)
+
+    def test_named_cancellation_keeps_full_partial_and_related_target_controls(self):
+        # A shorter name and a synonymous description must still withdraw an
+        # actual request; requiring all words to match would reactivate these.
+        pairs = (
+            ('배송 시각을 알려 주세요.', '배송 시각 안내 요청은 취소합니다.'),
+            ('배송 도착 예정 시각을 알려 주세요.', '시각 안내 요청은 철회합니다.'),
+            ('배송 시각을 알려 주세요.', '배송 요청은 취소합니다.'),
+            ('출고 상품 라벨을 확인해 주세요.', '라벨 확인 요청은 철회합니다.'),
+            ('주문 상품 반송 방법을 안내해 주세요.', '주문 상품 반송 절차 문의는 취소합니다.'),
+            ('배송 상품을 반송해 주세요.', '배송 상품 반송 요청은 취소합니다.'),
+            ('배송 상품 반송 시각을 알려 주세요.', '배송 상품 반송 요청은 취소합니다.'),
+            ('주문 내역과 라벨을 확인해 주세요.', '주문 내역 확인 요청은 취소합니다.'),
+            ('배송 차량의 도착 시각을 알려 주세요.', '배송 차량 도착 시간 문의는 취소합니다.'),
+            ('상품 반송 절차를 안내해 주세요.', '상품 반송 방법 문의는 취소합니다.'),
+            ('상품 라벨을 다시 보내 주세요.', '상품 재배송 요청은 취소합니다.'),
+            ('배송 시각을 알려 주세요. 배송 상품 반송해 주세요.', '배송 상품 반송 요청은 취소합니다.'),
+            ('배송 시각을 알려 주세요.', '배송 상품 반송이 아니라 배송 요청은 취소합니다.'),
+            ('배송 시각을 알려 주세요.', '배송 상품 반송 없이 배송 요청은 취소합니다.'),
+        )
+        for quote, tail in pairs:
+            with self.subTest(quote=quote, tail=tail):
+                self.assertIsNone(self.project(quote + ' ' + tail, quote)['fields']['request'])
+
+    def test_shared_business_word_does_not_move_pronoun_to_earlier_request(self):
+        first = '배송 시각을 알려 주세요.'
+        second = '배송 상품 반송 방법을 안내해 주세요.'
+        text = first + ' ' + second + ' 그 요청은 취소합니다.'
+        self.assertEqual(self.project(text, first)['fields']['request'], first)
+        self.assertIsNone(self.project(text, second)['fields']['request'])
+        repeated = first + ' 배송 시각을 다시 알려 주세요. 그 요청은 취소합니다.'
+        self.assertIsNone(self.project(repeated, first)['fields']['request'])
+        reverse = second + ' ' + first + ' 그 요청은 취소합니다.'
+        self.assertEqual(self.project(reverse, second)['fields']['request'], second)
+        self.assertIsNone(self.project(reverse, first)['fields']['request'])
+
+    def test_verbal_operation_modifiers_do_not_escape_named_cancellation(self):
+        # A time/schedule noun does not make an action's dependent inquiry a
+        # separate request. Fix these expectations before narrowing the guard.
+        pairs = (
+            ('배송 상품을 돌려보낼 시간을 알려 주세요.', '배송 상품 반송 요청은 취소합니다.'),
+            ('배송 상품을 돌려 보낼 시간을 알려 주세요.', '배송 상품 반송 요청은 취소합니다.'),
+            ('배송 상품을 다시 보낼 시간을 알려 주세요.', '배송 상품 재배송 요청은 취소합니다.'),
+            ('배송 상품을 다시 보내 주실 시간을 알려 주세요.', '배송 상품 재배송 요청은 취소합니다.'),
+            ('배송 상품을 바꿀 일정을 알려 주세요.', '배송 상품 교환 요청은 취소합니다.'),
+            ('배송 상품을 바꿔 받을 일정을 알려 주세요.', '배송 상품 교환 요청은 취소합니다.'),
+            ('배송 상품을 돌려보내는 시간을 알려 주세요.', '배송 상품 반송 요청은 취소합니다.'),
+            ('배송 상품을 다시 보내려고 하는 시간을 알려 주세요.', '배송 상품 재배송 요청은 취소합니다.'),
+            ('배송 상품을 돌려보내 주시고 처리 시간을 알려 주세요.', '배송 상품 반송 요청은 취소합니다.'),
+            ('배송 상품을 다시 보내 주시고 배송 시간을 알려 주세요.', '배송 상품 재배송 요청은 취소합니다.'),
+        )
+        for quote, tail in pairs:
+            with self.subTest(quote=quote, tail=tail):
+                self.assertIsNone(self.project(quote + ' ' + tail, quote)['fields']['request'])
+
+    def test_named_cancellation_scope_stops_at_adjacent_speaker_boundary(self):
+        from server.request_grounding import current_request_quote
+        quote = '배송 시각을 알려 주세요.'
+        for speaker, expected in (('경영주', None), ('상담원', quote)):
+            with self.subTest(speaker=speaker):
+                transcript = [{'speaker': '경영주', 'text': quote},
+                              {'speaker': speaker, 'text': '배송 시각 안내 요청은 취소합니다.'}]
+                self.assertEqual(current_request_quote(quote, transcript), expected)
+        for speaker in ('경영주', '상담원'):
+            with self.subTest(distinct_speaker=speaker):
+                transcript = [{'speaker': '경영주', 'text': quote},
+                              {'speaker': speaker, 'text': '배송 상품 반송 요청은 취소합니다.'}]
+                self.assertEqual(current_request_quote(quote, transcript), quote)
+
+    def test_cancellation_scope_mutations_are_detected(self):
+        checks = (
+            (False, 'test_named_cancellation_scope_keeps_distinct_requests'),
+            (False, 'test_shared_business_word_does_not_move_pronoun_to_earlier_request'),
+            (True, 'test_named_cancellation_keeps_full_partial_and_related_target_controls'),
+        )
+        for forced_separation, test_name in checks:
+            with self.subTest(forced_separation=forced_separation, test=test_name):
+                fresh = RequestGroundingTests(test_name)
+                with patch('server.request_grounding._separate_inquiry', return_value=forced_separation), self.assertRaises(AssertionError):
+                    getattr(fresh, test_name)()
+
     def test_missing_receipt_unit_stays_question_not_customer_request(self):
         receipt = '반짝봉투 5개를 받았습니다.'
         quote = '주문과 라벨을 확인해 주세요.'

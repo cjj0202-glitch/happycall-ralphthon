@@ -46,19 +46,51 @@ def _target_terms(text):
     return terms
 
 
+def _separate_inquiry(inquiry, other):
+    """Recognize only a narrow information/physical-operation distinction.
+
+    Only allow the simple noun phrases below, not an arbitrary modifier before
+    an information noun: "돌려보낼 시간" still depends on the cancelled action.
+    Everything else keeps the conservative overlap rule. This is not a general
+    intent classifier or a list of all possible operation synonyms.
+    """
+    information = {'시각', '시간', '일정', '라벨', '내역'}
+    operation = r'(?:반송|반품|회송|교환|재배송)'
+    named_operation = (
+        operation + r'(?:\s*(?:방법|절차)(?:을|를)?)?\s*'
+        r'(?:(?:요청|부탁|문의)(?:[은는을를])?|(?:안내해|확인해|해)?\s*'
+        r'(?:주세요|주십시오))[.!?]?\s*$'
+    )
+    simple_inquiry = (
+        r'(?:(?:배송|출고)\s+(?:시각|시간|일정)|상품\s+라벨|주문\s+내역)'
+        r'(?:을|를)?\s*(?:알려|안내해|확인해)\s*(?:주세요|주십시오)[.!?]?'
+    )
+    return (
+        bool(re.fullmatch(simple_inquiry, inquiry.strip()))
+        and bool(re.search(named_operation, other))
+        and not information.intersection(_target_terms(other))
+        and not re.search(r'아니|말고|제외|빼고|않|못|대신', other)
+    )
+
+
+def _same_target(reference, other):
+    if not _target_terms(reference).intersection(_target_terms(other)):
+        return False
+    return not (_separate_inquiry(reference, other) or _separate_inquiry(other, reference))
+
+
 def _withdrawn(reference, following):
-    target = _target_terms(reference)
     nearest = True
     for sentence in re.split(r'[.!?\n]+', following):
         cancellation = CANCELLATION.search(sentence)
         if cancellation:
             named = sentence[:cancellation.start()]
             pronoun = re.match(r'\s*(?:그|이|해당|방금)\s*요청', named)
-            if (pronoun and nearest) or target.intersection(_target_terms(named)):
+            if (pronoun and nearest) or _same_target(reference, named):
                 return True
         elif _meaningful_request(sentence) and not NON_CURRENT.search(sentence):
             # A pronoun after another distinct request belongs to that request.
-            nearest = bool(target.intersection(_target_terms(sentence)))
+            nearest = _same_target(reference, sentence)
     return False
 
 
@@ -93,7 +125,7 @@ def current_request_quote(quote, transcript):
                 if not segment.get('speaker') or later.get('speaker') != segment['speaker']:
                     break
                 following += '\n' + later.get('text', '')
-            if _withdrawn(quote[:request.end()], following):
+            if _withdrawn(quote, following):
                 return None
             start = text.find(quote, end)
     if not contexts or any(NON_CURRENT.search(context) for context in contexts):
