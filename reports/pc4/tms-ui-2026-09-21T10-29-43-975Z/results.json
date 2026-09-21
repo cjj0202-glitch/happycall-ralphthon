@@ -1,0 +1,223 @@
+{
+  "started": "2026-09-21T10:29:43.977Z",
+  "host": "pc4/장준호",
+  "base": "http://127.0.0.1:13104",
+  "head": "a952edee271574401332148f42969621a81a74d7",
+  "scope": "Assigned TmsScene in test-only host; callbacks simulated. Not pc1 integration or six full product flows.",
+  "sourceHashesStart": {
+    "apps/web/components/TmsScene.tsx": "981ac1f385dea80f8a8d3d9af2c89f1e0542499ff71fd65c45d9cab52f84285e",
+    "apps/web/components/TmsScene.module.css": "de5d4ab5f73fac9484aad94fc3db869902dccd7bcffbd4cb045e65398f9f9446",
+    "data/overlays/pc4-tms.json": "a7cada3fa82c321d0bb2d8692d2cbdde251601489f4dbb44cd777e0b289df28a",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "tests/remote/pc4/ui-check.mjs": "2e1ce53548c9c0cfe81cc5c17832febcabd35c67a0c83f20acaef82ba2b5c5b9"
+  },
+  "checks": [
+    {
+      "name": "CASE-0001-1440-semantic-responsive",
+      "status": "PASS",
+      "measured": {
+        "actual": "미등록",
+        "document": {
+          "doc": 1440,
+          "viewport": 1440
+        },
+        "table": {
+          "client": 1356,
+          "scroll": 1356
+        },
+        "screenshot": "CASE-0001-1440.png"
+      }
+    },
+    {
+      "name": "CASE-0002-1440-semantic-responsive",
+      "status": "PASS",
+      "measured": {
+        "actual": "05:10 KST",
+        "document": {
+          "doc": 1440,
+          "viewport": 1440
+        },
+        "table": {
+          "client": 1356,
+          "scroll": 1356
+        },
+        "screenshot": "CASE-0002-1440.png"
+      }
+    },
+    {
+      "name": "CASE-0001-1024-semantic-responsive",
+      "status": "PASS",
+      "measured": {
+        "actual": "미등록",
+        "document": {
+          "doc": 1024,
+          "viewport": 1024
+        },
+        "table": {
+          "client": 940,
+          "scroll": 940
+        },
+        "screenshot": "CASE-0001-1024.png"
+      }
+    },
+    {
+      "name": "CASE-0002-1024-semantic-responsive",
+      "status": "PASS",
+      "measured": {
+        "actual": "05:10 KST",
+        "document": {
+          "doc": 1024,
+          "viewport": 1024
+        },
+        "table": {
+          "client": 940,
+          "scroll": 940
+        },
+        "screenshot": "CASE-0002-1024.png"
+      }
+    },
+    {
+      "name": "CASE-0001-390-semantic-responsive",
+      "status": "PASS",
+      "measured": {
+        "actual": "미등록",
+        "document": {
+          "doc": 390,
+          "viewport": 390
+        },
+        "table": {
+          "client": 338,
+          "scroll": 658
+        },
+        "screenshot": "CASE-0001-390.png"
+      }
+    },
+    {
+      "name": "CASE-0002-390-semantic-responsive",
+      "status": "PASS",
+      "measured": {
+        "actual": "05:10 KST",
+        "document": {
+          "doc": 390,
+          "viewport": 390
+        },
+        "table": {
+          "client": 338,
+          "scroll": 658
+        },
+        "screenshot": "CASE-0002-390.png"
+      }
+    },
+    {
+      "name": "keyboard-previous-next-back",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "animation-holds-moves-and-pauses",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "reduced-motion",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "save-failure-retry-no-false-success",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "pending-double-click-and-case-change",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "regression-authoritative-server-unlink",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "regression-explicit-linked-text-intake",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "reject-future",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "reject-cross-day",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "reject-cross-store",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "reject-cross-case",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "reject-invalid-calendar",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "reject-no-timezone",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "reject-invalid-asof",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "reject-local-plan",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "null-is-not-zero-or-midnight",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "foreign-evidence-never-links",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "empty-is-unregistered",
+      "status": "PASS",
+      "measured": null
+    },
+    {
+      "name": "no-script-errors-or-external-calls",
+      "status": "PASS",
+      "measured": null
+    }
+  ],
+  "pageErrors": [],
+  "blockedExternal": [],
+  "finished": "2026-09-21T10:30:18.905Z",
+  "sourceHashesEnd": {
+    "apps/web/components/TmsScene.tsx": "981ac1f385dea80f8a8d3d9af2c89f1e0542499ff71fd65c45d9cab52f84285e",
+    "apps/web/components/TmsScene.module.css": "de5d4ab5f73fac9484aad94fc3db869902dccd7bcffbd4cb045e65398f9f9446",
+    "data/overlays/pc4-tms.json": "a7cada3fa82c321d0bb2d8692d2cbdde251601489f4dbb44cd777e0b289df28a",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "tests/remote/pc4/ui-check.mjs": "2e1ce53548c9c0cfe81cc5c17832febcabd35c67a0c83f20acaef82ba2b5c5b9"
+  },
+  "sourceStable": true,
+  "summary": {
+    "executed": 25,
+    "passed": 25,
+    "failed": 0
+  }
+}

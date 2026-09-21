@@ -1,0 +1,1494 @@
+{
+  "kind": "independent loopback HTTP/OpenAPI scenarios; not UI or live AI",
+  "startedAt": "2026-09-21T10:22:27.594935+00:00",
+  "host": "장준호",
+  "slot": "pc4",
+  "mode": "replay",
+  "apiPort": 18104,
+  "checks": [
+    {
+      "id": "same-store-other-date-no-auto-link",
+      "status": "PASS",
+      "evidence": {
+        "caseId": "INT-31458092",
+        "referenceCaseId": null,
+        "evidenceCount": 0
+      }
+    },
+    {
+      "id": "missing-revision-428",
+      "status": "PASS",
+      "evidence": {
+        "expected": 428,
+        "actual": 428,
+        "code": "REVISION_REQUIRED",
+        "storedStateUnchanged": true
+      }
+    },
+    {
+      "id": "stale-revision-409-preserves-winner",
+      "status": "PASS",
+      "evidence": {
+        "expected": 409,
+        "actual": 409,
+        "code": "STATE_CONFLICT",
+        "storedStateUnchanged": true
+      }
+    },
+    {
+      "id": "foreign-store-explicit-reference-422",
+      "status": "PASS",
+      "evidence": {
+        "status": 422,
+        "code": "INVALID_REFERENCE_CASE",
+        "stateUnchanged": true
+      }
+    },
+    {
+      "id": "foreign-case-evidence-422",
+      "status": "PASS",
+      "evidence": {
+        "expected": 422,
+        "actual": 422,
+        "code": "INVALID_EVIDENCE",
+        "storedStateUnchanged": true
+      }
+    },
+    {
+      "id": "linked-store-change-422",
+      "status": "PASS",
+      "evidence": {
+        "expected": 422,
+        "actual": 422,
+        "code": "SOURCE_CONTEXT_MISMATCH",
+        "storedStateUnchanged": true
+      }
+    },
+    {
+      "id": "owner-write-403",
+      "status": "PASS",
+      "evidence": {
+        "expected": 403,
+        "actual": 403,
+        "code": "READ_ONLY_ROLE",
+        "storedStateUnchanged": true
+      }
+    },
+    {
+      "id": "counselor-center-reply-403",
+      "status": "PASS",
+      "evidence": {
+        "expected": 403,
+        "actual": 403,
+        "code": "CENTER_ROLE_REQUIRED",
+        "storedStateUnchanged": true
+      }
+    },
+    {
+      "id": "reply-required-before-close",
+      "status": "PASS",
+      "evidence": {
+        "expected": 422,
+        "actual": 422,
+        "code": "REPLY_REQUIRED",
+        "storedStateUnchanged": true
+      }
+    },
+    {
+      "id": "stale-center-form-cannot-discard-new-actions",
+      "status": "PASS",
+      "evidence": {
+        "expected": 409,
+        "actual": 409,
+        "code": "STATE_CONFLICT",
+        "storedStateUnchanged": true
+      }
+    },
+    {
+      "id": "api-503-and-explicit-retry",
+      "status": "PASS",
+      "evidence": {
+        "injectedHTTP": 503,
+        "retryHTTP": 200,
+        "savedRevision": 2,
+        "uiFalseSuccessCheck": "NOT_RUN_HTTP_ONLY"
+      }
+    },
+    {
+      "id": "owned-http-server-disconnect-and-recovery",
+      "status": "PASS",
+      "evidence": {
+        "connectionRefused": true,
+        "restoredHTTP": 200,
+        "statePreserved": true,
+        "scope": "owned test server restart; not browser offline UI"
+      }
+    }
+  ],
+  "httpScenarios": [
+    {
+      "id": "CALL-1",
+      "startedAt": "2026-09-21T10:22:31.186312+00:00",
+      "isolatedStore": "CALL-1",
+      "head": "a952edee271574401332148f42969621a81a74d7",
+      "evidence": {
+        "caseId": "CASE-0001",
+        "flow": "CALL",
+        "repetition": 1,
+        "steps": [
+          {
+            "step": "saved-analysis-replay",
+            "status": "PASS",
+            "actualAI": false,
+            "audioPlayback": "NOT_RUN_HTTP_ONLY"
+          },
+          {
+            "step": "same-case-evidence-and-review",
+            "status": "PASS",
+            "selectedEvidence": [
+              "E-M1",
+              "E-M2",
+              "E-M3"
+            ]
+          },
+          {
+            "step": "confirmed-handoff",
+            "status": "PASS",
+            "unconfirmedControl": {
+              "expected": 422,
+              "actual": 422,
+              "code": "REVIEW_REQUIRED",
+              "storedStateUnchanged": true
+            }
+          },
+          {
+            "step": "intermediate-reply-and-pending-close-block",
+            "status": "PASS",
+            "negativeControl": {
+              "expected": 422,
+              "actual": 422,
+              "code": "ACTIONS_PENDING",
+              "storedStateUnchanged": true
+            }
+          },
+          {
+            "step": "center-final-and-owner-http-read",
+            "status": "PASS",
+            "revision": 5
+          }
+        ],
+        "finalStatus": "closed",
+        "uiCompletion": "NOT_RUN",
+        "sourcePreserved": true
+      },
+      "status": "PASS",
+      "finishedAt": "2026-09-21T10:22:31.421076+00:00",
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/api/cases",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 0
+        },
+        {
+          "method": "POST",
+          "path": "/api/cases/CASE-0001/analyze",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 1
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 1
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 1,
+          "savedRevision": 2
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 2
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 422,
+          "errorCode": "REVIEW_REQUIRED",
+          "sentRevision": 2,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 2
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 2,
+          "savedRevision": 3
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "center",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 3,
+          "savedRevision": 4
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 4
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "center",
+          "status": 422,
+          "errorCode": "ACTIONS_PENDING",
+          "sentRevision": 4,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 4
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "center",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 4,
+          "savedRevision": 5
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "owner",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 5
+        }
+      ]
+    },
+    {
+      "id": "CALL-2",
+      "startedAt": "2026-09-21T10:22:31.421076+00:00",
+      "isolatedStore": "CALL-2",
+      "head": "a952edee271574401332148f42969621a81a74d7",
+      "evidence": {
+        "caseId": "CASE-0001",
+        "flow": "CALL",
+        "repetition": 2,
+        "steps": [
+          {
+            "step": "saved-analysis-replay",
+            "status": "PASS",
+            "actualAI": false,
+            "audioPlayback": "NOT_RUN_HTTP_ONLY"
+          },
+          {
+            "step": "same-case-evidence-and-review",
+            "status": "PASS",
+            "selectedEvidence": [
+              "E-M1",
+              "E-M2",
+              "E-M3"
+            ]
+          },
+          {
+            "step": "confirmed-handoff",
+            "status": "PASS",
+            "unconfirmedControl": {
+              "expected": 422,
+              "actual": 422,
+              "code": "REVIEW_REQUIRED",
+              "storedStateUnchanged": true
+            }
+          },
+          {
+            "step": "intermediate-reply-and-pending-close-block",
+            "status": "PASS",
+            "negativeControl": {
+              "expected": 422,
+              "actual": 422,
+              "code": "ACTIONS_PENDING",
+              "storedStateUnchanged": true
+            }
+          },
+          {
+            "step": "center-final-and-owner-http-read",
+            "status": "PASS",
+            "revision": 5
+          }
+        ],
+        "finalStatus": "closed",
+        "uiCompletion": "NOT_RUN",
+        "sourcePreserved": true
+      },
+      "status": "PASS",
+      "finishedAt": "2026-09-21T10:22:31.661244+00:00",
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/api/cases",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 0
+        },
+        {
+          "method": "POST",
+          "path": "/api/cases/CASE-0001/analyze",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 1
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 1
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 1,
+          "savedRevision": 2
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 2
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 422,
+          "errorCode": "REVIEW_REQUIRED",
+          "sentRevision": 2,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 2
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 2,
+          "savedRevision": 3
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "center",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 3,
+          "savedRevision": 4
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 4
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "center",
+          "status": 422,
+          "errorCode": "ACTIONS_PENDING",
+          "sentRevision": 4,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 4
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "center",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 4,
+          "savedRevision": 5
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "owner",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 5
+        }
+      ]
+    },
+    {
+      "id": "CALL-3",
+      "startedAt": "2026-09-21T10:22:31.662308+00:00",
+      "isolatedStore": "CALL-3",
+      "head": "a952edee271574401332148f42969621a81a74d7",
+      "evidence": {
+        "caseId": "CASE-0001",
+        "flow": "CALL",
+        "repetition": 3,
+        "steps": [
+          {
+            "step": "saved-analysis-replay",
+            "status": "PASS",
+            "actualAI": false,
+            "audioPlayback": "NOT_RUN_HTTP_ONLY"
+          },
+          {
+            "step": "same-case-evidence-and-review",
+            "status": "PASS",
+            "selectedEvidence": [
+              "E-M1",
+              "E-M2",
+              "E-M3"
+            ]
+          },
+          {
+            "step": "confirmed-handoff",
+            "status": "PASS",
+            "unconfirmedControl": {
+              "expected": 422,
+              "actual": 422,
+              "code": "REVIEW_REQUIRED",
+              "storedStateUnchanged": true
+            }
+          },
+          {
+            "step": "intermediate-reply-and-pending-close-block",
+            "status": "PASS",
+            "negativeControl": {
+              "expected": 422,
+              "actual": 422,
+              "code": "ACTIONS_PENDING",
+              "storedStateUnchanged": true
+            }
+          },
+          {
+            "step": "center-final-and-owner-http-read",
+            "status": "PASS",
+            "revision": 5
+          }
+        ],
+        "finalStatus": "closed",
+        "uiCompletion": "NOT_RUN",
+        "sourcePreserved": true
+      },
+      "status": "PASS",
+      "finishedAt": "2026-09-21T10:22:31.901232+00:00",
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/api/cases",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 0
+        },
+        {
+          "method": "POST",
+          "path": "/api/cases/CASE-0001/analyze",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 1
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 1
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 1,
+          "savedRevision": 2
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 2
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 422,
+          "errorCode": "REVIEW_REQUIRED",
+          "sentRevision": 2,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 2
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 2,
+          "savedRevision": 3
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "center",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 3,
+          "savedRevision": 4
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 4
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "center",
+          "status": 422,
+          "errorCode": "ACTIONS_PENDING",
+          "sentRevision": 4,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 4
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/CASE-0001",
+          "role": "center",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 4,
+          "savedRevision": 5
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/CASE-0001",
+          "role": "owner",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 5
+        }
+      ]
+    },
+    {
+      "id": "TEXT-1",
+      "startedAt": "2026-09-21T10:22:31.901232+00:00",
+      "isolatedStore": "TEXT-1",
+      "head": "a952edee271574401332148f42969621a81a74d7",
+      "evidence": {
+        "caseId": "INT-85C6180E",
+        "flow": "TEXT",
+        "repetition": 1,
+        "steps": [
+          {
+            "step": "new-text-source-and-explicit-reference",
+            "status": "PASS",
+            "refinement": "NOT_RUN_REPLAY_UNAVAILABLE",
+            "manualReview": "1 BOX; no EA conversion"
+          },
+          {
+            "step": "same-case-evidence-and-review",
+            "status": "PASS",
+            "selectedEvidence": [
+              "E-W1",
+              "E-W2",
+              "E-W3",
+              "E-W4",
+              "E-W5"
+            ]
+          },
+          {
+            "step": "confirmed-handoff",
+            "status": "PASS",
+            "unconfirmedControl": {
+              "expected": 422,
+              "actual": 422,
+              "code": "REVIEW_REQUIRED",
+              "storedStateUnchanged": true
+            }
+          },
+          {
+            "step": "intermediate-reply-and-pending-close-block",
+            "status": "PASS",
+            "negativeControl": {
+              "expected": 422,
+              "actual": 422,
+              "code": "ACTIONS_PENDING",
+              "storedStateUnchanged": true
+            }
+          },
+          {
+            "step": "center-final-and-owner-http-read",
+            "status": "PASS",
+            "revision": 5
+          }
+        ],
+        "finalStatus": "closed",
+        "uiCompletion": "NOT_RUN",
+        "sourcePreserved": true
+      },
+      "status": "PASS",
+      "finishedAt": "2026-09-21T10:22:32.110779+00:00",
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/api/cases",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": null
+        },
+        {
+          "method": "POST",
+          "path": "/api/intake",
+          "role": "owner",
+          "status": 201,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 0
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-85C6180E",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 0
+        },
+        {
+          "method": "POST",
+          "path": "/api/cases/INT-85C6180E/analyze",
+          "role": "counselor",
+          "status": 409,
+          "errorCode": "REPLAY_NOT_AVAILABLE",
+          "sentRevision": null,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-85C6180E",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 0
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-85C6180E",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 0,
+          "savedRevision": 1
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-85C6180E",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 1,
+          "savedRevision": 2
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-85C6180E",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 2
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-85C6180E",
+          "role": "counselor",
+          "status": 422,
+          "errorCode": "REVIEW_REQUIRED",
+          "sentRevision": 2,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-85C6180E",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 2
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-85C6180E",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 2,
+          "savedRevision": 3
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-85C6180E",
+          "role": "center",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 3,
+          "savedRevision": 4
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-85C6180E",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 4
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-85C6180E",
+          "role": "center",
+          "status": 422,
+          "errorCode": "ACTIONS_PENDING",
+          "sentRevision": 4,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-85C6180E",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 4
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-85C6180E",
+          "role": "center",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 4,
+          "savedRevision": 5
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-85C6180E",
+          "role": "owner",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 5
+        }
+      ]
+    },
+    {
+      "id": "TEXT-2",
+      "startedAt": "2026-09-21T10:22:32.111779+00:00",
+      "isolatedStore": "TEXT-2",
+      "head": "a952edee271574401332148f42969621a81a74d7",
+      "evidence": {
+        "caseId": "INT-64AB3E46",
+        "flow": "TEXT",
+        "repetition": 2,
+        "steps": [
+          {
+            "step": "new-text-source-and-explicit-reference",
+            "status": "PASS",
+            "refinement": "NOT_RUN_REPLAY_UNAVAILABLE",
+            "manualReview": "1 BOX; no EA conversion"
+          },
+          {
+            "step": "same-case-evidence-and-review",
+            "status": "PASS",
+            "selectedEvidence": [
+              "E-W1",
+              "E-W2",
+              "E-W3",
+              "E-W4",
+              "E-W5"
+            ]
+          },
+          {
+            "step": "confirmed-handoff",
+            "status": "PASS",
+            "unconfirmedControl": {
+              "expected": 422,
+              "actual": 422,
+              "code": "REVIEW_REQUIRED",
+              "storedStateUnchanged": true
+            }
+          },
+          {
+            "step": "intermediate-reply-and-pending-close-block",
+            "status": "PASS",
+            "negativeControl": {
+              "expected": 422,
+              "actual": 422,
+              "code": "ACTIONS_PENDING",
+              "storedStateUnchanged": true
+            }
+          },
+          {
+            "step": "center-final-and-owner-http-read",
+            "status": "PASS",
+            "revision": 5
+          }
+        ],
+        "finalStatus": "closed",
+        "uiCompletion": "NOT_RUN",
+        "sourcePreserved": true
+      },
+      "status": "PASS",
+      "finishedAt": "2026-09-21T10:22:32.326754+00:00",
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/api/cases",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": null
+        },
+        {
+          "method": "POST",
+          "path": "/api/intake",
+          "role": "owner",
+          "status": 201,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 0
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-64AB3E46",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 0
+        },
+        {
+          "method": "POST",
+          "path": "/api/cases/INT-64AB3E46/analyze",
+          "role": "counselor",
+          "status": 409,
+          "errorCode": "REPLAY_NOT_AVAILABLE",
+          "sentRevision": null,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-64AB3E46",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 0
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-64AB3E46",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 0,
+          "savedRevision": 1
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-64AB3E46",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 1,
+          "savedRevision": 2
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-64AB3E46",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 2
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-64AB3E46",
+          "role": "counselor",
+          "status": 422,
+          "errorCode": "REVIEW_REQUIRED",
+          "sentRevision": 2,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-64AB3E46",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 2
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-64AB3E46",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 2,
+          "savedRevision": 3
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-64AB3E46",
+          "role": "center",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 3,
+          "savedRevision": 4
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-64AB3E46",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 4
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-64AB3E46",
+          "role": "center",
+          "status": 422,
+          "errorCode": "ACTIONS_PENDING",
+          "sentRevision": 4,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-64AB3E46",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 4
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-64AB3E46",
+          "role": "center",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 4,
+          "savedRevision": 5
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-64AB3E46",
+          "role": "owner",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 5
+        }
+      ]
+    },
+    {
+      "id": "TEXT-3",
+      "startedAt": "2026-09-21T10:22:32.326754+00:00",
+      "isolatedStore": "TEXT-3",
+      "head": "a952edee271574401332148f42969621a81a74d7",
+      "evidence": {
+        "caseId": "INT-E504A373",
+        "flow": "TEXT",
+        "repetition": 3,
+        "steps": [
+          {
+            "step": "new-text-source-and-explicit-reference",
+            "status": "PASS",
+            "refinement": "NOT_RUN_REPLAY_UNAVAILABLE",
+            "manualReview": "1 BOX; no EA conversion"
+          },
+          {
+            "step": "same-case-evidence-and-review",
+            "status": "PASS",
+            "selectedEvidence": [
+              "E-W1",
+              "E-W2",
+              "E-W3",
+              "E-W4",
+              "E-W5"
+            ]
+          },
+          {
+            "step": "confirmed-handoff",
+            "status": "PASS",
+            "unconfirmedControl": {
+              "expected": 422,
+              "actual": 422,
+              "code": "REVIEW_REQUIRED",
+              "storedStateUnchanged": true
+            }
+          },
+          {
+            "step": "intermediate-reply-and-pending-close-block",
+            "status": "PASS",
+            "negativeControl": {
+              "expected": 422,
+              "actual": 422,
+              "code": "ACTIONS_PENDING",
+              "storedStateUnchanged": true
+            }
+          },
+          {
+            "step": "center-final-and-owner-http-read",
+            "status": "PASS",
+            "revision": 5
+          }
+        ],
+        "finalStatus": "closed",
+        "uiCompletion": "NOT_RUN",
+        "sourcePreserved": true
+      },
+      "status": "PASS",
+      "finishedAt": "2026-09-21T10:22:32.627559+00:00",
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/api/cases",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": null
+        },
+        {
+          "method": "POST",
+          "path": "/api/intake",
+          "role": "owner",
+          "status": 201,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 0
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-E504A373",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 0
+        },
+        {
+          "method": "POST",
+          "path": "/api/cases/INT-E504A373/analyze",
+          "role": "counselor",
+          "status": 409,
+          "errorCode": "REPLAY_NOT_AVAILABLE",
+          "sentRevision": null,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-E504A373",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 0
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-E504A373",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 0,
+          "savedRevision": 1
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-E504A373",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 1,
+          "savedRevision": 2
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-E504A373",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 2
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-E504A373",
+          "role": "counselor",
+          "status": 422,
+          "errorCode": "REVIEW_REQUIRED",
+          "sentRevision": 2,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-E504A373",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 2
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-E504A373",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 2,
+          "savedRevision": 3
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-E504A373",
+          "role": "center",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 3,
+          "savedRevision": 4
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-E504A373",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 4
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-E504A373",
+          "role": "center",
+          "status": 422,
+          "errorCode": "ACTIONS_PENDING",
+          "sentRevision": 4,
+          "savedRevision": null
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-E504A373",
+          "role": "counselor",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 4
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/cases/INT-E504A373",
+          "role": "center",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": 4,
+          "savedRevision": 5
+        },
+        {
+          "method": "GET",
+          "path": "/api/cases/INT-E504A373",
+          "role": "owner",
+          "status": 200,
+          "errorCode": null,
+          "sentRevision": null,
+          "savedRevision": 5
+        }
+      ]
+    }
+  ],
+  "uiScenarios": [
+    {
+      "id": "CALL-1",
+      "status": "NOT_RUN",
+      "reason": "This script executes HTTP, not browser interactions"
+    },
+    {
+      "id": "CALL-2",
+      "status": "NOT_RUN",
+      "reason": "This script executes HTTP, not browser interactions"
+    },
+    {
+      "id": "CALL-3",
+      "status": "NOT_RUN",
+      "reason": "This script executes HTTP, not browser interactions"
+    },
+    {
+      "id": "TEXT-1",
+      "status": "NOT_RUN",
+      "reason": "This script executes HTTP, not browser interactions"
+    },
+    {
+      "id": "TEXT-2",
+      "status": "NOT_RUN",
+      "reason": "This script executes HTTP, not browser interactions"
+    },
+    {
+      "id": "TEXT-3",
+      "status": "NOT_RUN",
+      "reason": "This script executes HTTP, not browser interactions"
+    }
+  ],
+  "uiBoundaries": [
+    {
+      "id": "api-error-no-false-success",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "media-404-recovery",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "browser-offline-online",
+      "status": "NOT_RUN"
+    }
+  ],
+  "limitations": [
+    "No live STT/LLM or human observation",
+    "New text has no fixture replay; manual review is measured",
+    "Own TMS is not counted as independently accepted",
+    "Not a complete UI release rehearsal"
+  ],
+  "originalStateHashesBefore": {
+    "C:\\Users\\j324r\\OneDrive\\문서\\ChatGPT\\해커톤_D-Day\\happycall-ralphthon\\.local\\cases-store.json": null,
+    "C:\\Users\\j324r\\OneDrive\\문서\\ChatGPT\\해커톤_D-Day\\happycall-ralphthon\\.local\\demo-usage.json": null
+  },
+  "headStart": "a952edee271574401332148f42969621a81a74d7",
+  "branch": "work/pc4-n04-tms-qa",
+  "sourceHashesStart": {
+    "server/__init__.py": "b4c4a62ab2ea460cda3dddadcda2d33254eab2c0c91541ae38b4134014f9bdac",
+    "server/analysis_schema.py": "51463e09613c82957a443341982d261259b906e80df1b0324e6d82c04a263035",
+    "server/app.py": "6523565d8270ba8d6447562b921b0f20cb5f3ffa690e2d58a579b3393d988da9",
+    "server/budget.py": "961409c916801d2d133785119ce58232170686caa3eeb3b75ec4488031dfdaf0",
+    "server/cas_budget.py": "4191432f59b0157867d39303cfd6e9720a43656459785992f9d7e5d944f05036",
+    "server/cas_repository.py": "fdc21f8a0da2917cd9b7c5dd3d609ef873f056843accf0e57f9ef31baadb4f78",
+    "server/cas_store.py": "939c7210ec1d2c1f406f69754b832268d1fb0cb8e3d925b6cf235fbe85a38ee7",
+    "server/deployment_access.py": "299c1432484598c86b9ec19541f8a187404eb6907f2fe140775901910fee1935",
+    "server/deployment_app.py": "0e576b81725f83434d459f201075de4ff03f635f800d59d49ef0c11b08db0382",
+    "server/errors.py": "dae0dac1eeba6c6f3687c8cebcd32db8de17e3bde330c44e9bf170e215cdf01d",
+    "server/handlers.py": "aa279cfd48f546f3d8d12d2c8310ea2f91ba85c32733ac5808fff2779a85d604",
+    "server/live.py": "38c716e63b575b17e64cdaeab52988827a67c68d808a250ff3d34b2e47281f20",
+    "server/repository.py": "1165f1216d000d92ed3ef6bbe27dccddb2323ff464c20e4b2f3059bc3b0bc18d",
+    "server/runtime_config.py": "82a24e6ec92c00c945d84fed7cb494e9baf8866dfd3b2d66ef5ef2eed5425f3f",
+    "server/runtime_storage.py": "2ee19f31430891a0560f3c226b20c9c1b5f92769201454f5e2274309dde9e45b",
+    "server/service.py": "68fc155357bee36e4fa1c894ebeb1f56b0eef763dd5b3b50e4a03b1ffdd0bf60",
+    "server/vercel_blob_store.py": "e425701497876ec5b9dc5988cae34b38b7b0bac233e75d804efe5e8c019ee93d",
+    "server/openapi.yaml": "6035a972fefccf750bb800a2e85a618e5e95336f859dfe554941c205673bc966",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648"
+  },
+  "httpRequestCount": 136,
+  "headEnd": "a952edee271574401332148f42969621a81a74d7",
+  "sourceHashesEnd": {
+    "server/__init__.py": "b4c4a62ab2ea460cda3dddadcda2d33254eab2c0c91541ae38b4134014f9bdac",
+    "server/analysis_schema.py": "51463e09613c82957a443341982d261259b906e80df1b0324e6d82c04a263035",
+    "server/app.py": "6523565d8270ba8d6447562b921b0f20cb5f3ffa690e2d58a579b3393d988da9",
+    "server/budget.py": "961409c916801d2d133785119ce58232170686caa3eeb3b75ec4488031dfdaf0",
+    "server/cas_budget.py": "4191432f59b0157867d39303cfd6e9720a43656459785992f9d7e5d944f05036",
+    "server/cas_repository.py": "fdc21f8a0da2917cd9b7c5dd3d609ef873f056843accf0e57f9ef31baadb4f78",
+    "server/cas_store.py": "939c7210ec1d2c1f406f69754b832268d1fb0cb8e3d925b6cf235fbe85a38ee7",
+    "server/deployment_access.py": "299c1432484598c86b9ec19541f8a187404eb6907f2fe140775901910fee1935",
+    "server/deployment_app.py": "0e576b81725f83434d459f201075de4ff03f635f800d59d49ef0c11b08db0382",
+    "server/errors.py": "dae0dac1eeba6c6f3687c8cebcd32db8de17e3bde330c44e9bf170e215cdf01d",
+    "server/handlers.py": "aa279cfd48f546f3d8d12d2c8310ea2f91ba85c32733ac5808fff2779a85d604",
+    "server/live.py": "38c716e63b575b17e64cdaeab52988827a67c68d808a250ff3d34b2e47281f20",
+    "server/repository.py": "1165f1216d000d92ed3ef6bbe27dccddb2323ff464c20e4b2f3059bc3b0bc18d",
+    "server/runtime_config.py": "82a24e6ec92c00c945d84fed7cb494e9baf8866dfd3b2d66ef5ef2eed5425f3f",
+    "server/runtime_storage.py": "2ee19f31430891a0560f3c226b20c9c1b5f92769201454f5e2274309dde9e45b",
+    "server/service.py": "68fc155357bee36e4fa1c894ebeb1f56b0eef763dd5b3b50e4a03b1ffdd0bf60",
+    "server/vercel_blob_store.py": "e425701497876ec5b9dc5988cae34b38b7b0bac233e75d804efe5e8c019ee93d",
+    "server/openapi.yaml": "6035a972fefccf750bb800a2e85a618e5e95336f859dfe554941c205673bc966",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648"
+  },
+  "sameSource": true,
+  "originalStateHashesAfter": {
+    "C:\\Users\\j324r\\OneDrive\\문서\\ChatGPT\\해커톤_D-Day\\happycall-ralphthon\\.local\\cases-store.json": null,
+    "C:\\Users\\j324r\\OneDrive\\문서\\ChatGPT\\해커톤_D-Day\\happycall-ralphthon\\.local\\demo-usage.json": null
+  },
+  "originalStatePreserved": true,
+  "paidAnalyzerInvocations": 0,
+  "blockedExternalConnections": 0,
+  "finishedAt": "2026-09-21T10:22:35.504048+00:00",
+  "summary": {
+    "http": {
+      "planned": 6,
+      "executed": 6,
+      "passed": 6,
+      "failed": 0,
+      "notRun": 0
+    },
+    "ui": {
+      "planned": 6,
+      "executed": 0,
+      "passed": 0,
+      "failed": 0,
+      "notRun": 6
+    },
+    "boundary": {
+      "executed": 12,
+      "passed": 12,
+      "failed": 0
+    }
+  },
+  "httpSuiteStatus": "PASS",
+  "fullUIRehearsalStatus": "NOT_RUN"
+}

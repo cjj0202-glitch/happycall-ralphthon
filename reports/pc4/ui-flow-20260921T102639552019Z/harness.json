@@ -1,0 +1,1329 @@
+{
+  "startedAt": "2026-09-21T10:26:39.552019+00:00",
+  "hostname": "장준호",
+  "mode": "replay",
+  "kind": "AI Playwright technical observation; not human usability",
+  "apiPort": 18105,
+  "uiPort": 13105,
+  "headStart": "a952edee271574401332148f42969621a81a74d7",
+  "sourceHashesStart": {
+    "apps/web/app/globals.css": "9d303f73ec32aa9832461932a065d84a7204968e8001edb8c2e6f0e9de15bce4",
+    "apps/web/app/icon.svg": "db046826c657ff1026aafefb9e1f06d48f18c229a17d07dc914263e9acd9a847",
+    "apps/web/app/layout.tsx": "4c3986b8c358cad1a084c40da06dc5ee0279053c6d2a101acfb4779f04b6e0ee",
+    "apps/web/app/page.tsx": "48aaca8bae6fae2114f0d65bbff263ee4318f16d7f3de9408da90fb393fcf420",
+    "apps/web/app/tokens.css": "31a08dbc4cfd532d4a4d44ca0cf1fa8629ed57e25a9629b5caf748b41d1c01c3",
+    "apps/web/components/LogisticsView.module.css": "06f51bb143d3d4e3d2e5c1be1d717b786aedec0431f96ebc762bde4483a05275",
+    "apps/web/components/LogisticsView.tsx": "30922883fb60cc01fc33f983535f5cc3c001f61ac20982d251b2f2c5766a7aa3",
+    "apps/web/lib/api.ts": "b7a202365b3e2facfb4fca23f2bae45cdec4888448eaad0d27235dd252d6d2a0",
+    "apps/web/lib/types.ts": "3871af57d8633ae73b27c160de4bbe84fb9018263c43b56fc011efd7919a1461",
+    "apps/web/package-lock.json": "93fbdb2a0f14a73e41782566ea057a29226455d944356c9515aea6b0365a0b6c",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "server/__init__.py": "b4c4a62ab2ea460cda3dddadcda2d33254eab2c0c91541ae38b4134014f9bdac",
+    "server/analysis_schema.py": "51463e09613c82957a443341982d261259b906e80df1b0324e6d82c04a263035",
+    "server/app.py": "6523565d8270ba8d6447562b921b0f20cb5f3ffa690e2d58a579b3393d988da9",
+    "server/budget.py": "961409c916801d2d133785119ce58232170686caa3eeb3b75ec4488031dfdaf0",
+    "server/cas_budget.py": "4191432f59b0157867d39303cfd6e9720a43656459785992f9d7e5d944f05036",
+    "server/cas_repository.py": "fdc21f8a0da2917cd9b7c5dd3d609ef873f056843accf0e57f9ef31baadb4f78",
+    "server/cas_store.py": "939c7210ec1d2c1f406f69754b832268d1fb0cb8e3d925b6cf235fbe85a38ee7",
+    "server/deployment_access.py": "299c1432484598c86b9ec19541f8a187404eb6907f2fe140775901910fee1935",
+    "server/deployment_app.py": "0e576b81725f83434d459f201075de4ff03f635f800d59d49ef0c11b08db0382",
+    "server/errors.py": "dae0dac1eeba6c6f3687c8cebcd32db8de17e3bde330c44e9bf170e215cdf01d",
+    "server/handlers.py": "aa279cfd48f546f3d8d12d2c8310ea2f91ba85c32733ac5808fff2779a85d604",
+    "server/live.py": "38c716e63b575b17e64cdaeab52988827a67c68d808a250ff3d34b2e47281f20",
+    "server/openapi.yaml": "6035a972fefccf750bb800a2e85a618e5e95336f859dfe554941c205673bc966",
+    "server/repository.py": "1165f1216d000d92ed3ef6bbe27dccddb2323ff464c20e4b2f3059bc3b0bc18d",
+    "server/runtime_config.py": "82a24e6ec92c00c945d84fed7cb494e9baf8866dfd3b2d66ef5ef2eed5425f3f",
+    "server/runtime_storage.py": "2ee19f31430891a0560f3c226b20c9c1b5f92769201454f5e2274309dde9e45b",
+    "server/service.py": "68fc155357bee36e4fa1c894ebeb1f56b0eef763dd5b3b50e4a03b1ffdd0bf60",
+    "server/vercel_blob_store.py": "e425701497876ec5b9dc5988cae34b38b7b0bac233e75d804efe5e8c019ee93d",
+    "tests/e2e/package-lock.json": "b834f22670ee16ce45a1d4a2ed38482faae9049ff80f5209e86aec810be8eced"
+  },
+  "originalStateBefore": {
+    "C:\\Users\\j324r\\OneDrive\\문서\\ChatGPT\\해커톤_D-Day\\happycall-ralphthon\\.local\\cases-store.json": null,
+    "C:\\Users\\j324r\\OneDrive\\문서\\ChatGPT\\해커톤_D-Day\\happycall-ralphthon\\.local\\demo-usage.json": null
+  },
+  "out": "C:\\Users\\j324r\\OneDrive\\문서\\ChatGPT\\해커톤_D-Day\\happycall-ralphthon\\reports\\pc4\\ui-flow-20260921T102639552019Z",
+  "logs": "C:\\Users\\j324r\\OneDrive\\문서\\ChatGPT\\해커톤_D-Day\\happycall-ralphthon\\.local\\ui-flow-20260921T102639552019Z",
+  "newTmsIntegrated": false,
+  "temporaryStoreRoot": "C:\\Users\\j324r\\AppData\\Local\\Temp\\pc4-ui-replay-i0a3hhuz",
+  "ownedWeb": {
+    "pid": 20616,
+    "command": [
+      "C:\\Users\\j324r\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "C:\\Users\\j324r\\OneDrive\\문서\\ChatGPT\\해커톤_D-Day\\happycall-ralphthon\\apps\\web\\node_modules\\next\\dist\\bin\\next",
+      "dev",
+      "--hostname",
+      "127.0.0.1",
+      "--port",
+      "13105"
+    ]
+  },
+  "browserExitCode": 1,
+  "temporaryStores": [
+    "run-01",
+    "run-02"
+  ],
+  "temporaryFinalStates": {
+    "run-01\\cases.json": {
+      "cases": [
+        {
+          "id": "CASE-0001",
+          "type": "missing",
+          "title": "아침 배송 미도착 확인",
+          "store": {
+            "id": "SYN-ST01",
+            "name": "가상 한빛점"
+          },
+          "channel": "voice",
+          "sourceText": "상담원: 안녕하세요. 해피콜 상담원입니다. 어떤 점포에서 연락 주셨나요?\n경영주: 가상 한빛점이에요. 아침 다섯 시 배송인데 일곱 시가 다 돼도 물건이 안 왔어요. 정말 답답하네요.\n상담원: 오늘 배송 전체가 도착하지 않았다는 말씀이시죠?\n경영주: 네. 어제도 바빴는데 오늘까지 이러니 화가 나요. 가게 앞 공사 때문에 길이 막혔을 수도 있고요.\n상담원: 배송 전체 미도착으로 접수하겠습니다. 마지막 말씀은 확인이 필요한 내용으로 남기겠습니다.\n경영주: 지금 어디 있는지, 언제 올 수 있는지 센터에서 확인해서 알려 주세요.\n상담원: 센터에 운행 상황 확인을 요청하겠습니다. 확인되지 않은 도착 시간은 확답드리기 어렵습니다.\n경영주: 네. 확인 후 연락 부탁드립니다.",
+          "audioUrl": "/demo/CASE-0001.wav",
+          "transcript": [
+            {
+              "speaker": "상담원",
+              "text": "안녕하세요. 해피콜 상담원입니다. 어떤 점포에서 연락 주셨나요?"
+            },
+            {
+              "speaker": "경영주",
+              "text": "가상 한빛점이에요. 아침 다섯 시 배송인데 일곱 시가 다 돼도 물건이 안 왔어요. 정말 답답하네요."
+            },
+            {
+              "speaker": "상담원",
+              "text": "오늘 배송 전체가 도착하지 않았다는 말씀이시죠?"
+            },
+            {
+              "speaker": "경영주",
+              "text": "네. 어제도 바빴는데 오늘까지 이러니 화가 나요. 가게 앞 공사 때문에 길이 막혔을 수도 있고요."
+            },
+            {
+              "speaker": "상담원",
+              "text": "배송 전체 미도착으로 접수하겠습니다. 마지막 말씀은 확인이 필요한 내용으로 남기겠습니다."
+            },
+            {
+              "speaker": "경영주",
+              "text": "지금 어디 있는지, 언제 올 수 있는지 센터에서 확인해서 알려 주세요."
+            },
+            {
+              "speaker": "상담원",
+              "text": "센터에 운행 상황 확인을 요청하겠습니다. 확인되지 않은 도착 시간은 확답드리기 어렵습니다."
+            },
+            {
+              "speaker": "경영주",
+              "text": "네. 확인 후 연락 부탁드립니다."
+            }
+          ],
+          "asOf": "2026-09-18T07:00:00+09:00",
+          "status": "review",
+          "provenance": "33 모듈 과거 답변의 문의 패턴을 재구성한 독립 합성 시연. 실제 접수·배송 기록 아님.",
+          "selectedEvidence": [
+            "E-M3",
+            "E-M1"
+          ],
+          "pendingActions": [],
+          "reply": "",
+          "departmentId": "delivery",
+          "reviewConfirmed": false,
+          "expected": {
+            "product": "당일 1회차 배송 전체",
+            "quantity": null,
+            "unit": null
+          },
+          "received": {
+            "product": "경영주 진술: 전체 미수령",
+            "quantity": null,
+            "unit": null
+          },
+          "intake": {
+            "storeId": "SYN-ST01",
+            "subject": "당일 1회차 배송 전체",
+            "quantity": null,
+            "unit": null,
+            "request": "운행 위치와 도착 예정 확인"
+          },
+          "evidence": [
+            {
+              "id": "E-M1",
+              "system": "TMS",
+              "label": "규정 도착 시각",
+              "time": "2026-09-18T05:00:00+09:00",
+              "value": "규정 05:00 / 배송완료 기록 없음",
+              "status": "fact",
+              "source": "합성 TMS 방문행 SYN-R01/1"
+            },
+            {
+              "id": "E-M2",
+              "system": "TMS",
+              "label": "배송완료 실적",
+              "time": null,
+              "value": "미등록. 실제 미도착·기사 귀책은 아직 확정할 수 없습니다.",
+              "status": "unknown",
+              "source": "합성 TMS 실적 조회"
+            },
+            {
+              "id": "E-M3",
+              "system": "WMS",
+              "label": "센터 출고 스캔",
+              "time": "2026-09-18T04:20:00+09:00",
+              "value": "SYN-OUT01 출고 스캔 기록 존재. 점포 인도 완료와 다름.",
+              "status": "fact",
+              "source": "합성 WMS 출고행 SYN-OUT01"
+            }
+          ],
+          "wms": {
+            "picking": {
+              "orderId": "SYN-ORDER01",
+              "product": "당일 1회차 배송",
+              "quantity": null,
+              "unit": null,
+              "zone": "A",
+              "cell": "A-01",
+              "toteId": "SYN-TOTE01",
+              "pickedAt": "2026-09-18T03:30:00+09:00",
+              "workType": "FACILITY",
+              "workUnitType": "BOX"
+            },
+            "shipping": {
+              "id": "SYN-OUT01",
+              "time": "2026-09-18T04:20:00+09:00",
+              "dock": "D-01",
+              "vehicle": "시연 차량 01"
+            },
+            "events": [
+              {
+                "id": "W-M1",
+                "time": "2026-09-18T03:30:00+09:00",
+                "label": "피킹 스캔",
+                "location": "A-01",
+                "status": "fact",
+                "source": "합성 피킹 이벤트"
+              },
+              {
+                "id": "W-M2",
+                "time": "2026-09-18T03:42:00+09:00",
+                "label": "소터 투입",
+                "location": "소터 IN-01",
+                "status": "fact",
+                "source": "합성 공정 시연 이벤트"
+              },
+              {
+                "id": "W-M3",
+                "time": "2026-09-18T03:44:00+09:00",
+                "label": "분기 통과",
+                "location": "분기 01 → D-01",
+                "status": "fact",
+                "source": "합성 공정 시연 이벤트"
+              },
+              {
+                "id": "W-M4",
+                "time": "2026-09-18T04:20:00+09:00",
+                "label": "출고 스캔",
+                "location": "D-01",
+                "status": "fact",
+                "source": "합성 출고 이벤트"
+              }
+            ],
+            "referenceModule": "30_센터작업모니터링",
+            "sorting": {
+              "sortedAt": "2026-09-18T03:44:00+09:00",
+              "schdChuteNo": "CH-01",
+              "rsltChuteNo": "CH-01",
+              "source": "30 필드 정의를 참고한 가상 분류실적"
+            }
+          },
+          "tms": {
+            "centerId": "SYN-CTR01",
+            "bizDate": "2026-09-18",
+            "routeId": "SYN-R01",
+            "vehicle": "시연 차량 01",
+            "mapNote": "가상 좌표·방문순서 연결선. 실제 GPS 궤적 아님.",
+            "stops": [
+              {
+                "id": "SYN-ST01",
+                "name": "가상 한빛점",
+                "sequence": 1,
+                "planned": "2026-09-18T05:00:00+09:00",
+                "actual": null,
+                "mobileEntry": null,
+                "mobileExit": null,
+                "lat": 37.501,
+                "lng": 127.021,
+                "status": "unknown"
+              },
+              {
+                "id": "SYN-ST03",
+                "name": "가상 푸른점",
+                "sequence": 2,
+                "planned": "2026-09-18T05:25:00+09:00",
+                "actual": null,
+                "mobileEntry": null,
+                "mobileExit": null,
+                "lat": 37.509,
+                "lng": 127.043,
+                "status": "unknown"
+              },
+              {
+                "id": "SYN-ST04",
+                "name": "가상 나무점",
+                "sequence": 3,
+                "planned": "2026-09-18T05:50:00+09:00",
+                "actual": null,
+                "mobileEntry": null,
+                "mobileExit": null,
+                "lat": 37.492,
+                "lng": 127.051,
+                "status": "unknown"
+              }
+            ]
+          },
+          "replayAnalysis": {
+            "summary": "경영주는 규정 05:00인 당일 1회차 배송을 07:00 현재 받지 못했다고 진술했습니다. 운행 위치와 도착 예정 안내를 요청하며, 인근 공사 영향은 확인되지 않았습니다.",
+            "fields": {
+              "storeId": "SYN-ST01",
+              "subject": "당일 1회차 배송 전체",
+              "quantity": null,
+              "unit": null,
+              "request": "운행 위치와 도착 예정 확인"
+            },
+            "issues": [
+              {
+                "field": "도착 시각",
+                "message": "규정 시각은 실제 도착 기록이 아닙니다.",
+                "evidence": "E-M1"
+              },
+              {
+                "field": "지연 원인",
+                "message": "공사 영향은 경영주 추측으로 추가 확인이 필요합니다.",
+                "evidence": "발화 4"
+              }
+            ],
+            "questions": [
+              "차량의 현재 운행 상태를 확인해 주세요.",
+              "실제 인도 여부와 완료 기록 누락 여부를 확인해 주세요."
+            ],
+            "department": {
+              "id": "delivery",
+              "name": "센터 배송 담당",
+              "reason": "배송 전체 미수령 문의로 운행·점착 확인이 필요합니다."
+            },
+            "facts": [
+              "규정 도착은 05:00입니다.",
+              "센터 출고 스캔 기록은 04:20입니다."
+            ],
+            "unknowns": [
+              "배송완료 시각이 미등록입니다.",
+              "실제 미도착 여부·지연 원인·예상 도착은 센터 확인이 필요합니다."
+            ],
+            "replyDraft": "경영주님, 배송을 받지 못하셨다는 문의를 접수했습니다. 센터 출고 기록은 확인했으나 배송완료 기록이 없어 운행 상태와 실제 도착 여부를 확인 중입니다. 확인되는 내용을 센터 담당자가 안내드리겠습니다."
+          },
+          "media": [],
+          "revision": 3,
+          "analysis": {
+            "summary": "경영주는 규정 05:00인 당일 1회차 배송을 07:00 현재 받지 못했다고 진술했습니다. 운행 위치와 도착 예정 안내를 요청하며, 인근 공사 영향은 확인되지 않았습니다.",
+            "fields": {
+              "storeId": "SYN-ST01",
+              "subject": "당일 1회차 배송 전체",
+              "quantity": null,
+              "unit": null,
+              "request": "운행 위치와 도착 예정 확인"
+            },
+            "issues": [
+              {
+                "field": "도착 시각",
+                "message": "규정 시각은 실제 도착 기록이 아닙니다.",
+                "evidence": "E-M1"
+              },
+              {
+                "field": "지연 원인",
+                "message": "공사 영향은 경영주 추측으로 추가 확인이 필요합니다.",
+                "evidence": "발화 4"
+              }
+            ],
+            "questions": [
+              "차량의 현재 운행 상태를 확인해 주세요.",
+              "실제 인도 여부와 완료 기록 누락 여부를 확인해 주세요."
+            ],
+            "department": {
+              "id": "delivery",
+              "name": "센터 배송 담당",
+              "reason": "배송 전체 미수령 문의로 운행·점착 확인이 필요합니다."
+            },
+            "facts": [
+              "규정 도착은 05:00입니다.",
+              "센터 출고 스캔 기록은 04:20입니다."
+            ],
+            "unknowns": [
+              "배송완료 시각이 미등록입니다.",
+              "실제 미도착 여부·지연 원인·예상 도착은 센터 확인이 필요합니다."
+            ],
+            "replyDraft": "경영주님, 배송을 받지 못하셨다는 문의를 접수했습니다. 센터 출고 기록은 확인했으나 배송완료 기록이 없어 운행 상태와 실제 도착 여부를 확인 중입니다. 확인되는 내용을 센터 담당자가 안내드리겠습니다."
+          },
+          "analysisMode": "replay",
+          "analysisRequestId": "replay-5e393e4a4e754fc2bcfee3fdb733a05a",
+          "updatedAt": "2026-09-21T10:27:42.957747+00:00",
+          "history": [
+            {
+              "at": "2026-09-21T10:27:42.438621+00:00",
+              "actor": "counselor",
+              "action": "analyzed",
+              "message": "사전 분석 리플레이"
+            },
+            {
+              "at": "2026-09-21T10:27:42.727005+00:00",
+              "actor": "counselor",
+              "action": "review",
+              "message": "접수 상태 저장"
+            },
+            {
+              "at": "2026-09-21T10:27:42.958769+00:00",
+              "actor": "counselor",
+              "action": "review",
+              "message": "접수 상태 저장"
+            }
+          ]
+        },
+        {
+          "id": "CASE-0002",
+          "type": "wrong",
+          "title": "주문 상품과 다른 상품 입고",
+          "store": {
+            "id": "SYN-ST02",
+            "name": "가상 새봄점"
+          },
+          "channel": "voice",
+          "sourceText": "상담원: 안녕하세요. 해피콜 상담원입니다. 어떤 불편이 있으신가요?\n경영주: 가상 새봄점인데요. 비스킷 열여덟 개를 주문했는데 휴지 한 박스가 왔어요. 이게 대체 뭡니까.\n상담원: 비스킷 열여덟 개 대신 휴지 한 개가 왔다는 말씀이시죠?\n경영주: 아니요. 휴지 한 개가 아니라 한 박스예요. 단위를 제대로 적어 주세요.\n상담원: 네. 정정하겠습니다. 주문은 비스킷 열여덟 개, 받은 상품은 휴지 한 박스입니다.\n경영주: 주말 장사도 해야 하는데 정말 곤란해요. 잘못 온 상품은 어떻게 해야 하나요?\n상담원: 오출고 확인과 회송 안내가 필요한 것으로 접수하고 센터 상품 담당자에게 전달하겠습니다.\n경영주: 네. 주문한 상품 처리도 같이 확인해 주세요.",
+          "audioUrl": "/demo/CASE-0002.wav",
+          "transcript": [
+            {
+              "speaker": "상담원",
+              "text": "안녕하세요. 해피콜 상담원입니다. 어떤 불편이 있으신가요?"
+            },
+            {
+              "speaker": "경영주",
+              "text": "가상 새봄점인데요. 비스킷 열여덟 개를 주문했는데 휴지 한 박스가 왔어요. 이게 대체 뭡니까."
+            },
+            {
+              "speaker": "상담원",
+              "text": "비스킷 열여덟 개 대신 휴지 한 개가 왔다는 말씀이시죠?"
+            },
+            {
+              "speaker": "경영주",
+              "text": "아니요. 휴지 한 개가 아니라 한 박스예요. 단위를 제대로 적어 주세요."
+            },
+            {
+              "speaker": "상담원",
+              "text": "네. 정정하겠습니다. 주문은 비스킷 열여덟 개, 받은 상품은 휴지 한 박스입니다."
+            },
+            {
+              "speaker": "경영주",
+              "text": "주말 장사도 해야 하는데 정말 곤란해요. 잘못 온 상품은 어떻게 해야 하나요?"
+            },
+            {
+              "speaker": "상담원",
+              "text": "오출고 확인과 회송 안내가 필요한 것으로 접수하고 센터 상품 담당자에게 전달하겠습니다."
+            },
+            {
+              "speaker": "경영주",
+              "text": "네. 주문한 상품 처리도 같이 확인해 주세요."
+            }
+          ],
+          "asOf": "2026-09-18T07:00:00+09:00",
+          "status": "draft",
+          "provenance": "33 모듈 과거 답변의 문의 패턴을 재구성한 독립 합성 시연. 실제 접수·배송 기록 아님.",
+          "selectedEvidence": [],
+          "pendingActions": [],
+          "reply": "",
+          "departmentId": "",
+          "reviewConfirmed": false,
+          "expected": {
+            "product": "비스킷",
+            "productId": "SYN-SKU01",
+            "quantity": 18,
+            "unit": "EA"
+          },
+          "received": {
+            "product": "휴지",
+            "productId": "SYN-SKU02",
+            "quantity": 1,
+            "unit": "BOX"
+          },
+          "intake": {
+            "storeId": "SYN-ST02",
+            "subject": "비스킷 주문 대신 휴지 입고",
+            "quantity": 1,
+            "unit": "EA",
+            "request": "오출고 확인·회송 방법·주문 상품 처리 안내"
+          },
+          "evidence": [
+            {
+              "id": "E-W1",
+              "system": "WMS",
+              "label": "주문 상품",
+              "time": "2026-09-18T01:00:00+09:00",
+              "value": "비스킷 18 EA",
+              "status": "fact",
+              "source": "합성 주문 SYN-ORDER02/1"
+            },
+            {
+              "id": "E-W2",
+              "system": "WMS",
+              "label": "피킹 스캔",
+              "time": "2026-09-18T02:15:00+09:00",
+              "value": "비스킷 18 EA / SYN-TOTE02-A",
+              "status": "fact",
+              "source": "합성 피킹 SYN-PICK02"
+            },
+            {
+              "id": "E-W3",
+              "system": "WMS",
+              "label": "출고 스캔 불일치",
+              "time": "2026-09-18T03:02:00+09:00",
+              "value": "휴지 1 BOX / SYN-TOTE02-B. 상품·단위 불일치 확인.",
+              "status": "fact",
+              "source": "합성 출고 SYN-OUT02"
+            },
+            {
+              "id": "E-W4",
+              "system": "WMS",
+              "label": "발생 공정",
+              "time": null,
+              "value": "피킹과 출고 기록이 다르나 소터 오류·특정 작업자 귀책은 미확인.",
+              "status": "unknown",
+              "source": "합성 사례의 추가 조사 항목"
+            },
+            {
+              "id": "E-W5",
+              "system": "TMS",
+              "label": "배송완료 기록",
+              "time": "2026-09-18T05:10:00+09:00",
+              "value": "05:10 완료 등록. 정확한 상품 인도 여부는 별도 확인.",
+              "status": "fact",
+              "source": "합성 TMS SYN-R02/2"
+            }
+          ],
+          "wms": {
+            "picking": {
+              "orderId": "SYN-ORDER02",
+              "product": "비스킷",
+              "quantity": 18,
+              "unit": "EA",
+              "zone": "B",
+              "cell": "B-20-2",
+              "toteId": "SYN-TOTE02-A",
+              "pickedAt": "2026-09-18T02:15:00+09:00",
+              "workType": "FACILITY",
+              "workUnitType": "BOX"
+            },
+            "shipping": {
+              "id": "SYN-OUT02",
+              "product": "휴지",
+              "quantity": 1,
+              "unit": "BOX",
+              "toteId": "SYN-TOTE02-B",
+              "time": "2026-09-18T03:02:00+09:00",
+              "dock": "D-02",
+              "vehicle": "시연 차량 02"
+            },
+            "events": [
+              {
+                "id": "W-W1",
+                "time": "2026-09-18T02:15:00+09:00",
+                "label": "피킹 스캔 · 비스킷 18 EA",
+                "location": "B-20-2 / SYN-TOTE02-A",
+                "status": "fact",
+                "source": "합성 피킹 이벤트"
+              },
+              {
+                "id": "W-W2",
+                "time": "2026-09-18T02:31:00+09:00",
+                "label": "소터 투입",
+                "location": "소터 IN-02 / SYN-TOTE02-A",
+                "status": "fact",
+                "source": "합성 공정 시연 이벤트"
+              },
+              {
+                "id": "W-W3",
+                "time": "2026-09-18T02:33:00+09:00",
+                "label": "분기 이동",
+                "location": "분기 02 → D-02",
+                "status": "fact",
+                "source": "합성 공정 시연 이벤트"
+              },
+              {
+                "id": "W-W4",
+                "time": "2026-09-18T03:02:00+09:00",
+                "label": "출고 스캔 · 휴지 1 BOX",
+                "location": "D-02 / SYN-TOTE02-B",
+                "status": "fact",
+                "source": "합성 출고 이벤트"
+              }
+            ],
+            "referenceModule": "30_센터작업모니터링",
+            "sorting": {
+              "sortedAt": "2026-09-18T02:33:00+09:00",
+              "schdChuteNo": "CH-02",
+              "rsltChuteNo": "CH-02",
+              "source": "30 필드 정의를 참고한 가상 분류실적"
+            }
+          },
+          "tms": {
+            "centerId": "SYN-CTR01",
+            "bizDate": "2026-09-18",
+            "routeId": "SYN-R02",
+            "vehicle": "시연 차량 02",
+            "mapNote": "가상 좌표·방문순서 연결선. 실제 GPS 궤적 아님.",
+            "stops": [
+              {
+                "id": "SYN-ST05",
+                "name": "가상 온유점",
+                "sequence": 1,
+                "planned": "2026-09-18T04:45:00+09:00",
+                "actual": "2026-09-18T04:47:00+09:00",
+                "mobileEntry": "2026-09-18T04:44:00+09:00",
+                "mobileExit": "2026-09-18T04:49:00+09:00",
+                "lat": 37.482,
+                "lng": 127.01,
+                "status": "fact"
+              },
+              {
+                "id": "SYN-ST02",
+                "name": "가상 새봄점",
+                "sequence": 2,
+                "planned": "2026-09-18T05:10:00+09:00",
+                "actual": "2026-09-18T05:10:00+09:00",
+                "mobileEntry": "2026-09-18T05:07:00+09:00",
+                "mobileExit": "2026-09-18T05:14:00+09:00",
+                "lat": 37.495,
+                "lng": 127.033,
+                "status": "fact"
+              },
+              {
+                "id": "SYN-ST06",
+                "name": "가상 해뜰점",
+                "sequence": 3,
+                "planned": "2026-09-18T05:40:00+09:00",
+                "actual": "2026-09-18T05:42:00+09:00",
+                "mobileEntry": "2026-09-18T05:37:00+09:00",
+                "mobileExit": "2026-09-18T05:46:00+09:00",
+                "lat": 37.514,
+                "lng": 127.026,
+                "status": "fact"
+              }
+            ]
+          },
+          "replayAnalysis": {
+            "summary": "경영주는 비스킷 18개 주문에 휴지 1박스를 받았다고 진술했습니다. 상담원이 중간에 ‘1개’로 잘못 재진술했으나 경영주가 ‘1박스’로 정정했습니다. 오출고 확인·회송 방법·주문 상품 처리를 요청합니다.",
+            "fields": {
+              "storeId": "SYN-ST02",
+              "subject": "비스킷 주문 대신 휴지 입고",
+              "quantity": 1,
+              "unit": "BOX",
+              "request": "오출고 확인·회송 방법·주문 상품 처리 안내"
+            },
+            "issues": [
+              {
+                "field": "unit",
+                "message": "상담원 입력 EA와 경영주가 정정한 BOX가 다릅니다. 원문 확인 후 수정해 주세요.",
+                "evidence": "발화 3~5"
+              },
+              {
+                "field": "quantity",
+                "message": "주문 18 EA와 입고 1 BOX를 단순 차감하지 마세요.",
+                "evidence": "E-W1/E-W3"
+              }
+            ],
+            "questions": [
+              "주문 상품과 실제 입고 상품의 라벨을 센터에서 대조해 주세요.",
+              "피킹 토트와 출고 토트 연결 및 회송·재처리 방안을 확인해 주세요."
+            ],
+            "department": {
+              "id": "warehouse",
+              "name": "센터 상품 담당",
+              "reason": "주문/출고 상품이 달라 피킹·출고 대조와 회송 확인이 필요합니다."
+            },
+            "facts": [
+              "주문/피킹은 비스킷 18 EA입니다.",
+              "출고 스캔은 휴지 1 BOX로 기록돼 불일치합니다.",
+              "배송완료 등록은 05:10입니다."
+            ],
+            "unknowns": [
+              "불일치 발생 공정과 원인은 미확인입니다.",
+              "상품 회송·주문 상품 재처리 완료 여부는 확인이 필요합니다."
+            ],
+            "replyDraft": "경영주님, 주문하신 비스킷 18개와 출고 기록의 휴지 1박스가 다른 점을 확인했습니다. 발생 경위와 회송·주문 상품 처리 방안은 센터에서 추가 확인 후 안내드리겠습니다."
+          },
+          "media": [
+            {
+              "id": "SYN-CCTV-CASE2-SORTER",
+              "caseId": "CASE-0002",
+              "system": "WMS",
+              "cameraId": "SYN-CAM-02",
+              "eventIds": [
+                "W-W3"
+              ],
+              "url": "/demo/sorter-demo.mp4",
+              "synthetic": true,
+              "startSeconds": 0,
+              "endSeconds": 12,
+              "occurredAt": "2026-09-18T02:33:00+09:00",
+              "label": "분기02 → D-02 공정 합성 영상",
+              "notice": "AI로 만든 공정 설명 영상. 실제 작업·휴먼에러·귀책 증거가 아님."
+            }
+          ],
+          "revision": 0
+        }
+      ]
+    },
+    "run-02\\cases.json": {
+      "cases": [
+        {
+          "id": "CASE-0001",
+          "type": "missing",
+          "title": "아침 배송 미도착 확인",
+          "store": {
+            "id": "SYN-ST01",
+            "name": "가상 한빛점"
+          },
+          "channel": "voice",
+          "sourceText": "상담원: 안녕하세요. 해피콜 상담원입니다. 어떤 점포에서 연락 주셨나요?\n경영주: 가상 한빛점이에요. 아침 다섯 시 배송인데 일곱 시가 다 돼도 물건이 안 왔어요. 정말 답답하네요.\n상담원: 오늘 배송 전체가 도착하지 않았다는 말씀이시죠?\n경영주: 네. 어제도 바빴는데 오늘까지 이러니 화가 나요. 가게 앞 공사 때문에 길이 막혔을 수도 있고요.\n상담원: 배송 전체 미도착으로 접수하겠습니다. 마지막 말씀은 확인이 필요한 내용으로 남기겠습니다.\n경영주: 지금 어디 있는지, 언제 올 수 있는지 센터에서 확인해서 알려 주세요.\n상담원: 센터에 운행 상황 확인을 요청하겠습니다. 확인되지 않은 도착 시간은 확답드리기 어렵습니다.\n경영주: 네. 확인 후 연락 부탁드립니다.",
+          "audioUrl": "/demo/CASE-0001.wav",
+          "transcript": [
+            {
+              "speaker": "상담원",
+              "text": "안녕하세요. 해피콜 상담원입니다. 어떤 점포에서 연락 주셨나요?"
+            },
+            {
+              "speaker": "경영주",
+              "text": "가상 한빛점이에요. 아침 다섯 시 배송인데 일곱 시가 다 돼도 물건이 안 왔어요. 정말 답답하네요."
+            },
+            {
+              "speaker": "상담원",
+              "text": "오늘 배송 전체가 도착하지 않았다는 말씀이시죠?"
+            },
+            {
+              "speaker": "경영주",
+              "text": "네. 어제도 바빴는데 오늘까지 이러니 화가 나요. 가게 앞 공사 때문에 길이 막혔을 수도 있고요."
+            },
+            {
+              "speaker": "상담원",
+              "text": "배송 전체 미도착으로 접수하겠습니다. 마지막 말씀은 확인이 필요한 내용으로 남기겠습니다."
+            },
+            {
+              "speaker": "경영주",
+              "text": "지금 어디 있는지, 언제 올 수 있는지 센터에서 확인해서 알려 주세요."
+            },
+            {
+              "speaker": "상담원",
+              "text": "센터에 운행 상황 확인을 요청하겠습니다. 확인되지 않은 도착 시간은 확답드리기 어렵습니다."
+            },
+            {
+              "speaker": "경영주",
+              "text": "네. 확인 후 연락 부탁드립니다."
+            }
+          ],
+          "asOf": "2026-09-18T07:00:00+09:00",
+          "status": "draft",
+          "provenance": "33 모듈 과거 답변의 문의 패턴을 재구성한 독립 합성 시연. 실제 접수·배송 기록 아님.",
+          "selectedEvidence": [],
+          "pendingActions": [],
+          "reply": "",
+          "departmentId": "",
+          "reviewConfirmed": false,
+          "expected": {
+            "product": "당일 1회차 배송 전체",
+            "quantity": null,
+            "unit": null
+          },
+          "received": {
+            "product": "경영주 진술: 전체 미수령",
+            "quantity": null,
+            "unit": null
+          },
+          "intake": {
+            "storeId": "SYN-ST01",
+            "subject": "당일 1회차 배송 전체",
+            "quantity": null,
+            "unit": null,
+            "request": "운행 위치와 도착 예정 확인"
+          },
+          "evidence": [
+            {
+              "id": "E-M1",
+              "system": "TMS",
+              "label": "규정 도착 시각",
+              "time": "2026-09-18T05:00:00+09:00",
+              "value": "규정 05:00 / 배송완료 기록 없음",
+              "status": "fact",
+              "source": "합성 TMS 방문행 SYN-R01/1"
+            },
+            {
+              "id": "E-M2",
+              "system": "TMS",
+              "label": "배송완료 실적",
+              "time": null,
+              "value": "미등록. 실제 미도착·기사 귀책은 아직 확정할 수 없습니다.",
+              "status": "unknown",
+              "source": "합성 TMS 실적 조회"
+            },
+            {
+              "id": "E-M3",
+              "system": "WMS",
+              "label": "센터 출고 스캔",
+              "time": "2026-09-18T04:20:00+09:00",
+              "value": "SYN-OUT01 출고 스캔 기록 존재. 점포 인도 완료와 다름.",
+              "status": "fact",
+              "source": "합성 WMS 출고행 SYN-OUT01"
+            }
+          ],
+          "wms": {
+            "picking": {
+              "orderId": "SYN-ORDER01",
+              "product": "당일 1회차 배송",
+              "quantity": null,
+              "unit": null,
+              "zone": "A",
+              "cell": "A-01",
+              "toteId": "SYN-TOTE01",
+              "pickedAt": "2026-09-18T03:30:00+09:00",
+              "workType": "FACILITY",
+              "workUnitType": "BOX"
+            },
+            "shipping": {
+              "id": "SYN-OUT01",
+              "time": "2026-09-18T04:20:00+09:00",
+              "dock": "D-01",
+              "vehicle": "시연 차량 01"
+            },
+            "events": [
+              {
+                "id": "W-M1",
+                "time": "2026-09-18T03:30:00+09:00",
+                "label": "피킹 스캔",
+                "location": "A-01",
+                "status": "fact",
+                "source": "합성 피킹 이벤트"
+              },
+              {
+                "id": "W-M2",
+                "time": "2026-09-18T03:42:00+09:00",
+                "label": "소터 투입",
+                "location": "소터 IN-01",
+                "status": "fact",
+                "source": "합성 공정 시연 이벤트"
+              },
+              {
+                "id": "W-M3",
+                "time": "2026-09-18T03:44:00+09:00",
+                "label": "분기 통과",
+                "location": "분기 01 → D-01",
+                "status": "fact",
+                "source": "합성 공정 시연 이벤트"
+              },
+              {
+                "id": "W-M4",
+                "time": "2026-09-18T04:20:00+09:00",
+                "label": "출고 스캔",
+                "location": "D-01",
+                "status": "fact",
+                "source": "합성 출고 이벤트"
+              }
+            ],
+            "referenceModule": "30_센터작업모니터링",
+            "sorting": {
+              "sortedAt": "2026-09-18T03:44:00+09:00",
+              "schdChuteNo": "CH-01",
+              "rsltChuteNo": "CH-01",
+              "source": "30 필드 정의를 참고한 가상 분류실적"
+            }
+          },
+          "tms": {
+            "centerId": "SYN-CTR01",
+            "bizDate": "2026-09-18",
+            "routeId": "SYN-R01",
+            "vehicle": "시연 차량 01",
+            "mapNote": "가상 좌표·방문순서 연결선. 실제 GPS 궤적 아님.",
+            "stops": [
+              {
+                "id": "SYN-ST01",
+                "name": "가상 한빛점",
+                "sequence": 1,
+                "planned": "2026-09-18T05:00:00+09:00",
+                "actual": null,
+                "mobileEntry": null,
+                "mobileExit": null,
+                "lat": 37.501,
+                "lng": 127.021,
+                "status": "unknown"
+              },
+              {
+                "id": "SYN-ST03",
+                "name": "가상 푸른점",
+                "sequence": 2,
+                "planned": "2026-09-18T05:25:00+09:00",
+                "actual": null,
+                "mobileEntry": null,
+                "mobileExit": null,
+                "lat": 37.509,
+                "lng": 127.043,
+                "status": "unknown"
+              },
+              {
+                "id": "SYN-ST04",
+                "name": "가상 나무점",
+                "sequence": 3,
+                "planned": "2026-09-18T05:50:00+09:00",
+                "actual": null,
+                "mobileEntry": null,
+                "mobileExit": null,
+                "lat": 37.492,
+                "lng": 127.051,
+                "status": "unknown"
+              }
+            ]
+          },
+          "replayAnalysis": {
+            "summary": "경영주는 규정 05:00인 당일 1회차 배송을 07:00 현재 받지 못했다고 진술했습니다. 운행 위치와 도착 예정 안내를 요청하며, 인근 공사 영향은 확인되지 않았습니다.",
+            "fields": {
+              "storeId": "SYN-ST01",
+              "subject": "당일 1회차 배송 전체",
+              "quantity": null,
+              "unit": null,
+              "request": "운행 위치와 도착 예정 확인"
+            },
+            "issues": [
+              {
+                "field": "도착 시각",
+                "message": "규정 시각은 실제 도착 기록이 아닙니다.",
+                "evidence": "E-M1"
+              },
+              {
+                "field": "지연 원인",
+                "message": "공사 영향은 경영주 추측으로 추가 확인이 필요합니다.",
+                "evidence": "발화 4"
+              }
+            ],
+            "questions": [
+              "차량의 현재 운행 상태를 확인해 주세요.",
+              "실제 인도 여부와 완료 기록 누락 여부를 확인해 주세요."
+            ],
+            "department": {
+              "id": "delivery",
+              "name": "센터 배송 담당",
+              "reason": "배송 전체 미수령 문의로 운행·점착 확인이 필요합니다."
+            },
+            "facts": [
+              "규정 도착은 05:00입니다.",
+              "센터 출고 스캔 기록은 04:20입니다."
+            ],
+            "unknowns": [
+              "배송완료 시각이 미등록입니다.",
+              "실제 미도착 여부·지연 원인·예상 도착은 센터 확인이 필요합니다."
+            ],
+            "replyDraft": "경영주님, 배송을 받지 못하셨다는 문의를 접수했습니다. 센터 출고 기록은 확인했으나 배송완료 기록이 없어 운행 상태와 실제 도착 여부를 확인 중입니다. 확인되는 내용을 센터 담당자가 안내드리겠습니다."
+          },
+          "media": [],
+          "revision": 0
+        },
+        {
+          "id": "CASE-0002",
+          "type": "wrong",
+          "title": "주문 상품과 다른 상품 입고",
+          "store": {
+            "id": "SYN-ST02",
+            "name": "가상 새봄점"
+          },
+          "channel": "voice",
+          "sourceText": "상담원: 안녕하세요. 해피콜 상담원입니다. 어떤 불편이 있으신가요?\n경영주: 가상 새봄점인데요. 비스킷 열여덟 개를 주문했는데 휴지 한 박스가 왔어요. 이게 대체 뭡니까.\n상담원: 비스킷 열여덟 개 대신 휴지 한 개가 왔다는 말씀이시죠?\n경영주: 아니요. 휴지 한 개가 아니라 한 박스예요. 단위를 제대로 적어 주세요.\n상담원: 네. 정정하겠습니다. 주문은 비스킷 열여덟 개, 받은 상품은 휴지 한 박스입니다.\n경영주: 주말 장사도 해야 하는데 정말 곤란해요. 잘못 온 상품은 어떻게 해야 하나요?\n상담원: 오출고 확인과 회송 안내가 필요한 것으로 접수하고 센터 상품 담당자에게 전달하겠습니다.\n경영주: 네. 주문한 상품 처리도 같이 확인해 주세요.",
+          "audioUrl": "/demo/CASE-0002.wav",
+          "transcript": [
+            {
+              "speaker": "상담원",
+              "text": "안녕하세요. 해피콜 상담원입니다. 어떤 불편이 있으신가요?"
+            },
+            {
+              "speaker": "경영주",
+              "text": "가상 새봄점인데요. 비스킷 열여덟 개를 주문했는데 휴지 한 박스가 왔어요. 이게 대체 뭡니까."
+            },
+            {
+              "speaker": "상담원",
+              "text": "비스킷 열여덟 개 대신 휴지 한 개가 왔다는 말씀이시죠?"
+            },
+            {
+              "speaker": "경영주",
+              "text": "아니요. 휴지 한 개가 아니라 한 박스예요. 단위를 제대로 적어 주세요."
+            },
+            {
+              "speaker": "상담원",
+              "text": "네. 정정하겠습니다. 주문은 비스킷 열여덟 개, 받은 상품은 휴지 한 박스입니다."
+            },
+            {
+              "speaker": "경영주",
+              "text": "주말 장사도 해야 하는데 정말 곤란해요. 잘못 온 상품은 어떻게 해야 하나요?"
+            },
+            {
+              "speaker": "상담원",
+              "text": "오출고 확인과 회송 안내가 필요한 것으로 접수하고 센터 상품 담당자에게 전달하겠습니다."
+            },
+            {
+              "speaker": "경영주",
+              "text": "네. 주문한 상품 처리도 같이 확인해 주세요."
+            }
+          ],
+          "asOf": "2026-09-18T07:00:00+09:00",
+          "status": "review",
+          "provenance": "33 모듈 과거 답변의 문의 패턴을 재구성한 독립 합성 시연. 실제 접수·배송 기록 아님.",
+          "selectedEvidence": [
+            "E-W1",
+            "E-W5"
+          ],
+          "pendingActions": [],
+          "reply": "",
+          "departmentId": "warehouse",
+          "reviewConfirmed": false,
+          "expected": {
+            "product": "비스킷",
+            "productId": "SYN-SKU01",
+            "quantity": 18,
+            "unit": "EA"
+          },
+          "received": {
+            "product": "휴지",
+            "productId": "SYN-SKU02",
+            "quantity": 1,
+            "unit": "BOX"
+          },
+          "intake": {
+            "storeId": "SYN-ST02",
+            "subject": "비스킷 주문 대신 휴지 입고",
+            "quantity": 1,
+            "unit": "BOX",
+            "request": "오출고 확인·회송 방법·주문 상품 처리 안내"
+          },
+          "evidence": [
+            {
+              "id": "E-W1",
+              "system": "WMS",
+              "label": "주문 상품",
+              "time": "2026-09-18T01:00:00+09:00",
+              "value": "비스킷 18 EA",
+              "status": "fact",
+              "source": "합성 주문 SYN-ORDER02/1"
+            },
+            {
+              "id": "E-W2",
+              "system": "WMS",
+              "label": "피킹 스캔",
+              "time": "2026-09-18T02:15:00+09:00",
+              "value": "비스킷 18 EA / SYN-TOTE02-A",
+              "status": "fact",
+              "source": "합성 피킹 SYN-PICK02"
+            },
+            {
+              "id": "E-W3",
+              "system": "WMS",
+              "label": "출고 스캔 불일치",
+              "time": "2026-09-18T03:02:00+09:00",
+              "value": "휴지 1 BOX / SYN-TOTE02-B. 상품·단위 불일치 확인.",
+              "status": "fact",
+              "source": "합성 출고 SYN-OUT02"
+            },
+            {
+              "id": "E-W4",
+              "system": "WMS",
+              "label": "발생 공정",
+              "time": null,
+              "value": "피킹과 출고 기록이 다르나 소터 오류·특정 작업자 귀책은 미확인.",
+              "status": "unknown",
+              "source": "합성 사례의 추가 조사 항목"
+            },
+            {
+              "id": "E-W5",
+              "system": "TMS",
+              "label": "배송완료 기록",
+              "time": "2026-09-18T05:10:00+09:00",
+              "value": "05:10 완료 등록. 정확한 상품 인도 여부는 별도 확인.",
+              "status": "fact",
+              "source": "합성 TMS SYN-R02/2"
+            }
+          ],
+          "wms": {
+            "picking": {
+              "orderId": "SYN-ORDER02",
+              "product": "비스킷",
+              "quantity": 18,
+              "unit": "EA",
+              "zone": "B",
+              "cell": "B-20-2",
+              "toteId": "SYN-TOTE02-A",
+              "pickedAt": "2026-09-18T02:15:00+09:00",
+              "workType": "FACILITY",
+              "workUnitType": "BOX"
+            },
+            "shipping": {
+              "id": "SYN-OUT02",
+              "product": "휴지",
+              "quantity": 1,
+              "unit": "BOX",
+              "toteId": "SYN-TOTE02-B",
+              "time": "2026-09-18T03:02:00+09:00",
+              "dock": "D-02",
+              "vehicle": "시연 차량 02"
+            },
+            "events": [
+              {
+                "id": "W-W1",
+                "time": "2026-09-18T02:15:00+09:00",
+                "label": "피킹 스캔 · 비스킷 18 EA",
+                "location": "B-20-2 / SYN-TOTE02-A",
+                "status": "fact",
+                "source": "합성 피킹 이벤트"
+              },
+              {
+                "id": "W-W2",
+                "time": "2026-09-18T02:31:00+09:00",
+                "label": "소터 투입",
+                "location": "소터 IN-02 / SYN-TOTE02-A",
+                "status": "fact",
+                "source": "합성 공정 시연 이벤트"
+              },
+              {
+                "id": "W-W3",
+                "time": "2026-09-18T02:33:00+09:00",
+                "label": "분기 이동",
+                "location": "분기 02 → D-02",
+                "status": "fact",
+                "source": "합성 공정 시연 이벤트"
+              },
+              {
+                "id": "W-W4",
+                "time": "2026-09-18T03:02:00+09:00",
+                "label": "출고 스캔 · 휴지 1 BOX",
+                "location": "D-02 / SYN-TOTE02-B",
+                "status": "fact",
+                "source": "합성 출고 이벤트"
+              }
+            ],
+            "referenceModule": "30_센터작업모니터링",
+            "sorting": {
+              "sortedAt": "2026-09-18T02:33:00+09:00",
+              "schdChuteNo": "CH-02",
+              "rsltChuteNo": "CH-02",
+              "source": "30 필드 정의를 참고한 가상 분류실적"
+            }
+          },
+          "tms": {
+            "centerId": "SYN-CTR01",
+            "bizDate": "2026-09-18",
+            "routeId": "SYN-R02",
+            "vehicle": "시연 차량 02",
+            "mapNote": "가상 좌표·방문순서 연결선. 실제 GPS 궤적 아님.",
+            "stops": [
+              {
+                "id": "SYN-ST05",
+                "name": "가상 온유점",
+                "sequence": 1,
+                "planned": "2026-09-18T04:45:00+09:00",
+                "actual": "2026-09-18T04:47:00+09:00",
+                "mobileEntry": "2026-09-18T04:44:00+09:00",
+                "mobileExit": "2026-09-18T04:49:00+09:00",
+                "lat": 37.482,
+                "lng": 127.01,
+                "status": "fact"
+              },
+              {
+                "id": "SYN-ST02",
+                "name": "가상 새봄점",
+                "sequence": 2,
+                "planned": "2026-09-18T05:10:00+09:00",
+                "actual": "2026-09-18T05:10:00+09:00",
+                "mobileEntry": "2026-09-18T05:07:00+09:00",
+                "mobileExit": "2026-09-18T05:14:00+09:00",
+                "lat": 37.495,
+                "lng": 127.033,
+                "status": "fact"
+              },
+              {
+                "id": "SYN-ST06",
+                "name": "가상 해뜰점",
+                "sequence": 3,
+                "planned": "2026-09-18T05:40:00+09:00",
+                "actual": "2026-09-18T05:42:00+09:00",
+                "mobileEntry": "2026-09-18T05:37:00+09:00",
+                "mobileExit": "2026-09-18T05:46:00+09:00",
+                "lat": 37.514,
+                "lng": 127.026,
+                "status": "fact"
+              }
+            ]
+          },
+          "replayAnalysis": {
+            "summary": "경영주는 비스킷 18개 주문에 휴지 1박스를 받았다고 진술했습니다. 상담원이 중간에 ‘1개’로 잘못 재진술했으나 경영주가 ‘1박스’로 정정했습니다. 오출고 확인·회송 방법·주문 상품 처리를 요청합니다.",
+            "fields": {
+              "storeId": "SYN-ST02",
+              "subject": "비스킷 주문 대신 휴지 입고",
+              "quantity": 1,
+              "unit": "BOX",
+              "request": "오출고 확인·회송 방법·주문 상품 처리 안내"
+            },
+            "issues": [
+              {
+                "field": "unit",
+                "message": "상담원 입력 EA와 경영주가 정정한 BOX가 다릅니다. 원문 확인 후 수정해 주세요.",
+                "evidence": "발화 3~5"
+              },
+              {
+                "field": "quantity",
+                "message": "주문 18 EA와 입고 1 BOX를 단순 차감하지 마세요.",
+                "evidence": "E-W1/E-W3"
+              }
+            ],
+            "questions": [
+              "주문 상품과 실제 입고 상품의 라벨을 센터에서 대조해 주세요.",
+              "피킹 토트와 출고 토트 연결 및 회송·재처리 방안을 확인해 주세요."
+            ],
+            "department": {
+              "id": "warehouse",
+              "name": "센터 상품 담당",
+              "reason": "주문/출고 상품이 달라 피킹·출고 대조와 회송 확인이 필요합니다."
+            },
+            "facts": [
+              "주문/피킹은 비스킷 18 EA입니다.",
+              "출고 스캔은 휴지 1 BOX로 기록돼 불일치합니다.",
+              "배송완료 등록은 05:10입니다."
+            ],
+            "unknowns": [
+              "불일치 발생 공정과 원인은 미확인입니다.",
+              "상품 회송·주문 상품 재처리 완료 여부는 확인이 필요합니다."
+            ],
+            "replyDraft": "경영주님, 주문하신 비스킷 18개와 출고 기록의 휴지 1박스가 다른 점을 확인했습니다. 발생 경위와 회송·주문 상품 처리 방안은 센터에서 추가 확인 후 안내드리겠습니다."
+          },
+          "media": [
+            {
+              "id": "SYN-CCTV-CASE2-SORTER",
+              "caseId": "CASE-0002",
+              "system": "WMS",
+              "cameraId": "SYN-CAM-02",
+              "eventIds": [
+                "W-W3"
+              ],
+              "url": "/demo/sorter-demo.mp4",
+              "synthetic": true,
+              "startSeconds": 0,
+              "endSeconds": 12,
+              "occurredAt": "2026-09-18T02:33:00+09:00",
+              "label": "분기02 → D-02 공정 합성 영상",
+              "notice": "AI로 만든 공정 설명 영상. 실제 작업·휴먼에러·귀책 증거가 아님."
+            }
+          ],
+          "revision": 3,
+          "analysis": {
+            "summary": "경영주는 비스킷 18개 주문에 휴지 1박스를 받았다고 진술했습니다. 상담원이 중간에 ‘1개’로 잘못 재진술했으나 경영주가 ‘1박스’로 정정했습니다. 오출고 확인·회송 방법·주문 상품 처리를 요청합니다.",
+            "fields": {
+              "storeId": "SYN-ST02",
+              "subject": "비스킷 주문 대신 휴지 입고",
+              "quantity": 1,
+              "unit": "BOX",
+              "request": "오출고 확인·회송 방법·주문 상품 처리 안내"
+            },
+            "issues": [
+              {
+                "field": "unit",
+                "message": "상담원 입력 EA와 경영주가 정정한 BOX가 다릅니다. 원문 확인 후 수정해 주세요.",
+                "evidence": "발화 3~5"
+              },
+              {
+                "field": "quantity",
+                "message": "주문 18 EA와 입고 1 BOX를 단순 차감하지 마세요.",
+                "evidence": "E-W1/E-W3"
+              }
+            ],
+            "questions": [
+              "주문 상품과 실제 입고 상품의 라벨을 센터에서 대조해 주세요.",
+              "피킹 토트와 출고 토트 연결 및 회송·재처리 방안을 확인해 주세요."
+            ],
+            "department": {
+              "id": "warehouse",
+              "name": "센터 상품 담당",
+              "reason": "주문/출고 상품이 달라 피킹·출고 대조와 회송 확인이 필요합니다."
+            },
+            "facts": [
+              "주문/피킹은 비스킷 18 EA입니다.",
+              "출고 스캔은 휴지 1 BOX로 기록돼 불일치합니다.",
+              "배송완료 등록은 05:10입니다."
+            ],
+            "unknowns": [
+              "불일치 발생 공정과 원인은 미확인입니다.",
+              "상품 회송·주문 상품 재처리 완료 여부는 확인이 필요합니다."
+            ],
+            "replyDraft": "경영주님, 주문하신 비스킷 18개와 출고 기록의 휴지 1박스가 다른 점을 확인했습니다. 발생 경위와 회송·주문 상품 처리 방안은 센터에서 추가 확인 후 안내드리겠습니다."
+          },
+          "analysisMode": "replay",
+          "analysisRequestId": "replay-e5c0dc4c1a2d42ab8c44af88bd463dd0",
+          "updatedAt": "2026-09-21T10:28:49.710362+00:00",
+          "history": [
+            {
+              "at": "2026-09-21T10:28:49.198633+00:00",
+              "actor": "counselor",
+              "action": "analyzed",
+              "message": "사전 분석 리플레이"
+            },
+            {
+              "at": "2026-09-21T10:28:49.475735+00:00",
+              "actor": "counselor",
+              "action": "review",
+              "message": "접수 상태 저장"
+            },
+            {
+              "at": "2026-09-21T10:28:49.710362+00:00",
+              "actor": "counselor",
+              "action": "review",
+              "message": "접수 상태 저장"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "ownedWebCleanupExitCode": 0,
+  "finishedAt": "2026-09-21T10:29:05.842113+00:00",
+  "paidAnalyzerInvocations": 0,
+  "blockedExternalConnections": [],
+  "headEnd": "a952edee271574401332148f42969621a81a74d7",
+  "sourceHashesEnd": {
+    "apps/web/app/globals.css": "9d303f73ec32aa9832461932a065d84a7204968e8001edb8c2e6f0e9de15bce4",
+    "apps/web/app/icon.svg": "db046826c657ff1026aafefb9e1f06d48f18c229a17d07dc914263e9acd9a847",
+    "apps/web/app/layout.tsx": "4c3986b8c358cad1a084c40da06dc5ee0279053c6d2a101acfb4779f04b6e0ee",
+    "apps/web/app/page.tsx": "48aaca8bae6fae2114f0d65bbff263ee4318f16d7f3de9408da90fb393fcf420",
+    "apps/web/app/tokens.css": "31a08dbc4cfd532d4a4d44ca0cf1fa8629ed57e25a9629b5caf748b41d1c01c3",
+    "apps/web/components/LogisticsView.module.css": "06f51bb143d3d4e3d2e5c1be1d717b786aedec0431f96ebc762bde4483a05275",
+    "apps/web/components/LogisticsView.tsx": "30922883fb60cc01fc33f983535f5cc3c001f61ac20982d251b2f2c5766a7aa3",
+    "apps/web/lib/api.ts": "b7a202365b3e2facfb4fca23f2bae45cdec4888448eaad0d27235dd252d6d2a0",
+    "apps/web/lib/types.ts": "3871af57d8633ae73b27c160de4bbe84fb9018263c43b56fc011efd7919a1461",
+    "apps/web/package-lock.json": "93fbdb2a0f14a73e41782566ea057a29226455d944356c9515aea6b0365a0b6c",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "server/__init__.py": "b4c4a62ab2ea460cda3dddadcda2d33254eab2c0c91541ae38b4134014f9bdac",
+    "server/analysis_schema.py": "51463e09613c82957a443341982d261259b906e80df1b0324e6d82c04a263035",
+    "server/app.py": "6523565d8270ba8d6447562b921b0f20cb5f3ffa690e2d58a579b3393d988da9",
+    "server/budget.py": "961409c916801d2d133785119ce58232170686caa3eeb3b75ec4488031dfdaf0",
+    "server/cas_budget.py": "4191432f59b0157867d39303cfd6e9720a43656459785992f9d7e5d944f05036",
+    "server/cas_repository.py": "fdc21f8a0da2917cd9b7c5dd3d609ef873f056843accf0e57f9ef31baadb4f78",
+    "server/cas_store.py": "939c7210ec1d2c1f406f69754b832268d1fb0cb8e3d925b6cf235fbe85a38ee7",
+    "server/deployment_access.py": "299c1432484598c86b9ec19541f8a187404eb6907f2fe140775901910fee1935",
+    "server/deployment_app.py": "0e576b81725f83434d459f201075de4ff03f635f800d59d49ef0c11b08db0382",
+    "server/errors.py": "dae0dac1eeba6c6f3687c8cebcd32db8de17e3bde330c44e9bf170e215cdf01d",
+    "server/handlers.py": "aa279cfd48f546f3d8d12d2c8310ea2f91ba85c32733ac5808fff2779a85d604",
+    "server/live.py": "38c716e63b575b17e64cdaeab52988827a67c68d808a250ff3d34b2e47281f20",
+    "server/openapi.yaml": "6035a972fefccf750bb800a2e85a618e5e95336f859dfe554941c205673bc966",
+    "server/repository.py": "1165f1216d000d92ed3ef6bbe27dccddb2323ff464c20e4b2f3059bc3b0bc18d",
+    "server/runtime_config.py": "82a24e6ec92c00c945d84fed7cb494e9baf8866dfd3b2d66ef5ef2eed5425f3f",
+    "server/runtime_storage.py": "2ee19f31430891a0560f3c226b20c9c1b5f92769201454f5e2274309dde9e45b",
+    "server/service.py": "68fc155357bee36e4fa1c894ebeb1f56b0eef763dd5b3b50e4a03b1ffdd0bf60",
+    "server/vercel_blob_store.py": "e425701497876ec5b9dc5988cae34b38b7b0bac233e75d804efe5e8c019ee93d",
+    "tests/e2e/package-lock.json": "b834f22670ee16ce45a1d4a2ed38482faae9049ff80f5209e86aec810be8eced"
+  },
+  "originalStateAfter": {
+    "C:\\Users\\j324r\\OneDrive\\문서\\ChatGPT\\해커톤_D-Day\\happycall-ralphthon\\.local\\cases-store.json": null,
+    "C:\\Users\\j324r\\OneDrive\\문서\\ChatGPT\\해커톤_D-Day\\happycall-ralphthon\\.local\\demo-usage.json": null
+  },
+  "apiStopped": true,
+  "sameSource": true,
+  "originalStatePreserved": true
+}

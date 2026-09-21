@@ -1,0 +1,6 @@
+{
+  "name": "pc4-tms-contract-harness",
+  "private": true,
+  "scripts": { "dev": "next dev --hostname 127.0.0.1 --port 13104" },
+  "dependencies": { "next": "15.5.25", "react": "19.1.4", "react-dom": "19.1.4" }
+}

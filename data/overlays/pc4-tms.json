@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "synthetic": true,
+  "purpose": "N04 독립 합성 사례의 명시적 관계키 검증. 실제 원천 매핑·GPS 궤적·실물 인도 증거가 아님.",
+  "source": "data/fixtures/cases.json @ a952edee271574401332148f42969621a81a74d7",
+  "cases": [
+    {
+      "caseId": "CASE-0001", "caseType": "missing", "storeId": "SYN-ST01", "bizDate": "2026-09-18",
+      "centerId": "SYN-CTR01", "routeId": "SYN-R01", "vehicle": "시연 차량 01", "sequence": 1,
+      "planned": "2026-09-18T05:00:00+09:00", "actual": null,
+      "evidence": [
+        { "id": "E-M1", "system": "TMS", "label": "규정 도착 시각", "time": "2026-09-18T05:00:00+09:00", "value": "규정 05:00 / 배송완료 기록 없음", "status": "fact", "source": "합성 TMS 방문행 SYN-R01/1" },
+        { "id": "E-M2", "system": "TMS", "label": "배송완료 실적", "time": null, "value": "미등록. 실제 미도착·기사 귀책은 아직 확정할 수 없습니다.", "status": "unknown", "source": "합성 TMS 실적 조회" }
+      ]
+    },
+    {
+      "caseId": "CASE-0002", "caseType": "wrong", "storeId": "SYN-ST02", "bizDate": "2026-09-18",
+      "centerId": "SYN-CTR01", "routeId": "SYN-R02", "vehicle": "시연 차량 02", "sequence": 2,
+      "planned": "2026-09-18T05:10:00+09:00", "actual": "2026-09-18T05:10:00+09:00",
+      "evidence": [
+        { "id": "E-W5", "system": "TMS", "label": "배송완료 기록", "time": "2026-09-18T05:10:00+09:00", "value": "05:10 완료 등록. 정확한 상품 인도 여부는 별도 확인.", "status": "fact", "source": "합성 TMS SYN-R02/2" }
+      ]
+    }
+  ],
+  "media": [],
+  "limitations": ["야간 업무일 규칙 미확정: 시간만 있는 계획을 날짜와 합치지 않음", "방문순번은 실제 방문순서 확정이 아님", "GPS 진입/이탈은 상품 인도 증거가 아님", "TMS 영상 미등록"]
+}

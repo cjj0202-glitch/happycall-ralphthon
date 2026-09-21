@@ -1,0 +1,233 @@
+{
+  "startedAt": "2026-09-21T10:26:42.766Z",
+  "suite": "existing-product-isolated-ui",
+  "ui": "http://127.0.0.1:13105",
+  "api": "http://127.0.0.1:18105",
+  "executor": "AI Playwright; not human review or live AI",
+  "newTmsIntegrated": false,
+  "flows": [
+    {
+      "id": "CASE-0001-1",
+      "caseId": "CASE-0001",
+      "repetition": 1,
+      "status": "FAIL",
+      "startedAt": "2026-09-21T10:26:52.271Z",
+      "steps": [
+        "native-audio-ended",
+        "replay-analysis-via-ui",
+        "wms-source-and-evidence-linked-via-ui",
+        "tms-source-and-evidence-linked-via-ui"
+      ],
+      "store": {
+        "store": "run-01",
+        "scope": "setup only; new isolated state, existing state never reset"
+      },
+      "audio": {
+        "method": "native controls, full duration, actual ended",
+        "wallSeconds": 47.706,
+        "before": {
+          "duration": 47.15,
+          "ended": false,
+          "currentTime": 0,
+          "rate": 1,
+          "currentSrc": "http://127.0.0.1:13105/demo/CASE-0001.wav"
+        },
+        "after": {
+          "ended": true,
+          "currentTime": 47.15,
+          "duration": 47.15,
+          "rate": 1
+        },
+        "syntheticEventsDispatched": 0
+      },
+      "tmsOwnRow": [
+        "1",
+        "가상 한빛점 · 문의 점포",
+        "05:00",
+        "미등록",
+        "미등록",
+        "미등록"
+      ],
+      "error": {
+        "message": "locator.fill: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('요청사항', { exact: true })\u001b[22m\n",
+        "stack": "locator.fill: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('요청사항', { exact: true })\u001b[22m\n\n    at flow (C:\\Users\\j324r\\OneDrive\\문서\\ChatGPT\\해커톤_D-Day\\happycall-ralphthon\\tests\\remote\\pc4\\flow-ui-check.mjs:79:46)\n    at async file:///C:/Users/j324r/OneDrive/%EB%AC%B8%EC%84%9C/ChatGPT/%ED%95%B4%EC%BB%A4%ED%86%A4_D-Day/happycall-ralphthon/tests/remote/pc4/flow-ui-check.mjs:140:123"
+      },
+      "finishedAt": "2026-09-21T10:27:58.249Z",
+      "http": [
+        {
+          "url": "http://127.0.0.1:18105/api/cases",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001/analyze",
+          "method": "POST",
+          "status": 200,
+          "mode": "replay"
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 1
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 2
+        }
+      ]
+    },
+    {
+      "id": "CASE-0002-1",
+      "caseId": "CASE-0002",
+      "repetition": 1,
+      "status": "FAIL",
+      "startedAt": "2026-09-21T10:27:58.277Z",
+      "steps": [
+        "native-audio-ended",
+        "replay-analysis-via-ui",
+        "wms-source-and-evidence-linked-via-ui",
+        "tms-source-and-evidence-linked-via-ui"
+      ],
+      "store": {
+        "store": "run-02",
+        "scope": "setup only; new isolated state, existing state never reset"
+      },
+      "audio": {
+        "method": "native controls, full duration, actual ended",
+        "wallSeconds": 49.733,
+        "before": {
+          "duration": 49.55,
+          "ended": false,
+          "currentTime": 0,
+          "rate": 1,
+          "currentSrc": "http://127.0.0.1:13105/demo/CASE-0002.wav"
+        },
+        "after": {
+          "ended": true,
+          "currentTime": 49.55,
+          "duration": 49.55,
+          "rate": 1
+        },
+        "syntheticEventsDispatched": 0
+      },
+      "tmsOwnRow": [
+        "2",
+        "가상 새봄점 · 문의 점포",
+        "05:10",
+        "05:10",
+        "05:07",
+        "05:14"
+      ],
+      "error": {
+        "message": "locator.fill: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('요청사항', { exact: true })\u001b[22m\n",
+        "stack": "locator.fill: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('요청사항', { exact: true })\u001b[22m\n\n    at flow (C:\\Users\\j324r\\OneDrive\\문서\\ChatGPT\\해커톤_D-Day\\happycall-ralphthon\\tests\\remote\\pc4\\flow-ui-check.mjs:79:46)\n    at async file:///C:/Users/j324r/OneDrive/%EB%AC%B8%EC%84%9C/ChatGPT/%ED%95%B4%EC%BB%A4%ED%86%A4_D-Day/happycall-ralphthon/tests/remote/pc4/flow-ui-check.mjs:140:123"
+      },
+      "finishedAt": "2026-09-21T10:29:05.023Z",
+      "http": [
+        {
+          "url": "http://127.0.0.1:18105/api/cases",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002/analyze",
+          "method": "POST",
+          "status": 200,
+          "mode": "replay"
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 1
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 2
+        }
+      ]
+    }
+  ],
+  "boundaries": [],
+  "consoleErrors": [],
+  "blockedExternal": [],
+  "blockedLive": [],
+  "http": [
+    {
+      "url": "http://127.0.0.1:18105/api/cases",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001/analyze",
+      "method": "POST",
+      "status": 200,
+      "mode": "replay"
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 1
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 2
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002/analyze",
+      "method": "POST",
+      "status": 200,
+      "mode": "replay"
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 1
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 2
+    }
+  ],
+  "limitations": [
+    "Uses existing page.tsx/LogisticsView; new pc4 TmsScene is not integrated",
+    "First repetition of each CASE plays the full audio at rate 1; repetitions 2 and 3 seek near the end and await genuine media ended",
+    "All setup resets create new test-only temporary stores; original state and budget remain untouched",
+    "Replay is saved fixture analysis, not actual STT/LLM"
+  ],
+  "finishedAt": "2026-09-21T10:29:05.300Z",
+  "guard": {
+    "ready": true,
+    "paidAnalyzerInvocations": 0,
+    "externalConnectionsBlocked": 0,
+    "stores": [
+      "run-01",
+      "run-02"
+    ]
+  },
+  "summary": {
+    "planned": 6,
+    "executed": 2,
+    "passed": 0,
+    "failed": 2,
+    "notRun": 4,
+    "boundaryPassed": 0,
+    "boundaryFailed": 0
+  }
+}

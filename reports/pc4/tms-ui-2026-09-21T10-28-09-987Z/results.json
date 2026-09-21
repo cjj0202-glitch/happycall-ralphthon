@@ -1,0 +1,47 @@
+{
+  "started": "2026-09-21T10:28:09.990Z",
+  "host": "pc4/장준호",
+  "base": "http://127.0.0.1:13104",
+  "head": "a952edee271574401332148f42969621a81a74d7",
+  "scope": "Assigned TmsScene in test-only host; callbacks simulated. Not pc1 integration or six full product flows.",
+  "sourceHashesStart": {
+    "apps/web/components/TmsScene.tsx": "00c265b4bb0f8234b99b9c0ded5866584b2623425538ebdb7d324a6fb22ee935",
+    "apps/web/components/TmsScene.module.css": "de5d4ab5f73fac9484aad94fc3db869902dccd7bcffbd4cb045e65398f9f9446",
+    "data/overlays/pc4-tms.json": "a7cada3fa82c321d0bb2d8692d2cbdde251601489f4dbb44cd777e0b289df28a",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "tests/remote/pc4/ui-check.mjs": "63353d8be0d235a290f38646ebfc8063cd21d361c926780de5ce75f48edd9b4d"
+  },
+  "checks": [
+    {
+      "name": "regression-authoritative-server-unlink",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n",
+      "screenshot": "failure-1.png"
+    },
+    {
+      "name": "regression-explicit-linked-text-intake",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(await firstLink().isEnabled())\n",
+      "screenshot": "failure-2.png"
+    }
+  ],
+  "pageErrors": [
+    "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <InnerLayoutRouter url=\"/\" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>\n      <SegmentViewNode type=\"page\" pagePath=\"page.tsx\">\n        <SegmentTrieNode>\n        <ClientPageRoot Component={function Harness} searchParams={{}} params={{}}>\n          <Harness params={Promise} searchParams={Promise}>\n            <header>\n            <main className=\"harness-main\">\n              <TmsScene caseData={{id:\"CASE-0001\", ...}} onBack={function onBack} ...>\n                <TmsContent caseData={{id:\"CASE-0001\", ...}} onBack={function onBack} ...>\n                  <section className=\"TmsScene_r...\" aria-label=\"TMS 방문 기록\" data-testid=\"tms-scene\">\n                    <header>\n                    <div>\n                    <p>\n                    <div className=\"TmsScene_w...\">\n                      <section className=\"TmsScene_p...\" aria-label=\"방문순번 개념 지도\">\n                        <div>\n                        <p>\n                        <svg viewBox=\"0 0 760 250\" className=\"TmsScene_m...\" role=\"img\" aria-labelledby=\"_R_klrlb_\" ...>\n                          <title id=\"_R_klrlb_\">\n+                           {\"합성 방문순번 경로. 문의 점포 \"}\n                            ...\n                          ...\n                        ...\n                      ...\n                    ...\n                    ...\n      ...\n",
+    "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <InnerLayoutRouter url=\"/\" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>\n      <SegmentViewNode type=\"page\" pagePath=\"page.tsx\">\n        <SegmentTrieNode>\n        <ClientPageRoot Component={function Harness} searchParams={{}} params={{}}>\n          <Harness params={Promise} searchParams={Promise}>\n            <header>\n            <main className=\"harness-main\">\n              <TmsScene caseData={{id:\"CASE-0001\", ...}} onBack={function onBack} ...>\n                <TmsContent caseData={{id:\"CASE-0001\", ...}} onBack={function onBack} ...>\n                  <section className=\"TmsScene_r...\" aria-label=\"TMS 방문 기록\" data-testid=\"tms-scene\">\n                    <header>\n                    <div>\n                    <p>\n                    <div className=\"TmsScene_w...\">\n                      <section className=\"TmsScene_p...\" aria-label=\"방문순번 개념 지도\">\n                        <div>\n                        <p>\n                        <svg viewBox=\"0 0 760 250\" className=\"TmsScene_m...\" role=\"img\" aria-labelledby=\"_R_klrlb_\" ...>\n                          <title id=\"_R_klrlb_\">\n+                           {\"합성 방문순번 경로. 문의 점포 \"}\n                            ...\n                          ...\n                        ...\n                      ...\n                    ...\n                    ...\n      ...\n"
+  ],
+  "blockedExternal": [],
+  "finished": "2026-09-21T10:28:14.016Z",
+  "sourceHashesEnd": {
+    "apps/web/components/TmsScene.tsx": "21b72f739f1a0272aee07c61cfa8603f1ac03d7576ac35f4700b271f64dbe3fd",
+    "apps/web/components/TmsScene.module.css": "de5d4ab5f73fac9484aad94fc3db869902dccd7bcffbd4cb045e65398f9f9446",
+    "data/overlays/pc4-tms.json": "a7cada3fa82c321d0bb2d8692d2cbdde251601489f4dbb44cd777e0b289df28a",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "tests/remote/pc4/ui-check.mjs": "63353d8be0d235a290f38646ebfc8063cd21d361c926780de5ce75f48edd9b4d"
+  },
+  "sourceStable": false,
+  "summary": {
+    "executed": 2,
+    "passed": 0,
+    "failed": 2
+  }
+}

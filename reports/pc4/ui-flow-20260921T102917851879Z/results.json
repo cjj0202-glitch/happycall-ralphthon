@@ -1,0 +1,1071 @@
+{
+  "startedAt": "2026-09-21T10:29:20.166Z",
+  "suite": "existing-product-isolated-ui",
+  "ui": "http://127.0.0.1:13105",
+  "api": "http://127.0.0.1:18105",
+  "executor": "AI Playwright; not human review or live AI",
+  "newTmsIntegrated": false,
+  "flows": [
+    {
+      "id": "CASE-0001-1",
+      "caseId": "CASE-0001",
+      "repetition": 1,
+      "status": "PASS",
+      "startedAt": "2026-09-21T10:29:24.319Z",
+      "steps": [
+        "native-audio-ended",
+        "replay-analysis-via-ui",
+        "wms-source-and-evidence-linked-via-ui",
+        "tms-source-and-evidence-linked-via-ui",
+        "edited-reviewed-and-handed-off-via-ui",
+        "intermediate-reply-and-pending-close-disabled-via-ui",
+        "final-reply-and-closed-via-ui",
+        "owner-read-registered-reply-and-closed-state"
+      ],
+      "store": {
+        "store": "run-01",
+        "scope": "setup only; new isolated state, existing state never reset"
+      },
+      "audio": {
+        "method": "native controls, full duration, actual ended",
+        "wallSeconds": 47.782,
+        "before": {
+          "duration": 47.15,
+          "ended": false,
+          "currentTime": 0,
+          "rate": 1,
+          "currentSrc": "http://127.0.0.1:13105/demo/CASE-0001.wav"
+        },
+        "after": {
+          "ended": true,
+          "currentTime": 47.15,
+          "duration": 47.15,
+          "rate": 1
+        },
+        "syntheticEventsDispatched": 0
+      },
+      "tmsOwnRow": [
+        "1",
+        "가상 한빛점 · 문의 점포",
+        "05:00",
+        "미등록",
+        "미등록",
+        "미등록"
+      ],
+      "final": {
+        "status": "closed",
+        "revision": 6,
+        "selectedEvidence": [
+          "E-M3",
+          "E-M1"
+        ],
+        "sourcePreserved": true
+      },
+      "finishedAt": "2026-09-21T10:30:16.564Z",
+      "http": [
+        {
+          "url": "http://127.0.0.1:18105/api/cases",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001/analyze",
+          "method": "POST",
+          "status": 200,
+          "mode": "replay"
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 1
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 2
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 3
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 4
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 5
+        }
+      ]
+    },
+    {
+      "id": "CASE-0001-2",
+      "caseId": "CASE-0001",
+      "repetition": 2,
+      "status": "PASS",
+      "startedAt": "2026-09-21T10:30:16.651Z",
+      "steps": [
+        "native-audio-ended",
+        "replay-analysis-via-ui",
+        "wms-source-and-evidence-linked-via-ui",
+        "tms-source-and-evidence-linked-via-ui",
+        "edited-reviewed-and-handed-off-via-ui",
+        "intermediate-reply-and-pending-close-disabled-via-ui",
+        "final-reply-and-closed-via-ui",
+        "owner-read-registered-reply-and-closed-state"
+      ],
+      "store": {
+        "store": "run-02",
+        "scope": "setup only; new isolated state, existing state never reset"
+      },
+      "audio": {
+        "method": "native controls, explicit near-end seek, actual ended",
+        "wallSeconds": 1.437,
+        "before": {
+          "duration": 47.15,
+          "ended": false,
+          "currentTime": 0,
+          "rate": 1,
+          "currentSrc": "http://127.0.0.1:13105/demo/CASE-0001.wav"
+        },
+        "after": {
+          "ended": true,
+          "currentTime": 47.15,
+          "duration": 47.15,
+          "rate": 1
+        },
+        "syntheticEventsDispatched": 0
+      },
+      "tmsOwnRow": [
+        "1",
+        "가상 한빛점 · 문의 점포",
+        "05:00",
+        "미등록",
+        "미등록",
+        "미등록"
+      ],
+      "final": {
+        "status": "closed",
+        "revision": 6,
+        "selectedEvidence": [
+          "E-M3",
+          "E-M1"
+        ],
+        "sourcePreserved": true
+      },
+      "finishedAt": "2026-09-21T10:30:21.681Z",
+      "http": [
+        {
+          "url": "http://127.0.0.1:18105/api/cases",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001/analyze",
+          "method": "POST",
+          "status": 200,
+          "mode": "replay"
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 1
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 2
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 3
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 4
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 5
+        }
+      ]
+    },
+    {
+      "id": "CASE-0001-3",
+      "caseId": "CASE-0001",
+      "repetition": 3,
+      "status": "PASS",
+      "startedAt": "2026-09-21T10:30:21.719Z",
+      "steps": [
+        "native-audio-ended",
+        "replay-analysis-via-ui",
+        "wms-source-and-evidence-linked-via-ui",
+        "tms-source-and-evidence-linked-via-ui",
+        "edited-reviewed-and-handed-off-via-ui",
+        "intermediate-reply-and-pending-close-disabled-via-ui",
+        "final-reply-and-closed-via-ui",
+        "owner-read-registered-reply-and-closed-state"
+      ],
+      "store": {
+        "store": "run-03",
+        "scope": "setup only; new isolated state, existing state never reset"
+      },
+      "audio": {
+        "method": "native controls, explicit near-end seek, actual ended",
+        "wallSeconds": 1.434,
+        "before": {
+          "duration": 47.15,
+          "ended": false,
+          "currentTime": 0,
+          "rate": 1,
+          "currentSrc": "http://127.0.0.1:13105/demo/CASE-0001.wav"
+        },
+        "after": {
+          "ended": true,
+          "currentTime": 47.15,
+          "duration": 47.15,
+          "rate": 1
+        },
+        "syntheticEventsDispatched": 0
+      },
+      "tmsOwnRow": [
+        "1",
+        "가상 한빛점 · 문의 점포",
+        "05:00",
+        "미등록",
+        "미등록",
+        "미등록"
+      ],
+      "final": {
+        "status": "closed",
+        "revision": 6,
+        "selectedEvidence": [
+          "E-M3",
+          "E-M1"
+        ],
+        "sourcePreserved": true
+      },
+      "finishedAt": "2026-09-21T10:30:26.385Z",
+      "http": [
+        {
+          "url": "http://127.0.0.1:18105/api/cases",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001/analyze",
+          "method": "POST",
+          "status": 200,
+          "mode": "replay"
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 1
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 2
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 3
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 4
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 5
+        }
+      ]
+    },
+    {
+      "id": "CASE-0002-1",
+      "caseId": "CASE-0002",
+      "repetition": 1,
+      "status": "PASS",
+      "startedAt": "2026-09-21T10:30:26.405Z",
+      "steps": [
+        "native-audio-ended",
+        "replay-analysis-via-ui",
+        "wms-source-and-evidence-linked-via-ui",
+        "tms-source-and-evidence-linked-via-ui",
+        "edited-reviewed-and-handed-off-via-ui",
+        "intermediate-reply-and-pending-close-disabled-via-ui",
+        "final-reply-and-closed-via-ui",
+        "owner-read-registered-reply-and-closed-state"
+      ],
+      "store": {
+        "store": "run-04",
+        "scope": "setup only; new isolated state, existing state never reset"
+      },
+      "audio": {
+        "method": "native controls, full duration, actual ended",
+        "wallSeconds": 49.693,
+        "before": {
+          "duration": 49.55,
+          "ended": false,
+          "currentTime": 0,
+          "rate": 1,
+          "currentSrc": "http://127.0.0.1:13105/demo/CASE-0002.wav"
+        },
+        "after": {
+          "ended": true,
+          "currentTime": 49.55,
+          "duration": 49.55,
+          "rate": 1
+        },
+        "syntheticEventsDispatched": 0
+      },
+      "tmsOwnRow": [
+        "2",
+        "가상 새봄점 · 문의 점포",
+        "05:10",
+        "05:10",
+        "05:07",
+        "05:14"
+      ],
+      "final": {
+        "status": "closed",
+        "revision": 6,
+        "selectedEvidence": [
+          "E-W1",
+          "E-W5"
+        ],
+        "sourcePreserved": true
+      },
+      "finishedAt": "2026-09-21T10:31:19.440Z",
+      "http": [
+        {
+          "url": "http://127.0.0.1:18105/api/cases",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002/analyze",
+          "method": "POST",
+          "status": 200,
+          "mode": "replay"
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 1
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 2
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 3
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 4
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 5
+        }
+      ]
+    },
+    {
+      "id": "CASE-0002-2",
+      "caseId": "CASE-0002",
+      "repetition": 2,
+      "status": "PASS",
+      "startedAt": "2026-09-21T10:31:19.454Z",
+      "steps": [
+        "native-audio-ended",
+        "replay-analysis-via-ui",
+        "wms-source-and-evidence-linked-via-ui",
+        "tms-source-and-evidence-linked-via-ui",
+        "edited-reviewed-and-handed-off-via-ui",
+        "intermediate-reply-and-pending-close-disabled-via-ui",
+        "final-reply-and-closed-via-ui",
+        "owner-read-registered-reply-and-closed-state"
+      ],
+      "store": {
+        "store": "run-05",
+        "scope": "setup only; new isolated state, existing state never reset"
+      },
+      "audio": {
+        "method": "native controls, explicit near-end seek, actual ended",
+        "wallSeconds": 1.438,
+        "before": {
+          "duration": 49.55,
+          "ended": false,
+          "currentTime": 0,
+          "rate": 1,
+          "currentSrc": "http://127.0.0.1:13105/demo/CASE-0002.wav"
+        },
+        "after": {
+          "ended": true,
+          "currentTime": 49.55,
+          "duration": 49.55,
+          "rate": 1
+        },
+        "syntheticEventsDispatched": 0
+      },
+      "tmsOwnRow": [
+        "2",
+        "가상 새봄점 · 문의 점포",
+        "05:10",
+        "05:10",
+        "05:07",
+        "05:14"
+      ],
+      "final": {
+        "status": "closed",
+        "revision": 6,
+        "selectedEvidence": [
+          "E-W1",
+          "E-W5"
+        ],
+        "sourcePreserved": true
+      },
+      "finishedAt": "2026-09-21T10:31:23.623Z",
+      "http": [
+        {
+          "url": "http://127.0.0.1:18105/api/cases",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002/analyze",
+          "method": "POST",
+          "status": 200,
+          "mode": "replay"
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 1
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 2
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 3
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 4
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 5
+        }
+      ]
+    },
+    {
+      "id": "CASE-0002-3",
+      "caseId": "CASE-0002",
+      "repetition": 3,
+      "status": "PASS",
+      "startedAt": "2026-09-21T10:31:23.639Z",
+      "steps": [
+        "native-audio-ended",
+        "replay-analysis-via-ui",
+        "wms-source-and-evidence-linked-via-ui",
+        "tms-source-and-evidence-linked-via-ui",
+        "edited-reviewed-and-handed-off-via-ui",
+        "intermediate-reply-and-pending-close-disabled-via-ui",
+        "final-reply-and-closed-via-ui",
+        "owner-read-registered-reply-and-closed-state"
+      ],
+      "store": {
+        "store": "run-06",
+        "scope": "setup only; new isolated state, existing state never reset"
+      },
+      "audio": {
+        "method": "native controls, explicit near-end seek, actual ended",
+        "wallSeconds": 1.415,
+        "before": {
+          "duration": 49.55,
+          "ended": false,
+          "currentTime": 0,
+          "rate": 1,
+          "currentSrc": "http://127.0.0.1:13105/demo/CASE-0002.wav"
+        },
+        "after": {
+          "ended": true,
+          "currentTime": 49.55,
+          "duration": 49.55,
+          "rate": 1
+        },
+        "syntheticEventsDispatched": 0
+      },
+      "tmsOwnRow": [
+        "2",
+        "가상 새봄점 · 문의 점포",
+        "05:10",
+        "05:10",
+        "05:07",
+        "05:14"
+      ],
+      "final": {
+        "status": "closed",
+        "revision": 6,
+        "selectedEvidence": [
+          "E-W1",
+          "E-W5"
+        ],
+        "sourcePreserved": true
+      },
+      "finishedAt": "2026-09-21T10:31:27.664Z",
+      "http": [
+        {
+          "url": "http://127.0.0.1:18105/api/cases",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002/analyze",
+          "method": "POST",
+          "status": 200,
+          "mode": "replay"
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 1
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 2
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 3
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 4
+        },
+        {
+          "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+          "method": "PATCH",
+          "status": 200,
+          "sentRevision": 5
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "new-text-different-day-no-implicit-evidence",
+      "status": "PASS",
+      "store": {
+        "store": "run-07",
+        "scope": "setup only; new isolated state, existing state never reset"
+      },
+      "result": {
+        "caseId": "INT-8264E2B8",
+        "sourcePreserved": true,
+        "noImplicitEvidence": true,
+        "analysisStatus": 409,
+        "analysis": "NOT_RUN: new text has no replay fixture; paid AI forbidden"
+      }
+    },
+    {
+      "id": "explicit-reference-text-media-missing",
+      "status": "PASS",
+      "store": {
+        "store": "run-08",
+        "scope": "setup only; new isolated state, existing state never reset"
+      },
+      "result": {
+        "caseId": "INT-F488DA95",
+        "reference": "CASE-0002",
+        "mediaCopied": false,
+        "missingShown": true
+      }
+    },
+    {
+      "id": "media-404-and-retry",
+      "status": "PASS",
+      "store": {
+        "store": "run-09",
+        "scope": "setup only; new isolated state, existing state never reset"
+      },
+      "result": {
+        "injectedStatus": 404,
+        "errorDisplayed": true,
+        "originalScanPreserved": true,
+        "retryMetadataLoaded": true,
+        "nativeVideoAdvanced": true,
+        "escapeClosed": true
+      }
+    },
+    {
+      "id": "api-error-and-recovery-no-false-save",
+      "status": "PASS",
+      "store": {
+        "store": "run-10",
+        "scope": "setup only; new isolated state, existing state never reset"
+      },
+      "result": {
+        "injectedStatus": 503,
+        "errorVisible": true,
+        "noFalseSuccess": true,
+        "storedRevisionUnchangedOnFailure": true,
+        "retrySaved": true
+      }
+    },
+    {
+      "id": "api-offline-example-and-reconnect",
+      "status": "PASS",
+      "store": {
+        "store": "run-11",
+        "scope": "setup only; new isolated state, existing state never reset"
+      },
+      "result": {
+        "scope": "API disconnected; static UI and fixture remain available (not complete device offline)",
+        "readonlyExample": true,
+        "modeDisplayed": true,
+        "reconnected": true
+      }
+    },
+    {
+      "id": "browser-offline-save-and-recovery",
+      "status": "PASS",
+      "store": {
+        "store": "run-12",
+        "scope": "setup only; new isolated state, existing state never reset"
+      },
+      "result": {
+        "scope": "actual browser context offline/online",
+        "errorDisplayed": true,
+        "stateUnchangedOnFailure": true,
+        "retrySaved": true
+      }
+    }
+  ],
+  "consoleErrors": [
+    {
+      "kind": "console",
+      "message": "Failed to load resource: the server responded with a status of 409 (Conflict)"
+    },
+    {
+      "kind": "console",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "kind": "console",
+      "message": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    },
+    {
+      "kind": "console",
+      "message": "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "kind": "console",
+      "message": "Failed to load resource: net::ERR_INTERNET_DISCONNECTED"
+    }
+  ],
+  "blockedExternal": [],
+  "blockedLive": [],
+  "http": [
+    {
+      "url": "http://127.0.0.1:18105/api/cases",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001/analyze",
+      "method": "POST",
+      "status": 200,
+      "mode": "replay"
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 1
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 2
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 3
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 4
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 5
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001/analyze",
+      "method": "POST",
+      "status": 200,
+      "mode": "replay"
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 1
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 2
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 3
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 4
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 5
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001/analyze",
+      "method": "POST",
+      "status": 200,
+      "mode": "replay"
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 1
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 2
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 3
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 4
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 5
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002/analyze",
+      "method": "POST",
+      "status": 200,
+      "mode": "replay"
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 1
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 2
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 3
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 4
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 5
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002/analyze",
+      "method": "POST",
+      "status": 200,
+      "mode": "replay"
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 1
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 2
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 3
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 4
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 5
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002/analyze",
+      "method": "POST",
+      "status": 200,
+      "mode": "replay"
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 1
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 2
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 3
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 4
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0002",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 5
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/intake",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/INT-8264E2B8/analyze",
+      "method": "POST",
+      "status": 409,
+      "mode": "replay"
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/intake",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 503,
+      "sentRevision": 0
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 0
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:18105/api/cases/CASE-0001",
+      "method": "PATCH",
+      "status": 200,
+      "sentRevision": 0
+    }
+  ],
+  "limitations": [
+    "Uses existing page.tsx/LogisticsView; new pc4 TmsScene is not integrated",
+    "First repetition of each CASE plays the full audio at rate 1; repetitions 2 and 3 seek near the end and await genuine media ended",
+    "All setup resets create new test-only temporary stores; original state and budget remain untouched",
+    "Replay is saved fixture analysis, not actual STT/LLM"
+  ],
+  "finishedAt": "2026-09-21T10:31:37.558Z",
+  "guard": {
+    "ready": true,
+    "paidAnalyzerInvocations": 0,
+    "externalConnectionsBlocked": 0,
+    "stores": [
+      "run-01",
+      "run-02",
+      "run-03",
+      "run-04",
+      "run-05",
+      "run-06",
+      "run-07",
+      "run-08",
+      "run-09",
+      "run-10",
+      "run-11",
+      "run-12"
+    ]
+  },
+  "summary": {
+    "planned": 6,
+    "executed": 6,
+    "passed": 6,
+    "failed": 0,
+    "notRun": 0,
+    "boundaryPassed": 6,
+    "boundaryFailed": 0
+  }
+}

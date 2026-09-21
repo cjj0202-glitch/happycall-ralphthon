@@ -1,0 +1,10 @@
+{
+  "extends": "../../../../apps/web/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": { "@/*": ["../../../../apps/web/*"] },
+    "incremental": false
+  },
+  "include": ["next-env.d.ts", "app/**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}

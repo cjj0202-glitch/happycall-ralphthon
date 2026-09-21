@@ -1,0 +1,300 @@
+{
+  "task": "N04",
+  "scope": "TMS module self-check; not independent acceptance or end-to-end workflow",
+  "executedAt": "2026-09-21T10:28:43.938Z",
+  "timezone": "UTC; Korea UTC+09:00",
+  "head": "a952edee271574401332148f42969621a81a74d7",
+  "node": "v24.19.0",
+  "platform": "win32/x64",
+  "command": "node tests/remote/pc4/tms-contract-check.cjs",
+  "sources": [
+    {
+      "path": "apps/web/components/TmsScene.tsx",
+      "sha256": "981ac1f385dea80f8a8d3d9af2c89f1e0542499ff71fd65c45d9cab52f84285e"
+    },
+    {
+      "path": "apps/web/components/TmsScene.module.css",
+      "sha256": "de5d4ab5f73fac9484aad94fc3db869902dccd7bcffbd4cb045e65398f9f9446"
+    },
+    {
+      "path": "data/overlays/pc4-tms.json",
+      "sha256": "a7cada3fa82c321d0bb2d8692d2cbdde251601489f4dbb44cd777e0b289df28a"
+    },
+    {
+      "path": "data/fixtures/cases.json",
+      "sha256": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648"
+    },
+    {
+      "path": "tests/remote/pc4/tms-contract-check.cjs",
+      "sha256": "506530fa2e7ff625c81de8ec15fd70c3807de0bc02c5c8578ef03e883bdd241d"
+    }
+  ],
+  "total": 39,
+  "passed": 39,
+  "failed": 0,
+  "apiCalls": 0,
+  "results": [
+    {
+      "name": "two synthetic relations accepted",
+      "expected": [
+        null,
+        null
+      ],
+      "actual": [
+        null,
+        null
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "known TMS evidence accepted",
+      "expected": [
+        null,
+        null,
+        null
+      ],
+      "actual": [
+        null,
+        null,
+        null
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "null remains missing",
+      "expected": "미등록",
+      "actual": "미등록",
+      "status": "PASS"
+    },
+    {
+      "name": "numeric zero rejected",
+      "expected": "invalid",
+      "actual": "invalid",
+      "status": "PASS"
+    },
+    {
+      "name": "real midnight accepted",
+      "expected": "00:00 KST",
+      "actual": "00:00 KST",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid calendar rejected",
+      "expected": null,
+      "actual": null,
+      "status": "PASS"
+    },
+    {
+      "name": "timezone missing rejected",
+      "expected": null,
+      "actual": null,
+      "status": "PASS"
+    },
+    {
+      "name": "HH:mm preserved without invented date",
+      "expected": "local",
+      "actual": "local",
+      "status": "PASS"
+    },
+    {
+      "name": "future actual masked",
+      "expected": "future",
+      "actual": "future",
+      "status": "PASS"
+    },
+    {
+      "name": "prior day retains date",
+      "expected": "2026-09-17 23:59 KST",
+      "actual": "2026-09-17 23:59 KST",
+      "status": "PASS"
+    },
+    {
+      "name": "same instant UTC displayed KST",
+      "expected": "00:00 KST",
+      "actual": "00:00 KST",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown asOf not confirmed",
+      "expected": "unbounded",
+      "actual": "unbounded",
+      "status": "PASS"
+    },
+    {
+      "name": "store blocked",
+      "expected": "explicit rejection reason",
+      "actual": "사건의 점포·문의 유형이 등록 계약과 다릅니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "date blocked",
+      "expected": "explicit rejection reason",
+      "actual": "업무일·센터·루트·차량이 같은 사건인지 확인해야 합니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "vehicle blocked",
+      "expected": "explicit rejection reason",
+      "actual": "업무일·센터·루트·차량이 같은 사건인지 확인해야 합니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "route blocked",
+      "expected": "explicit rejection reason",
+      "actual": "업무일·센터·루트·차량이 같은 사건인지 확인해야 합니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "center blocked",
+      "expected": "explicit rejection reason",
+      "actual": "업무일·센터·루트·차량이 같은 사건인지 확인해야 합니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate sequence blocked",
+      "expected": "explicit rejection reason",
+      "actual": "방문순번 누락·중복이 있어 연결을 보류합니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "target record time blocked",
+      "expected": "explicit rejection reason",
+      "actual": "방문 기록과 등록된 근거의 시각이 다릅니다. 관계를 다시 확인해야 합니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "target row foreign identity blocked",
+      "expected": "explicit rejection reason",
+      "actual": "방문행의 사건·점포·배송키가 상위 사건과 다릅니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "TMS foreign identity blocked",
+      "expected": "explicit rejection reason",
+      "actual": "TMS의 사건·점포·관계 상태가 검토된 합성 연결과 다릅니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "unlinked relation blocked",
+      "expected": "explicit rejection reason",
+      "actual": "TMS의 사건·점포·관계 상태가 검토된 합성 연결과 다릅니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "different confirmed intake store blocked",
+      "expected": "explicit rejection reason",
+      "actual": "접수에서 확인한 점포와 TMS 문의 점포가 다릅니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "foreign evidence rejected",
+      "expected": "explicit rejection reason",
+      "actual": "이 사건의 허용 근거가 아닙니다. 다른 점포·사건의 근거는 연결하지 않습니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "evidence date injection rejected",
+      "expected": "explicit rejection reason",
+      "actual": "근거 내용·출처·시각이 검토된 합성 입력과 달라 재확인이 필요합니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "explicit evidence wrong store rejected",
+      "expected": "explicit rejection reason",
+      "actual": "근거의 명시적 관계키가 현재 사건과 다릅니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "same evidence ID duplicate rejected",
+      "expected": "explicit rejection reason",
+      "actual": "근거 ID가 중복되어 연결할 수 없습니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "explicitly linked text relations accepted",
+      "expected": [
+        null,
+        null
+      ],
+      "actual": [
+        null,
+        null
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "explicitly linked text TMS evidence accepted",
+      "expected": [
+        null,
+        null,
+        null
+      ],
+      "actual": [
+        null,
+        null,
+        null
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "linked text missing explicit reference blocked",
+      "expected": "explicit rejection reason",
+      "actual": "이 사건의 명시적 TMS 연결 계약이 없어 상담 연결을 보류합니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "linked text wrong explicit reference blocked",
+      "expected": "explicit rejection reason",
+      "actual": "명시적으로 연결한 원본 사례의 점포·문의 대상·조회 기준이 접수와 다릅니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "linked text unknown explicit reference blocked",
+      "expected": "explicit rejection reason",
+      "actual": "이 사건의 명시적 TMS 연결 계약이 없어 상담 연결을 보류합니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "linked text different store blocked",
+      "expected": "explicit rejection reason",
+      "actual": "사건의 점포·문의 유형이 등록 계약과 다릅니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "linked text different date blocked",
+      "expected": "explicit rejection reason",
+      "actual": "명시적으로 연결한 원본 사례와 TMS·근거 내용이 다릅니다. 다른 기록을 섞지 않습니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "linked text different type blocked",
+      "expected": "explicit rejection reason",
+      "actual": "사건의 점포·문의 유형이 등록 계약과 다릅니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "linked text different asOf blocked",
+      "expected": "explicit rejection reason",
+      "actual": "명시적으로 연결한 원본 사례의 점포·문의 대상·조회 기준이 접수와 다릅니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "linked text different original subject blocked",
+      "expected": "explicit rejection reason",
+      "actual": "명시적으로 연결한 원본 사례의 점포·문의 대상·조회 기준이 접수와 다릅니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "linked text changed TMS neighbour row blocked",
+      "expected": "explicit rejection reason",
+      "actual": "명시적으로 연결한 원본 사례와 TMS·근거 내용이 다릅니다. 다른 기록을 섞지 않습니다.",
+      "status": "PASS"
+    },
+    {
+      "name": "linked text changed copied evidence blocked",
+      "expected": "explicit rejection reason",
+      "actual": "명시적으로 연결한 원본 사례와 TMS·근거 내용이 다릅니다. 다른 기록을 섞지 않습니다.",
+      "status": "PASS"
+    }
+  ]
+}
