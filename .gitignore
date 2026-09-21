@@ -28,3 +28,4 @@ desktop.ini
 .DS_Store
 .vscode/
 .idea/
+.mailbox_state.*.json

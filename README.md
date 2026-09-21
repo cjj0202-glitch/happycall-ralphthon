@@ -42,6 +42,7 @@ python channel/mail.py inbox        # ③ 내 앞 편지
 | `python channel/mail.py reply 12 --body "..."` | 회신 |
 | `python channel/mail.py done 12 --evidence "..."` | 처리완료 (증거 없으면 안 닫힌다) |
 | `python channel/mail.py status --set "지금 하는 일"` | 상태 갱신 (편지 아님) |
+| `python channel/mail.py watch --interval 30 --bell` | **감시** — 새것이 있을 때만 울린다 |
 
 의존성 없습니다 — 파이썬 표준 라이브러리와 `gh` 만 씁니다.
 
@@ -53,9 +54,10 @@ python channel/mail.py inbox        # ③ 내 앞 편지
 원본 채널 1,433건 실측에서 상태 보고가 **51.5%** 였습니다. 그걸 다 편지로 만들면
 편지함이 상태로 덮여 진짜 지시가 묻힙니다. `status --set` 를 쓰십시오.
 
-**2. 편지함을 매 루프마다 보지 마십시오.**
-「폴링이 편지를 부릅니다」 — 원본에서 감시 세션을 켠 날 편지가 **4배**로 뛰었습니다.
-최소 10분 간격, 또는 한 덩어리가 끝났을 때만 봅니다.
+**2. 감지는 감시기에 맡기고, 중계하지 마십시오.**
+별도 터미널에서 `python channel/mail.py watch --interval 30 --bell` 을 띄워 둡니다.
+**새것이 있을 때만** 울립니다. 원본에서 감시 세션을 켠 날 편지가 **4배**로 뛰었는데,
+터진 것은 읽는 폴링이 아니라 그 세션이 **중계 허브**가 된 것이었습니다.
 
 **3. 「에러 없음」은 검증이 아닙니다.**
 무엇을 보고 됐다고 판단했는지 수치와 시각으로 적으십시오. 기대값이 없으면
@@ -69,6 +71,8 @@ python channel/mail.py inbox        # ③ 내 앞 편지
 |---|---|
 | [docs/01_ChatGPT_전달_프롬프트.md](docs/01_ChatGPT_전달_프롬프트.md) | **복붙용.** 워커 루프 · 메인 루프 프롬프트 |
 | [AGENTS.md](AGENTS.md) | 에이전트 상시 지침 — Codex CLI 가 자동으로 읽는다 |
+| `.claude/skills/mailbox/` | **스킬** — 「편지함」·「inbox」·「회신해」 등에 자동 발동 |
+| `.claude/skills/ralph-loop/` | **스킬** — 「랄프」·「루프 돌려」·「다음 덩어리」에 자동 발동 |
 | [channel/00_채널규약.md](channel/00_채널규약.md) | 편지함 규약 전문 — 유형 분류, 6칸 템플릿, 금기 6가지 |
 | [docs/00_랄프톤_운영설계.md](docs/00_랄프톤_운영설계.md) | 4대 구조, 루프 규율, 붙여넣는 프롬프트, 체크포인트 |
 | [channel/pcs.json](channel/pcs.json) | 슬롯 ↔ 역할 ↔ hostname ↔ 계정 매핑 (여기 하나만 고친다) |

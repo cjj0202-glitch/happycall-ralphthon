@@ -300,6 +300,103 @@ def cmd_status(a) -> int:
     return 0
 
 
+def _state_path(slot: str) -> Path:
+    return ROOT / f".mailbox_state.{slot}.json"
+
+
+def _snapshot(label: str) -> dict:
+    """내 앞 열린 편지의 «번호 → 회신수» 지도. 이 지도가 바뀐 것만 알린다."""
+    raw = sh([
+        "gh", "issue", "list", "--label", label, "--state", "open",
+        "--limit", "50", "--json", "number,title,labels,author,comments",
+    ])
+    out = {}
+    for it in json.loads(raw or "[]"):
+        out[str(it["number"])] = {
+            "title": it["title"],
+            "comments": len(it.get("comments", []) or []),
+            "author": it["author"]["login"],
+            "urgent": any(x["name"] == "urgent" for x in it["labels"]),
+            "type": next((x["name"] for x in it["labels"] if re.match(r"^[A-F]-", x["name"])), "?"),
+        }
+    return out
+
+
+def _diff(old: dict, new: dict) -> list[str]:
+    ev = []
+    for n, cur in new.items():
+        prev = old.get(n)
+        mark = "🚨 " if cur["urgent"] else ""
+        if prev is None:
+            ev.append(f"{mark}새 편지 #{n} [{cur['type']}] {cur['title']}  ← {cur['author']}")
+        elif cur["comments"] > prev["comments"]:
+            d = cur["comments"] - prev["comments"]
+            ev.append(f"{mark}회신 {d}건 #{n} {cur['title']}")
+    for n, prev in old.items():
+        if n not in new:
+            ev.append(f"닫힘 #{n} {prev['title']}")
+    return ev
+
+
+def cmd_watch(a) -> int:
+    """편지함 감시 — 🚨 «새것이 있을 때만» 출력한다.
+
+    조용한 것이 기본값이다. 이것이 핵심이다. 매번 「없음」을 찍으면 로그가 노이즈로 덮여
+    진짜 신호가 묻힌다 — 원본 채널이 경계하던 실패 형태와 같다.
+
+    그리고 이 감시기는 «읽기»만 한다. 원본에서 편지가 4배로 뛴 것은 감시 세션이
+    «중계 허브»가 되면서였다. 감시기가 편지를 만들지 않으면 그 부작용은 없다.
+    """
+    import time
+
+    slot, meta = me()
+    label = meta["inbox"]
+    sp = _state_path(slot)
+
+    try:
+        old = json.loads(sp.read_text(encoding="utf-8")) if sp.exists() else {}
+    except Exception:
+        old = {}
+
+    hdr = f"감시 시작 · {slot}/{meta.get('role','미정')} · {a.interval}초 간격 · {now()}"
+    print(hdr)
+    print("새 편지·회신·종결이 있을 때만 출력합니다. 조용하면 변화가 없는 것입니다.")
+    print("─" * 70, flush=True)
+
+    n_loop = 0
+    n_fail = 0
+    while True:
+        n_loop += 1
+        try:
+            new = _snapshot(label)
+            n_fail = 0
+        except SystemExit:
+            # 네트워크가 끊겼다. 🚨 여기서 죽으면 안 된다 — 행사장 와이파이는 끊긴다.
+            n_fail += 1
+            print(f"[{datetime.now(KST):%H:%M:%S}] 조회 실패 {n_fail}회 — 계속 재시도", flush=True)
+            if a.once:
+                return 1
+            time.sleep(min(a.interval * n_fail, 300))
+            continue
+
+        for line in _diff(old, new):
+            bell = "\a" if a.bell else ""
+            print(f"{bell}[{datetime.now(KST):%H:%M:%S} KST] {line}", flush=True)
+
+        old = new
+        try:
+            sp.write_text(json.dumps(new, ensure_ascii=False, indent=1), encoding="utf-8")
+        except Exception:
+            pass
+
+        if a.once:
+            return 0
+        if a.max_loops and n_loop >= a.max_loops:
+            print(f"─ {a.max_loops}회 돌고 종료 ─", flush=True)
+            return 0
+        time.sleep(a.interval)
+
+
 def cmd_board(a) -> int:
     c = cfg()
     raw = sh([
@@ -377,6 +474,13 @@ def main() -> int:
     p = sub.add_parser("status", help="내 상태 갱신/조회")
     p.add_argument("--set", help="지금 하는 일 한 줄")
     p.set_defaults(fn=cmd_status)
+
+    p = sub.add_parser("watch", help="편지함 감시 — 새것이 있을 때만 출력")
+    p.add_argument("--interval", type=int, default=30, help="초 (기본 30)")
+    p.add_argument("--once", action="store_true", help="1회만 — 루프에 끼워 넣을 때")
+    p.add_argument("--bell", action="store_true", help="새것이 오면 터미널 벨")
+    p.add_argument("--max-loops", type=int, default=0, help="N회 돌고 종료 (0=무한)")
+    p.set_defaults(fn=cmd_watch)
 
     p = sub.add_parser("board", help="4대 상태 한눈에")
     p.set_defaults(fn=cmd_board)
