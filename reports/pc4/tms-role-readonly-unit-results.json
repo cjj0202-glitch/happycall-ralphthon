@@ -1,0 +1,470 @@
+{
+  "task": "N04-U1",
+  "scope": "actual TypeScript component JSX/callback execution with controlled hooks; not browser or build acceptance",
+  "startedAt": "2026-09-21T14:01:01.156Z",
+  "sourceRef": "working-tree",
+  "dependencyRef": "ed2b188de31091a71f1596f50961239d02813107",
+  "baselineExpectedToFail": false,
+  "sources": {
+    "component": "2480e2d9b86b1c62941e05146c99781c8646f8fa2923a80eb5d07de5e6a0e9a2",
+    "fixtures": "c7449e66a89c6c2b43b9b09868d651379a376e25a27f3f227b99375c7fa51449",
+    "overlay": "a7cada3fa82c321d0bb2d8692d2cbdde251601489f4dbb44cd777e0b289df28a",
+    "checker": "04f1ed592f4b9b3d17ed8ecad29c0ef240faf87ffc4f79ef3bd6503de3f62327"
+  },
+  "serverStarts": 0,
+  "browserStarts": 0,
+  "networkCalls": 0,
+  "paidCalls": 0,
+  "limitations": [
+    "Deterministic hook harness executes actual effects and keyed cleanup. matchMedia is explicitly controlled as false; animation timers, DOM focus, layout, native details expansion and browser event dispatch are NOT_RUN.",
+    "onLinkEvidence is a controlled callback boundary, not an API or repository. Direct invocation intentionally bypasses HTML disabled behavior.",
+    "Back label and callback are checked inside this component. Parent center navigation integration is NOT_RUN.",
+    "Working-tree ApiError import is absent: actual dependencyRef class is used explicitly. Working-tree import/typecheck parity is NOT_RUN here; do not count this as a successful app build."
+  ],
+  "checks": [
+    {
+      "name": "draft: real JSX enabled and actual link allows one callback",
+      "status": "PASS",
+      "detail": {
+        "disabled": false,
+        "callbackIds": [
+          "E-M1"
+        ],
+        "linkedLabel": "연결됨"
+      }
+    },
+    {
+      "name": "review: real JSX enabled and actual link allows one callback",
+      "status": "PASS",
+      "detail": {
+        "disabled": false,
+        "callbackIds": [
+          "E-M1"
+        ],
+        "linkedLabel": "연결됨"
+      }
+    },
+    {
+      "name": "handed_off: actual JSX disables link",
+      "status": "PASS",
+      "detail": {
+        "disabled": true
+      }
+    },
+    {
+      "name": "handed_off: direct actual onClick cannot invoke link callback",
+      "status": "PASS",
+      "detail": {
+        "bypassDisabled": true,
+        "callbackCalls": 0
+      }
+    },
+    {
+      "name": "handed_off: visible role reason and existing linked marker retained",
+      "status": "PASS",
+      "detail": {
+        "linkedLabel": "연결됨",
+        "notice": "센터 전달 · 이관된 접수의 근거는 조회만 할 수 있습니다.",
+        "completedReason": false
+      }
+    },
+    {
+      "name": "handed_off: read-only notice survives zero visits and evidence",
+      "status": "PASS",
+      "detail": {
+        "notice": "센터 전달 · 이관된 접수의 근거는 조회만 할 수 있습니다.",
+        "visits": 0,
+        "evidence": 0
+      }
+    },
+    {
+      "name": "in_progress: actual JSX disables link",
+      "status": "PASS",
+      "detail": {
+        "disabled": true
+      }
+    },
+    {
+      "name": "in_progress: direct actual onClick cannot invoke link callback",
+      "status": "PASS",
+      "detail": {
+        "bypassDisabled": true,
+        "callbackCalls": 0
+      }
+    },
+    {
+      "name": "in_progress: visible role reason and existing linked marker retained",
+      "status": "PASS",
+      "detail": {
+        "linkedLabel": "연결됨",
+        "notice": "센터 조사 중 · 이관된 접수의 근거는 조회만 할 수 있습니다.",
+        "completedReason": false
+      }
+    },
+    {
+      "name": "in_progress: read-only notice survives zero visits and evidence",
+      "status": "PASS",
+      "detail": {
+        "notice": "센터 조사 중 · 이관된 접수의 근거는 조회만 할 수 있습니다.",
+        "visits": 0,
+        "evidence": 0
+      }
+    },
+    {
+      "name": "closed: actual JSX disables link",
+      "status": "PASS",
+      "detail": {
+        "disabled": true
+      }
+    },
+    {
+      "name": "closed: direct actual onClick cannot invoke link callback",
+      "status": "PASS",
+      "detail": {
+        "bypassDisabled": true,
+        "callbackCalls": 0
+      }
+    },
+    {
+      "name": "closed: visible role reason and existing linked marker retained",
+      "status": "PASS",
+      "detail": {
+        "linkedLabel": "연결됨",
+        "notice": "처리완료 · 이관된 접수의 근거는 조회만 할 수 있습니다.",
+        "completedReason": true
+      }
+    },
+    {
+      "name": "closed: read-only notice survives zero visits and evidence",
+      "status": "PASS",
+      "detail": {
+        "notice": "처리완료 · 이관된 접수의 근거는 조회만 할 수 있습니다.",
+        "visits": 0,
+        "evidence": 0
+      }
+    },
+    {
+      "name": "comparison visit: disabled plus direct callback guard",
+      "status": "PASS",
+      "detail": {
+        "callbackCalls": 0
+      }
+    },
+    {
+      "name": "invalid relation: disabled plus direct callback guard",
+      "status": "PASS",
+      "detail": {
+        "callbackCalls": 0
+      }
+    },
+    {
+      "name": "already linked: preserves label and blocks duplicate callback",
+      "status": "PASS",
+      "detail": {
+        "callbackCalls": 0
+      }
+    },
+    {
+      "name": "pending: disabled and repeated stale/current callbacks remain single-flight",
+      "status": "PASS",
+      "detail": {
+        "callbackCalls": 1,
+        "linkedAfterSettlement": true
+      }
+    },
+    {
+      "name": "handed_off: status-only transition isolates delayed resolve and stale callback",
+      "status": "PASS",
+      "detail": {
+        "sameCaseId": "CASE-0001",
+        "sameRevision": null,
+        "outcome": "resolve",
+        "callbackCalls": 1,
+        "lifecycle": {
+          "mounts": 6,
+          "cleanups": 2
+        }
+      }
+    },
+    {
+      "name": "handed_off: status-only transition isolates delayed reject and stale callback",
+      "status": "PASS",
+      "detail": {
+        "sameCaseId": "CASE-0001",
+        "sameRevision": null,
+        "outcome": "reject",
+        "callbackCalls": 1,
+        "lifecycle": {
+          "mounts": 6,
+          "cleanups": 2
+        }
+      }
+    },
+    {
+      "name": "in_progress: status-only transition isolates delayed resolve and stale callback",
+      "status": "PASS",
+      "detail": {
+        "sameCaseId": "CASE-0001",
+        "sameRevision": null,
+        "outcome": "resolve",
+        "callbackCalls": 1,
+        "lifecycle": {
+          "mounts": 6,
+          "cleanups": 2
+        }
+      }
+    },
+    {
+      "name": "in_progress: status-only transition isolates delayed reject and stale callback",
+      "status": "PASS",
+      "detail": {
+        "sameCaseId": "CASE-0001",
+        "sameRevision": null,
+        "outcome": "reject",
+        "callbackCalls": 1,
+        "lifecycle": {
+          "mounts": 6,
+          "cleanups": 2
+        }
+      }
+    },
+    {
+      "name": "closed: status-only transition isolates delayed resolve and stale callback",
+      "status": "PASS",
+      "detail": {
+        "sameCaseId": "CASE-0001",
+        "sameRevision": null,
+        "outcome": "resolve",
+        "callbackCalls": 1,
+        "lifecycle": {
+          "mounts": 6,
+          "cleanups": 2
+        }
+      }
+    },
+    {
+      "name": "closed: status-only transition isolates delayed reject and stale callback",
+      "status": "PASS",
+      "detail": {
+        "sameCaseId": "CASE-0001",
+        "sameRevision": null,
+        "outcome": "reject",
+        "callbackCalls": 1,
+        "lifecycle": {
+          "mounts": 6,
+          "cleanups": 2
+        }
+      }
+    },
+    {
+      "name": "read-only to review: valid evidence becomes editable",
+      "status": "PASS",
+      "detail": {
+        "callbackCalls": 1
+      }
+    },
+    {
+      "name": "forced readOnly true + draft: actual JSX and callback guard with truthful notice",
+      "status": "PASS",
+      "detail": {
+        "status": "draft",
+        "readOnly": true,
+        "disabled": true,
+        "callbackCalls": 0,
+        "notice": "읽기 전용 · 이 접수의 근거는 조회만 할 수 있습니다."
+      }
+    },
+    {
+      "name": "forced readOnly true + review: actual JSX and callback guard with truthful notice",
+      "status": "PASS",
+      "detail": {
+        "status": "review",
+        "readOnly": true,
+        "disabled": true,
+        "callbackCalls": 0,
+        "notice": "읽기 전용 · 이 접수의 근거는 조회만 할 수 있습니다."
+      }
+    },
+    {
+      "name": "forced readOnly false + handed_off: explicit false cannot unlock status",
+      "status": "PASS",
+      "detail": {
+        "status": "handed_off",
+        "readOnly": false,
+        "disabled": true,
+        "callbackCalls": 0,
+        "notice": "센터 전달 · 이관된 접수의 근거는 조회만 할 수 있습니다."
+      }
+    },
+    {
+      "name": "forced readOnly false + in_progress: explicit false cannot unlock status",
+      "status": "PASS",
+      "detail": {
+        "status": "in_progress",
+        "readOnly": false,
+        "disabled": true,
+        "callbackCalls": 0,
+        "notice": "센터 조사 중 · 이관된 접수의 근거는 조회만 할 수 있습니다."
+      }
+    },
+    {
+      "name": "forced readOnly false + closed: explicit false cannot unlock status",
+      "status": "PASS",
+      "detail": {
+        "status": "closed",
+        "readOnly": false,
+        "disabled": true,
+        "callbackCalls": 0,
+        "notice": "처리완료 · 이관된 접수의 근거는 조회만 할 수 있습니다."
+      }
+    },
+    {
+      "name": "forced readOnly prop-only transition isolates delayed resolve and stale callback",
+      "status": "PASS",
+      "detail": {
+        "sameCaseId": "CASE-0001",
+        "sameStatus": "review",
+        "sameRevision": null,
+        "outcome": "resolve",
+        "callbackCalls": 1,
+        "lifecycle": {
+          "mounts": 6,
+          "cleanups": 2
+        }
+      }
+    },
+    {
+      "name": "forced readOnly prop-only transition isolates delayed reject and stale callback",
+      "status": "PASS",
+      "detail": {
+        "sameCaseId": "CASE-0001",
+        "sameStatus": "review",
+        "sameRevision": null,
+        "outcome": "reject",
+        "callbackCalls": 1,
+        "lifecycle": {
+          "mounts": 6,
+          "cleanups": 2
+        }
+      }
+    },
+    {
+      "name": "forced readOnly true to false: same draft case resumes editing",
+      "status": "PASS",
+      "detail": {
+        "sameCaseId": "CASE-0001",
+        "sameStatus": "draft",
+        "callbackCalls": 1
+      }
+    },
+    {
+      "name": "read-only query controls: visits, sorting, details markup and back remain usable; frozen props unchanged",
+      "status": "PASS",
+      "detail": {
+        "propsDeepFrozen": true,
+        "visitSelection": true,
+        "previousOrNext": true,
+        "sort": "actual",
+        "detailsMarkup": true,
+        "nativeDetailsExpansion": "NOT_RUN",
+        "callbackCalls": 0,
+        "backCalls": 1
+      }
+    },
+    {
+      "name": "back action: 상담으로 돌아가기",
+      "status": "PASS",
+      "detail": {
+        "label": "←  상담으로 돌아가기",
+        "callbackCalls": 1
+      }
+    },
+    {
+      "name": "back action: 센터 업무로 돌아가기",
+      "status": "PASS",
+      "detail": {
+        "label": "←  센터 업무로 돌아가기",
+        "callbackCalls": 1
+      }
+    }
+  ],
+  "mutations": [
+    {
+      "name": "remove-readOnly-only-from-actual-link-guard",
+      "status": "DETECTED",
+      "memorySourceSha256": "1b2e6a859aca22e674a006e1fe80476ee06a181b50f2918722a4067ac31b2164",
+      "edits": 1,
+      "failedChecks": [
+        "handed_off: direct actual onClick cannot invoke link callback",
+        "in_progress: direct actual onClick cannot invoke link callback",
+        "closed: direct actual onClick cannot invoke link callback",
+        "forced readOnly true + draft: actual JSX and callback guard with truthful notice",
+        "forced readOnly true + review: actual JSX and callback guard with truthful notice",
+        "forced readOnly false + handed_off: explicit false cannot unlock status",
+        "forced readOnly false + in_progress: explicit false cannot unlock status",
+        "forced readOnly false + closed: explicit false cannot unlock status",
+        "forced readOnly prop-only transition isolates delayed resolve and stale callback",
+        "forced readOnly prop-only transition isolates delayed reject and stale callback"
+      ],
+      "readOnlyFailures": [
+        "handed_off: direct actual onClick cannot invoke link callback",
+        "in_progress: direct actual onClick cannot invoke link callback",
+        "closed: direct actual onClick cannot invoke link callback"
+      ]
+    },
+    {
+      "name": "remove-readOnly-only-from-actual-button-disabled",
+      "status": "DETECTED",
+      "memorySourceSha256": "9631ae5291a2de06c6c4f03188015a1a187343d4fd02c7ea7dceb7dbad1d92c8",
+      "edits": 1,
+      "failedChecks": [
+        "handed_off: actual JSX disables link",
+        "in_progress: actual JSX disables link",
+        "closed: actual JSX disables link",
+        "handed_off: status-only transition isolates delayed resolve and stale callback",
+        "handed_off: status-only transition isolates delayed reject and stale callback",
+        "in_progress: status-only transition isolates delayed resolve and stale callback",
+        "in_progress: status-only transition isolates delayed reject and stale callback",
+        "closed: status-only transition isolates delayed resolve and stale callback",
+        "closed: status-only transition isolates delayed reject and stale callback",
+        "read-only to review: valid evidence becomes editable",
+        "forced readOnly true + draft: actual JSX and callback guard with truthful notice",
+        "forced readOnly true + review: actual JSX and callback guard with truthful notice",
+        "forced readOnly false + handed_off: explicit false cannot unlock status",
+        "forced readOnly false + in_progress: explicit false cannot unlock status",
+        "forced readOnly false + closed: explicit false cannot unlock status",
+        "forced readOnly prop-only transition isolates delayed resolve and stale callback",
+        "forced readOnly prop-only transition isolates delayed reject and stale callback",
+        "forced readOnly true to false: same draft case resumes editing"
+      ],
+      "readOnlyFailures": [
+        "handed_off: actual JSX disables link",
+        "in_progress: actual JSX disables link",
+        "closed: actual JSX disables link",
+        "handed_off: status-only transition isolates delayed resolve and stale callback",
+        "handed_off: status-only transition isolates delayed reject and stale callback",
+        "in_progress: status-only transition isolates delayed resolve and stale callback",
+        "in_progress: status-only transition isolates delayed reject and stale callback",
+        "closed: status-only transition isolates delayed resolve and stale callback",
+        "closed: status-only transition isolates delayed reject and stale callback"
+      ]
+    }
+  ],
+  "apiDependency": {
+    "mode": "actual-class-AST-extraction",
+    "ref": "ed2b188de31091a71f1596f50961239d02813107",
+    "fileSha256": "6ba326131f82475392e8326698efa1cdcafb34a8fe8c5ee36fcf91f19f596432",
+    "classSha256": "6b5fe961e9a1f472bf04b906a83aec18945d921c9b2c6cd59e1efabb7de885fc",
+    "workingTreeClassAvailable": false,
+    "workingTreeParity": false
+  },
+  "summary": {
+    "checks": 36,
+    "passed": 36,
+    "failed": 0,
+    "mutationsDetected": 2,
+    "mutationsNotRun": 0
+  },
+  "status": "PASS",
+  "finishedAt": "2026-09-21T14:01:09.571Z"
+}

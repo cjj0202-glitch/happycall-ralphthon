@@ -13,10 +13,15 @@
         "unit": "87/87; mutations7/7",
         "saveToastRegression": "48/48; mutations3/3",
         "independentRecheck": "7/7 after two case-selection fixes",
-        "browser": "Existing IAB role/empty/search/WMS return observed; 3-width DOM measured; full flow not rerun",
-        "tmsInternalUI": "N04-U1 ACK; not integrated",
+        "browser": "Existing role/queue/search/WMS/TMS return observed. New web intake blocked by stale API CORS; complete new flows0/2.",
+        "tmsInternalUI": "N04-U1 integrated; 36/36 + mutations2/2; existing browser role/read-only/return observed",
         "notificationDelivery": "Final scope defined; not connected",
-        "evidence": ["reports/role-workflow-ui.md", "reports/role-workflow-independent.md"],
+        "evidence": [
+          "reports/role-workflow-ui.md",
+          "reports/role-workflow-independent.md",
+          "reports/pc4-tms-role-main-intake.md",
+          "reports/role-flow-live-check.md"
+        ],
         "accepted": true,
         "acceptanceScope": "Role queues and case-context corrections only"
       },
@@ -266,11 +271,16 @@
       "latestAssignment": {
         "id": "N03-M4",
         "card": "reports/channel/N03-M4-full-animation.md",
-        "state": "ACKNOWLEDGED_IMPLEMENTING",
+        "state": "CODE_ACCEPTED_FULL_RENDER_RUNNING",
         "ackAtKST": "2026-09-21T22:47:21+09:00",
         "ackCommentId": 5761535254,
         "accepted": false,
-        "prior72FrameIntake": "reports/pc3-real-short-main-intake.md"
+        "prior72FrameIntake": "reports/pc3-real-short-main-intake.md",
+        "sourceCommit": "a39cd664758575a81e1fcce437db245f60fc2c1b",
+        "mainEvidence": "reports/pc3-full-render-main-start.md",
+        "renderPid": 13052,
+        "renderDirectory": ".local/pc3-render-intake/full1080-a39cd66-01",
+        "startedAtKST": "2026-09-21T23:11:14+09:00"
       },
       "outcome": "WMS 공정·합성 CCTV",
       "state": "FIX_RESULT_RECEIVED_REVIEW",
@@ -389,10 +399,13 @@
       "latestAssignment": {
         "id": "N04-U1",
         "card": "reports/channel/N04-U1-center-evidence-return.md",
-        "state": "ACKNOWLEDGED_IMPLEMENTING",
+        "state": "ACCEPTED_SCOPED",
         "ackAtKST": "2026-09-21T22:47:08+09:00",
         "ackCommentId": 5761531994,
-        "accepted": false
+        "accepted": true,
+        "sourceCommit": "79d763acd2985c32e0eb853d17a7d68dce0174d0",
+        "mainEvidence": "reports/pc4-tms-role-main-intake.md",
+        "acceptanceScope": "TMS role/read-only/return only; no full-flow or deployment acceptance"
       },
       "outcome": "TMS·타모듈 시나리오 검증",
       "state": "RESULT_RECEIVED_REVIEW",

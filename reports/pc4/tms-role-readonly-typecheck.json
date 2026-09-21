@@ -1,0 +1,248 @@
+{
+  "task": "N04-U1",
+  "scope": "full web TypeScript check over fixed-main tracked sources plus only candidate TmsScene; no Next build or runtime",
+  "recorded_at": "2026-09-21T22:50:29.573268+09:00",
+  "reference_main_sha": "ed2b188de31091a71f1596f50961239d02813107",
+  "workspace_head_before_commit": "d89c8e3ae5c0923bbd5648151d0c723a2810dd16",
+  "command": "node apps/web/node_modules/typescript/bin/tsc --noEmit --incremental false --project .local/tms-role-readonly-fixed-main/apps/web/tsconfig.json",
+  "typescript": "Version 5.9.3",
+  "baseline_exit": 0,
+  "candidate_exit": 0,
+  "baseline_output": "",
+  "candidate_output": "",
+  "dependency_resolution": "Existing apps/web/node_modules via junction in ignored fixed snapshot; no install. Current pc4 api.ts is older than fixed main and is not changed.",
+  "input_count": 32,
+  "inputs": [
+    {
+      "path": "apps/web/.gitignore",
+      "baseline_blob": "741f06f36bf12d2a6687268330f3339441d297c9",
+      "baseline_sha256": "6aaa3f144af1faf17b2633a6158102e39abe0385fa4379c70bfa1863da9b5c20",
+      "candidate_sha256": "6aaa3f144af1faf17b2633a6158102e39abe0385fa4379c70bfa1863da9b5c20",
+      "changed": false
+    },
+    {
+      "path": "apps/web/README.md",
+      "baseline_blob": "72efa9721c062bfc1334c0786cf38fe8960edb55",
+      "baseline_sha256": "27f72547d8c15f0c29501e9dbc379eb95788cef429124145e9e51531ccae5c48",
+      "candidate_sha256": "27f72547d8c15f0c29501e9dbc379eb95788cef429124145e9e51531ccae5c48",
+      "changed": false
+    },
+    {
+      "path": "apps/web/app/globals.css",
+      "baseline_blob": "4435067507d77f1cceb9c22e44617b09f0636cdc",
+      "baseline_sha256": "30d38f9a06530dac048286925ec37ecd28553f372f98a2424de915eba65b752d",
+      "candidate_sha256": "30d38f9a06530dac048286925ec37ecd28553f372f98a2424de915eba65b752d",
+      "changed": false
+    },
+    {
+      "path": "apps/web/app/icon.svg",
+      "baseline_blob": "a4db95492a0ed7423d4ed757f802b1151399b2bc",
+      "baseline_sha256": "3bad432d0af9fd8cba881b2a33f23b85ea15cd01e5c1281a0efc25e455c83282",
+      "candidate_sha256": "3bad432d0af9fd8cba881b2a33f23b85ea15cd01e5c1281a0efc25e455c83282",
+      "changed": false
+    },
+    {
+      "path": "apps/web/app/layout.tsx",
+      "baseline_blob": "76b6019e51c9ce491d1f33cb9762e751e9c1a211",
+      "baseline_sha256": "0493984afcf9beb28919883f20e7657e477884c692f2d34cb59168938bc27603",
+      "candidate_sha256": "0493984afcf9beb28919883f20e7657e477884c692f2d34cb59168938bc27603",
+      "changed": false
+    },
+    {
+      "path": "apps/web/app/page.tsx",
+      "baseline_blob": "dee5f777797d7d963de56629e0d481c42c6b35fd",
+      "baseline_sha256": "56f2a9dcacd0ebfccb58f6cb36b43e10df1f51d4a5e7b6a857dd1d5c1f5887eb",
+      "candidate_sha256": "56f2a9dcacd0ebfccb58f6cb36b43e10df1f51d4a5e7b6a857dd1d5c1f5887eb",
+      "changed": false
+    },
+    {
+      "path": "apps/web/app/tokens.css",
+      "baseline_blob": "7ef966e7ae1f8db2ba5307cc98e682fd83a911ca",
+      "baseline_sha256": "9e090a0bd6e9bbca8f0522dd7729d5dcf28237a8f03483264e21962824a3c3bb",
+      "candidate_sha256": "9e090a0bd6e9bbca8f0522dd7729d5dcf28237a8f03483264e21962824a3c3bb",
+      "changed": false
+    },
+    {
+      "path": "apps/web/components/CallReview.module.css",
+      "baseline_blob": "48055d3bc9ba30fd54a3f9a8a80ce20da48f0178",
+      "baseline_sha256": "09bfa4eebb63bea1082127bc4226093f3a6b3f4a88edaaf14618ce6c487af359",
+      "candidate_sha256": "09bfa4eebb63bea1082127bc4226093f3a6b3f4a88edaaf14618ce6c487af359",
+      "changed": false
+    },
+    {
+      "path": "apps/web/components/CallReview.tsx",
+      "baseline_blob": "600286e7ccce873d0887736c8245053410529672",
+      "baseline_sha256": "ecea3abef5c9c40bc612f8e239768d9ed0c726d6899e119d273e70daa1987a44",
+      "candidate_sha256": "ecea3abef5c9c40bc612f8e239768d9ed0c726d6899e119d273e70daa1987a44",
+      "changed": false
+    },
+    {
+      "path": "apps/web/components/CctvInspector.module.css",
+      "baseline_blob": "747b1ddc4cf8ffea92e1c687d01ca86b5d6a1e61",
+      "baseline_sha256": "59ad04efe37639727902184bdeb973812df4fcb36f883d33db37aea6c38fdb61",
+      "candidate_sha256": "59ad04efe37639727902184bdeb973812df4fcb36f883d33db37aea6c38fdb61",
+      "changed": false
+    },
+    {
+      "path": "apps/web/components/CctvInspector.tsx",
+      "baseline_blob": "fcdc02c1ee2e663fd5ad190b277231d23c8630de",
+      "baseline_sha256": "dafe4f74a6ba0816a7ed8061288f9a040ab86c54e737e398dba3b9a6dc6b2395",
+      "candidate_sha256": "dafe4f74a6ba0816a7ed8061288f9a040ab86c54e737e398dba3b9a6dc6b2395",
+      "changed": false
+    },
+    {
+      "path": "apps/web/components/LogisticsView.module.css",
+      "baseline_blob": "2b97712a9d462d52cbab2f2477299e4949b53d82",
+      "baseline_sha256": "3faa8ad69e31e89a1da04881ee6367d3118c0b342d6e8b4b300965383b52069b",
+      "candidate_sha256": "3faa8ad69e31e89a1da04881ee6367d3118c0b342d6e8b4b300965383b52069b",
+      "changed": false
+    },
+    {
+      "path": "apps/web/components/LogisticsView.tsx",
+      "baseline_blob": "b396671a9dae8aad71e5b603ea423fd64f89a77d",
+      "baseline_sha256": "b2f409cd87d01795074cf6ef17ac7c4347f338160fb98d19483f7b577f24ddd9",
+      "candidate_sha256": "b2f409cd87d01795074cf6ef17ac7c4347f338160fb98d19483f7b577f24ddd9",
+      "changed": false
+    },
+    {
+      "path": "apps/web/components/TmsScene.module.css",
+      "baseline_blob": "d23f980ec05ff173f869563e6984e6704bcce0e0",
+      "baseline_sha256": "de5d4ab5f73fac9484aad94fc3db869902dccd7bcffbd4cb045e65398f9f9446",
+      "candidate_sha256": "de5d4ab5f73fac9484aad94fc3db869902dccd7bcffbd4cb045e65398f9f9446",
+      "changed": false
+    },
+    {
+      "path": "apps/web/components/TmsScene.tsx",
+      "baseline_blob": "363b9aa2f4329b27937aa1bf85fe112de9d66c70",
+      "baseline_sha256": "a5ce72f0539004f0130946ee898c5111ebd879f2ad962cefff935e5bab915744",
+      "candidate_sha256": "2480e2d9b86b1c62941e05146c99781c8646f8fa2923a80eb5d07de5e6a0e9a2",
+      "changed": true
+    },
+    {
+      "path": "apps/web/components/WmsScene.module.css",
+      "baseline_blob": "5c3838b060ab8f52da98c4febe954c796f804d16",
+      "baseline_sha256": "6c6129347b80868d6aa7d12ac47a0ab938cf67850752e8e6266a64e75665c9bd",
+      "candidate_sha256": "6c6129347b80868d6aa7d12ac47a0ab938cf67850752e8e6266a64e75665c9bd",
+      "changed": false
+    },
+    {
+      "path": "apps/web/components/WmsScene.tsx",
+      "baseline_blob": "64b4bab69e8ac9e7f256e80628396c41cc6898ba",
+      "baseline_sha256": "38724614d3fd6a68230c2eb9c93a5eee78ed88f1a5d82c1c4b7f24727aa06666",
+      "candidate_sha256": "38724614d3fd6a68230c2eb9c93a5eee78ed88f1a5d82c1c4b7f24727aa06666",
+      "changed": false
+    },
+    {
+      "path": "apps/web/lib/api.ts",
+      "baseline_blob": "9833270de17f5460bf04a782284c7af8123532d1",
+      "baseline_sha256": "6ba326131f82475392e8326698efa1cdcafb34a8fe8c5ee36fcf91f19f596432",
+      "candidate_sha256": "6ba326131f82475392e8326698efa1cdcafb34a8fe8c5ee36fcf91f19f596432",
+      "changed": false
+    },
+    {
+      "path": "apps/web/lib/cctv-tracks.ts",
+      "baseline_blob": "fb41edd8aa9b0cb5298a1aa6008e8adfc86fce6f",
+      "baseline_sha256": "d3e7c9a3e9de71e5b487efa3e5057e3dc5aad36f2f0b104dddb389575c9336e5",
+      "candidate_sha256": "d3e7c9a3e9de71e5b487efa3e5057e3dc5aad36f2f0b104dddb389575c9336e5",
+      "changed": false
+    },
+    {
+      "path": "apps/web/lib/drafts.ts",
+      "baseline_blob": "ac9b48e293198f958b64b03bfdba2f1df50b02f1",
+      "baseline_sha256": "74f2dbcc50d8f27cc66eb5271b5106350b95f240ee9256ef14a2d6f2afdc9385",
+      "candidate_sha256": "74f2dbcc50d8f27cc66eb5271b5106350b95f240ee9256ef14a2d6f2afdc9385",
+      "changed": false
+    },
+    {
+      "path": "apps/web/lib/types.ts",
+      "baseline_blob": "71a7175968ec16f7eea5c00869e41bebc769d02d",
+      "baseline_sha256": "30bcaa243a4ea7a199b4ed846a029063845868423675016a0b0a8b965703cc0e",
+      "candidate_sha256": "30bcaa243a4ea7a199b4ed846a029063845868423675016a0b0a8b965703cc0e",
+      "changed": false
+    },
+    {
+      "path": "apps/web/next-env.d.ts",
+      "baseline_blob": "830fb594ca2970a827555c28a253b097367e08d8",
+      "baseline_sha256": "85ae5aee75f011967cf2d25cbc342f62d69314e9d925f7f4aa3456fc2cffcca6",
+      "candidate_sha256": "85ae5aee75f011967cf2d25cbc342f62d69314e9d925f7f4aa3456fc2cffcca6",
+      "changed": false
+    },
+    {
+      "path": "apps/web/next.config.ts",
+      "baseline_blob": "ef44ede31f4e796c1e992c7112872edf64d82eed",
+      "baseline_sha256": "4db497dcd4c517d84ab80a1bc1855e94d49f21d19facb1c198a16955af1e19f8",
+      "candidate_sha256": "4db497dcd4c517d84ab80a1bc1855e94d49f21d19facb1c198a16955af1e19f8",
+      "changed": false
+    },
+    {
+      "path": "apps/web/package-lock.json",
+      "baseline_blob": "270ad83d110494487ee48e0eb4d16ee24ce77bf2",
+      "baseline_sha256": "93fbdb2a0f14a73e41782566ea057a29226455d944356c9515aea6b0365a0b6c",
+      "candidate_sha256": "93fbdb2a0f14a73e41782566ea057a29226455d944356c9515aea6b0365a0b6c",
+      "changed": false
+    },
+    {
+      "path": "apps/web/package.json",
+      "baseline_blob": "2b558fb736bdc4049dc8f25eaeb02fc0ebefbfb7",
+      "baseline_sha256": "3102a72411ecd283956c590829cd670c6b0d50d7195e35bd2360208c0314fb9f",
+      "candidate_sha256": "3102a72411ecd283956c590829cd670c6b0d50d7195e35bd2360208c0314fb9f",
+      "changed": false
+    },
+    {
+      "path": "apps/web/public/cases.json",
+      "baseline_blob": "00fcaa68c2b65504dab2d2b055b800b93eee209c",
+      "baseline_sha256": "c7449e66a89c6c2b43b9b09868d651379a376e25a27f3f227b99375c7fa51449",
+      "candidate_sha256": "c7449e66a89c6c2b43b9b09868d651379a376e25a27f3f227b99375c7fa51449",
+      "changed": false
+    },
+    {
+      "path": "apps/web/scripts/check-layout.mjs",
+      "baseline_blob": "98efe0ba75e4d3e125175c54bd77b14b611ee586",
+      "baseline_sha256": "64d5d636110d6bcb56af6d7dcbb3e9f3b8803ab5f1e73010199d85dad636e963",
+      "candidate_sha256": "64d5d636110d6bcb56af6d7dcbb3e9f3b8803ab5f1e73010199d85dad636e963",
+      "changed": false
+    },
+    {
+      "path": "apps/web/scripts/generate-tokens.mjs",
+      "baseline_blob": "ff49c621ea237dc7154b1f230de6088c6ba12d94",
+      "baseline_sha256": "c1dfc96efe59d5d54daac76e2159522d3c1be768b6bcf685b678022d9beed961",
+      "candidate_sha256": "c1dfc96efe59d5d54daac76e2159522d3c1be768b6bcf685b678022d9beed961",
+      "changed": false
+    },
+    {
+      "path": "apps/web/tsconfig.json",
+      "baseline_blob": "401801a77ace2159441de0b10c7e5c78d4e1f35e",
+      "baseline_sha256": "3a8c8c69ad6919aa33ef6a83422ff4fc142020af3f71e4575a32000a73f8cfba",
+      "candidate_sha256": "3a8c8c69ad6919aa33ef6a83422ff4fc142020af3f71e4575a32000a73f8cfba",
+      "changed": false
+    },
+    {
+      "path": "data/demo-media-manifest.json",
+      "baseline_blob": "02b2f47e5212e175d27fe0d38f59eb4897f09173",
+      "baseline_sha256": "2cc1675e8c3df64a720a53f8e34b8eaa8358d3608b78d63f74eb1f4342c1ce13",
+      "candidate_sha256": "2cc1675e8c3df64a720a53f8e34b8eaa8358d3608b78d63f74eb1f4342c1ce13",
+      "changed": false
+    },
+    {
+      "path": "data/fixtures/cases.json",
+      "baseline_blob": "00fcaa68c2b65504dab2d2b055b800b93eee209c",
+      "baseline_sha256": "c7449e66a89c6c2b43b9b09868d651379a376e25a27f3f227b99375c7fa51449",
+      "candidate_sha256": "c7449e66a89c6c2b43b9b09868d651379a376e25a27f3f227b99375c7fa51449",
+      "changed": false
+    },
+    {
+      "path": "data/overlays/pc4-tms.json",
+      "baseline_blob": "41e6fe9204ee109721d79d496069c8c95c8d0dbd",
+      "baseline_sha256": "a7cada3fa82c321d0bb2d8692d2cbdde251601489f4dbb44cd777e0b289df28a",
+      "candidate_sha256": "a7cada3fa82c321d0bb2d8692d2cbdde251601489f4dbb44cd777e0b289df28a",
+      "changed": false
+    }
+  ],
+  "server_starts": 0,
+  "browser_starts": 0,
+  "socket_starts": 0,
+  "paid_calls": 0,
+  "new_installs": 0,
+  "parent_center_navigation": "NOT_RUN; pc1 must pass backLabel and appropriate onBack",
+  "candidate_checked_at": "2026-09-21T23:01:18.433593+09:00"
+}
