@@ -1,0 +1,230 @@
+{
+  "task": "N04-U1",
+  "scope": "actual TypeScript component JSX/callback execution with controlled hooks; not browser or build acceptance",
+  "startedAt": "2026-09-21T13:54:50.275Z",
+  "sourceRef": "ed2b188de31091a71f1596f50961239d02813107",
+  "dependencyRef": "ed2b188de31091a71f1596f50961239d02813107",
+  "baselineExpectedToFail": true,
+  "sources": {
+    "component": "a5ce72f0539004f0130946ee898c5111ebd879f2ad962cefff935e5bab915744",
+    "fixtures": "c7449e66a89c6c2b43b9b09868d651379a376e25a27f3f227b99375c7fa51449",
+    "overlay": "a7cada3fa82c321d0bb2d8692d2cbdde251601489f4dbb44cd777e0b289df28a",
+    "checker": "e590fd12cd5bfa4d24419f28699ffcb6db98908b08634252ece5d6f4be0019fe"
+  },
+  "serverStarts": 0,
+  "browserStarts": 0,
+  "networkCalls": 0,
+  "paidCalls": 0,
+  "limitations": [
+    "Deterministic hook harness executes actual effects and keyed cleanup. matchMedia is explicitly controlled as false; animation timers, DOM focus, layout, native details expansion and browser event dispatch are NOT_RUN.",
+    "onLinkEvidence is a controlled callback boundary, not an API or repository. Direct invocation intentionally bypasses HTML disabled behavior.",
+    "Back label and callback are checked inside this component. Parent center navigation integration is NOT_RUN.",
+    "Working-tree ApiError import is absent: actual dependencyRef class is used explicitly. Working-tree import/typecheck parity is NOT_RUN here; do not count this as a successful app build."
+  ],
+  "checks": [
+    {
+      "name": "draft: real JSX enabled and actual link allows one callback",
+      "status": "PASS",
+      "detail": {
+        "disabled": false,
+        "callbackIds": [
+          "E-M1"
+        ],
+        "linkedLabel": "연결됨"
+      }
+    },
+    {
+      "name": "review: real JSX enabled and actual link allows one callback",
+      "status": "PASS",
+      "detail": {
+        "disabled": false,
+        "callbackIds": [
+          "E-M1"
+        ],
+        "linkedLabel": "연결됨"
+      }
+    },
+    {
+      "name": "handed_off: actual JSX disables link",
+      "status": "FAIL",
+      "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
+    },
+    {
+      "name": "handed_off: direct actual onClick cannot invoke link callback",
+      "status": "FAIL",
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   'E-M1'\n+ ]\n- []\n"
+    },
+    {
+      "name": "handed_off: visible role reason and existing linked marker retained",
+      "status": "FAIL",
+      "error": "Exactly one read-only status notice is rendered\n\n0 !== 1\n"
+    },
+    {
+      "name": "handed_off: read-only notice survives zero visits and evidence",
+      "status": "FAIL",
+      "error": "Exactly one read-only status notice is rendered\n\n0 !== 1\n"
+    },
+    {
+      "name": "in_progress: actual JSX disables link",
+      "status": "FAIL",
+      "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
+    },
+    {
+      "name": "in_progress: direct actual onClick cannot invoke link callback",
+      "status": "FAIL",
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   'E-M1'\n+ ]\n- []\n"
+    },
+    {
+      "name": "in_progress: visible role reason and existing linked marker retained",
+      "status": "FAIL",
+      "error": "Exactly one read-only status notice is rendered\n\n0 !== 1\n"
+    },
+    {
+      "name": "in_progress: read-only notice survives zero visits and evidence",
+      "status": "FAIL",
+      "error": "Exactly one read-only status notice is rendered\n\n0 !== 1\n"
+    },
+    {
+      "name": "closed: actual JSX disables link",
+      "status": "FAIL",
+      "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
+    },
+    {
+      "name": "closed: direct actual onClick cannot invoke link callback",
+      "status": "FAIL",
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   'E-M1'\n+ ]\n- []\n"
+    },
+    {
+      "name": "closed: visible role reason and existing linked marker retained",
+      "status": "FAIL",
+      "error": "Exactly one read-only status notice is rendered\n\n0 !== 1\n"
+    },
+    {
+      "name": "closed: read-only notice survives zero visits and evidence",
+      "status": "FAIL",
+      "error": "Exactly one read-only status notice is rendered\n\n0 !== 1\n"
+    },
+    {
+      "name": "comparison visit: disabled plus direct callback guard",
+      "status": "PASS",
+      "detail": {
+        "callbackCalls": 0
+      }
+    },
+    {
+      "name": "invalid relation: disabled plus direct callback guard",
+      "status": "PASS",
+      "detail": {
+        "callbackCalls": 0
+      }
+    },
+    {
+      "name": "already linked: preserves label and blocks duplicate callback",
+      "status": "PASS",
+      "detail": {
+        "callbackCalls": 0
+      }
+    },
+    {
+      "name": "pending: disabled and repeated stale/current callbacks remain single-flight",
+      "status": "PASS",
+      "detail": {
+        "callbackCalls": 1,
+        "linkedAfterSettlement": true
+      }
+    },
+    {
+      "name": "handed_off: status-only transition isolates delayed resolve and stale callback",
+      "status": "FAIL",
+      "error": "Exactly one read-only status notice is rendered\n\n0 !== 1\n"
+    },
+    {
+      "name": "handed_off: status-only transition isolates delayed reject and stale callback",
+      "status": "FAIL",
+      "error": "Exactly one read-only status notice is rendered\n\n0 !== 1\n"
+    },
+    {
+      "name": "in_progress: status-only transition isolates delayed resolve and stale callback",
+      "status": "FAIL",
+      "error": "Exactly one read-only status notice is rendered\n\n0 !== 1\n"
+    },
+    {
+      "name": "in_progress: status-only transition isolates delayed reject and stale callback",
+      "status": "FAIL",
+      "error": "Exactly one read-only status notice is rendered\n\n0 !== 1\n"
+    },
+    {
+      "name": "closed: status-only transition isolates delayed resolve and stale callback",
+      "status": "FAIL",
+      "error": "Exactly one read-only status notice is rendered\n\n0 !== 1\n"
+    },
+    {
+      "name": "closed: status-only transition isolates delayed reject and stale callback",
+      "status": "FAIL",
+      "error": "Exactly one read-only status notice is rendered\n\n0 !== 1\n"
+    },
+    {
+      "name": "read-only to review: valid evidence becomes editable",
+      "status": "FAIL",
+      "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
+    },
+    {
+      "name": "read-only query controls: visits, sorting, details markup and back remain usable; frozen props unchanged",
+      "status": "PASS",
+      "detail": {
+        "propsDeepFrozen": true,
+        "visitSelection": true,
+        "previousOrNext": true,
+        "sort": "actual",
+        "detailsMarkup": true,
+        "nativeDetailsExpansion": "NOT_RUN",
+        "callbackCalls": 0,
+        "backCalls": 1
+      }
+    },
+    {
+      "name": "back action: 상담으로 돌아가기",
+      "status": "PASS",
+      "detail": {
+        "label": "← 상담으로 돌아가기",
+        "callbackCalls": 1
+      }
+    },
+    {
+      "name": "back action: 센터 업무로 돌아가기",
+      "status": "FAIL",
+      "error": "The expression evaluated to a falsy value:\n\n  assert.ok(textOf(button).includes(label))\n"
+    }
+  ],
+  "mutations": [
+    {
+      "name": "remove-readOnly-only-from-actual-link-guard",
+      "status": "NOT_RUN",
+      "reason": "Baseline functional checks fail; do not claim mutation detection from an already failing baseline.",
+      "edits": 0
+    },
+    {
+      "name": "remove-readOnly-only-from-actual-button-disabled",
+      "status": "NOT_RUN",
+      "reason": "Baseline functional checks fail; do not claim mutation detection from an already failing baseline.",
+      "edits": 0
+    }
+  ],
+  "apiDependency": {
+    "mode": "actual-class-AST-extraction",
+    "ref": "ed2b188de31091a71f1596f50961239d02813107",
+    "fileSha256": "6ba326131f82475392e8326698efa1cdcafb34a8fe8c5ee36fcf91f19f596432",
+    "classSha256": "6b5fe961e9a1f472bf04b906a83aec18945d921c9b2c6cd59e1efabb7de885fc",
+    "workingTreeClassAvailable": false,
+    "workingTreeParity": false
+  },
+  "summary": {
+    "checks": 28,
+    "passed": 8,
+    "failed": 20,
+    "mutationsDetected": 0,
+    "mutationsNotRun": 2
+  },
+  "status": "FAIL",
+  "finishedAt": "2026-09-21T13:54:51.623Z"
+}

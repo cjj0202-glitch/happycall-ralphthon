@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from 'react';
 import type { CaseData, Evidence } from '@/lib/types';
+import { ApiError } from '@/lib/api';
 import overlay from '../../../data/overlays/pc4-tms.json';
 import fixtureData from '../../../data/fixtures/cases.json';
 import styles from './TmsScene.module.css';
@@ -10,6 +11,7 @@ type Props = {
   caseData: CaseData;
   onLinkEvidence: (id: string) => Promise<void> | void;
   onBack: () => void;
+  backLabel?: string;
 };
 type Row = Record<string, unknown>;
 type TimeState = 'missing' | 'local' | 'invalid' | 'unbounded' | 'future' | 'recorded';
@@ -132,11 +134,13 @@ export function tmsEvidenceIssue(caseData: CaseData, evidence: Evidence): string
 
 export default function TmsScene(props: Props) {
   // Remount on relevant context changes, including same-ID replacement and late async callbacks.
-  const contextKey = JSON.stringify([props.caseData.id, props.caseData.revision, props.caseData.selectedEvidence, props.caseData.store, props.caseData.type, props.caseData.asOf, props.caseData.tms, props.caseData.evidence, props.caseData.linkedFixtureId, props.caseData.channel, props.caseData.synthetic, props.caseData.intake?.storeId, props.caseData.storeId, props.caseData.subject, props.caseData.title]);
+  const contextKey = JSON.stringify([props.caseData.id, props.caseData.status, props.caseData.revision, props.caseData.selectedEvidence, props.caseData.store, props.caseData.type, props.caseData.asOf, props.caseData.tms, props.caseData.evidence, props.caseData.linkedFixtureId, props.caseData.channel, props.caseData.synthetic, props.caseData.intake?.storeId, props.caseData.storeId, props.caseData.subject, props.caseData.title]);
   return <TmsContent key={contextKey} {...props}/>;
 }
 
-function TmsContent({ caseData, onLinkEvidence, onBack }: Props) {
+function TmsContent({ caseData, onLinkEvidence, onBack, backLabel = '상담으로 돌아가기' }: Props) {
+  const readOnly = caseData.status === 'handed_off' || caseData.status === 'in_progress' || caseData.status === 'closed';
+  const readOnlyReason = `${caseData.status === 'closed' ? '처리완료' : caseData.status === 'handed_off' ? '센터 전달' : '센터 조사 중'} · 이관된 접수의 근거는 조회만 할 수 있습니다.`;
   const tms = rowOf(caseData.tms);
   const stops = stopsFor(tms);
   const target = stops.find(stop => stop.id === caseData.store.id && isStore(stop));
@@ -177,7 +181,7 @@ function TmsContent({ caseData, onLinkEvidence, onBack }: Props) {
 
   function choose(stop: Stop) { setSelectedKey(stop.key); setPlaying(false); setFrame(stops.indexOf(stop) * 3); setError(''); setMessage(''); }
   async function link(item: Evidence) {
-    if (busy.current || selectedEvidence.has(item.id)) return;
+    if (readOnly || !mounted.current || busy.current || selectedEvidence.has(item.id)) return;
     const reason = tmsEvidenceIssue(caseData, item);
     if (!selectedIsTarget || reason) { setError(reason ?? '문의 점포를 선택한 뒤 근거를 연결해 주세요.'); return; }
     busy.current = true; setPending(item.id); setError(''); setMessage('');
@@ -185,7 +189,7 @@ function TmsContent({ caseData, onLinkEvidence, onBack }: Props) {
       await onLinkEvidence(item.id);
       if (mounted.current) { setLinked(current => [...current, item.id]); setMessage(`${item.label} 근거를 ${caseData.id} 상담에 연결했습니다.`); }
     } catch (cause) {
-      if (mounted.current) setError(`근거 연결 실패: ${cause instanceof Error ? cause.message : '저장 응답을 받지 못했습니다.'} 연결되지 않았습니다. 같은 버튼으로 재시도할 수 있습니다.`);
+      if (mounted.current) setError(`${cause instanceof Error ? cause.message : '저장 응답을 확인하지 못했습니다.'} ${cause instanceof ApiError && !cause.uncertain ? '안내 내용을 확인한 뒤 다시 시도해 주세요.' : '상단의 목록 새로고침으로 최신 접수를 조회해 연결 여부를 먼저 확인해 주세요.'}`);
     } finally { busy.current = false; if (mounted.current) setPending(null); }
   }
 
@@ -211,10 +215,11 @@ function TmsContent({ caseData, onLinkEvidence, onBack }: Props) {
   return <section className={styles.root} aria-label="TMS 방문 기록" data-testid="tms-scene">
     <header className={styles.header}>
       <div><p className={styles.eyebrow}>TMS · VISIT RECORDS</p><h1>배송 기록, 어디까지 확인됐나요?</h1><p className={styles.subtitle}>{caseData.store.name} · {caseData.id} · 문의 점포의 기록과 확인할 내용을 살펴보세요.</p></div>
-      <button type="button" className={styles.back} onClick={onBack}>← 상담으로 돌아가기</button>
+      <button type="button" className={styles.back} onClick={onBack}>← {backLabel}</button>
     </header>
     <div className={styles.context}><span className={styles.badge}>독립 합성 사례</span><span>업무일 <strong>{businessDate}</strong></span><span>센터 <strong>{text(tms.centerId)}</strong></span><span>루트 <strong>{text(tms.routeId)}</strong></span><span>차량 <strong>{text(tms.vehicle)}</strong></span><span>조회 기준 <strong>{asOfLabel(caseData.asOf)}</strong></span></div>
     <p className={styles.notice}>계획은 예정 시각, 배송완료는 시스템 등록, GPS 진출입은 접근 기록입니다. <strong>정확한 상품의 실물 인도 여부는 별도 확인이 필요합니다.</strong></p>
+    {readOnly && <p className={styles.notice} role="status">{readOnlyReason}</p>}
     {relationIssue && <p className={styles.warning} role="status">연결 보류 · {relationIssue}</p>}
 
     {!stops.length ? <div className={styles.empty}>등록된 TMS 방문행이 없습니다. 0회 방문이나 배송완료로 판단하지 않습니다.</div> : <>
@@ -268,7 +273,7 @@ function TmsContent({ caseData, onLinkEvidence, onBack }: Props) {
       <div className={styles.evidenceList}>{evidence.map((item, index) => {
         const reason = tmsEvidenceIssue(caseData, item);
         const connected = selectedEvidence.has(item.id) && reason === null;
-        return <article className={styles.evidence} key={`${item.id}-${index}`}><div className={styles.evidenceTitle}><h3>{item.label}</h3><span className={reason ? styles.compareBadge : item.status === 'fact' ? styles.badge : styles.compareBadge}>{reason ? '관계 확인 필요' : item.status === 'fact' ? '시스템 기록' : '미확인 사항'}</span></div><p>{text(item.value)}</p><p className={styles.muted}>{timeOf(item.time).label} · {text(item.source)}</p>{reason && <p className={styles.warning}>{reason}</p>}<div className={styles.evidenceFooter}><span className={styles.muted}>{item.id} · {businessDate}</span><button type="button" className={connected ? styles.connected : styles.primary} disabled={pending !== null || connected || reason !== null || !selectedIsTarget} onClick={() => void link(item)}>{connected ? '연결됨' : pending === item.id ? '연결 중…' : '이 근거 연결'}</button></div>{sourceDetails('근거', item)}</article>;
+        return <article className={styles.evidence} key={`${item.id}-${index}`}><div className={styles.evidenceTitle}><h3>{item.label}</h3><span className={reason ? styles.compareBadge : item.status === 'fact' ? styles.badge : styles.compareBadge}>{reason ? '관계 확인 필요' : item.status === 'fact' ? '시스템 기록' : '미확인 사항'}</span></div><p>{text(item.value)}</p><p className={styles.muted}>{timeOf(item.time).label} · {text(item.source)}</p>{reason && <p className={styles.warning}>{reason}</p>}<div className={styles.evidenceFooter}><span className={styles.muted}>{item.id} · {businessDate}</span><button type="button" className={connected ? styles.connected : styles.primary} disabled={readOnly || pending !== null || connected || reason !== null || !selectedIsTarget} onClick={() => void link(item)}>{connected ? '연결됨' : pending === item.id ? '연결 중…' : '이 근거 연결'}</button></div>{sourceDetails('근거', item)}</article>;
       })}</div>
       {error && <p className={styles.error} role="alert">{error}</p>}<p className={styles.feedback} role="status" aria-live="polite">{message}</p>
     </section>
