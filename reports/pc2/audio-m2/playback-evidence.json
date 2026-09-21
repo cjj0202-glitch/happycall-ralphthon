@@ -1,0 +1,107 @@
+{
+  "recorded_at": "2026-09-21T21:17:33.549651+09:00",
+  "hash_basis": "sha256/bytes are exact local execution/evidence bytes; git_blob_sha256/bytes also recorded where Git normalized text line endings. All differences are CRLF/LF only; manifest and PNGs are byte preserved.",
+  "files": [
+    {
+      "path": "reports/pc2/audio-m2/playback-2026-09-21T12-10-13-303Z/layout-1024.png",
+      "bytes": 148437,
+      "sha256": "76323780fba2ab820e26eb8703b9a96502241f9b9829f2a1a653831951bb2124",
+      "git_blob_bytes": 148437,
+      "git_blob_sha256": "76323780fba2ab820e26eb8703b9a96502241f9b9829f2a1a653831951bb2124"
+    },
+    {
+      "path": "reports/pc2/audio-m2/playback-2026-09-21T12-10-13-303Z/layout-1440.png",
+      "bytes": 148291,
+      "sha256": "879ea215d988ccbaed0d19033d05f9e0c1419684141ebce5efcd5c72c4841044",
+      "git_blob_bytes": 148291,
+      "git_blob_sha256": "879ea215d988ccbaed0d19033d05f9e0c1419684141ebce5efcd5c72c4841044"
+    },
+    {
+      "path": "reports/pc2/audio-m2/playback-2026-09-21T12-10-13-303Z/layout-390.png",
+      "bytes": 134330,
+      "sha256": "c642be02a3f3dbc6df0a95bab751e66f7c7c0ee0997fb27a786cea1322ab6323",
+      "git_blob_bytes": 134330,
+      "git_blob_sha256": "c642be02a3f3dbc6df0a95bab751e66f7c7c0ee0997fb27a786cea1322ab6323"
+    },
+    {
+      "path": "reports/pc2/audio-m2/playback-2026-09-21T12-10-13-303Z/results.json",
+      "bytes": 56583,
+      "sha256": "4c379c1b1d51248331424d273f593cbb899759310ae588661929b231eeaa62a5",
+      "git_blob_bytes": 56583,
+      "git_blob_sha256": "4c379c1b1d51248331424d273f593cbb899759310ae588661929b231eeaa62a5"
+    },
+    {
+      "path": "reports/pc2/audio-m2/playback-manifest.json",
+      "bytes": 32182,
+      "sha256": "39b5673596b7fa338300cce367ae04a9395e0c259387139744bf664cb7ac68be",
+      "git_blob_bytes": 32182,
+      "git_blob_sha256": "39b5673596b7fa338300cce367ae04a9395e0c259387139744bf664cb7ac68be"
+    },
+    {
+      "path": "reports/pc2/audio-m2/playback-plan.md",
+      "bytes": 3777,
+      "sha256": "37ec7a3cec75e69fd76b539b6dc895b9efeb88b6368c268ace75d05be7bfbe34",
+      "git_blob_bytes": 3777,
+      "git_blob_sha256": "37ec7a3cec75e69fd76b539b6dc895b9efeb88b6368c268ace75d05be7bfbe34"
+    },
+    {
+      "path": "reports/pc2/audio-m2/playback-result.md",
+      "bytes": 8447,
+      "sha256": "f0c54b0a0ca717077308bea68f92b8c0179a59de1b9714c57b8edafba3e9f690",
+      "git_blob_bytes": 8447,
+      "git_blob_sha256": "f0c54b0a0ca717077308bea68f92b8c0179a59de1b9714c57b8edafba3e9f690"
+    },
+    {
+      "path": "scripts/media_pc2/prepare_playback.py",
+      "bytes": 5665,
+      "sha256": "a035048f1aea6b72069a97f89855ecab273d46096122f3c2f7a26cdfe723478c",
+      "git_blob_bytes": 5665,
+      "git_blob_sha256": "a035048f1aea6b72069a97f89855ecab273d46096122f3c2f7a26cdfe723478c"
+    },
+    {
+      "path": "scripts/media_pc2/test_playback_timeline.py",
+      "bytes": 654,
+      "sha256": "109f2e29aacc8431badbb984af4ae6d93d8ba5796055c63d41bee767930681ad",
+      "git_blob_bytes": 654,
+      "git_blob_sha256": "109f2e29aacc8431badbb984af4ae6d93d8ba5796055c63d41bee767930681ad"
+    },
+    {
+      "path": "tests/remote/pc2/m2/build.mjs",
+      "bytes": 2198,
+      "sha256": "6526dd8655d2904ee9e519afe5ab6a42ce808a4e6c845ecd2939f1ea109250b8",
+      "git_blob_bytes": 2198,
+      "git_blob_sha256": "6526dd8655d2904ee9e519afe5ab6a42ce808a4e6c845ecd2939f1ea109250b8"
+    },
+    {
+      "path": "tests/remote/pc2/m2/harness.tsx",
+      "bytes": 2791,
+      "sha256": "b5bdd9a52a4655f1b17e94308a6d83171569ca1aedf97a77ee97fcb85912129e",
+      "git_blob_bytes": 2791,
+      "git_blob_sha256": "b5bdd9a52a4655f1b17e94308a6d83171569ca1aedf97a77ee97fcb85912129e"
+    },
+    {
+      "path": "tests/remote/pc2/m2/run.mjs",
+      "bytes": 14910,
+      "sha256": "eb90462ba0d4760a93ddc8d44aba35d730d0317f60f3ec77fd12da65e1742756",
+      "git_blob_bytes": 14910,
+      "git_blob_sha256": "eb90462ba0d4760a93ddc8d44aba35d730d0317f60f3ec77fd12da65e1742756"
+    },
+    {
+      "path": "tests/remote/pc2/m2/server.mjs",
+      "bytes": 2132,
+      "sha256": "84a760768d6085b1b59164a5c8f3ffa8afaf9556f810c7373a2e8555fd1c51f4",
+      "git_blob_bytes": 2132,
+      "git_blob_sha256": "84a760768d6085b1b59164a5c8f3ffa8afaf9556f810c7373a2e8555fd1c51f4"
+    }
+  ],
+  "visual_review": {
+    "reviewer": "pc2 AI",
+    "screenshots": 3,
+    "horizontal_overflow_px": [
+      0,
+      0,
+      0
+    ],
+    "findings": "Desktop side-by-side and mobile stacked playback/intake; all 8 turn labels and controls visible, text wraps. Human usability not assessed."
+  }
+}

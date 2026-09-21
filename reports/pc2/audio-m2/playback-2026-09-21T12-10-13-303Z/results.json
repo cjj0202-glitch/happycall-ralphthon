@@ -1,0 +1,2320 @@
+{
+  "started": "2026-09-21T12:10:13.308Z",
+  "node": "v24.21.0",
+  "playwright": "1.58.2",
+  "method": "Actual bfc8543 CallReview snapshot rendered in one Edge browser/context/page with local A/B PCM WAVs.",
+  "limits": [
+    "AI technical inspection; human listening0",
+    "No real parent page/API persistence or paid requests",
+    "Headless native playback is not OS speaker or understanding evidence"
+  ],
+  "checks": [
+    {
+      "id": "A-full-natural-1x",
+      "expected": "49.55s decoded/natural ended1/callback1/played0-end",
+      "status": "PASS",
+      "actual": {
+        "variant": "A",
+        "elapsed": 50.934,
+        "expectedSeconds": 49.55,
+        "nativeEnded": 1,
+        "actual": {
+          "variant": "A",
+          "complete": true,
+          "disabled": false,
+          "callbacks": [
+            {
+              "variant": "A",
+              "url": "/audio/A.wav",
+              "at": 1789992669617
+            }
+          ],
+          "audio": {
+            "src": "http://127.0.0.1:51995/audio/A.wav",
+            "time": 49.55,
+            "duration": 49.55,
+            "paused": true,
+            "ended": true,
+            "rate": 1,
+            "volume": 1,
+            "muted": false,
+            "ready": 4,
+            "error": null,
+            "played": [
+              [
+                0,
+                49.55
+              ]
+            ]
+          }
+        }
+      },
+      "ms": 51012
+    },
+    {
+      "id": "A-to-B-completion-reset",
+      "expected": "A complete must not carry into B",
+      "status": "PASS",
+      "actual": {
+        "actual": {
+          "variant": "B",
+          "complete": false,
+          "disabled": false,
+          "callbacks": [
+            {
+              "variant": "A",
+              "url": "/audio/A.wav",
+              "at": 1789992669617
+            }
+          ],
+          "audio": {
+            "src": "http://127.0.0.1:51995/audio/B.wav",
+            "time": 0,
+            "duration": 49.75,
+            "paused": true,
+            "ended": false,
+            "rate": 1,
+            "volume": 1,
+            "muted": false,
+            "ready": 4,
+            "error": null,
+            "played": []
+          }
+        },
+        "old": {
+          "paused": true,
+          "connected": false
+        }
+      },
+      "ms": 132
+    },
+    {
+      "id": "B-full-natural-1x",
+      "expected": "49.75s decoded/natural ended1/callback1/played0-end",
+      "status": "PASS",
+      "actual": {
+        "variant": "B",
+        "elapsed": 49.983,
+        "expectedSeconds": 49.75,
+        "nativeEnded": 1,
+        "actual": {
+          "variant": "B",
+          "complete": true,
+          "disabled": false,
+          "callbacks": [
+            {
+              "variant": "B",
+              "url": "/audio/B.wav",
+              "at": 1789992719816
+            }
+          ],
+          "audio": {
+            "src": "http://127.0.0.1:51995/audio/B.wav",
+            "time": 49.75,
+            "duration": 49.75,
+            "paused": true,
+            "ended": true,
+            "rate": 1,
+            "volume": 1,
+            "muted": false,
+            "ready": 4,
+            "error": null,
+            "played": [
+              [
+                0,
+                49.75
+              ]
+            ]
+          }
+        }
+      },
+      "ms": 50055
+    },
+    {
+      "id": "B-to-A-completion-reset",
+      "expected": "B complete must not carry into A",
+      "status": "PASS",
+      "actual": {
+        "variant": "A",
+        "complete": false,
+        "disabled": false,
+        "callbacks": [
+          {
+            "variant": "B",
+            "url": "/audio/B.wav",
+            "at": 1789992719816
+          }
+        ],
+        "audio": {
+          "src": "http://127.0.0.1:51995/audio/A.wav",
+          "time": 0,
+          "duration": 49.55,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "ready": 4,
+          "error": null,
+          "played": []
+        }
+      },
+      "ms": 107
+    },
+    {
+      "id": "B-clip-1",
+      "expected": "Correct source speaker/text/start/end; no next-turn intrusion or whole completion",
+      "status": "PASS",
+      "actual": {
+        "speaker": "상담원",
+        "text": "안녕하세요. 해피콜 상담원입니다. 어떤 불편이 있으신가요?",
+        "expected": {
+          "start": 0,
+          "end": 4.3,
+          "startFrame": 0,
+          "endFrame": 103200
+        },
+        "observedStart": 0,
+        "playedEnd": 4.308935,
+        "overshoot": 0.008935000000000137,
+        "finalCursor": 4.3,
+        "callbacks": 0
+      },
+      "ms": 4868
+    },
+    {
+      "id": "B-clip-2",
+      "expected": "Correct source speaker/text/start/end; no next-turn intrusion or whole completion",
+      "status": "PASS",
+      "actual": {
+        "speaker": "경영주",
+        "text": "가상 새봄점인데요. 비스킷 열여덟 개를 주문했는데 휴지 한 박스가 왔어요. 이게 대체 뭡니까.",
+        "expected": {
+          "start": 4.65,
+          "end": 12.2,
+          "startFrame": 111600,
+          "endFrame": 292800
+        },
+        "observedStart": 4.65,
+        "playedEnd": 12.202127,
+        "overshoot": 0.0021270000000015443,
+        "finalCursor": 12.2,
+        "callbacks": 0
+      },
+      "ms": 8091
+    },
+    {
+      "id": "B-clip-3",
+      "expected": "Correct source speaker/text/start/end; no next-turn intrusion or whole completion",
+      "status": "PASS",
+      "actual": {
+        "speaker": "상담원",
+        "text": "비스킷 열여덟 개 대신 휴지 한 개가 왔다는 말씀이시죠?",
+        "expected": {
+          "start": 12.55,
+          "end": 17.2,
+          "startFrame": 301200,
+          "endFrame": 412800
+        },
+        "observedStart": 12.55,
+        "playedEnd": 17.213427,
+        "overshoot": 0.013427000000000078,
+        "finalCursor": 17.2,
+        "callbacks": 0
+      },
+      "ms": 5216
+    },
+    {
+      "id": "B-clip-4",
+      "expected": "Correct source speaker/text/start/end; no next-turn intrusion or whole completion",
+      "status": "PASS",
+      "actual": {
+        "speaker": "경영주",
+        "text": "아니요. 휴지 한 개가 아니라 한 박스예요. 단위를 제대로 적어 주세요.",
+        "expected": {
+          "start": 17.75,
+          "end": 23.3,
+          "startFrame": 426000,
+          "endFrame": 559200
+        },
+        "observedStart": 17.75,
+        "playedEnd": 23.317641,
+        "overshoot": 0.017640999999997575,
+        "finalCursor": 23.3,
+        "callbacks": 0
+      },
+      "ms": 6147
+    },
+    {
+      "id": "B-clip-5",
+      "expected": "Correct source speaker/text/start/end; no next-turn intrusion or whole completion",
+      "status": "PASS",
+      "actual": {
+        "speaker": "상담원",
+        "text": "네. 정정하겠습니다. 주문은 비스킷 열여덟 개, 받은 상품은 휴지 한 박스입니다.",
+        "expected": {
+          "start": 23.65,
+          "end": 29.8,
+          "startFrame": 567600,
+          "endFrame": 715200
+        },
+        "observedStart": 23.65,
+        "playedEnd": 29.815974,
+        "overshoot": 0.015973999999999933,
+        "finalCursor": 29.8,
+        "callbacks": 0
+      },
+      "ms": 6680
+    },
+    {
+      "id": "B-clip-6",
+      "expected": "Correct source speaker/text/start/end; no next-turn intrusion or whole completion",
+      "status": "PASS",
+      "actual": {
+        "speaker": "경영주",
+        "text": "주말 장사도 해야 하는데 정말 곤란해요. 잘못 온 상품은 어떻게 해야 하나요?",
+        "expected": {
+          "start": 30.15,
+          "end": 36.55,
+          "startFrame": 723600,
+          "endFrame": 877200
+        },
+        "observedStart": 30.15,
+        "playedEnd": 36.554989,
+        "overshoot": 0.004989000000001909,
+        "finalCursor": 36.55,
+        "callbacks": 0
+      },
+      "ms": 6966
+    },
+    {
+      "id": "B-clip-7",
+      "expected": "Correct source speaker/text/start/end; no next-turn intrusion or whole completion",
+      "status": "PASS",
+      "actual": {
+        "speaker": "상담원",
+        "text": "오출고 확인과 회송 안내가 필요한 것으로 접수하고 센터 상품 담당자에게 전달하겠습니다.",
+        "expected": {
+          "start": 36.9,
+          "end": 44.25,
+          "startFrame": 885600,
+          "endFrame": 1062000
+        },
+        "observedStart": 36.9,
+        "playedEnd": 44.25228,
+        "overshoot": 0.0022799999999989495,
+        "finalCursor": 44.25,
+        "callbacks": 0
+      },
+      "ms": 7843
+    },
+    {
+      "id": "B-clip-8",
+      "expected": "Correct source speaker/text/start/end; no next-turn intrusion or whole completion",
+      "status": "PASS",
+      "actual": {
+        "speaker": "경영주",
+        "text": "네. 주문한 상품 처리도 같이 확인해 주세요.",
+        "expected": {
+          "start": 44.6,
+          "end": 49.4,
+          "startFrame": 1070400,
+          "endFrame": 1185600
+        },
+        "observedStart": 44.6,
+        "playedEnd": 49.415079,
+        "overshoot": 0.015079000000000065,
+        "finalCursor": 49.4,
+        "callbacks": 0
+      },
+      "ms": 5380
+    },
+    {
+      "id": "duplicate-start-pause-seek",
+      "expected": "No completion from repeated start/stop or end seek",
+      "status": "PASS",
+      "actual": {
+        "paused": {
+          "variant": "B",
+          "complete": false,
+          "disabled": false,
+          "callbacks": [],
+          "audio": {
+            "src": "http://127.0.0.1:51995/audio/B.wav",
+            "time": 0.081871,
+            "duration": 49.75,
+            "paused": true,
+            "ended": false,
+            "rate": 1,
+            "volume": 1,
+            "muted": false,
+            "ready": 4,
+            "error": null,
+            "played": [
+              [
+                0,
+                0.081871
+              ]
+            ]
+          }
+        },
+        "afterSeek": {
+          "variant": "B",
+          "complete": false,
+          "disabled": false,
+          "callbacks": [],
+          "audio": {
+            "src": "http://127.0.0.1:51995/audio/B.wav",
+            "time": 49.75,
+            "duration": 49.75,
+            "paused": true,
+            "ended": true,
+            "rate": 1,
+            "volume": 1,
+            "muted": false,
+            "ready": 4,
+            "error": null,
+            "played": [
+              [
+                0,
+                0.081871
+              ],
+              [
+                49.67,
+                49.75
+              ]
+            ]
+          }
+        }
+      },
+      "ms": 621
+    },
+    {
+      "id": "switch-playing-old-events-and-disabled",
+      "expected": "Active A pauses on B switch; old events/disabled cannot complete",
+      "status": "PASS",
+      "actual": {
+        "switched": {
+          "variant": "B",
+          "complete": false,
+          "disabled": false,
+          "callbacks": [],
+          "audio": {
+            "src": "http://127.0.0.1:51995/audio/B.wav",
+            "time": 0,
+            "duration": 49.75,
+            "paused": true,
+            "ended": false,
+            "rate": 1,
+            "volume": 1,
+            "muted": false,
+            "ready": 4,
+            "error": null,
+            "played": []
+          }
+        },
+        "disabled": {
+          "variant": "B",
+          "complete": false,
+          "disabled": true,
+          "callbacks": [],
+          "audio": {
+            "src": "http://127.0.0.1:51995/audio/B.wav",
+            "time": 0,
+            "duration": 49.75,
+            "paused": true,
+            "ended": false,
+            "rate": 1,
+            "volume": 1,
+            "muted": false,
+            "ready": 4,
+            "error": null,
+            "played": []
+          }
+        }
+      },
+      "ms": 613
+    },
+    {
+      "id": "layout-keyboard-1440",
+      "expected": "Actual component, 0 horizontal overflow, keyboard source disclosure/controls",
+      "status": "PASS",
+      "actual": {
+        "width": 1440,
+        "overflow": 0,
+        "turnButtons": 8,
+        "keyboard": "Enter/Space disclosure, rate arrows, mute Space",
+        "screenshot": "layout-1440.png"
+      },
+      "ms": 387
+    },
+    {
+      "id": "layout-keyboard-1024",
+      "expected": "Actual component, 0 horizontal overflow, keyboard source disclosure/controls",
+      "status": "PASS",
+      "actual": {
+        "width": 1024,
+        "overflow": 0,
+        "turnButtons": 8,
+        "keyboard": "Enter/Space disclosure, rate arrows, mute Space",
+        "screenshot": "layout-1024.png"
+      },
+      "ms": 450
+    },
+    {
+      "id": "layout-keyboard-390",
+      "expected": "Actual component, 0 horizontal overflow, keyboard source disclosure/controls",
+      "status": "PASS",
+      "actual": {
+        "width": 390,
+        "overflow": 0,
+        "turnButtons": 8,
+        "keyboard": "Enter/Space disclosure, rate arrows, mute Space",
+        "screenshot": "layout-390.png"
+      },
+      "ms": 329
+    },
+    {
+      "id": "request-and-source-integrity",
+      "expected": "pageerror0/API0/all source hashes unchanged",
+      "status": "PASS",
+      "actual": {
+        "pageErrors": 0,
+        "blockedRequests": 0,
+        "consoleErrors": 0,
+        "sourceFilesUnchanged": 5,
+        "requests": 40
+      },
+      "ms": 3
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "blockedRequests": [],
+  "media": [
+    {
+      "kind": "full",
+      "variant": "A",
+      "elapsed": 50.934,
+      "state": {
+        "variant": "A",
+        "complete": true,
+        "disabled": false,
+        "callbacks": [
+          {
+            "variant": "A",
+            "url": "/audio/A.wav",
+            "at": 1789992669617
+          }
+        ],
+        "audio": {
+          "src": "http://127.0.0.1:51995/audio/A.wav",
+          "time": 49.55,
+          "duration": 49.55,
+          "paused": true,
+          "ended": true,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "ready": 4,
+          "error": null,
+          "played": [
+            [
+              0,
+              49.55
+            ]
+          ]
+        }
+      },
+      "events": [
+        {
+          "type": "loadedmetadata",
+          "id": 3,
+          "src": "http://127.0.0.1:51995/audio/A.wav",
+          "time": 0,
+          "duration": 49.55,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 843.1999999992549,
+          "played": []
+        },
+        {
+          "type": "play",
+          "id": 3,
+          "src": "http://127.0.0.1:51995/audio/A.wav",
+          "time": 0,
+          "duration": 49.55,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 861.9000000022352,
+          "played": []
+        },
+        {
+          "type": "playing",
+          "id": 3,
+          "src": "http://127.0.0.1:51995/audio/A.wav",
+          "time": 0,
+          "duration": 49.55,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 867.3000000007451,
+          "played": []
+        },
+        {
+          "type": "pause",
+          "id": 3,
+          "src": "http://127.0.0.1:51995/audio/A.wav",
+          "time": 49.55,
+          "duration": 49.55,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 51664.300000000745,
+          "played": [
+            [
+              0,
+              49.55
+            ]
+          ]
+        },
+        {
+          "type": "ended",
+          "id": 3,
+          "src": "http://127.0.0.1:51995/audio/A.wav",
+          "time": 49.55,
+          "duration": 49.55,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 51664.800000000745,
+          "played": [
+            [
+              0,
+              49.55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "full",
+      "variant": "B",
+      "elapsed": 49.983,
+      "state": {
+        "variant": "B",
+        "complete": true,
+        "disabled": false,
+        "callbacks": [
+          {
+            "variant": "B",
+            "url": "/audio/B.wav",
+            "at": 1789992719816
+          }
+        ],
+        "audio": {
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 49.75,
+          "duration": 49.75,
+          "paused": true,
+          "ended": true,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "ready": 4,
+          "error": null,
+          "played": [
+            [
+              0,
+              49.75
+            ]
+          ]
+        }
+      },
+      "events": [
+        {
+          "type": "loadedmetadata",
+          "id": 6,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 0,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 51957.60000000149,
+          "played": []
+        },
+        {
+          "type": "play",
+          "id": 6,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 0,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 51976.5,
+          "played": []
+        },
+        {
+          "type": "playing",
+          "id": 6,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 0,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 51976.699999999255,
+          "played": []
+        },
+        {
+          "type": "pause",
+          "id": 6,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 49.75,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 101863.80000000075,
+          "played": [
+            [
+              0,
+              49.75
+            ]
+          ]
+        },
+        {
+          "type": "ended",
+          "id": 6,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 49.75,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 101864,
+          "played": [
+            [
+              0,
+              49.75
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "clip",
+      "index": 0,
+      "expected": {
+        "start": 0,
+        "end": 4.3,
+        "startFrame": 0,
+        "endFrame": 103200
+      },
+      "observedStart": 0,
+      "playedEnd": 4.308935,
+      "state": {
+        "variant": "B",
+        "complete": false,
+        "disabled": false,
+        "callbacks": [],
+        "audio": {
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 4.3,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "ready": 4,
+          "error": null,
+          "played": [
+            [
+              0,
+              4.308935
+            ]
+          ]
+        }
+      },
+      "events": [
+        {
+          "type": "seeking",
+          "id": 8,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 0,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 102239.60000000149,
+          "played": []
+        },
+        {
+          "type": "play",
+          "id": 8,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 0,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 102246.80000000075,
+          "played": []
+        },
+        {
+          "type": "seeked",
+          "id": 8,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 0,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 3,
+          "error": null,
+          "trusted": true,
+          "at": 102305.69999999925,
+          "played": []
+        },
+        {
+          "type": "playing",
+          "id": 8,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 0,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 3,
+          "error": null,
+          "trusted": true,
+          "at": 102305.90000000224,
+          "played": []
+        },
+        {
+          "type": "pause",
+          "id": 8,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 4.3,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 106672.90000000224,
+          "played": [
+            [
+              0,
+              4.308935
+            ]
+          ]
+        },
+        {
+          "type": "seeking",
+          "id": 8,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 4.3,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 106673.19999999925,
+          "played": [
+            [
+              0,
+              4.308935
+            ]
+          ]
+        },
+        {
+          "type": "seeked",
+          "id": 8,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 4.3,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 106679.40000000224,
+          "played": [
+            [
+              0,
+              4.308935
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "clip",
+      "index": 1,
+      "expected": {
+        "start": 4.65,
+        "end": 12.2,
+        "startFrame": 111600,
+        "endFrame": 292800
+      },
+      "observedStart": 4.65,
+      "playedEnd": 12.202127,
+      "state": {
+        "variant": "B",
+        "complete": false,
+        "disabled": false,
+        "callbacks": [],
+        "audio": {
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 12.2,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "ready": 4,
+          "error": null,
+          "played": [
+            [
+              4.65,
+              12.202127
+            ]
+          ]
+        }
+      },
+      "events": [
+        {
+          "type": "seeking",
+          "id": 9,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 4.65,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 107049.90000000224,
+          "played": []
+        },
+        {
+          "type": "play",
+          "id": 9,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 4.65,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 107057.5,
+          "played": []
+        },
+        {
+          "type": "seeked",
+          "id": 9,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 4.65,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 3,
+          "error": null,
+          "trusted": true,
+          "at": 107146.5,
+          "played": []
+        },
+        {
+          "type": "playing",
+          "id": 9,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 4.65,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 3,
+          "error": null,
+          "trusted": true,
+          "at": 107146.60000000149,
+          "played": []
+        },
+        {
+          "type": "pause",
+          "id": 9,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 12.2,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 114760.40000000224,
+          "played": [
+            [
+              4.65,
+              12.202127
+            ]
+          ]
+        },
+        {
+          "type": "seeking",
+          "id": 9,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 12.2,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 114760.90000000224,
+          "played": [
+            [
+              4.65,
+              12.202127
+            ]
+          ]
+        },
+        {
+          "type": "seeked",
+          "id": 9,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 12.2,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 114780.40000000224,
+          "played": [
+            [
+              4.65,
+              12.202127
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "clip",
+      "index": 2,
+      "expected": {
+        "start": 12.55,
+        "end": 17.2,
+        "startFrame": 301200,
+        "endFrame": 412800
+      },
+      "observedStart": 12.55,
+      "playedEnd": 17.213427,
+      "state": {
+        "variant": "B",
+        "complete": false,
+        "disabled": false,
+        "callbacks": [],
+        "audio": {
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 17.2,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "ready": 4,
+          "error": null,
+          "played": [
+            [
+              12.55,
+              17.213427
+            ]
+          ]
+        }
+      },
+      "events": [
+        {
+          "type": "seeking",
+          "id": 10,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 12.55,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 115169,
+          "played": []
+        },
+        {
+          "type": "play",
+          "id": 10,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 12.55,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 115180.5,
+          "played": []
+        },
+        {
+          "type": "seeked",
+          "id": 10,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 12.55,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 3,
+          "error": null,
+          "trusted": true,
+          "at": 115258.19999999925,
+          "played": []
+        },
+        {
+          "type": "playing",
+          "id": 10,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 12.55,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 3,
+          "error": null,
+          "trusted": true,
+          "at": 115258.40000000224,
+          "played": []
+        },
+        {
+          "type": "pause",
+          "id": 10,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 17.2,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 119990,
+          "played": [
+            [
+              12.55,
+              17.213427
+            ]
+          ]
+        },
+        {
+          "type": "seeking",
+          "id": 10,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 17.2,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 119990.40000000224,
+          "played": [
+            [
+              12.55,
+              17.213427
+            ]
+          ]
+        },
+        {
+          "type": "seeked",
+          "id": 10,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 17.2,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 120003.40000000224,
+          "played": [
+            [
+              12.55,
+              17.213427
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "clip",
+      "index": 3,
+      "expected": {
+        "start": 17.75,
+        "end": 23.3,
+        "startFrame": 426000,
+        "endFrame": 559200
+      },
+      "observedStart": 17.75,
+      "playedEnd": 23.317641,
+      "state": {
+        "variant": "B",
+        "complete": false,
+        "disabled": false,
+        "callbacks": [],
+        "audio": {
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 23.3,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "ready": 4,
+          "error": null,
+          "played": [
+            [
+              17.75,
+              23.317641
+            ]
+          ]
+        }
+      },
+      "events": [
+        {
+          "type": "seeking",
+          "id": 11,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 17.75,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 120412.60000000149,
+          "played": []
+        },
+        {
+          "type": "play",
+          "id": 11,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 17.75,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 120419.69999999925,
+          "played": []
+        },
+        {
+          "type": "seeked",
+          "id": 11,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 17.75,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 120507.80000000075,
+          "played": []
+        },
+        {
+          "type": "playing",
+          "id": 11,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 17.75,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 120507.90000000224,
+          "played": []
+        },
+        {
+          "type": "pause",
+          "id": 11,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 23.3,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 126133.80000000075,
+          "played": [
+            [
+              17.75,
+              23.317641
+            ]
+          ]
+        },
+        {
+          "type": "seeking",
+          "id": 11,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 23.3,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 126134.10000000149,
+          "played": [
+            [
+              17.75,
+              23.317641
+            ]
+          ]
+        },
+        {
+          "type": "seeked",
+          "id": 11,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 23.3,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 126140.69999999925,
+          "played": [
+            [
+              17.75,
+              23.317641
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "clip",
+      "index": 4,
+      "expected": {
+        "start": 23.65,
+        "end": 29.8,
+        "startFrame": 567600,
+        "endFrame": 715200
+      },
+      "observedStart": 23.65,
+      "playedEnd": 29.815974,
+      "state": {
+        "variant": "B",
+        "complete": false,
+        "disabled": false,
+        "callbacks": [],
+        "audio": {
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 29.8,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "ready": 4,
+          "error": null,
+          "played": [
+            [
+              23.65,
+              29.815974
+            ]
+          ]
+        }
+      },
+      "events": [
+        {
+          "type": "seeking",
+          "id": 12,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 23.65,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 126510,
+          "played": []
+        },
+        {
+          "type": "play",
+          "id": 12,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 23.65,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 126518.10000000149,
+          "played": []
+        },
+        {
+          "type": "seeked",
+          "id": 12,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 23.65204,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 126598.10000000149,
+          "played": [
+            [
+              23.65,
+              23.65204
+            ]
+          ]
+        },
+        {
+          "type": "playing",
+          "id": 12,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 23.652129,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 126598.10000000149,
+          "played": [
+            [
+              23.65,
+              23.652129
+            ]
+          ]
+        },
+        {
+          "type": "pause",
+          "id": 12,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 29.8,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 132813.1000000015,
+          "played": [
+            [
+              23.65,
+              29.815974
+            ]
+          ]
+        },
+        {
+          "type": "seeking",
+          "id": 12,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 29.8,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 132813.30000000075,
+          "played": [
+            [
+              23.65,
+              29.815974
+            ]
+          ]
+        },
+        {
+          "type": "seeked",
+          "id": 12,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 29.8,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 132818.90000000224,
+          "played": [
+            [
+              23.65,
+              29.815974
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "clip",
+      "index": 5,
+      "expected": {
+        "start": 30.15,
+        "end": 36.55,
+        "startFrame": 723600,
+        "endFrame": 877200
+      },
+      "observedStart": 30.15,
+      "playedEnd": 36.554989,
+      "state": {
+        "variant": "B",
+        "complete": false,
+        "disabled": false,
+        "callbacks": [],
+        "audio": {
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 36.55,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "ready": 4,
+          "error": null,
+          "played": [
+            [
+              30.15,
+              36.554989
+            ]
+          ]
+        }
+      },
+      "events": [
+        {
+          "type": "seeking",
+          "id": 13,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 30.15,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 133208.69999999925,
+          "played": []
+        },
+        {
+          "type": "play",
+          "id": 13,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 30.15,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 133216.6000000015,
+          "played": []
+        },
+        {
+          "type": "seeked",
+          "id": 13,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 30.15,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 133312.69999999925,
+          "played": []
+        },
+        {
+          "type": "playing",
+          "id": 13,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 30.15,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 133312.80000000075,
+          "played": []
+        },
+        {
+          "type": "pause",
+          "id": 13,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 36.55,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 139778.80000000075,
+          "played": [
+            [
+              30.15,
+              36.554989
+            ]
+          ]
+        },
+        {
+          "type": "seeking",
+          "id": 13,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 36.55,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 139779,
+          "played": [
+            [
+              30.15,
+              36.554989
+            ]
+          ]
+        },
+        {
+          "type": "seeked",
+          "id": 13,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 36.55,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 139784.90000000224,
+          "played": [
+            [
+              30.15,
+              36.554989
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "clip",
+      "index": 6,
+      "expected": {
+        "start": 36.9,
+        "end": 44.25,
+        "startFrame": 885600,
+        "endFrame": 1062000
+      },
+      "observedStart": 36.9,
+      "playedEnd": 44.25228,
+      "state": {
+        "variant": "B",
+        "complete": false,
+        "disabled": false,
+        "callbacks": [],
+        "audio": {
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 44.25,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "ready": 4,
+          "error": null,
+          "played": [
+            [
+              36.9,
+              44.25228
+            ]
+          ]
+        }
+      },
+      "events": [
+        {
+          "type": "seeking",
+          "id": 14,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 36.9,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 140138.6000000015,
+          "played": []
+        },
+        {
+          "type": "play",
+          "id": 14,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 36.9,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 140144.69999999925,
+          "played": []
+        },
+        {
+          "type": "seeked",
+          "id": 14,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 36.9,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 140210.1000000015,
+          "played": []
+        },
+        {
+          "type": "playing",
+          "id": 14,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 36.9,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 140210.19999999925,
+          "played": []
+        },
+        {
+          "type": "pause",
+          "id": 14,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 44.25,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 147624.6000000015,
+          "played": [
+            [
+              36.9,
+              44.25228
+            ]
+          ]
+        },
+        {
+          "type": "seeking",
+          "id": 14,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 44.25,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 147624.90000000224,
+          "played": [
+            [
+              36.9,
+              44.25228
+            ]
+          ]
+        },
+        {
+          "type": "seeked",
+          "id": 14,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 44.25,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 147630.90000000224,
+          "played": [
+            [
+              36.9,
+              44.25228
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "clip",
+      "index": 7,
+      "expected": {
+        "start": 44.6,
+        "end": 49.4,
+        "startFrame": 1070400,
+        "endFrame": 1185600
+      },
+      "observedStart": 44.6,
+      "playedEnd": 49.415079,
+      "state": {
+        "variant": "B",
+        "complete": false,
+        "disabled": false,
+        "callbacks": [],
+        "audio": {
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 49.4,
+          "duration": 49.75,
+          "paused": true,
+          "ended": false,
+          "rate": 1,
+          "volume": 1,
+          "muted": false,
+          "ready": 4,
+          "error": null,
+          "played": [
+            [
+              44.6,
+              49.415079
+            ]
+          ]
+        }
+      },
+      "events": [
+        {
+          "type": "seeking",
+          "id": 15,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 44.6,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 148019.40000000224,
+          "played": []
+        },
+        {
+          "type": "play",
+          "id": 15,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 44.6,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 148026.80000000075,
+          "played": []
+        },
+        {
+          "type": "seeked",
+          "id": 15,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 44.6,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 148118.30000000075,
+          "played": []
+        },
+        {
+          "type": "playing",
+          "id": 15,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 44.6,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 148118.5,
+          "played": []
+        },
+        {
+          "type": "pause",
+          "id": 15,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 49.4,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 153007,
+          "played": [
+            [
+              44.6,
+              49.415079
+            ]
+          ]
+        },
+        {
+          "type": "seeking",
+          "id": 15,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 49.4,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 1,
+          "error": null,
+          "trusted": true,
+          "at": 153007.19999999925,
+          "played": [
+            [
+              44.6,
+              49.415079
+            ]
+          ]
+        },
+        {
+          "type": "seeked",
+          "id": 15,
+          "src": "http://127.0.0.1:51995/audio/B.wav",
+          "time": 49.4,
+          "duration": 49.75,
+          "rate": 1,
+          "ready": 4,
+          "error": null,
+          "trusted": true,
+          "at": 153013.1000000015,
+          "played": [
+            [
+              44.6,
+              49.415079
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "layout-1440.png",
+      "width": 1440,
+      "sha256": "879ea215d988ccbaed0d19033d05f9e0c1419684141ebce5efcd5c72c4841044"
+    },
+    {
+      "file": "layout-1024.png",
+      "width": 1024,
+      "sha256": "76323780fba2ab820e26eb8703b9a96502241f9b9829f2a1a653831951bb2124"
+    },
+    {
+      "file": "layout-390.png",
+      "width": 390,
+      "sha256": "c642be02a3f3dbc6df0a95bab751e66f7c7c0ee0997fb27a786cea1322ab6323"
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "context",
+      "status": "complete",
+      "ms": 26
+    },
+    {
+      "name": "browser",
+      "status": "complete",
+      "ms": 3538
+    },
+    {
+      "name": "server",
+      "status": "complete",
+      "ms": 1
+    }
+  ],
+  "priorSetupFailures": [
+    {
+      "at": "2026-09-21T21:07:20+09:00",
+      "phase": "node --check build.mjs",
+      "error": "SyntaxError Unexpected token :; missing module.rules closing bracket. Fixed before any browser launch."
+    }
+  ],
+  "protectedBefore": {
+    "apps/web/components/CallReview.tsx": "e861bc8ff7775e51be35c67f72364fdda261bd43407f4962be06367831fd6161",
+    "apps/web/components/CallReview.module.css": "decc14c878b152c1ceab08070f21abb29a7acf1b56edc19440e97a2cc01f4d13",
+    "apps/web/app/page.tsx": "48aaca8bae6fae2114f0d65bbff263ee4318f16d7f3de9408da90fb393fcf420",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf"
+  },
+  "productCommit": "bfc8543aa65316682948f2e3d5b77a3ee56b21ff",
+  "productSources": {
+    "apps/web/components/CallReview.tsx": {
+      "sha256": "ecea3abef5c9c40bc612f8e239768d9ed0c726d6899e119d273e70daa1987a44",
+      "bytes": 27063
+    },
+    "apps/web/components/CallReview.module.css": {
+      "sha256": "09bfa4eebb63bea1082127bc4226093f3a6b3f4a88edaaf14618ce6c487af359",
+      "bytes": 9292
+    },
+    "apps/web/app/tokens.css": {
+      "sha256": "9e090a0bd6e9bbca8f0522dd7729d5dcf28237a8f03483264e21962824a3c3bb",
+      "bytes": 3260
+    },
+    "apps/web/app/globals.css": {
+      "sha256": "e486e8b7d7ef4e3bea8d6fa976d27b00e64ce9368cd8ac821fc064ca794b80c2",
+      "bytes": 29153
+    },
+    "apps/web/lib/types.ts": {
+      "sha256": "30bcaa243a4ea7a199b4ed846a029063845868423675016a0b0a8b965703cc0e",
+      "bytes": 1688
+    },
+    "data/fixtures/cases.json": {
+      "sha256": "071b4599c4a8a733accb201aaa4dd1535b216d8a2dbb6a0004b67043ffda8916",
+      "bytes": 22830
+    }
+  },
+  "manifestSha256": "39b5673596b7fa338300cce367ae04a9395e0c259387139744bf664cb7ac68be",
+  "assets": {
+    "A": {
+      "localPath": "apps/web/public/demo/CASE-0002.wav",
+      "url": "/audio/A.wav",
+      "sha256": "333897f4f10426674ec97b9e3a44c2f8da21f1f7931b4f911c82a29abcf6b914",
+      "bytes": 2378478,
+      "duration": 49.55,
+      "frames": 1189200,
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    "B": {
+      "localPath": ".local/pc2-n02-m2-pause-v1-recheck/CASE-0002-pause020-v1.wav",
+      "url": "/audio/B.wav",
+      "sha256": "6fe83afb8552765ab92722b838d2a0905f507551c4f98c58fa62a515033abaa0",
+      "bytes": 2388044,
+      "duration": 49.75,
+      "frames": 1194000,
+      "sampleRate": 24000,
+      "channels": 1
+    }
+  },
+  "serverAddress": {
+    "address": "127.0.0.1",
+    "family": "IPv4",
+    "port": 51995
+  },
+  "browser": "153.0.4234.48",
+  "browserControl": "Playwright pipe; no BrowserServer",
+  "passed": 18,
+  "failed": 0,
+  "protectedAfter": {
+    "apps/web/components/CallReview.tsx": "e861bc8ff7775e51be35c67f72364fdda261bd43407f4962be06367831fd6161",
+    "apps/web/components/CallReview.module.css": "decc14c878b152c1ceab08070f21abb29a7acf1b56edc19440e97a2cc01f4d13",
+    "apps/web/app/page.tsx": "48aaca8bae6fae2114f0d65bbff263ee4318f16d7f3de9408da90fb393fcf420",
+    "data/fixtures/cases.json": "6e7babe176b575509d32613284753b146ad601b62c487a28d0373d7f96778648",
+    "data/demo-media-manifest.json": "0caf2965d948d2a1c7409c0d7ddbacb248add214cb7f70f93f635b739d215dcf"
+  },
+  "browserDisconnected": true,
+  "requests": [
+    {
+      "at": "2026-09-21T12:10:17.973Z",
+      "path": "/",
+      "method": "GET",
+      "status": 200,
+      "start": 0,
+      "end": 243
+    },
+    {
+      "at": "2026-09-21T12:10:18.002Z",
+      "path": "/harness.js",
+      "method": "GET",
+      "status": 200,
+      "start": 0,
+      "end": 1185213
+    },
+    {
+      "at": "2026-09-21T12:10:18.425Z",
+      "path": "/audio/A.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2378477
+    },
+    {
+      "at": "2026-09-21T12:10:18.654Z",
+      "path": "/audio/A.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2378477
+    },
+    {
+      "at": "2026-09-21T12:10:18.784Z",
+      "path": "/audio/A.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2378477
+    },
+    {
+      "at": "2026-09-21T12:10:19.547Z",
+      "path": "/audio/A.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 1048576,
+      "end": 2378477
+    },
+    {
+      "at": "2026-09-21T12:11:09.735Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:11:09.812Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:11:09.898Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:11:09.999Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 1048576,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:11:59.900Z",
+      "path": "/audio/A.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2378477
+    },
+    {
+      "at": "2026-09-21T12:11:59.978Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:00.261Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 229376,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:04.852Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:05.079Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 229376,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:12.956Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:13.215Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 1048576,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:18.157Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:18.448Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 851968,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:24.309Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:24.541Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 1114112,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:31.007Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:31.255Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 1441792,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:37.945Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:38.156Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 1769472,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:45.794Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:46.065Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 2129920,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:51.189Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:51.294Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:51.295Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:51.415Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 1212416,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:51.825Z",
+      "path": "/audio/A.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2378477
+    },
+    {
+      "at": "2026-09-21T12:12:51.923Z",
+      "path": "/audio/A.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2378477
+    },
+    {
+      "at": "2026-09-21T12:12:52.022Z",
+      "path": "/audio/A.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 229376,
+      "end": 2378477
+    },
+    {
+      "at": "2026-09-21T12:12:52.202Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:52.307Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:52.421Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 1048576,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:52.423Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:52.806Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    },
+    {
+      "at": "2026-09-21T12:12:53.255Z",
+      "path": "/audio/B.wav",
+      "method": "GET",
+      "status": 206,
+      "start": 0,
+      "end": 2388043
+    }
+  ],
+  "finished": "2026-09-21T12:12:57.137Z"
+}

@@ -1,2 +1,4 @@
 # Preserve FFmpeg output bytes, including its padded progress lines.
 *-ebur128.txt -text whitespace=-blank-at-eol
+# Preserve the exact manifest bytes hashed by the native playback run.
+playback-manifest.json -text whitespace=cr-at-eol
