@@ -19,7 +19,7 @@ from typing import Callable
 
 ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY = "cjj0202-glitch/happycall-ralphthon"
-RELEASE_TAG = "demo-media-20260921-audio-v2"
+RELEASE_TAG = "demo-media-20260921-audio-v3"
 NAMES = ("CASE-0001.wav", "CASE-0002.wav", "sorter-demo.mp4")
 MANIFEST = ROOT / "data/demo-media-manifest.json"
 DESTINATION = ROOT / "apps/web/public/demo"
@@ -361,7 +361,7 @@ def main() -> int:
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--verify-only", action="store_true", help="Check local files without network or writes")
     mode.add_argument("--self-test", action="store_true", help="Run isolated mock checks without network")
-    mode.add_argument("--upgrade-approved", action="store_true", help="Replace only exact approved v1 WAVs, preserving private backups")
+    mode.add_argument("--upgrade-approved", action="store_true", help="Replace only exact approved source WAVs, preserving private backups")
     args = parser.parse_args()
     try:
         if args.self_test:
