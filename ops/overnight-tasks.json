@@ -91,6 +91,39 @@
         "evidence": "reports/request-grounding-final-independent.md",
         "accepted": true,
         "acceptanceScope": "Original four defects and quoted-request projection only"
+      },
+      "cctvInspector": {
+        "commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+        "browserChecksBeforeFinalFix": "64/64",
+        "finalSourceSha256": "dafe4f74a6ba0816a7ed8061288f9a040ab86c54e737e398dba3b9a6dc6b2395",
+        "finalPureFunctionChecks": "14/14;1 mutation detected",
+        "independentPureChecks": "9/9;2 mutations detected",
+        "finalBrowserRecheck": "NOT_RUN: automatic approval review rejected independent server/browser launch",
+        "finalSceneRegistered": false,
+        "accepted": false,
+        "evidence": [
+          "reports/cctv-inspector.md",
+          "reports/cctv-inspector-independent.md"
+        ]
+      },
+      "successToastRepair": {
+        "commit": "7ca0e8ba85dbfa7bff85577d4b0d019756e53e35",
+        "ownPureChecks": "48/48;3/3 mutations",
+        "independentPureChecks": "22/22;1/1 mutation",
+        "browserRecheck": "NOT_RUN: policy rejection boundary",
+        "accepted": true,
+        "acceptanceScope": "Actual action functions; not React rendering or full browser flow",
+        "evidence": "reports/save-toast.md"
+      },
+      "latestBuild": {
+        "completedAtKST": "2026-09-21T21:56:19.194786+09:00",
+        "source": "716e1cdc1a2b738b50f74c5cbcb62f8564e92e4d34e8b49f0b3d38790a7048be",
+        "output": "2b2889efda74036be37a2936763f05a376c4a83fb4e9f65a1134918077b571aa",
+        "outputFiles": 26,
+        "build": "PASS",
+        "localBundle": "PASS after fixing stale public fixture",
+        "deployed": false,
+        "fullBrowserFlows": "NOT_RUN"
       }
     },
     {
@@ -170,10 +203,13 @@
       "parentVerificationCard": {
         "id": "N02-M3",
         "productCommit": "92d2ecbad981f366a9e5ffc850d9c2bb7fd5d3a2",
-        "state": "SENT_ACK_PENDING",
+        "state": "ACK_RECEIVED_EXECUTING",
         "card": "reports/channel/N02-M3-v3-parent-verification.md",
         "comment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5760570765",
-        "accepted": false
+        "accepted": false,
+        "ackComment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5760679104",
+        "acknowledgedAtKST": "2026-09-21T21:44:09+09:00",
+        "reportedFirstResultWindowKST": "21:57–22:07"
       }
     },
     {
@@ -255,8 +291,38 @@
         "settings": "EEVEE96/shadow4/threads2, root explicit override before formal CLI intake",
         "checks": "34/34 pre-render source tests",
         "evidenceLocal": ".local/pc3-render-intake/staging-01/",
-        "motion72": "PENDING",
+        "motion72": "72/72 PNG render verified;3-second review video in preparation",
         "finalMediaRegistered": false,
+        "accepted": true,
+        "motionRender": {
+          "atKST": "2026-09-21T21:52:30.526254+09:00",
+          "exitCode": 0,
+          "wallSeconds": 896.578,
+          "expectedFrames": 72,
+          "evidence": ".local/pc3-render-intake/short-33fa0e4-01/short-cli-process.json",
+          "acceptance": "PENDING file/geometry/motion review"
+        },
+        "acceptanceScope": "Representative and 72-frame scene only; not full288/product asset",
+        "motionReview": {
+          "raySamples": 15886,
+          "visible": 15886,
+          "positiveOccluderDetections": "199/199",
+          "contactChecks": "20/20",
+          "staticPixelComparisons": 85200,
+          "staticChangedPixels": 0,
+          "representativeDifferencePixels": 8,
+          "representativeMaxChannelDifference": 1,
+          "evidence": "reports/media/pc3-environment-main-review.md",
+          "pixelPerfectDeterminism": false,
+          "fullOcclusionGuarantee": false
+        }
+      },
+      "packageValidatorCard": {
+        "id": "N03-M3",
+        "sourceCommit": "33fa0e4edeb88c0d4ad5e9cc0194ffc7e96cebcd",
+        "state": "ACK_RECEIVED_EXECUTING",
+        "card": "reports/channel/N03-M3-render-intake-validator.md",
+        "ackComment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5760683253",
         "accepted": false
       }
     },
@@ -286,7 +352,7 @@
       "resumeBasis": "pc4 reports direct instruction by its local user; previous local hold no longer active.",
       "resultCommit": "1b82f1d7fad1b31545d512b28896bfcba40189ec",
       "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5759119569",
-      "mainFinding": "Q2 fixedbfc accepted scoped. Q3 fixedc6 ACK received, independent8axes executing on separate clean checkout",
+      "mainFinding": "Q3 fixedc6 accepted scoped with P2; pc1 committed toast repair7ca0e8b; D1 presentation draft sent separately",
       "followupCard": {
         "id": "N04-Q2",
         "baseCommit": "e5469aa99bb266c5a977b80c097223275ac6fc9b",
@@ -330,14 +396,31 @@
         "productCommit": "c6f734f60d0dbe0151a69e35b8dfd8a41f3c5bd5",
         "card": "reports/channel/N04-Q3-prototype-recovery.md",
         "comment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5760348790",
-        "state": "ACK_RECEIVED_EXECUTING",
-        "accepted": false,
+        "state": "ACCEPTED_SCOPED_WITH_P2",
+        "accepted": true,
         "ackComment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5760453319",
-        "acknowledgedAtKST": "2026-09-21T21:25:57+09:00"
+        "acknowledgedAtKST": "2026-09-21T21:25:57+09:00",
+        "resultCommit": "d7841717e8181d4f9315a20dee5099c073251019",
+        "resultComment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5760687749",
+        "reportedAxes": "8/8",
+        "reportedObservations": "297/297",
+        "remainingP2": "Previous success toast remains when next save becomes uncertain; main repair in progress",
+        "acceptanceScope": "Fixed c6f734f/v2 eight recovery axes only",
+        "mainChecks": "Git evidence98/98;checker33/33;input67;observations297/297",
+        "mainEvidence": "reports/pc4-q3-main-intake.md",
+        "acceptanceComment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5760817788"
+      },
+      "demoStoryboardCard": {
+        "id": "N04-D1",
+        "productCommit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+        "state": "SENT_ACK_PENDING",
+        "card": "reports/channel/N04-D1-demo-storyboard.md",
+        "comment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5760793161",
+        "accepted": false
       }
     }
   ],
-  "updatedAtKST": "2026-09-21T21:36:25.620067+09:00",
-  "sharedBaseCommit": "92d2ecbad981f366a9e5ffc850d9c2bb7fd5d3a2",
-  "lastMainReviewKST": "2026-09-21T21:36:25.620067+09:00"
+  "updatedAtKST": "2026-09-21T21:59:35.902772+09:00",
+  "sharedBaseCommit": "7ca0e8ba85dbfa7bff85577d4b0d019756e53e35",
+  "lastMainReviewKST": "2026-09-21T21:59:35.902772+09:00"
 }
