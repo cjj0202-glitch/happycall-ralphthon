@@ -1,0 +1,178 @@
+{
+  "started": "2026-09-21T10:08:46.910Z",
+  "method": "Chromium local-file decode, first progression and final ended; no audio capture claim",
+  "recordings": [
+    {
+      "name": "round1-missing",
+      "path": "C:\\00.프로젝트\\happycall-ralphthon\\tests\\e2e\\test-results\\rehearsal\\2026-09-21T10-03-54-814Z\\5317cb5c82cee679ddbef8f797535a51.webm",
+      "bytes": 3423962,
+      "sha256": "403c56ad3c26bc39b6222064599ae96a4f398bd6e30d5b3b0acb36bb26ad37ae",
+      "start": {
+        "duration": 53.28,
+        "currentTime": 0.152227,
+        "width": 1364,
+        "height": 950,
+        "error": null
+      },
+      "end": {
+        "ended": true,
+        "currentTime": 53.28,
+        "error": null
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "round1-wrong",
+      "path": "C:\\00.프로젝트\\happycall-ralphthon\\tests\\e2e\\test-results\\rehearsal\\2026-09-21T10-03-54-814Z\\5781165b14f6c330e9712e9c0a6d0c0a.webm",
+      "bytes": 4966579,
+      "sha256": "cef19a4d87da89ed96aa2a64cf154052832fe22d0fcdbb6adb99bbccbc7215e5",
+      "start": {
+        "duration": 68.08,
+        "currentTime": 0.158202,
+        "width": 1364,
+        "height": 950,
+        "error": null
+      },
+      "end": {
+        "ended": true,
+        "currentTime": 68.08,
+        "error": null
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "round2-missing",
+      "path": "C:\\00.프로젝트\\happycall-ralphthon\\tests\\e2e\\test-results\\rehearsal\\2026-09-21T10-03-54-814Z\\ea77e41fd49398945b761b488725bcd1.webm",
+      "bytes": 3716644,
+      "sha256": "69cfc42e61e029f9bbed213dbb0d117620db42e256c5a6002ae37a8ff8880c44",
+      "start": {
+        "duration": 53.84,
+        "currentTime": 0.173137,
+        "width": 1364,
+        "height": 950,
+        "error": null
+      },
+      "end": {
+        "ended": true,
+        "currentTime": 53.84,
+        "error": null
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "round2-wrong",
+      "path": "C:\\00.프로젝트\\happycall-ralphthon\\tests\\e2e\\test-results\\rehearsal\\2026-09-21T10-03-54-814Z\\514a61d3092c1203bcc591a9ad82d455.webm",
+      "bytes": 5504877,
+      "sha256": "634372346b2da03d7aed472ad6933cdf2b3fb606d47d7a82b4708abe9d14f342",
+      "start": {
+        "duration": 67.92,
+        "currentTime": 0.159553,
+        "width": 1364,
+        "height": 950,
+        "error": null
+      },
+      "end": {
+        "ended": true,
+        "currentTime": 67.92,
+        "error": null
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "round3-missing",
+      "path": "C:\\00.프로젝트\\happycall-ralphthon\\tests\\e2e\\test-results\\rehearsal\\2026-09-21T10-03-54-814Z\\c01db5a200c4641692cca0d699c7aad2.webm",
+      "bytes": 3522955,
+      "sha256": "2b386698b0c86cae873760768d582538e8eb21182a29738466fba039d55db8ba",
+      "start": {
+        "duration": 53.68,
+        "currentTime": 0.161838,
+        "width": 1364,
+        "height": 950,
+        "error": null
+      },
+      "end": {
+        "ended": true,
+        "currentTime": 53.68,
+        "error": null
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "round3-wrong",
+      "path": "C:\\00.프로젝트\\happycall-ralphthon\\tests\\e2e\\test-results\\rehearsal\\2026-09-21T10-03-54-814Z\\9ccd3288e9409425a714288f236af337.webm",
+      "bytes": 5122651,
+      "sha256": "f3b8031d13d607bce4c010c7f1973e706f28552969ee866d025482b57263ac17",
+      "start": {
+        "duration": 68.6,
+        "currentTime": 0.158645,
+        "width": 1364,
+        "height": 950,
+        "error": null
+      },
+      "end": {
+        "ended": true,
+        "currentTime": 68.6,
+        "error": null
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "text-missing",
+      "path": "C:\\00.프로젝트\\happycall-ralphthon\\tests\\e2e\\test-results\\rehearsal\\2026-09-21T10-03-54-814Z\\a5375a00a91b25192eea8012d187bb10.webm",
+      "bytes": 779394,
+      "sha256": "70f5b42f1ec97b9744e36ab81908d51a59932def68fc85ea0e1f5f963cd40660",
+      "start": {
+        "duration": 6,
+        "currentTime": 0.163909,
+        "width": 1364,
+        "height": 950,
+        "error": null
+      },
+      "end": {
+        "ended": true,
+        "currentTime": 6,
+        "error": null
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "text-wrong",
+      "path": "C:\\00.프로젝트\\happycall-ralphthon\\tests\\e2e\\test-results\\rehearsal\\2026-09-21T10-03-54-814Z\\d1e8067771004f09d2660f1ff442aba8.webm",
+      "bytes": 854730,
+      "sha256": "4ecb5338733f9aa0e6ab6e9fe8bc1b6eddaa8367bc933be9d29444abba6d5a37",
+      "start": {
+        "duration": 6.44,
+        "currentTime": 0.17932,
+        "width": 1364,
+        "height": 950,
+        "error": null
+      },
+      "end": {
+        "ended": true,
+        "currentTime": 6.44,
+        "error": null
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "offline-api-unavailable",
+      "path": "C:\\00.프로젝트\\happycall-ralphthon\\tests\\e2e\\test-results\\rehearsal\\2026-09-21T10-03-54-814Z\\26331a129928f8645264b436e43ce8ef.webm",
+      "bytes": 243931,
+      "sha256": "892adff8fc162023e117faa09f30abe91d85ecafc5cc122ab6f69ee1d69f5050",
+      "start": {
+        "duration": 2.2,
+        "currentTime": 0.170573,
+        "width": 1364,
+        "height": 950,
+        "error": null
+      },
+      "end": {
+        "ended": true,
+        "currentTime": 2.2,
+        "error": null
+      },
+      "status": "PASS"
+    }
+  ],
+  "finished": "2026-09-21T10:08:55.889Z"
+}
