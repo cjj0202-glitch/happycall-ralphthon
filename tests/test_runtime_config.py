@@ -159,9 +159,9 @@ def test_invalid_live_config_does_not_construct_client(monkeypatch):
 def test_health_shares_live_validation_without_exposing_key(change, ready, monkeypatch):
     from server import handlers
     set_env(monkeypatch, {**RUNTIME_VALUES, **change})
-    budget = Mock()
-    budget.return_value.status.return_value = {"reservedUsd": 0, "accounting": "synthetic-test"}
-    monkeypatch.setattr(handlers, "Budget", budget)
+    runtime = Mock()
+    runtime.check_ready.return_value = {"reservedUsd": 0, "accounting": "synthetic-test"}
+    monkeypatch.setattr(handlers, "get_runtime_storage", Mock(return_value=runtime))
     result = asyncio.run(handlers.health())
     assert result["liveReady"] is ready
     assert result["runtime"] == "synthetic-demo"

@@ -1,17 +1,16 @@
 """Thin OpenAPI handlers. Business state changes live in CaseService."""
-from functools import lru_cache
 from connexion import request
 from starlette.concurrency import run_in_threadpool
 
 from server.errors import DemoError
-from server.repository import JsonCaseRepository
-from server.service import CaseService
-from server.budget import Budget
+from server.runtime_storage import get_runtime_storage, storage_unavailable
 
 
-@lru_cache(maxsize=1)
 def service():
-    return CaseService(JsonCaseRepository())
+    runtime = get_runtime_storage()
+    if runtime.backend == "vercel-blob":
+        runtime.check_ready()
+    return runtime.service
 
 
 def error(exc):
@@ -25,34 +24,38 @@ async def health():
         ready = True
     except DemoError:
         ready = False
-    # Readiness covers configuration only, not provider auth, storage or deployment.
-    return {"status": "ok", "synthetic": True, "runtime": "synthetic-demo", "liveReady": ready, "budget": Budget().status()}
+    # liveReady covers key/policy only, not model-provider authentication.
+    try:
+        budget_status = await run_in_threadpool(lambda: get_runtime_storage().check_ready())
+    except Exception:
+        return error(storage_unavailable())
+    return {"status": "ok", "synthetic": True, "runtime": "synthetic-demo", "liveReady": ready, "budget": budget_status}
 
 
 async def list_cases():
     try:
-        return await run_in_threadpool(service().list)
+        return await run_in_threadpool(lambda: service().list())
     except DemoError as exc:
         return error(exc)
 
 
 async def get_case(case_id):
     try:
-        return await run_in_threadpool(service().get, case_id)
+        return await run_in_threadpool(lambda: service().get(case_id))
     except DemoError as exc:
         return error(exc)
 
 
 async def create_intake(body):
     try:
-        return await run_in_threadpool(service().intake, body), 201
+        return await run_in_threadpool(lambda: service().intake(body)), 201
     except DemoError as exc:
         return error(exc)
 
 
 async def analyze_case(case_id, body):
     try:
-        return await run_in_threadpool(service().analyze, case_id, body["mode"])
+        return await run_in_threadpool(lambda: service().analyze(case_id, body["mode"]))
     except DemoError as exc:
         return error(exc)
 
@@ -60,6 +63,6 @@ async def analyze_case(case_id, body):
 async def patch_case(case_id, body):
     try:
         role = request.headers.get("X-Demo-Role", "counselor")
-        return await run_in_threadpool(service().patch, case_id, body, role)
+        return await run_in_threadpool(lambda: service().patch(case_id, body, role))
     except DemoError as exc:
         return error(exc)

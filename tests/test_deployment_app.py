@@ -1,0 +1,444 @@
+"""In-process deployment checks using synthetic exports/stores; no real secrets/API."""
+from __future__ import annotations
+
+import asyncio
+import base64
+from pathlib import Path
+import types
+from unittest.mock import Mock
+
+import httpx
+import pytest
+from starlette.responses import JSONResponse
+
+from server import deployment_access as access
+from server import deployment_app as deployment
+
+
+USER = "reviewer-61"
+PASSWORD = "T7!pK9@qV2#rM4$sN6%wZ8&cX0"
+AUTH = "Basic " + base64.b64encode(f"{USER}:{PASSWORD}".encode()).decode()
+MEDIA = b"SYNTHETIC-MEDIA-0123456789"
+
+
+def run_request(app, method="GET", path="/", *, headers=None, **kwargs):
+    async def execute():
+        async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app),
+                                    base_url="https://demo.invalid") as client:
+            return await client.request(method, path, headers=headers, **kwargs)
+    return asyncio.run(execute())
+
+
+def authenticated(app, method="GET", path="/", *, headers=None, **kwargs):
+    return run_request(app, method, path, headers={"Authorization": AUTH, **(headers or {})}, **kwargs)
+
+
+def physical_symlink(link, target, *, directory=False):
+    try:
+        link.symlink_to(target, target_is_directory=directory)
+    except OSError as error:
+        if getattr(error, "winerror", None) == 1314:
+            pytest.skip("Windows symlink privilege unavailable; physical link check not run")
+        raise
+
+
+class EchoAPI:
+    def __init__(self):
+        self.calls = []
+
+    async def __call__(self, scope, receive, send):
+        self.calls.append(dict(scope))
+        await JSONResponse({"path": scope["path"], "root_path": scope.get("root_path", ""),
+                            "query": scope["query_string"].decode()})(scope, receive, send)
+
+
+@pytest.fixture(autouse=True)
+def isolated_runtime(tmp_path, monkeypatch):
+    from server import handlers, live, runtime_config
+    for key in runtime_config.DEMO_ENV_KEYS | {runtime_config.CORS_ENV_KEY}:
+        monkeypatch.delenv(key, raising=False)
+    monkeypatch.setattr(runtime_config, "ENV_FILE", tmp_path / "nonexistent-synthetic.env")
+    forbidden = Mock(side_effect=AssertionError("Real live API and local runtime state are forbidden"))
+    monkeypatch.setattr(live, "OpenAI", forbidden)
+    monkeypatch.setattr(handlers, "get_runtime_storage", forbidden)
+    monkeypatch.setattr(handlers, "service", forbidden)
+    yield
+    forbidden.assert_not_called()
+
+
+@pytest.fixture
+def export_dir(tmp_path):
+    root = tmp_path / "out"
+    files = {"index.html": b"<!doctype html><title>Synthetic OneFlow</title>",
+             "404.html": b"<!doctype html><title>Missing</title>", "index.txt": b"synthetic-next-flight",
+             "cases.json": b'{"cases":[]}', "icon.svg": b"<svg/>",
+             "_next/static/chunks/app.js": b"console.log('synthetic');",
+             "_next/static/css/app.css": b"body { color: black; }",
+             "demo/CASE-0001.wav": MEDIA, "demo/CASE-0002.wav": MEDIA, "demo/sorter-demo.mp4": MEDIA}
+    for name, content in files.items():
+        file = root / name
+        file.parent.mkdir(parents=True, exist_ok=True)
+        file.write_bytes(content)
+    return root
+
+
+@pytest.fixture
+def environment(export_dir):
+    return {"ONEFLOW_STATIC_DIR": str(export_dir), "ONEFLOW_ACCESS_USER": USER,
+            "ONEFLOW_ACCESS_PASSWORD": PASSWORD}
+
+
+@pytest.fixture
+def app(environment):
+    return deployment.create_deployment_app(environ=environment, api_app=EchoAPI())
+
+
+@pytest.mark.parametrize("method,path", [("GET", "/"), ("HEAD", "/"), ("GET", "/cases.json"),
+    ("GET", "/_next/static/chunks/app.js"), ("GET", "/demo/CASE-0001.wav"),
+    ("HEAD", "/demo/sorter-demo.mp4"), ("GET", "/api/health"), ("GET", "/api"),
+    ("GET", "/api/"), ("PATCH", "/api/cases/SYN-TEST"), ("POST", "/api/intake"),
+    ("OPTIONS", "/api/cases"), ("GET", "/missing"), ("GET", "/.env"), ("POST", "/healthz")])
+def test_every_nonpublic_path_requires_authentication(app, method, path):
+    response = run_request(app, method, path, headers={"Range": "bytes=0-3"})
+    assert response.status_code == 401
+    assert response.headers["www-authenticate"] == access.CHALLENGE
+    assert "content-range" not in response.headers
+    assert app.app.api.calls == []
+
+
+@pytest.mark.parametrize("path", ["/healthz", "/healthz?ignored=synthetic-secret"])
+def test_public_health_is_constant_and_does_not_call_api(app, path):
+    response = run_request(app, path=path, headers={"Authorization": "not even valid"})
+    assert response.status_code == 200
+    assert response.json() == {"status": "ok"}
+    assert app.app.api.calls == []
+    head = run_request(app, "HEAD", path)
+    assert head.status_code == 200 and head.content == b""
+    assert head.headers["content-length"] == str(len(response.content))
+
+
+@pytest.mark.parametrize("value", ["", "Bearer x", "Basic", "Basic ", "Basic !!!", "Basic !!!===",
+    "Basic abc", "Basic YQ==", "Basic dXNlcjpwYXNz trailing", "Basic\tdXNlcjpwYXNz",
+    "Basic " + base64.b64encode(b"bad:credentials").decode(), "Basic " + "A" * 4097,
+    "Basic " + base64.b64encode(b"\xff:\xff").decode(), AUTH + "=", AUTH + "\n"])
+def test_invalid_authentication_is_identical_401(app, value, caplog):
+    response = run_request(app, path="/api/cases", headers={"Authorization": value})
+    assert response.status_code == 401
+    assert response.text == "Unauthorized"
+    assert response.headers["www-authenticate"] == access.CHALLENGE
+    assert PASSWORD not in response.text + caplog.text
+    assert app.app.api.calls == []
+
+
+@pytest.mark.parametrize("headers", [[("Authorization", AUTH), ("Authorization", AUTH)],
+    [("Authorization", AUTH), ("authorization", "Basic invalid")],
+    [("Authorization", "Basic invalid"), ("Authorization", AUTH)],
+    [("Authorization", AUTH + ", " + AUTH)]])
+def test_duplicate_or_combined_authorization_is_rejected(app, headers):
+    response = run_request(app, path="/api/cases", headers=headers)
+    assert response.status_code == 401
+    assert app.app.api.calls == []
+
+
+def test_basic_scheme_is_case_insensitive_and_two_hashes_always_compared(app, monkeypatch):
+    actual = access.hmac.compare_digest
+    compare = Mock(wraps=actual)
+    monkeypatch.setattr(access.hmac, "compare_digest", compare)
+    response = run_request(app, headers={"Authorization": "bAsIc" + AUTH[5:]})
+    assert response.status_code == 200
+    assert compare.call_count == 2
+    assert all(len(arg) == 32 for call in compare.call_args_list for arg in call.args)
+    compare.reset_mock()
+    bad = "Basic " + base64.b64encode(f"wrong-user:{PASSWORD}".encode()).decode()
+    assert run_request(app, headers={"Authorization": bad}).status_code == 401
+    assert compare.call_count == 2
+    assert PASSWORD not in repr(app.credentials)
+
+
+@pytest.mark.parametrize("path,mime", [("/", "text/html"), ("/index.html", "text/html"),
+    ("/index.txt", "text/plain"), ("/cases.json", "application/json"),
+    ("/icon.svg", "image/svg+xml"), ("/_next/static/chunks/app.js", "text/javascript"),
+    ("/_next/static/css/app.css", "text/css"), ("/demo/CASE-0001.wav", "audio/wav"),
+    ("/demo/sorter-demo.mp4", "video/mp4")])
+def test_authenticated_export_has_expected_mime_and_security_headers(app, path, mime):
+    response = authenticated(app, path=path)
+    assert response.status_code == 200
+    assert response.headers["content-type"].split(";")[0] == mime
+    assert response.headers["cache-control"] == "private, no-store"
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert response.headers["referrer-policy"] == "no-referrer"
+    assert response.content
+
+
+@pytest.mark.parametrize("path", ["/demo/CASE-0001.wav", "/demo/sorter-demo.mp4"])
+def test_media_get_head_and_range(app, path):
+    full = authenticated(app, path=path)
+    assert full.content == MEDIA
+    assert full.headers["accept-ranges"] == "bytes"
+    head = authenticated(app, "HEAD", path)
+    assert head.status_code == 200 and head.content == b""
+    assert head.headers["content-length"] == str(len(MEDIA))
+    partial = authenticated(app, path=path, headers={"Range": "bytes=2-7"})
+    assert partial.status_code == 206
+    assert partial.content == MEDIA[2:8]
+    assert partial.headers["content-range"] == f"bytes 2-7/{len(MEDIA)}"
+    suffix = authenticated(app, path=path, headers={"Range": "bytes=-4"})
+    assert suffix.status_code == 206 and suffix.content == MEDIA[-4:]
+    head_range = authenticated(app, "HEAD", path, headers={"Range": "bytes=2-7"})
+    assert head_range.status_code == 206 and head_range.content == b""
+    assert head_range.headers["content-length"] == "6"
+    outside = authenticated(app, path=path, headers={"Range": "bytes=999-"})
+    assert outside.status_code == 416
+    assert outside.headers["content-range"] == f"bytes */{len(MEDIA)}"
+    if_range = authenticated(app, path=path, headers={"Range": "bytes=2-7", "If-Range": '"stale"'})
+    assert if_range.status_code == 200 and if_range.content == MEDIA
+
+
+@pytest.mark.parametrize("path", ["/api", "/api/", "/api/cases?selected=SYN-TEST", "/api/unknown"])
+def test_api_receives_original_path_query_and_origin(app, path):
+    response = authenticated(app, path=path)
+    assert response.status_code == 200
+    assert response.json()["path"] == path.split("?")[0]
+    assert response.json()["root_path"] == ""
+    assert response.json()["query"] == (path.split("?", 1)[1] if "?" in path else "")
+    assert app.app.api.calls[-1]["scheme"] == "https"
+    assert not any(key.lower() == b"authorization" for key, value in app.app.api.calls[-1]["headers"])
+    assert "access-control-allow-origin" not in response.headers
+
+
+@pytest.mark.parametrize("path", ["/missing", "/missing.js", "/demo/missing.wav", "/apiary",
+    "/healthz/", "/.env", "/server/deployment_app.py", "/secret.json", "/README.md",
+    "/_next/static/chunks/secret.js.map", "/demo/private.json"])
+def test_unknown_static_and_secret_files_are_404_not_html(app, export_dir, path):
+    if path not in {"/missing", "/healthz/"}:
+        candidate = export_dir / path.lstrip("/")
+        candidate.parent.mkdir(parents=True, exist_ok=True)
+        candidate.write_text("synthetic-private-value", encoding="utf-8")
+    response = authenticated(app, path=path)
+    # Missing allowed assets deliberately remain missing, all other planted files are denied.
+    if path in {"/missing.js", "/demo/missing.wav"}:
+        (export_dir / path.lstrip("/")).unlink()
+        response = authenticated(app, path=path)
+    assert response.status_code == 404
+    assert b"synthetic-private-value" not in response.content
+    assert b"<!doctype" not in response.content
+
+
+@pytest.mark.parametrize("path", ["/%2e%2e/secret.json", "/demo/%2e%2e/index.html",
+    "/demo/%252e%252e/index.html", "/demo%5c..%5cindex.html", "/demo//CASE-0001.wav",
+    "/demo/CASE-0001.wav%00", "/demo/CASE-0001.wav:secret", "/demo/CASE-0001.wav.",
+    "/demo/CASE-0001.wav%20", "/_next/static/.private.js", "/%00"])
+def test_traversal_and_ambiguous_paths_are_denied(app, path):
+    response = authenticated(app, path=path)
+    assert response.status_code == 404
+    assert response.content == b""
+
+
+def test_symlink_files_and_directories_are_not_served(app, export_dir, tmp_path):
+    outside = tmp_path / "private.wav"
+    outside.write_text("synthetic-private-value", encoding="utf-8")
+    physical_symlink(export_dir / "demo/linked.wav", outside)
+    physical_symlink(export_dir / "demo/linked-dir", tmp_path, directory=True)
+    for path in ("/demo/linked.wav", "/demo/linked-dir/private.wav"):
+        response = authenticated(app, path=path)
+        assert response.status_code == 404
+        assert b"synthetic-private-value" not in response.content
+
+
+def test_replaced_required_file_symlink_is_blocked_after_start(app, export_dir, tmp_path):
+    secret = tmp_path / "private.html"
+    secret.write_text("synthetic-private-value", encoding="utf-8")
+    target = export_dir / "index.html"
+    target.unlink()
+    physical_symlink(target, secret)
+    assert authenticated(app).status_code == 404
+
+
+@pytest.mark.parametrize("key,value", [("ONEFLOW_ACCESS_USER", ""), ("ONEFLOW_ACCESS_USER", "abc"),
+    ("ONEFLOW_ACCESS_USER", "admin"), ("ONEFLOW_ACCESS_USER", "demo"),
+    ("ONEFLOW_ACCESS_USER", "person:name"), ("ONEFLOW_ACCESS_USER", "x" * 65),
+    ("ONEFLOW_ACCESS_USER", "user with spaces"), ("ONEFLOW_ACCESS_USER", "사용자이름"),
+    ("ONEFLOW_ACCESS_PASSWORD", ""), ("ONEFLOW_ACCESS_PASSWORD", "short-synthetic-value"),
+    ("ONEFLOW_ACCESS_PASSWORD", "x" * 32), ("ONEFLOW_ACCESS_PASSWORD", "x" * 257),
+    ("ONEFLOW_ACCESS_PASSWORD", "replace-with-a-secure-password-123456789!"),
+    ("ONEFLOW_ACCESS_PASSWORD", "ChangeMe-1234567890-Secret!"),
+    ("ONEFLOW_ACCESS_PASSWORD", PASSWORD + "\n")])
+def test_invalid_access_configuration_fails_without_echo(environment, key, value):
+    with pytest.raises(ValueError) as caught:
+        deployment.create_deployment_app(environ={**environment, key: value}, api_app=EchoAPI())
+    assert str(caught.value) == access.ACCESS_ERROR
+    assert PASSWORD not in str(caught.value)
+
+
+@pytest.mark.parametrize("key", ["ONEFLOW_STATIC_DIR", "ONEFLOW_ACCESS_USER", "ONEFLOW_ACCESS_PASSWORD"])
+def test_missing_environment_is_not_recovered_from_local_file(environment, key):
+    environment.pop(key)
+    with pytest.raises(ValueError):
+        deployment.create_deployment_app(environ=environment, api_app=EchoAPI())
+
+
+@pytest.mark.parametrize("value", ["", "apps/web/out", "../out", "missing-synthetic-export", "\x00"])
+def test_invalid_static_configuration_fails_without_echo(environment, value):
+    with pytest.raises(ValueError) as caught:
+        deployment.create_deployment_app(environ={**environment, "ONEFLOW_STATIC_DIR": value}, api_app=EchoAPI())
+    assert str(caught.value) == deployment.STATIC_ERROR
+
+
+@pytest.mark.parametrize("relative", [*deployment.REQUIRED_FILES, "_next/static/chunks/app.js",
+                                    "_next/static/css/app.css"])
+def test_missing_export_component_prevents_startup(environment, export_dir, relative):
+    (export_dir / relative).unlink()
+    with pytest.raises(ValueError, match="ONEFLOW_STATIC_DIR"):
+        deployment.create_deployment_app(environ=environment, api_app=EchoAPI())
+
+
+def test_empty_export_component_and_symlink_root_prevent_startup(environment, export_dir, tmp_path):
+    (export_dir / "index.html").write_bytes(b"")
+    with pytest.raises(ValueError, match="ONEFLOW_STATIC_DIR"):
+        deployment.create_deployment_app(environ=environment, api_app=EchoAPI())
+    (export_dir / "index.html").write_bytes(b"<html/>")
+    root_link = tmp_path / "linked-export"
+    physical_symlink(root_link, export_dir, directory=True)
+    with pytest.raises(ValueError, match="ONEFLOW_STATIC_DIR"):
+        deployment.create_deployment_app(environ={**environment, "ONEFLOW_STATIC_DIR": str(root_link)}, api_app=EchoAPI())
+
+
+def test_static_mutation_methods_are_not_allowed(app):
+    response = authenticated(app, "POST", "/index.html", content="do not change")
+    assert response.status_code == 405
+    assert response.headers["allow"] == "GET, HEAD"
+    assert authenticated(app, "POST", "/healthz").status_code == 405
+
+
+@pytest.mark.parametrize("kind", ["is_symlink", "is_junction"])
+@pytest.mark.parametrize("relative", ["index.html", "demo", ""])
+def test_synthetic_link_detection_denies_file_directory_and_root(app, export_dir, monkeypatch, kind, relative):
+    """Exercise both link detectors without requiring OS link creation privilege."""
+    original = getattr(Path, kind)
+    marked_link = export_dir / relative
+    monkeypatch.setattr(Path, kind, lambda path: path == marked_link or original(path))
+    path = "/demo/CASE-0001.wav" if relative == "demo" else "/"
+    assert authenticated(app, path=path).status_code == 404
+
+
+@pytest.mark.parametrize("kind", ["is_symlink", "is_junction"])
+def test_synthetic_link_export_fails_startup(environment, export_dir, monkeypatch, kind):
+    original = getattr(Path, kind)
+    monkeypatch.setattr(Path, kind, lambda path: path == export_dir or original(path))
+    with pytest.raises(ValueError, match="ONEFLOW_STATIC_DIR"):
+        deployment.create_deployment_app(environ=environment, api_app=EchoAPI())
+
+
+def test_websockets_are_always_closed(app):
+    sent = []
+    async def send(message):
+        sent.append(message)
+    asyncio.run(app({"type": "websocket", "path": "/api", "headers": []}, None, send))
+    assert sent == [{"type": "websocket.close", "code": 1008}]
+    assert app.app.api.calls == []
+
+
+@pytest.fixture
+def real_api_app(environment, tmp_path, monkeypatch):
+    from server import handlers
+    from server.repository import JsonCaseRepository
+    from server.service import CaseService
+    root = Path(__file__).resolve().parents[1]
+    fixture = tmp_path / "synthetic-fixtures.json"
+    fixture.write_bytes((root / "data/fixtures/cases.json").read_bytes())
+    analyzer = Mock()
+    analyzer.analyze.side_effect = AssertionError("No model calls")
+    service = CaseService(JsonCaseRepository(tmp_path / "synthetic-store.json", fixture), analyzer=analyzer)
+    monkeypatch.setattr(handlers, "service", lambda: service)
+    async def health():
+        return {"status": "synthetic", "budget": {"marker": "private-synthetic-budget"}}
+    monkeypatch.setattr(handlers, "health", health)
+    yield deployment.create_deployment_app(environ=environment), service
+    analyzer.analyze.assert_not_called()
+
+
+def test_real_connexion_api_and_health_are_protected_and_keep_contract(real_api_app):
+    app, service = real_api_app
+    denied = run_request(app, path="/api/health")
+    assert denied.status_code == 401 and "private-synthetic-budget" not in denied.text
+    health = authenticated(app, path="/api/health")
+    assert health.status_code == 200 and health.json()["budget"]["marker"] == "private-synthetic-budget"
+    listed = authenticated(app, path="/api/cases")
+    assert listed.status_code == 200 and len(listed.json()["cases"]) == 2
+    for path in ("/api", "/api/", "/api/unknown", "/api/cases/UNKNOWN"):
+        missing = authenticated(app, path=path)
+        assert missing.status_code == 404
+        assert "html" not in missing.headers.get("content-type", "")
+    wrong_method = authenticated(app, "DELETE", "/api/cases")
+    assert wrong_method.status_code == 405
+
+
+def test_real_api_role_and_revision_denials_survive_outer_basic_auth(real_api_app):
+    app, service = real_api_app
+    case = service.list()["cases"][0]
+    path = "/api/cases/" + case["id"]
+    missing_revision = authenticated(app, "PATCH", path, json={"departmentId": "delivery"})
+    assert missing_revision.status_code == 428
+    denied = authenticated(app, "PATCH", path, headers={"X-Demo-Role": "owner"},
+                           json={"expectedRevision": 0, "reviewConfirmed": True})
+    assert denied.status_code == 403
+    assert denied.json()["error"]["code"] == "READ_ONLY_ROLE"
+    blocked = authenticated(app, "PATCH", path, headers={"X-Demo-Role": "counselor"},
+                            json={"expectedRevision": 0, "status": "closed"})
+    assert blocked.status_code == 409
+    assert service.get(case["id"])["revision"] == 0
+    allowed = authenticated(app, "PATCH", path, headers={"X-Demo-Role": "counselor"},
+                            json={"expectedRevision": 0, "departmentId": "delivery"})
+    assert allowed.status_code == 200 and allowed.json()["revision"] == 1
+    handoff = authenticated(app, "PATCH", path, headers={"X-Demo-Role": "counselor"},
+                            json={"expectedRevision": 1, "reviewConfirmed": True, "status": "handed_off"})
+    assert handoff.status_code == 200
+    close = authenticated(app, "PATCH", path, headers={"X-Demo-Role": "counselor"},
+                          json={"expectedRevision": 2, "status": "closed"})
+    assert close.status_code == 403 and close.json()["error"]["code"] == "CENTER_ROLE_REQUIRED"
+
+
+def test_guard_mutations_are_killed_with_unchanged_control(environment, export_dir):
+    """Execute memory-only mutants; never rewrite repository source during verification."""
+    access_source = Path(access.__file__).read_text(encoding="utf-8")
+    app_source = Path(deployment.__file__).read_text(encoding="utf-8")
+
+    def load_copy(module, source):
+        # Keep the original name for dataclass type introspection; this object is not installed.
+        copied = types.ModuleType(module.__name__)
+        copied.__file__ = module.__file__
+        exec(compile(source, "<synthetic-deployment-mutant>", "exec"), copied.__dict__)
+        return copied
+
+    def protected(module):
+        app = module.DeploymentAccess(EchoAPI(), access.AccessCredentials.from_environment(environment))
+        assert run_request(app, path="/api/cases").status_code == 401
+
+    def allowed(module):
+        app = module.DeploymentAccess(EchoAPI(), access.AccessCredentials.from_environment(environment))
+        assert authenticated(app, path="/api/cases").status_code == 200
+
+    def original_path(module):
+        app = module.create_deployment_app(environ=environment, api_app=EchoAPI())
+        assert authenticated(app, path="/api/cases").json()["path"] == "/api/cases"
+
+    def secret_denied(module):
+        (export_dir / "private.json").write_text('{"syntheticSecret":"never-serve"}', encoding="utf-8")
+        app = module.create_deployment_app(environ=environment, api_app=EchoAPI())
+        assert authenticated(app, path="/private.json").status_code == 404
+
+    mutations = [
+        (access, access_source, "if not self.credentials.accepts(scope.get(\"headers\", [])):", "if False:", protected),
+        (access, access_source, "if not self.credentials.accepts(scope.get(\"headers\", [])):", "if True:", allowed),
+        (deployment, app_source, "await self.api(scope, receive, send)\n            return\n        if path",
+         "await self.api({**scope, 'path': path.removeprefix('/api')}, receive, send)\n            return\n        if path", original_path),
+        (deployment, app_source, "if relative in ROOT_FILES:", "if relative in ROOT_FILES or relative.endswith('.json'):", secret_denied),
+    ]
+    killed = 0
+    for module, source, before, after, check in mutations:
+        check(load_copy(module, source))
+        assert source.count(before) == 1
+        with pytest.raises(AssertionError):
+            check(load_copy(module, source.replace(before, after)))
+        killed += 1
+    assert killed == 4
