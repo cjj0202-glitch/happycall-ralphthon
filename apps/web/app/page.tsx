@@ -33,7 +33,7 @@ export default function Home() {
   const reload = useCallback(async () => {
     if (reloadInFlight.current) return;
     reloadInFlight.current = true;
-    setLoading(true); setError('');
+    setLoading(true); setError(''); setToast('');
     try {
       const data = await request<{ cases: CaseData[] }>('/api/cases');
       setCases(data.cases); setFallback(false);
@@ -51,11 +51,13 @@ export default function Home() {
   }, [hasDrafts]);
   const update = (updated: CaseData) => setCases(old => old.some(c => c.id === updated.id) ? old.map(c => c.id === updated.id ? { ...c, ...updated } : c) : [updated, ...old]);
   const save = async (id: string, payload: Record<string, unknown>) => {
+    setToast('');
     if (fallback) throw new Error('예시 열람 모드에서는 저장할 수 없습니다. 서버에 다시 연결해 주세요.');
     if (typeof payload.expectedRevision !== 'number') throw new Error('접수 버전을 확인할 수 없습니다. 화면을 새로 연 뒤 변경 내용을 확인해 주세요.');
     const updated = await request<CaseData>(`/api/cases/${id}`, 'PATCH', payload, view === 'center' ? 'center' : 'counselor'); update(updated); return updated;
   };
   const loadExample = async () => {
+    setToast('');
     try {
       const response = await fetch('/cases.json');
       if (!response.ok) throw new Error('예시 데이터도 불러오지 못했습니다.');
@@ -77,7 +79,7 @@ export default function Home() {
       <div className="workspace-sync"><div><strong>{hasDrafts ? '저장하지 않은 초안이 있습니다' : '접수 현황'}</strong><p className="small muted">{hasDrafts ? '메뉴를 이동해도 초안을 유지합니다. 이 페이지를 닫거나 새로고침하면 사라질 수 있습니다.' : '다른 담당자가 등록한 내용은 목록 새로고침으로 확인하세요.'}</p><span className="small muted" role="status">최종 서버 확인 {lastSync || '확인 중'}</span></div><button onClick={() => void reload()} disabled={loading}>{loading ? '최신 내용 확인 중…' : '목록 새로고침'}</button></div>
       {loading && !cases.length ? <div className="empty-state" role="status"><div className="spinner"/><h2>접수 건을 불러오고 있습니다</h2><p>서버의 최신 처리 상태를 확인합니다.</p></div> : <>
         {view !== 'owner' && cases.length > 0 && <section className="case-selector" aria-label="문의 선택"><div className="section-label"><span className="small-kicker">TODAY&apos;S CASES</span><strong>접수 목록 <span className="count">{cases.length}</span></strong></div><div className="case-buttons">{cases.map(c => <button key={c.id} className={`case-button ${active?.id === c.id ? 'active' : ''}`} onClick={() => setSelected(c.id)} aria-pressed={active?.id === c.id}><span className="case-icon" aria-hidden="true">{c.channel === 'voice' ? <svg viewBox="0 0 24 24" fill="none"><path d="M7 3h3l1 5-2 1c1 3 3 5 6 6l1-2 5 1v3c0 3-3 4-6 3C8 18 3 13 3 6c0-2 2-3 4-3Z" stroke="currentColor" strokeWidth="1.6"/></svg> : <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H9l-5 4V4Z" stroke="currentColor" strokeWidth="1.6"/></svg>}</span><span className="case-copy"><strong>{c.title}</strong><span>{c.store?.name || c.store?.id} · {c.id}</span></span><Status status={c.status}/></button>)}</div></section>}
-        {view === 'owner' ? <Owner cases={cases} selected={selected} onSelect={setSelected} onCreated={c => { update(c); setSelected(c.id); setToast(`${c.id} 접수가 등록되었습니다.`); }} onDesk={() => setView('desk')} fallback={fallback}/> : !active ? <div className="empty-state"><h2>접수된 문의가 없습니다</h2><p>경영주 접수에서 첫 문의를 등록해 주세요.</p><button className="primary" onClick={() => setView('owner')}>문의 접수하기</button></div> : view === 'desk' ? <Desk key={active.id} caseData={active} mode={mode} fallback={fallback} onUpdate={update} onSave={save} onView={setView} onToast={setToast}/> : view === 'center' ? <Center key={active.id} caseData={active} onUpdate={update} onSave={save} onToast={setToast} onView={setView}/> : <LogisticsScene key={`${view}:${active.id}`} kind={view} caseData={active} onBack={() => setView('desk')} onLinkEvidence={async (id: string) => { await save(active.id, { expectedRevision: active.revision, selectedEvidence: Array.from(new Set([...(active.selectedEvidence || []), id])) }); setToast('물류 근거를 접수 건에 연결했습니다.'); }}/>}
+        {view === 'owner' ? <Owner cases={cases} selected={selected} onSelect={setSelected} onCreated={c => { update(c); setSelected(c.id); setToast(`${c.id} 접수가 등록되었습니다.`); }} onToast={setToast} onDesk={() => setView('desk')} fallback={fallback}/> : !active ? <div className="empty-state"><h2>접수된 문의가 없습니다</h2><p>경영주 접수에서 첫 문의를 등록해 주세요.</p><button className="primary" onClick={() => setView('owner')}>문의 접수하기</button></div> : view === 'desk' ? <Desk key={active.id} caseData={active} mode={mode} fallback={fallback} onUpdate={update} onSave={save} onView={setView} onToast={setToast}/> : view === 'center' ? <Center key={active.id} caseData={active} onUpdate={update} onSave={save} onToast={setToast} onView={setView}/> : <LogisticsScene key={`${view}:${active.id}`} kind={view} caseData={active} onBack={() => setView('desk')} onLinkEvidence={async (id: string) => { await save(active.id, { expectedRevision: active.revision, selectedEvidence: Array.from(new Set([...(active.selectedEvidence || []), id])) }); setToast('물류 근거를 접수 건에 연결했습니다.'); }}/>}
       </>}
       <footer className="page-footer"><span>HappyCall OneFlow</span><span>전화·점포·물류 데이터는 시연용 합성 데이터입니다. 실제 고객 통화가 아닙니다.</span></footer>
     </main>
@@ -168,6 +170,7 @@ function Desk({ caseData: c, mode, fallback, onUpdate, onSave, onView, onToast }
   const field = (key: keyof Intake, value: string) => { setForm(old => ({ ...old, [key]: value })); setEdited(true); setConfirmed(false); };
   const analyze = async () => {
     if (intakeLocked || busy || analysisInFlight.current || stale || uncertain || recovery) return;
+    onToast('');
     if (fallback) { setAnalysisFailure('분석은 서버에 연결한 후 사용할 수 있습니다.'); return; }
     if (c.channel === 'voice' && !audioEnded) { setAnalysisFailure('통화를 처음부터 끝까지 재생한 뒤 분석해 주세요.'); return; }
     analysisInFlight.current = true;
@@ -194,7 +197,7 @@ function Desk({ caseData: c, mode, fallback, onUpdate, onSave, onView, onToast }
     } catch (e) { setError(errorText(e)); if (e instanceof ApiError && e.uncertain) draft.set('uncertain', payload); if (e instanceof ApiError && e.status === 409) await inspectLatest(); } finally { setBusy(''); }
   };
   const inspectLatest = async () => {
-    setBusy('verify'); setError('');
+    setBusy('verify'); setError(''); onToast('');
     try {
       const latest = await request<CaseData>(`/api/cases/${c.id}`);
       onUpdate(latest);
@@ -261,7 +264,7 @@ function Desk({ caseData: c, mode, fallback, onUpdate, onSave, onView, onToast }
   </div>;
 }
 
-function Owner({ cases, selected, onSelect, onCreated, onDesk, fallback }: { cases: CaseData[]; selected: string; onSelect: (s: string) => void; onCreated: (c: CaseData) => void; onDesk: () => void; fallback: boolean }) {
+function Owner({ cases, selected, onSelect, onCreated, onToast, onDesk, fallback }: { cases: CaseData[]; selected: string; onSelect: (s: string) => void; onCreated: (c: CaseData) => void; onToast: (s: string) => void; onDesk: () => void; fallback: boolean }) {
   type Attempt = { key: string; payload: { storeId: string; subject: string; text: string; type: 'missing' | 'wrong'; referenceCaseId?: string }; retryAllowed?: boolean };
   const draft = useSessionDraft<{ storeId: string; subject: string; text: string; type: 'missing' | 'wrong'; referenceCaseId: string | null; attempt: Attempt | null }>('owner:new', { storeId: '', subject: '', text: '', type: 'missing', referenceCaseId: null, attempt: null });
   const { storeId, subject, text, type, referenceCaseId, attempt } = draft.value;
@@ -307,6 +310,7 @@ function Owner({ cases, selected, onSelect, onCreated, onDesk, fallback }: { cas
   const submit = async (e?: React.FormEvent) => {
     e?.preventDefault();
     if (busy || fallback || (attempt && !attempt.retryAllowed)) return;
+    onToast('');
     const current = attempt || { key: crypto.randomUUID(), payload: { storeId, subject, text, type, ...(referenceCaseId ? { referenceCaseId } : {}) } };
     draft.set('attempt', { ...current, retryAllowed: false }); setBusy(true); setError('');
     try { finish(await request<CaseData>('/api/intake', 'POST', current.payload, 'owner', { idempotencyKey: current.key })); }
@@ -317,7 +321,7 @@ function Owner({ cases, selected, onSelect, onCreated, onDesk, fallback }: { cas
   };
   const verifyAttempt = async () => {
     if (!attempt || busy) return;
-    setBusy(true); setError('');
+    setBusy(true); setError(''); onToast('');
     try { finish(await request<CaseData>(`/api/intake-attempts/${attempt.key}`, 'GET', undefined, 'owner')); }
     catch (err) {
       if (err instanceof ApiError && err.status === 404) { draft.set('attempt', { ...attempt, retryAllowed: true }); setError('아직 등록된 접수를 찾지 못했습니다. 첫 요청이 처리 중일 수 있어 입력을 유지합니다. 같은 내용으로 확인·재시도하면 중복 접수를 방지합니다.'); }
@@ -352,7 +356,7 @@ function Center({ caseData: c, onSave, onToast, onView, onUpdate }: { caseData: 
     } catch (e) { setError(errorText(e)); if (e instanceof ApiError && e.uncertain) draft.set('uncertain', payload); if (e instanceof ApiError && e.status === 409) await inspectLatest(); } finally { setBusy(false); }
   };
   const inspectLatest = async () => {
-    setBusy(true); setError('');
+    setBusy(true); setError(''); onToast('');
     try {
       const latest = await request<CaseData>(`/api/cases/${c.id}`, 'GET', undefined, 'center'); onUpdate(latest);
       if (uncertain && sameMutation(latest, uncertain)) { draft.replace(initial(latest), true); setRecovery(null); onToast('서버에 요청한 회신이 저장되어 있음을 확인했습니다.'); }
