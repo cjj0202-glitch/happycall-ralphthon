@@ -1,4 +1,4 @@
-"""Fetch only the three approved synthetic demo assets from the team GitHub Release.
+"""Fetch approved demo media and a registered tracks sidecar from the team Release.
 
 Requires authenticated GitHub CLI for downloads. Verification and self-test use
 only the Python standard library, never an API key or paid media generation.
@@ -6,40 +6,55 @@ only the Python standard library, never an API key or paid media generation.
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import os
 import re
 import stat
 import subprocess
+import sys
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Callable
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from server.media_contract import (ALLOWED_RELEASE_TAGS, CURRENT_RELEASE_TAG,
+                                   MEDIA_NAMES, TRACKS_NAME,
+                                   validate_media_manifest)
+
 REPOSITORY = "cjj0202-glitch/happycall-ralphthon"
-RELEASE_TAG = "demo-media-20260921-audio-v2"
-NAMES = ("CASE-0001.wav", "CASE-0002.wav", "sorter-demo.mp4")
+RELEASE_TAG = CURRENT_RELEASE_TAG
+NAMES = tuple(MEDIA_NAMES)
 MANIFEST = ROOT / "data/demo-media-manifest.json"
 DESTINATION = ROOT / "apps/web/public/demo"
 BACKUP_ROOT = ROOT / ".local/demo-media-backups"
 
 
 def validate_manifest(manifest: dict) -> list[dict]:
-    if (manifest.get("schemaVersion") != 1
-            or manifest.get("repository") != REPOSITORY
-            or manifest.get("releaseTag") != RELEASE_TAG):
-        raise ValueError("Unexpected manifest schema, repository, or release tag")
-    assets = manifest.get("assets", [])
-    if len(assets) != len(NAMES) or {a.get("name") for a in assets} != set(NAMES):
-        raise ValueError("Manifest must contain exactly the three approved asset names")
-    for asset in assets:
-        if type(asset.get("bytes")) is not int or asset["bytes"] <= 0:
-            raise ValueError(f"Invalid byte count: {asset['name']}")
-        if not re.fullmatch(r"[0-9a-f]{64}", str(asset.get("sha256", ""))):
-            raise ValueError(f"Invalid SHA256: {asset['name']}")
-    return assets
+    return copy.deepcopy(validate_media_manifest(manifest, check_release=True))
+
+
+def validate_assets(assets: list[dict], *, release_tag: str = RELEASE_TAG) -> list[dict]:
+    """Validate direct list callers as strictly as the CLI's canonical manifest.
+
+    Accept canonical three assets, or exactly the flattened result returned by
+    validate_manifest. A loose fourth filename never grants sidecar permission.
+    """
+    if not isinstance(assets, list) or not all(isinstance(a, dict) for a in assets):
+        raise ValueError("Assets must be a list of descriptors")
+    canonical = [a for a in assets if a.get("name") != TRACKS_NAME]
+    sidecars = [a for a in assets if a.get("name") == TRACKS_NAME]
+    validated = validate_manifest({"schemaVersion": 1, "repository": REPOSITORY,
+                                   "releaseTag": release_tag, "assets": canonical})
+    expected_sidecars = [a for a in validated if a["name"] == TRACKS_NAME]
+    if sidecars and sidecars != expected_sidecars:
+        raise ValueError("Flattened tracks must exactly match the parent descriptor")
+    return validated
 
 
 def verify(path: Path, asset: dict) -> bool:
@@ -94,7 +109,7 @@ def move_no_replace(source: Path, target: Path) -> None:
 
 
 def approved_source(asset: dict) -> dict:
-    if (asset["name"] not in NAMES[:2] or asset.get("synthetic") is not True
+    if (asset["name"] not in NAMES or asset.get("synthetic") is not True
             or type(asset.get("sourceBytes")) is not int or asset["sourceBytes"] <= 0
             or not re.fullmatch(r"[0-9a-f]{64}", str(asset.get("sourceSha256", "")))):
         raise ValueError(f"No approved source bytes/SHA256 for upgrade: {asset['name']}")
@@ -102,11 +117,10 @@ def approved_source(asset: dict) -> dict:
 
 
 def upgrade(assets: list[dict], destination: Path, *, backup_root: Path,
-            downloader: Callable[[str, Path], None]) -> dict:
+            downloader: Callable[[str, Path], None], release_tag: str = RELEASE_TAG) -> dict:
     """Validated, opt-in replacement; completed files remain on partial failure."""
     # The API is used by isolated tests as well as main; do not trust caller names.
-    validate_manifest({"schemaVersion": 1, "repository": REPOSITORY,
-                       "releaseTag": RELEASE_TAG, "assets": assets})
+    assets = validate_assets(assets, release_tag=release_tag)
     destination, backup_root = destination.absolute(), backup_root.absolute()
     safe_path(destination)
     safe_path(backup_root)
@@ -137,7 +151,7 @@ def upgrade(assets: list[dict], destination: Path, *, backup_root: Path,
     except FileExistsError as exc:
         raise ValueError(f"Another upgrade or interrupted run owns {lock}; inspect before retry") from exc
     run = None
-    record = {"status": "preparing", "releaseTag": RELEASE_TAG,
+    record = {"status": "preparing", "releaseTag": release_tag,
               "destination": str(destination), "installed": [], "backups": []}
     try:
         run = Path(tempfile.mkdtemp(prefix=datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ-"),
@@ -224,10 +238,13 @@ def upgrade(assets: list[dict], destination: Path, *, backup_root: Path,
         lock.rmdir()
 
 
-def download(name: str, target: Path) -> None:
-    # No shell interpolation. Repo, tag, and all possible names are fixed above.
+def download(name: str, target: Path, *, release_tag: str = RELEASE_TAG) -> None:
+    if (name not in (*NAMES, TRACKS_NAME) or not isinstance(release_tag, str)
+            or release_tag not in ALLOWED_RELEASE_TAGS):
+        raise ValueError("Unapproved release tag or download name")
+    # No shell interpolation; repository, allowed tags and names are fixed.
     subprocess.run(
-        ["gh", "release", "download", RELEASE_TAG, "--repo", REPOSITORY,
+        ["gh", "release", "download", release_tag, "--repo", REPOSITORY,
          "--pattern", name, "--dir", str(target)],
         check=True, timeout=120,
     )
@@ -235,11 +252,16 @@ def download(name: str, target: Path) -> None:
 
 def fetch(assets: list[dict], destination: Path, *, verify_only: bool = False,
           upgrade_approved: bool = False, backup_root: Path = BACKUP_ROOT,
-          downloader: Callable[[str, Path], None] = download) -> dict:
+          downloader: Callable[[str, Path], None] | None = None,
+          release_tag: str = RELEASE_TAG) -> dict:
+    assets = validate_assets(assets, release_tag=release_tag)
+    if downloader is None:
+        downloader = lambda name, target: download(name, target, release_tag=release_tag)
     if upgrade_approved:
         if verify_only:
             raise ValueError("--upgrade-approved cannot be combined with --verify-only")
-        return upgrade(assets, destination, backup_root=backup_root, downloader=downloader)
+        return upgrade(assets, destination, backup_root=backup_root, downloader=downloader,
+                       release_tag=release_tag)
     safe_path(destination)
     missing: list[dict] = []
     skipped: list[str] = []
@@ -361,15 +383,17 @@ def main() -> int:
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--verify-only", action="store_true", help="Check local files without network or writes")
     mode.add_argument("--self-test", action="store_true", help="Run isolated mock checks without network")
-    mode.add_argument("--upgrade-approved", action="store_true", help="Replace only exact approved v1 WAVs, preserving private backups")
+    mode.add_argument("--upgrade-approved", action="store_true", help="Replace only exact approved source media, preserving private backups")
     args = parser.parse_args()
     try:
         if args.self_test:
             result = self_test()
         else:
-            assets = validate_manifest(json.loads(MANIFEST.read_text(encoding="utf-8")))
+            manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+            assets = validate_manifest(manifest)
             result = fetch(assets, DESTINATION, verify_only=args.verify_only,
-                           upgrade_approved=args.upgrade_approved)
+                           upgrade_approved=args.upgrade_approved,
+                           release_tag=manifest["releaseTag"])
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 1 if result.get("missing") else 0
     except (ValueError, OSError, subprocess.SubprocessError) as exc:

@@ -1,0 +1,40 @@
+test_01_legacy_three_manifest_and_self_test (m4fetch.FetchChecks.test_01_legacy_three_manifest_and_self_test) ... ok
+test_02_four_assets_fresh_install_and_idempotence (m4fetch.FetchChecks.test_02_four_assets_fresh_install_and_idempotence) ... ok
+test_03_verify_only_never_creates_or_downloads (m4fetch.FetchChecks.test_03_verify_only_never_creates_or_downloads) ... ok
+test_04_three_media_upgrade_and_new_sidecar_backup (m4fetch.FetchChecks.test_04_three_media_upgrade_and_new_sidecar_backup) ... ok
+test_05_changed_sidecar_refused_before_writes (m4fetch.FetchChecks.test_05_changed_sidecar_refused_before_writes) ... ok
+test_06_mp4_unknown_source_is_preserved (m4fetch.FetchChecks.test_06_mp4_unknown_source_is_preserved) ... ok
+test_07_mp4_requires_source_and_synthetic_proof (m4fetch.FetchChecks.test_07_mp4_requires_source_and_synthetic_proof) ... ok
+test_08_corrupt_fourth_prevents_every_replacement (m4fetch.FetchChecks.test_08_corrupt_fourth_prevents_every_replacement) ... ok
+test_09_offline_partial_download_keeps_originals (m4fetch.FetchChecks.test_09_offline_partial_download_keeps_originals) ... ok
+test_10_sidecar_publish_failure_keeps_all_original_backups (m4fetch.FetchChecks.test_10_sidecar_publish_failure_keeps_all_original_backups) ... ok
+test_11_direct_list_escape_and_unregistered_sidecar_rejected (m4fetch.FetchChecks.test_11_direct_list_escape_and_unregistered_sidecar_rejected) ... ok
+test_12_descriptor_contract_rejects_invalid_boundaries (m4fetch.FetchChecks.test_12_descriptor_contract_rejects_invalid_boundaries) ... ok
+test_13_raw_three_with_nested_tracks_expands (m4fetch.FetchChecks.test_13_raw_three_with_nested_tracks_expands) ... ok
+test_14_cli_uses_selected_manifest_release_tag (m4fetch.FetchChecks.test_14_cli_uses_selected_manifest_release_tag) ... ok
+test_15_unapproved_tag_or_name_never_calls_subprocess (m4fetch.FetchChecks.test_15_unapproved_tag_or_name_never_calls_subprocess) ... ok
+test_16_default_upgrade_refused_no_backups (m4fetch.FetchChecks.test_16_default_upgrade_refused_no_backups) ... ok
+test_17_current_media_missing_sidecar_only_downloads_sidecar (m4fetch.FetchChecks.test_17_current_media_missing_sidecar_only_downloads_sidecar) ... ok
+test_bad_release_values_fail_consistently_for_download_contract (m4bundle.DeliveryChecks.test_bad_release_values_fail_consistently_for_download_contract) ... ok
+test_existing_three_assets_preserve_exact_inventory (m4bundle.DeliveryChecks.test_existing_three_assets_preserve_exact_inventory) ... ok
+test_export_different_from_public_fails (m4bundle.DeliveryChecks.test_export_different_from_public_fails) ... ok
+test_extra_json_not_allowed_even_with_registration (m4bundle.DeliveryChecks.test_extra_json_not_allowed_even_with_registration) ... ok
+test_hardlinked_sidecar_rejected_without_changing_target (m4bundle.DeliveryChecks.test_hardlinked_sidecar_rejected_without_changing_target) ... ok
+test_invalid_descriptor_matrix (m4bundle.DeliveryChecks.test_invalid_descriptor_matrix) ... ok
+test_manifest_change_invalidates_existing_stamp (m4bundle.DeliveryChecks.test_manifest_change_invalidates_existing_stamp) ... ok
+test_noncanonical_manifest_rejected (m4bundle.DeliveryChecks.test_noncanonical_manifest_rejected) ... ok
+test_offline_legacy_three_assets_only_sidecar_still_requires_approved_tag (m4bundle.DeliveryChecks.test_offline_legacy_three_assets_only_sidecar_still_requires_approved_tag) ... ok
+test_package_write_failure_preserves_source_and_no_complete_marker (m4bundle.DeliveryChecks.test_package_write_failure_preserves_source_and_no_complete_marker) ... ok
+test_registered_missing_export_sidecar_fails (m4bundle.DeliveryChecks.test_registered_missing_export_sidecar_fails) ... ok
+test_registered_missing_public_sidecar_fails (m4bundle.DeliveryChecks.test_registered_missing_public_sidecar_fails) ... ok
+test_registered_parent_video_corruption_fails (m4bundle.DeliveryChecks.test_registered_parent_video_corruption_fails) ... ok
+test_registered_sidecar_fetch_public_export_package_identical (m4bundle.DeliveryChecks.test_registered_sidecar_fetch_public_export_package_identical) ... ok
+test_same_size_corruption_fails_sha (m4bundle.DeliveryChecks.test_same_size_corruption_fails_sha) ... ok
+test_symlink_sidecar_rejected_without_changing_target (m4bundle.DeliveryChecks.test_symlink_sidecar_rejected_without_changing_target) ... skipped 'Windows symlink privilege unavailable'
+test_tracks_on_audio_or_top_level_fourth_asset_fails (m4bundle.DeliveryChecks.test_tracks_on_audio_or_top_level_fourth_asset_fails) ... ok
+test_unregistered_sidecar_is_not_allowed_in_export (m4bundle.DeliveryChecks.test_unregistered_sidecar_is_not_allowed_in_export) ... ok
+
+----------------------------------------------------------------------
+Ran 35 tests in 67.182s
+
+OK (skipped=1)

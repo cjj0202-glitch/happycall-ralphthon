@@ -57,6 +57,7 @@ def source_repo(tmp_path):
         'dependencies = []\n[tool.uv]\npackage = false\n')
     put(root, "uv.lock", 'version = 1\nrevision = 1\nrequires-python = ">=3.12,<3.13"\n')
     put(root, "data/fixtures/cases.json", '[{"id":"SYN-TEST-1","synthetic":true}]\n')
+    put(root, "data/overlays/pc4-tms.json", '{"synthetic":true,"visits":[]}\n')
     for name, content in {
         "app/page.tsx": "export default function Page(){return 'synthetic';}\n",
         "app/layout.tsx": "export default function Layout(){return 'synthetic';}\n",
@@ -133,6 +134,57 @@ def test_complete_bundle_has_exact_inventory_and_two_verified_media_copies(sourc
     assert not any(Path(name).name == bundle.BUILD_STAMP_NAME for name in entries)
     assert before == {p: content for p, content in tree_bytes(root).items()
                       if not p.startswith("dist/")}
+
+
+def register_tracks(root):
+    from server.media_contract import CURRENT_RELEASE_TAG, TRACKS_NAME, TRACKS_SCHEMA, TRACKS_URL
+    manifest_path = root / bundle.MEDIA_MANIFEST
+    manifest = json.loads(manifest_path.read_bytes())
+    manifest["releaseTag"] = CURRENT_RELEASE_TAG
+    content = b'{"synthetic":true,"frames":[]}'
+    video = next(a for a in manifest["assets"] if a["name"] == "sorter-demo.mp4")
+    video["tracks"] = {"schemaVersion": TRACKS_SCHEMA, "url": TRACKS_URL,
+                       "bytes": len(content), "sha256": digest(content), "videoSha256": video["sha256"]}
+    put(root, bundle.MEDIA_MANIFEST, json.dumps(manifest))
+    for folder in ("apps/web/public/demo/", "apps/web/out/demo/"):
+        put(root, folder + TRACKS_NAME, content)
+    return content
+
+
+def test_registered_tracks_copied_exactly_and_contract_module_bundled(source_repo):
+    content = register_tracks(source_repo)
+    stamp(source_repo)
+    output = build(source_repo)
+    assert (output / "apps/web/public/demo/sorter-demo.tracks.json").read_bytes() == content
+    assert (output / "apps/web/out/demo/sorter-demo.tracks.json").read_bytes() == content
+    assert (output / "server/media_contract.py").is_file()
+
+
+@pytest.mark.parametrize("field,value", [("bytes", True), ("bytes", 10000001),
+    ("schemaVersion", "other"), ("url", "/demo/../other.json"),
+    ("sha256", "A" * 64), ("videoSha256", "f" * 64)])
+def test_invalid_registered_tracks_blocks_stamp(source_repo, field, value):
+    register_tracks(source_repo)
+    path = source_repo / bundle.MEDIA_MANIFEST
+    manifest = json.loads(path.read_bytes())
+    next(a for a in manifest["assets"] if a["name"] == "sorter-demo.mp4")["tracks"][field] = value
+    put(source_repo, bundle.MEDIA_MANIFEST, json.dumps(manifest))
+    with pytest.raises(bundle.BundleError, match="INVALID_MEDIA_MANIFEST"):
+        stamp(source_repo)
+    assert_no_complete_bundle(source_repo)
+
+
+def test_unregistered_tracks_cannot_be_packaged(source_repo):
+    put(source_repo, "apps/web/out/demo/sorter-demo.tracks.json", "{}")
+    with pytest.raises(bundle.BundleError, match="UNAPPROVED_EXPORT_FILE"):
+        stamp(source_repo)
+
+
+def test_registered_tracks_missing_public_cannot_be_packaged(source_repo):
+    register_tracks(source_repo)
+    (source_repo / "apps/web/public/demo/sorter-demo.tracks.json").unlink()
+    with pytest.raises((bundle.BundleError, OSError)):
+        stamp(source_repo)
 
 
 def test_forbidden_root_files_are_neither_read_nor_copied(source_repo, monkeypatch):
@@ -247,6 +299,25 @@ def test_source_change_during_build_cannot_receive_completion_stamp(source_repo)
         bundle.write_build_stamp(source_repo, before)
     with pytest.raises(bundle.BundleError):
         build(source_repo)
+
+
+@pytest.mark.parametrize('name', bundle.FRONTEND_DATA_FILES)
+def test_external_client_json_change_invalidates_build(source_repo, name):
+    before = bundle.source_fingerprint(source_repo)
+    # Valid JSON whitespace change suffices: the export must bind the exact input.
+    with (source_repo / name).open('a', encoding='utf-8') as stream:
+        stream.write('\n ')
+    assert bundle.source_fingerprint(source_repo) != before
+    with pytest.raises(bundle.BundleError, match='STALE_OR_CHANGED_BUILD_STAMP'):
+        build(source_repo)
+    assert_no_complete_bundle(source_repo)
+
+
+@pytest.mark.parametrize('name', bundle.FRONTEND_DATA_FILES)
+def test_missing_external_client_json_cannot_receive_stamp(source_repo, name):
+    (source_repo / name).unlink()
+    with pytest.raises(bundle.BundleError):
+        bundle.source_fingerprint(source_repo)
 
 
 def test_output_change_after_build_stamp_is_rejected(source_repo):

@@ -1,0 +1,46 @@
+{
+  "method": "ast.parse + compile in memory; no module imports or ASGI execution",
+  "passed": 10,
+  "files": [
+    {
+      "file": "scripts/fetch_demo_media.py",
+      "syntax": "PASS"
+    },
+    {
+      "file": "scripts/build_deployment_bundle.py",
+      "syntax": "PASS"
+    },
+    {
+      "file": "server/deployment_app.py",
+      "syntax": "PASS"
+    },
+    {
+      "file": "server/media_contract.py",
+      "syntax": "PASS"
+    },
+    {
+      "file": "tests/test_demo_media_upgrade.py",
+      "syntax": "PASS"
+    },
+    {
+      "file": "tests/test_deployment_bundle.py",
+      "syntax": "PASS"
+    },
+    {
+      "file": "tests/test_deployment_app.py",
+      "syntax": "PASS"
+    },
+    {
+      "file": "reports/pc2/media-m4-fetch-checks.py",
+      "syntax": "PASS"
+    },
+    {
+      "file": "reports/pc2/media-m4-bundle-checks.py",
+      "syntax": "PASS"
+    },
+    {
+      "file": "reports/pc2/media-m4-server-checks.py",
+      "syntax": "PASS"
+    }
+  ]
+}

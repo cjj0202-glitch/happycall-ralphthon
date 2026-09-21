@@ -1,0 +1,17 @@
+{
+  "suite": "fetch+bundle stdlib unittest; ASGI separately NOT_RUN",
+  "executed": 35,
+  "passed": 34,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 1,
+  "skipReasons": [
+    "Windows symlink privilege unavailable"
+  ],
+  "elapsedSeconds": 67.498,
+  "networkDownloads": 0,
+  "npmBuilds": 0,
+  "servers": 0,
+  "sockets": 0,
+  "pytestExecuted": false
+}

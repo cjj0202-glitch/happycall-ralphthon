@@ -1,0 +1,22 @@
+test_bad_release_values_fail_consistently_for_download_contract (__main__.DeliveryChecks.test_bad_release_values_fail_consistently_for_download_contract) ... ok
+test_existing_three_assets_preserve_exact_inventory (__main__.DeliveryChecks.test_existing_three_assets_preserve_exact_inventory) ... ok
+test_export_different_from_public_fails (__main__.DeliveryChecks.test_export_different_from_public_fails) ... ok
+test_extra_json_not_allowed_even_with_registration (__main__.DeliveryChecks.test_extra_json_not_allowed_even_with_registration) ... ok
+test_hardlinked_sidecar_rejected_without_changing_target (__main__.DeliveryChecks.test_hardlinked_sidecar_rejected_without_changing_target) ... ok
+test_invalid_descriptor_matrix (__main__.DeliveryChecks.test_invalid_descriptor_matrix) ... ok
+test_manifest_change_invalidates_existing_stamp (__main__.DeliveryChecks.test_manifest_change_invalidates_existing_stamp) ... ok
+test_noncanonical_manifest_rejected (__main__.DeliveryChecks.test_noncanonical_manifest_rejected) ... ok
+test_package_write_failure_preserves_source_and_no_complete_marker (__main__.DeliveryChecks.test_package_write_failure_preserves_source_and_no_complete_marker) ... ok
+test_registered_missing_export_sidecar_fails (__main__.DeliveryChecks.test_registered_missing_export_sidecar_fails) ... ok
+test_registered_missing_public_sidecar_fails (__main__.DeliveryChecks.test_registered_missing_public_sidecar_fails) ... ok
+test_registered_parent_video_corruption_fails (__main__.DeliveryChecks.test_registered_parent_video_corruption_fails) ... ok
+test_registered_sidecar_fetch_public_export_package_identical (__main__.DeliveryChecks.test_registered_sidecar_fetch_public_export_package_identical) ... ok
+test_same_size_corruption_fails_sha (__main__.DeliveryChecks.test_same_size_corruption_fails_sha) ... ok
+test_symlink_sidecar_rejected_without_changing_target (__main__.DeliveryChecks.test_symlink_sidecar_rejected_without_changing_target) ... skipped 'Windows symlink privilege unavailable'
+test_tracks_on_audio_or_top_level_fourth_asset_fails (__main__.DeliveryChecks.test_tracks_on_audio_or_top_level_fourth_asset_fails) ... ok
+test_unregistered_sidecar_is_not_allowed_in_export (__main__.DeliveryChecks.test_unregistered_sidecar_is_not_allowed_in_export) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 77.827s
+
+OK (skipped=1)
