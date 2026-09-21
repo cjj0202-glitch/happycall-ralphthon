@@ -31,6 +31,7 @@ const reviewCase: CaseData = {
   transcript,
   analysis,
   intake: form, // 아직 저장하지 않은 현재 상담 입력을 읽기 전용으로 비교.
+  reviewConfirmed: confirmed, // 저장된 c 값이 아닌 현재 폼의 확인 체크 상태.
   analysisMode: resultMode,
 };
 
@@ -51,6 +52,8 @@ const reviewCase: CaseData = {
 ```
 
 부모의 분석 버튼에서도 `c.channel === 'voice' && !audioEnded`를 계속 차단한다. 재시도 함수 안의 게이트도 유지하고 UI disabled만 신뢰하지 않는다. 이 예시가 부모의 현재 `analyze()` 함수를 수정한 것은 아니다. `onPlaybackEnded`는 완료 사실 알림이며 자동으로 API를 호출하는 콜백으로 연결하지 않는다.
+
+현재 접수값 `form`과 확인 체크 `confirmed`는 같은 편집 상태의 한 쌍으로 전달한다. 기존 `c.reviewConfirmed=true`인 접수를 수정하면 부모 `field()`가 `setConfirmed(false)`를 실행하므로, `...c`의 과거 확인값을 승계해서는 안 된다. 반대로 아직 저장하지 않은 확인 체크가 true이면 현재 폼의 상태를 표시한다. 이 표시는 서버 저장·센터 이관 완료를 뜻하지 않으며 기존 저장/이관 함수와 revision 검사를 대체하지 않는다. 분석 성공 후 확인 해제, 부서 편집 후 확인 해제도 동일하게 전달한다.
 
 구간 재생이나 끝으로 건너뛰기는 전체 완료로 처리하지 않는다. 오류·음원 없음·disabled·사건 전환에서 새 완료 콜백이 나오지 않는지 N02 검사로 확인하며, 최종 부모 연결에서도 동일 조건을 검사해야 한다.
 
