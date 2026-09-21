@@ -2,6 +2,8 @@
 
 현재 대상은 **52g Studio / g-28**입니다(DEC-021). 이 메인 대화의 실제 pc3 준비 보고에 있는 팀 G-28과 등록 신원 LAPTOP-U2AL73UH / mcjun86-oss를 대조해 선택했습니다. 과거 g-23 예시는 실행값으로 쓰지 않습니다.
 
+최신 배포 관측은 [2026-09-22 보호 Preview 갱신](../reports/deployment/protected-preview-refresh-20260922.md)입니다. 고정3cf7b0a를 실제 Preview로 배포하고 원격 정적27/27·인증·영상 Range를 확인했습니다. 접수API는 저장소 미구성503이며 최종 Production·전체 저장 흐름은 미완료입니다.
+
 ## 확인한 계정과 프로젝트
 
 | 항목 | 검증한 값 |
