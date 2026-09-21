@@ -1,0 +1,61 @@
+{
+  "startedAt": "2026-09-21T11:04:37.152917+00:00",
+  "pid": 11440,
+  "ports": [
+    8821,
+    8822,
+    8823,
+    8824
+  ],
+  "buildStamp": {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "completedAt": "2026-09-21T11:03:12.477601+00:00",
+    "nextPublicApiBase": "",
+    "outputFileCount": 26,
+    "outputFingerprint": "f6c1841bf603019f79494544477293eae1155178b74a6488ace20241f357141e",
+    "recordDigest": "abde1f29d3c9c01383a6e6c5f7a932abe2a33ab8cde6434fc5a884f2e9b1cd80",
+    "schemaVersion": "oneflow-next-build-v1",
+    "sourceAfter": "7e76d4b0d5c84e80d5c6c6ab24c638d37b82ea4073b39d3032d0b3684f3894cc",
+    "sourceBefore": "7e76d4b0d5c84e80d5c6c6ab24c638d37b82ea4073b39d3032d0b3684f3894cc",
+    "status": "complete"
+  },
+  "backendHashes": {
+    "server/analysis_schema.py": "ed155f5d3b89f537844db5d882501a0901b428c1c6c0bbd896be7a9b267c7167",
+    "server/app.py": "6523565d8270ba8d6447562b921b0f20cb5f3ffa690e2d58a579b3393d988da9",
+    "server/budget.py": "961409c916801d2d133785119ce58232170686caa3eeb3b75ec4488031dfdaf0",
+    "server/cas_budget.py": "4191432f59b0157867d39303cfd6e9720a43656459785992f9d7e5d944f05036",
+    "server/cas_repository.py": "fdc21f8a0da2917cd9b7c5dd3d609ef873f056843accf0e57f9ef31baadb4f78",
+    "server/cas_store.py": "939c7210ec1d2c1f406f69754b832268d1fb0cb8e3d925b6cf235fbe85a38ee7",
+    "server/deployment_access.py": "299c1432484598c86b9ec19541f8a187404eb6907f2fe140775901910fee1935",
+    "server/deployment_app.py": "0e576b81725f83434d459f201075de4ff03f635f800d59d49ef0c11b08db0382",
+    "server/errors.py": "dae0dac1eeba6c6f3687c8cebcd32db8de17e3bde330c44e9bf170e215cdf01d",
+    "server/handlers.py": "aa279cfd48f546f3d8d12d2c8310ea2f91ba85c32733ac5808fff2779a85d604",
+    "server/live.py": "2318ce0759d55dcb95d55eae2afcafd5b0ffa7331849e993abe803c47a369c6c",
+    "server/repository.py": "1165f1216d000d92ed3ef6bbe27dccddb2323ff464c20e4b2f3059bc3b0bc18d",
+    "server/runtime_config.py": "82a24e6ec92c00c945d84fed7cb494e9baf8866dfd3b2d66ef5ef2eed5425f3f",
+    "server/runtime_storage.py": "2ee19f31430891a0560f3c226b20c9c1b5f92769201454f5e2274309dde9e45b",
+    "server/service.py": "68fc155357bee36e4fa1c894ebeb1f56b0eef763dd5b3b50e4a03b1ffdd0bf60",
+    "server/vercel_blob_store.py": "e425701497876ec5b9dc5988cae34b38b7b0bac233e75d804efe5e8c019ee93d",
+    "server/__init__.py": "b4c4a62ab2ea460cda3dddadcda2d33254eab2c0c91541ae38b4134014f9bdac",
+    "server/openapi.yaml": "1cff321a45f2632c95470d11102da6c0eb58ec7028a3b224ce1aec05acd5c9cc"
+  },
+  "fixtureSha256": "e4bd1cbefee5b32c1d3b00b3cd8a3336524a937923946e0e7323ce6c0bbccd90",
+  "mediaHashes": {
+    "demo/CASE-0001.wav": "d4eeb6448ff8969f27034ecade9a050ee212468585c6300b19c9a0ebdc372931",
+    "demo/CASE-0002.wav": "333897f4f10426674ec97b9e3a44c2f8da21f1f7931b4f911c82a29abcf6b914",
+    "demo/sorter-demo.mp4": "e6cad3cf9f999b596a0fef3e3d463170e0d279568a31a4be49366e5383908881"
+  },
+  "staticSnapshot": "C:\\Users\\choi8\\AppData\\Local\\Temp\\oneflow-rehearsal-7qt4mqw0\\static",
+  "temporaryStateRoot": "C:\\Users\\choi8\\AppData\\Local\\Temp\\oneflow-rehearsal-7qt4mqw0",
+  "statePreserved": true,
+  "cleanupPolicy": "preserve-new-run-no-delete",
+  "mode": "isolated-replay-only",
+  "existingProcessesTouched": false,
+  "keyReads": 0,
+  "paidCalls": 0,
+  "budgetLedgerCreated": false
+}

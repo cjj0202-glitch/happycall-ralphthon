@@ -27,7 +27,13 @@
         "PC 모듈 인수·통합",
         "20입력·12경계·6회 리허설",
         "최종 UI 검수·인계"
-      ]
+      ],
+      "mainIntegration": {
+        "state": "FUNCTIONAL_6_OF_6_UI_REFINEMENT_PENDING",
+        "evidence": "reports/integrated-modules.md",
+        "buildSource": "7e76d4b0d5c84e80d5c6c6ab24c638d37b82ea4073b39d3032d0b3684f3894cc",
+        "accepted": false
+      }
     },
     {
       "id": "N02",
@@ -47,9 +53,9 @@
       "reportedHead": "3c5e5a35dff7afb3a8c59bd93814bd1699d9915a",
       "reportedBranch": "work/pc2-n02-call-review",
       "reportedRepo": "C:/Users/Administrator/Desktop/hackerton/happycall-ralphthon",
-      "resultCommit": "7ae648eb4bfb8f7e00ab842b39ad86e0df0ac134",
+      "resultCommit": "ef8f33e23f003c95a51e6a44a8c77cac19f46b71",
       "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5758898272",
-      "mainFinding": "Parent integration must pass current reviewConfirmed along with edited intake; independent component checks passed within scope.",
+      "mainFinding": "Current intake + confirmation wired; actual shell 6/6 functional; action distance UX fix pending.",
       "followupCard": {
         "id": "N02-M2",
         "baseCommit": "e5469aa99bb266c5a977b80c097223275ac6fc9b",
@@ -57,7 +63,14 @@
         "replyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5759286540",
         "bodyFile": "reports/channel/N02-M2-pc2-voice-quality.md",
         "state": "SENT_BODY_VERIFIED",
-        "acknowledged": false
+        "acknowledged": false,
+        "sourceDelivery": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/8#issuecomment-5759439879"
+      },
+      "mainIntegration": {
+        "state": "FUNCTIONAL_6_OF_6_UI_REFINEMENT_PENDING",
+        "evidence": "reports/integrated-modules.md",
+        "buildSource": "7e76d4b0d5c84e80d5c6c6ab24c638d37b82ea4073b39d3032d0b3684f3894cc",
+        "accepted": false
       }
     },
     {
@@ -87,8 +100,17 @@
         "sentAtUTC": "2026-09-21T10:48:49Z",
         "replyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5759286998",
         "bodyFile": "reports/channel/N03-M2-pc3-blender-scene.md",
-        "state": "SENT_BODY_VERIFIED",
-        "acknowledged": false
+        "state": "FIRST_CODE_RESULT_RECEIVED_RENDER_PENDING",
+        "acknowledged": true,
+        "ackUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5759324663",
+        "resultCommit": "c208597a318a1934b7ee873299b326619ec23f33",
+        "resultReplyUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5759468507"
+      },
+      "mainIntegration": {
+        "state": "FUNCTIONAL_6_OF_6_UI_REFINEMENT_PENDING",
+        "evidence": "reports/integrated-modules.md",
+        "buildSource": "7e76d4b0d5c84e80d5c6c6ab24c638d37b82ea4073b39d3032d0b3684f3894cc",
+        "accepted": false
       }
     },
     {
@@ -100,7 +122,7 @@
       "implementation": "REPORTED_WITH_EVIDENCE",
       "unit": "REPORTED_WITH_EVIDENCE",
       "functional": "REPORTED_WITH_EVIDENCE",
-      "adversarial": "PENDING",
+      "adversarial": "HELPER_SSR_BROWSER_CHECKED_INDEPENDENTLY",
       "accepted": false,
       "issueUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10",
       "sentAtKST": "2026-09-21T18:28:16+09:00",
@@ -126,6 +148,12 @@
         "bodyFile": "reports/channel/N04-Q2-pc4-integrated-qa.md",
         "state": "SENT_BODY_VERIFIED",
         "acknowledged": false
+      },
+      "mainIntegration": {
+        "state": "FUNCTIONAL_6_OF_6_UI_REFINEMENT_PENDING",
+        "evidence": "reports/integrated-modules.md",
+        "buildSource": "7e76d4b0d5c84e80d5c6c6ab24c638d37b82ea4073b39d3032d0b3684f3894cc",
+        "accepted": false
       }
     }
   ],

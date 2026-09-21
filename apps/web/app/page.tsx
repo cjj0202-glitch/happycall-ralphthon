@@ -1,7 +1,9 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import LogisticsView from '@/components/LogisticsView';
+import CallReview from '@/components/CallReview';
+import WmsScene from '@/components/WmsScene';
+import TmsScene from '@/components/TmsScene';
 import { request } from '@/lib/api';
 import type { Analysis, AnalyzeResult, CaseData, CaseStatus, Intake, Mode, View } from '@/lib/types';
 
@@ -61,28 +63,36 @@ export default function Home() {
       {toast && <div className="notice success" role="status">{toast}</div>}
       {loading ? <div className="empty-state" role="status"><div className="spinner"/><h2>접수 건을 불러오고 있습니다</h2><p>서버의 최신 처리 상태를 확인합니다.</p></div> : <>
         {view !== 'owner' && cases.length > 0 && <section className="case-selector" aria-label="문의 선택"><div className="section-label"><span className="small-kicker">TODAY&apos;S CASES</span><strong>접수 목록 <span className="count">{cases.length}</span></strong></div><div className="case-buttons">{cases.map(c => <button key={c.id} className={`case-button ${active?.id === c.id ? 'active' : ''}`} onClick={() => setSelected(c.id)} aria-pressed={active?.id === c.id}><span className="case-icon" aria-hidden="true">{c.channel === 'voice' ? <svg viewBox="0 0 24 24" fill="none"><path d="M7 3h3l1 5-2 1c1 3 3 5 6 6l1-2 5 1v3c0 3-3 4-6 3C8 18 3 13 3 6c0-2 2-3 4-3Z" stroke="currentColor" strokeWidth="1.6"/></svg> : <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H9l-5 4V4Z" stroke="currentColor" strokeWidth="1.6"/></svg>}</span><span className="case-copy"><strong>{c.title}</strong><span>{c.store?.name || c.store?.id} · {c.id}</span></span><Status status={c.status}/></button>)}</div></section>}
-        {view === 'owner' ? <Owner cases={cases} selected={selected} onSelect={setSelected} onCreated={c => { update(c); setSelected(c.id); setToast(`${c.id} 접수가 등록되었습니다.`); }} onDesk={() => setView('desk')} fallback={fallback}/> : !active ? <div className="empty-state"><h2>접수된 문의가 없습니다</h2><p>경영주 접수에서 첫 문의를 등록해 주세요.</p><button className="primary" onClick={() => setView('owner')}>문의 접수하기</button></div> : view === 'desk' ? <Desk key={active.id} caseData={active} mode={mode} fallback={fallback} onUpdate={update} onSave={save} onView={setView} onToast={setToast}/> : view === 'center' ? <Center key={active.id} caseData={active} onSave={save} onToast={setToast} onView={setView}/> : <LogisticsView kind={view} caseData={active} onBack={() => setView('desk')} onLinkEvidence={async (id: string) => { await save(active.id, { expectedRevision: active.revision, selectedEvidence: Array.from(new Set([...(active.selectedEvidence || []), id])) }); setToast('물류 근거를 접수 건에 연결했습니다.'); }}/>} 
+        {view === 'owner' ? <Owner cases={cases} selected={selected} onSelect={setSelected} onCreated={c => { update(c); setSelected(c.id); setToast(`${c.id} 접수가 등록되었습니다.`); }} onDesk={() => setView('desk')} fallback={fallback}/> : !active ? <div className="empty-state"><h2>접수된 문의가 없습니다</h2><p>경영주 접수에서 첫 문의를 등록해 주세요.</p><button className="primary" onClick={() => setView('owner')}>문의 접수하기</button></div> : view === 'desk' ? <Desk key={active.id} caseData={active} mode={mode} fallback={fallback} onUpdate={update} onSave={save} onView={setView} onToast={setToast}/> : view === 'center' ? <Center key={active.id} caseData={active} onSave={save} onToast={setToast} onView={setView}/> : <LogisticsScene key={`${view}:${active.id}`} kind={view} caseData={active} onBack={() => setView('desk')} onLinkEvidence={async (id: string) => { await save(active.id, { expectedRevision: active.revision, selectedEvidence: Array.from(new Set([...(active.selectedEvidence || []), id])) }); setToast('물류 근거를 접수 건에 연결했습니다.'); }}/>} 
       </>}
       <footer className="page-footer"><span>HappyCall OneFlow</span><span>전화·점포·물류 데이터는 시연용 합성 데이터입니다. 실제 고객 통화가 아닙니다.</span></footer>
     </main>
   </div>;
 }
 
+function LogisticsScene({ kind, ...props }: { kind: 'wms' | 'tms'; caseData: CaseData; onBack: () => void; onLinkEvidence: (id: string) => Promise<void> }) {
+  return kind === 'wms' ? <WmsScene {...props}/> : <TmsScene {...props}/>;
+}
+
 function Desk({ caseData: c, mode, fallback, onUpdate, onSave, onView, onToast }: { caseData: CaseData; mode: Mode; fallback: boolean; onUpdate: (c: CaseData) => void; onSave: (id: string, p: Record<string, unknown>) => Promise<CaseData>; onView: (v: View) => void; onToast: (s: string) => void }) {
   const [analysis, setAnalysis] = useState<Analysis | undefined>(c.analysis);
   const [transcript, setTranscript] = useState(c.transcript || []);
-  const [resultMode, setResultMode] = useState<Mode | undefined>(c.analysis ? ((c.analysisMode as Mode) || 'replay') : undefined);
+  const [resultMode, setResultMode] = useState<Mode | undefined>(c.analysis && (c.analysisMode === 'demo-live' || c.analysisMode === 'replay') ? c.analysisMode : undefined);
   const [form, setForm] = useState<Intake>(normalizeIntake(c.intake || { ...emptyIntake, storeId: c.store?.id || '' }));
   const [formRevision, setFormRevision] = useState(c.revision);
   const [department, setDepartment] = useState(c.departmentId || '');
   const [edited, setEdited] = useState(c.reviewConfirmed === true);
   const [confirmed, setConfirmed] = useState(c.reviewConfirmed || false);
-  const [audioEnded, setAudioEnded] = useState(false);
-  const [audioError, setAudioError] = useState(false);
+  const audioSource = JSON.stringify([c.id, c.channel, c.audioUrl ?? null]);
+  const [completedAudioSource, setCompletedAudioSource] = useState<string | null>(null);
+  const audioEnded = completedAudioSource === audioSource;
   const [busy, setBusy] = useState('');
   const [error, setError] = useState('');
+  const [analysisFailure, setAnalysisFailure] = useState('');
   const [question, setQuestion] = useState('');
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const analysisInFlight = useRef(false);
+  const mounted = useRef(false);
+  useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
   const intakeLocked = ['handed_off', 'in_progress', 'closed'].includes(c.status || '');
   const canTransfer = !intakeLocked && edited && confirmed && !!(form.storeId || '').trim() && !!(form.subject || '').trim() && !!department && !busy && !fallback;
   // Cards only read the saved selection. Opening a record must not refresh formRevision.
@@ -129,17 +139,21 @@ function Desk({ caseData: c, mode, fallback, onUpdate, onSave, onView, onToast }
   const visibleEvidenceCount = selectedEvidence.filter(item => !item.withheld).length;
   const field = (key: keyof Intake, value: string) => { setForm(old => ({ ...old, [key]: value })); setEdited(true); setConfirmed(false); };
   const analyze = async () => {
-    if (fallback) { setError('실제 분석은 서버에 연결한 후 사용할 수 있습니다.'); return; }
-    setBusy('analyze'); setError('');
+    if (intakeLocked || busy || analysisInFlight.current) return;
+    if (fallback) { setAnalysisFailure('분석은 서버에 연결한 후 사용할 수 있습니다.'); return; }
+    if (c.channel === 'voice' && !audioEnded) { setAnalysisFailure('통화를 처음부터 끝까지 재생한 뒤 분석해 주세요.'); return; }
+    analysisInFlight.current = true;
+    setBusy('analyze'); setAnalysisFailure('');
     try {
       const data = await request<AnalyzeResult>(`/api/cases/${c.id}/analyze`, 'POST', { mode });
+      if (!mounted.current) return;
       setAnalysis(data.analysis); setTranscript(data.transcript || []); setResultMode(data.mode);
       setForm(normalizeIntake(data.analysis.fields));
       setFormRevision(data.revision);
       setDepartment(data.analysis.department?.id || ''); setEdited(false); setConfirmed(false);
       onUpdate({ ...c, revision: data.revision, status: 'review', reviewConfirmed: false, intake: normalizeIntake(data.analysis.fields), departmentId: data.analysis.department?.id || '', analysis: data.analysis, transcript: data.transcript, analysisMode: data.mode });
       onToast(data.mode === 'demo-live' ? '실제 AI 전사·정제가 완료되었습니다. 접수 정보를 확인해 주세요.' : '저장된 분석 결과를 불러왔습니다. 실제 AI 호출은 하지 않았습니다.');
-    } catch (e) { setError(errorText(e)); } finally { setBusy(''); }
+    } catch (e) { if (mounted.current) setAnalysisFailure(errorText(e)); } finally { analysisInFlight.current = false; if (mounted.current) setBusy(''); }
   };
   const persist = async (transfer = false) => {
     if (transfer && !canTransfer) return;
@@ -158,13 +172,22 @@ function Desk({ caseData: c, mode, fallback, onUpdate, onSave, onView, onToast }
     <div className="workflow" aria-label="처리 흐름"><span className="current"><b>1</b> 문의 듣기</span><span className={analysis ? 'current' : ''}><b>2</b> AI 정제·사람 확인</span><span className={['handed_off', 'in_progress', 'closed'].includes(c.status || '') ? 'current' : ''}><b>3</b> 센터 전달·회신</span></div>
     {error && <div className="notice danger" role="alert">{error}<button className="text-button" onClick={() => setError('')}>닫기</button></div>}
     {intakeLocked && <div className="notice info compact">센터로 전달된 접수입니다. 상담원이 확인한 내용은 보존되며 이후 회신은 센터 회신에서 등록합니다.<button onClick={() => onView('center')}>센터 회신 보기</button></div>}
-    <div className="workbench-grid">
-      <section className="panel source-panel"><div className="panel-heading"><div><span className="small-kicker">01 / ORIGINAL</span><h3>문의 원문</h3></div><span className="badge neutral">{c.channel === 'voice' ? 'AI 생성 통화' : '경영주 웹 접수'}</span></div>
-        {c.channel === 'voice' ? <div className="audio-card"><div className="audio-title"><span className="audio-symbol" aria-hidden="true">◖))</span><div><strong>{c.store.name} 경영주 문의</strong><p>사전에 생성한 합성 음성 · 직접 재생</p></div></div><audio ref={audioRef} key={c.audioUrl} controls preload="metadata" src={c.audioUrl || `/demo/${c.id}.wav`} onEnded={() => setAudioEnded(true)} onError={() => setAudioError(true)} aria-label="합성 상담 통화"/>{audioError ? <p className="warning-text">음성 파일을 불러오지 못했습니다. 아래 원문과 저장 결과 재생으로 확인할 수 있습니다.</p> : <p className="small muted">{audioEnded ? '통화 재생이 끝났습니다. AI 전사·정제를 실행할 수 있습니다.' : '음성을 끝까지 들은 후 실제 AI 전사·정제를 실행해 주세요.'}</p>}</div> : <div className="notice info compact">점포에서 입력한 원문입니다. AI 분석 후에도 원문은 보존됩니다.</div>}
-        <div className="transcript"><div className="subheading"><strong>{transcript.length ? '대화 전사' : '접수 원문'}</strong><span className="small muted">{resultMode === 'demo-live' ? '실제 AI 전사 결과' : '시연 원문'}</span></div>{transcript.length ? transcript.map((line, i) => <div className="speech" key={i}><div className="speaker">{line.speaker}<span>{line.start === undefined ? '' : `${Math.floor(line.start / 60)}:${String(Math.floor(line.start % 60)).padStart(2, '0')}`}</span></div><p>{line.text}</p></div>) : <p className="source-text">{c.sourceText}</p>}</div>
-        <div className="analysis-action"><button className="primary wide" disabled={intakeLocked || !!busy || fallback || (mode === 'demo-live' && c.channel === 'voice' && !audioEnded)} onClick={() => void analyze()}>{busy === 'analyze' ? 'AI가 전사·정제하고 있습니다…' : mode === 'demo-live' ? 'AI 전사·정제 실행' : '저장된 분석 결과 재생'} <span aria-hidden="true">→</span></button><p className="small muted">{mode === 'demo-live' ? '버튼을 누르면 실제 AI API를 사용합니다.' : '재생 모드 · 저장된 결과를 불러오며 AI API 비용이 발생하지 않습니다.'}</p></div>
-      </section>
-      <section className="panel refinement-panel"><div className="panel-heading"><div><span className="small-kicker">02 / REFINE & REVIEW</span><h3>AI 정제와 접수 확인</h3></div>{resultMode && <span className={`badge ${resultMode === 'demo-live' ? 'success' : 'info'}`}>{resultMode === 'demo-live' ? '실제 AI 분석' : '저장 결과 재생'}</span>}</div>
+    <div className="integrated-review">
+      <CallReview
+        caseData={{ ...c, transcript, analysis, intake: form, reviewConfirmed: confirmed, analysisMode: resultMode }}
+        disabled={intakeLocked || !!busy}
+        onPlaybackEnded={() => setCompletedAudioSource(audioSource)}
+        transcriptMode={resultMode ?? (!analysis ? 'replay' : undefined)}
+        analysisState={busy === 'analyze' ? 'loading' : analysisFailure ? 'error' : 'idle'}
+        analysisError={analysisFailure}
+        onRetryAnalysis={() => void analyze()}
+      />
+      <div className="analysis-action integrated-analysis-action">
+        <div><strong>{audioEnded || c.channel !== 'voice' ? '접수 내용을 정리할 준비가 되었습니다' : '통화를 먼저 끝까지 재생해 주세요'}</strong><p className="small muted">{mode === 'demo-live' ? '실제 AI API를 사용합니다. 결과를 확인한 뒤 아래 접수 정보를 편집해 주세요.' : '저장된 결과를 불러옵니다. 실제 AI API 비용은 발생하지 않습니다.'}</p></div>
+        <button className="primary" disabled={intakeLocked || !!busy || fallback || (c.channel === 'voice' && !audioEnded)} onClick={() => void analyze()}>{busy === 'analyze' ? 'AI가 전사·정제하고 있습니다…' : mode === 'demo-live' ? 'AI 전사·정제 실행' : '저장된 분석 결과 재생'} <span aria-hidden="true">→</span></button>
+        <a className="text-button" href="#intake-editor">접수 편집으로 이동 ↓</a>
+      </div>
+      <section id="intake-editor" className="panel refinement-panel"><div className="panel-heading"><div><span className="small-kicker">02 / REFINE & REVIEW</span><h3>AI 정제와 접수 확인</h3></div>{resultMode && <span className={`badge ${resultMode === 'demo-live' ? 'success' : 'info'}`}>{resultMode === 'demo-live' ? '실제 AI 분석' : '저장 결과 재생'}</span>}</div>
         {analysis ? <><div className="ai-summary"><span className="small-kicker">AI 요약 · 확인 전 초안</span><p>{analysis.summary}</p></div>{!!analysis.issues?.length && <div className="issue-list">{analysis.issues.map((issue, i) => <div className="issue" key={i}><span className="badge warning">확인 필요</span><div><strong>{issue.message}</strong>{issue.evidence && <p>원문 근거: {issue.evidence}</p>}</div></div>)}</div>}
           <div className="compare-strip"><span>원문 보존</span><span aria-hidden="true">→</span><span>AI 초안</span><span aria-hidden="true">→</span><strong>상담원 편집·확인</strong></div>
           <details className="ai-fields"><summary>AI가 제안한 접수 정보 원본</summary><dl className="details-list"><div><dt>점포</dt><dd>{analysis.fields.storeId || '미확인'}</dd></div><div><dt>상품·대상</dt><dd>{analysis.fields.subject || '미확인'}</dd></div><div><dt>수령 수량·단위(진술)</dt><dd>{analysis.fields.quantity ?? '미확인'} {analysis.fields.unit || '단위 미확인'}</dd></div><div><dt>요청</dt><dd>{analysis.fields.request || '미확인'}</dd></div></dl></details>
