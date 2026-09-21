@@ -9,6 +9,9 @@ export type CallReviewProps = {
   caseData: CaseData;
   disabled?: boolean;
   onPlaybackEnded?: () => void;
+  /** Tab-scoped preference supplied by Home; completion remains source-scoped. */
+  playbackRate?: number;
+  onPlaybackRateChange?: (rate: number) => void;
   /** Parent-owned analysis status. This component never calls an API. */
   analysisState?: 'idle' | 'loading' | 'error';
   analysisError?: string;
@@ -22,6 +25,10 @@ export type CallReviewProps = {
 
 type Clip = { start: number; end: number; index: number };
 type Playback = 'ready' | 'playing' | 'paused' | 'ended';
+const playbackSpeeds = [0.75, 1, 1.25, 1.5, 2];
+function safePlaybackRate(value: number | undefined, fallback = 1.25): number {
+  return typeof value === 'number' && Number.isFinite(value) && value >= 0.75 && value <= 2 ? value : fallback;
+}
 const fields: { key: keyof Intake; label: string }[] = [
   { key: 'storeId', label: '점포 ID' },
   { key: 'subject', label: '상품·문의 대상' },
@@ -75,7 +82,7 @@ export default function CallReview(props: CallReviewProps) {
   return <ReviewSession key={sourceKey} {...props} />;
 }
 
-function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisState = 'idle', analysisError, onRetryAnalysis, transcriptMode, analysisActions, intakeEditor }: CallReviewProps) {
+function ReviewSession({ caseData, disabled = false, onPlaybackEnded, playbackRate, onPlaybackRateChange, analysisState = 'idle', analysisError, onRetryAnalysis, transcriptMode, analysisActions, intakeEditor }: CallReviewProps) {
   const id = useId();
   const audioRef = useRef<HTMLAudioElement>(null);
   const alive = useRef(false);
@@ -93,7 +100,8 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisSt
   const [seekNotice, setSeekNotice] = useState(false);
   const [hiddenClipNotice, setHiddenClipNotice] = useState(false);
   const [segmentIndex, setSegmentIndex] = useState<number | null>(null);
-  const [rate, setRate] = useState(1);
+  const [localRate, setLocalRate] = useState(() => safePlaybackRate(playbackRate));
+  const rate = safePlaybackRate(playbackRate, localRate);
   const [volume, setVolume] = useState(1);
   const [muted, setMuted] = useState(false);
   const [showTranscript, setShowTranscript] = useState(true);
@@ -118,6 +126,13 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisSt
     const audio = audioRef.current;
     return () => { audio?.pause(); };
   }, [attempt]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.preservesPitch = true;
+    if (audio.playbackRate !== rate) audio.playbackRate = rate;
+  }, [rate, attempt]);
 
   useEffect(() => {
     if (!disabled) return;
@@ -163,6 +178,15 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisSt
 
   function isCurrent(audio: HTMLAudioElement): boolean {
     return alive.current && audioRef.current === audio;
+  }
+
+  function changePlaybackRate(value: number) {
+    const next = safePlaybackRate(value, rate);
+    setLocalRate(next);
+    // Commit before the asynchronous native ratechange, including immediate case navigation.
+    onPlaybackRateChange?.(next);
+    const audio = audioRef.current;
+    if (audio && audio.playbackRate !== next) audio.playbackRate = next;
   }
 
   function stopAtClipEnd(audio: HTMLAudioElement): boolean {
@@ -313,6 +337,7 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisSt
                   return;
                 }
                 setDuration(audio.duration);
+                audio.preservesPitch = true;
                 audio.playbackRate = rate; audio.volume = volume; audio.muted = muted;
               }}
               onCanPlay={event => {
@@ -343,7 +368,7 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisSt
                   clip.current = null; setSegmentIndex(null); audio.pause();
                 }
               }}
-              onRateChange={event => { if (isCurrent(event.currentTarget)) setRate(event.currentTarget.playbackRate); }}
+              onRateChange={event => { if (isCurrent(event.currentTarget)) changePlaybackRate(event.currentTarget.playbackRate); }}
               onVolumeChange={event => { if (isCurrent(event.currentTarget)) { setVolume(event.currentTarget.volume); setMuted(event.currentTarget.muted); } }}
               onError={event => {
                 if (!isCurrent(event.currentTarget)) return;
@@ -363,9 +388,9 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, analysisSt
               }} />
             <div className={styles.playbackRow}><strong role="status">{playbackLabel}</strong><span className={styles.time}>{clock(position)} / {duration === null ? '길이 확인 중' : clock(duration)}</span></div>
             <div className={styles.controls}>
-              <label>재생 속도<select aria-label="통화 재생 속도" value={rate} disabled={disabled || !!mediaError} onChange={event => { const audio = audioRef.current; if (audio) audio.playbackRate = Number(event.target.value); }}>
-                {[0.75, 1, 1.25, 1.5, 2].map(speed => <option value={speed} key={speed}>{speed}배</option>)}
-                {![0.75, 1, 1.25, 1.5, 2].includes(rate) && <option value={rate}>{rate}배</option>}
+              <label>재생 속도<select aria-label="통화 재생 속도" value={rate} disabled={disabled || !!mediaError} onChange={event => changePlaybackRate(Number(event.target.value))}>
+                {playbackSpeeds.map(speed => <option value={speed} key={speed}>{speed}배</option>)}
+                {!playbackSpeeds.includes(rate) && <option value={rate}>{rate}배</option>}
               </select></label>
               <label className={styles.volume}>볼륨 {Math.round(volume * 100)}%<input aria-label="통화 볼륨" type="range" min="0" max="1" step="0.05" value={volume} disabled={disabled || !!mediaError} onChange={event => { const audio = audioRef.current; if (audio) audio.volume = Number(event.target.value); }} /></label>
               <button type="button" aria-label="통화 음소거" aria-pressed={muted} disabled={disabled || !!mediaError} onClick={() => { const audio = audioRef.current; if (audio) audio.muted = !audio.muted; }}>{muted ? '음소거 해제' : '음소거'}</button>

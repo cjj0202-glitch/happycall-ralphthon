@@ -35,6 +35,7 @@ export default function Home() {
   const [toast, setToast] = useState('');
   const [fallback, setFallback] = useState(false);
   const [mode, setMode] = useState<Mode>('replay');
+  const [playbackRate, setPlaybackRate] = useState(1.25);
   const [lastSync, setLastSync] = useState<string>('');
   const hasDrafts = useHasUnsavedDrafts();
   const reloadInFlight = useRef(false);
@@ -136,7 +137,7 @@ export default function Home() {
         </aside>}
         <div id="selected-work" tabIndex={-1} className="work-detail" data-case-id={active?.id} data-work-role={role} data-work-view={view} aria-label={active ? `선택한 접수 작업 영역 · ${active.title}` : '선택한 접수 작업 영역'}>
           {!active ? <div className="empty-state"><h2>{logistics ? '선택한 접수를 찾을 수 없습니다' : query.trim() ? '검색 결과가 없습니다' : '선택한 처리 단계에 접수가 없습니다'}</h2><p>{logistics ? `접수 ${selected}가 최신 목록에 없습니다. 다른 접수의 근거로 전환하지 않았습니다.` : query.trim() ? '점포명이나 접수번호를 다시 확인해 주세요.' : '다른 단계의 목록을 확인하거나 최신 접수를 불러올 수 있습니다.'}</p><div className="button-row">{logistics ? <button onClick={returnToWork}>접수 목록으로 돌아가기</button> : <>{query && <button onClick={() => setQuery('')}>검색 지우기</button>}<button onClick={() => { setQueue('all'); setQuery(''); }}>전체 접수 보기</button></>}<button onClick={() => void reload()} disabled={loading}>목록 새로고침</button></div></div>
-            : view === 'desk' ? <Desk key={active.id} caseData={active} mode={mode} fallback={fallback} onUpdate={update} onSave={save} onView={navigate} onToast={setToast}/>
+            : view === 'desk' ? <Desk key={active.id} caseData={active} mode={mode} fallback={fallback} playbackRate={playbackRate} onPlaybackRateChange={setPlaybackRate} onUpdate={update} onSave={save} onView={navigate} onToast={setToast}/>
             : view === 'center' ? <Center key={active.id} caseData={active} onUpdate={update} onSave={save} onToast={setToast} onView={navigate}/>
             : (view === 'wms' || view === 'tms') ? <><div className="logistics-case-context"><span className="badge neutral">{roleNames[role]} 근거 확인</span><strong>{active.title}</strong><span>{active.store?.name} · {active.id}</span>{!isEvidenceEditable(active, role) && <span className="badge info">이관 내용 보존 · 근거 열람</span>}</div><LogisticsScene key={`${view}:${active.id}`} kind={view} caseData={active} backLabel={role === 'center' ? '센터 업무로 돌아가기' : '상담으로 돌아가기'} readOnly={!isEvidenceEditable(active, role)} onBack={returnToWork} onLinkEvidence={async (id: string) => { setToast(''); if (!isEvidenceEditable(active, role)) throw new Error('센터에 전달된 접수 또는 센터 열람 화면에서는 근거를 변경할 수 없습니다.'); await save(active.id, { expectedRevision: active.revision, selectedEvidence: Array.from(new Set([...(active.selectedEvidence || []), id])) }); setToast('물류 근거를 접수 건에 연결했습니다.'); }}/></> : null}
         </div>
@@ -163,7 +164,7 @@ function Recovery({ current, rows, busy, onUseServer, onKeepDraft }: { current: 
   return <section className="panel recovery-panel" aria-label="최신 서버 내용과 초안 대조"><h3>다른 저장 내용이 있습니다</h3><p className="muted">최신 내용과 현재 초안을 확인한 뒤 사용할 내용을 선택해 주세요. 선택 전에는 덮어쓰지 않습니다.</p><Status status={current.status}/><div className="recovery-comparison">{rows.map(row => <div key={row.label}><h4>{row.label}</h4><div><strong>현재 초안</strong><p>{row.local || '비어 있음'}</p></div><div><strong>서버에 저장된 내용</strong><p>{row.server || '비어 있음'}</p></div></div>)}</div><div className="button-row"><button disabled={busy} onClick={onUseServer}>서버 내용 사용</button><button disabled={busy} onClick={onKeepDraft}>내 초안 유지 · 다시 확인</button></div><p className="small muted">초안을 유지하면 다시 대조·확인한 후 저장할 수 있습니다. 서버에 저장된 내용은 이 선택만으로 바뀌지 않습니다.</p></section>;
 }
 
-function Desk({ caseData: c, mode, fallback, onUpdate, onSave, onView, onToast }: { caseData: CaseData; mode: Mode; fallback: boolean; onUpdate: (c: CaseData) => void; onSave: (id: string, p: Record<string, unknown>) => Promise<CaseData>; onView: (v: View) => void; onToast: (s: string) => void }) {
+function Desk({ caseData: c, mode, fallback, playbackRate, onPlaybackRateChange, onUpdate, onSave, onView, onToast }: { caseData: CaseData; mode: Mode; fallback: boolean; playbackRate: number; onPlaybackRateChange: (rate: number) => void; onUpdate: (c: CaseData) => void; onSave: (id: string, p: Record<string, unknown>) => Promise<CaseData>; onView: (v: View) => void; onToast: (s: string) => void }) {
   const draft = useSessionDraft<DeskDraft>(`desk:${c.id}`, deskDraft(c), deskContent);
   const { analysis, transcript, resultMode, form, formRevision, department, edited, confirmed, question, uncertain } = draft.value;
   const setForm = (value: Intake | ((old: Intake) => Intake)) => draft.set('form', value);
@@ -294,6 +295,8 @@ function Desk({ caseData: c, mode, fallback, onUpdate, onSave, onView, onToast }
       <CallReview
         caseData={{ ...c, transcript, analysis, intake: form, reviewConfirmed: confirmed, analysisMode: resultMode }}
         disabled={intakeLocked || !!busy}
+        playbackRate={playbackRate}
+        onPlaybackRateChange={onPlaybackRateChange}
         onPlaybackEnded={() => setCompletedAudioSource(audioSource)}
         transcriptMode={resultMode ?? (!analysis ? 'replay' : undefined)}
         analysisState={busy === 'analyze' ? 'loading' : analysisFailure ? 'error' : 'idle'}
