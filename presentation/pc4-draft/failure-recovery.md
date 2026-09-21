@@ -45,3 +45,7 @@ pc4 Q3 c6f734f의 [실제 390px 화면](../../reports/pc4/q3-run-20260921T123023
 이 계획은 실제 제품 사용성·사람 청취·발표 시간 리허설·최종 배포 검증을 대신하지 않습니다. main e1ef36f 기준 Vercel 로그인과 g-28 링크는 완료됐지만 Blob 생성403 및 계정 조회 연결 저장소0이 남아 있습니다. 배포 준비·실제 배포·영속 저장 완료를 서로 바꾸어 쓰지 않습니다. 새 검사·설치·배포·과금 호출·원문 로그 복사는 본 카드에 포함하지 않았습니다.
 
 근거: [pc1 고정 빌드 독립 검사](https://github.com/cjj0202-glitch/happycall-ralphthon/blob/e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb/reports/prototype-independent-acceptance.md), [pc4 Q2](https://github.com/cjj0202-glitch/happycall-ralphthon/blob/d7841717e8181d4f9315a20dee5099c073251019/reports/pc4/q2-candidate-bfc8543.md), [pc4 Q3](https://github.com/cjj0202-glitch/happycall-ralphthon/blob/d7841717e8181d4f9315a20dee5099c073251019/reports/pc4/q3-c6f734f-results.md), [요청 근거화 잔여 P2](https://github.com/cjj0202-glitch/happycall-ralphthon/blob/e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb/reports/request-grounding-final-independent.md), [CCTV 독립 검사](https://github.com/cjj0202-glitch/happycall-ralphthon/blob/e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb/reports/cctv-inspector-independent.md), [배포 상태](https://github.com/cjj0202-glitch/happycall-ralphthon/blob/e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb/reports/deployment/account-auth-status.md).
+
+## 한국어 자연스러움 피드백에 대한 설명
+
+22:19 KST [메인 전달](https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5761145013)로 v3 부정 청취 피드백 1건을 확인했습니다. 재생 성공과 자연스러움 품질은 별개이며, v4는 대본 후보로 전체 합성·STT·제품 교체가 미완료입니다. 어색한 음성을 기술 검사 성공으로 감추지 않고 개선 중임을 설명합니다. 준비되지 않은 v4나 다른 사례 음원으로 자동 교체하지 않습니다. 이는 후속 설명 계획이며 이번에 새 음원 청취·재생·복구 리허설을 실행한 것이 아닙니다.

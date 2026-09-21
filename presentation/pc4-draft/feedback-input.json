@@ -1,0 +1,16 @@
+{
+  "event_key": "issue-10-comment-5761145013",
+  "comment_id": 5761145013,
+  "author": "cjj0202-glitch",
+  "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/10#issuecomment-5761145013",
+  "created_at": "2026-09-21T13:19:13Z",
+  "source_body_sha256": "ac02ca8d96f5af63d0d564dd2436fabfb0137c6b15861ba2a43080406c1d8ac4",
+  "reference_document_commit": "e1ef36f174f9bf8f68d82a6fbc77eca77bf859cb",
+  "prior_d1_commit": "3342ec94af85e35386670a55d39a6b591d1d2180",
+  "reported_negative_listening_feedback_count": 1,
+  "actual_listening_time": "not specified",
+  "direct_pc4_listening": false,
+  "systematic_quality_assessment": "NOT_COMPLETED",
+  "v4_full_synthesis_stt_product_replacement": "NOT_COMPLETED",
+  "scope": "presentation wording only"
+}

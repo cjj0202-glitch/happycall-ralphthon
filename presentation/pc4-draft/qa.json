@@ -3,9 +3,9 @@
   "page_limit": 5,
   "planned_seconds": 300,
   "actual_rehearsal": "NOT_RUN",
-  "pdf_bytes": 499964,
+  "pdf_bytes": 502292,
   "max_bytes": 94371840,
-  "pdf_sha256": "ffd794cd5a55dc2fc56b4cd2498acff13e0c38260dae2bab70c8a4686a43ce3c",
+  "pdf_sha256": "32443f4398d63757d3ce31cd067bb01d1aeb1da1a92245f90c98e92de4600a7c",
   "missing_glyphs": [],
   "text_box_overlaps": [],
   "text_image_overlaps": [],
@@ -37,7 +37,16 @@
     "Initial page4 image/caption overlap corrected and regenerated.",
     "Initial artifact Python command used project venv without Pillow; used already-installed bundled runtime instead."
   ],
-  "visual_pages_inspected": 5,
-  "independent_content_review": "Same-pc4 read-only reviewer compared original inputs, draft sources and final five renders; no remaining factual discrepancy found.",
-  "review_limit": "Not a human rehearsal, product retest, remote PC acceptance or guarantee."
+  "visual_pages_inspected": 2,
+  "independent_content_review": "Same-pc4 read-only reviewer checked M9 attribution, facts and pages 2/5. Final wording explicitly preserves unfinished systematic listening/usability assessment.",
+  "review_limit": "Not a human rehearsal, product retest, remote PC acceptance or guarantee.",
+  "text_box_out_of_bounds": [],
+  "visual_pages_unchanged_from_verified_baseline": [
+    1,
+    3,
+    4
+  ],
+  "feedback_comment_id": 5761145013,
+  "feedback_sources": 1,
+  "updated_at": "2026-09-21T22:25:36.691493+09:00"
 }
