@@ -38,18 +38,18 @@ python channel/whoami.py
 <첫 덩어리 — 한 덩어리만. 예: "WMS 화면의 주문목록 뷰를 만든다.
 영상은 demo/video/placeholder.mp4 로 두고 클릭하면 재생되는 것까지만.">
 
-## 감시기 — 시작 전에 별도 터미널에서
-    python channel/mail.py watch --interval 30 --bell
-새 편지·회신·종결이 있을 때만 울린다. 조용하면 변화가 없는 것이다.
-
 ## 반복할 것
-1. 맡은 덩어리를 끝낸다.
-2. 끝냈거나 막혔거나 감시기가 울렸으면 `python channel/mail.py inbox` 를 본다.
+1. `python channel/mail.py watch --once` 를 부른다.
+   조용하면 새것이 없는 것이다. 그냥 3 으로 간다.
+   🚨 터미널 감시기(`--interval 30`)는 사람이 보는 것이고 너를 깨우지 못한다.
+   너는 루프 맨 위에서 `--once` 를 «직접» 불러야 한다.
+2. 출력이 있었으면 `python channel/mail.py inbox` 로 본다.
    - 편지가 있으면 `read` 하고, 6칸 중 「검증 방법 + 기대값」을 **먼저** 읽는다.
    - 기대값을 못 맞추면 done 하지 마라. `reply` 로 막힌 지점을 수치와 함께 적어라.
    - 다 됐으면 `python channel/mail.py done <번호> --evidence "<무엇을 어떻게 확인했는가>"`
-3. `python channel/mail.py status --set "<지금 하는 일 한 줄>"` 로 상태를 갱신한다.
-4. 1 로 돌아간다.
+3. 맡은 덩어리를 끝낸다.
+4. `python channel/mail.py status --set "<지금 하는 일 한 줄>"` 로 상태를 갱신한다.
+5. 1 로 돌아간다.
 
 ## 규칙 — 어기면 멈춘다
 - 상태 보고를 편지(이슈)로 만들지 마라. `status --set` 만 쓴다.
@@ -57,7 +57,7 @@ python channel/whoami.py
 - 「에러 없음」을 검증이라고 쓰지 마라. 수치와 시각을 적어라.
 - 인용할 때 「그쪽」이라고 쓰지 마라. 슬롯명(pc2 등)으로 적어라.
 - 시크릿 값을 편지에 넣지 마라. 경로만 적어라.
-- 루프 안에서 inbox 를 반복 호출하지 마라. 감지는 감시기가 한다.
+- inbox 를 무조건 부르지 마라. `watch --once` 가 조용하면 부를 이유가 없다.
 - 남의 앞으로 온 편지를 대신 처리하거나 옮기지 마라. 중계가 편지를 4배로 만든다.
 - 영상·음성 파일을 git 에 커밋하지 마라. `gh release upload demo-assets <파일> --clobber` 를 쓴다.
 - 한 가지에 30분 막히면 루프를 멈추고 나에게 올려라. 다른 워커에게 넘기지 마라.

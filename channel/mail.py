@@ -49,10 +49,13 @@ SECRET_PATTERNS = [
 
 
 def sh(cmd: list[str], check: bool = True, stdin: str | None = None) -> str:
-    p = subprocess.run(
-        cmd, capture_output=True, text=True, input=stdin,
-        encoding="utf-8", errors="replace",
-    )
+    try:
+        p = subprocess.run(
+            cmd, cwd=ROOT, capture_output=True, text=True, input=stdin,
+            encoding="utf-8", errors="replace", timeout=45,
+        )
+    except subprocess.TimeoutExpired as exc:
+        raise SystemExit("GitHub 조회/명령이 45초 안에 끝나지 않았습니다.") from exc
     if check and p.returncode != 0:
         sys.stderr.write((p.stderr or p.stdout or "").strip() + "\n")
         raise SystemExit(f"실패: {' '.join(cmd[:3])}... (exit {p.returncode})")
@@ -305,20 +308,25 @@ def _state_path(slot: str) -> Path:
 
 
 def _snapshot(label: str) -> dict:
-    """내 앞 열린 편지의 «번호 → 회신수» 지도. 이 지도가 바뀐 것만 알린다."""
-    raw = sh([
-        "gh", "issue", "list", "--label", label, "--state", "open",
-        "--limit", "50", "--json", "number,title,labels,author,comments",
-    ])
+    """받은 편지와 보낸 편지의 회신·명시적 종결을 함께 감지한다."""
     out = {}
-    for it in json.loads(raw or "[]"):
-        out[str(it["number"])] = {
-            "title": it["title"],
-            "comments": len(it.get("comments", []) or []),
-            "author": it["author"]["login"],
-            "urgent": any(x["name"] == "urgent" for x in it["labels"]),
-            "type": next((x["name"] for x in it["labels"] if re.match(r"^[A-F]-", x["name"])), "?"),
-        }
+    for watched_label in (label, label.replace("to:", "from:", 1)):
+        raw = sh([
+            "gh", "issue", "list", "--label", watched_label, "--state", "all",
+            "--limit", "1000", "--json", "number,title,state,labels,author,comments",
+        ])
+        items = json.loads(raw or "[]")
+        if len(items) >= 1000:
+            raise SystemExit("편지 조회 한도 1000건에 도달했습니다. 전체 조회를 확인해야 합니다.")
+        for it in items:
+            out[str(it["number"])] = {
+                "title": it["title"],
+                "state": it["state"],
+                "comments": len(it.get("comments", []) or []),
+                "author": it["author"]["login"],
+                "urgent": any(x["name"] == "urgent" for x in it["labels"]),
+                "type": next((x["name"] for x in it["labels"] if re.match(r"^[A-F]-", x["name"])), "?"),
+            }
     return out
 
 
@@ -327,14 +335,14 @@ def _diff(old: dict, new: dict) -> list[str]:
     for n, cur in new.items():
         prev = old.get(n)
         mark = "🚨 " if cur["urgent"] else ""
-        if prev is None:
+        if prev is None and cur.get("state", "OPEN") == "OPEN":
             ev.append(f"{mark}새 편지 #{n} [{cur['type']}] {cur['title']}  ← {cur['author']}")
-        elif cur["comments"] > prev["comments"]:
+        elif prev is not None and cur["comments"] > prev["comments"]:
             d = cur["comments"] - prev["comments"]
             ev.append(f"{mark}회신 {d}건 #{n} {cur['title']}")
-    for n, prev in old.items():
-        if n not in new:
-            ev.append(f"닫힘 #{n} {prev['title']}")
+        if prev is not None and prev.get("state", "OPEN") != cur.get("state", "OPEN"):
+            state = "닫힘" if cur["state"] == "CLOSED" else "다시 열림"
+            ev.append(f"{state} #{n} {cur['title']}")
     return ev
 
 
@@ -349,6 +357,8 @@ def cmd_watch(a) -> int:
     """
     import time
 
+    if a.interval <= 0 or a.max_loops < 0:
+        raise SystemExit("--interval은 양수, --max-loops는 0 이상이어야 합니다.")
     slot, meta = me()
     label = meta["inbox"]
     sp = _state_path(slot)
@@ -358,10 +368,12 @@ def cmd_watch(a) -> int:
     except Exception:
         old = {}
 
-    hdr = f"감시 시작 · {slot}/{meta.get('role','미정')} · {a.interval}초 간격 · {now()}"
-    print(hdr)
-    print("새 편지·회신·종결이 있을 때만 출력합니다. 조용하면 변화가 없는 것입니다.")
-    print("─" * 70, flush=True)
+    # 🚨 --once 는 루프가 매 회전마다 부른다. 머리글을 찍으면 「조용하면 넘어간다」가
+    #    성립하지 않는다 — 변화가 없는데도 3줄이 나와 루프가 매번 뭔가 있다고 읽는다.
+    if not a.once:
+        print(f"감시 시작 · {slot}/{meta.get('role','미정')} · {a.interval}초 간격 · {now()}")
+        print("새 편지·회신·종결이 있을 때만 출력합니다. 조용하면 변화가 없는 것입니다.")
+        print("─" * 70, flush=True)
 
     n_loop = 0
     n_fail = 0
@@ -370,11 +382,11 @@ def cmd_watch(a) -> int:
         try:
             new = _snapshot(label)
             n_fail = 0
-        except SystemExit:
+        except (SystemExit, json.JSONDecodeError):
             # 네트워크가 끊겼다. 🚨 여기서 죽으면 안 된다 — 행사장 와이파이는 끊긴다.
             n_fail += 1
             print(f"[{datetime.now(KST):%H:%M:%S}] 조회 실패 {n_fail}회 — 계속 재시도", flush=True)
-            if a.once:
+            if a.once or (a.max_loops and n_loop >= a.max_loops):
                 return 1
             time.sleep(min(a.interval * n_fail, 300))
             continue

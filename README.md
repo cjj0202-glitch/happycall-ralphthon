@@ -31,7 +31,7 @@ python channel/mail.py inbox        # ③ 내 앞 편지
 
 ---
 
-## 명령 7개가 전부입니다
+## 편지함 명령
 
 | 명령 | 무엇 |
 |---|---|
@@ -73,6 +73,7 @@ python channel/mail.py inbox        # ③ 내 앞 편지
 | [AGENTS.md](AGENTS.md) | 에이전트 상시 지침 — Codex CLI 가 자동으로 읽는다 |
 | `.claude/skills/mailbox/` | **스킬** — 「편지함」·「inbox」·「회신해」 등에 자동 발동 |
 | `.claude/skills/ralph-loop/` | **스킬** — 「랄프」·「루프 돌려」·「다음 덩어리」에 자동 발동 |
+| `.agents/skills/mailbox/`, `.agents/skills/ralph-loop/` | **Codex 스킬** — Claude와 같은 원본 규약 참조 |
 | [channel/00_채널규약.md](channel/00_채널규약.md) | 편지함 규약 전문 — 유형 분류, 6칸 템플릿, 금기 6가지 |
 | [docs/00_랄프톤_운영설계.md](docs/00_랄프톤_운영설계.md) | 4대 구조, 루프 규율, 붙여넣는 프롬프트, 체크포인트 |
 | [channel/pcs.json](channel/pcs.json) | 슬롯 ↔ 역할 ↔ hostname ↔ 계정 매핑 (여기 하나만 고친다) |

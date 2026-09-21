@@ -10,10 +10,13 @@ python channel/whoami.py
 ```
 
 **슬롯이 「미등록」으로 나오면 거기서 멈추십시오.** `channel/pcs.json` 의 자기 슬롯
-`hostname` 에 출력된 값을 넣은 뒤 다시 돌립니다. 등록 전에 편지함을 읽으면
+`hostname` 등록은 메인에게 요청하고, 반영된 설정을 받은 뒤 다시 돌립니다. 등록 전에 편지함을 읽으면
 **남의 편지를 처리하는 사고**가 납니다. 이건 실제로 났던 사고입니다.
 
 ## 1. 이 레포가 무엇인가
+
+Codex도 스킬을 지원합니다. `.agents/skills/mailbox`와 `.agents/skills/ralph-loop`가
+`.claude/skills`의 공유 원본을 읽습니다. 규약의 정본은 이 파일과 `channel/00_채널규약.md`입니다.
 
 노트북 4대가 랄프톤(에이전트 루프) 방식으로 **해피콜 시스템**을 만듭니다.
 4대는 서로 직접 대화할 수 없으므로 **GitHub Issues 를 편지함으로** 씁니다.
@@ -34,6 +37,9 @@ python channel/whoami.py
 ```bash
 python channel/mail.py watch --interval 30 --bell
 ```
+
+감시기는 내 앞으로 온 편지와 내가 보낸 편지의 회신·종결을 읽습니다. 시작·오류·종료 안내를
+제외하면 변화가 없을 때 출력하지 않습니다. 터미널 알림만으로 Codex 대화가 자동 재개되지는 않습니다.
 
 그리고 작업 터미널에서:
 
