@@ -1,0 +1,401 @@
+{
+  "schemaVersion": "pc3-full-output-evidence-v1",
+  "createdAtUtc": "2026-09-21T14:32:23.343571+00:00",
+  "assignment": "N03-M5",
+  "identity": {
+    "slot": "pc3",
+    "hostname": "LAPTOP-U2AL73UH",
+    "github": "mcjun86-oss"
+  },
+  "baseline": "a39cd664758575a81e1fcce437db245f60fc2c1b",
+  "contractRef": "c768d9231e73e6806fe8320cc4826e05c9b24c53",
+  "contractComment": "https://github.com/cjj0202-glitch/happycall-ralphthon/issues/9#issuecomment-5761966922",
+  "status": "SCOPED_IMPLEMENTATION_VERIFIED_AWAITING_PC1_REVIEW",
+  "commands": {
+    "test": "python -B -m unittest discover -s scripts/media_pc3 -p test_full_animation_package.py -v",
+    "actualSingleRunCollector": "python -B .local/pc3-m5-intake/actualtest-run.py",
+    "intake": "python -B scripts/media_pc3/verify_full_animation.py --package <completed-real-output> --expectations <independently-frozen-manifest-outside-output>"
+  },
+  "unit": {
+    "testsRun": 18,
+    "passed": 17,
+    "skipped": 1,
+    "failureRecords": 0,
+    "errorRecords": 0,
+    "elapsedSeconds": 87.593,
+    "successfulTests": [
+      "test_full_animation_package.FullAnimationPackageTests.test_actual_readback_not_requested_values_is_enforced",
+      "test_full_animation_package.FullAnimationPackageTests.test_cli_external_expected_and_read_only_input",
+      "test_full_animation_package.FullAnimationPackageTests.test_complete_artificial_288_output_preserves_inputs_and_pending",
+      "test_full_animation_package.FullAnimationPackageTests.test_descriptor_paths_extra_files_and_strict_json",
+      "test_full_animation_package.FullAnimationPackageTests.test_disabled_png_hash_guard_is_killed_by_independent_negative",
+      "test_full_animation_package.FullAnimationPackageTests.test_exact_all_frame_order_names_counts_and_elapsed_clock",
+      "test_full_animation_package.FullAnimationPackageTests.test_external_expectations_cannot_be_replaced_by_report_claims",
+      "test_full_animation_package.FullAnimationPackageTests.test_hardlink_asset_rejected_by_actual_link_guard",
+      "test_full_animation_package.FullAnimationPackageTests.test_input_changed_after_its_read_is_rejected_by_final_stamp",
+      "test_full_animation_package.FullAnimationPackageTests.test_junction_package_rejected_by_actual_reparse_guard",
+      "test_full_animation_package.FullAnimationPackageTests.test_missing_byte_tampered_and_structurally_corrupt_files",
+      "test_full_animation_package.FullAnimationPackageTests.test_original_sources_are_byte_preserved",
+      "test_full_animation_package.FullAnimationPackageTests.test_receipt_cannot_alias_its_own_fixture_reference",
+      "test_full_animation_package.FullAnimationPackageTests.test_receipt_verification_metadata_cannot_self_approve",
+      "test_full_animation_package.FullAnimationPackageTests.test_rejects_png_hash_mismatch",
+      "test_full_animation_package.FullAnimationPackageTests.test_report_flags_missing_metadata_units_events_and_source_bindings",
+      "test_full_animation_package.FullAnimationPackageTests.test_tracks_288_rows_event_camera_bbox_clock_and_required_fields"
+    ],
+    "skipDetails": [
+      {
+        "test": "test_symlink_asset_rejected_if_os_permits_creation (test_full_animation_package.FullAnimationPackageTests.test_symlink_asset_rejected_if_os_permits_creation)",
+        "reason": "OS refused symlink creation; no privilege changes: [WinError 1314] 클라이언트가 필요한 권한을 가지고 있지 않습니다: 'D:\\\\hwana\\\\Work\\\\happycall-ralphthon\\\\.local\\\\pc3-m5-intake\\\\ARTIFICIAL-m5-l7shsj8w\\\\outside-original.png' -> 'D:\\\\hwana\\\\Work\\\\happycall-ralphthon\\\\.local\\\\pc3-m5-intake\\\\ARTIFICIAL-m5-l7shsj8w\\\\package\\\\frame-0133.png'"
+      }
+    ]
+  },
+  "negatives": {
+    "observedUniqueCount": 129,
+    "observedNames": [
+      "bbox-0",
+      "bbox-1",
+      "bbox-2",
+      "bbox-3",
+      "bbox-4",
+      "cli-self-contained-expectations",
+      "duplicate-frame",
+      "expected-duplicate-dependency",
+      "expected-duplicate-verified-file",
+      "expected-empty",
+      "expected-fixture-sha",
+      "expected-generator-sha",
+      "expected-layout-sha",
+      "expected-missing-dependency",
+      "expected-missing-receipt",
+      "expected-missing-verified-files",
+      "expected-numeric-bool",
+      "expected-receipt-sha",
+      "expected-schema",
+      "expected-source-commit",
+      "expected-verified-path-traversal",
+      "first-frame-bool",
+      "frame-name-order",
+      "frame-time-unit",
+      "hardlink-asset",
+      "input-changed-after-first-read",
+      "json-duplicate-key",
+      "json-infinity",
+      "json-malformed",
+      "json-nan",
+      "junction-package",
+      "last-frame-time-12-not-287over24",
+      "missing-animationReview",
+      "missing-case-0002-ww3.blend",
+      "missing-fixture",
+      "missing-frame-0133.png",
+      "missing-frame-row",
+      "missing-mainRegistration",
+      "missing-render-report.json",
+      "missing-sceneReadback",
+      "missing-synthetic",
+      "missing-threads",
+      "missing-tracks.json",
+      "path-absolute",
+      "path-backslash",
+      "path-traversal",
+      "png-byte-tamper",
+      "png-hash-mismatch",
+      "png-structure-crc",
+      "png-structure-resolution-720",
+      "png-structure-trailing-bytes",
+      "png-structure-truncated-iend",
+      "previous-72-report",
+      "readback-camera-forward",
+      "readback-camera-lens",
+      "readback-camera-name",
+      "readback-camera-position",
+      "readback-camera-sensorFit",
+      "readback-camera-sensorWidth",
+      "readback-camera-shift",
+      "readback-camera-type",
+      "readback-camera-up",
+      "readback-engine",
+      "readback-fps",
+      "readback-fpsBase",
+      "readback-frameEnd",
+      "readback-frameStart",
+      "readback-pixelAspect",
+      "readback-resolution",
+      "readback-resolutionPercentage",
+      "readback-samples",
+      "readback-shadowRays",
+      "readback-threads",
+      "readback-threadsMode",
+      "receipt-approved-only",
+      "receipt-authenticated-int",
+      "receipt-duplicate-file",
+      "receipt-missing-dependency",
+      "receipt-missing-files",
+      "receipt-requested-sha",
+      "receipt-self-path-collision",
+      "receipt-traversal",
+      "receipt-unverified",
+      "receipt-visual-accepted",
+      "receipt-wrong-sha",
+      "report-as-expected",
+      "report-cameraId",
+      "report-candidateFrameCount",
+      "report-engine",
+      "report-fixture-sha",
+      "report-fps",
+      "report-generator-sha",
+      "report-mainRegistration",
+      "report-module-duplicate",
+      "report-module-sha",
+      "report-other-date",
+      "report-other-event",
+      "report-renderedFrameCount",
+      "report-requestedSamples",
+      "report-resolution",
+      "report-runtime-bool",
+      "report-runtime-null",
+      "report-schemaVersion",
+      "report-shadow-applied-int",
+      "report-shadows-clamped",
+      "report-synthetic",
+      "report-threads-actual",
+      "report-threads-mode",
+      "report-threads-requested",
+      "report-tote-false",
+      "report-videoEncoded",
+      "report-visualGateAccepted",
+      "track-cameraId",
+      "track-cameraPosition",
+      "track-clippedFrames",
+      "track-fps",
+      "track-frameCount",
+      "track-occlusionTested",
+      "track-resolution",
+      "track-source",
+      "track-synthetic",
+      "tracks-first-frame-bool",
+      "tracks-last-time-12",
+      "tracks-missing-bbox",
+      "tracks-other-case",
+      "tracks-row-duplicate",
+      "tracks-row-missing",
+      "tracks-tote-false",
+      "unexpected-289th-frame"
+    ],
+    "notAdditionalUnitMethods": true
+  },
+  "mutation": {
+    "name": "disable-PNG-byte-and-SHA-guard-in-memory",
+    "killed": true,
+    "negativeTest": "test_rejects_png_hash_mismatch",
+    "testsRun": 1,
+    "failures": 1,
+    "errors": 0,
+    "assertion": "True is not False",
+    "fullAssertionSha256": "7d318d326863ea9c5b3941a4e1240841344b4b7a58cf1e82e4a428d343a28007",
+    "sourceFilesChanged": false
+  },
+  "fixture": {
+    "pngFiles": 288,
+    "trackRows": 288,
+    "packageFiles": 291,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "origin": "Artificial independent flat-colour PNGs, fake Blend and declared readback; not real render or pc1 approval"
+  },
+  "sourceFiles": {
+    "scripts/media_pc3/verify_full_animation.py": {
+      "bytes": 21052,
+      "sha256": "a711fed3ce821bb1e24caafadcf2c6161f266e9b031cfea29b73d46e0d716075"
+    },
+    "scripts/media_pc3/test_full_animation_package.py": {
+      "bytes": 25007,
+      "sha256": "bc6dd3735da0b435fa38fca982a2677b344371076beb9db62babcc92fadcb5b9"
+    },
+    "scripts/media_pc3/build_scene.py": {
+      "bytes": 28295,
+      "sha256": "c255e94d9f93a08734bf49cc0a7da1edc5304f4b0a9955e6508864dc72998320"
+    },
+    "scripts/media_pc3/verify_render_package.py": {
+      "bytes": 29547,
+      "sha256": "36b4e2f3de8f0517da6cb26719e346e0fbfec221f5d1b673e494a73c31af30cc"
+    },
+    "scripts/media_pc3/scene_contract.py": {
+      "bytes": 14278,
+      "sha256": "670638cae0357da1bf934b7c4b9287ea0780180214e53a181166dd53a8a554bf"
+    },
+    "scripts/media_pc3/look_presets.py": {
+      "bytes": 1762,
+      "sha256": "91c3852386c48729d24f69fff1049602451646a41c7d532d4dc4f8f008cd3e33"
+    },
+    "scripts/media_pc3/environment_detail.py": {
+      "bytes": 3714,
+      "sha256": "e4a82164a828e165f86b496883d539311fd4f2a98e7581edca4cc197f7a19c36"
+    },
+    "scripts/media_pc3/shadow_settings.py": {
+      "bytes": 2643,
+      "sha256": "4d1357cde51530be813e3a1505972b253b9b23ae8c35a99cbb1b304fe5c374fe"
+    },
+    "scripts/media_pc3/full_render_gate.py": {
+      "bytes": 23306,
+      "sha256": "382d764b06da18abd710a50edecdf874883038fffea1a5e55bbd747e61fa12c5"
+    }
+  },
+  "preservation": {
+    "preexistingFilesCount": 23,
+    "allByteCountsAndSha256Equal": true,
+    "files": {
+      "scripts/media_pc3/BLENDER.md": {
+        "bytes": 11388,
+        "sha256": "b4d19cd501422c90e0b566ddeebe6726195e01b373b894cf4b9ec1b8b1167c0a"
+      },
+      "scripts/media_pc3/README.md": {
+        "bytes": 3035,
+        "sha256": "8b62ff48278cd2ca4ecbe2e338bdd0fbc2e43cb63882c6b89d9129ace12d39b2"
+      },
+      "scripts/media_pc3/audit_guard_supports.py": {
+        "bytes": 14677,
+        "sha256": "c86199ac17d658ce6b21518340784de65d3e6ebb49dfa07592af0367f7c325a5"
+      },
+      "scripts/media_pc3/build_review_page.py": {
+        "bytes": 19121,
+        "sha256": "e917bf1e33b30cbba40c63c9cb6f77b7b270a6b09c36a8884a84ca398ad25951"
+      },
+      "scripts/media_pc3/build_scene.py": {
+        "bytes": 28295,
+        "sha256": "c255e94d9f93a08734bf49cc0a7da1edc5304f4b0a9955e6508864dc72998320"
+      },
+      "scripts/media_pc3/compare_representatives.py": {
+        "bytes": 11551,
+        "sha256": "fd6b3ee4b451f4f9dc39f3ef638e7b407668d40d4864efc9de947028604e5412"
+      },
+      "scripts/media_pc3/environment_detail.py": {
+        "bytes": 3714,
+        "sha256": "e4a82164a828e165f86b496883d539311fd4f2a98e7581edca4cc197f7a19c36"
+      },
+      "scripts/media_pc3/full_render_gate.py": {
+        "bytes": 23306,
+        "sha256": "382d764b06da18abd710a50edecdf874883038fffea1a5e55bbd747e61fa12c5"
+      },
+      "scripts/media_pc3/generate_candidates.py": {
+        "bytes": 9690,
+        "sha256": "5bfd67a9bf81a4b10604fc26b0d0384255bad2b707e284d14b4090ae4ce7302f"
+      },
+      "scripts/media_pc3/look_presets.py": {
+        "bytes": 1762,
+        "sha256": "91c3852386c48729d24f69fff1049602451646a41c7d532d4dc4f8f008cd3e33"
+      },
+      "scripts/media_pc3/media_contract.py": {
+        "bytes": 7778,
+        "sha256": "1d7e6f094d9838c839c7e2cc242ea86f29c7aae81f3926c301b1169599e7fad2"
+      },
+      "scripts/media_pc3/requirements.txt": {
+        "bytes": 37,
+        "sha256": "632ed6a2203d994ab4340c918c2618d0d9b1a278884e8e6c281698acc2680982"
+      },
+      "scripts/media_pc3/scene_contract.py": {
+        "bytes": 14278,
+        "sha256": "670638cae0357da1bf934b7c4b9287ea0780180214e53a181166dd53a8a554bf"
+      },
+      "scripts/media_pc3/shadow_settings.py": {
+        "bytes": 2643,
+        "sha256": "4d1357cde51530be813e3a1505972b253b9b23ae8c35a99cbb1b304fe5c374fe"
+      },
+      "scripts/media_pc3/test_compare_representatives.py": {
+        "bytes": 13193,
+        "sha256": "f0c65f9ee14e610381a53c522704132a0d1e588791e67df7d4e8d238ccb8dab7"
+      },
+      "scripts/media_pc3/test_environment_detail.py": {
+        "bytes": 23414,
+        "sha256": "768483c7e1627ca35929191d60a923c1b2f75fe36c92a4ddf50079e7f5921f23"
+      },
+      "scripts/media_pc3/test_full_render_gate.py": {
+        "bytes": 28727,
+        "sha256": "85e2f89abf1fc0fe326400d88d094be8a558f0bcd9f877ac4bada36a71e47955"
+      },
+      "scripts/media_pc3/test_look_presets.py": {
+        "bytes": 18867,
+        "sha256": "5befb2602001f8c40a52d0670717729c8bc46b4bb83e73955523ccd1288a8446"
+      },
+      "scripts/media_pc3/test_media_contract.py": {
+        "bytes": 4431,
+        "sha256": "84a5d8801480125cb09a4e427ee23553101089b6eadd3f75ffab34d2fe097995"
+      },
+      "scripts/media_pc3/test_render_package.py": {
+        "bytes": 28542,
+        "sha256": "a5a1b448763955ba1542be73abfb67c7a4445c7faccf3b504f5dbb9cefec51ad"
+      },
+      "scripts/media_pc3/test_review_package.py": {
+        "bytes": 13933,
+        "sha256": "aec79018a4c8f117d1216d52cbb178a377ba6e0f894eb3be2e79304d1506fd2e"
+      },
+      "scripts/media_pc3/test_shadow_settings.py": {
+        "bytes": 13816,
+        "sha256": "fcc9a2f9cbb2a20f5821fa978f4f46c13225508b4b0f29180bbf7961d5560293"
+      },
+      "scripts/media_pc3/verify_render_package.py": {
+        "bytes": 29547,
+        "sha256": "36b4e2f3de8f0517da6cb26719e346e0fbfec221f5d1b673e494a73c31af30cc"
+      }
+    }
+  },
+  "reviewFinding": {
+    "finding": "Receipt filename could collide with one verifiedFiles relative path",
+    "fix": "Initialize seen paths with receipt filename, matching M4 gate",
+    "dedicatedNegative": "receipt-self-path-collision",
+    "regression": "PASS",
+    "foundBeforeFirstSuite": true
+  },
+  "rawLocalEvidence": [
+    {
+      "path": ".local/pc3-m5-intake/actualtest-20260921T142857319926Z.json",
+      "bytes": 95113,
+      "sha256": "a9d066db175ed8308847416a4bf78afbd6c25a085c8019ee180017839c9876c1"
+    },
+    {
+      "path": ".local/pc3-m5-intake/actualtest-20260921T142857319926Z.log",
+      "bytes": 3639,
+      "sha256": "3690a71ab1af521d245c3d2be61f09a10c62f50295b7543cbf406017a1055edc"
+    },
+    {
+      "path": ".local/pc3-m5-intake/root-check.json",
+      "bytes": 4134,
+      "sha256": "1c25f0b1e74fd0e45d661d3965b63ef5efe1a16035202aa06be4b192be40e68e"
+    },
+    {
+      "path": ".local/pc3-m5-intake/schema-audit.json",
+      "bytes": 13005,
+      "sha256": "2527c4507a4c4bf39ce1171ed7ab2f40eb822ffbb4fb19aa1ad20bf58fa0cde7"
+    }
+  ],
+  "boundaries": {
+    "actualFullPackageReceived": false,
+    "blenderRunsOnPC3": 0,
+    "sourceInputsRehashedFromActualFullPackage": false,
+    "finalBlenderReadback": false,
+    "pixelDecoded": false,
+    "mp4EncodedOrDecoded": false,
+    "visualAccepted": false,
+    "productRegistered": false,
+    "receiptIssued": false,
+    "testRoundtrip": "PENDING",
+    "mainMerged": false,
+    "issueClosed": false
+  },
+  "provenanceLimits": [
+    "Expected sourceCommit is a declaration, not proof of executing commit or issuer authentication.",
+    "Source/layout/fixture/receipt bytes are absent from the strict 291-file output; compare embedded descriptors against external expectations.",
+    "sceneReadback/threads were collected before first render; runtimeSamples was reread at report writing.",
+    "Recorded source hashes are working-file bytes; Git may normalize line endings.",
+    "129 rejected negatives and 18 unittest methods have different denominators.",
+    "Skipped Windows symlink creation is not a passed path guard."
+  ],
+  "parallelRoles": [
+    "root integration/handoff",
+    "n03_media checker",
+    "handoff_audit independent tests",
+    "watcher_review read-only schema/security audit"
+  ]
+}
