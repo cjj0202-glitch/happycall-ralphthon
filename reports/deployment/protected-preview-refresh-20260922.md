@@ -46,7 +46,7 @@ Vercel CLI59.23.2에서 명시 project=`prj_VUk0C5e3thVOU9GgT8pc9tAoCczs`, scope
 
 첫 HTTP 기록은 오류 JSON의 top-level `code`를 읽어 null을 기록했습니다. 원본을 보존하고 04:01 후속 GET에서 실제 계약 `error.code`를 읽어 `STORAGE_CONFIG_INVALID`를 확인했습니다. HTTP503 자체를 성공한 업무로 세지 않습니다.
 
-별도 검토자는 배포 묶음의 코드/설정7파일을 marker와7/7 대조하고 합성 설정으로 실제 `handlers.list_cases()`를 호출했습니다. backend 미설정·Blob 필수설정 누락은503 CONFIG_INVALID, 기존 케이스 원장 없음·읽기 실패·예산 원장 없음은503 STORAGE_UNAVAILABLE로5/5 일치했습니다. 업무 목록 호출·저장·외부 연결은0입니다. Connexion/FileLock 의존성을 대역 처리한 오프라인 handler 검사이며 실제 원격 환경/스토리지 검사로 세지 않습니다. 정적 라우터와 health는 저장소 준비검사를 거치지 않고 업무 API는 통과해야 한다는 코드 경로를 별도로 확인했습니다.
+별도 검토자는 배포 묶음의 코드/설정7파일을 marker와7/7 대조하고 합성 설정으로 실제 `handlers.list_cases()`를 호출했습니다. backend 미설정·Blob 필수설정 누락은503 CONFIG_INVALID, 기존 케이스 원장 없음·읽기 실패·예산 원장 없음은503 STORAGE_UNAVAILABLE로5/5 일치했습니다. 업무 목록 호출·저장·외부 연결은0입니다. Connexion/FileLock 의존성을 대역 처리한 오프라인 handler 검사이며 실제 원격 환경/스토리지 검사로 세지 않습니다. 정적 라우터와 `/healthz`는 저장소 준비검사를 거치지 않고 업무 API는 통과해야 한다는 코드 경로를 별도로 확인했습니다. `/api/health`는 저장소 준비검사를 하므로 `/healthz`의 결과와 구분합니다.
 
 정제된 원시 측정은 ignored `.local/nominal-request-package-20260921T185505.json`, `.local/preview-refresh-3cf7-http-initial.json`, `.local/preview-refresh-3cf7-http-assets.json`에 보존합니다. CLI deploy/dry 응답도 같은 `.local/preview-refresh-3cf7-*` 경로에 보존하며 외부 제출물로 삼지 않습니다.
 
