@@ -1,0 +1,59 @@
+# 규약 ⑦ — 회신 없이 닫지 않는다.
+#
+# mail.py done 이 클라이언트 쪽에서 한 번 막지만, gh issue close 나 웹 UI 로 직접 닫으면
+# 그 게이트를 지나가지 않는다. 그래서 서버 쪽에서 한 겹 더 본다 — 코멘트 없이 닫힌 편지는
+# 자동으로 다시 열린다.
+#
+# 「조용하다」가 「안 했다」로 읽히는 것을 막는 장치다. 막는 게 아니라 «적게» 만드는 장치다.
+name: reply-gate
+
+on:
+  issues:
+    types: [closed]
+
+permissions:
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 코멘트 없이 닫혔으면 다시 연다
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          NUM: ${{ github.event.issue.number }}
+          COMMENTS: ${{ github.event.issue.comments }}
+          LABELS: ${{ toJSON(github.event.issue.labels.*.name) }}
+        run: |
+          set -euo pipefail
+
+          # 고정 상태 이슈는 대상이 아니다 (닫지 말 것이지만, 닫혀도 되살리지 않는다)
+          if echo "$LABELS" | grep -q '"status"'; then
+            echo "status 이슈 — 게이트 대상 아님"
+            exit 0
+          fi
+
+          if [ "$COMMENTS" -gt 0 ]; then
+            echo "회신 $COMMENTS 건 — 통과"
+            exit 0
+          fi
+
+          echo "회신 0건으로 닫혔다 — 다시 연다"
+          gh issue reopen "$NUM" --repo "$REPO"
+          gh issue comment "$NUM" --repo "$REPO" --body "$(cat <<'EOF'
+🚨 **회신 없이 닫혀서 다시 열었습니다** (규약 ⑦).
+
+「조용하다」는 받는 쪽에서 「안 했다」로 읽힙니다. 무엇을 했는지 한 줄이라도 남기고 닫으십시오.
+
+```bash
+python channel/mail.py done <번호> --evidence "무엇을 어떻게 확인했는가 — 수치·시각"
+```
+
+회신이 정말 필요 없는 건이면 사유를 적으십시오.
+
+```bash
+python channel/mail.py done <번호> --force-no-reply "중복 발송분 — #NN 에서 이미 처리"
+```
+EOF
+          )"

@@ -1,0 +1,30 @@
+# 시크릿 — 레포에도 이슈에도 올리지 않는다
+.env
+.env.*
+*.key
+*.pem
+secrets/
+
+# 큰 산출물 — Release 자산으로 나른다 (gh release upload)
+*.mp4
+*.wav
+*.mp3
+*.mov
+demo/video/*
+demo/audio/*
+!demo/**/.gitkeep
+
+# 생성물
+data/seed/*.csv
+data/seed/*.sqlite
+__pycache__/
+*.pyc
+node_modules/
+dist/
+
+# OS·편집기
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
