@@ -1,0 +1,36 @@
+{
+  "method": "independent pinhole/box mathematics only; no Blender or generator execution",
+  "assumptions": {
+    "camera": [
+      24.0,
+      1.0,
+      8.0
+    ],
+    "lookAt": [
+      17.0,
+      7.0,
+      0.85
+    ],
+    "lensMm": 32.0,
+    "sensorWidthMm": 36.0,
+    "aspect": 1.7777777777777777,
+    "sensorFit": "horizontal/default AUTO for landscape",
+    "pixelAspect": 1
+  },
+  "spatialSamples": 903,
+  "projectedVertices": 21672,
+  "boundsNormalizedTopLeft": [
+    0.24774362681055373,
+    0.11370031924464924,
+    0.5978638819209303,
+    0.8293038492918793
+  ],
+  "depthRange": [
+    8.981624246029295,
+    16.41809884900779
+  ],
+  "outOfFrameSamples": [],
+  "beltFootprintCornerFailures": [],
+  "conservativeGuardAabbOverlaps": [],
+  "limits": "Not evaluated Blender matrices/modifiers/camera settings, ray occlusion, rendered appearance, or continuous collision proof."
+}

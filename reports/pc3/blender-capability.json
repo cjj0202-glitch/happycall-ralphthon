@@ -1,0 +1,53 @@
+{
+  "taskId": "N03-M2",
+  "checkedAt": "2026-09-21T19:51:09.9543657+09:00",
+  "hostname": "LAPTOP-U2AL73UH",
+  "sourceLocalInventory": ".local/pc3-blender/inventory.json",
+  "scope": "Read-only bounded inventory; no additional search, download, install, security change or render",
+  "blender": {
+    "foundInSearchedScopes": false,
+    "executable": null,
+    "actualVersion": null,
+    "searchedExistingScope": ["D:/hwana/Apps"],
+    "fileSearch": "rg --files --hidden --no-ignore -g '*[bB]lender*.exe' -- D:/hwana/Apps",
+    "absentStandardFolders": ["C:/Program Files/Blender Foundation", "C:/Program Files/Blender", "C:/Program Files (x86)/Blender Foundation", "C:/Program Files (x86)/Blender"],
+    "programFilesTopLevelBlenderFolders": [],
+    "pathCommandMatches": [],
+    "uninstallRegistryMatches": [],
+    "limitation": "No whole-drive scan; unrelated portable locations were not searched."
+  },
+  "cpu": {
+    "name": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz",
+    "physicalCores": 4,
+    "logicalProcessors": 8,
+    "wmiMaxClockSpeedMHz": 1992
+  },
+  "totalPhysicalMemoryBytes": 8500961280,
+  "gpus": [
+    {"name": "Intel(R) UHD Graphics 620", "wmiAdapterRAMBytes": 1073741824, "driverVersion": "27.20.100.7987", "status": "OK"},
+    {"name": "NVIDIA GeForce MX150", "wmiAdapterRAMBytes": 2147483648, "driverVersion": "24.21.13.9907", "status": "OK"}
+  ],
+  "gpuMemoryMeasurement": "Win32_VideoController.AdapterRAM; not Blender-detected VRAM or a CUDA/OpenGL compatibility test. Intel figure must not be treated as dedicated VRAM.",
+  "nvidiaSmiInPath": false,
+  "diskD": {"fileSystem": "NTFS", "totalBytes": 983852285952, "freeBytes": 852067274752},
+  "benchmark": {
+    "executed": false,
+    "reason": "No Blender executable in the checked scopes",
+    "engine": null,
+    "measuredFrames": null,
+    "elapsedSeconds": null,
+    "measuredSecondsPerFrame": null,
+    "estimatedTotalRenderSeconds": null
+  },
+  "selectedAlternative": {
+    "installOnPc3": false,
+    "plan": "pc3 root session prepares scene code for rendering on pc1",
+    "sceneDeliveryVerifiedByThisInventory": false,
+    "pc1RenderVerifiedByThisInventory": false
+  },
+  "pc1ReportedEnvironment": {
+    "reportedVersion": "Blender 4.5.14 LTS portable",
+    "reportedOutcome": "pc1 reports successful execution",
+    "provenance": "pc1 report relayed by root; not independently measured on pc3"
+  }
+}
