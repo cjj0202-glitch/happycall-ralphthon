@@ -8,7 +8,7 @@ Keep the original 291-file package unchanged: PNG frames 1 through 288, render-r
 
 Supply an existing FFmpeg executable explicitly. The tool does not download, install or discover a replacement executable. Where supported, an explicitly supplied ffprobe can provide structured metadata; the FFmpeg-only path compares input-stream metadata with separately decoded frame hashes. A success-like stderr message is insufficient. FFmpeg's rounded human-readable Duration field is not the exact timing authority.
 
-The output must be a new directory outside the package and expectation inputs. Existing destinations and partial outputs are refused. Use a different new output path after a failed attempt; never treat the partial MP4 or tracks file as a complete result. Encoding, decoding and metadata failures must leave no success candidate report.
+The output must be a new directory outside the package and expectation inputs. Existing destinations and partial outputs are refused. Use a different new output path after a failed attempt; never treat the partial MP4 or tracks file as a complete result. The success candidate report is published only after all packaging checks. A failed or interrupted output is never accepted based on a single report file or on whether cleanup succeeded.
 
 ## Reproduction
 
@@ -27,7 +27,7 @@ A successful new directory contains exactly four candidate files:
 - `sorter-demo.tracks.descriptor.json`: exactly five binding fields.
 - `candidate-report.json`: validation observations and provenance, written last.
 
-Failure can retain `sorter-demo.partial.mp4` or diagnostic media plus a `failure.json`; those files are not a successful candidate. The tool removes only success markers created by its own invocation where their filesystem identities remain unchanged. It does not replace or clean an existing destination.
+Failure can retain `sorter-demo.partial.mp4` or diagnostic media plus a `failure.json`; those files are not a successful candidate. The correction does not delete markers on failure. Descriptor, staged-report and diagnostic files may remain; they are not evidence of success. A failure diagnostic is best effort and only written to the same owned directory identity. No permission changes or forced unlocking are attempted. It does not replace or clean an existing destination.
 
 The independent suite uses artificial 291-file inputs and mocked media subprocess results:
 
@@ -49,7 +49,37 @@ The original M5 result's pending fields describe its structural-check boundary. 
 
 pc1 owns the actual finished-render intake, visual checks, final two WAV files plus MP4 plus tracks Release, product manifest, new build and UI playback/seek acceptance. No actual completed pc1 288-frame bundle has been provided to this M6 implementation yet. TEST roundtrip and whole-N03 acceptance remain separate.
 
-## Observed validation and corrections
+## Review correction and required consumer check
+
+The review of submission `3a223f160941212d4d8608a53806563ec2ef9318` found two independently reproducible gaps despite normal tests passing: rotation metadata did not affect acceptance, and a late validation failure plus injected deletion denial left contradictory success and failure markers. The original normal results and counterexamples are retained separately. pc1's reported 20/20 suite is an external observation, not pc3's new measurement.
+
+The corrected publication contract uses `candidate-report.staged.json` while checks are still running. Input bytes, output identity/inventory and final hashes must pass before the final atomic publication of `candidate-report.json`. The publication operation is the final fallible step; there is no later validation that changes published success into a returned failure. Interrupted staged reports and leftover descriptors do not complete a bundle.
+
+Consumers must call `validate_candidate(directory)` from `scripts/media_pc3/package_full_animation_media.py` when taking delivery. Require `valid is True` and `status == "PASS_WITH_PENDING"`; any other result rejects intake. This reads the complete four-file inventory, checks actual asset hashes and the exact five-field descriptor binding, and rejects failure/staged/partial/unknown files. Reading `candidate-report.json` alone is never the intake contract. The helper is a local integrity check and does not authenticate the issuer or independently replay the encoder. The same check is available without an encoder via CLI (exit 0 for a complete pending-review candidate, exit 1 for rejection):
+
+```powershell
+python -B scripts/media_pc3/package_full_animation_media.py --check-candidate D:\hwana\Work\new-full-media-candidate
+```
+
+Movie and track display matrices must be identity and displayed dimensions must remain 1920x1080. Explicit rotation/transform information must be understood and identity; unknown or non-identity transformations are rejected. Existing pixel-aspect, format, full-frame timeline and byte-identical tracks requirements remain. Metadata that is absent is not itself proof of identity; mandatory MP4 matrix inspection supplies that check.
+
+The last checks and atomic publication have a finite observation boundary. External changes after the last observation cannot be permanently prevented by this script; consumers must validate again at intake and retain their own file-control policy. This does not promise protection against arbitrary simultaneous writers, forged reports or later changes. Failed outputs are diagnosed and abandoned, never reused.
+
+This correction uses artificial completed 291-file fixtures with mock subprocesses for the full suite. New actual-tool execution is restricted to three artificial 64x64 PNGs. The preserved earlier real 1080p video, input metadata and decoded-frame logs are compared read-only against new guards; this is not another full-package encode or actual pc1 scene review. Detailed measured results are in `full-media-checks.json` under `reviewCorrection`.
+
+### Measured review correction results
+
+The frozen original source reproduced all nine expected observations in 14.511 seconds: three incorrectly accepted rotation examples, three normal controls, normal packaging, a late-failure/deletion-permitted control and the late-failure/deletion-denied contradiction. These are defect reproduction observations, not nine successful product checks. No real media process or Windows file lock was used.
+
+The final packager is 40,523 bytes, SHA256 `cad81122ffb8225c35e58d7ca8b6327701e504e8ddbd8c6dd7d5b667d12b9396`; the final independent test file is 41,324 bytes, SHA256 `672ad99b52c06df95a53ee1b051a9d3e0c9c0e2c2c6b620fa031fcdb94b8f398`. One complete final-source suite passed 30/30 methods with 118 distinct negative cases, three killed guard mutants, no failures/errors/skips, in 272.266 seconds. The original decode guard, identity-matrix guard and consumer-inventory guard mutants were killed; the consumer mutant disables both initial and final inventory conditions and is counted as one mutant, not two. Source and test bytes were identical before and after execution. The raw unittest log says OK and the complete result JSON was observed. The tester did not retain the original command session handle, so its process exit code is uncollected, not inferred.
+
+The compound fault reaches the staged report's final validation, returns FAIL, leaves no public candidate report and is rejected by the consumer. An unlink PermissionError injection remains configured, but the corrected code makes zero unlink attempts: failure safety no longer depends on deleting success markers. This is not a reproduction of an actual Windows file lock.
+
+Independent pure parser/matrix checks passed 35/35. A read-only comparison of preserved genuine FFmpeg 1080p/288 outputs, saved Input/framehash logs and current consumer checks passed six observations; no new full-size encoding was performed. The fresh permitted tiny PNG sample used one actual encode and one EOF decode of three 64x64 frames at 24fps, 0.125 seconds. Consumer CLI checks separately accepted the preserved genuine bundle with exit 0 and rejected the original contradictory-marker directory with exit 1. These denominators overlap in purpose and are not added into a single test total.
+
+All 25 preexisting media files remained byte-identical. Only the assigned two scripts and three full-media reports changed. No actual pc1 completed render was read or altered, and no renderer/server/browser, installation, Release, UI, manifest, deployment or permission change was performed. Whole N03 acceptance, TEST, visual review and actual-scene/media acceptance remain pending. Full commands, hashes, negative cases, raw-log references and the preserved original results are in `full-media-checks.json` under `reviewCorrection`.
+
+## Original submission validation history
 
 The first mocked-process suite passed 16 methods with 63 distinct negative cases and killed one removed-full-decode-guard mutant. Independent review then reproduced three additional publication-boundary failures: altered final video could still be accepted, replacement output-directory identity could still be accepted, and failure diagnostics could be written into that replacement directory. Rechecking identity/inventory/final hashes and restricting diagnostic writes fixed them. The expanded full suite passed 19/19 methods, 67 distinct negative cases and the same 1/1 guard mutant in 215.797 seconds, with no skips/errors. This full suite also separately altered the final tracks copy.
 
