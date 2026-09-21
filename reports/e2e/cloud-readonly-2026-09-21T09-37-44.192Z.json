@@ -1,0 +1,18 @@
+{
+  "started": "2026-09-21T09:37:44.192Z",
+  "url": "https://g-28-arxz4aubg-52g-studio.vercel.app",
+  "deploymentId": "dpl_ByC9km4G9rUevPYUu5pHVmLNjG6N",
+  "mode": "protected read-only synthetic preview",
+  "views": [],
+  "media": [],
+  "mutationRequests": 0,
+  "pageErrors": [],
+  "limits": [
+    "Storage is unavailable; this does not test persisted workflows or live AI.",
+    "Official CLI-created automation access retains Vercel project protection.",
+    "Playback does not verify human listening or OS output."
+  ],
+  "status": "FAILED",
+  "error": "locator.innerText: Error: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <div role=\"alert\" class=\"notice danger\">…</div> aka getByText('서버 연결 확인이 필요합니다서버 저장소 설정이 올바르지 않습니다.현재 예시 열람 중입니다. 변경 사항은 저장되지 않습니다.다시 연결')\n    2) <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div> aka locator('[id=\"__next-route-announcer__\"]')\n\nCall log:\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n",
+  "finished": "2026-09-21T09:37:49.743Z"
+}

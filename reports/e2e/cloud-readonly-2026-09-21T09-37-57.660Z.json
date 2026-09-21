@@ -1,0 +1,316 @@
+{
+  "started": "2026-09-21T09:37:57.660Z",
+  "url": "https://g-28-arxz4aubg-52g-studio.vercel.app",
+  "deploymentId": "dpl_ByC9km4G9rUevPYUu5pHVmLNjG6N",
+  "mode": "protected read-only synthetic preview",
+  "views": [
+    {
+      "width": 1440,
+      "id": "CASE-0001",
+      "view": "상담 작업대",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "id": "CASE-0001",
+      "view": "경영주 접수",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "id": "CASE-0001",
+      "view": "센터 회신",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "id": "CASE-0001",
+      "view": "WMS 작업 확인",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "id": "CASE-0001",
+      "view": "TMS 배송 확인",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "id": "CASE-0002",
+      "view": "상담 작업대",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "id": "CASE-0002",
+      "view": "경영주 접수",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "id": "CASE-0002",
+      "view": "센터 회신",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "id": "CASE-0002",
+      "view": "WMS 작업 확인",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "id": "CASE-0002",
+      "view": "TMS 배송 확인",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      }
+    },
+    {
+      "width": 1024,
+      "id": "CASE-0001",
+      "view": "상담 작업대",
+      "layout": {
+        "width": 1024,
+        "scroll": 1024
+      }
+    },
+    {
+      "width": 1024,
+      "id": "CASE-0001",
+      "view": "경영주 접수",
+      "layout": {
+        "width": 1024,
+        "scroll": 1024
+      }
+    },
+    {
+      "width": 1024,
+      "id": "CASE-0001",
+      "view": "센터 회신",
+      "layout": {
+        "width": 1024,
+        "scroll": 1024
+      }
+    },
+    {
+      "width": 1024,
+      "id": "CASE-0001",
+      "view": "WMS 작업 확인",
+      "layout": {
+        "width": 1024,
+        "scroll": 1024
+      }
+    },
+    {
+      "width": 1024,
+      "id": "CASE-0001",
+      "view": "TMS 배송 확인",
+      "layout": {
+        "width": 1024,
+        "scroll": 1024
+      }
+    },
+    {
+      "width": 1024,
+      "id": "CASE-0002",
+      "view": "상담 작업대",
+      "layout": {
+        "width": 1024,
+        "scroll": 1024
+      }
+    },
+    {
+      "width": 1024,
+      "id": "CASE-0002",
+      "view": "경영주 접수",
+      "layout": {
+        "width": 1024,
+        "scroll": 1024
+      }
+    },
+    {
+      "width": 1024,
+      "id": "CASE-0002",
+      "view": "센터 회신",
+      "layout": {
+        "width": 1024,
+        "scroll": 1024
+      }
+    },
+    {
+      "width": 1024,
+      "id": "CASE-0002",
+      "view": "WMS 작업 확인",
+      "layout": {
+        "width": 1024,
+        "scroll": 1024
+      }
+    },
+    {
+      "width": 1024,
+      "id": "CASE-0002",
+      "view": "TMS 배송 확인",
+      "layout": {
+        "width": 1024,
+        "scroll": 1024
+      }
+    },
+    {
+      "width": 390,
+      "id": "CASE-0001",
+      "view": "상담 작업대",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      }
+    },
+    {
+      "width": 390,
+      "id": "CASE-0001",
+      "view": "경영주 접수",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      }
+    },
+    {
+      "width": 390,
+      "id": "CASE-0001",
+      "view": "센터 회신",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      }
+    },
+    {
+      "width": 390,
+      "id": "CASE-0001",
+      "view": "WMS 작업 확인",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      }
+    },
+    {
+      "width": 390,
+      "id": "CASE-0001",
+      "view": "TMS 배송 확인",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      }
+    },
+    {
+      "width": 390,
+      "id": "CASE-0002",
+      "view": "상담 작업대",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      }
+    },
+    {
+      "width": 390,
+      "id": "CASE-0002",
+      "view": "경영주 접수",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      }
+    },
+    {
+      "width": 390,
+      "id": "CASE-0002",
+      "view": "센터 회신",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      }
+    },
+    {
+      "width": 390,
+      "id": "CASE-0002",
+      "view": "WMS 작업 확인",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      }
+    },
+    {
+      "width": 390,
+      "id": "CASE-0002",
+      "view": "TMS 배송 확인",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      }
+    }
+  ],
+  "media": [
+    {
+      "id": "CASE-0001",
+      "sha256": "d4eeb6448ff8969f27034ecade9a050ee212468585c6300b19c9a0ebdc372931",
+      "audio": {
+        "ended": true,
+        "duration": 47.15,
+        "currentTime": 47.15,
+        "error": null
+      }
+    },
+    {
+      "id": "CASE-0002",
+      "sha256": "333897f4f10426674ec97b9e3a44c2f8da21f1f7931b4f911c82a29abcf6b914",
+      "audio": {
+        "ended": true,
+        "duration": 49.55,
+        "currentTime": 49.55,
+        "error": null
+      },
+      "video": {
+        "ended": true,
+        "duration": 12,
+        "width": 960,
+        "height": 540,
+        "error": null
+      }
+    }
+  ],
+  "mutationRequests": 0,
+  "pageErrors": [],
+  "limits": [
+    "Storage is unavailable; this does not test persisted workflows or live AI.",
+    "Official CLI-created automation access retains Vercel project protection.",
+    "Playback does not verify human listening or OS output."
+  ],
+  "status": "PASS_READ_ONLY_PREVIEW",
+  "finished": "2026-09-21T09:39:17.733Z"
+}
