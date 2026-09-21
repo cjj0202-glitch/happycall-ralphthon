@@ -46,11 +46,11 @@ MODEL_ANALYSIS_SCHEMA = obj({
     **{key: value for key, value in ANALYSIS_SCHEMA["properties"].items()
        if key not in {"fields", "facts"}},
     "fields": obj({
-        "subject": {**NULLABLE, "description": "발화에서 새로 추출한 문의 대상·문제와 의미에 필요한 불확실성·명시된 현재 업무 단계. 최초/재문의 여부가 명시되지 않으면 추정하지 않는다. 기존 문의의 후속 회신 문의를 새로운 최초 문의로 축약하지 않는다. 점포 귀속과 문의 점포의 식별은 구분한다. 상담 입력이나 임시 문구를 복사하지 않는다. 대상이 없거나 불명확하면 null과 확인 질문."},
+        "subject": {**NULLABLE, "description": "제목만으로 문의 대상·문제·확인하려는 내용과 원문에 명시된 불확실성의 범위를 알 수 있게 새로 추출한다. 의미에 필요한 조건은 짧은 길이보다 우선하며 다른 필드에 있다는 이유로 생략하지 않는다. 확인 요청을 확인 중·완료로 바꾸지 않는다. 최초/재문의/처리 단계는 명시된 경우만 보존한다. 기존 문의의 후속 회신 문의를 새로운 최초 문의로 축약하지 않는다. 점포 귀속과 문의 점포의 식별은 구분한다. 상담 입력이나 임시 문구를 복사하지 않는다. 대상이 없거나 불명확하면 null과 확인 질문."},
         "request": {**NULLABLE, "description": "경영주가 발화에서 요청한 확인·안내 내용과 그 요청에 필요한 최종 정정·기한·조건·미해결 안내. 다른 필드로 대체하지 않고 실제 발화에서 새로 추출한다. 처리완료·귀책·센터 회신이나 원문에 없는 조건을 창작하지 않는다. 요청이 미확인이면 null."},
     }),
     "draftContext": obj({
-        "subjectQuote": {**NULLABLE, "description": "회신 초안의 문의 내용을 뒷받침하는 transcript 한 구간의 짧은 원문 그대로. fields.subject를 복사하거나 새로운 문장을 만들지 않는다. 부정·정정 문맥을 자르지 않는다. 관련 원문이 없으면 null."},
+        "subjectQuote": {**NULLABLE, "description": "문의 대상·문제·필수 조건을 뒷받침하는 transcript의 연속된 한 구간을 그대로 인용한다. 점포 소개만 선택하거나 fields.subject를 복사하거나 새로운 문장을 만들지 않는다. 짧게 만들기 위해 부정·정정·시점·귀속 불확실성을 자르지 않는다. 관련 원문이 없으면 null."},
         "requestQuote": {**NULLABLE, "description": "회신 초안에서 다룰 고객 요청·불만·긴급성을 담은 transcript 한 구간의 짧은 원문 그대로. 욕설은 서버가 초안에서만 순화하므로 여기서는 원문을 변형하지 않는다. 관련 원문이 없으면 null."},
     }),
     "orderedClaim": claim_schema("주문"),
