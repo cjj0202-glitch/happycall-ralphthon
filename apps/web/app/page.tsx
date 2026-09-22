@@ -116,7 +116,7 @@ export default function Home() {
     <a className="skip-link" href="#main">본문으로 이동</a>
     <header className="site-header">
       <div className="header-inner">
-        <a className="brand" href="#" onClick={e => { e.preventDefault(); returnToWork(); }} aria-label="HappyCall OneFlow 홈"><span className="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 6v12M19 6v12M5 12h14M10 6v12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/></svg></span><span>HappyCall <strong>OneFlow</strong></span></a>
+        <a className="brand" href="#" onClick={e => { e.preventDefault(); returnToWork(); }} aria-label="AI-GO 무엇이든 물어보살 홈"><span className="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3 18 8 6l5 12M5 13h6M18 6v12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg></span><span><strong>AI-GO</strong> 무엇이든 물어보살</span></a>
         <nav className="nav-inner" aria-label="업무 역할">{tabs.map(tab => <button key={tab.role} onClick={() => changeRole(tab.role)} className={role === tab.role ? 'nav-tab selected' : 'nav-tab'} aria-pressed={role === tab.role}>{tab.label}</button>)}</nav>
         <span className="badge neutral demo-label">합성 데이터 시연</span>
       </div>
@@ -146,7 +146,7 @@ export default function Home() {
             : (view === 'wms' || view === 'tms') ? <><div className="logistics-case-context"><span className="badge neutral">{roleNames[role]} 근거 확인</span><strong>{active.title}</strong><span>{active.store?.name} · {active.id}</span>{!isEvidenceEditable(active, role) && <span className="badge info">이관 내용 보존 · 근거 열람</span>}</div><LogisticsScene key={`${view}:${active.id}`} kind={view} caseData={active} backLabel={role === 'center' ? '센터 업무로 돌아가기' : '상담으로 돌아가기'} readOnly={!isEvidenceEditable(active, role)} onBack={returnToWork} onLinkEvidence={async (id: string) => { setToast(''); if (!isEvidenceEditable(active, role)) throw new Error('센터에 전달된 접수 또는 센터 열람 화면에서는 근거를 변경할 수 없습니다.'); const selectedEvidence = Array.from(new Set([...(active.selectedEvidence || []), id])); const saved = await save(active.id, { expectedRevision: active.revision, selectedEvidence }); acceptOwnEvidenceSave(active, saved, selectedEvidence); setToast('물류 근거를 접수 건에 연결했습니다.'); }}/></> : null}
         </div>
       </div>}
-      <footer className="page-footer"><span>HappyCall OneFlow</span><span>전화·점포·물류 데이터는 시연용 합성 데이터입니다. 실제 고객 통화가 아닙니다.</span></footer>
+      <footer className="page-footer"><span>AI-GO 무엇이든 물어보살</span><span>전화·점포·물류 데이터는 시연용 합성 데이터입니다. 실제 고객 통화가 아닙니다.</span></footer>
     </main>
   </div>;
 }
