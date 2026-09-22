@@ -48,6 +48,7 @@ paths:
                 reviewConfirmed: {type: boolean}
                 status: {type: string, enum: [draft, review, handed_off, in_progress, closed]}
                 reply: {type: string, maxLength: 8000}
+                replyTitle: {type: string, minLength: 1, maxLength: 160, description: Optional center-only reply title; legacy replies without a title remain supported.}
                 pendingActions: {type: array, items: {type: string}, maxItems: 50}
                 selectedEvidence: {type: array, items: {type: string}, maxItems: 50}
       responses:
@@ -106,6 +107,7 @@ paths:
                   properties:
                     pendingActions: {type: array, maxItems: 50, items: {type: string, minLength: 1, maxLength: 8000}}
                     reply: {type: string, maxLength: 8000}
+                    replyTitle: {type: string, maxLength: 160}
       responses:
         '200':
           description: Review-only draft; never writes case, registered reply, status, history or notifications.
@@ -113,8 +115,9 @@ paths:
             application/json:
               schema:
                 type: object
-                required: [replyDraft, mode, requestId, revision]
+                required: [replyTitle, replyDraft, mode, requestId, revision]
                 properties:
+                  replyTitle: {type: string, minLength: 1, maxLength: 100}
                   replyDraft: {type: string}
                   mode: {type: string, enum: [replay, demo-live]}
                   requestId: {type: string}

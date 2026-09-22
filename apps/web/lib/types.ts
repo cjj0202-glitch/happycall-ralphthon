@@ -33,7 +33,7 @@ export type CaseData = {
   store: { id: string; name: string }; channel: 'voice' | 'text';
   sourceText: string; audioUrl?: string; transcript?: Transcript[]; asOf?: string;
   status?: CaseStatus; analysis?: Analysis; intake?: Intake; departmentId?: string;
-  reviewConfirmed?: boolean; reply?: string; pendingActions?: string[]; selectedEvidence?: string[];
+  reviewConfirmed?: boolean; replyTitle?: string; reply?: string; pendingActions?: string[]; selectedEvidence?: string[];
   notificationOutbox?: NotificationIntent[];
   expected?: { product?: string; quantity?: number; unit?: string };
   received?: { product?: string; quantity?: number; unit?: string };

@@ -111,8 +111,8 @@ function harness(inputs = source) {
   const ranges = (values, target = audio()) => { target.media.played = { length: values.length, start: i => values[i][0], end: i => values[i][1] }; };
   const click = value => { button(value).props.onClick({ stopPropagation() {} }); flush(); };
   const selectCase = index => { one(node => node.type === 'button' && node.props.className?.split(' ').includes('queue-open') && node.props['data-case-id'] === cases[index].id).props.onClick({ stopPropagation() {} }); flush(); };
-  const analysisEnabled = () => !one(node => node.type === 'button' && textOf(node).includes('대화록 변환 · AI 접수 정리')).props.disabled;
-  return { flush, audio, event, setRate, ranges, click, selectCase, one, label, analysisEnabled, calls, writes, drafts, completions, remoteCases,
+  const playbackComplete = () => /전체 (통화 )?재생 완료/.test(textOf(one(node => node.type === 'strong' && node.props.role === 'status')));
+  return { flush, audio, event, setRate, ranges, click, selectCase, one, label, playbackComplete, calls, writes, drafts, completions, remoteCases,
     async ready() { flush(); await Promise.resolve(); flush(); return this; },
     destroy() { instances.forEach(instance => instance.hooks.forEach(hook => hook?.cleanup?.())); },
   };
@@ -133,14 +133,14 @@ const preference = app => {
   assert.notEqual(app.audio().media, old.media);
   assert.equal(app.audio().media.playbackRate, 1.5);
   assert.equal(app.label('통화 재생 속도').props.value, 1.5);
-  assert.equal(app.analysisEnabled(), false);
+  assert.equal(app.playbackComplete(), false);
   return { default: 1.25, selected: 1.5, afterCase: app.audio().media.playbackRate, nativeRateEvents: 0 };
 };
 const normal = rate => app => {
   app.event('onLoadedMetadata'); app.setRate(rate); app.event('onPlay');
   app.audio().media.currentTime = 10; app.audio().media.ended = true; app.ranges([[0, 10]]); app.event('onEnded');
-  assert.equal(app.analysisEnabled(), true);
-  app.event('onEnded'); assert.equal(app.analysisEnabled(), true);
+  assert.equal(app.playbackComplete(), true);
+  app.event('onEnded'); assert.equal(app.playbackComplete(), true);
   assert.deepEqual(app.completions, [cases[0].id]);
   return { rate, completion: true, callbackCount: app.completions.length };
 };
@@ -156,10 +156,11 @@ const blocked = (rate, kind) => app => {
   app.audio().media.currentTime = 10; app.audio().media.ended = kind !== 'not-ended';
   app.ranges(kind === 'gap' ? [[0, 2], [4, 10]] : kind === 'empty' ? [] : [[0, 10]]);
   app.event('onEnded', app.audio(), { nativeEvent: { isTrusted: kind !== 'untrusted' } });
-  assert.equal(app.analysisEnabled(), false, `${kind} must not mark full playback complete`);
+  assert.equal(app.playbackComplete(), false, `${kind} must not mark full playback complete`);
   assert.equal(app.completions.length, 0);
   return { rate, kind, completion: false, callbackCount: app.completions.length };
 };
+await test('stored recording can be analyzed before playback', app => { assert.equal(app.one(node => node.type === 'button' && textOf(node).includes('대화록 변환 · AI 접수 정리')).props.disabled, false); assert.equal(app.playbackComplete(), false); });
 await test('default and immediate Home -> Desk -> CallReview preference transfer', preference);
 await test('WMS/TMS and both other roles retain selected preference', app => {
   app.event('onLoadedMetadata'); app.setRate(2);
@@ -196,22 +197,22 @@ await test('restart preserves preference, stale audio cannot mutate rate or comp
   assert.notEqual(app.audio().media, old.media); assert.equal(app.audio().media.playbackRate, 1.5);
   old.media.playbackRate = 2; old.media.currentTime = 10; old.media.ended = true; app.ranges([[0, 10]], old);
   for (const name of ['onRateChange', 'onPlay', 'onEnded', 'onSeeking', 'onError']) app.event(name, old);
-  assert.equal(app.label('통화 재생 속도').props.value, 1.5); assert.equal(app.analysisEnabled(), false);
+  assert.equal(app.label('통화 재생 속도').props.value, 1.5); assert.equal(app.playbackComplete(), false);
   app.event('onCanPlay'); app.event('onPlay'); app.audio().media.currentTime = 10; app.audio().media.ended = true; app.ranges([[0, 10]]); app.event('onEnded');
-  assert.equal(app.analysisEnabled(), true);
-  app.click('처음부터 전체 통화 재생'); assert.equal(app.analysisEnabled(), true); // Existing completed-source policy.
-  app.selectCase(1); app.event('onLoadedMetadata'); assert.equal(app.analysisEnabled(), false); assert.equal(app.audio().media.playbackRate, 1.5);
+  assert.equal(app.playbackComplete(), true);
+  app.click('처음부터 전체 통화 재생'); assert.equal(app.playbackComplete(), true); // Existing completed-source policy.
+  app.selectCase(1); app.event('onLoadedMetadata'); assert.equal(app.playbackComplete(), false); assert.equal(app.audio().media.playbackRate, 1.5);
   return { replacedAudio: true, rejectedStaleEventTypes: 5, newCaseComplete: false, completedSourceRestartPreserved: true };
 });
 await test('same-case source replacement resets completion and rejects old source events', async app => {
   normal(1.5)(app); const old = app.audio();
   app.remoteCases[0].audioUrl = '/offline-replaced.wav'; app.click('목록 새로고침'); await Promise.resolve(); app.flush();
   app.event('onLoadedMetadata'); assert.equal(app.audio().props.src, '/offline-replaced.wav');
-  assert.equal(app.audio().media.playbackRate, 1.5); assert.equal(app.analysisEnabled(), false);
+  assert.equal(app.audio().media.playbackRate, 1.5); assert.equal(app.playbackComplete(), false);
   assert.notEqual(app.audio().media, old.media);
   old.media.playbackRate = 0.75;
   for (const name of ['onRateChange', 'onPlay', 'onEnded']) app.event(name, old);
-  assert.equal(app.label('통화 재생 속도').props.value, 1.5); assert.equal(app.analysisEnabled(), false);
+  assert.equal(app.label('통화 재생 속도').props.value, 1.5); assert.equal(app.playbackComplete(), false);
   assert.equal(app.completions.length, 1);
   // Editing another case still uses its own draft, not the first case's draft object.
   app.label('요청사항').props.onChange({ target: { value: '첫 사례 미저장 내용' } }); app.flush();

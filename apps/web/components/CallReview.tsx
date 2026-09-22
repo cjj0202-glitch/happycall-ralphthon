@@ -117,7 +117,7 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, playbackRa
   const suppliedMode = transcriptMode ?? caseData.analysisMode;
   const mode = suppliedMode === 'replay' || suppliedMode === 'demo-live' ? suppliedMode : undefined;
   const transcriptLabel = mode === 'replay' ? '합성 대화록 · 저장 결과 재생' : mode === 'demo-live' && voice ? '실제 STT 결과 · 인식 오류 확인 필요' : '전사 출처 미확인';
-  const canRetryAnalysis = !disabled && analysisState === 'error' && (!voice || (complete && !mediaError));
+  const canRetryAnalysis = !disabled && analysisState === 'error' && (!voice || (!!caseData.audioUrl && !mediaError));
 
   useEffect(() => {
     alive.current = true;
@@ -259,7 +259,7 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, playbackRa
 
   const analysisFeedback = <>
           {analysisState === 'loading' && <p className={styles.notice} role="status">AI 분석 중 · 원문과 현재 상담 입력을 보존하고 있습니다.</p>}
-          {analysisState === 'error' && <div className={styles.error}><p role="alert">{analysisError || 'AI 분석에 실패했습니다. 원문과 현재 상담 입력은 유지됩니다.'}</p>{onRetryAnalysis ? <button type="button" disabled={!canRetryAnalysis} onClick={() => { if (canRetryAnalysis) onRetryAnalysis(); }}>AI 분석 다시 시도</button> : <p>상위 화면에서 분석을 다시 실행해 주세요.</p>}{voice && !complete && <p>정상 전체 통화 재생 후 분석을 다시 시도할 수 있습니다.</p>}</div>}
+          {analysisState === 'error' && <div className={styles.error}><p role="alert">{analysisError || 'AI 분석에 실패했습니다. 원문과 현재 상담 입력은 유지됩니다.'}</p>{onRetryAnalysis ? <button type="button" disabled={!canRetryAnalysis} onClick={() => { if (canRetryAnalysis) onRetryAnalysis(); }}>AI 분석 다시 시도</button> : <p>상위 화면에서 분석을 다시 실행해 주세요.</p>}{voice && !complete && <p>전체 녹음 파일을 기준으로 분석을 다시 시도합니다.</p>}</div>}
   </>;
   const sourceTextContent = <section className={styles.card} aria-labelledby={`${id}-source-title`}>
           <div className={styles.sectionHeading}><h3 id={`${id}-source-title`}>{voice ? '합성 통화 원대본' : '접수 원문'}</h3><span className={styles.badge}>원문 보존</span></div>
@@ -407,9 +407,9 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, playbackRa
               <button type="button" aria-label="통화 음소거" aria-pressed={muted} disabled={disabled || !!mediaError} onClick={() => { const audio = audioRef.current; if (audio) audio.muted = !audio.muted; }}>{muted ? '음소거 해제' : '음소거'}</button>
             </div>
             {(muted || volume === 0) && <p className={styles.warning}>현재 소리가 꺼져 있습니다. 재생 완료는 실제 청취 확인을 뜻하지 않습니다.</p>}
-            <p id={`${id}-audio-help`} className={styles.help}>전체 재생 후 상단의 AI 정리 버튼을 눌러 주세요.</p>
+            <p id={`${id}-audio-help`} className={styles.help}>통화 재생은 선택입니다. 상단의 AI 정리 버튼으로 바로 시작할 수 있습니다.</p>
             {hiddenClipNotice && <p className={styles.warning} role="status">탭이 숨겨져 선택 발화 재생을 멈췄습니다. 돌아온 뒤 구간 재생 버튼을 다시 눌러 주세요.</p>}
-            {!complete && seekNotice && <p className={styles.warning}>재생 위치가 변경됐습니다. 분석 전 ‘처음부터 전체 통화 재생’을 사용해 주세요.</p>}
+            {!complete && seekNotice && <p className={styles.warning}>재생 위치를 이동했습니다. AI는 선택 구간이 아닌 전체 녹음을 분석합니다.</p>}
             {mediaError && <p className={styles.error} role="alert">{mediaError}</p>}
             <div className={styles.buttonRow}>
               {mediaError && <button type="button" disabled={disabled} onClick={() => restart(false)}>음원 다시 불러오기</button>}

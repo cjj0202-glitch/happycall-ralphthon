@@ -41,7 +41,7 @@ try {
     if (index) await page.getByRole('button', { name: '상담원 작업대', exact: true }).click();
     await page.getByRole('button', { name: title + ' 접수 열기', exact: true }).click();
     const analysis = page.locator('.workflow-primary').getByRole('button');
-    check(title + ': AI blocked before playback', await analysis.isEnabled(), false);
+    check(title + ': recorded call can be analyzed without forced playback', await analysis.isEnabled(), true);
     await page.getByRole('button', { name: /3 부서 이관/ }).click();
     check(title + ': handoff blocked before review', await page.locator('.workflow-primary').getByRole('button').isEnabled(), false);
     await page.getByRole('button', { name: /1 통화 · 텍스트 접수/ }).click();
@@ -54,7 +54,8 @@ try {
     check(title + ': moves to AI review', await page.getByRole('button', { name: /2 AI 정리/ }).getAttribute('aria-pressed'), 'true');
     await snap('review-' + index);
     const request = page.getByLabel('요청사항', { exact: true });
-    await request.fill((await request.inputValue()) + '\n합성 UI 검수: 확인 후 회신 요청');
+    if (index) await request.fill((await request.inputValue()) + '\n합성 UI 검수: 확인 후 회신 요청');
+    else check('unchanged AI intake can be reviewed without dummy edit', (await request.inputValue()).length > 0, true);
     await page.getByRole('checkbox', { name: /점포·상품·전달 부서를 원문과 대조/ }).check();
     await page.locator('.workflow-primary').getByRole('button', { name: /이관 내용 확인/ }).click();
     check(title + ': handoff ready', await page.locator('.workflow-primary').getByRole('button').isEnabled(), true);
@@ -76,16 +77,26 @@ try {
     await page.getByRole('button', { name: /2 처리 · 최종 회신/ }).click();
     await page.getByRole('textbox', { name: /경영주에게 등록할 회신/ }).fill('합성 검수 회신: 기록을 확인했습니다. 추가 확인이 필요한 내용은 별도로 안내하겠습니다.');
     await page.getByRole('button', { name: 'AI 답변 초안 생성', exact: true }).filter({visible:true}).click();
-    await page.getByRole('button', { name: '이 초안을 답변에 적용', exact:true }).waitFor();
+    await page.getByRole('button', { name: '제목·본문을 답변에 적용', exact:true }).waitFor();
     check(title + ': AI preview preserves typed reply', await page.getByRole('textbox', { name: /경영주에게 등록할 회신/ }).inputValue(), '합성 검수 회신: 기록을 확인했습니다. 추가 확인이 필요한 내용은 별도로 안내하겠습니다.');
     check(title + ': generated draft nonempty', (await page.locator('.draft-reply').innerText()).length > 40, true);
+    await page.getByRole('button', { name: '제목·본문을 답변에 적용', exact:true }).click();
+    const finalReply = await page.getByRole('textbox', { name: /경영주에게 등록할 회신/ }).inputValue();
+    const finalTitle = await page.getByRole('textbox', { name: '회신 제목', exact:true }).inputValue();
+    check(title + ': generated title applied', finalTitle.length > 5, true);
+    await page.getByRole('textbox', { name: '남은 조치 내용', exact:true }).fill('합성 시연: 원본 기록 추가 확인');
+    await page.getByRole('button', { name: '조치 추가', exact:true }).click();
+    await page.locator('.panel-actions').getByRole('button', { name:'중간 회신 등록', exact:true }).click();
+    await page.getByText('중간 회신 등록 완료', {exact:true}).waitFor();
+    check(title + ': interim registration visibly confirmed', true, true);
     await snap('center-' + index);
     const pending = page.getByRole('button', { name: /조치 완료$/ });
     for (let count = await pending.count(); count > 0; count--) await pending.first().click();
     await page.locator('.workflow-primary').getByRole('button', { name: /최종 회신·처리 완료/ }).click();
     await page.locator('.workflow-primary').getByRole('button', { name: /경영주 회신 확인/ }).waitFor();
     await page.locator('.workflow-primary').getByRole('button', { name: /경영주 회신 확인/ }).click();
-    await page.getByText('합성 검수 회신: 기록을 확인했습니다. 추가 확인이 필요한 내용은 별도로 안내하겠습니다.', { exact: true }).waitFor();
+    await page.locator('.registered-reply').getByText(finalReply, {exact:true}).waitFor();
+    await page.locator('.registered-reply').getByRole('heading', {name:finalTitle,exact:true}).waitFor();
     check(title + ': registered reply visible to owner', true, true);
   }
   check('browser exceptions', report.errors, []);

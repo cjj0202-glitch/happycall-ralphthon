@@ -17,7 +17,7 @@ DEFAULT_DEPARTMENTS = [
     {"id": "cs", "name": "고객 지원"},
 ]
 INTAKE_KEYS = {"storeId", "subject", "quantity", "unit", "request"}
-PATCH_KEYS = {"intake", "departmentId", "reviewConfirmed", "status", "reply", "pendingActions", "selectedEvidence", "expectedRevision"}
+PATCH_KEYS = {"intake", "departmentId", "reviewConfirmed", "status", "reply", "replyTitle", "pendingActions", "selectedEvidence", "expectedRevision"}
 TRANSITIONS = {"draft": {"draft", "review", "handed_off"}, "review": {"draft", "review", "handed_off"},
                "handed_off": {"handed_off", "in_progress", "closed"}, "in_progress": {"in_progress", "closed"}, "closed": {"closed"}}
 
@@ -146,8 +146,10 @@ class CaseService:
             raise DemoError("INVALID_INPUT", "회신 생성 요청 형식을 확인해 주세요.", 422)
         center_context = body.get("centerContext")
         if "centerContext" in body:
-            if (not isinstance(center_context, dict) or set(center_context) != {"pendingActions", "reply"}
+            if (not isinstance(center_context, dict) or set(center_context) - {"pendingActions", "reply", "replyTitle"}
+                    or not {"pendingActions", "reply"}.issubset(center_context)
                     or not isinstance(center_context["reply"], str) or len(center_context["reply"]) > 8000
+                    or ("replyTitle" in center_context and (not isinstance(center_context["replyTitle"], str) or len(center_context["replyTitle"]) > 160))
                     or not isinstance(center_context["pendingActions"], list) or len(center_context["pendingActions"]) > 50
                     or any(not nonempty(value) or len(value) > 8000 for value in center_context["pendingActions"])):
                 raise DemoError("INVALID_CENTER_CONTEXT", "센터 초안의 회신·남은 조치 형식을 확인해 주세요.", 422)
@@ -168,7 +170,12 @@ class CaseService:
             text = (case.get("analysis") or {}).get("replyDraft")
             if not nonempty(text):
                 raise DemoError("REPLAY_NOT_AVAILABLE", "저장된 회신 초안이 없습니다. 실제 AI 생성을 선택해 주세요.", 409)
-            result = {"replyDraft": text, "mode": "replay", "requestId": "replay-" + uuid.uuid4().hex}
+            subject = (case.get("intake") or {}).get("subject") or case.get("title") or "접수 문의"
+            subject = " ".join(str(subject).split())
+            for assertion in ("완료", "확정", "정상 출고", "정상출고", "보상 승인", "보상승인"):
+                subject = subject.replace(assertion, "")
+            title = (subject.strip() or "접수 문의")[:94] + " 확인 안내"
+            result = {"replyTitle": title, "replyDraft": text, "mode": "replay", "requestId": "replay-" + uuid.uuid4().hex}
         else:
             result = self.analyzer.reply_draft(copy.deepcopy(case), center_context=copy.deepcopy(center_context))
         current = self.repo.get(case_id)
@@ -189,7 +196,7 @@ class CaseService:
         expected_revision = body["expectedRevision"]
         if isinstance(expected_revision, bool) or not isinstance(expected_revision, int) or expected_revision < 0:
             raise DemoError("INVALID_REVISION", "접수 버전은 0 이상의 정수여야 합니다.", 422)
-        if role != "center" and ({"reply", "pendingActions"} & set(body)):
+        if role != "center" and ({"reply", "replyTitle", "pendingActions"} & set(body)):
             raise DemoError("CENTER_ROLE_REQUIRED", "회신·조치 등록은 센터 역할에서만 가능합니다.", 403)
         def mutate(case):
             # The repository invokes this transform inside its read-modify-write lock.
@@ -241,6 +248,10 @@ class CaseService:
                 if not isinstance(body["reviewConfirmed"], bool):
                     raise DemoError("INVALID_CONFIRMATION", "검토 확인 값이 올바르지 않습니다.", 422)
                 case["reviewConfirmed"] = body["reviewConfirmed"]
+            if "replyTitle" in body:
+                if not nonempty(body["replyTitle"]) or len(body["replyTitle"]) > 160:
+                    raise DemoError("INVALID_REPLY_TITLE", "회신 제목을 1~160자로 입력해 주세요.", 422)
+                case["replyTitle"] = body["replyTitle"].strip()
             if "reply" in body:
                 if not nonempty(body["reply"]):
                     raise DemoError("EMPTY_REPLY", "센터 회신을 입력해 주세요.", 422)
