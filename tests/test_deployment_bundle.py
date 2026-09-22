@@ -502,6 +502,7 @@ def test_real_runtime_imports_and_asgi_work_without_original_repository(source_r
     environment = {key: value for key, value in os.environ.items()
                    if key.upper() in {"PATH", "SYSTEMROOT", "WINDIR", "TEMP", "TMP", "COMSPEC", "PATHEXT"}}
     environment.update({"ONEFLOW_ACCESS_USER": "bundle-reviewer",
+                        "ONEFLOW_REQUIRE_LOGIN": "1",
                         "ONEFLOW_ACCESS_PASSWORD": "R8!vB4@qC2#nM9$sL1%wZ6&kJ0",
                         "ONEFLOW_STATIC_DIR": "deliberately-ignored-external-path"})
     code = r'''
