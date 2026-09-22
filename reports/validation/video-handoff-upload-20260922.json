@@ -1,0 +1,70 @@
+{
+  "releaseUrl": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/tag/video-edit-handoff-20260922",
+  "published": true,
+  "prerelease": true,
+  "expectedAssets": 8,
+  "verified": [
+    {
+      "name": "video-edit-sources.zip",
+      "bytes": 268020461,
+      "sha256": "cc13cfa7cd829022bdb7674906f48fbcd0700a6fd4112129b6bd9ce4e5d2c7e0",
+      "serverDigest": "sha256:cc13cfa7cd829022bdb7674906f48fbcd0700a6fd4112129b6bd9ce4e5d2c7e0",
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/download/video-edit-handoff-20260922/video-edit-sources.zip"
+    },
+    {
+      "name": "blender-lossless-frames.zip",
+      "bytes": 687125669,
+      "sha256": "92cd044f336a38830d645324da89ceabf9688bbb8e775b09a113284916dbca34",
+      "serverDigest": "sha256:92cd044f336a38830d645324da89ceabf9688bbb8e775b09a113284916dbca34",
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/download/video-edit-handoff-20260922/blender-lossless-frames.zip"
+    },
+    {
+      "name": "ai-go-demo-audience-candidate.mp4",
+      "bytes": 25188614,
+      "sha256": "626b47e5f094066ca520830034943d7eb10f50e6aca5256cad416df3a53289fc",
+      "serverDigest": "sha256:626b47e5f094066ca520830034943d7eb10f50e6aca5256cad416df3a53289fc",
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/download/video-edit-handoff-20260922/ai-go-demo-audience-candidate.mp4"
+    },
+    {
+      "name": "ai-go-demo-dynamic-legacy-fast.mp4",
+      "bytes": 17944129,
+      "sha256": "14acd9322eb0ece5359b0f904bfdc3a816729642de1567b52e475d7208ca16b5",
+      "serverDigest": "sha256:14acd9322eb0ece5359b0f904bfdc3a816729642de1567b52e475d7208ca16b5",
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/download/video-edit-handoff-20260922/ai-go-demo-dynamic-legacy-fast.mp4"
+    },
+    {
+      "name": "ai-go-demo-legacy-static.mp4",
+      "bytes": 13306892,
+      "sha256": "d4e175a1d54c74ebb432f785bafb60b2de2ca9fdfff97cf9003e13b707e22381",
+      "serverDigest": "sha256:d4e175a1d54c74ebb432f785bafb60b2de2ca9fdfff97cf9003e13b707e22381",
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/download/video-edit-handoff-20260922/ai-go-demo-legacy-static.mp4"
+    },
+    {
+      "name": "sorter-demo.mp4",
+      "bytes": 991249,
+      "sha256": "4a640c20e209bf5a43e26c3f1c5afeb41f4157af9017f04b4c3812b1990dca51",
+      "serverDigest": "sha256:4a640c20e209bf5a43e26c3f1c5afeb41f4157af9017f04b4c3812b1990dca51",
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/download/video-edit-handoff-20260922/sorter-demo.mp4"
+    },
+    {
+      "name": "release-assets.json",
+      "bytes": 1558,
+      "sha256": "97c3f58e98708b72275db29457477df312c4780a4d87e67a5e7da90fa2281bec",
+      "serverDigest": "sha256:97c3f58e98708b72275db29457477df312c4780a4d87e67a5e7da90fa2281bec",
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/download/video-edit-handoff-20260922/release-assets.json"
+    },
+    {
+      "name": "CLAUDE_CODE_VIDEO_HANDOFF.md",
+      "bytes": 9358,
+      "sha256": "03a239f5328cafed4a313506aa6da787af47a42b071d8f14a7e61ca563dd5b2c",
+      "serverDigest": "sha256:03a239f5328cafed4a313506aa6da787af47a42b071d8f14a7e61ca563dd5b2c",
+      "url": "https://github.com/cjj0202-glitch/happycall-ralphthon/releases/download/video-edit-handoff-20260922/CLAUDE_CODE_VIDEO_HANDOFF.md"
+    }
+  ],
+  "pending": [],
+  "complete": true,
+  "verifiedAt": "2026-09-22T02:22:11.125906+00:00",
+  "mainCommitBeforeReport": "ce4fd8a86a10d15d6a2671d63c82f8980b7351f1",
+  "archiveCommit": "a1f85801709ca0d8bcf7451f06fa8a5ac2fa67c8",
+  "scope": "Upload integrity only; video candidate still needs the edits listed in docs/CLAUDE_CODE_VIDEO_HANDOFF.md."
+}

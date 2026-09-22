@@ -154,7 +154,7 @@ function Scene({ caseData, onBack, onLinkEvidence, backLabel = '상담으로 돌
     <section className={styles.comparison} aria-label="꺼낸 기록과 내보낸 기록 비교">
       <div><p className={styles.eyebrow}>센터가 꺼낸 상품</p><h2>{scan(safePicking)}</h2><p>상자 {label(safePicking.toteId)}</p><small>{model.pickingVisible ? date(picking.pickedAt) : '기준시각 안에서 꺼낸 시각을 확인할 수 없습니다'}</small></div>
       <div><p className={styles.eyebrow}>센터가 내보낸 상품</p><h2>{scan(safeShipping)}</h2><p>상자 {label(safeShipping.toteId)}</p><small>{model.shippingVisible ? date(shipping.time) : '기준시각 안에서 내보낸 시각을 확인할 수 없습니다'}</small></div>
-      <div className={styles.finding}><strong>{model.difference ? '두 기록이 서로 다릅니다' : caseData.type === 'missing' ? '점포는 못 받았다고 합니다' : '아직 확인할 것이 남았습니다'}</strong><p>{caseData.type === 'missing' ? '센터에 내보낸 기록이 있어도 점포에 실제로 도착했는지는 따로 확인해야 합니다.' : '낱개와 박스는 서로 바꿔 계산하지 않습니다. 어느 단계에서 달라졌는지는 아직 모릅니다.'}</p><b>원인·담당자 미확인</b></div>
+      <div className={styles.finding}><strong>{model.difference ? '두 기록이 서로 다릅니다' : caseData.type === 'missing' ? '점포는 못 받았다고 합니다' : '아직 확인할 것이 남았습니다'}</strong><p>{caseData.type === 'missing' ? '센터에 내보낸 기록이 있어도 점포에 실제로 도착했는지는 따로 확인해야 합니다.' : '낱개와 박스는 서로 바꿔 계산하지 않습니다. 어느 단계에서 달라졌는지는 아직 모릅니다.'}</p><b>실제 발생 지점·담당자 미확인</b></div>
     </section>
 
     <section className={styles.panel} aria-labelledby="wms-scene-title">

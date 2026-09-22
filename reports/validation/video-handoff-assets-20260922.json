@@ -1,0 +1,56 @@
+{
+  "tag": "video-edit-handoff-20260922",
+  "status": "EDITING_HANDOFF_NOT_FINAL",
+  "assets": [
+    {
+      "name": "video-edit-sources.zip",
+      "size": 268020461,
+      "sha256": "cc13cfa7cd829022bdb7674906f48fbcd0700a6fd4112129b6bd9ce4e5d2c7e0",
+      "fileCount": 171,
+      "expandedBytes": 311011742,
+      "extensions": {
+        ".webm": 10,
+        ".json": 40,
+        ".mp4": 8,
+        ".png": 48,
+        ".log": 16,
+        ".ass": 7,
+        ".srt": 7,
+        ".py": 11,
+        ".wav": 20,
+        ".txt": 3,
+        ".blend": 1
+      }
+    },
+    {
+      "name": "blender-lossless-frames.zip",
+      "size": 687125669,
+      "sha256": "92cd044f336a38830d645324da89ceabf9688bbb8e775b09a113284916dbca34",
+      "fileCount": 288,
+      "expandedBytes": 651739630,
+      "extensions": {
+        ".png": 288
+      }
+    },
+    {
+      "name": "ai-go-demo-audience-candidate.mp4",
+      "size": 25188614,
+      "sha256": "626b47e5f094066ca520830034943d7eb10f50e6aca5256cad416df3a53289fc"
+    },
+    {
+      "name": "ai-go-demo-dynamic-legacy-fast.mp4",
+      "size": 17944129,
+      "sha256": "14acd9322eb0ece5359b0f904bfdc3a816729642de1567b52e475d7208ca16b5"
+    },
+    {
+      "name": "ai-go-demo-legacy-static.mp4",
+      "size": 13306892,
+      "sha256": "d4e175a1d54c74ebb432f785bafb60b2de2ca9fdfff97cf9003e13b707e22381"
+    },
+    {
+      "name": "sorter-demo.mp4",
+      "size": 991249,
+      "sha256": "4a640c20e209bf5a43e26c3f1c5afeb41f4157af9017f04b4c3812b1990dca51"
+    }
+  ]
+}
