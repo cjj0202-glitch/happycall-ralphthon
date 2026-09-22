@@ -20,13 +20,16 @@
   --text-on-fill: #FFFFFF;
   --text-disabled: #A39E98;
 
-  /* 행동을 칠하는 유일한 색 (흰 배경 대비 4.57) */
+  /* 행동을 «칠하는» 유일한 색. 흰 배경 대비 4.57 이라 채움에는 그대로 쓴다. */
   --accent: #0075DE;
   --accent-soft: #EBF4FC;
   --action-fill: #0075DE;
   --action-fill-hover: #0075DE;
   --action-fill-pressed: #005BAB;
-  --action-text: #0075DE;
+  /* 글자로 쓸 때만 킷의 pressed blue 로 내린다. #0075DE 는 tint(#EBF4FC) 위에서 4.1 이고,
+     tint 를 밝혀서는 해결되지 않는다 — 이 파랑이 4.5 를 넘는 배경은 사실상 순백뿐이다.
+     #005BAB 는 tint 위 6.1, 흰 배경 6.8. */
+  --action-text: #005BAB;
   --action-tint: #EBF4FC;
 
   --focus-ring: #0075DE;
@@ -43,7 +46,7 @@
   --status-warning-text: #793400;
   --status-warning-tint: #FCEEE6;
   --status-info-fill: #0075DE;
-  --status-info-text: #0075DE;
+  --status-info-text: #005BAB;
   --status-info-tint: #EBF4FC;
   --status-ofc-fill: #D6B6F6;
   --status-ofc-text: #391C57;
@@ -51,6 +54,12 @@
 
   --direction-up: #0075DE;
   --direction-down: #B3271B;
+  /* 지금 화면에서 쓰지 않지만, 덮지 않으면 tokens.css 의 구 GS 값이 남는다 */
+  --direction-flat: #615D59;
+  --direction-finance-up: #B3271B;
+  --direction-finance-down: #005BAB;
+  --direction-cost-inverted-up: #B3271B;
+  --direction-cost-inverted-down: #0E6B22;
 
   --chart-s1: #0075DE;
   --chart-s2: #DD5B00;

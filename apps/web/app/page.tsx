@@ -46,9 +46,23 @@ export default function Home() {
   const logistics = view === 'wms' || view === 'tms';
   // Evidence remains anchored to its case even when a refresh moves it out of the work queue.
   const active = logistics || role === 'owner' ? cases.find(c => c.id === selected) : visibleCases.find(c => c.id === selected) || visibleCases[0];
+  // Picking a stage moves the selection with it. The owner reads `active` from the whole
+  // list rather than the queue, so 답변 완료 used to sit beside a still-open 접수 대기 case.
+  const changeQueue = (next: QueueId) => {
+    setNewIntake(false); setQueue(next); setView(roleView[role]);
+    const listed = filterCases(cases, role, next, query);
+    if (!listed.some(item => item.id === selected)) setSelected(listed[0]?.id || '');
+  };
+  // An empty first screen reads as "this role has nothing". Open on the role's own queue
+  // only while it holds something; the fixture ships no handed_off case, so the center tab
+  // would otherwise always greet a judge with an empty rail.
+  const firstQueue = (nextRole: WorkRole): QueueId => {
+    const preferred: QueueId = nextRole === 'owner' ? 'all' : defaultQueue(nextRole);
+    return cases.some(item => inQueue(item, nextRole, preferred)) ? preferred : 'all';
+  };
   const changeRole = (nextRole: WorkRole) => {
     // 경영주는 자기 접수 전부를 보는 화면이라 처리 단계로 걸러 두지 않는다.
-    setNewIntake(false); setRole(nextRole); setView(roleView[nextRole]); setQueue(nextRole === 'owner' ? 'all' : defaultQueue(nextRole)); setQuery(''); setToast('');
+    setNewIntake(false); setRole(nextRole); setView(roleView[nextRole]); setQueue(firstQueue(nextRole)); setQuery(''); setToast('');
   };
   const navigate = (nextView: View) => {
     setNewIntake(false);
@@ -133,7 +147,7 @@ export default function Home() {
         <button onClick={() => void reload()} disabled={loading}>{loading ? '최신 내용 확인 중…' : '목록 새로고침'}</button>
       </div>
       {loading && !cases.length ? <div className="empty-state" role="status"><div className="spinner"/><h2>접수 건을 불러오고 있습니다</h2><p>서버의 최신 처리 상태를 확인합니다.</p></div> : <div className={`console${logistics ? ' console-wide' : ''}`}>
-        {!logistics && <QueueRail role={role} cases={cases} visibleCases={visibleCases} queue={queue} onQueue={id => { setNewIntake(false); setQueue(id); setView(roleView[role]); }} query={query} onQuery={setQuery} sort={queueSort} onSort={setQueueSort} activeId={newIntake ? '' : active?.id} onSelect={selectCase} onNewIntake={role === 'counselor' ? () => { setNewIntake(true); setToast(''); } : undefined}/>}
+        {!logistics && <QueueRail role={role} cases={cases} visibleCases={visibleCases} queue={queue} onQueue={changeQueue} query={query} onQuery={setQuery} sort={queueSort} onSort={setQueueSort} activeId={newIntake ? '' : active?.id} onSelect={selectCase} onNewIntake={role === 'counselor' ? () => { setNewIntake(true); setToast(''); } : undefined}/>}
         {newIntake && role === 'counselor'
           ? <Owner counselorEntry cases={cases} selected={selected} onSelect={setSelected} onCreated={created => { update(created); setSelected(created.id); setQueue('attention'); setQuery(''); setNewIntake(false); setToast(`${created.id} 접수 등록 완료 · AI 정리를 진행해 주세요.`); }} onToast={setToast} onDesk={() => setNewIntake(false)} onCancel={() => setNewIntake(false)} fallback={fallback}/>
           : !active ? <section id="selected-work" tabIndex={-1} className="console-pane console-thread" aria-label="선택한 접수 작업 영역"><div className="empty-state"><h2>{logistics ? '선택한 접수를 찾을 수 없습니다' : query.trim() ? '검색 결과가 없습니다' : '이 단계에 처리할 접수가 없습니다'}</h2><p>{logistics ? `접수 ${selected}가 최신 목록에 없습니다. 다른 접수의 근거로 전환하지 않았습니다.` : query.trim() ? '점포명이나 접수번호를 다시 확인해 주세요.' : '왼쪽에서 다른 단계를 선택하거나 최신 접수를 불러올 수 있습니다.'}</p><div className="button-row">{logistics ? <button onClick={returnToWork}>접수 목록으로 돌아가기</button> : <>{query && <button onClick={() => setQuery('')}>검색 지우기</button>}<button onClick={() => { setQueue('all'); setQuery(''); }}>전체 접수 보기</button></>}<button onClick={() => void reload()} disabled={loading}>목록 새로고침</button></div></div></section>
@@ -624,6 +638,12 @@ function Center({ caseData: c, role, onSave, onToast, onView, onUpdate, fallback
   const setBusy = (value: boolean) => draft.set('operation', value);
   const [recovery, setRecovery] = useState<CaseData | null>(null);
   const stale = formRevision !== c.revision;
+  // The center draft lives in a module-level store, so it keeps the revision it first saw.
+  // A counselor who hands the case over afterwards would turn an untouched draft into a
+  // false conflict and lock both reply buttons. Nothing was typed, so follow the server.
+  useEffect(() => {
+    if (formRevision !== c.revision && !draft.dirty && !recovery && !uncertain) draft.replace(initial(c), true);
+  }, [c.revision]); // eslint-disable-line react-hooks/exhaustive-deps
   const received = ['handed_off', 'in_progress', 'closed'].includes(c.status || '');
   const blocked = fallback || !received || c.status === 'closed' || busy || stale || !!uncertain || !!recovery;
   const [generatedReply, setGeneratedReply] = useState('');
