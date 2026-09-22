@@ -26,7 +26,10 @@ export function inQueue(item: CaseData, role: WorkRole, queue: QueueId): boolean
   if (queue === 'all') return true;
   const status = item.status;
   if (queue === 'attention') return status === 'draft' || status === 'review';
-  if (queue === 'handed_off' && role === 'counselor') return status === 'handed_off' || status === 'in_progress';
+  // Only the center splits handed_off from in_progress. The counselor and the owner
+  // share one bucket, and queueForCase routes both statuses into it, so the filter
+  // has to accept both or that bucket counts 0 while holding the selected case.
+  if (queue === 'handed_off' && role !== 'center') return status === 'handed_off' || status === 'in_progress';
   return status === queue;
 }
 export function filterCases(cases: CaseData[], role: WorkRole, queue: QueueId, query: string): CaseData[] {

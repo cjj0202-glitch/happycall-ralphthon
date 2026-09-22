@@ -271,7 +271,9 @@ function Desk({ caseData: c, role, mode, onMode, fallback, playbackRate, onPlayb
     setBusy('analyze'); setAnalysisFailure(''); setAnalysisFailureCode('');
     try {
       const data = await request<AnalyzeResult>(`/api/cases/${c.id}/analyze`, 'POST', { mode });
-      if (!mounted.current) return;
+      // The draft store and the case list live outside this component. A counselor who
+      // opens a logistics record while the analysis runs unmounts the desk, so guarding
+      // on mount here dropped a result the server had already saved.
       draft.replace({ analysis: data.analysis, transcript: data.transcript || [], resultMode: data.mode, form: normalizeIntake(data.analysis.fields), formRevision: data.revision, department: data.analysis.department?.id || '', edited: false, confirmed: false, question: '' }, true);
       onUpdate({ ...c, revision: data.revision, status: 'review', reviewConfirmed: false, intake: normalizeIntake(data.analysis.fields), departmentId: data.analysis.department?.id || '', analysis: data.analysis, transcript: data.transcript, analysisMode: data.mode });
       onToast(data.mode === 'demo-live' ? '실제 AI 전사·정제가 완료되었습니다. 접수 정보를 확인해 주세요.' : '저장된 분석 결과를 불러왔습니다. 실제 AI 호출은 하지 않았습니다.');
