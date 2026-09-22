@@ -8,6 +8,8 @@
 2. 영상·음성·자막·타임라인·Blender 원본: [영상 편집 Release](https://github.com/cjj0202-glitch/happycall-ralphthon/releases/tag/video-edit-handoff-20260922).
 3. 환경 준비·파일 목록·수정 시각·검증 기준: [상세 인계서](CLAUDE_CODE_VIDEO_HANDOFF.md). `scripts/prepare_video_edit.py`로 파일 SHA256 검증과 현재 PC 경로 변환을 수행합니다.
 
+Release의 인계 자산 8개 모두 서버의 파일 크기·SHA256이 로컬 원본과 일치했습니다. [업로드 검증 기록](../reports/validation/video-handoff-upload-20260922.json)의 파일별 다운로드 URL과 해시로 확인할 수 있습니다. 업로드 무결성 통과가 영상 최종 품질 통과를 뜻하지는 않습니다.
+
 최신 후보를 먼저 재생하고, 상세 인계서의 긴 무음·3D 초반 잘림·읽기 속도·클릭 및 스크롤·자막 항목을 수정하세요. 통화/텍스트 접수 → AI 정리 및 원문 대조 → 부서 이관 → 센터 확인·회신 → 경영주 수신 흐름을 보여 줍니다. Blender는 WMS 상품·수량·단위 대조와 연결하며 실제 CCTV나 귀책 판정으로 표현하지 않습니다.
 
 기존 CLOVA A~F 여섯 음원은 패키지에 있습니다. 보충 G~J는 원격 프로젝트에 생성되어 있으나 인계 시 로컬 WAV를 받지 못했습니다. Downloads와 상세 인계서의 프로젝트를 확인하고, 수령 후 발화 경계·싱크를 검증하세요. 보충 음성이 이미 들어 있다고 가정하지 마세요.
