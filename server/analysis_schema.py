@@ -50,8 +50,8 @@ MODEL_ANALYSIS_SCHEMA = obj({
         "request": {**NULLABLE, "description": "경영주가 발화에서 요청한 확인·안내 내용과 그 요청에 필요한 최종 정정·기한·조건·미해결 안내. 다른 필드로 대체하지 않고 실제 발화에서 새로 추출한다. 처리완료·귀책·센터 회신이나 원문에 없는 조건을 창작하지 않는다. 요청이 미확인이면 null."},
     }),
     "draftContext": obj({
-        "subjectQuote": {**NULLABLE, "description": "문의 대상·문제·필수 조건을 뒷받침하는 transcript의 연속된 한 구간을 그대로 인용한다. 점포 소개만 선택하거나 fields.subject를 복사하거나 새로운 문장을 만들지 않는다. 짧게 만들기 위해 부정·정정·시점·귀속 불확실성을 자르지 않는다. 관련 원문이 없으면 null."},
-        "requestQuote": {**NULLABLE, "description": "회신 초안에서 다룰 고객 요청·불만·긴급성을 담은 transcript 한 구간의 짧은 원문 그대로. 욕설은 서버가 초안에서만 순화하므로 여기서는 원문을 변형하지 않는다. 관련 원문이 없으면 null."},
+        "subjectQuote": {**NULLABLE, "description": "문의 대상·문제·필수 조건을 뒷받침하는 원문을 그대로 인용한다. 같은 비어 있지 않은 화자의 인접 transcript 구간만 경계 한 공백으로 이을 수 있다. 다른 화자나 빈 구간을 건너뛰거나 내부 글자·공백을 바꾸지 않는다. 점포 소개만 선택하거나 fields.subject를 복사하거나 새로운 문장을 만들지 않는다. 짧게 만들기 위해 부정·정정·시점·귀속 불확실성을 자르지 않는다. 관련 원문이 없으면 null."},
+        "requestQuotes": {"type": "array", "maxItems": 8, "items": STRING, "description": "현재 고객 요청을 각각 자족적인 원문 인용으로 추출한다. 최대8개, 없으면 빈 배열. 단위 정정·잘못 온 상품 처리·주문 상품 처리처럼 독립 요청을 빠뜨리지 않는다. 인용마다 같은 비어 있지 않은 화자의 인접 transcript 구간만 사용할 수 있고 구간 경계만 한 공백으로 잇는다. 다른 화자나 빈 구간을 건너뛰거나 내부 글자·공백을 바꾸지 않는다. 정정 대상·조건·기한을 자르지 않고 전사 순서로 중복 없이 반환한다. 욕설 순화는 서버가 담당한다."},
     }),
     "orderedClaim": claim_schema("주문"),
     "receivedClaim": claim_schema("실제 수령"),

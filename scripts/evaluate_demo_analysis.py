@@ -296,7 +296,7 @@ def _safe_error(exc: Exception) -> dict:
 
 def _code_hashes() -> dict:
     return {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in (
-        "scripts/evaluate_demo_analysis.py", "server/live.py", "server/claim_grounding.py", "server/request_grounding.py", "server/analysis_schema.py",
+        "scripts/evaluate_demo_analysis.py", "server/live.py", "server/claim_grounding.py", "server/request_grounding.py", "server/transcript_provenance.py", "server/analysis_schema.py",
         "server/budget.py", "server/runtime_config.py")}
 
 

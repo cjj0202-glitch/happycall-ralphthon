@@ -206,7 +206,7 @@ class ClaimProjectionTests(unittest.TestCase):
                  "source": "미확인", "status": "unknown"},
             ]}
         self.model = {"summary": "MODEL_ALIAS_TRAP", "fields": {"subject": "휴지 오출고", "request": "확인"},
-            "draftContext": {"subjectQuote": "휴지 한 박스가 왔어요.", "requestQuote": None},
+            "draftContext": {"subjectQuote": "휴지 한 박스가 왔어요.", "requestQuotes": []},
             "orderedClaim": {"product": "비스킷", "quantity": 18, "unit": "EA", "evidenceQuote": "비스킷 18개를 주문했습니다."},
             "receivedClaim": {"product": "휴지", "quantity": 1, "unit": "BOX", "evidenceQuote": "휴지 한 박스가 왔어요."},
             "storeClaim": {"name": "가상새봄점", "evidenceQuote": "가상새봄점입니다."},

@@ -130,7 +130,7 @@ class AnalysisRepairTests(unittest.TestCase):
                 result = self.project()
                 self.assertIn("주문 진술: 달모래잼 7 EA", result["summary"])
                 self.assertEqual((result["fields"]["quantity"], result["fields"]["unit"]), (2, "BOX"))
-                self.assertEqual(result["fields"]["subject"], "달모래잼 주문 / 구름바다칫솔 수령")
+                self.assertEqual(result["fields"]["subject"], "달모래잼 주문 / 구름바다칫솔 수령 · 구름바다칫솔 규격 차이")
 
     def test_affirmative_nominal_order_statement_is_supported(self):
         quote = "주문한 달모래잼은 7개입니다."
@@ -509,7 +509,7 @@ class AnalysisRepairTests(unittest.TestCase):
             (patch("server.live._review_reply_draft", side_effect=lambda analysis, received, context:
                    str(analysis["fields"]) + str(analysis["unknowns"])),
              "test_unfounded_fields_unknowns_and_reply_never_enter_draft"),
-            (patch("server.live._quoted", return_value=True),
+            (patch("server.live.quote_position", return_value=(0, 0)),
              "test_forged_draft_quotes_are_rejected_even_when_fields_agree"),
             (patch("server.live._clean_draft_quote", side_effect=lambda quote: (quote, False)),
              "test_profanity_is_softened_without_losing_urgency_complaint_or_request"),

@@ -1,0 +1,71 @@
+{
+  "purpose": "Archive only; not integrated or newly validated; compare against latest main before use. Original checkout preserved unchanged.",
+  "baseCommit": "c20d411c8b5d430897db6d00fb96bee079a68a6d",
+  "files": [
+    {
+      "path": "scripts/build_deployment_bundle.py",
+      "bytes": 22634,
+      "sha256": "02124cf183dbe9c07b0c3fb8fe6072609690ebbcf3294ad2598015a4c8202f34"
+    },
+    {
+      "path": "scripts/evaluate_demo_analysis.py",
+      "bytes": 31035,
+      "sha256": "f4f5e2ce6d521f25874f99ff0efadd0fe99418e4459fe3b23af1c32bc2827984"
+    },
+    {
+      "path": "server/analysis_schema.py",
+      "bytes": 6646,
+      "sha256": "f9e5792e9e406b826b7acab3e076ebca1d86e248b7c8d5ec7d8c64805d1abb20"
+    },
+    {
+      "path": "server/live.py",
+      "bytes": 33795,
+      "sha256": "4e531f940ff243d30a8c63310123193ffcde849095c66862126f1d2613cba9bd"
+    },
+    {
+      "path": "server/request_grounding.py",
+      "bytes": 8893,
+      "sha256": "02f387652451d0e25dec3b9b1e5c00002fb974bf87b77d1a96108357abaf5765"
+    },
+    {
+      "path": "tests/test_analysis_repair.py",
+      "bytes": 35365,
+      "sha256": "2b808f28deb9424d0a63ef9fb997ae33c41854c9c23ceee676bcd99e444b278d"
+    },
+    {
+      "path": "tests/test_analysis_semantics.py",
+      "bytes": 21805,
+      "sha256": "8c4fb2eab14e501d53d941bba7a817c9e88cf37c0253c9ee71261d586fac5862"
+    },
+    {
+      "path": "tests/test_evaluation_dataset.py",
+      "bytes": 25620,
+      "sha256": "43535ae1d68ad1fc5157da64fc298ffd8cdc41ab1a52aa417d3e6d11383593a1"
+    },
+    {
+      "path": "tests/test_request_grounding.py",
+      "bytes": 23673,
+      "sha256": "170c26280fc6b7ce3bb7cbd565cf96fb33b589964e9c6e66ec1534f2760d7cbd"
+    },
+    {
+      "path": "reports/pc4-d1-main-intake.md",
+      "bytes": 11238,
+      "sha256": "f0a0a19f42646ce617b5e976b98b3c68222fffcfc4a37090abfa765fff5cbc18"
+    },
+    {
+      "path": "server/transcript_provenance.py",
+      "bytes": 1468,
+      "sha256": "4e72f5984a1dff2ac6cb490b88e8d72169febced7425511da114f625dc03500d"
+    },
+    {
+      "path": "tests/test_multi_request_adversarial.py",
+      "bytes": 14996,
+      "sha256": "0c5e2e098c2caeb389d6dfd0897696aa6768055f2072c6eb3862f8fb5168e695"
+    },
+    {
+      "path": "tests/test_multi_request_provenance.py",
+      "bytes": 5487,
+      "sha256": "5ad7d9899d3d78372946b16938e0eac0ddee06845933aabda9f031150bb36f20"
+    }
+  ]
+}

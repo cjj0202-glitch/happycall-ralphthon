@@ -232,7 +232,7 @@ class RequestGroundingTests(unittest.TestCase):
              'test_information_with_particle_in_compound_cancellation_is_not_separate'),
             ('re.fullmatch(nominal_operation, other.strip())',
              're.search(nominal_operation, other.strip())',
-             'test_reported_nominal_operation_does_not_replace_nearest_current_request'),
+             'test_nominal_operation_must_fill_clause'),
         )
         for before, after, test_name in mutations:
             with self.subTest(mutation=before):
@@ -242,6 +242,11 @@ class RequestGroundingTests(unittest.TestCase):
                 fresh = RequestGroundingTests(test_name)
                 with patch('server.request_grounding._separate_inquiry', namespace['_separate_inquiry']), self.assertRaises(AssertionError):
                     getattr(fresh, test_name)()
+
+    def test_nominal_operation_must_fill_clause(self):
+        from server.request_grounding import _separate_inquiry
+        self.assertTrue(_separate_inquiry('배송 시각 안내 요청입니다.', '배송 상품 반송 방법 안내 요청입니다.'))
+        self.assertFalse(_separate_inquiry('배송 시각 안내 요청입니다.', '점포 업무 외 배송 상품 반송 방법 안내 요청입니다.'))
 
     def test_shared_business_word_does_not_move_pronoun_to_earlier_request(self):
         first = '배송 시각을 알려 주세요.'

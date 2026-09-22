@@ -89,9 +89,20 @@ def _same_target(reference, other):
 
 def _withdrawn(reference, following):
     nearest = True
-    for sentence in re.split(r'[.!?\n]+', following):
+    for match in re.finditer(r'[^.!?\n]+(?:[.!?\n]|$)', following):
+        sentence = match.group()
+        tail = following[match.end():].lstrip()
+        quoted_tail = bool(tail) and (
+            (tail[0] in ('"', "'") and sentence.count(tail[0]) % 2 == 1)
+            or any(tail.startswith(closing) and sentence.count(opening) > sentence.count(closing)
+                   for opening, closing in (('“', '”'), ('‘', '’'), ('「', '」'), ('『', '』'))))
+        if quoted_tail or tail.startswith(('라고', '라는')):
+            # A full stop inside quoted speech does not end its attribution.
+            sentence += re.split(r'[.!?\n]', tail, maxsplit=1)[0]
         cancellation = CANCELLATION.search(sentence)
         if cancellation:
+            if NON_CURRENT.search(sentence) or re.search(r'(?:라고|라는).*?(?:뜻|의미).*?(?:아니|아닙)', sentence):
+                continue
             named = sentence[:cancellation.start()]
             pronoun = re.match(r'\s*(?:그|이|해당|방금)\s*요청', named)
             if (pronoun and nearest) or _same_target(reference, named):
@@ -113,7 +124,7 @@ def current_request_quote(quote, transcript):
         return None
     quote = quote.strip()
     request = _meaningful_request(quote)
-    if not request or NON_CURRENT.search(quote):
+    if not request or NON_CURRENT.search(quote) or CANCELLATION.search(quote):
         return None
     contexts = []
     for index, segment in enumerate(transcript):
@@ -130,9 +141,10 @@ def current_request_quote(quote, transcript):
             contexts.append(text[left:right])
             following = text[start + request.end():]
             for later in transcript[index + 1:]:
-                if not segment.get('speaker') or later.get('speaker') != segment['speaker']:
+                if not segment.get('speaker'):
                     break
-                following += '\n' + later.get('text', '')
+                if later.get('speaker') == segment['speaker']:
+                    following += '\n' + later.get('text', '')
             if _withdrawn(quote, following):
                 return None
             start = text.find(quote, end)
