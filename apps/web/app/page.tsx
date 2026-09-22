@@ -288,8 +288,13 @@ function Desk({ caseData: c, role, mode, onMode, fallback, playbackRate, onPlayb
       // The draft store and the case list live outside this component. A counselor who
       // opens a logistics record while the analysis runs unmounts the desk, so guarding
       // on mount here dropped a result the server had already saved.
-      draft.replace({ analysis: data.analysis, transcript: data.transcript || [], resultMode: data.mode, form: normalizeIntake(data.analysis.fields), formRevision: data.revision, department: data.analysis.department?.id || '', edited: false, confirmed: false, question: '' }, true);
-      onUpdate({ ...c, revision: data.revision, status: 'review', reviewConfirmed: false, intake: normalizeIntake(data.analysis.fields), departmentId: data.analysis.department?.id || '', analysis: data.analysis, transcript: data.transcript, analysisMode: data.mode });
+      // The AI reads the customer's words, which rarely repeat the store code the intake
+      // already carries. Letting an empty field win erased a known store and then blocked
+      // the handoff, which requires one. Keep what the case already knows.
+      const fields = normalizeIntake(data.analysis.fields);
+      if (!fields.storeId) fields.storeId = c.store?.id || '';
+      draft.replace({ analysis: data.analysis, transcript: data.transcript || [], resultMode: data.mode, form: fields, formRevision: data.revision, department: data.analysis.department?.id || '', edited: false, confirmed: false, question: '' }, true);
+      onUpdate({ ...c, revision: data.revision, status: 'review', reviewConfirmed: false, intake: fields, departmentId: data.analysis.department?.id || '', analysis: data.analysis, transcript: data.transcript, analysisMode: data.mode });
       onToast(data.mode === 'demo-live' ? '실제 AI 전사·정제가 완료되었습니다. 접수 정보를 확인해 주세요.' : '저장된 분석 결과를 불러왔습니다. 실제 AI 호출은 하지 않았습니다.');
     } catch (e) { if (mounted.current) { setAnalysisFailure(errorText(e)); setAnalysisFailureCode(e instanceof ApiError && e.code ? e.code : ''); } } finally { analysisInFlight.current = false; setBusy(''); }
   };
