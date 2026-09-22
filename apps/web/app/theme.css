@@ -1,0 +1,83 @@
+/* AI-GO 콘솔 테마 — Notion 디자인 시스템(DESIGN-notion.md) 팔레트.
+   tokens.css 는 생성물이라 수정하지 않고 여기서 의미 토큰만 덮어쓴다.
+   Notion 규칙: 캔버스는 warm paper, 카드는 흰색+hairline, 색은 파랑 하나만 행동에 쓴다.
+   상태색 램프는 원본에 없어 sticker 팔레트에서 파생했고, 본문에 쓰는 값은 흰 배경 대비 4.5 이상만 둔다. */
+:root {
+  --surface-canvas: #FFFFFF;
+  --surface-raised: #FFFFFF;
+  --surface-page: #F6F5F4;
+  --surface-sunken: #F6F5F4;
+  --surface-zebra: #FFFFFF;
+  --surface-hover: rgba(0, 0, 0, 0.04);
+  --surface-overlay: rgba(0, 0, 0, 0.45);
+
+  --border-default: #E6E6E6;
+  --border-strong: #DDDDDD;
+
+  --text-primary: #0D0D0D;
+  --text-secondary: #31302E;
+  --text-muted: #615D59;
+  --text-on-fill: #FFFFFF;
+  --text-disabled: #A39E98;
+
+  /* 행동을 칠하는 유일한 색 (흰 배경 대비 4.57) */
+  --accent: #0075DE;
+  --accent-soft: #EBF4FC;
+  --action-fill: #0075DE;
+  --action-fill-hover: #0075DE;
+  --action-fill-pressed: #005BAB;
+  --action-text: #0075DE;
+  --action-tint: #EBF4FC;
+
+  --focus-ring: #0075DE;
+
+  /* sticker green 은 본문 대비 2.9라 텍스트용만 어둡게 파생 */
+  --status-positive-fill: #1AAE39;
+  --status-positive-text: #0E6B22;
+  --status-positive-tint: #E8F7EB;
+  /* 원본에 error 램프가 없어 orange-deep 보다 붉은 쪽으로 파생 */
+  --status-negative-fill: #B3271B;
+  --status-negative-text: #B3271B;
+  --status-negative-tint: #FBEAE8;
+  --status-warning-fill: #DD5B00;
+  --status-warning-text: #793400;
+  --status-warning-tint: #FCEEE6;
+  --status-info-fill: #0075DE;
+  --status-info-text: #0075DE;
+  --status-info-tint: #EBF4FC;
+  --status-ofc-fill: #D6B6F6;
+  --status-ofc-text: #391C57;
+  --status-ofc-tint: #F5EDFD;
+
+  --direction-up: #0075DE;
+  --direction-down: #B3271B;
+
+  --chart-s1: #0075DE;
+  --chart-s2: #DD5B00;
+  --chart-s3: #1AAE39;
+  --chart-s4: #391C57;
+  --chart-s5: #2A9D99;
+  --chart-empty: #E6E6E6;
+  --chart-other: #A39E98;
+
+  --radius-sm: 5px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* barely-there: 여러 겹의 거의 투명한 그림자 */
+  --shadow-card: 0 0.175px 1.041px rgba(0,0,0,0.01), 0 0.8px 2.925px rgba(0,0,0,0.02), 0 2.025px 7.847px rgba(0,0,0,0.027);
+  --shadow-dropdown: 0 2.025px 7.847px rgba(0,0,0,0.03), 0 4px 18px rgba(0,0,0,0.04);
+  --shadow-popup: 0 4px 18px rgba(0,0,0,0.04), 0 23px 52px rgba(0,0,0,0.05);
+
+  /* 한글 화면이라 본문 서체는 Pretendard 를 유지하고, Notion 의 타이트한 자간만 가져온다 */
+  --font-tracking-tight: -0.011em;
+  --font-tracking-title: -0.025em;
+  --font-size-15: 15px;
+  --font-size-18: 18px;
+  --font-body: 13.5px;
+
+  --console-header: 56px;
+  --console-rail: 288px;
+  --console-context: 320px;
+}

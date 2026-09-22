@@ -48,3 +48,28 @@
 @media (max-width: 1000px) { .comparison { grid-template-columns: 1fr 1fr; } .comparison .finding { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); } .events { grid-template-columns: repeat(2, minmax(0, 1fr)); } .event { min-height: 148px; } }
 @media (max-width: 680px) { .header, .panelHead { align-items: flex-start; flex-direction: column; gap: 8px; } .header .button { align-self: stretch; } .comparison { grid-template-columns: 1fr; } .comparison > div + div { border-left: 0; border-top: 1px solid var(--line); } .comparison > div { padding: 16px; } .detailGrid, .evidence, .videoGrid { grid-template-columns: 1fr; } .panel { padding: 15px; } .event { padding: 12px; } .events { gap: 8px; } .facts > div { grid-template-columns: 90px minmax(0, 1fr); } .dialog { padding: 15px; } .dialogHead h2 { font-size: 17px; } .scene h1 span { display: block; margin: 4px 0 0; } }
 @media (prefers-reduced-motion: reduce) { .moving { animation: none; } }
+
+/* 3D 합성 장면을 화면 주인공으로 올린 뒤 쓰는 스타일.
+   점선 SVG 개념도(.diagram)를 대신한다. */
+.stagePlayer { display: grid; gap: var(--space-8); margin-bottom: var(--space-16); }
+.stageVideo { width: 100%; max-height: 52vh; background: #141413; border: 1px solid var(--border-default); border-radius: var(--radius-lg); }
+.stageFoot { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-8) var(--space-12); color: var(--text-muted); font-size: var(--font-size-11); }
+.stageFoot > button { margin-left: auto; }
+
+.stageList { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--space-8); margin: 0; padding: 0; list-style: none; }
+.stageStep { position: relative; display: flex; align-items: flex-start; gap: var(--space-8); width: 100%; height: 100%; padding: var(--space-12); text-align: left; background: var(--surface-raised); border: 1px solid var(--border-default); border-radius: var(--radius-md); }
+.stageStep:hover:not(:disabled) { border-color: var(--accent); background: var(--surface-hover); }
+.stageStep.selected { border-color: var(--accent); background: var(--action-tint); }
+.stageNumber { display: grid; place-items: center; flex-shrink: 0; width: 22px; height: 22px; border-radius: var(--radius-full); background: var(--surface-sunken); color: var(--text-secondary); font-size: var(--font-size-11); font-weight: var(--font-weight-semibold); }
+.stageStep.selected .stageNumber { background: var(--accent); color: var(--text-on-fill); }
+.stageBody { display: grid; gap: var(--space-2); min-width: 0; color: var(--text-muted); font-size: var(--font-size-11); }
+.stageBody strong { color: var(--text-primary); font-size: var(--font-size-13); }
+.stageTag { position: absolute; top: var(--space-8); right: var(--space-8); padding: 0 var(--space-6); border-radius: var(--radius-sm); background: var(--status-positive-tint); color: var(--status-positive-text); font-size: var(--font-size-10); }
+
+.disclosure { margin-top: var(--space-16); padding: var(--space-12) var(--space-16); border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--surface-page); color: var(--text-muted); font-size: var(--font-size-12); }
+.disclosure > summary { min-height: var(--control-md); color: var(--text-secondary); font-weight: var(--font-weight-medium); }
+.disclosure p { margin-top: var(--space-8); line-height: var(--font-leading-relaxed); }
+
+.sourceInner { margin-top: var(--space-8); }
+.sourceInner > summary { min-height: var(--control-sm); color: var(--action-text); font-size: var(--font-size-12); }
+.sourceInner pre { overflow: auto; max-height: 240px; padding: var(--space-8); background: var(--surface-page); border-radius: var(--radius-sm); font-size: var(--font-size-11); }

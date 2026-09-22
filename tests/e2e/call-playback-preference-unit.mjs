@@ -110,7 +110,7 @@ function harness(inputs = source) {
   const setRate = value => { label('통화 재생 속도').props.onChange({ target: { value: String(value) } }); flush(); };
   const ranges = (values, target = audio()) => { target.media.played = { length: values.length, start: i => values[i][0], end: i => values[i][1] }; };
   const click = value => { button(value).props.onClick({ stopPropagation() {} }); flush(); };
-  const selectCase = index => { one(node => node.type === 'button' && node.props.className?.split(' ').includes('queue-open') && node.props['data-case-id'] === cases[index].id).props.onClick({ stopPropagation() {} }); flush(); };
+  const selectCase = index => { one(node => node.type === 'button' && node.props.className?.split(' ').includes('queue-card') && node.props['data-case-id'] === cases[index].id).props.onClick({ stopPropagation() {} }); flush(); };
   const playbackComplete = () => /전체 (통화 )?재생 완료/.test(textOf(one(node => node.type === 'strong' && node.props.role === 'status')));
   return { flush, audio, event, setRate, ranges, click, selectCase, one, label, playbackComplete, calls, writes, drafts, completions, remoteCases,
     async ready() { flush(); await Promise.resolve(); flush(); return this; },
@@ -160,12 +160,12 @@ const blocked = (rate, kind) => app => {
   assert.equal(app.completions.length, 0);
   return { rate, kind, completion: false, callbackCount: app.completions.length };
 };
-await test('stored recording can be analyzed before playback', app => { assert.equal(app.one(node => node.type === 'button' && textOf(node).includes('대화록 변환 · AI 접수 정리')).props.disabled, false); assert.equal(app.playbackComplete(), false); });
+await test('stored recording can be analyzed before playback', app => { assert.equal(app.one(node => node.type === 'button' && textOf(node).includes('AI로 정리하기')).props.disabled, false); assert.equal(app.playbackComplete(), false); });
 await test('default and immediate Home -> Desk -> CallReview preference transfer', preference);
 await test('WMS/TMS and both other roles retain selected preference', app => {
   app.event('onLoadedMetadata'); app.setRate(2);
   for (const kind of ['wms', 'tms']) {
-    app.click(kind === 'wms' ? 'WMS 작업 확인 ' : 'TMS 배송 확인 ');
+    app.click(kind === 'wms' ? '센터 작업 기록 보기 ' : '배송 기록 보기 ');
     const scene = app.one(node => typeof node.type === 'function' && node.type.name === 'LogisticsScene');
     assert.equal(scene.props.kind, kind); scene.props.onBack(); app.flush(); app.event('onLoadedMetadata');
     assert.equal(app.audio().media.playbackRate, 2);
@@ -215,10 +215,10 @@ await test('same-case source replacement resets completion and rejects old sourc
   assert.equal(app.label('통화 재생 속도').props.value, 1.5); assert.equal(app.playbackComplete(), false);
   assert.equal(app.completions.length, 1);
   // Editing another case still uses its own draft, not the first case's draft object.
-  app.label('요청사항').props.onChange({ target: { value: '첫 사례 미저장 내용' } }); app.flush();
-  app.selectCase(1); assert.equal(app.label('요청사항').props.value, '');
-  app.label('요청사항').props.onChange({ target: { value: '둘째 사례 미저장 내용' } }); app.flush();
-  app.selectCase(0); assert.equal(app.label('요청사항').props.value, '첫 사례 미저장 내용');
+  app.label('점포가 바라는 것').props.onChange({ target: { value: '첫 사례 미저장 내용' } }); app.flush();
+  app.selectCase(1); assert.equal(app.label('점포가 바라는 것').props.value, '');
+  app.label('점포가 바라는 것').props.onChange({ target: { value: '둘째 사례 미저장 내용' } }); app.flush();
+  app.selectCase(0); assert.equal(app.label('점포가 바라는 것').props.value, '첫 사례 미저장 내용');
   assert.equal(app.audio().media.playbackRate, 1.5);
   return { newSourceComplete: false, staleSourceEvents: 3, independentlyRetainedDrafts: 2, completionCallbacks: 1 };
 });
@@ -231,7 +231,7 @@ function replaceOnce(text, before, after) { const normalized = text.replace(/\r\
 const mutantCases = [
   ['Home resets preference on case change', 'page', 'setSelected(id); setView(roleView[role]);', 'setPlaybackRate(1.25); setSelected(id); setView(roleView[role]);', preference],
   ['Home omits parent preference callback', 'page', 'onPlaybackRateChange={setPlaybackRate}', 'onPlaybackRateChange={() => {}}', preference],
-  ['Desk omits preference value', 'page', 'playbackRate={playbackRate}\n        onPlaybackRateChange', 'playbackRate={1.25}\n        onPlaybackRateChange', preference],
+  ['Desk omits preference value', 'page', 'playbackRate={playbackRate}\n              onPlaybackRateChange', 'playbackRate={1.25}\n              onPlaybackRateChange', preference],
   ['trusted-ended guard removed', 'call', '!event.nativeEvent.isTrusted || ', '', blocked(1.5, 'untrusted')],
   ['played coverage guard removed', 'call', ' || !playedWholeAudio(audio)', '', blocked(1.25, 'gap')],
   ['seeking guards weakened', 'call', 'if (disabled || selected || sought.current || !fullAttempt.current || mediaError', 'if (disabled || selected || mediaError', blocked(1.5, 'seek')],

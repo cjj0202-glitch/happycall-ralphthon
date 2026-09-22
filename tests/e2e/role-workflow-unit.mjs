@@ -77,7 +77,7 @@ app.child(tree, 'LogisticsScene').props.onBack();
 check('no draft clearing while changing roles and evidence pages', app.draftWrites.length === 0);
 
 app = instance({ cases: [cases[0]], role: 'center', view: 'center', queue: 'handed_off' }); tree = app.render();
-check('empty center queue does not borrow a draft case', !app.child(tree, 'Center') && textOf(tree).includes('선택한 처리 단계에 접수가 없습니다'));
+check('empty center queue does not borrow a draft case', !app.child(tree, 'Center') && textOf(tree).includes('이 단계에 처리할 접수가 없습니다'));
 app.button(tree, '전체 접수 보기').props.onClick(); tree = app.render();
 check('all-list recovery explicitly shows draft for viewing', app.child(tree, 'Center').props.caseData.id === 'CASE-0' && app.states.queue === 'all');
 app.child(tree, 'Center').props.onView('tms'); tree = app.render();

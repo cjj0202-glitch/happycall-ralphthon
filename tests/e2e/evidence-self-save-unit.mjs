@@ -78,7 +78,7 @@ async function suite(draftSource, callbackSource) {
     check(status + ': successful own evidence save advances only revision and confirmation', same(after, { ...before, formRevision: 5, confirmed: false }), after);
     check(status + ': unsaved form, department, question and edited flag remain dirty', app.read().dirty && app.drafts.useHasUnsavedDrafts() && after.form.request === before.form.request && after.question === before.question && after.department === before.department && after.edited === true);
     check(status + ': one PATCH uses original revision and exact deduplicated selection', same(app.requests, [[`/api/cases/${seed.id}`, 'PATCH', { expectedRevision: 4, selectedEvidence: selected }, 'counselor']]));
-    check(status + ': accepted response updates case and shows success', app.receipts[0] === true && app.updates.length === 1 && app.toast() === '물류 근거를 접수 건에 연결했습니다.');
+    check(status + ': accepted response updates case and shows success', app.receipts[0] === true && app.updates.length === 1 && app.toast() === '확인한 기록을 접수 건에 연결했습니다.');
   }
   for (const outcome of ['409 conflict', '503 rejection', 'response lost']) {
     const app = instance(draftSource, callbackSource), before = structuredClone(app.read().value);

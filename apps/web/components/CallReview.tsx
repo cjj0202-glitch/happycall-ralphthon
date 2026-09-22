@@ -415,7 +415,7 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, playbackRa
               {mediaError && <button type="button" disabled={disabled} onClick={() => restart(false)}>음원 다시 불러오기</button>}
             </div>
           </> : <p className={styles.warning} role="status">음원 없음 · 이 사건에 연결된 음성 파일이 없습니다. 다른 사건 음원으로 대체하지 않습니다.</p>}
-        </section> : <p className={styles.notice}>텍스트 접수 · 음성 전사 없이 입력 원문과 분석 내용을 대조합니다.</p>}
+        </section> : workStage ? null : <p className={styles.notice}>텍스트 접수 · 음성 전사 없이 입력 원문과 분석 내용을 대조합니다.</p>}
 
         {!workStage && analysisActions}
         {workStage === 'source' && analysisFeedback}

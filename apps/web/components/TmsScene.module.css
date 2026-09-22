@@ -9,7 +9,6 @@
 .header h1 { margin: 6px 0 0; font-size: clamp(22px, 2.3vw, 30px); letter-spacing: -.04em; line-height: 1.35; }
 .header > div { min-width: 0; }
 .back { flex-shrink: 0; }
-.eyebrow { color: var(--action-text); font-size: var(--font-size-11); font-weight: var(--font-weight-semibold); letter-spacing: .06em; margin: 0; }
 .subtitle { color: var(--text-muted); font-size: var(--font-size-12); line-height: 1.7; margin-top: 8px; overflow-wrap: anywhere; }
 .context { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; padding: 14px 16px; font-size: var(--font-size-12); background: var(--surface-raised); border: 1px solid var(--border-default); border-radius: 8px; overflow-wrap: anywhere; }
 .context strong { display: inline-block; margin-left: 4px; }
@@ -20,30 +19,21 @@
 .notice { color: var(--status-info-text); background: var(--status-info-tint); border: 1px solid var(--border-default); }
 .warning { color: var(--status-warning-text); background: var(--status-warning-tint); border-left: 3px solid var(--status-warning-text); margin-block: 12px; }
 .error { color: var(--status-negative-text); background: var(--status-negative-tint); border: 1px solid var(--status-negative-text); margin-top: 16px; }
-.workspace { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 20px; align-items: start; }
 .panel { min-width: 0; padding: 20px; border: 1px solid var(--border-default); border-radius: 10px; background: var(--surface-raised); box-shadow: var(--shadow-card); }
 .panelHeader { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
-.panel h2 { font-size: var(--font-size-16); line-height: 1.5; margin: 4px 0 0; letter-spacing: -.02em; }
+.panel h2 { font-size: var(--font-size-16); line-height: 1.5; margin: 0; letter-spacing: -.02em; }
 .panel h3 { font-size: var(--font-size-13); margin: 0; }
 .muted { color: var(--text-muted); font-size: var(--font-size-11); line-height: 1.7; overflow-wrap: anywhere; }
-.map { width: 100%; display: block; height: auto; background: var(--surface-zebra); border: 1px solid var(--border-default); border-radius: 8px; margin: 16px 0; overflow: hidden; }
-.land { fill: none; stroke: var(--action-tint); stroke-width: 30; }
-.road { fill: none; stroke: var(--border-default); stroke-width: 18; stroke-linecap: round; stroke-linejoin: round; }
-.route { fill: none; stroke: var(--action-text); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 7 8; }
-.node { fill: var(--surface-raised); stroke: var(--border-strong); stroke-width: 2; }
-.selectedNode { fill: var(--action-text); stroke: var(--surface-raised); stroke-width: 3; }
-.nodeNumber, .selectedNumber { font-family: inherit; font-weight: var(--font-weight-semibold); font-size: var(--font-size-14); }
-.nodeNumber { fill: var(--text-primary); }
-.selectedNumber { fill: var(--text-on-fill); }
-.truck { fill: var(--action-text); stroke: var(--surface-raised); stroke-width: 1.5; }
-.wheel { fill: var(--text-primary); }
 .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-.visits { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 16px 0 0; }
-.visits li { flex: 1 1 130px; min-width: 0; }
-.visits button { display: flex; align-items: center; text-align: left; width: 100%; gap: 9px; }
-.visits button[aria-pressed='true'] { background: var(--action-tint); border-color: var(--action-text); }
-.visits small { display: block; font-size: var(--font-size-10); margin-top: 3px; color: var(--text-muted); }
-.visitNumber { width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; border-radius: 50%; background: var(--surface-sunken); font-weight: var(--font-weight-semibold); }
+
+/* 결론 카드 — 문의 점포(또는 선택한 방문)의 배송 기록을 화면 맨 위에서 한눈에 보여준다. */
+.hero { min-width: 0; padding: 20px; border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--surface-raised); box-shadow: var(--shadow-card); }
+.hero h2 { font-size: var(--font-size-18); line-height: 1.5; margin: 0; letter-spacing: -.02em; }
+.heroLead { font-size: var(--font-size-14); line-height: 1.7; margin: 4px 0 16px; }
+.tonePositive { color: var(--status-positive-text); }
+.toneNegative { color: var(--status-negative-text); }
+.toneWarning { color: var(--status-warning-text); }
+
 .facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 18px 0; }
 .facts > div { min-width: 0; border: 1px solid var(--border-default); border-radius: 7px; padding: 12px; background: var(--surface-zebra); }
 .facts dt { font-size: var(--font-size-11); color: var(--text-muted); }
@@ -51,9 +41,31 @@
 .facts small { display: block; color: var(--text-muted); font-size: var(--font-size-10); line-height: 1.7; }
 .nextAction { padding: 14px; border-radius: 7px; background: var(--action-tint); border-left: 3px solid var(--action-text); margin-bottom: 12px; }
 .nextAction p { font-size: var(--font-size-12); line-height: 1.7; margin: 6px 0 0; }
-.source { margin-top: 12px; padding: 10px 12px; border: 1px solid var(--border-default); border-radius: 6px; font-size: var(--font-size-11); color: var(--text-muted); }
-.source summary { cursor: pointer; line-height: 1.7; }
-.source pre { margin: 10px 0 0; max-height: 240px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-size: var(--font-size-11); line-height: 1.7; }
+
+/* 배송 코스 타임라인 — 세로로 이어지는 방문 카드. 문의 점포는 태그로 강조한다. */
+.timeline { position: relative; display: flex; flex-direction: column; gap: var(--space-8); list-style: none; margin: 16px 0 0; padding: 0; }
+.timeline li { position: relative; }
+.timeline li:not(:last-child)::after { content: ''; position: absolute; left: 23px; top: 44px; bottom: -8px; width: 2px; background: var(--border-default); }
+.timelineStep { position: relative; z-index: 1; display: flex; align-items: flex-start; gap: var(--space-12); width: 100%; padding: var(--space-12) var(--space-16); background: var(--surface-raised); border: 1px solid var(--border-default); border-radius: var(--radius-md); text-align: left; }
+.timelineStep:hover:not(:disabled) { border-color: var(--accent); background: var(--surface-hover); }
+.timelineStep.selected { border-color: var(--accent); background: var(--action-tint); }
+.timelineNumber { display: grid; place-items: center; flex-shrink: 0; width: 24px; height: 24px; border-radius: var(--radius-full); background: var(--surface-sunken); color: var(--text-secondary); font-size: var(--font-size-11); font-weight: var(--font-weight-semibold); }
+.timelineStep.selected .timelineNumber { background: var(--accent); color: var(--text-on-fill); }
+.timelineBody { display: grid; gap: 2px; min-width: 0; font-size: var(--font-size-12); color: var(--text-muted); }
+.timelineBody strong { color: var(--text-primary); font-size: var(--font-size-13); }
+.targetTag { display: inline-block; width: fit-content; padding: 1px 6px; border-radius: var(--radius-sm); background: var(--action-tint); color: var(--action-text); font-size: var(--font-size-10); font-weight: var(--font-weight-semibold); }
+
+.source { margin-top: 4px; padding: 14px 16px; border: 1px solid var(--border-default); border-radius: var(--radius-md); font-size: var(--font-size-11); color: var(--text-muted); background: var(--surface-page); }
+.source summary { cursor: pointer; line-height: 1.7; color: var(--text-secondary); }
+.sourceInner { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-default); }
+.sourceInner:first-of-type { margin-top: 12px; padding-top: 0; border-top: 0; }
+.sourceLabel { margin: 0 0 6px; font-weight: var(--font-weight-semibold); color: var(--text-secondary); }
+.sourceInner pre { margin: 0; max-height: 220px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-size: var(--font-size-11); line-height: 1.7; background: var(--surface-raised); border-radius: var(--radius-sm); padding: 8px; }
+
+.disclosure { padding: var(--space-12) var(--space-16); border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--surface-page); color: var(--text-muted); font-size: var(--font-size-12); }
+.disclosure > summary { min-height: var(--control-md); color: var(--text-secondary); font-weight: var(--font-weight-medium); cursor: pointer; }
+.disclosure p { margin-top: var(--space-8); line-height: var(--font-leading-relaxed); }
+
 .sort { display: flex; align-items: center; gap: 8px; font-size: var(--font-size-11); color: var(--text-muted); }
 .sort select { max-width: 100%; border: 1px solid var(--border-default); border-radius: 6px; padding: 7px; color: var(--text-primary); background: var(--surface-raised); }
 .tableWrap { overflow-x: auto; max-width: 100%; border: 1px solid var(--border-default); border-radius: 7px; margin-top: 14px; }
@@ -66,6 +78,8 @@
 .table small { display: block; color: var(--text-muted); font-size: var(--font-size-10); }
 .table button { white-space: nowrap; }
 .table tbody tr:nth-child(even) { background: var(--surface-zebra); }
+.table tbody .targetRow { background: var(--action-tint); }
+.table tbody .targetRow td:first-child, .table tbody .targetRow th:first-child { border-left: 3px solid var(--action-text); }
 .table tbody .selectedRow, .table tbody .selectedRow:nth-child(even) { background: var(--action-tint); }
 .table tr:last-child td, .table tr:last-child th { border-bottom: 0; }
 .empty { border: 1px dashed var(--border-strong); padding: 20px; border-radius: 8px; color: var(--text-muted); background: var(--surface-zebra); font-size: var(--font-size-12); line-height: 1.8; }
@@ -79,13 +93,12 @@
 .root .connected { color: var(--status-positive-text); background: var(--status-positive-tint); opacity: 1; }
 .feedback { min-height: 0; margin-top: 12px; font-size: var(--font-size-12); line-height: 1.7; color: var(--status-positive-text); }
 .feedback:empty { display: none; }
-@media (max-width: 1100px) { .workspace { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 640px) {
   .root { gap: 16px; }
   .header { flex-direction: column; gap: 12px; }
   .header .back { order: -1; }
   .context { padding: 12px; gap: 9px 12px; }
-  .panel { padding: 14px; }
+  .panel, .hero { padding: 14px; }
   .facts { grid-template-columns: minmax(0, 1fr); }
   .facts dd { font-size: var(--font-size-16); }
   .evidenceList { grid-template-columns: minmax(0, 1fr); }

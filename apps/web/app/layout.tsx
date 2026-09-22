@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import './tokens.css';
+import './theme.css';
 import './globals.css';
+import './console.css';
 import './workflow-ux.css';
 
 export const metadata: Metadata = {

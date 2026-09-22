@@ -119,7 +119,7 @@ for (const [name, expectedAudience] of [['Desk', 'workforce'], ['Center', 'workf
   const html = renderToStaticMarkup(React.createElement(page[name], props));
   check(name + ' actual callsite passes exact saved object and audience', captured.length === 1 && captured[0].caseData === savedCase && captured[0].audience === expectedAudience);
   check(name + ' actual callsite renders only saved notifications', recordCount(html) === (name === 'Owner' ? 1 : 4) && !html.includes('UNSAVED-ALERT-SENTINEL'));
-  check(name + ' notification follows existing action or reply', html.indexOf('aria-label="외부 알림"') > html.indexOf(name === 'Desk' ? '접수 내용 저장' : name === 'Center' ? '최종 회신·처리 완료' : '센터에서 보낸 회신'));
+  check(name + ' notification follows existing action or reply', html.indexOf('aria-label="외부 알림"') > html.indexOf(name === 'Desk' ? '여기까지 저장' : name === 'Center' ? '최종 회신·처리 완료' : '센터 답변'));
 }
 const escaping = renderToStaticMarkup(React.createElement(page.Center, { ...sharedProps, caseData: { ...savedCase, title: htmlAttack } }));
 for (const [id, analysis, expected] of [
@@ -129,7 +129,7 @@ for (const [id, analysis, expected] of [
   ['custom', { department: { id: 'warehouse', name: '출고 운영' } }, 'custom'],
 ]) {
   const html = renderToStaticMarkup(React.createElement(page.Center, { ...sharedProps, caseData: { ...savedCase, departmentId: id, analysis } }));
-  check('actual center department label ' + id + '/' + expected, html.includes('<dt>전달 부서</dt><dd>' + expected + '</dd>'));
+  check('actual center department label ' + id + '/' + expected, html.includes('<dt>담당 부서</dt><dd>' + expected + '</dd>'));
 }
 check('actual React page SSR escapes untrusted text instead of injecting HTML', escaping.includes('&lt;script&gt;alert(&quot;PRIVATE-HTML-SENTINEL&quot;)&lt;/script&gt;') && !escaping.includes('<script'));
 check('actual three draft roles were reached without writes', ['desk:CASE-UI-1', 'center:CASE-UI-1', 'owner:new'].every(key => draftReads.includes(key)));

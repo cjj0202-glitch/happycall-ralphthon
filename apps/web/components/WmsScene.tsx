@@ -103,7 +103,7 @@ export function validateWmsClip(caseData: CaseData, event: Row, media: unknown =
 }
 
 function Source({ name, data }: { name: string; data: unknown }) {
-  return <details className={styles.source}><summary>{name} · 원본 보기</summary><pre>{JSON.stringify(data, null, 2)}</pre></details>;
+  return <details className={styles.sourceInner}><summary>{name}</summary><pre>{JSON.stringify(data, null, 2)}</pre></details>;
 }
 
 function registeredEvidence(caseData: CaseData, evidence: Row): boolean {
@@ -132,8 +132,8 @@ function Scene({ caseData, onBack, onLinkEvidence, backLabel = '상담으로 돌
   const registeredVideos = events.map((event, index) => ({ event, index, result: validateWmsClip(caseData, event) })).filter(item => item.result.clip);
   const readOnly = roleReadOnly || (!!caseData.status && !['draft', 'review'].includes(caseData.status));
   const safePicking = model.pickingVisible ? picking : {}, safeShipping = model.shippingVisible ? shipping : {};
-  const steps = ['피킹', '소터 투입', '분기 / 슈트', '출고'];
-  const nextActions = ['상품·수량·단위와 피킹 토트 원본을 확인하세요.', '투입 시각과 토트 연결 기록을 센터에 확인하세요.', '계획·실적 슈트와 분기 전후 연결을 확인하세요. 슈트 일치만으로 상품 일치를 확정할 수 없습니다.', '출고 스캔과 피킹 기록을 대조하고 센터에 토트 연결·상품 처리를 요청하세요.'];
+  const steps = ['상품 꺼내기', '분류기에 넣기', '분류기 갈림길', '내보내기'];
+  const nextActions = ['꺼낸 상품과 수량, 그때 쓴 상자가 맞는지 센터에 확인해 주세요.', '분류기에 넣은 시각과 어느 상자였는지를 센터에 확인해 주세요.', '예정한 출구와 실제 나간 출구가 같은지 확인해 주세요. 출구가 같아도 상품이 같다고는 할 수 없습니다.', '내보낸 기록과 꺼낸 기록을 맞춰 보고, 상자 연결과 상품 처리를 센터에 요청해 주세요.'];
   async function link(id: string) {
     const evidence = (caseData.evidence ?? []).find(item => item.id === id);
     if (requestPending.current || readOnly || model.contextError || !evidence || !registeredEvidence(caseData, evidence)) return;
@@ -142,24 +142,79 @@ function Scene({ caseData, onBack, onLinkEvidence, backLabel = '상담으로 돌
     catch (failure) { if (mounted.current) setError(`${failure instanceof Error ? failure.message : '저장 응답을 확인하지 못했습니다.'} ${failure instanceof ApiError && !failure.uncertain ? '안내 내용을 확인한 뒤 다시 시도해 주세요.' : '상단의 목록 새로고침으로 최신 접수를 조회해 연결 여부를 먼저 확인해 주세요.'}`); }
     finally { requestPending.current = false; if (mounted.current) setPending(''); }
   }
-  return <section className={styles.scene} aria-label="WMS 공정 확인">
-    <header className={styles.header}><div><p className={styles.eyebrow}>WMS · 물류 기록 확인</p><h1>{caseData.store?.name || '점포 미확인'} <span>{caseData.type === 'wrong' ? '오출고 문의' : '미도착 문의'}</span></h1><p>{caseData.id} · 기준 {date(caseData.asOf)}</p></div><button className={styles.button} type="button" onClick={onBack}>{backLabel}</button></header>
-    <p className={styles.caption} data-testid="source-reference">현재 접수 {label(caseData.id)} · 원본 사건 {label(canonicalCase(caseData)?.id, '미연결')}{model.contextError ? ' · 연결 검증 필요' : ''}</p>
-    <p className={styles.notice}>독립 합성 시연 · 실제 WMS/CCTV 아님. 기록과 경영주 진술, 원인 미확인을 구분합니다.</p>
-    {!!registeredVideos.length && <section className={styles.mediaEntry} aria-label="이 접수에 연결된 영상"><div><strong>이 접수의 소터 영상</strong><p>공정 기록과 영상 구간을 함께 확인하세요. 합성 시연 영상입니다.</p></div>{registeredVideos.map(({ event: sourceEvent, index, result }) => <button key={String(sourceEvent.id)} className={styles.primary} data-testid="case-video-shortcut" onClick={event => { setSelected(index); setPlaying(false); setActive({ clip: result.clip!, event: sourceEvent, opener: event.currentTarget, tracks: result.tracks, processAnchor: result.processAnchor, tracksError: result.tracksError }); }}>▶ {label(sourceEvent.label)} · 영상 보기</button>)}</section>}
-    {model.contextError && <p className={styles.warning} role="alert">{model.contextError} 영상·근거 연결이 차단되었습니다.</p>}
-    <section className={styles.comparison} aria-label="피킹과 출고 기록 비교"><div><p className={styles.eyebrow}>피킹 기록</p><h2>{scan(safePicking)}</h2><p>토트 {label(safePicking.toteId)} · {model.pickingVisible ? date(picking.pickedAt) : '기준시각 내 피킹 시각 미확인'}</p><small>주문 {label(picking.orderId)} · 작업방식 {label(picking.workType)}</small></div><div><p className={styles.eyebrow}>출고 기록</p><h2>{scan(safeShipping)}</h2><p>토트 {label(safeShipping.toteId)} · {model.shippingVisible ? date(shipping.time) : '기준시각 내 출고 시각 미확인'}</p><small>출고 {label(shipping.id)} · 도크 {label(shipping.dock)}</small></div><div className={styles.finding}><strong>{model.difference ? '상품·수량·단위 기록 차이' : caseData.type === 'missing' ? '미수령 진술과 출고 기록을 구분' : '관측값과 미확인을 대조'}</strong><p>{caseData.type === 'missing' ? '경영주는 미수령을 진술했습니다. 센터 출고 기록만으로 점포 도착·인도를 확정할 수 없습니다.' : 'EA와 BOX는 환산하거나 차감하지 않습니다. 피킹·출고 토트의 연결과 차이가 발생한 공정은 추가 확인이 필요합니다.'}</p><b>발생 공정·작업자 귀책 미확인</b></div></section>
-    <section className={styles.panel} aria-labelledby="pc3-process-title"><div className={styles.panelHead}><div><h2 id="pc3-process-title">공정별 기록</h2><p>원본 이벤트 순서를 유지합니다. 연속 위치 추적·snapshot 누계 재구성이 아닙니다.</p></div><button className={styles.button} type="button" disabled={reduced} aria-pressed={playing} data-testid="motion-toggle" onClick={() => setPlaying(value => !value)}>{reduced ? '모션 감소 · 정지' : playing ? '설명 이동 일시정지' : '설명 이동 시작'}</button></div>
-      <div className={styles.diagram} aria-label="피킹, 소터 투입, 분기, 출고 개념도" data-testid="process-diagram" data-playing={playing && !reduced}><svg viewBox="0 0 800 84" role="img" aria-label="실제 좌표가 아닌 공정 설명"><path d="M65 42H735" stroke="#c5d3e1" strokeWidth="5" strokeDasharray="7 7"/>{[65, 290, 515, 735].map((x, i) => <g key={x}><circle cx={x} cy="42" r="25" fill={i === currentStage ? '#005ba8' : '#eef3f8'}/><text x={x} y="48" textAnchor="middle" fill={i === currentStage ? 'white' : '#334155'} fontSize="18">{i + 1}</text></g>)}<circle className={playing && !reduced ? styles.moving : undefined} cx="65" cy="42" r="7" fill="#b54708"/></svg></div>
-      <div className={styles.events}>{events.map((event, index) => <button key={`${label(event.id)}:${index}`} type="button" className={`${styles.event} ${selected === index ? styles.selected : ''}`} aria-pressed={selected === index} data-testid={`event-${label(event.id)}`} onClick={() => { setSelected(index); setPlaying(false); }}><small>{String(index + 1).padStart(2, '0')} · {steps[stageFor(caseData, event)] || '공정 미확인'}</small><strong>{label(event.label)}</strong><span>{date(event.time)}</span><span>{label(event.location)}</span><em>{visible(event.time, caseData.asOf) ? '합성 기록' : '시각 확인 필요'}</em></button>)}</div>
-      {!events.length && <p className={styles.empty}>공정 기록 미등록 · 센터 원본 확인이 필요합니다.</p>}
-      {model.timeReversal && <p className={styles.warning} role="alert">공정 시각 역전이 있습니다. 원본을 보존했으며 발생 순서를 임의로 고치지 않았습니다.</p>}
-      {events.some(event => !visible(event.time, caseData.asOf)) && <p className={styles.warning}>미등록·불명확·기준시각 이후 이벤트는 확정 근거로 사용할 수 없습니다.</p>}
+  const featured = registeredVideos[0];
+  const featuredActive = featured && current && featured.event.id === current.id ? clipResult.clip : undefined;
+  return <section className={styles.scene} aria-label="센터 작업 기록 확인">
+    <header className={styles.header}>
+      <div><h1>{caseData.store?.name || '점포 미확인'} <span>{caseData.type === 'wrong' ? '다른 상품이 왔어요' : '상품이 안 왔어요'}</span></h1><p>센터에서 상품을 꺼내 내보내기까지의 기록입니다. 기준 {date(caseData.asOf)}</p></div>
+      <button className={styles.button} type="button" onClick={onBack}>{backLabel}</button>
+    </header>
+    {model.contextError && <p className={styles.warning} role="alert">{model.contextError} 영상과 기록 연결을 멈췄습니다.</p>}
+
+    <section className={styles.comparison} aria-label="꺼낸 기록과 내보낸 기록 비교">
+      <div><p className={styles.eyebrow}>센터가 꺼낸 상품</p><h2>{scan(safePicking)}</h2><p>상자 {label(safePicking.toteId)}</p><small>{model.pickingVisible ? date(picking.pickedAt) : '기준시각 안에서 꺼낸 시각을 확인할 수 없습니다'}</small></div>
+      <div><p className={styles.eyebrow}>센터가 내보낸 상품</p><h2>{scan(safeShipping)}</h2><p>상자 {label(safeShipping.toteId)}</p><small>{model.shippingVisible ? date(shipping.time) : '기준시각 안에서 내보낸 시각을 확인할 수 없습니다'}</small></div>
+      <div className={styles.finding}><strong>{model.difference ? '두 기록이 서로 다릅니다' : caseData.type === 'missing' ? '점포는 못 받았다고 합니다' : '아직 확인할 것이 남았습니다'}</strong><p>{caseData.type === 'missing' ? '센터에 내보낸 기록이 있어도 점포에 실제로 도착했는지는 따로 확인해야 합니다.' : '낱개와 박스는 서로 바꿔 계산하지 않습니다. 어느 단계에서 달라졌는지는 아직 모릅니다.'}</p><b>원인·담당자 미확인</b></div>
     </section>
-    {current && <section className={styles.detailGrid}><div className={styles.panel}><p className={styles.eyebrow}>선택 공정 · {label(current.id)}</p><h2>{label(current.label)}</h2><p>{date(current.time)} · {label(current.location)}</p><div className={styles.action}><h3>다음 확인 행동</h3><p>{nextActions[currentStage] || '사건 관계와 원본을 센터에 확인하세요.'}</p></div><dl className={styles.facts}><div><dt>피킹 토트</dt><dd>{label(safePicking.toteId)}</dd></div><div><dt>출고 토트</dt><dd>{label(safeShipping.toteId)}</dd></div><div><dt>계획 / 실적 슈트</dt><dd>{visible(sorting.sortedAt, caseData.asOf) ? `${label(sorting.schdChuteNo)} / ${label(sorting.rsltChuteNo)}` : '기준시각 내 분류 실적 미확인'}</dd></div><div><dt>토트 연속 연결</dt><dd>미확인 · 동일 이동으로 가정하지 않음</dd></div></dl><Source name="선택 이벤트" data={current}/><Source name="피킹 스캔" data={picking}/><Source name="분류 기록" data={sorting}/><Source name="출고 스캔" data={shipping}/></div>
-      <div className={styles.panel}><p className={styles.eyebrow}>선택 공정의 합성 영상</p><h2>기록과 함께 확인</h2><p className={styles.caption}>영상은 설명용이며 원인·귀책 판정에 사용할 수 없습니다.</p>{clipResult.clip ? <><div className={styles.videoCard}><span className={styles.synthetic}>합성 · 실제 CCTV 아님</span><strong>{clipResult.clip.cameraId}</strong><p>{date(clipResult.clip.occurredAt)} · {clipResult.clip.startSeconds}–{clipResult.clip.endSeconds}초</p><button className={styles.primary} type="button" data-testid="open-video" onClick={event => setActive({ clip: clipResult.clip!, event: current, opener: event.currentTarget, tracks: clipResult.tracks, processAnchor: clipResult.processAnchor, tracksError: clipResult.tracksError })}>등록된 합성 영상 열기</button></div><p className={styles.caption}>재생 전 등록 파일의 크기·SHA256을 확인합니다. 카메라 관계는 합성 시나리오에 한정됩니다.</p>{clipResult.tracksError && <p className={styles.warning} role="alert">객체 좌표 등록 확인 필요 · {clipResult.tracksError}</p>}</> : <div className={styles.empty} data-testid="media-unavailable"><strong>연결 영상 없음</strong><p>{clipResult.reason}</p><p>원본 기록을 먼저 확인하세요. 다른 공정의 영상으로 대체하지 않습니다.</p></div>}<p className={styles.caption}>선택한 사건과 공정에 등록된 영상만 제공합니다. 영상이 없으면 원본 기록을 확인하고 센터에 추가 자료를 요청하세요.</p></div>
+
+    <section className={styles.panel} aria-labelledby="wms-scene-title">
+      <div className={styles.panelHead}><div><h2 id="wms-scene-title">센터에서 무슨 일이 있었나</h2><p>합성으로 만든 센터 장면입니다. 실제 CCTV가 아닙니다.</p></div>{featured && <span className={styles.badge}>{label(featured.event.label)} 구간</span>}</div>
+
+      {featured ? <div className={styles.stagePlayer}>
+        <video className={styles.stageVideo} controls preload="metadata" playsInline src={featured.result.clip!.url} aria-label={`${label(featured.event.label)} 합성 장면`}/>
+        <div className={styles.stageFoot}>
+          <span className={styles.synthetic}>합성 장면 · 실제 CCTV 아님</span>
+          <span>{date(featured.result.clip!.occurredAt)} 기록 · 영상은 {featured.result.clip!.endSeconds - featured.result.clip!.startSeconds}초로 줄여 보여 줍니다</span>
+          <button className={styles.primary} type="button" data-testid="case-video-shortcut" onClick={event => { setSelected(featured.index); setPlaying(false); setActive({ clip: featured.result.clip!, event: featured.event, opener: event.currentTarget, tracks: featured.result.tracks, processAnchor: featured.result.processAnchor, tracksError: featured.result.tracksError }); }}>프레임별로 자세히 보기</button>
+        </div>
+      </div> : <p className={styles.empty}>이 문의에는 등록된 장면 영상이 없습니다. 아래 기록으로 확인해 주세요.</p>}
+
+      <ol className={styles.stageList} aria-label="센터 처리 단계">{events.map((event, index) => {
+        const stage = stageFor(caseData, event);
+        const hasVideo = registeredVideos.some(item => item.index === index);
+        return <li key={`${label(event.id)}:${index}`}>
+          <button type="button" className={`${styles.stageStep} ${selected === index ? styles.selected : ''}`} aria-pressed={selected === index} data-testid={`event-${label(event.id)}`} onClick={() => { setSelected(index); setPlaying(false); }}>
+            <span className={styles.stageNumber}>{index + 1}</span>
+            <span className={styles.stageBody}><strong>{steps[stage] || '단계 미확인'}</strong><span>{date(event.time)}</span><span>{label(event.location)}</span></span>
+            {hasVideo && <span className={styles.stageTag}>영상 있음</span>}
+          </button>
+        </li>;
+      })}</ol>
+      {!events.length && <p className={styles.empty}>센터 처리 기록이 없습니다. 센터에 원본 확인을 요청해 주세요.</p>}
+      {model.timeReversal && <p className={styles.warning} role="alert">기록된 시각의 순서가 뒤바뀌어 있습니다. 원본을 그대로 두었고 순서를 임의로 고치지 않았습니다.</p>}
+      {events.some(event => !visible(event.time, caseData.asOf)) && <p className={styles.warning}>시각이 없거나 기준시각보다 늦은 기록은 근거로 쓰지 않습니다.</p>}
+    </section>
+
+    {current && <section className={styles.panel} aria-label="선택한 단계">
+      <div className={styles.panelHead}><div><h2>{steps[currentStage] || '선택한 단계'} · {label(current.label)}</h2><p>{date(current.time)} · {label(current.location)}</p></div>{featuredActive && <span className={styles.badge}>이 단계의 영상이 위에 있습니다</span>}</div>
+      <div className={styles.action}><h3>다음에 확인할 것</h3><p>{nextActions[currentStage] || '이 기록과 문의의 연결을 센터에 확인해 주세요.'}</p></div>
+      <dl className={styles.facts}>
+        <div><dt>꺼낼 때 쓴 상자</dt><dd>{label(safePicking.toteId)}</dd></div>
+        <div><dt>내보낼 때 쓴 상자</dt><dd>{label(safeShipping.toteId)}</dd></div>
+        <div><dt>예정 / 실제 분류 출구</dt><dd>{visible(sorting.sortedAt, caseData.asOf) ? `${label(sorting.schdChuteNo)} / ${label(sorting.rsltChuteNo)}` : '기준시각 안에서 확인할 수 없습니다'}</dd></div>
+        <div><dt>두 상자가 같은 것인지</dt><dd>미확인</dd></div>
+      </dl>
+      {clipResult.clip ? <div className={styles.videoCard}>
+        <div><strong>이 단계의 장면이 있습니다</strong><p>{clipResult.clip.cameraId} · {date(clipResult.clip.occurredAt)}</p></div>
+        <button className={styles.primary} type="button" data-testid="open-video" onClick={event => setActive({ clip: clipResult.clip!, event: current, opener: event.currentTarget, tracks: clipResult.tracks, processAnchor: clipResult.processAnchor, tracksError: clipResult.tracksError })}>이 단계 영상 자세히 보기</button>
+      </div> : <div className={styles.empty} data-testid="media-unavailable"><strong>이 단계에는 영상이 없습니다</strong><p>{clipResult.reason}</p><p>다른 단계의 영상으로 대신하지 않습니다.</p></div>}
+      {clipResult.tracksError && <p className={styles.warning} role="alert">영상 속 물체 좌표를 확인해야 합니다 · {clipResult.tracksError}</p>}
+      <details className={styles.source}><summary>원본 기록 보기</summary><Source name="선택 단계" data={current}/><Source name="꺼낸 기록" data={picking}/><Source name="분류 기록" data={sorting}/><Source name="내보낸 기록" data={shipping}/></details>
     </section>}
-    <section className={styles.panel} aria-label="상담 근거"><h2>상담에 연결할 근거</h2><p>합성 기록·미확인 항목의 출처를 유지합니다. 연결 완료는 저장 응답 후 표시합니다.</p>{readOnly && <p className={styles.warning}>조회 전용 · 근거 기록을 확인할 수 있으며 현재 화면에서는 변경할 수 없습니다.</p>}<div className={styles.evidence}>{(caseData.evidence ?? []).filter(item => item.system === 'WMS').map(item => { const registered = registeredEvidence(caseData, item); const temporal = item.status === 'unknown' && !item.time || visible(item.time, caseData.asOf); const done = linked.includes(item.id) || caseData.selectedEvidence?.includes(item.id); return <article key={item.id}><span className={styles.eyebrow}>{item.status === 'unknown' ? '미확인 항목' : '합성 기록'} · {item.id}</span><h3>{item.label}</h3><p>{String(item.value ?? '값 미확인')}</p><small>{item.source} · {item.time ? date(item.time) : '시각 미등록'}</small><button className={styles.button} type="button" data-testid={`link-${item.id}`} disabled={readOnly || !!model.contextError || !registered || !temporal || !!pending || !!done} onClick={() => void link(item.id)}>{!registered ? '사건 근거 불일치' : done ? '연결됨' : pending === item.id ? '연결 중…' : !temporal ? '시각 확인 필요' : '상담 근거에 연결'}</button></article>; })}</div><p role="status" className={styles.verified}>{message}</p>{error && <p role="alert" className={styles.warning}>근거 연결 확인: {error}</p>}</section>
+
+    <section className={styles.panel} aria-label="상담 근거">
+      <div className={styles.panelHead}><div><h2>이 문의에 붙일 기록</h2><p>고른 기록은 상담 화면과 센터에 그대로 전달됩니다.</p></div></div>
+      {readOnly && <p className={styles.warning}>지금은 보기만 할 수 있습니다. 센터로 넘어간 접수의 기록은 바꾸지 않습니다.</p>}
+      <div className={styles.evidence}>{(caseData.evidence ?? []).filter(item => item.system === 'WMS').map(item => { const registered = registeredEvidence(caseData, item); const temporal = item.status === 'unknown' && !item.time || visible(item.time, caseData.asOf); const done = linked.includes(item.id) || caseData.selectedEvidence?.includes(item.id); return <article key={item.id}><span className={styles.eyebrow}>{item.status === 'unknown' ? '아직 모르는 것' : '센터 기록'}</span><h3>{item.label}</h3><p>{String(item.value ?? '내용 미확인')}</p><small>{item.source} · {item.time ? date(item.time) : '시각 미등록'}</small><button className={styles.button} type="button" data-testid={`link-${item.id}`} disabled={readOnly || !!model.contextError || !registered || !temporal || !!pending || !!done} onClick={() => void link(item.id)}>{!registered ? '기록 확인 필요' : done ? '붙였습니다' : pending === item.id ? '붙이는 중…' : !temporal ? '시각 확인 필요' : '이 문의에 붙이기'}</button></article>; })}</div>
+      <p role="status" className={styles.verified}>{message}</p>{error && <p role="alert" className={styles.warning}>{error}</p>}
+    </section>
+
+    <details className={styles.disclosure}>
+      <summary>이 화면의 자료에 대하여</summary>
+      <p>여기 나오는 점포·상품·시각·영상은 모두 시연을 위해 만든 합성 자료입니다. 실제 센터 시스템(WMS)이나 실제 CCTV가 아닙니다.</p>
+      <p>기록이 있다는 것과 실제로 그 일이 일어났다는 것은 다릅니다. 영상과 좌표는 무슨 일이 있었는지 설명하기 위한 것이며, 발생 원인이나 담당자 책임을 정하는 데 쓸 수 없습니다.</p>
+      <p>현재 접수 {label(caseData.id)} · 원본 사건 {label(canonicalCase(caseData)?.id, '미연결')}{model.contextError ? ' · 연결 확인 필요' : ''}</p>
+    </details>
     {active && <CctvInspector {...active} picking={safePicking} shipping={safeShipping} onClose={() => setActive(null)}/>}
   </section>;
 }
