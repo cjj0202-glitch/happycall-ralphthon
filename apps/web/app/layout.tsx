@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './tokens.css';
 import './globals.css';
+import './workflow-ux.css';
 
 export const metadata: Metadata = {
   title: 'HappyCall OneFlow · 해피콜 작업대',

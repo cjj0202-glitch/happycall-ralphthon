@@ -76,3 +76,11 @@ async def patch_case(case_id, body):
         return await run_in_threadpool(lambda: service().patch(case_id, body, role))
     except DemoError as exc:
         return error(exc)
+
+
+async def generate_reply_draft(case_id, body):
+    try:
+        role = request.headers.get("X-Demo-Role")
+        return await run_in_threadpool(lambda: service().reply_draft(case_id, body, role))
+    except DemoError as exc:
+        return error(exc)

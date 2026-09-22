@@ -1,4 +1,16 @@
 .review { min-width: 0; width: 100%; color: var(--text-primary); font-family: var(--font-family); overflow-wrap: anywhere; container: call-review / inline-size; }
+.review[hidden], .review [hidden] { display: none !important; }
+.taskHeader { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.staged[data-work-stage='source'] .columns { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'listen' 'source'; }
+.staged[data-work-stage='review'] .columns { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'editor' 'source'; }
+.staged .sourcePane .scrollRegion { max-height: calc(var(--control-xl) * 5); }
+.staged .controls { margin-block: var(--space-8); }
+.staged .reviewDetails > summary { min-height: var(--control-md); padding-block: var(--space-4); }
+@container call-review (min-width: 850px) {
+ .staged[data-work-stage='source'] .columns { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: 'listen source'; }
+ .staged[data-work-stage='review'] .columns { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); grid-template-areas: 'source editor'; }
+ .staged .sourcePane { position: sticky; top: calc(var(--control-xl) * 4); }
+}
 .review *, .review *::before, .review *::after { box-sizing: border-box; }
 .review button, .review input, .review select { font: inherit; max-width: 100%; }
 .review button { min-height: 40px; white-space: normal; overflow-wrap: anywhere; }

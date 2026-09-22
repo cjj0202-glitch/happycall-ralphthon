@@ -9,7 +9,7 @@ export class ApiError extends Error {
 
 export async function request<T>(path: string, method = 'GET', body?: unknown, role = 'counselor', options?: { idempotencyKey?: string }): Promise<T> {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), path.endsWith('/analyze') ? 120000 : 15000);
+  const timer = setTimeout(() => controller.abort(), (path.endsWith('/analyze') || path.endsWith('/reply-draft')) ? 120000 : 15000);
   try {
     const response = await fetch(`${BASE}${path}`, {
       method, headers: { 'Content-Type': 'application/json', 'X-Demo-Role': role, ...(options?.idempotencyKey ? { 'X-Idempotency-Key': options.idempotencyKey } : {}) },

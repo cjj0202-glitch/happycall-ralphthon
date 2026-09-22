@@ -195,13 +195,13 @@ class AccessCredentials:
 
 
 class DeploymentAccess:
-    def __init__(self, app: ASGIApp, credentials: AccessCredentials):
+    def __init__(self, app: ASGIApp, credentials: AccessCredentials | None):
         self.app = app
         self.credentials = credentials
         self._session_key = hmac.new(credentials.password_digest,
                                      b"oneflow-browser-session-v1\0" + credentials.username_digest
                                      + credentials.session_secret,
-                                     hashlib.sha256).digest()
+                                     hashlib.sha256).digest() if credentials else b""
 
     def _signature(self, payload, origin):
         return hmac.new(self._session_key, (payload + "|" + repr(origin)).encode("ascii"),
@@ -263,6 +263,20 @@ class DeploymentAccess:
             if scope["method"] == "HEAD":
                 response = Response(status_code=200, headers=dict(response.headers))
             await response(scope, receive, secure_send)
+            return
+        # Public synthetic demo: the user explicitly removed the login step.
+        # Keep transport protections and business role/revision validation.
+        if self.credentials is None:
+            if scope["path"] == "/login":
+                await RedirectResponse("/", status_code=303)(scope, receive, secure_send)
+                return
+            if scope["method"] not in {"GET", "HEAD", "OPTIONS"} and not _same_origin(scope):
+                await JSONResponse({"error": {"code": "ORIGIN_REQUIRED", "message": "같은 접속 주소에서 다시 시도해 주세요."}},
+                                   status_code=403)(scope, receive, secure_send)
+                return
+            public_scope = {**scope, "headers": [(key, value) for key, value in scope.get("headers", [])
+                                                  if key.lower() not in {b"authorization", b"cookie"}]}
+            await self.app(public_scope, receive, secure_send)
             return
         if scope["path"] == "/login":
             if scope["method"] == "GET":

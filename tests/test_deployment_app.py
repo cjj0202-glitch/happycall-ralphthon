@@ -89,8 +89,40 @@ def export_dir(tmp_path):
 
 @pytest.fixture
 def environment(export_dir):
-    return {"ONEFLOW_STATIC_DIR": str(export_dir), "ONEFLOW_ACCESS_USER": USER,
+    return {"ONEFLOW_REQUIRE_LOGIN": "1", "ONEFLOW_STATIC_DIR": str(export_dir), "ONEFLOW_ACCESS_USER": USER,
             "ONEFLOW_ACCESS_PASSWORD": PASSWORD}
+
+
+@pytest.mark.parametrize("path", ["/", "/api/cases", "/demo/CASE-0001.wav", "/_next/static/chunks/app.js", "/healthz"])
+def test_default_public_demo_opens_without_login(environment, legacy_media_manifest, path):
+    environment.pop("ONEFLOW_REQUIRE_LOGIN")
+    environment.pop("ONEFLOW_ACCESS_USER")
+    environment.pop("ONEFLOW_ACCESS_PASSWORD")
+    application = deployment.create_deployment_app(environ=environment, api_app=EchoAPI(), media_manifest=legacy_media_manifest)
+    result = run_request(application, path=path)
+    assert result.status_code == 200
+    assert "www-authenticate" not in result.headers
+    assert result.headers["x-content-type-options"] == "nosniff"
+
+
+def test_public_demo_ignores_old_credentials_and_redirects_login(environment, legacy_media_manifest):
+    environment["ONEFLOW_REQUIRE_LOGIN"] = "0"
+    application = deployment.create_deployment_app(environ=environment, api_app=EchoAPI(), media_manifest=legacy_media_manifest)
+    response = run_request(application, path="/login")
+    assert response.status_code == 303
+    assert response.headers["location"] == "/"
+    assert "set-cookie" not in response.headers
+
+
+@pytest.mark.parametrize("origin,status", [("https://demo.invalid", 200), ("https://other.invalid", 403), ("null", 403), (None, 403)])
+def test_public_demo_mutation_still_requires_same_origin(environment, legacy_media_manifest, origin, status):
+    environment.pop("ONEFLOW_REQUIRE_LOGIN")
+    api = EchoAPI()
+    application = deployment.create_deployment_app(environ=environment, api_app=api, media_manifest=legacy_media_manifest)
+    headers = {"Origin": origin} if origin else {}
+    result = run_request(application, "PATCH", "/api/cases/SYN-TEST", headers=headers, json={"synthetic": True})
+    assert result.status_code == status
+    assert len(api.calls) == (1 if status == 200 else 0)
 
 
 @pytest.fixture

@@ -7,6 +7,9 @@
 .scene p, .dialog p { margin: 6px 0 12px; }
 .header, .panelHead, .dialogHead { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
 .header { margin-bottom: 18px; } .header > div { min-width: 0; } .header > div > p:last-child { color: var(--muted); }
+.mediaEntry { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-16); padding: var(--space-16); margin-block: var(--space-16); border: 1px solid var(--action-text); border-radius: var(--radius-lg); background: var(--action-tint); }
+.mediaEntry strong { font-size: var(--font-size-16); }
+.mediaEntry p { margin: var(--space-4) 0 0; color: var(--text-secondary); font-size: var(--font-size-12); }
 .eyebrow { display: block; font-size: 11px; letter-spacing: .08em; font-weight: 750; color: #536981; margin: 0 0 6px; }
 .notice { background: #e9f2ff; color: #164c78; padding: 11px 15px; border-left: 3px solid #005ba8; border-radius: 4px; }
 .button, .primary { font: inherit; cursor: pointer; min-height: 42px; padding: 8px 14px; background: white; color: #254b6d; border: 1px solid #b6c9da; border-radius: 6px; text-align: center; }

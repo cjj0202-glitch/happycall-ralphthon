@@ -269,7 +269,10 @@ def create_deployment_app(*, environ: Mapping[str, str] | None = None,
                           media_manifest: Mapping | None | object = _PACKAGED_MANIFEST) -> ASGIApp:
     """Uvicorn factory; explicit arguments permit isolated synthetic tests."""
     environment = os.environ if environ is None else environ
-    credentials = AccessCredentials.from_environment(environment)
+    access_mode = environment.get("ONEFLOW_REQUIRE_LOGIN", "0")
+    if access_mode not in {"0", "1"}:
+        raise ValueError("ONEFLOW_REQUIRE_LOGIN must be 0 or 1.")
+    credentials = AccessCredentials.from_environment(environment) if access_mode == "1" else None
     root = static_directory(environment)
     manifest = _packaged_manifest() if media_manifest is _PACKAGED_MANIFEST else media_manifest
     if api_app is None:

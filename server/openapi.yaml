@@ -80,6 +80,53 @@ paths:
         '429': {description: Budget reservation stopped request}
         '502': {description: 'Actual AI request failed, no automatic replay'}
         '503': {description: Local credential or fixture unavailable}
+  /api/cases/{case_id}/reply-draft:
+    parameters:
+      - {name: case_id, in: path, required: true, schema: {type: string}}
+    post:
+      operationId: server.handlers.generate_reply_draft
+      parameters:
+        - {name: X-Demo-Role, in: header, required: true, schema: {type: string, enum: [center]}}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [mode]
+              properties:
+                mode: {type: string, enum: [replay, demo-live]}
+                expectedRevision: {type: integer, minimum: 0, description: Required by service; missing returns 428.}
+                centerContext:
+                  type: object
+                  additionalProperties: false
+                  required: [pendingActions, reply]
+                  description: Unverified local center draft; distinct from registered server data and never saved by generation.
+                  properties:
+                    pendingActions: {type: array, maxItems: 50, items: {type: string, minLength: 1, maxLength: 8000}}
+                    reply: {type: string, maxLength: 8000}
+      responses:
+        '200':
+          description: Review-only draft; never writes case, registered reply, status, history or notifications.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [replyDraft, mode, requestId, revision]
+                properties:
+                  replyDraft: {type: string}
+                  mode: {type: string, enum: [replay, demo-live]}
+                  requestId: {type: string}
+                  revision: {type: integer, minimum: 0}
+        '403': {description: Center role required}
+        '404': {description: Case not found}
+        '409': {description: 'Revision changed, invalid state or replay unavailable'}
+        '422': {description: Invalid input}
+        '428': {description: expectedRevision required}
+        '429': {description: Budget reservation rejected}
+        '502': {description: AI request failed without automatic replay}
+        '503': {description: Credentials or storage unavailable}
   /api/intake:
     post:
       operationId: server.handlers.create_intake

@@ -21,6 +21,8 @@ export type CallReviewProps = {
   /** Parent-owned actions/editing slots; no API or persistence is added here. */
   analysisActions?: ReactNode;
   intakeEditor?: ReactNode;
+  /** Show the current task without destroying playback/unsaved editor state. */
+  workStage?: 'source' | 'review' | 'handoff';
 };
 
 type Clip = { start: number; end: number; index: number };
@@ -82,7 +84,7 @@ export default function CallReview(props: CallReviewProps) {
   return <ReviewSession key={sourceKey} {...props} />;
 }
 
-function ReviewSession({ caseData, disabled = false, onPlaybackEnded, playbackRate, onPlaybackRateChange, analysisState = 'idle', analysisError, onRetryAnalysis, transcriptMode, analysisActions, intakeEditor }: CallReviewProps) {
+function ReviewSession({ caseData, disabled = false, onPlaybackEnded, playbackRate, onPlaybackRateChange, analysisState = 'idle', analysisError, onRetryAnalysis, transcriptMode, analysisActions, intakeEditor, workStage }: CallReviewProps) {
   const id = useId();
   const audioRef = useRef<HTMLAudioElement>(null);
   const alive = useRef(false);
@@ -126,6 +128,14 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, playbackRa
     const audio = audioRef.current;
     return () => { audio?.pause(); };
   }, [attempt]);
+
+  useEffect(() => {
+    if (!workStage || workStage === 'source') return;
+    autoStart.current = false;
+    clip.current = null;
+    setSegmentIndex(null);
+    audioRef.current?.pause();
+  }, [workStage]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -253,15 +263,15 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, playbackRa
   </>;
   const sourceTextContent = <section className={styles.card} aria-labelledby={`${id}-source-title`}>
           <div className={styles.sectionHeading}><h3 id={`${id}-source-title`}>{voice ? '합성 통화 원대본' : '접수 원문'}</h3><span className={styles.badge}>원문 보존</span></div>
-          <p className={styles.help}>{voice ? '음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.' : '경영주가 입력한 원문입니다. AI 제안과 상담원 수정 내용이 아닙니다.'}</p>
+          {!workStage && <p className={styles.help}>{voice ? '음성 생성에 사용한 합성 원대본입니다. 실제 STT 결과와 별도로 확인하세요.' : '경영주가 입력한 원문입니다. AI 제안과 상담원 수정 내용이 아닙니다.'}</p>}
           <div className={`${styles.sourceText} ${styles.scrollRegion}`} role="region" tabIndex={0} aria-labelledby={`${id}-source-title`}>{valueText(caseData.sourceText)}</div>
         </section>;
   const sourceContent = <>
         {!voice && sourceTextContent}
 
-        <section className={styles.card} aria-labelledby={`${id}-transcript-title`}>
+        {voice && <section className={styles.card} aria-labelledby={`${id}-transcript-title`}>
           <div className={styles.sectionHeading}><div><h3 id={`${id}-transcript-title`}>화자별 대화록</h3><p className={styles.help}>{transcriptLabel}</p></div><label className={styles.checkbox}><input type="checkbox" checked={showTranscript} disabled={disabled} onChange={event => setShowTranscript(event.target.checked)} aria-label="대화록 표시" />자막 표시</label></div>
-          <p className={styles.help}>구간은 제공된 발화 시각 기준입니다. 저장된 합성 대화록의 구간은 음성 생성 파일의 경계이며 STT·단어 정렬 결과가 아닙니다.</p>
+          {!workStage && <p className={styles.help}>구간은 제공된 발화 시각 기준입니다. 저장된 합성 대화록의 구간은 음성 생성 파일의 경계이며 STT·단어 정렬 결과가 아닙니다.</p>}
           {showTranscript && (transcript.length ? <div className={styles.scrollRegion} role="region" tabIndex={0} aria-labelledby={`${id}-transcript-title`}><ol className={styles.transcript}>{transcript.map((line, index) => {
             const range = clipFor(line, duration);
             const valid = range.start !== undefined && range.end !== undefined;
@@ -277,7 +287,7 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, playbackRa
               {reason && <p id={`${id}-range-${index}`} className={styles.help}>{reason}</p>}
             </li>;
           })}</ol></div> : <p className={styles.empty}>제공된 대화록이 없습니다. 원대본을 전사 결과로 대신 표시하지 않습니다.</p>)}
-        </section>
+        </section>}
         {voice && <details className={styles.reviewDetails}><summary>합성 통화 원대본 · 음성 제작 원본, STT 아님</summary>{sourceTextContent}</details>}
   </>;
   const comparisonContent = <>
@@ -315,17 +325,18 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, playbackRa
           {analysis?.department && <div className={styles.department}><strong>AI 추천 부서 · {valueText(analysis.department.name)}</strong><p>{valueText(analysis.department.reason)}</p><span className={styles.help}>상담원 확인 전 제안 · 자동 이관하지 않습니다.</span></div>}
         </section>
   </>;
-  return <section className={styles.review} aria-labelledby={`${id}-title`}>
-    <header className={styles.header}>
+  return <section className={`${styles.review} ${workStage ? styles.staged : ''}`} data-work-stage={workStage} hidden={workStage === 'handoff'} aria-labelledby={`${id}-title`}>
+    <header className={workStage ? styles.taskHeader : styles.header}>
       <h2 id={`${id}-title`}>{voice ? '통화와 원문 대조' : '접수 원문 대조'}</h2>
       <span className={styles.badge}>합성 시연 사례</span>
     </header>
 
     <div className={styles.columns}>
-      <div className={`${styles.stack} ${styles.listenPane}`}>
+      <div className={`${styles.stack} ${styles.listenPane}`} hidden={workStage === 'review'}>
         {voice ? <section className={styles.card} aria-labelledby={`${id}-audio-title`}>
-          <div className={styles.sectionHeading}><h3 id={`${id}-audio-title`}>1. 통화 다시 듣기</h3><span className={styles.badge}>사전 생성한 합성 음성</span></div>
+          <div className={styles.sectionHeading}><h3 id={`${id}-audio-title`}>통화 녹음</h3><span className={styles.badge}>합성 음성</span></div>
           {audioUrl ? <>
+            <div className={styles.buttonRow}><button type="button" className={styles.primaryButton} disabled={disabled} onClick={() => restart(true)}>처음부터 전체 통화 재생</button></div>
             <audio key={attempt} ref={audioRef} className={styles.audio} controls={!disabled} preload="metadata" src={audioUrl}
               aria-label={`합성 상담 통화 ${caseData.id}`} aria-describedby={`${id}-audio-help`} aria-disabled={disabled} tabIndex={disabled ? -1 : 0}
               onLoadedMetadata={event => {
@@ -396,27 +407,26 @@ function ReviewSession({ caseData, disabled = false, onPlaybackEnded, playbackRa
               <button type="button" aria-label="통화 음소거" aria-pressed={muted} disabled={disabled || !!mediaError} onClick={() => { const audio = audioRef.current; if (audio) audio.muted = !audio.muted; }}>{muted ? '음소거 해제' : '음소거'}</button>
             </div>
             {(muted || volume === 0) && <p className={styles.warning}>현재 소리가 꺼져 있습니다. 재생 완료는 실제 청취 확인을 뜻하지 않습니다.</p>}
-            <p id={`${id}-audio-help`} className={styles.help}>음성을 처음부터 끝까지 재생하면 분석 준비가 됩니다. 구간 재생이나 끝으로 이동은 전체 재생 완료로 처리하지 않습니다.</p>
-            <details className={styles.playbackHelp}><summary>구간 재생 안내</summary><p className={styles.help}>구간 재생 중 다른 탭으로 이동하면 선택 구간을 멈춥니다. 전체 통화 재생은 계속될 수 있습니다.</p></details>
+            <p id={`${id}-audio-help`} className={styles.help}>전체 재생 후 상단의 AI 정리 버튼을 눌러 주세요.</p>
             {hiddenClipNotice && <p className={styles.warning} role="status">탭이 숨겨져 선택 발화 재생을 멈췄습니다. 돌아온 뒤 구간 재생 버튼을 다시 눌러 주세요.</p>}
             {!complete && seekNotice && <p className={styles.warning}>재생 위치가 변경됐습니다. 분석 전 ‘처음부터 전체 통화 재생’을 사용해 주세요.</p>}
             {mediaError && <p className={styles.error} role="alert">{mediaError}</p>}
             <div className={styles.buttonRow}>
-              <button type="button" className={styles.primaryButton} disabled={disabled} onClick={() => restart(true)}>처음부터 전체 통화 재생</button>
               {mediaError && <button type="button" disabled={disabled} onClick={() => restart(false)}>음원 다시 불러오기</button>}
             </div>
           </> : <p className={styles.warning} role="status">음원 없음 · 이 사건에 연결된 음성 파일이 없습니다. 다른 사건 음원으로 대체하지 않습니다.</p>}
         </section> : <p className={styles.notice}>텍스트 접수 · 음성 전사 없이 입력 원문과 분석 내용을 대조합니다.</p>}
 
-        {analysisActions}
+        {!workStage && analysisActions}
+        {workStage === 'source' && analysisFeedback}
       </div>
 
-      {intakeEditor ? <details open id={`${id}-source-panel`} className={`${styles.sourcePane} ${styles.reviewDetails}`}><summary>{voice ? '원문과 화자별 대화록 확인' : '접수 원문과 입력 내용 확인'}</summary><div className={styles.stack}>
+      {intakeEditor ? <details key={workStage || 'all'} open id={`${id}-source-panel`} className={`${styles.sourcePane} ${styles.reviewDetails}`}><summary>{voice ? '원문과 화자별 대화록 확인' : '접수 원문과 입력 내용 확인'}</summary><div className={styles.stack}>
         {sourceContent}
       </div></details> : <div className={`${styles.sourcePane} ${styles.stack}`}>
         {sourceContent}
       </div>}
-      <div className={`${styles.stack} ${styles.editorPane}`}>
+      <div className={`${styles.stack} ${styles.editorPane}`} hidden={workStage === 'source'}>
         {intakeEditor && analysisFeedback}
         {intakeEditor}
         {intakeEditor ? <details className={styles.reviewDetails}><summary>AI 제안과 현재 입력 상세 대조</summary><div className={styles.stack}>

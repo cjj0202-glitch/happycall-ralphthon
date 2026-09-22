@@ -109,9 +109,9 @@ function harness(inputs = source) {
   const event = (name, target = audio(), extra = {}) => { target.props[name]({ currentTarget: target.media, nativeEvent: { isTrusted: true }, ...extra }); flush(); };
   const setRate = value => { label('통화 재생 속도').props.onChange({ target: { value: String(value) } }); flush(); };
   const ranges = (values, target = audio()) => { target.media.played = { length: values.length, start: i => values[i][0], end: i => values[i][1] }; };
-  const click = value => { button(value).props.onClick(); flush(); };
-  const selectCase = index => { one(node => node.type === 'button' && node.props.className?.split(' ').includes('queue-case') && textOf(node).includes(cases[index].id)).props.onClick(); flush(); };
-  const analysisEnabled = () => !all(tree, node => node.type === 'button' && textOf(node).includes('저장된 분석 결과 재생'))[0]?.props.disabled;
+  const click = value => { button(value).props.onClick({ stopPropagation() {} }); flush(); };
+  const selectCase = index => { one(node => node.type === 'button' && node.props.className?.split(' ').includes('queue-open') && node.props['data-case-id'] === cases[index].id).props.onClick({ stopPropagation() {} }); flush(); };
+  const analysisEnabled = () => !one(node => node.type === 'button' && textOf(node).includes('대화록 변환 · AI 접수 정리')).props.disabled;
   return { flush, audio, event, setRate, ranges, click, selectCase, one, label, analysisEnabled, calls, writes, drafts, completions, remoteCases,
     async ready() { flush(); await Promise.resolve(); flush(); return this; },
     destroy() { instances.forEach(instance => instance.hooks.forEach(hook => hook?.cleanup?.())); },

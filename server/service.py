@@ -139,6 +139,44 @@ class CaseService:
         result["revision"] = saved["revision"]
         return result
 
+    def reply_draft(self, case_id, body, role=None):
+        if role != "center":
+            raise DemoError("CENTER_ROLE_REQUIRED", "AI 회신 초안은 센터 역할에서 생성할 수 있습니다.", 403)
+        if not isinstance(body, dict) or set(body) - {"mode", "expectedRevision", "centerContext"}:
+            raise DemoError("INVALID_INPUT", "회신 생성 요청 형식을 확인해 주세요.", 422)
+        center_context = body.get("centerContext")
+        if "centerContext" in body:
+            if (not isinstance(center_context, dict) or set(center_context) != {"pendingActions", "reply"}
+                    or not isinstance(center_context["reply"], str) or len(center_context["reply"]) > 8000
+                    or not isinstance(center_context["pendingActions"], list) or len(center_context["pendingActions"]) > 50
+                    or any(not nonempty(value) or len(value) > 8000 for value in center_context["pendingActions"])):
+                raise DemoError("INVALID_CENTER_CONTEXT", "센터 초안의 회신·남은 조치 형식을 확인해 주세요.", 422)
+        revision = body.get("expectedRevision")
+        if "expectedRevision" not in body:
+            raise DemoError("REVISION_REQUIRED", "현재 확인한 접수 버전이 필요합니다.", 428)
+        if isinstance(revision, bool) or not isinstance(revision, int) or revision < 0:
+            raise DemoError("INVALID_REVISION", "접수 버전은 0 이상의 정수여야 합니다.", 422)
+        mode = body.get("mode")
+        if mode not in ("replay", "demo-live"):
+            raise DemoError("INVALID_MODE", "replay 또는 demo-live 모드를 선택해 주세요.", 422)
+        case = self.repo.get(case_id)
+        if case["revision"] != revision:
+            raise DemoError("STATE_CONFLICT", "접수가 변경되었습니다. 최신 내용을 확인해 주세요.", 409)
+        if case.get("status") not in ("handed_off", "in_progress"):
+            raise DemoError("REPLY_DRAFT_STATE", "센터에 이관된 처리 중 접수에서만 회신 초안을 생성할 수 있습니다.", 409)
+        if mode == "replay":
+            text = (case.get("analysis") or {}).get("replyDraft")
+            if not nonempty(text):
+                raise DemoError("REPLAY_NOT_AVAILABLE", "저장된 회신 초안이 없습니다. 실제 AI 생성을 선택해 주세요.", 409)
+            result = {"replyDraft": text, "mode": "replay", "requestId": "replay-" + uuid.uuid4().hex}
+        else:
+            result = self.analyzer.reply_draft(copy.deepcopy(case), center_context=copy.deepcopy(center_context))
+        current = self.repo.get(case_id)
+        if current["revision"] != revision or current.get("status") != case.get("status"):
+            raise DemoError("STATE_CONFLICT", "초안 생성 중 접수가 변경되었습니다. 최신 내용을 확인한 뒤 다시 생성해 주세요.", 409)
+        # A generated draft is not a registered reply. No case/history/outbox write.
+        return {**result, "revision": revision}
+
     def patch(self, case_id, body, role="counselor"):
         if role not in ("counselor", "center", "owner"):
             raise DemoError("INVALID_ROLE", "허용되지 않은 데모 역할입니다.", 403)
