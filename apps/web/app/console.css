@@ -113,16 +113,18 @@ body { background: var(--surface-page); }
 
 /* ── 반응형 ─────────────────────────────────────────── */
 @media (max-width: 1279px) {
-  .console { grid-template-columns: var(--console-rail) minmax(0, 1fr); }
-  .console-context { display: none; }
-  .console-thread .thread-context-inline { display: block; }
-}
-@media (min-width: 1280px) {
-  .console-thread .thread-context-inline { display: none; }
+  /* 컨텍스트 패널을 숨기지 않는다. 경영주의 «문의 보내기» 폼은 이 패널에만 있어서
+     숨기면 좁은 화면에서 문의를 보낼 방법 자체가 사라진다. 스레드 아래 줄로 내린다. */
+  .console { grid-template-columns: var(--console-rail) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; }
+  .console-queue { grid-column: 1; grid-row: 1 / -1; }
+  .console-thread { grid-column: 2; grid-row: 1; }
+  .console-context { grid-column: 2; grid-row: 2; max-height: 38vh; }
 }
 @media (max-width: 960px) {
   .app-shell { height: auto; min-height: 100vh; overflow: visible; }
-  .console { grid-template-columns: minmax(0, 1fr); height: auto; }
+  .console { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; height: auto; }
+  .console-queue, .console-thread, .console-context { grid-column: auto; grid-row: auto; }
+  .console-context { max-height: none; }
   .console-pane { max-height: none; overflow: visible; }
   .console-scroll { overflow: visible; }
   .console-queue .console-scroll { max-height: calc(var(--control-xl) * 6); overflow-y: auto; }
