@@ -52,3 +52,4 @@ TODO.md.tmp
 submission-private/
 # Browser-server raw diagnostics stay local; publish selected structured evidence.
 reports/e2e/**/server.log
+docs/education/
