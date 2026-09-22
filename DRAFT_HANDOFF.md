@@ -1,14 +1,16 @@
 # 해피콜 시스템 — 09시 초안 인계
 
+**최종 복구 메인 인계:** [MAIN_PC_RECOVERY_HANDOFF.md](MAIN_PC_RECOVERY_HANDOFF.md)에 개인 AWS·API 키 복원·계정 변경·남은 작업과 자동 재개 중지 상태를 정리했습니다.
+
 2026-09-22, pc1 최제준/cjj0202-glitch. 사용자 요청에 따라 최근 게임을 배포한 **개인 AWS 계정**에 최소 초안을 올렸습니다. Vercel 작업은 중단했고 기존 게임은 보존했습니다.
 
 ## 배포 접속
 
 **[HappyCall OneFlow 열기](https://yrvhgwajh4zcfalqsdidrnm32a0oeltw.lambda-url.ap-northeast-2.on.aws/)**
 
-일반 브라우저에서 열고 Basic 로그인 창에 접속 계정을 입력합니다. 사용자 이름·비밀번호는 이 PC의 Git 제외 `.local/aws-deploy-20260922/접속안내.md`에 있습니다. API 키는 서버에 연결했으며 이 문서나 화면에 노출하지 않습니다. Codex 내장 브라우저는 URL 탐색을 거절했으므로 원격 화면 클릭 검수는 미완료입니다.
+브라우저의 한국어 로그인 폼에 접속 계정을 입력합니다. 최종 계정은 Git 제외 `.local/aws-deploy-20260922/접속안내.md`, API 키까지 포함한 인계는 `.local/main-pc-handoff-20260922/PRIVATE_ACCESS.md`에 있습니다. API 키는 서버에 연결했으며 이 문서나 화면에 노출하지 않습니다. 08:56 실제 내장 브라우저 로그인과 서버 접수3건 표시를 확인했습니다.
 
-배포 제품 SHA는 `f4916ca5b55a599dc9ba430d4b9642f9c2f88fcf`입니다. 같은 AWS Lambda에서 화면과 API를 제공하고 DynamoDB에 접수·회신·보수 비용 원장을 저장합니다. 실제 HTTPS19/19, 업무6/6, 별도 cold-start Lambda에서 종결 기록 재조회 일치를 확인했습니다. 자세한 증거는 [AWS 배포 실측](reports/deployment/aws-minimal-deployment-20260922.md)에 있습니다.
+최종 배포 제품 SHA는 `49c78604fa29fa2613800284f1514c42084094c1`, Lambda published version4입니다. 최종 HTTPS25/25·로그인/앱187PASS를 확인했습니다. 같은 AWS Lambda에서 화면과 API를 제공하고 DynamoDB에 접수·회신·보수 비용 원장을 저장합니다. 최초 HTTPS19/19, 업무6/6, 별도 cold-start 종결 기록 일치 증거는 [최초 AWS 배포 실측](reports/deployment/aws-minimal-deployment-20260922.md)에 보존했습니다.
 
 ## 사용할 최소 기능
 
@@ -29,7 +31,7 @@ AI는 `gpt-4.1-mini`를 사용하며 실제 텍스트 검증1회 전체 응답�
 
 | 담당 | 남은 범위 |
 |---|---|
-| PC1 최제준 | AWS 접속 안내·배포 증거 보존·09시 최종 인계, 후속 운영 담당 결정 |
+| 복구 메인 | 최종 인계 문서 수신·실측 신원 확인·단일 pc1 등록·후속 운영 |
 | PC2 안영일/MR-A83 | 복수 요청 수정본 원20행20/20 재검 보고 인계 완료; 기존 실모델 의미 실패·사람 청취는 별도 |
 | PC3 LAPTOP-U2AL73UH/mcjun86-oss | Vercel 중단 확인·외부 변경0, 기존 브라우저/미디어 증거 보존; 원격 AWS 사람 검수는 후속 |
 | PC4 장준호/j324rst-svg | 알림 fake 구현은 별도 브랜치에 보존하고 배포 제품에는 미연결 |

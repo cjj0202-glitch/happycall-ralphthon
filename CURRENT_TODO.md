@@ -1,5 +1,7 @@
 # 현재 시연 구현 TODO
 
+**09:00 최종 인계:** 로그인 수정 제품 `49c78604fa29fa2613800284f1514c42084094c1`을 개인 AWS Lambda version4로 배포했습니다. HTTPS25/25·로그인/앱187PASS, 08:56 실제 브라우저 로그인과 접수3건 표시를 확인했습니다. [복구 메인 인계](MAIN_PC_RECOVERY_HANDOFF.md)에 AWS·API 키 안전 복원·미완료·담당을 정리했습니다. heartbeat는 PAUSED, 소유 감시는 NOT_RUNNING이며 새 구현·배정·과금을 중지합니다. 아래는 시점별 이력입니다.
+
 2026-09-22 KST, 로컬 통합 기준. 기존 [45개 작업표](TODO.md)의 인수 완료율과 별개입니다. 실제 사람·원격 PC·최종 제출 완료를 뜻하지 않습니다.
 
 **현재 결과 (08:22 KST):** 개인 AWS에 최소 초안을 배포했고 실제 API·DynamoDB 영속 저장·저가형 AI 답변을 확인했습니다. [배포 주소](https://yrvhgwajh4zcfalqsdidrnm32a0oeltw.lambda-url.ap-northeast-2.on.aws/) · [실측 보고서](reports/deployment/aws-minimal-deployment-20260922.md) · [접속·담당 안내](DRAFT_HANDOFF.md). 제품 SHA `f4916ca5b55a599dc9ba430d4b9642f9c2f88fcf`, HTTPS19/19, 업무6/6, 별도 Lambda cold start 후 같은 종결 기록 유지입니다. `gpt-4.1-mini` 실제 텍스트1회 HTTP200/6.625초, 보수 예약29.35/30달러입니다. 새 구현·추가 유료 검사 대신 접속 안내와 인계에 집중합니다. 공식 CLOVA 음원·실제 알림·공식 제출은 미완료입니다. 내장 브라우저의 원격 URL 탐색은 차단되어 AWS UI 클릭 검수는 미완료로 구분합니다.
