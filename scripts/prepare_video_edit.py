@@ -171,7 +171,8 @@ def main() -> None:
         result = prepare(args.package)
     except (OSError, ValueError, KeyError, TypeError) as error:
         parser.exit(1, f"Preparation stopped: {error}\n")
-    print(json.dumps(result, ensure_ascii=False, indent=2))
+    # ASCII JSON keeps Korean paths intact across Windows console code pages.
+    print(json.dumps(result, ensure_ascii=True, indent=2))
 
 
 if __name__ == "__main__":
