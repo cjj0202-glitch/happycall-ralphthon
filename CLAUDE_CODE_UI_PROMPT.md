@@ -3,9 +3,9 @@
 아래 내용을 저장소 루트에서 시작한 Claude Code에 그대로 붙여 넣으세요.
 
 ```text
-AI-GO 화면 작업을 이어서 진행해 주세요. 먼저 C:/Users/Administrator/.claude/CLAUDE.md, 현재 저장소와 상위의 AGENTS.md, 저장소 CLAUDE.md, 수정 대상에 가장 가까운 CLAUDE.md를 읽고 우선순위를 적용하세요. 그다음 CLAUDE_CODE_UI_HANDOFF.md와 reports/deployment/aws-aigo-v5-deployment-20260922.md를 읽어 현재 화면, AWS 배포 상태, 검증 범위, 비용 원장 불일치를 인수하세요.
+AI-GO 화면 작업을 이어서 진행해 주세요. 먼저 C:/Users/Administrator/.claude/CLAUDE.md, 현재 저장소와 상위의 AGENTS.md, 저장소 CLAUDE.md, 수정 대상에 가장 가까운 CLAUDE.md를 읽고 우선순위를 적용하세요. 그다음 CLAUDE_CODE_UI_HANDOFF.md, CLAUDE_CODE_AWS_DEPLOYMENT_HANDOFF.md와 reports/deployment/aws-aigo-v5-deployment-20260922.md를 읽어 현재 화면, AWS 배포 상태, 검증 범위, 비용 원장 불일치를 인수하세요.
 
-현재 기준 저장소는 cjj0202-glitch/happycall-ralphthon main이고 화면 제품 기준은 2e5454217707a956e8173a376f65ff949ee2607b입니다. 먼저 git status, branch, HEAD, origin/main을 읽기 전용으로 확인하세요. 기존 변경은 모두 보존하고 reset --hard, clean, 자동 stash를 사용하지 마세요. 깨끗하고 fast-forward 가능한 경우에만 git pull --ff-only origin main을 실행하세요.
+현재 기준 저장소는 cjj0202-glitch/happycall-ralphthon main이고 AWS version 5에 배포된 화면 제품 기준은 2e5454217707a956e8173a376f65ff949ee2607b입니다. 이후 main 변경이 있으므로 먼저 git status, branch, HEAD, origin/main을 읽기 전용으로 확인하세요. 기존 변경은 모두 보존하고 reset --hard, clean, 자동 stash를 사용하지 마세요. 깨끗하고 fast-forward 가능한 경우에만 git pull --ff-only origin main을 실행하세요.
 
 서비스명은 “AI-GO 무엇이든 물어보살”입니다. 상담원은 접수 선택→통화/원문→AI 정제 대조→사람 확인→부서 이관, 센터는 이관/물류 근거 확인→답변 제목·본문 생성 및 사람 편집→중간/최종 회신, 경영주는 새 문의 접수와 진행/회신 조회 흐름입니다. actual 실패를 replay 성공으로 바꾸지 말고, AI 초안을 자동 발송·저장하지 말며, 확인되지 않은 물류 사실을 확정 표현하지 마세요.
 

@@ -5,11 +5,11 @@
 ## 현재 기준
 
 - 저장소: `cjj0202-glitch/happycall-ralphthon`, 브랜치 `main`.
-- 화면 제품 기준: `2e5454217707a956e8173a376f65ff949ee2607b`.
+- 현재 저장소 기준은 작업 시작 시 실제 `origin/main`을 다시 확인합니다. AWS version 5에 배포된 화면 제품 기준은 `2e5454217707a956e8173a376f65ff949ee2607b`이며, 이후 `main` 변경은 아직 이 배포 증거에 포함되지 않습니다.
 - 서비스 표시 이름: **AI-GO 무엇이든 물어보살**.
 - AWS: 개인 계정 `704995468470`, 서울 `ap-northeast-2`, Lambda `happycall-oneflow-api`, DynamoDB `happycall-oneflow-state`.
 - 실제 배포: Lambda published version `5`, `$LATEST` Active/Successful. Function URL은 [AI-GO](https://yrvhgwajh4zcfalqsdidrnm32a0oeltw.lambda-url.ap-northeast-2.on.aws/)입니다.
-- 배포와 기능 검증 상세: [AWS version 5 보고](reports/deployment/aws-aigo-v5-deployment-20260922.md).
+- 배포와 기능 검증 상세: [AWS version 5 보고](reports/deployment/aws-aigo-v5-deployment-20260922.md). 재배포는 [개인 AWS 배포 인계](CLAUDE_CODE_AWS_DEPLOYMENT_HANDOFF.md)를 따릅니다.
 
 작업 시작 전 전역 규칙, 저장소 `AGENTS.md`, 루트 `CLAUDE.md`, 수정 대상에 더 가까운 `CLAUDE.md`를 먼저 읽습니다. 기존 변경이 있으면 보존하고 `reset --hard`, `clean`, 자동 stash로 덮지 않습니다. 깨끗하고 fast-forward 가능한 경우에만 `git pull --ff-only origin main`을 사용합니다.
 
