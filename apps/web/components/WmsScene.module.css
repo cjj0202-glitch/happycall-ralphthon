@@ -10,6 +10,9 @@
 .mediaEntry { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-16); padding: var(--space-16); margin-block: var(--space-16); border: 1px solid var(--action-text); border-radius: var(--radius-lg); background: var(--action-tint); }
 .mediaEntry strong { font-size: var(--font-size-16); }
 .mediaEntry p { margin: var(--space-4) 0 0; color: var(--text-secondary); font-size: var(--font-size-12); }
+.mediaEntry > div { flex: 1 1 320px; min-width: 0; overflow-wrap: anywhere; }
+.mediaEntry .primary { min-height: var(--control-lg); padding: var(--space-16) var(--space-24); font-size: var(--font-size-16); background: var(--action-fill); border-color: var(--action-fill); color: var(--text-on-fill); }
+.mediaEntry .primary:focus-visible { outline-color: var(--focus-ring); }
 .eyebrow { display: block; font-size: 11px; letter-spacing: .08em; font-weight: 750; color: #536981; margin: 0 0 6px; }
 .notice { background: #e9f2ff; color: #164c78; padding: 11px 15px; border-left: 3px solid #005ba8; border-radius: 4px; }
 .button, .primary { font: inherit; cursor: pointer; min-height: 42px; padding: 8px 14px; background: white; color: #254b6d; border: 1px solid #b6c9da; border-radius: 6px; text-align: center; }
@@ -48,3 +51,4 @@
 @media (max-width: 1000px) { .comparison { grid-template-columns: 1fr 1fr; } .comparison .finding { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); } .events { grid-template-columns: repeat(2, minmax(0, 1fr)); } .event { min-height: 148px; } }
 @media (max-width: 680px) { .header, .panelHead { align-items: flex-start; flex-direction: column; gap: 8px; } .header .button { align-self: stretch; } .comparison { grid-template-columns: 1fr; } .comparison > div + div { border-left: 0; border-top: 1px solid var(--line); } .comparison > div { padding: 16px; } .detailGrid, .evidence, .videoGrid { grid-template-columns: 1fr; } .panel { padding: 15px; } .event { padding: 12px; } .events { gap: 8px; } .facts > div { grid-template-columns: 90px minmax(0, 1fr); } .dialog { padding: 15px; } .dialogHead h2 { font-size: 17px; } .scene h1 span { display: block; margin: 4px 0 0; } }
 @media (prefers-reduced-motion: reduce) { .moving { animation: none; } }
+@media (max-width: 680px) { .mediaEntry .primary { width: 100%; white-space: normal; } }
